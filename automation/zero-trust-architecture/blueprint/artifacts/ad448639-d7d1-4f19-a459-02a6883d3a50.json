@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e765b5de-1225-4ba3-bd56-1ac6695af988",
+    "parameters": {
+      "listOfAllowedLocations": {
+        "value": "[parameters('listOfAllowedLocations')]"
+      }
+    },
+    "dependsOn": [],
+    "displayName": "Allowed locations for resource groups"
+  },
+  "kind": "policyAssignment",
+  "id": "/providers/Microsoft.Blueprint/blueprints/Zero_Trust_Architecture/artifacts/ad448639-d7d1-4f19-a459-02a6883d3a50",
+  "type": "Microsoft.Blueprint/blueprints/artifacts",
+  "name": "ad448639-d7d1-4f19-a459-02a6883d3a50"
+}

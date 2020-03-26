@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policySetDefinitions/89c6cddc-1c73-4ac1-b19c-54d1a15a42f2",
+    "parameters": {
+      "listOfResourceTypesWithDiagnosticLogsEnabled": {
+        "value": "[parameters('listOfResourceTypesWithDiagnosticLogsEnabled')]"
+      }
+    },
+    "dependsOn": [],
+    "displayName": "[Preview]: Audit ISO 27001:2013 controls and deploy specific VM Extensions to support audit requirements"
+  },
+  "kind": "policyAssignment",
+  "id": "/providers/Microsoft.Blueprint/blueprints/Zero_Trust_Architecture/artifacts/94bd9371-83e9-4d50-97e8-58449465e4cf",
+  "type": "Microsoft.Blueprint/blueprints/artifacts",
+  "name": "94bd9371-83e9-4d50-97e8-58449465e4cf"
+}
