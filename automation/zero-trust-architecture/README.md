@@ -6,17 +6,16 @@ Following are the instructions to deploy artifacts included in the package, they
 * Resource Groups and Resources
 
 ### Prerequisites 
-1. An Azure Subscription (this is where audit policies and deployments will be implemented against.)
-2. Owner level permissions on the management group and subscription.
-3. (Optional) ManagementGroupID of the Management group where subscription. 
-4. All the files in current and sub directories.
+1. An Azure Subscription (this is where audit policies and deployments will be implemented against).
+2. Owner level permissions on the management group and subscription. Keep ManagementGroupId or SubscriptionId handy.
+4. All the files and sub directories in current directory.
 
 
 ## Method 1- Azure Blueprint
 
 Use this method if Azure Blueprint engine **is available** in targeted Azure Cloud environment and is desired framework for managing policy assignments and resource deployments. More on Azure Blueprints can be found [here](https://docs.microsoft.com/en-us/azure/governance/blueprints/concepts/lifecycle).
 
-In order to customize and assign Blueprint we first need to import it into Azure Subscription, following instructions in one of two options to do so.
+In order to customize and assign Blueprint we first need to import it into Azure Subscription, follow these steps to do so.
 
 ### Import via Azure CloudShell
 
@@ -36,7 +35,7 @@ In order to customize and assign Blueprint we first need to import it into Azure
     > [!TIP]
     > Run `dir $HOME/clouddrive` to verify content of directory.
 
-4. Run following command import artifacts as Blueprint and save it within the specified subscription or management group.
+4. Run following command import artifacts as Blueprint and saves it within the specified subscription or management group.
 
     ```powershell
     Import-AzBlueprintWithArtifact -Name 'YourBlueprintName' -SubscriptionId '00000000-1111-0000-1111-000000000000' -InputPath '$HOME/clouddrive/ato-toolkit/automation/zero-trust-architecture/blueprint'
