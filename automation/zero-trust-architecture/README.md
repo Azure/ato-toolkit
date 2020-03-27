@@ -22,9 +22,9 @@ In order to customize and assign Blueprint we first need to import it into Azure
     > [!TIP]
     > Alternatively you can execute same steps via PowerShell shell (min version 7.0.0) installed on local computer by connecting to target Azure Cloud environment and Subscription context. [Learn how to](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-3.6.1)
 
-1. Open Cloud Shell on the Azure portal. [Learn how to](https://azure.microsoft.com/en-us/features/cloud-shell/)
+1. Open CloudShell in Azure Portal. [Learn how to](https://docs.microsoft.com/en-us/azure/cloud-shell/overview)
 
-2. Launch PowerShell in the Azure CloudShell. [Learn how to](https://docs.microsoft.com/en-us/azure/cloud-shell/overview)
+2. Launch PowerShell in Azure CloudShell. [Learn how to](https://docs.microsoft.com/en-us/azure/cloud-shell/overview#choice-of-preferred-shell-experience)
     > [!NOTE]
     > If you don't have any storage mounted, Azure CloudShell requires an Azure file share to persist files. This will create a new storage account. Click "Create Storage".
 
@@ -35,10 +35,10 @@ In order to customize and assign Blueprint we first need to import it into Azure
     > [!TIP]
     > Run `dir $HOME/clouddrive` to verify content of directory.
 
-4. Run following command import artifacts as Blueprint and saves it within the specified subscription or management group.
+4. Run following command to import artifacts as Blueprint and save it within the specified subscription or management group.
 
     ```powershell
-    Import-AzBlueprintWithArtifact -Name 'YourBlueprintName' -SubscriptionId '00000000-1111-0000-1111-000000000000' -InputPath '$HOME/clouddrive/ato-toolkit/automation/zero-trust-architecture/blueprint'
+    Import-AzBlueprintWithArtifact -Name "YourBlueprintName" -SubscriptionId "00000000-1111-0000-1111-000000000000" -InputPath "$HOME/clouddrive/ato-toolkit/automation/zero-trust-architecture/blueprint"
     ```
     > [!NOTE]
     > The input path must point to the folder where blueprint.json file is placed.
