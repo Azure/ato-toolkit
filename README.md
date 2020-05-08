@@ -8,7 +8,7 @@ Please review all the artifacts and instructions carefully before importing Zero
 
 [Learn more about Zero Trust](https://www.microsoft.com/en-us/security/business/zero-trust) and to learn more about how to implement Zero Trust architecture on Azure, read the [6-part blog series](https://devblogs.microsoft.com/azuregov/implementing-zero-trust-with-microsoft-azure-identity-and-access-management-1-of-6/) on the Azure Government Dev Blog.
 
-For more information, questions, and feedback, please [contact us](https://aka.ms/zerotrust-blueprint-feedback)
+For more information, questions, or feedback please [contact us](https://aka.ms/zerotrust-blueprint-feedback).
 
 ## Contents
 
@@ -33,7 +33,7 @@ For more information, questions, and feedback, please [contact us](https://aka.m
 
 ## Feedback
 
-For more information, questions, and feedback, please [contact us](https://aka.ms/zerotrust-blueprint-feedback)
+For more information, questions, or feedback please [contact us](https://aka.ms/zerotrust-blueprint-feedback).
 
 ## Contributing
 

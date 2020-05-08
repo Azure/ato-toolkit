@@ -4,10 +4,10 @@
       "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
       "contentVersion": "1.0.0.0",
       "parameters": {
-        "organization": {
+        "resourcePrefix": {
           "type": "string",
           "metadata": {
-            "description": "Organization name. For example: Contoso"
+            "displayName": "Resource Group and Resource identifier. String to be used as prefix to all Resource Group and Resource names."
           }
         },
         "vnet-address-prefix": {
@@ -25,30 +25,37 @@
             "description": "Value used in Virtual Network / Route Table, Jumpbox and Active Directory Domain Services templates"
           }
         },
-        "dmz-subnet-address-prefix": {
+        "bastion-subnet-address-prefix": {
           "type": "string",
           "defaultValue": "10.0.1.0/24",
           "metadata": {
-            "displayName": "DMZ subnet address prefix"
+            "displayName": "Bastion subnet address prefix"
+          }
+        },
+        "app-subnet-address-prefix": {
+          "type": "string",
+          "defaultValue": "10.0.2.0/24",
+          "metadata": {
+            "displayName": "Applications subnet address prefix"
           }
         },
         "app-gateway-subnet-address-prefix": {
           "type": "string",
-          "defaultValue": "10.0.2.0/24",
+          "defaultValue": "10.0.3.0/24",
           "metadata": {
             "displayName": "Application Gateway subnet address prefix"
           }
         },
         "gateway-subnet-address-prefix": {
           "type": "string",
-          "defaultValue": "10.0.3.0/24",
+          "defaultValue": "10.0.4.0/24",
           "metadata": {
             "displayName": "Virtual Network Gateway subnet address prefix"
           }
         },
         "azure-firewall-subnet-address-prefix": {
           "type": "string",
-          "defaultValue": "10.0.4.0/24",
+          "defaultValue": "10.0.5.0/24",
           "metadata": {
             "displayName": "Azure Firewall subnet address prefix"
           }
@@ -73,7 +80,7 @@
         }
       },
       "variables": {
-        "deployment-prefix": "[concat(parameters('organization'), '-sharedsvcs')]",
+        "deployment-prefix": "[concat(parameters('resourcePrefix'), '-sharedsvcs')]",
         "vnet-name": "[concat(variables('deployment-prefix'), '-vnet')]",
         "ddos-protection-plan-name": "[concat(variables('deployment-prefix'), '-ddos-plan')]",
         "ddos-protection-plan-id": {
@@ -92,7 +99,7 @@
           "name": "sharedsvcs",
           "address-prefix": "[parameters('sharedsvcs-subnet-address-prefix')]",
           "network-security-group": "sharedsvcs-subnet",
-          "user-defined-route": "[variables('user-defined-routes')[0].name]",
+          "user-defined-route": "",
           "service-endpoints": [
           {
             "service": "Microsoft.KeyVault"
@@ -100,9 +107,18 @@
           ]
         },
         {
-          "name": "dmz",
-          "address-prefix": "[parameters('dmz-subnet-address-prefix')]",
-          "network-security-group": "dmz-subnet",
+          "name": "bastion",
+          "address-prefix": "[parameters('bastion-subnet-address-prefix')]",
+          "network-security-group": "bastion-subnet",
+          "user-defined-route": "",
+          "service-endpoints": [
+          
+          ]
+        },
+        {
+          "name": "app",
+          "address-prefix": "[parameters('app-subnet-address-prefix')]",
+          "network-security-group": "app-subnet",
           "user-defined-route": "",
           "service-endpoints": [
           
@@ -137,7 +153,7 @@
         }
         ],
         "enable-ddos-protection": "[bool(parameters('enable-ddos-protection'))]",
-        "oms-workspace-resourceGroup": "[concat(variables('deployment-prefix'), '-log-rg')]",
+        "oms-workspace-resourceGroup": "[concat(variables('deployment-prefix'), '-rg')]",
         "oms-workspace-name": "[concat(variables('deployment-prefix'), '-log')]",
         "uniqueString": "[uniqueString(subscription().id, concat(variables('deployment-prefix'), '-log'))]",
         "diagnostic-storageAccount-prefix": "[concat(replace(variables('deployment-prefix'), '-', ''), 'diag')]",
@@ -227,12 +243,6 @@
               "days": "[parameters('logs-retention-in-days')]"
             }
           }
-          ],
-          "logs": [
-          {
-            "category": "VMProtectionAlerts",
-            "enabled": true
-          }
           ]
         }
       }
@@ -242,8 +252,8 @@
       }
     },
     "parameters": {
-      "organization": {
-        "value": "[parameters('organization')]"
+      "resourcePrefix": {
+        "value": "[parameters('resourcePrefix')]"
       },
       "vnet-address-prefix": {
         "value": "[parameters('vnet_vnet-address-prefix')]"
@@ -254,8 +264,11 @@
       "sharedsvcs-subnet-address-prefix": {
         "value": "[parameters('vnet_sharedsvcs-subnet-address-prefix')]"
       },
-      "dmz-subnet-address-prefix": {
-        "value": "[parameters('vnet_dmz-subnet-address-prefix')]"
+      "bastion-subnet-address-prefix": {
+        "value": "[parameters('vnet_bastion-subnet-address-prefix')]"
+      },
+      "app-subnet-address-prefix": {
+        "value": "[parameters('vnet_app-subnet-address-prefix')]"
       },
       "app-gateway-subnet-address-prefix": {
         "value": "[parameters('vnet_app-gateway-subnet-address-prefix')]"
@@ -273,12 +286,12 @@
     "dependsOn": [
     "nsg"
     ],
-    "resourceGroup": "ResourceGroup2",
+    "resourceGroup": "ResourceGroup",
     "displayName": "Virtual Network and Route Table template",
     "description": ""
   },
   "kind": "template",
-  "id": "/providers/Microsoft.Blueprint/blueprints/Zero_Trust_Architecture/artifacts/net",
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34/artifacts/net",
   "type": "Microsoft.Blueprint/blueprints/artifacts",
   "name": "net"
 }

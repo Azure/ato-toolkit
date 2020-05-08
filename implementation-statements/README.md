@@ -1,4 +1,4 @@
-# Template Instructions
+# Instructions
 
 > [!IMPORTANT]
 > Microsoft Azure and Microsoft Azure Government cloud services meets requirements of the US Federal Risk & Authorization Management Program (FedRAMP) and of the US Department of Defense, from information impact levels 2 through 5. More information on Azure compliance can be found [here](https://docs.microsoft.com/en-us/microsoft-365/compliance/offering-home?view=o365-worldwide). The current list of in-scope cloud services across Azure and Azure Government for FedRAMP and DoD CC SRG compliance offerings can be found at [here](https://docs.microsoft.com/en-us/azure/azure-government/compliance/azure-services-in-fedramp-auditscope)
@@ -21,4 +21,4 @@
 
 ## Feedback
 
-For more information, questions, and feedback, please [contact us](https://aka.ms/zerotrust-blueprint-feedback)
+For more information, questions, or feedback please [contact us](https://aka.ms/zerotrust-blueprint-feedback).

@@ -3,7 +3,7 @@
     "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/3c1b3629-c8f8-4bf6-862c-037cb9094038",
     "parameters": {
       "logAnalytics": {
-        "value": "[concat(subscription().id, '/resourceGroups/', concat(parameters('organization'),'-sharedsvcs-log-rg'), '/providers/Microsoft.OperationalInsights/workspaces/', concat(parameters('organization'), '-sharedsvcs-log'))]"
+        "value": "[concat(subscription().id, '/resourceGroups/', concat(parameters('resourcePrefix'), '-sharedsvcs-rg'), '/providers/Microsoft.OperationalInsights/workspaces/', concat(parameters('resourcePrefix'), '-sharedsvcs-log'))]"
       },
       "listOfImageIdToInclude": {
         "value": "[parameters('deployLogAnalyticsAgentforWindowsVMScaleSets_listOfImageIdToInclude')]"
@@ -13,7 +13,7 @@
     "displayName": "[Preview]: Deploy Log Analytics Agent for Windows VM Scale Sets (VMSS)"
   },
   "kind": "policyAssignment",
-  "id": "/providers/Microsoft.Blueprint/blueprints/Zero_Trust_Architecture/artifacts/15b2256e-6e50-497e-8c7b-12908ea3bcec",
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34/artifacts/15b2256e-6e50-497e-8c7b-12908ea3bcec",
   "type": "Microsoft.Blueprint/blueprints/artifacts",
   "name": "15b2256e-6e50-497e-8c7b-12908ea3bcec"
 }

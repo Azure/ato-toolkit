@@ -1,16 +1,12 @@
 {
   "properties": {
     "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/86a912f6-9a06-4e26-b447-11b16ba8659f",
-    "parameters": {
-      
-    },
-    "dependsOn": [
-    
-    ],
+    "parameters": {},
+    "dependsOn": [],
     "displayName": "Deploy SQL DB transparent data encryption"
   },
   "kind": "policyAssignment",
-  "id": "/providers/Microsoft.Blueprint/blueprints/Zero_Trust_Architecture/artifacts/3bcbd39e-142f-438c-8d60-bf1e7a7a646d",
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34/artifacts/3bcbd39e-142f-438c-8d60-bf1e7a7a646d",
   "type": "Microsoft.Blueprint/blueprints/artifacts",
   "name": "3bcbd39e-142f-438c-8d60-bf1e7a7a646d"
 }

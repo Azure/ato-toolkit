@@ -30,19 +30,19 @@ More on Azure Blueprint can be found [here](https://docs.microsoft.com/en-us/azu
     > If you don't have any storage mounted, Azure CloudShell requires an Azure file share to persist files. This will create a new storage account. Click "Create Storage".
 
 3. Run following command to clone the Azure ato-toolkit repository to clouddrive.
-        ```powershell
-        git clone https://github.com/Azure/ato-toolkit.git $HOME/clouddrive
+    ```powershell
+    git clone https://github.com/Azure/ato-toolkit.git $HOME/clouddrive
 
-        ```
+    ```
 
     > [!TIP]
     > Run `dir $HOME/clouddrive` to verify content of directory.
 
 4. Run following command to import artifacts as blueprint and save it within the specified subscription or management group.
-        ```powershell
-        Import-AzBlueprintWithArtifact -Name "YourBlueprintName" -SubscriptionId "00000000-1111-0000-1111-000000000000" -InputPath "$HOME/clouddrive/ato-toolkit/automation/zero-trust-architecture/blueprint"
+    ```powershell
+    Import-AzBlueprintWithArtifact -Name "YourBlueprintName" -SubscriptionId "00000000-1111-0000-1111-000000000000" -InputPath "$HOME/clouddrive/ato-toolkit/automation/zero-trust-architecture/blueprint"
 
-        ```
+    ```
 
     > [!NOTE]
     > The input path must point to the folder where blueprint.json file is placed.
@@ -68,3 +68,7 @@ Blueprint creates a JumpBoxes/Bastion hosts, (by default Windows, but can be cha
     * This is required to retrieve JumpBox VM password from the Key Vault secrets. [More info](https://docs.microsoft.com/en-us/azure/key-vault/secrets/about-secrets)
 2. From Azure portal, search for virtual machine name "\*-sharedsvcs-jb-\*-vm" and add a public ip address. [More info](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-network-interface-addresses#add-ip-addresses)
 3. From Azure portal, search for virtual machine name "\*-sharedsvcs-jb-\*-vm" and connect to it by requesting access via just-in-time. [More info](https://docs.microsoft.com/en-us/azure/security-center/security-center-just-in-time#request-jit-access-via-security-center)
+
+## Feedback
+
+For more information, questions, or feedback please [contact us](https://aka.ms/zerotrust-blueprint-feedback).
