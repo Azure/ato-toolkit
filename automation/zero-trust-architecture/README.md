@@ -31,7 +31,7 @@ More on Azure Blueprint can be found [here](https://docs.microsoft.com/en-us/azu
 
 3. Run following command to clone the Azure ato-toolkit repository to clouddrive.
     ```powershell
-    git clone https://github.com/Azure/ato-toolkit.git $HOME/clouddrive
+    git clone https://github.com/Azure/ato-toolkit.git $HOME/clouddrive/ato-toolkit
 
     ```
 

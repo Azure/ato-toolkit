@@ -1,7 +1,7 @@
 ﻿{
   "properties": {
     "parameters": {
-      "listOfAllowedStorageSKUs": {
+      "allowedStorageAccountSKUs_listOfAllowedStorageSKUs": {
         "type": "array",
         "metadata": {
           "displayName": "Allowed storage SKUs",
@@ -21,14 +21,7 @@
           "Standard_LRS"
         ]
       },
-      "listOfAllowedLocations": {
-        "type": "array",
-        "metadata": {
-          "displayName": "Allowed locations",
-          "strongType": "location"
-        }
-      },
-      "listOfAllowedVirtualMachineSKUs": {
+      "allowedVirtualMachineSKUs_listOfAllowedVirtualMachineSKUs": {
         "type": "array",
         "metadata": {
           "displayName": "Allowed virtual machine SKUs",
@@ -38,231 +31,7 @@
           "Standard_DS1_v2",
           "Standard_DS2_v2"
         ],
-        "allowedValues": [
-          "Basic_A0",
-          "Basic_A1",
-          "Basic_A2",
-          "Basic_A3",
-          "Basic_A4",
-          "Standard_A0",
-          "Standard_A1",
-          "Standard_A1_v2",
-          "Standard_A2",
-          "Standard_A2m_v2",
-          "Standard_A2_v2",
-          "Standard_A3",
-          "Standard_A4",
-          "Standard_A4m_v2",
-          "Standard_A4_v2",
-          "Standard_A5",
-          "Standard_A6",
-          "Standard_A7",
-          "Standard_A8",
-          "Standard_A8m_v2",
-          "Standard_A8_v2",
-          "Standard_A9",
-          "Standard_A10",
-          "Standard_A11",
-          "Standard_B1ls",
-          "Standard_B1ms",
-          "Standard_B1s",
-          "Standard_B2ms",
-          "Standard_B2s",
-          "Standard_B4ms",
-          "Standard_B8ms",
-          "Standard_D1",
-          "Standard_D1_v2",
-          "Standard_D2",
-          "Standard_D2s_v3",
-          "Standard_D2_v2",
-          "Standard_D2_v2_Promo",
-          "Standard_D2_v3",
-          "Standard_D3",
-          "Standard_D3_v2",
-          "Standard_D3_v2_Promo",
-          "Standard_D4",
-          "Standard_D4s_v3",
-          "Standard_D4_v2",
-          "Standard_D4_v2_Promo",
-          "Standard_D4_v3",
-          "Standard_D5_v2",
-          "Standard_D5_v2_Promo",
-          "Standard_D8s_v3",
-          "Standard_D8_v3",
-          "Standard_D11",
-          "Standard_D11_v2",
-          "Standard_D11_v2_Promo",
-          "Standard_D12",
-          "Standard_D12_v2",
-          "Standard_D12_v2_Promo",
-          "Standard_D13",
-          "Standard_D13_v2",
-          "Standard_D13_v2_Promo",
-          "Standard_D14",
-          "Standard_D14_v2",
-          "Standard_D14_v2_Promo",
-          "Standard_D15_v2",
-          "Standard_D16s_v3",
-          "Standard_D16_v3",
-          "Standard_D32s_v3",
-          "Standard_D32_v3",
-          "Standard_D64s_v3",
-          "Standard_D64_v3",
-          "Standard_DC2s",
-          "Standard_DC4s",
-          "Standard_DS1",
-          "Standard_DS1_v2",
-          "Standard_DS2",
-          "Standard_DS2_v2",
-          "Standard_DS2_v2_Promo",
-          "Standard_DS3",
-          "Standard_DS3_v2",
-          "Standard_DS3_v2_Promo",
-          "Standard_DS4",
-          "Standard_DS4_v2",
-          "Standard_DS4_v2_Promo",
-          "Standard_DS5_v2",
-          "Standard_DS5_v2_Promo",
-          "Standard_DS11",
-          "Standard_DS11-1_v2",
-          "Standard_DS11_v2",
-          "Standard_DS11_v2_Promo",
-          "Standard_DS12",
-          "Standard_DS12-1_v2",
-          "Standard_DS12-2_v2",
-          "Standard_DS12_v2",
-          "Standard_DS12_v2_Promo",
-          "Standard_DS13",
-          "Standard_DS13-2_v2",
-          "Standard_DS13-4_v2",
-          "Standard_DS13_v2",
-          "Standard_DS13_v2_Promo",
-          "Standard_DS14",
-          "Standard_DS14-4_v2",
-          "Standard_DS14-8_v2",
-          "Standard_DS14_v2",
-          "Standard_DS14_v2_Promo",
-          "Standard_DS15_v2",
-          "Standard_E2s_v3",
-          "Standard_E2_v3",
-          "Standard_E4-2s_v3",
-          "Standard_E4s_v3",
-          "Standard_E4_v3",
-          "Standard_E8-2s_v3",
-          "Standard_E8-4s_v3",
-          "Standard_E8s_v3",
-          "Standard_E8_v3",
-          "Standard_E16-4s_v3",
-          "Standard_E16-8s_v3",
-          "Standard_E16s_v3",
-          "Standard_E16_v3",
-          "Standard_E20s_v3",
-          "Standard_E20_v3",
-          "Standard_E32-8s_v3",
-          "Standard_E32-16s_v3",
-          "Standard_E32s_v3",
-          "Standard_E32_v3",
-          "Standard_E64-16s_v3",
-          "Standard_E64-32s_v3",
-          "Standard_E64is_v3",
-          "Standard_E64i_v3",
-          "Standard_E64s_v3",
-          "Standard_E64_v3",
-          "Standard_F1",
-          "Standard_F1s",
-          "Standard_F2",
-          "Standard_F2s",
-          "Standard_F2s_v2",
-          "Standard_F4",
-          "Standard_F4s",
-          "Standard_F4s_v2",
-          "Standard_F8",
-          "Standard_F8s",
-          "Standard_F8s_v2",
-          "Standard_F16",
-          "Standard_F16s",
-          "Standard_F16s_v2",
-          "Standard_F32s_v2",
-          "Standard_F64s_v2",
-          "Standard_F72s_v2",
-          "Standard_G1",
-          "Standard_G2",
-          "Standard_G3",
-          "Standard_G4",
-          "Standard_G5",
-          "Standard_GS1",
-          "Standard_GS2",
-          "Standard_GS3",
-          "Standard_GS4",
-          "Standard_GS4-4",
-          "Standard_GS4-8",
-          "Standard_GS5",
-          "Standard_GS5-8",
-          "Standard_GS5-16",
-          "Standard_H8",
-          "Standard_H8m",
-          "Standard_H16",
-          "Standard_H16m",
-          "Standard_H16mr",
-          "Standard_H16r",
-          "Standard_HB60rs",
-          "Standard_HC44rs",
-          "Standard_L4s",
-          "Standard_L8s",
-          "Standard_L8s_v2",
-          "Standard_L16s",
-          "Standard_L16s_v2",
-          "Standard_L32s",
-          "Standard_L32s_v2",
-          "Standard_L64s_v2",
-          "Standard_L80s_v2",
-          "Standard_M8-2ms",
-          "Standard_M8-4ms",
-          "Standard_M8ms",
-          "Standard_M16-4ms",
-          "Standard_M16-8ms",
-          "Standard_M16ms",
-          "Standard_M32-8ms",
-          "Standard_M32-16ms",
-          "Standard_M32ls",
-          "Standard_M32ms",
-          "Standard_M32ts",
-          "Standard_M64",
-          "Standard_M64-16ms",
-          "Standard_M64-32ms",
-          "Standard_M64ls",
-          "Standard_M64m",
-          "Standard_M64ms",
-          "Standard_M64s",
-          "Standard_M128",
-          "Standard_M128-32ms",
-          "Standard_M128-64ms",
-          "Standard_M128m",
-          "Standard_M128ms",
-          "Standard_M128s",
-          "Standard_NC6",
-          "Standard_NC6s_v2",
-          "Standard_NC6s_v3",
-          "Standard_NC12",
-          "Standard_NC12s_v2",
-          "Standard_NC12s_v3",
-          "Standard_NC24",
-          "Standard_NC24r",
-          "Standard_NC24rs_v2",
-          "Standard_NC24rs_v3",
-          "Standard_NC24s_v2",
-          "Standard_NC24s_v3",
-          "Standard_ND6s",
-          "Standard_ND12s",
-          "Standard_ND24rs",
-          "Standard_ND24s",
-          "Standard_NV6",
-          "Standard_NV6s_v2",
-          "Standard_NV12",
-          "Standard_NV12s_v2",
-          "Standard_NV24",
-          "Standard_NV24s_v2"
-        ]
+        "allowedValues": []
       },
       "deployLogAnalyticsAgentforLinuxVMs_listOfImageIdToInclude": {
         "type": "array",
@@ -304,10 +73,73 @@
         ],
         "allowedValues": []
       },
-      "listOfResourceTypesWithDiagnosticLogsEnabled": {
+      "deployAuditingonSQLservers_retentionDays": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Retention days to deploy Auditing on SQL servers(optional, 180 days if unspecified)",
+          "description": "The value in days of the retention period (0 indicates unlimited retention)"
+        },
+        "defaultValue": "180",
+        "allowedValues": []
+      },
+      "deployAuditingonSQLservers_storageAccountsResourceGroup": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Resource group name for storage accounts to deploy Auditing on SQL servers",
+          "description": "Auditing writes database events to an audit log in your Azure Storage account (a storage account will be created in each region where a SQL Server is created that will be shared by all servers in that region). Important - for proper operation of Auditing do not delete or rename the resource group or the storage accounts.",
+          "strongType": "existingResourceGroups"
+        },
+        "defaultValue": "[concat(subscription().id, '/resourceGroups/', concat(parameters('resourcePrefix'), '-sharedsvcs-rg'))]",
+        "allowedValues": []
+      },
+      "deployDiagnosticSettingsforNetworkSecurityGroups_storagePrefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Storage Account Prefix for Regional Storage Account",
+          "description": "This prefix will be combined with the network security group location to form the created storage account name."
+        },
+        "defaultValue": "[concat(parameters('resourcePrefix'), 'sharedsvcsdiag')]",
+        "allowedValues": []
+      },
+      "deployDiagnosticSettingsforNetworkSecurityGroups_rgName": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Resource Group Name for Storage Account (must exist)",
+          "description": "The resource group that the storage account will be created in. This resource group must already exist.",
+          "strongType": "ExistingResourceGroups"
+        },
+        "defaultValue": "[concat(subscription().id, '/resourceGroups/', concat(parameters('resourcePrefix'), '-sharedsvcs-rg'))]",
+        "allowedValues": []
+      },
+      "listOfAllowedLocationsForResourcesAndResourceGroups": {
         "type": "array",
         "metadata": {
-          "displayName": "Resource types to audit diagnostic logs"
+          "displayName": "Allowed locations for resources and resource groups",
+          "description": "This policy enables you to restrict the locations your organization can specify when creating resource groups or deploying resources. Use to enforce your geo-compliance requirements. Excludes Microsoft.AzureActiveDirectory/b2cDirectories, and resources that use the 'global' region.",
+          "strongType": "location"
+        },
+        "allowedValues": []
+      },
+      "membersToIncludeInAdministratorsLocalGroup": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Members to be included in the Administrators local group",
+          "description": "A semicolon-separated list of members that should be included in the Administrators local group. Ex: Administrator; myUser1; myUser2"
+        },
+        "allowedValues": []
+      },
+      "membersToExcludeInAdministratorsLocalGroup": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Members that should be excluded in the Administrators local group",
+          "description": "A semicolon-separated list of members that should be excluded in the Administrators local group. Ex: Administrator; myUser1; myUser2"
+        },
+        "allowedValues": []
+      },
+      "listOfResourceTypes": {
+        "type": "array",
+        "metadata": {
+          "displayName": "List of resource types that should have diagnostic logs enabled (Policy: DoD Impact Level 4)"
         },
         "defaultValue": [
           "Microsoft.AnalysisServices/servers",
@@ -406,12 +238,236 @@
           "Microsoft.Network/virtualNetworkGateways"
         ]
       },
-      "organization": {
+      "logAnalyticsWorkspaceIdForVMs": {
         "type": "string",
         "metadata": {
-          "displayName": "Organization name (e.g. Contoso), must be unique"
+          "displayName": "Log Analytics Workspace Id that VMs should be configured for",
+          "description": "This is the Id (GUID) of the Log Analytics Workspace that the VMs should be configured for"
         },
-        "defaultValue": "contoso"
+        "defaultValue": "[concat(subscription().id, '/resourceGroups/', concat(parameters('resourcePrefix'), '-sharedsvcs-rg'), '/providers/Microsoft.OperationalInsights/workspaces/', concat(parameters('resourcePrefix'), '-sharedsvcs-log'))]",
+        "allowedValues": []
+      },
+      "longtermGeoRedundantBackupEnabledAzureSQLDatabasesEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Long-term geo-redundant backup should be enabled for Azure SQL Databases",
+          "description": "This policy audits any Azure SQL Database with long-term geo-redundant backup not enabled"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "vulnerabilityAssessmentOnManagedInstanceMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Vulnerability assessment should be enabled on your SQL managed instances",
+          "description": "Audit SQL managed instances which do not have recurring vulnerability assessment scans enabled. Vulnerability assessment can discover, track, and help you remediate potential database vulnerabilities."
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "vulnerabilityAssessmentOnServerMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Vulnerability assessment should be enabled on your SQL servers",
+          "description": "Audit Azure SQL servers which do not have recurring vulnerability assessment scans enabled. Vulnerability assessment can discover, track, and help you remediate potential database vulnerabilities."
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "geoRedundancyEnabledForStorageAccountsEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Geo-redundant storage should be enabled for Storage Accounts",
+          "description": "This policy audits any Storage Account with geo-redundant storage not enabled."
+        },
+        "defaultValue": "Audit",
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ]
+      },
+      "geoRedundancyEnabledForAzureDatabaseForMySQLEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Geo-redundant backup should be enabled for Azure Database for MySQL",
+          "description": "This policy audits any Azure Database for MySQL with geo-redundant backup not enabled."
+        },
+        "defaultValue": "Audit",
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ]
+      },
+      "geoRedundancyEnabledForAzureDatabaseForPostgreSQLEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Geo-redundant backup should be enabled for Azure Database for PostgreSQL",
+          "description": "This policy audits any Azure Database for PostgreSQL with geo-redundant backup not enabled."
+        },
+        "defaultValue": "Audit",
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ]
+      },
+      "webAppEnforceHttpsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Web Application should only be accessible over HTTPS",
+          "description": "Enable or disable the monitoring of the use of HTTPS in Web App"
+        },
+        "defaultValue": "Audit",
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ]
+      },
+      "functionAppEnforceHttpsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Function App should only be accessible over HTTPS",
+          "description": "Enable or disable the monitoring of the use of HTTPS in function App"
+        },
+        "defaultValue": "Audit",
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ]
+      },
+      "identityRemoveExternalAccountWithWritePermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "External accounts with write permissions should be removed from your subscription",
+          "description": "Enable or disable the monitoring of external accounts with write permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityRemoveExternalAccountWithReadPermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "External accounts with read permissions should be removed from your subscription",
+          "description": "Enable or disable the monitoring of external accounts with read permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityRemoveExternalAccountWithOwnerPermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "External accounts with owner permissions should be removed from your subscription",
+          "description": "Enable or disable the monitoring of external accounts with owner permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityRemoveDeprecatedAccountWithOwnerPermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Deprecated accounts with owner permissions should be removed from your subscription",
+          "description": "Enable or disable the monitoring of deprecated accounts with owner permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityRemoveDeprecatedAccountMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Deprecated accounts should be removed from your subscription",
+          "description": "Enable or disable the monitoring of deprecated accounts in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "webAppRestrictCORSAccessMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "CORS should not allow every resource to access your Web Application",
+          "description": "Enable or disable the monitoring of CORS restrictions for API Web"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "vmssSystemUpdatesMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "System updates on virtual machine scale sets should be installed",
+          "description": "Enable or disable virtual machine scale sets reporting of system updates"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityEnableMFAForReadPermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "MFA should be enabled on accounts with read permissions on your subscription",
+          "description": "Enable or disable the monitoring of MFA for accounts with read permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityEnableMFAForOwnerPermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "MFA should be enabled on accounts with owner permissions on your subscription",
+          "description": "Enable or disable the monitoring of MFA for accounts with owner permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityEnableMFAForWritePermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "MFA should be enabled accounts with write permissions on your subscription",
+          "description": "Enable or disable the monitoring of MFA for accounts with write permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "resourcePrefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Resource Group and Resource identifier. String to be used as prefix to all Resource Group and Resource names."
+        }
       },
       "log-analytics_service-tier": {
         "type": "string",
@@ -441,7 +497,7 @@
           "displayName": "Location",
           "description": "Region used when establishing the workspace"
         }
-      },
+      },      
       "azure-firewall_azure-firewall-private-ip": {
         "type": "string",
         "metadata": {
@@ -482,12 +538,20 @@
         "defaultValue": "10.0.0.0/24",
         "allowedValues": []
       },
-      "vnet_dmz-subnet-address-prefix": {
+      "vnet_bastion-subnet-address-prefix": {
         "type": "string",
         "metadata": {
-          "displayName": "DMZ subnet address prefix"
+          "displayName": "Bastion subnet address prefix"
         },
         "defaultValue": "10.0.1.0/24",
+        "allowedValues": []
+      },
+      "vnet_app-subnet-address-prefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Application subnet address prefix"
+        },
+        "defaultValue": "10.0.2.0/24",
         "allowedValues": []
       },
       "vnet_app-gateway-subnet-address-prefix": {
@@ -495,7 +559,7 @@
         "metadata": {
           "displayName": "Application Gateway subnet address prefix"
         },
-        "defaultValue": "10.0.2.0/24",
+        "defaultValue": "10.0.3.0/24",
         "allowedValues": []
       },
       "vnet_gateway-subnet-address-prefix": {
@@ -503,7 +567,7 @@
         "metadata": {
           "displayName": "Virtual Network Gateway subnet address prefix"
         },
-        "defaultValue": "10.0.3.0/24",
+        "defaultValue": "10.0.4.0/24",
         "allowedValues": []
       },
       "vnet_azure-firewall-subnet-address-prefix": {
@@ -511,7 +575,7 @@
         "metadata": {
           "displayName": "Azure Firewall subnet address prefix"
         },
-        "defaultValue": "10.0.4.0/24",
+        "defaultValue": "10.0.5.0/24",
         "allowedValues": []
       },
       "vnet_logs-retention-in-days": {
@@ -530,36 +594,6 @@
         },
         "defaultValue": 365
       },
-      "keyvault_jumpbox-local-admin-username": {
-        "type": "string",
-        "metadata": {
-          "displayName": "Jumpbox admin username",
-          "description": "The username used to access jumpbox VM"
-        },
-        "defaultValue": "jb-admin-user"
-      },
-      "keyvault_jumpbox-local-admin-user-password": {
-        "type": "string",
-        "metadata": {
-          "displayName": "Jumpbox admin ssh key or password",
-          "description": "Jumpbox admin user's ssh key or password"
-        }
-      },
-      "keyvault_ad-domain-admin-username": {
-        "type": "string",
-        "metadata": {
-          "displayName": "Domain admin username",
-          "description": "Username used to access Active Directory VM and to join other VMs to a domain"
-        },
-        "defaultValue": "domain-admin-user"
-      },
-      "keyvault_ad-domain-admin-user-password": {
-        "type": "string",
-        "metadata": {
-          "displayName": "Domain admin password",
-          "description": "Domain admin user's password"
-        }
-      },
       "keyvault_deployment-user-object-id": {
         "type": "string",
         "metadata": {
@@ -575,17 +609,6 @@
         },
         "defaultValue": 365
       },
-      "keyvault_vault-sku": {
-        "type": "string",
-        "metadata": {
-          "displayName": "Key Vault SKU",
-          "description": "Specifies the SKU for the vault"
-        },
-        "defaultValue": "Premium",
-        "allowedValues": [
-          "Premium"
-        ]
-      },
       "jumpbox_jumpbox-local-admin-username": {
         "type": "string",
         "metadata": {
@@ -593,13 +616,6 @@
           "description": "The username used to access jumpbox VMs"
         },
         "defaultValue": "jb-admin-user"
-      },
-      "jumpbox_jumpbox-local-admin-password": {
-        "type": "secureString",
-        "metadata": {
-          "displayName": "Jumpbox admin password",
-          "description": "The Key Vault Resource ID and Key Vault Secret Name where the Jumpbox admin password is stored. If Linux is selected as Jumpbox OS, this value will be a public SSH Key, otherwise this value will be a User's Password. Secret name has to match the value specified in Key Vault template - Jumpbox admin username. To learn more on how to use SecureStrings in Azure Blueprints, go to: https://aka.ms/blueprintsecrets"
-        }
       },
       "jumpbox_jumpbox-os": {
         "type": "string",
@@ -629,22 +645,6 @@
         },
         "defaultValue": "contoso.com"
       },
-      "active-directory-domain-services_ad-domain-admin-username": {
-        "type": "string",
-        "metadata": {
-          "displayName": "Domain admin username",
-          "description": "Domain user that has privileges to join a VM into a Domain"
-        },
-        "defaultValue": "domain-admin-user"
-      },
-      "active-directory-domain-services_ad-domain-admin-password": {
-        "type": "secureString",
-        "metadata": {
-          "displayName": "Domain admin password",
-          "description": "The Key Vault Resource ID and Key Vault Secret Name where the Domain admin password is stored. Secret name has to match the value specified in Key Vault template - Domain admin username. To learn more on how to use SecureStrings in Azure Blueprints, go to: https://aka.ms/blueprintsecrets"
-        },
-        "allowedValues": []
-      },
       "active-directory-domain-services_logs-retention-in-days": {
         "type": "int",
         "metadata": {
@@ -653,52 +653,29 @@
         },
         "defaultValue": 365
       },
+      "active-directory-domain-services_ad-domain-admin-username": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Domain admin username",
+          "description": "Domain user that has privileges to join a VM into a Domain"
+        },
+        "defaultValue": "domain-admin-user"
+      },
       "resource-group-location": {
         "type": "string",
         "metadata": {
-          "displayName": "Shared services location",
+          "displayName": "Shared Services resource group location",
+          "description": "Location where Resource Group(s) and Resources to be created",
           "strongType": "location"
         }
       }
     },
     "resourceGroups": {
       "ResourceGroup": {
-        "name": "[concat(parameters('organization'),'-sharedsvcs-log-rg')]",
+        "name": "[concat(parameters('resourcePrefix'),'-sharedsvcs-rg')]",
         "location": "[parameters('resource-group-location')]",
         "metadata": {
-          "displayName": "Log Analytics resource group"
-        },
-        "dependsOn": []
-      },
-      "ResourceGroup2": {
-        "name": "[concat(parameters('organization'),'-sharedsvcs-net-rg')]",
-        "location": "[parameters('resource-group-location')]",
-        "metadata": {
-          "displayName": "Network resource group"
-        },
-        "dependsOn": []
-      },
-      "ResourceGroup3": {
-        "name": "[concat(parameters('organization'),'-sharedsvcs-kv-rg')]",
-        "location": "[parameters('resource-group-location')]",
-        "metadata": {
-          "displayName": "Key Vault resource group"
-        },
-        "dependsOn": []
-      },
-      "ResourceGroup4": {
-        "name": "[concat(parameters('organization'),'-sharedsvcs-jb-rg')]",
-        "location": "[parameters('resource-group-location')]",
-        "metadata": {
-          "displayName": "Jumpbox resource group"
-        },
-        "dependsOn": []
-      },
-      "ResourceGroup5": {
-        "name": "[concat(parameters('organization'),'-sharedsvcs-adds-rg')]",
-        "location": "[parameters('resource-group-location')]",
-        "metadata": {
-          "displayName": "Active Directory Domain Services resource group"
+          "displayName": "Shared Services resource group"
         },
         "dependsOn": []
       }
@@ -711,7 +688,7 @@
     "displayName": "Azure Zero Trust Architecture",
     "description": "Deploys and configures Azure infrastructure and policies mapped to Zero Trust Architecture (TIC 3.0)."
   },
-  "id": "/providers/Microsoft.Blueprint/blueprints/Zero_Trust_Architecture",
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34",
   "type": "Microsoft.Blueprint/blueprints",
-  "name": "Zero_Trust_Architecture"
+  "name": "bce24a0e-4bb8-45bd-b705-8493e0180a34"
 }
