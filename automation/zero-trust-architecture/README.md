@@ -53,21 +53,17 @@ More on Azure Blueprint can be found [here](https://docs.microsoft.com/en-us/azu
 
 Azure resources deployed by the Zero Trust blueprint are locked inside virtual network using [Virtual Network service endpoints](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview) and are not accessible from outside the virtual network. All the passwords and secrets for virtual machines are auto generated and stored securely in [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/).
 
-Blueprint creates a JumpBoxes/Bastion hosts, (by default Windows, but can be changed to Linux operating systems during blueprint assignment) with duel virtual network interface cards to enable entry into the the secure Zero Trust environment created by the blueprint. Use one of the following options as applicable to access to the environment.
-
-### Connect from private network
-
-1. From Azure portal, search for virtual network with name "*-sharedsvcs-kv" and configure Azure VPN to securaly connect to it.
-2. From Azure portal, search for key vault with name "*-sharedsvcs-kv" and configure it to allow access from specific network or from internet via Firewall. [More info](https://docs.microsoft.com/en-us/azure/key-vault/general/network-security)
-    * This is required to retrieve JumpBox VM password from the Key Vault secrets. [More info](https://docs.microsoft.com/en-us/azure/key-vault/secrets/about-secrets)
-3. From Azure portal, search for virtual machine name "\*-sharedsvcs-jb-\*-vm" and connect to it by requesting access via just-in-time. [More info](https://docs.microsoft.com/en-us/azure/security-center/security-center-just-in-time#request-jit-access-via-security-center)
+Blueprint creates a JumpBox/Bastion host, (by default Windows, but can be changed to Linux operating systems during blueprint assignment) with pre-configured firewall rule to enable entry into the the secure Zero Trust environment created by the blueprint. Use following instructions or as applicable to connect to the environment.
 
 ### Connect from internet
 
-1. From Azure portal, search for key vault with name "*-sharedsvcs-kv" and configure it to allow access from specific network or from internet via Firewall. [More info](https://docs.microsoft.com/en-us/azure/key-vault/general/network-security)
-    * This is required to retrieve JumpBox VM password from the Key Vault secrets. [More info](https://docs.microsoft.com/en-us/azure/key-vault/secrets/about-secrets)
-2. From Azure portal, search for virtual machine name "\*-sharedsvcs-jb-\*-vm" and add a public ip address. [More info](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-network-interface-addresses#add-ip-addresses)
-3. From Azure portal, search for virtual machine name "\*-sharedsvcs-jb-\*-vm" and connect to it by requesting access via just-in-time. [More info](https://docs.microsoft.com/en-us/azure/security-center/security-center-just-in-time#request-jit-access-via-security-center)
+1. From Azure portal, search for key vault with name "\*-sharedsvcs-kv" and configure it to allow access from specific network or from internet via firewall. [More info](https://docs.microsoft.com/en-us/azure/key-vault/general/network-security)
+    * This is required to retrieve JumpBox VM password from the key vault secrets. [More info](https://docs.microsoft.com/en-us/azure/key-vault/secrets/about-secrets)
+
+    > [!IMPORTANT]
+    > Do not forget to revert the changes back after retrieving the password to lock down key vault to intended networks only.
+
+2. From Azure portal, search for Azure Firewall name "\*-sharedsvcs-az-fw". Firewall is pre-configured with rule to allow access to JumpBox VM. Use firewall's public ip to connect to JumpBox VM to gain access to the environment. Default admin user name, unless changed during blueprint assignment, is 'jb-admin-user' and password retrieved in previous step.
 
 ## Feedback
 

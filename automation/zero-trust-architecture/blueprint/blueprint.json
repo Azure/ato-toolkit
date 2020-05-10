@@ -25,6 +25,7 @@
         "type": "array",
         "metadata": {
           "displayName": "Allowed virtual machine SKUs",
+          "description": "Allowed virtual machine SKUs. Run `Get-AzureRmComputeResourceSku | Where-Object ResourceType -eq VirtualMachines | Select-Object Name` from Azure PowerShell to get available skus.",
           "strongType": "vmSKUs"
         },
         "defaultValue": [
@@ -495,7 +496,7 @@
         "type": "string",
         "metadata": {
           "displayName": "Location",
-          "description": "Region used when establishing the workspace"
+          "description": "Region used when establishing the workspace. Run `Get-AzLocation | Where-Object Providers -like 'Microsoft.OperationalInsights' | Select DisplayName` in Azure PowersShell to find available regions."
         }
       },      
       "azure-firewall_azure-firewall-private-ip": {
