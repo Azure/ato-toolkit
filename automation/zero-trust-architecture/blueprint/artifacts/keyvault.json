@@ -26,6 +26,54 @@
             "displayName": "Log retention in days",
             "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely"
           }
+        },
+        "secret-unique-value1": {
+          "type": "string",
+          "defaultValue": "[newGuid()]",
+          "metadata": {
+            "displayName": "Unique value1 for secret generation",
+            "description": "Unique value that will be used to auto generate secrets"
+          }
+        },
+        "secret-unique-value2": {
+          "type": "string",
+          "defaultValue": "[newGuid()]",
+          "metadata": {
+            "displayName": "Unique value2 for secret generation",
+            "description": "Unique value that will be used to auto generate secrets"
+          }
+        },
+        "secret-unique-value3": {
+          "type": "string",
+          "defaultValue": "[newGuid()]",
+          "metadata": {
+            "displayName": "Unique value3 for secret generation",
+            "description": "Unique value that will be used to auto generate secrets"
+          }
+        },
+        "secret-unique-value4": {
+          "type": "string",
+          "defaultValue": "[newGuid()]",
+          "metadata": {
+            "displayName": "Unique value4 for secret generation",
+            "description": "Unique value that will be used to auto generate secrets"
+          }
+        },
+        "secret-unique-value5": {
+          "type": "string",
+          "defaultValue": "[newGuid()]",
+          "metadata": {
+            "displayName": "Unique value5 for secret generation",
+            "description": "Unique value that will be used to auto generate secrets"
+          }
+        },
+        "secret-unique-value6": {
+          "type": "string",
+          "defaultValue": "[newGuid()]",
+          "metadata": {
+            "displayName": "Unique value6 for secret generation",
+            "description": "Unique value that will be used to auto generate secrets"
+          }
         }
       },
       "variables": {
@@ -34,8 +82,8 @@
         "enable-vault-for-templateDeployment": true,
         "enable-vault-for-diskEncryption": true,
         "vault-sku": "Premium",
-        "jumpbox-local-admin-user-password-secret-value": "[concat('J', uniqueString(resourceGroup().id, '224F5A8B-51DB-46A3-A7C8-59B0DD584A41'), 'z', '@')]",
-        "ad-domain-admin-user-password-secret-value": "[concat('A', uniqueString(resourceGroup().id, '8ACDA621-2D72-4271-BB1A-036B24CF88CD'), 'x', '!')]",
+        "jumpbox-local-admin-user-password-secret-value": "[concat(toUpper(uniqueString(parameters('secret-unique-value1'))), uniqueString(parameters('secret-unique-value2')), toLower(uniqueString(parameters('secret-unique-value3'))), '@')]",
+        "ad-domain-admin-user-password-secret-value": "[concat(toUpper(uniqueString(parameters('secret-unique-value4'))), uniqueString(parameters('secret-unique-value5')), toLower(uniqueString(parameters('secret-unique-value6'))), '!')]",
         "oms-workspace-resourceGroup": "[concat(variables('deployment-prefix'), '-rg')]",
         "oms-workspace-name": "[concat(variables('deployment-prefix'), '-log')]",
         "key-vault-name": "[concat(variables('deployment-prefix'), '-kv')]",
