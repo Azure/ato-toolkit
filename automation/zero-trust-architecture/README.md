@@ -20,8 +20,8 @@ More on Azure Blueprint can be found [here](https://docs.microsoft.com/en-us/azu
 
 ### Import via Azure CloudShell
 
-    > [!TIP]
-    > Alternatively you can execute same steps via PowerShell shell (min version 7.0.0) installed on local computer by connecting to target Azure Cloud environment and subscription context. [Learn how to](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-3.6.1)
+> [!TIP]
+> Alternatively you can execute same steps via PowerShell shell (min version 7.0.0) installed on local computer by connecting to target Azure Cloud environment and subscription context. [Learn how to](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-3.6.1)
 
 1. Open CloudShell in Azure Portal. [Learn how to](https://docs.microsoft.com/en-us/azure/cloud-shell/overview)
 
