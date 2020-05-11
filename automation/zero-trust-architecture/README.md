@@ -53,6 +53,9 @@ More on Azure Blueprint can be found [here](https://docs.microsoft.com/en-us/azu
 
 Azure resources deployed by the Zero Trust blueprint are locked inside virtual network using [Virtual Network service endpoints](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview) and are not accessible from outside the virtual network. All the passwords and secrets for virtual machines are auto generated and stored securely in [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/).
 
+> [!IMPORTANT]
+> Change all the passwords and secrets and update them in key vault for reference, before hosting any production data in the environment created by the blueprint.
+
 Blueprint creates a JumpBox/Bastion host, (by default Windows, but can be changed to Linux operating systems during blueprint assignment) with pre-configured firewall rule to enable entry into the the secure Zero Trust environment created by the blueprint. Use following instructions or as applicable to connect to the environment.
 
 ### Connect from internet
