@@ -10,18 +10,18 @@ Following are the instructions to deploy artifacts included in the package, they
 
 ## Prerequisites
 
-1. An Azure subscription (this is where audit policies and other resources will be created).
+1. An active Azure or Azure Government subscription (this is where audit policies and other resources will be deployed).
 2. Owner level permissions on the management group and subscription. Keep ManagementGroupId or SubscriptionId handy.
 3. All the files and sub directories in current directory.
 
 ## Azure Blueprint
 
-More on Azure Blueprint can be found [here](https://docs.microsoft.com/en-us/azure/governance/blueprints/concepts/lifecycle). In order to customize and assign blueprint we first need to import it into Azure subscription, follow these steps to do so.
+More on Azure Blueprint can be found [here](https://docs.microsoft.com/en-us/azure/governance/blueprints/concepts/lifecycle). In order to customize and assign blueprint we first need to import it into your Azure subscription, follow these steps to do so.
 
 ### Import via Azure CloudShell
 
-    > [!TIP]
-    > Alternatively you can execute same steps via PowerShell shell (min version 7.0.0) installed on local computer by connecting to target Azure Cloud environment and subscription context. [Learn how to](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-3.6.1)
+> [!TIP]
+> Alternatively you can execute same steps via PowerShell shell (min version 7.0.0) installed on local computer by connecting to target Azure Cloud environment and subscription context. [Learn how to](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-3.6.1)
 
 1. Open CloudShell in Azure Portal. [Learn how to](https://docs.microsoft.com/en-us/azure/cloud-shell/overview)
 
