@@ -3,7 +3,7 @@
     "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c",
     "parameters": {
       "listOfAllowedLocations": {
-        "value": "[parameters('listOfAllowedLocations')]"
+        "value": "[parameters('listOfAllowedLocationsForResourcesAndResourceGroups')]"
       }
     },
     "dependsOn": [
@@ -12,7 +12,7 @@
     "displayName": "Allowed locations"
   },
   "kind": "policyAssignment",
-  "id": "/providers/Microsoft.Blueprint/blueprints/Zero_Trust_Architecture/artifacts/e2e95399-ff59-48b9-9985-504a5eedd7af",
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34/artifacts/e2e95399-ff59-48b9-9985-504a5eedd7af",
   "type": "Microsoft.Blueprint/blueprints/artifacts",
   "name": "e2e95399-ff59-48b9-9985-504a5eedd7af"
 }

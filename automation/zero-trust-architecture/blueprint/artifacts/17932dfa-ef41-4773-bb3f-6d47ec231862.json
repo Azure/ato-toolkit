@@ -3,14 +3,14 @@
     "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
     "parameters": {
       "listOfAllowedSKUs": {
-        "value": "[parameters('listOfAllowedStorageSKUs')]"
+        "value": "[parameters('allowedStorageAccountSKUs_listOfAllowedStorageSKUs')]"
       }
     },
     "dependsOn": [],
     "displayName": "Allowed storage account SKUs"
   },
   "kind": "policyAssignment",
-  "id": "/providers/Microsoft.Blueprint/blueprints/Zero_Trust_Architecture/artifacts/17932dfa-ef41-4773-bb3f-6d47ec231862",
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34/artifacts/17932dfa-ef41-4773-bb3f-6d47ec231862",
   "type": "Microsoft.Blueprint/blueprints/artifacts",
   "name": "17932dfa-ef41-4773-bb3f-6d47ec231862"
 }

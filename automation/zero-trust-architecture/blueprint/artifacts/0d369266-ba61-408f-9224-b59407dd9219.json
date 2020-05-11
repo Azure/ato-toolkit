@@ -3,7 +3,7 @@
     "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/053d3325-282c-4e5c-b944-24faffd30d77",
     "parameters": {
       "logAnalytics": {
-        "value": "[concat(subscription().id, '/resourceGroups/', concat(parameters('organization'), '-sharedsvcs-log-rg'), '/providers/Microsoft.OperationalInsights/workspaces/', concat(parameters('organization'), '-sharedsvcs-log'))]"
+        "value": "[concat(subscription().id, '/resourceGroups/', concat(parameters('resourcePrefix'), '-sharedsvcs-rg'), '/providers/Microsoft.OperationalInsights/workspaces/', concat(parameters('resourcePrefix'), '-sharedsvcs-log'))]"
       },
       "listOfImageIdToInclude": {
         "value": "[parameters('deployLogAnalyticsAgentforLinuxVMs_listOfImageIdToInclude')]"
@@ -13,7 +13,7 @@
     "displayName": "[Preview]: Deploy Log Analytics Agent for Linux VMs"
   },
   "kind": "policyAssignment",
-  "id": "/providers/Microsoft.Blueprint/blueprints/Zero_Trust_Architecture/artifacts/0d369266-ba61-408f-9224-b59407dd9219",
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34/artifacts/0d369266-ba61-408f-9224-b59407dd9219",
   "type": "Microsoft.Blueprint/blueprints/artifacts",
   "name": "0d369266-ba61-408f-9224-b59407dd9219"
 }

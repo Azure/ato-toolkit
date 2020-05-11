@@ -1,53 +1,39 @@
----
-page_type: sample
-languages:
-- csharp
-products:
-- dotnet
-description: "Add 150 character max description"
-urlFragment: "update-this-to-unique-url-stub"
----
+# Microsoft Azure blueprint for Zero Trust (preview)
 
-# Official Microsoft Sample
+Welcome to the Microsoft Azure blueprint for Zero Trust preview. Many of our customers in regulated industries are adopting a Zero Trust architecture, moving to a security model that more effectively adapts to the complexity of the modern environment, embraces the mobile workforce, and protects people, devices, applications, and data wherever they’re located. A Zero Trust approach should extend throughout the entire digital estate and serve as an integrated security philosophy and end-to-end strategy, across three primary principles: (1) verify explicitly, (2) enforce least privilege access, and (3) assume breach.
 
-<!-- 
-Guidelines on README format: https://review.docs.microsoft.com/help/onboard/admin/samples/concepts/readme-template?branch=master
+Using the Azure Blueprints service, the Zero Trust blueprint will first configure your VNET to deny all network traffic by default, enabling you to extend it and/or set rules for selective traffic based on your business needs. In addition, the blueprint will enforce and maintain Azure resource behaviors and configuration in compliance with specific NIST SP 800-53 security control requirements using Azure Policy. The blueprint includes Azure Resource Manager templates to deploy and configure Azure resources such as Virtual Network, Network Security Groups, Azure Key Vault, Azure Monitor, Azure Security Center, and more. If you’re working with applications that need to comply with FedRAMP High or DoD Impact Level 4 requirements or just want to improve the security posture of your cloud deployment, the blueprint for Zero Trust is designed to help you get there faster.
 
-Guidance on onboarding samples to docs.microsoft.com/samples: https://review.docs.microsoft.com/help/onboard/admin/samples/process/onboarding?branch=master
+Please review all the artifacts and instructions carefully before importing Zero Trust blueprint into Azure subscription. Use the supplemental, 'implementation-statements' to aid with ATO package, SSP (System Security Plan) or other relevant compliance processes. The Zero Trust blueprint is currently in preview with limited support.
 
-Taxonomies for products and languages: https://review.docs.microsoft.com/new-hope/information-architecture/metadata/taxonomies?branch=master
--->
+[Learn more about Zero Trust](https://www.microsoft.com/en-us/security/business/zero-trust) and to learn more about how to implement Zero Trust architecture on Azure, read the [6-part blog series](https://devblogs.microsoft.com/azuregov/implementing-zero-trust-with-microsoft-azure-identity-and-access-management-1-of-6/) on the Azure Government Dev Blog.
 
-Give a short description for your sample here. What does it do and why is it important?
+For more information, questions, or feedback please [contact us](https://aka.ms/zerotrust-blueprint-feedback).
 
 ## Contents
 
-Outline the file contents of the repository. It helps users navigate the codebase, build configuration and any related assets.
-
 | File/folder       | Description                                |
 |-------------------|--------------------------------------------|
-| `src`             | Sample source code.                        |
-| `.gitignore`      | Define what to ignore at commit time.      |
-| `CHANGELOG.md`    | List of changes to the sample.             |
-| `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
+| `automation`      | Zero Trust blueprint sample and associated artifacts.                        |
+| `implementation-statements`      | Implementation statements, mapped to NIST security controls, describing the implementation deployed and configured by the automation to aid with compliance ATO process.                         |
+| `utils`      | General tools and utilities to assist with automation and implementation statements.                         |
 | `README.md`       | This README file.                          |
+| `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
 | `LICENSE`         | The license for the sample.                |
 
 ## Prerequisites
 
-Outline the required components and tools that a user might need to have on their machine in order to run the sample. This can be anything from frameworks, SDKs, OS versions or IDE releases.
+1. Active Azure or Azure Government subscription. [Start here](https://azure.microsoft.com/en-us/)
 
-## Setup
+## Instructions
 
-Explain how to prepare the sample once the user clones or downloads the repository. The section should outline every step necessary to install dependencies and set up any settings (for example, API keys and output folders).
+1. [Zero Trust blueprint](/automation/zero-trust-architecture/README.md)
+2. [Implementation statements](/implementation-statements/README.md)
+    * [VSCode extension](/utils/authoring-assistant/README.md)
 
-## Running the sample
+## Feedback
 
-Outline step-by-step instructions to execute the sample and see its output. Include steps for executing the sample from the IDE, starting specific services in the Azure portal or anything related to the overall launch of the code.
-
-## Key concepts
-
-Provide users with more context on the tools and services used in the sample. Explain some of the code that is being used and how services interact with each other.
+For more information, questions, or feedback please [contact us](https://aka.ms/zerotrust-blueprint-feedback).
 
 ## Contributing
 

@@ -3,34 +3,26 @@
     "template": {
       "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
       "contentVersion": "1.0.0.1",
-      "variables": {
-        
-      },
+      "variables": {},
       "resources": [
-      {
-        "type": "Microsoft.Security/pricings",
-        "apiVersion": "2017-08-01-preview",
-        "name": "default",
-        "properties": {
-          "pricingTier": "Standard"
+        {
+          "type": "Microsoft.Security/pricings",
+          "apiVersion": "2017-08-01-preview",
+          "name": "default",
+          "properties": {
+            "pricingTier": "Standard"
+          }
         }
-      }
       ],
-      "outputs": {
-        
-      }
+      "outputs": {}
     },
-    "parameters": {
-      
-    },
-    "dependsOn": [
-    
-    ],
+    "parameters": {},
+    "dependsOn": [],
     "displayName": "Azure Security Center template",
     "description": ""
   },
   "kind": "template",
-  "id": "/providers/Microsoft.Blueprint/blueprints/Zero_Trust_Architecture/artifacts/939c6f4a-da98-4c2e-9d87-ba25bb8f0c23",
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34/artifacts/939c6f4a-da98-4c2e-9d87-ba25bb8f0c23",
   "type": "Microsoft.Blueprint/blueprints/artifacts",
   "name": "939c6f4a-da98-4c2e-9d87-ba25bb8f0c23"
 }
