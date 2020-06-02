@@ -27,7 +27,7 @@ Here are the architectural components of the solution.
 > 
 > 
 
-For a full end-to-end tutorial of the solution [see demo video here](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade).
+For a full end-to-end tutorial of the solution [see demo video here](https://www.youtube.com/watch?v=gntpwbeWbak).
 
 ## Prerequisities
 * Download az-cli
