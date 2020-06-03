@@ -18,8 +18,8 @@ Here are the architectural components of the solution.
 * *Workload*. Lastly, we have the top layer - deploying your application workload! Here you pull a trusted container image from [Iron Bank](https://ironbank.dsop.io), which is the DoD’s central repository for hardened Docker images, and use it to seamlessly deploy a basic web app.
 
 ## Deploying the solution
-* *Secure infrastructure*. Use the [Zero Trust Blueprint](https://github.com/Azure/ato-toolkit/tree/master/automation/zero-trust-architecture) to setup strongly governed components like networking, storage, and monitoring that abide by the Zero Trust "never trust, always verify" philosophy on Azure
-* *Container orchestration*. Use the [secure OpenShift deployment](https://github.com/Azure/ato-toolkit/tree/master/automation/openshift/ocp3.11/ocp3.11-in-hardened-zero-trust-environment.md) to deploy a functional OpenShift 3.11 cluster
+* *Secure infrastructure*. Use the [Zero Trust Blueprint](https://github.com/Azure/ato-toolkit/automation/zero-trust-architecture) to setup strongly governed components like networking, storage, and monitoring that abide by the Zero Trust "never trust, always verify" philosophy on Azure
+* *Container orchestration*. Use the [secure OpenShift deployment](https://github.com/Azure/ato-toolkit/automation/openshift/ocp3.11/ocp3.11-on-azure-gov-in-zta.md) to deploy a functional OpenShift 3.11 cluster
 * *Workload*. Use the [Iron Bank verification script](xxx) to ensure you're using a secure Docker image 
 
 > [!NOTE]
