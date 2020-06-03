@@ -1,5 +1,7 @@
 ## OpenShift 3.11 automated install solution on Azure Government, Azure Stack, and Azure Secret clouds
 
+This install is a secure deployment of RedHat OpenShift on Azure. The deployment is unique as its automated and has hardening baked-in.
+
 ## Prerequisities
 * Download az-cli
 
