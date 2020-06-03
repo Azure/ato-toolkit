@@ -1,4 +1,4 @@
-## OpenShift 3.11 automated install solution on Azure Government
+## OpenShift 3.11 automated install solution on Azure Government, Azure Stack, and Azure Secret clouds
 
 ## Prerequisities
 * Download az-cli
