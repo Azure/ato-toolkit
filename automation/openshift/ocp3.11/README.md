@@ -24,8 +24,8 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
 
 1. Clone repo or download this folder
 2. Generate an ssh key
-3. Create a certs folder in the root of this directory
-4. Put the ssh key in the `./certs/` folder
+3. Create a `certs` folder in the root of this directory
+4. Put the public and private ssh keys in the `./certs/` folder
 5. Gather Red Hat Subscription Manager info:
    1. Username or Organization Id (ex. your email you use to log into the portal)
    2. Pool Id (ex. a random string of 32 characters)
@@ -37,4 +37,14 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
 1. Change `deployment.vars.usgovernment.ps1`
 2. Open the latest version of Powershell and run `install.ps1 -VariableFile deployment.vars.usgovernment.ps1`
 
+## Troubleshooting
 
+All installation logs are output to the `./deployment-output/` folder. Look there first for any issues.
+
+1. If you get a naming conflict error then you might have to adjust how resources get named in the `deployment.vars.*.ps1` file. Look for the `Naming Conventions` section.
+2. The install occasionally has trouble deploying the ansible playbooks. If you see a deployment hang, then fail you can usually delete the deployment and start again. This is part of the ansible playbooks used to deploy OCP 3.11 and not something this tool is staged to correct.
+3. If you have any other issues during the `deploy openshift` step then you can ssh to the bastion using the ssh key you generated. Then run the following command to see what ansible did: `sudo cat /var/lib/waagent/custom-script/download/0/stdout`
+
+## Further Help
+
+Contact [CloudFit](https://www.cloudfitsoftware.com/) @ getfit@cloudfitsoftware.com
