@@ -32,7 +32,9 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
    3. Broker Pool Id (ex. can be the exact same as the pool id)
    4. Password or Activation Key (ex. the password you use to log into the portal)
 
-## Azure US Government Deployment
+## Deployment
+
+### Azure US Government
 
 1. Change `deployment.vars.usgovernment.ps1`
 2. Open the latest version of Powershell and run `install.ps1 -VariableFile deployment.vars.usgovernment.ps1`
