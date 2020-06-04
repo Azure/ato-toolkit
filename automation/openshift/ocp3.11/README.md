@@ -2,10 +2,25 @@
 
 This install is a secure deployment of RedHat OpenShift on Azure. The deployment is unique as its automated and has hardening baked-in.
 
-## Prerequisities
-* Download az-cli
+## Prerequisites
+
+* Download [az-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+* Download [Powershell](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7)
+* Access to your Azure subscription to create a resources such as:
+  * Resource Group
+  * Virtual Machine
+  * Storage Account
+  * Availability Set
+  * Managed Disk
+  * Image
+  * Key Vault
+  * Load Balancers
+  * Network Interfaces
+  * Network Security Groups
+* Red Hat Subscription information
 
 ## Steps
-* Change between lines 5-25 of parameters in deploy-vars.ps1
-* Run install.ps1
-* Wait for install to complete
+
+1. Change between lines 5-25 of parameters in deploy-vars.ps1
+2. Run install.ps1
+3. Wait for install to complete
