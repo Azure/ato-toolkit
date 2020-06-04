@@ -4,9 +4,9 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
 
 ## Prerequisites
 
-* Download [az-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
-* Download [Powershell](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7)
-* Download [openssh](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_overview) for using [ssh-keygen] to create a ssh key
+* [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+* Latest version of [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7)
+* [openssh](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_overview) for using `ssh-keygen` to create a ssh key
 * Access to your Azure subscription to create a resources such as:
   * Resource Group
   * Virtual Machine
@@ -22,6 +22,9 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
 
 ## Steps
 
-1. Change between lines 5-25 of parameters in deploy-vars.ps1
-2. Run install.ps1
-3. Wait for install to complete
+1. clone repo or download this folder
+2. generate ssh key and put it in the `./certs/` folder
+3. gather Red Hat Subscription info
+4. Change `deployment.vars.ps1`
+5. Open the latest version of Powershell and run `install.ps1`
+6. Wait for install to complete
