@@ -6,6 +6,7 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
 
 * Download [az-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 * Download [Powershell](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7)
+* Download [openssh](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_overview) for using [ssh-keygen] to create a ssh key
 * Access to your Azure subscription to create a resources such as:
   * Resource Group
   * Virtual Machine
