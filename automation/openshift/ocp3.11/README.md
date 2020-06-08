@@ -64,7 +64,10 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
     ```powershell
     [string] $DepArgs.TenantId = "12345678-1234-1234-1234-1234567890ab"
     ```
-7. Open the latest version of Powershell, navigate to this directory, and run `install.ps1 -VariableFile deployment.vars.usgovernment.ps1`
+7. Open the latest version of Powershell, navigate to this directory, and run: 
+    ```powershell
+    ./install.ps1 -VariableFile deployment.vars.usgovernment.ps1
+    ```
 
 ## Troubleshooting
 
