@@ -23,7 +23,7 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
 ## Preparation
 
 1. Clone repo or download this folder
-2. [Generate an ssh key](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys)
+2. Generate an ssh key [Learn how to](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys)
 3. Create a `certs` folder in the root of this directory
 4. Put the public and private ssh keys in the `./certs/` folder
 5. Gather Red Hat Subscription Manager info:
@@ -48,15 +48,19 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
     [string] $DepArgs.RhsmBrokerPoolId = "can be the exact same as the pool id"
     [string] $DepArgs.RhsmPasswordOrActivationKey = "password used to login"
     ```
-4. Input the [Azure location](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list-locations) you would like to use. Examples include: usgovvirginia | usgoviowa | usgovtexas | usgovarizona
+4. Input the Azure location you would like to use. [Learn how to](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list-locations)
     ```powershell
     [string] $DepArgs.AzureLocation = "usgovvirginia"
     ```
-5. Input the [Azure Subscription Id](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list) you wish to use.
+
+    > [!TIP]
+    > Examples include: usgovvirginia | usgoviowa | usgovtexas | usgovarizona
+
+5. Input the Azure Subscription Id you wish to use. [Learn how to](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list)
     ```powershell
     [string] $DepArgs.SubscriptionId = "12345678-1234-1234-1234-1234567890ab"
     ```
-6. Input the [Azure Tenant Id](https://microsoft.github.io/AzureTipsAndTricks/blog/tip153.html) you wish to use.
+6. Input the Azure Tenant Id you wish to use. [Learn how to](https://microsoft.github.io/AzureTipsAndTricks/blog/tip153.html)
     ```powershell
     [string] $DepArgs.TenantId = "12345678-1234-1234-1234-1234567890ab"
     ```
