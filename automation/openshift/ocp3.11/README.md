@@ -34,7 +34,7 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
 
 ## Deployment
 
-Running the deployment will connect to Azure using the cli, deploy the needed resources for spinning up an OCP 3.11 cluster, 
+Running the deployment will connect to Azure using the cli, deploy the needed resources, prepare the virtual machines for deployment, and deploy an OCP 3.11.
 
 ### Azure US Government
 
