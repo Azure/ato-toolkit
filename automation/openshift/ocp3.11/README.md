@@ -36,7 +36,7 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
 
 ### Azure US Government
 
-1. Open `deployment.vars.usgovernment.ps1` in [your favorite editor](https://code.visualstudio.com/download)
+1. Open `deployment.vars.usgovernment.ps1` in [your favorite editor](https://code.visualstudio.com/download). We're going to change a few variable values at the top before starting the deployment.
 2. Update SshKey with the one you generated
     ```powershell
     [string] $DepArgs.SshKey = "your-ssh-key"
