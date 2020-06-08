@@ -38,28 +38,28 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
 
 1. Open `deployment.vars.usgovernment.ps1` in [your favorite editor](https://code.visualstudio.com/download)
 2. Update SshKey with the one you generated
-  ```powershell
-  [string] $DepArgs.SshKey = "your-ssh-key"
-  ```
+    ```powershell
+    [string] $DepArgs.SshKey = "your-ssh-key"
+    ```
 3. Update your RedHat Subscription manager information
-  ```powershell
-  [string] $DepArgs.RhsmUsernameOrOrgId = "email used to login"
-  [string] $DepArgs.RhsmPoolId = "random string of 32 characters"
-  [string] $DepArgs.RhsmBrokerPoolId = "can be the exact same as the pool id"
-  [string] $DepArgs.RhsmPasswordOrActivationKey = "password used to login"
-  ```
+    ```powershell
+    [string] $DepArgs.RhsmUsernameOrOrgId = "email used to login"
+    [string] $DepArgs.RhsmPoolId = "random string of 32 characters"
+    [string] $DepArgs.RhsmBrokerPoolId = "can be the exact same as the pool id"
+    [string] $DepArgs.RhsmPasswordOrActivationKey = "password used to login"
+    ```
 4. Input the [Azure location](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list-locations) you would like to use. Examples include: usgovvirginia | usgoviowa | usgovtexas | usgovarizona
-  ```powershell
-  [string] $DepArgs.AzureLocation = "usgovvirginia"
-  ```
+    ```powershell
+    [string] $DepArgs.AzureLocation = "usgovvirginia"
+    ```
 5. Input the [Azure Subscription Id](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list) you wish to use.
-  ```powershell
-  [string] $DepArgs.SubscriptionId = "12345678-1234-1234-1234-1234567890ab"
-  ```
+    ```powershell
+    [string] $DepArgs.SubscriptionId = "12345678-1234-1234-1234-1234567890ab"
+    ```
 6. Input the [Azure Tenant Id](https://microsoft.github.io/AzureTipsAndTricks/blog/tip153.html) you wish to use.
-  ```powershell
-  [string] $DepArgs.TenantId = "12345678-1234-1234-1234-1234567890ab"
-  ```
+    ```powershell
+    [string] $DepArgs.TenantId = "12345678-1234-1234-1234-1234567890ab"
+    ```
 7. Open the latest version of Powershell, navigate to this directory, and run `install.ps1 -VariableFile deployment.vars.usgovernment.ps1`
 
 ## Troubleshooting
