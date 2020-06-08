@@ -34,6 +34,8 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
 
 ## Deployment
 
+Running the deployment will connect to Azure using the cli, deploy the needed resources for spinning up an OCP 3.11 cluster, 
+
 ### Azure US Government
 
 1. Open `deployment.vars.usgovernment.ps1` in [your favorite editor](https://code.visualstudio.com/download). We're going to change a few variable values at the top before starting the deployment.
@@ -80,3 +82,5 @@ All installation logs are output to the `./deployment-output/` folder. Look ther
 ## Further Help
 
 Contact [CloudFit](https://www.cloudfitsoftware.com/) @ getfit@cloudfitsoftware.com
+
+> While this installation only covers OpenShift 3.11, Microsoft Azure and CloudFit are actively working on OpenShift 4.x support.
