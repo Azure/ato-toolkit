@@ -23,7 +23,7 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
 ## Preparation
 
 1. Clone repo or download this folder
-2. Generate an ssh key
+2. [Generate an ssh key](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys)
 3. Create a `certs` folder in the root of this directory
 4. Put the public and private ssh keys in the `./certs/` folder
 5. Gather Red Hat Subscription Manager info:
@@ -36,16 +36,39 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
 
 ### Azure US Government
 
-1. Change `deployment.vars.usgovernment.ps1`
-2. Open the latest version of Powershell and run `install.ps1 -VariableFile deployment.vars.usgovernment.ps1`
+1. Open `deployment.vars.usgovernment.ps1` in [your favorite editor](https://code.visualstudio.com/download)
+2. Update SshKey with the one you generated
+  ```powershell
+  [string] $DepArgs.SshKey = "your-ssh-key"
+  ```
+3. Update your RedHat Subscription manager information
+  ```powershell
+  [string] $DepArgs.RhsmUsernameOrOrgId = "email used to login"
+  [string] $DepArgs.RhsmPoolId = "random string of 32 characters"
+  [string] $DepArgs.RhsmBrokerPoolId = "can be the exact same as the pool id"
+  [string] $DepArgs.RhsmPasswordOrActivationKey = "password used to login"
+  ```
+4. Input the [Azure location](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list-locations) you would like to use. Examples include: usgovvirginia | usgoviowa | usgovtexas | usgovarizona
+  ```powershell
+  [string] $DepArgs.AzureLocation = "usgovvirginia"
+  ```
+5. Input the [Azure Subscription Id](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list) you wish to use.
+  ```powershell
+  [string] $DepArgs.SubscriptionId = "12345678-1234-1234-1234-1234567890ab"
+  ```
+6. Input the [Azure Tenant Id](https://microsoft.github.io/AzureTipsAndTricks/blog/tip153.html) you wish to use.
+  ```powershell
+  [string] $DepArgs.TenantId = "12345678-1234-1234-1234-1234567890ab"
+  ```
+7. Open the latest version of Powershell, navigate to this directory, and run `install.ps1 -VariableFile deployment.vars.usgovernment.ps1`
 
 ## Troubleshooting
 
 All installation logs are output to the `./deployment-output/` folder. Look there first for any issues.
 
 1. If you get a naming conflict error then you might have to adjust how resources get named in the `deployment.vars.*.ps1` file. Look for the `Naming Conventions` section.
-2. The install occasionally has trouble deploying the ansible playbooks. If you see a deployment hang, then fail you can usually delete the deployment and start again. This is part of the ansible playbooks used to deploy OCP 3.11 and not something this tool is staged to correct.
-3. If you have any other issues during the `deploy openshift` step then you can ssh to the bastion using the ssh key you generated. Then run the following command to see what ansible did: `sudo cat /var/lib/waagent/custom-script/download/0/stdout`
+2. The install occasionally has trouble deploying the ansible playbooks. A typical installation during the `deploy openshift` step takes at least 40 minutes. If you see a deployment hang, then fail you can usually delete the deployment and start again. This is part of the ansible playbooks used to deploy OCP 3.11 and not something this tool is intended to correct.
+3. If you have any issues during the `deploy openshift` step you can ssh to the bastion virtual machine using the ssh key you generated. Then run the following command to see what ansible did: `sudo cat /var/lib/waagent/custom-script/download/0/stdout`
 
 ## Further Help
 
