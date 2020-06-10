@@ -77,7 +77,8 @@ All installation logs are output to the `./deployment-output/` folder. Look ther
 
 1. If you get a naming conflict error then you might have to adjust how resources get named in the `deployment.vars.*.ps1` file. Look for the `Naming Conventions` section.
 2. The install occasionally has trouble deploying the ansible playbooks. A typical installation during the `deploy openshift` step takes at least 40 minutes. If you see a deployment hang, then fail you can usually delete the deployment and start again. This is part of the ansible playbooks used to deploy OCP 3.11 and not something this tool is intended to correct.
-3. If you have any issues during the `deploy openshift` step you can ssh to the bastion virtual machine using the ssh key you generated. Then run the following command to see what ansible did: `sudo cat /var/lib/waagent/custom-script/download/0/stdout`
+3. The `deploy openshift` step can fail if you do not have the correct RedHat subscription. You should see an error similar to: `ERROR! the playbook: /usr/share/ansible/openshift-ansible/playbooks/openshift-node/network_manager.yml could not be found`. You should confirm your subscription supports an OpenShift deployment.
+4. If you have any issues during the `deploy openshift` step you can ssh to the bastion virtual machine using the ssh key you generated. Then run the following command to see what ansible did: `sudo cat /var/lib/waagent/custom-script/download/0/stdout`
 
 ## Further Help
 
