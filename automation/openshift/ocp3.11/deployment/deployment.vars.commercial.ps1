@@ -17,7 +17,7 @@ $DepArgs = @{}
 # If you are already or can login to the az cli manually, then finding these values will be much easier.
 
 # az account list-locations - Examples: usgovvirginia | usgoviowa | usdodeast | usdodcentral | usgovtexas | usgovarizona
-[string] $DepArgs.AzureLocation = "usgovvirginia"
+[string] $DepArgs.AzureLocation = "eastus"
 
 # Azure Subscription ID
 # Found: az account list -o table
@@ -125,7 +125,7 @@ $CurrentAzureDns = "dev-openshift.com"
 [int] $DepArgs.CnsGlusterDiskSize = 256 # $cnsGlusterDiskSize = "1024"
 # If CNS is false, then azure storage blob registry is configured in deployOpenShift.sh
 # Possible Values: core.windows.net | [other configuration] Example: endpoint.stackpoc.com
-[string] $DepArgs.InternalEndpoint = "core.usgovcloudapi.net"
+[string] $DepArgs.InternalEndpoint = "core.windows.net"
 
 ####!! END GlusterFS !!####
 
@@ -199,8 +199,8 @@ $VirtualMachinePrefix = "$($DepArgs.Environment)-$($DepArgs.RegionLocation)"
 ########################
 
 # Possible Values: AzureCloud | AzureUSGovernment | [custom azure/stack config scheme](https://docs.microsoft.com/en-us/azure-stack/user/azure-stack-version-profiles-azurecli2?view=azs-2002#connect-to-azure-stack-hub)
-[string] $DepArgs.AzureCloud = "AzureUSGovernment"
-# if custom AzureCloud configuration - Stack Example: ppe4.stackpoc.com
+[string] $DepArgs.AzureCloud = "AzureCloud"
+# if custom AzureCloud configuration - Stack Example: endpoint.stackpoc.com
 [string] $DepArgs.AzureDomain = "core.windows.net"
 # if custom configuration - Stack Example: 2018-03-01-hybrid
 [string] $DepArgs.AzureProfile = "latest"
