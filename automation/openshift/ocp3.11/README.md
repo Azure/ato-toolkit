@@ -38,7 +38,7 @@ Running the deployment will connect to Azure using the cli, deploy the needed re
 
 > Note: Any connected deployment will deploy as a public cluster using [nip.io](https://nip.io/) as dns and use a self-signed certificate. It will be configured to be highly available. Metrics and logging will not be installed by default. The minor version will be 157. The urls will be [https://[insert-load-balancer-ip].nip.io]() for the console and apps.
 
-### Azure Commerical (Connected)
+### Azure Commercial (Connected)
 
 > in progress
 
@@ -76,6 +76,14 @@ Running the deployment will connect to Azure using the cli, deploy the needed re
     ```powershell
     ./install.ps1 -VariableFile deployment.vars.usgovernment.ps1
     ```
+
+### Azure Stack Hub (Connected)
+
+> in progress
+
+### Azure Secret (Connected)
+
+> in progress
 
 ## Troubleshooting
 
