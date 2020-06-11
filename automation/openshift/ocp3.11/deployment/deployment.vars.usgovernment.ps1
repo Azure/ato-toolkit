@@ -124,7 +124,7 @@ $CurrentAzureDns = "dev-openshift.com"
 [bool] $DepArgs.EnableCns = $false # currently azure disks aren't known to work with sequoia and gluster is our only other option
 [int] $DepArgs.CnsGlusterDiskSize = 256 # $cnsGlusterDiskSize = "1024"
 # If CNS is false, then azure storage blob registry is configured in deployOpenShift.sh
-# Possible Values: core.windows.net | core.microsoft.scloud | [other configuration] Example: ppe4.stackpoc.com
+# Possible Values: core.windows.net | [other configuration] Example: endpoint.stackpoc.com
 [string] $DepArgs.InternalEndpoint = "core.usgovcloudapi.net"
 
 ####!! END GlusterFS !!####
