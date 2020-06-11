@@ -36,6 +36,12 @@ This install is a secure deployment of RedHat OpenShift on Azure. The deployment
 
 Running the deployment will connect to Azure using the cli, deploy the needed resources, prepare the virtual machines for deployment, and deploy an OCP 3.11.
 
+> Note: Any connected deployment will deploy as a public cluster using [nip.io](https://nip.io/) as dns and use a self-signed certificate. It will be configured to be highly available. Metrics and logging will not be installed by default. The minor version will be 157. The urls will be [https://[insert-load-balancer-ip].nip.io]() for the console and apps.
+
+### Azure Cloud (Connected)
+
+> in progress
+
 ### Azure US Government (Connected)
 
 1. Open `./deployment/deployment.vars.usgovernment.ps1` in [your favorite editor](https://code.visualstudio.com/download). We're going to change a few variable values at the top before starting the deployment.
