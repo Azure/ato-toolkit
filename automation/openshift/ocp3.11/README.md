@@ -1,4 +1,4 @@
-## OpenShift 3.11 automated install solution across Azure fabrics
+## OpenShift 3.11 automated install solution across Azure fabrics (preview)
 
 This install is a secure deployment of RedHat OpenShift on Azure. The deployment is unique as its automated and has hardening baked-in.
 
