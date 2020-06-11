@@ -3,10 +3,10 @@
 This install is a secure deployment of RedHat OpenShift on Azure. The deployment is unique as its automated and has hardening baked-in.
 
 Environments include:
-- [Azure Commercial]()
-- [Azure Government]()
-- [Azure Stack]()
-- [Azure Secret]()
+- [Azure Commercial (Connected)](#azure-commercial-connected)
+- [Azure US Government (Connected)](#azure-us-government-connected)
+- [Azure Stack Hub (Connected)](#azure-stack-hub-connected)
+- [Azure Secret (Disconnected)](#azure-secret-disconnected)
 
 ## Prerequisites
 
@@ -38,15 +38,46 @@ Environments include:
    3. Broker Pool Id (ex. can be the exact same as the pool id)
    4. Password or Activation Key (ex. the password you use to log into the portal)
 
-## Deployment
+## Deployment Environments
 
 Running the deployment will connect to Azure using the cli, deploy the needed resources, prepare the virtual machines for deployment, and deploy an OCP 3.11.
 
-> Note: Any connected deployment will deploy as a public cluster using [nip.io](https://nip.io/) as dns and use a self-signed certificate. It will be configured to be highly available. Metrics and logging will not be installed by default. The minor version will be 157. The urls will be [https://[insert-load-balancer-ip].nip.io]() for the console and apps.
+> Note: Any **connected** deployment will deploy as a public cluster using [nip.io](https://nip.io/) as dns and use a self-signed certificate. It will be configured to be highly available. Metrics and logging will not be installed by default. The minor version will be 157. The urls will be [https://[insert-load-balancer-ip].nip.io]() for the console and apps.
 
 ### Azure Commercial (Connected)
 
-> in progress
+1. Open `./deployment/deployment.vars.commercial.ps1` in [your favorite editor](https://code.visualstudio.com/download). We're going to change a few variable values at the top before starting the deployment.
+2. Update SshKey with the one you generated
+    ```powershell
+    [string] $DepArgs.SshKey = "your-ssh-key"
+    ```
+3. Update your RedHat Subscription manager information
+    ```powershell
+    [string] $DepArgs.RhsmUsernameOrOrgId = "email used to login"
+    [string] $DepArgs.RhsmPoolId = "random string of 32 characters"
+    [string] $DepArgs.RhsmBrokerPoolId = "can be the exact same as the pool id"
+    [string] $DepArgs.RhsmPasswordOrActivationKey = "password used to login"
+    ```
+4. Input the Azure location you would like to use. [Learn how to](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list-locations)
+    ```powershell
+    [string] $DepArgs.AzureLocation = "eastus"
+    ```
+
+    > [!TIP]
+    > Examples include: eastus | westus | centralus | northcentralus
+
+5. Input the Azure Subscription Id you wish to use. [Learn how to](https://docs.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list)
+    ```powershell
+    [string] $DepArgs.SubscriptionId = "12345678-1234-1234-1234-1234567890ab"
+    ```
+6. Input the Azure Tenant Id you wish to use. [Learn how to](https://microsoft.github.io/AzureTipsAndTricks/blog/tip153.html)
+    ```powershell
+    [string] $DepArgs.TenantId = "12345678-1234-1234-1234-1234567890ab"
+    ```
+7. To begin the deployment, open the latest version of Powershell, navigate to the `deployment` folder, and run: 
+    ```powershell
+    ./install.ps1 -VariableFile deployment.vars.commercial.ps1
+    ```
 
 ### Azure US Government (Connected)
 
@@ -85,11 +116,11 @@ Running the deployment will connect to Azure using the cli, deploy the needed re
 
 ### Azure Stack Hub (Connected)
 
-> in progress
+> coming
 
-### Azure Secret (Connected)
+### Azure Secret (Disconnected)
 
-> in progress
+> coming
 
 ## Troubleshooting
 
