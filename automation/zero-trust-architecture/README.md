@@ -29,7 +29,7 @@ More on Azure Blueprint can be found [here](https://docs.microsoft.com/en-us/azu
     > [!NOTE]
     > If you don't have any storage mounted, Azure CloudShell requires an Azure file share to persist files. This will create a new storage account. Click "Create Storage".
 
-3. Run following command to clone the Azure ato-toolkit repository to clouddrive.
+3. Run the following command to clone the Azure ato-toolkit repository to clouddrive.
     ```powershell
     git clone https://github.com/Azure/ato-toolkit.git $HOME/clouddrive/ato-toolkit
 
@@ -38,7 +38,13 @@ More on Azure Blueprint can be found [here](https://docs.microsoft.com/en-us/azu
     > [!TIP]
     > Run `dir $HOME/clouddrive` to verify content of directory.
 
-4. Run following command to import artifacts as blueprint and save it within the specified subscription or management group.
+4. Run the following commands to import the powershell module needed to import the blueprint.
+    ```powershell
+    Install-Module -Name Az.Blueprint
+	Import-Module Az.Blueprint
+    ```
+
+5. Run the following command to import artifacts as blueprint and save it within the specified subscription or management group.
     ```powershell
     Import-AzBlueprintWithArtifact -Name "YourBlueprintName" -SubscriptionId "00000000-1111-0000-1111-000000000000" -InputPath "$HOME/clouddrive/ato-toolkit/automation/zero-trust-architecture/blueprint"
 
@@ -47,7 +53,7 @@ More on Azure Blueprint can be found [here](https://docs.microsoft.com/en-us/azu
     > [!NOTE]
     > The input path must point to the folder where blueprint.json file is placed.
 
-5. From Azure Portal, browse to Azure Blueprint service tab and select "Blueprint definitions". You can review newly imported blueprint in there and follow instructions to edit, publish and assign blueprint. [Learn how to](https://docs.microsoft.com/en-us/azure/governance/blueprints/create-blueprint-portal#edit-a-blueprint)
+6. From Azure Portal, browse to Azure Blueprint service tab and select "Blueprint definitions". You can review newly imported blueprint in there and follow instructions to edit, publish and assign blueprint. [Learn how to](https://docs.microsoft.com/en-us/azure/governance/blueprints/create-blueprint-portal#edit-a-blueprint)
 
 ## Post blueprint assignment steps
 
