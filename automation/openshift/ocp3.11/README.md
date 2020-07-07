@@ -116,7 +116,54 @@ Running the deployment will connect to Azure using the cli, deploy the needed re
 
 ### Azure Stack Hub (Connected)
 
-> coming
+1. Open `./deployment/deployment.vars.stack.ps1` in [your favorite editor](https://code.visualstudio.com/download). We're going to change a few variable values at the top before starting the deployment.
+2. Update SshKey with the one you generated
+    ```powershell
+    [string] $DepArgs.SshKey = "your-ssh-key"
+    ```
+3. Update your RedHat Subscription manager information
+    ```powershell
+    [string] $DepArgs.RhsmUsernameOrOrgId = "email used to login"
+    [string] $DepArgs.RhsmPoolId = "random string of 32 characters"
+    [string] $DepArgs.RhsmBrokerPoolId = "can be the exact same as the pool id"
+    [string] $DepArgs.RhsmPasswordOrActivationKey = "password used to login"
+    ```
+4. Input the Azure location you would like to use. This location will be based on your installation of Azure Stack Hub. [Learn how to](https://docs.microsoft.com/en-us/azure-stack/user/authenticate-azure-stack-hub?view=azs-2002)
+    ```powershell
+    [string] $DepArgs.AzureLocation = "my-stack"
+    ```
+5. Input the Azure Cloud you would like to use. This location will be based on your installation of Azure Stack Hub. [Learn how to](https://docs.microsoft.com/en-us/azure-stack/user/azure-stack-version-profiles-azurecli2?view=azs-2002#connect-to-azure-stack-hub)
+    ```powershell
+    [string] $DepArgs.AzureCloud = "my-stack-config"
+    ```
+6. Input the Azure Domain you would like to use. This domain will be based on your installation of Azure Stack Hub. [Learn how to](https://docs.microsoft.com/en-us/azure-stack/user/azure-stack-version-profiles-azurecli2?view=azs-2002#connect-to-azure-stack-hub)
+    ```powershell
+    [string] $DepArgs.AzureDomain = "my-stack.domain.com"
+    ```
+7. Input the Azure Profile you would like to use. This will be based on your installation of Azure Stack Hub. [Learn how to](https://docs.microsoft.com/en-us/azure-stack/user/azure-stack-version-profiles-azurecli2?view=azs-2002#connect-to-azure-stack-hub)
+    ```powershell
+    [string] $DepArgs.AzureProfile = "2018-03-01-hybrid"
+    ```
+8. Input the Azure Subscription Id you wish to use. [Learn how to](https://docs.microsoft.com/en-us/azure-stack/user/authenticate-azure-stack-hub?view=azs-2002#get-the-subscription-id)
+    ```powershell
+    [string] $DepArgs.SubscriptionId = "12345678-1234-1234-1234-1234567890ab"
+    ```
+9. Input the Azure Tenant Id you wish to use. [Learn how to](https://docs.microsoft.com/en-us/azure-stack/user/authenticate-azure-stack-hub?view=azs-2002#get-the-tenant-id)
+    ```powershell
+    [string] $DepArgs.TenantId = "12345678-1234-1234-1234-1234567890ab"
+    ```
+10. Depending on your Azure Stack installation, you may not have a RHEL v7 image to use for install. You will want to query the vm image list to determine if you have one by running `az vm image list --all --offer "RHEL" --output table`. If you do, then make sure the output values match the Marketplace values below. If you do not, you will need a RedHat image installed into your Azure Stack Marketplace to be used. [Learn how to](https://docs.microsoft.com/en-us/azure-stack/operator/azure-stack-add-vm-image?view=azs-2002)
+    ```powershell
+    [string] $DepArgs.MarketplacePublisher = "RedHat"
+    [string] $DepArgs.MarketplaceOffer = "RHEL"
+    [string] $DepArgs.MarketplaceSku = "7-RAW"
+    [string] $DepArgs.MarketplaceVersion = "latest"
+    ```
+11. For Azure Stack Hub, there are other considerations to be made based on your installation. [Learn how to](https://docs.microsoft.com/en-us/azure-stack/user/azure-stack-version-profiles-azurecli2?view=azs-2002)
+12. To begin the deployment, open the latest version of Powershell, navigate to the `deployment` folder, and run: 
+    ```powershell
+    ./install.ps1 -VariableFile deployment.vars.stack.ps1
+    ```
 
 ### Azure Secret (Disconnected)
 
@@ -130,6 +177,7 @@ All installation logs are output to the `./deployment/deployment-output/` folder
 2. The install occasionally has trouble deploying the ansible playbooks. A typical installation during the `deploy openshift` step takes at least 40 minutes. If you see a deployment hang, then fail you can usually delete the deployment and start again. This is part of the ansible playbooks used to deploy OCP 3.11 and not something this tool is intended to correct.
 3. The `deploy openshift` step can fail if you do not have the correct RedHat subscription. You should see an error similar to: `ERROR! the playbook: /usr/share/ansible/openshift-ansible/playbooks/openshift-node/network_manager.yml could not be found`. You should confirm your subscription supports an OpenShift deployment.
 4. If you have any issues during the `deploy openshift` step you can ssh to the bastion virtual machine using the ssh key you generated. Then run the following command to see what ansible did: `sudo cat /var/lib/waagent/custom-script/download/0/stdout`
+5. **Azure Stack Hub** - The VM sizes you use, number of VMs, and disk sizes are all dependant upon the resources your installation have available. If you have any resource issues during installation, they could be caused by this.
 
 ## Further Help
 
