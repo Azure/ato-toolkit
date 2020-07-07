@@ -178,7 +178,6 @@ All installation logs are output to the `./deployment/deployment-output/` folder
 3. The `deploy openshift` step can fail if you do not have the correct RedHat subscription. You should see an error similar to: `ERROR! the playbook: /usr/share/ansible/openshift-ansible/playbooks/openshift-node/network_manager.yml could not be found`. You should confirm your subscription supports an OpenShift deployment.
 4. If you have any issues during the `deploy openshift` step you can ssh to the bastion virtual machine using the ssh key you generated. Then run the following command to see what ansible did: `sudo cat /var/lib/waagent/custom-script/download/0/stdout`
 5. **Azure Stack Hub** - The VM sizes you use, number of VMs, and disk sizes are all dependant upon the resources your installation have available. If you have any resource issues during installation, they could be caused by this.
-6. 
 
 ## Further Help
 
