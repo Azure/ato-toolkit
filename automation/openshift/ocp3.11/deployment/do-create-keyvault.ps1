@@ -19,6 +19,26 @@ Log-Information "Create resource group for KeyVault: $ResourceGroup"
 $argList = "group create -l `"$AzureLocation`" -n $ResourceGroup -o table"
 $retVal = Run-Command -Process $proc -Arguments $argList
 
+Log-Information "Checking for soft-deleted keyvault with the name, $KeyVaultName"
+
+$softDeletedKeyvault = (az keyvault list-deleted --query "[?name == '$KeyVaultName'].name" -o tsv)
+if ($softDeletedKeyvault)
+{
+    Log-Information "Found a soft-deleted keyvault, $softDeletedKeyvault.  Purging keyvault"
+    $argList = "keyvault purge --name $KeyVaultName"
+    $retVal = Run-Command -Process $proc -Arguments $argList
+
+    if ($retVal -ne 0)
+    {
+        Log-Error "There was an error purging the keyvault, $KeyVaultName"
+        throw
+    }
+    else 
+    {
+        Log-Information "Successfully purged the keyvault, $KeyVaultName"
+    }
+}
+
 Log-Information "Create the KeyVault"
 $argList = "keyvault create -l `"$AzureLocation`" -n $KeyVaultName -g $ResourceGroup --enabled-for-template-deployment true --enabled-for-deployment true -o table"
 $retVal = Run-Command -Process $proc -Arguments $argList
