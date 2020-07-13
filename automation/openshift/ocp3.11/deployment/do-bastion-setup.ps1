@@ -5,6 +5,11 @@ param (
 )
 
 $scriptsPath = "$($(Get-Location).Path)/Ring-0/extra-scripts"
+if (-not (Test-Path $scriptsPath))
+{
+    New-Item -Path $scriptsPath -ItemType "directory"
+}
+
 $rawSshScriptPath = "$scriptsPath/rawssh.sh"
 if (Test-Path $rawSshScriptPath)
 {
