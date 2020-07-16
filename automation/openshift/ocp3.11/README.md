@@ -38,6 +38,15 @@ Environments include:
    3. Broker Pool Id (ex. can be the exact same as the pool id)
    4. Password or Activation Key (ex. the password you use to log into the portal)
 
+## ZTA Adjustment
+
+The current implementation of Zero Trust includes a DNS server. This breaks the deployment of OCP 3.11 inside of it. Because of this, we must adjust the Virtual Network deployed by the blueprint to use Azure DNS. Follow these instructions to complete that.
+
+1. Navigate to the Virtual Network named `contest-sharedsvcs-vnet`
+2. In the left hand navigation menu, select `DNS servers`
+3. Select `Default (Azure-provided)`
+4. Save the changes and wait for them to complete before starting any deployment
+
 ## Deployment Environments
 
 Running the deployment will connect to Azure using the cli, deploy the needed resources, prepare the virtual machines for deployment, and deploy an OCP 3.11.
