@@ -32,15 +32,18 @@ Log-Parameters -ScriptName $MyInvocation.MyCommand -ScriptArgs $MyInvocation.MyC
 
 $proc = "az"
 
-Log-Information "Create resource group for deployment: $ResourceGroup"
-$retVal = Run-Command -Process $proc -Arguments "group create -l `"$AzureLocation`" -n $ResourceGroup -o table"
+if (($ResourceGroup -ne "contest-sharedsvcs-rg") -or ($VirtualNetworkName -ne "contest-sharedsvcs-vnet"))
+{
+    Log-Information "Create resource group for deployment: $ResourceGroup"
+    $retVal = Run-Command -Process $proc -Arguments "group create -l `"$AzureLocation`" -n $ResourceGroup -o table"
 
-Log-Information "Create Virtual Network"
-$argList = "network vnet create --resource-group $ResourceGroup " +
-            "--name $VirtualNetworkName " +
-            "--address-prefix $AddressPrefixes " +
-            "-o table"
-$retVal = Run-Command -Process $proc -Arguments $argList
+    Log-Information "Create Virtual Network"
+    $argList = "network vnet create --resource-group $ResourceGroup " +
+                "--name $VirtualNetworkName " +
+                "--address-prefix $AddressPrefixes " +
+                "-o table"
+    $retVal = Run-Command -Process $proc -Arguments $argList
+}
 
 Log-Information "Creating Master Infra Subnet"
 $argList = "network vnet subnet create --address-prefix $MasterInfraSubnetPrefix " +
