@@ -59,23 +59,23 @@ $CurrentAzureDns = "dev-openshift.com"
 [string] $DepArgs.VirtualNetwork = "new"
 
 # Full vnet range CIDR Notation - Example: 10.1.0.0/16
-[string] $DepArgs.AddressPrefixes = "10.12.0.0/16"
+[string] $DepArgs.AddressPrefixes = "10.0.0.0/16"
 # Example: OcpVNet
-[string] $DepArgs.VirtualNetworkName = "OcpVNet"
+[string] $DepArgs.VirtualNetworkName = "contest-sharedsvcs-vnet"
 # Example: MasterInfraSubnet
 [string] $DepArgs.MasterInfraSubnetName = "MasterInfraSubnet"
 # Use CIDR Notation - Example: 10.1.101.0/24
-[string] $DepArgs.MasterInfraSubnetPrefix = "10.12.101.0/24"
+[string] $DepArgs.MasterInfraSubnetPrefix = "10.0.101.0/24"
 # Example: NodeSubnet
 [string] $DepArgs.NodeSubnetName = "NodeSubnet"
 # Use CIDR Notataion - Example: 10.1.102.0/24
-[string] $DepArgs.NodeSubnetPrefix = "10.12.102.0/24"
+[string] $DepArgs.NodeSubnetPrefix = "10.0.102.0/24"
 
 # Load balancer IPs, if ClusterType = "private"
 # Example: 10.3.101.100
-[string] $DepArgs.MasterPrivateClusterIp = "10.12.101.100"
+[string] $DepArgs.MasterPrivateClusterIp = "10.0.101.100"
 # Example: 10.3.101.200
-[string] $DepArgs.RouterPrivateClusterIp = "10.12.101.200"
+[string] $DepArgs.RouterPrivateClusterIp = "10.0.101.200"
 
 # Possible Values: selfsigned | custom
 [string] $DepArgs.RoutingCertType = "selfsigned"
@@ -161,12 +161,12 @@ $CurrentAzureDns = "dev-openshift.com"
 [string] $DepArgs.CnsShortname = "CNS"
 
 [string] $DepArgs.ResourceGroup = "$($DepArgs.ProductLine)-$($DepArgs.Environment)-OCP3-RG01"
-[string] $DepArgs.VirtualNetworkResourceGroup = "$($DepArgs.ResourceGroup)"
+[string] $DepArgs.VirtualNetworkResourceGroup = "contest-sharedsvcs-rg"
 
 [string] $DepArgs.AvailabilitySetPrefix = "$($DepArgs.Environment)-$($DepArgs.RegionLocation)"
 [string] $DepArgs.PublicIpPrefix = "$($DepArgs.Environment)$($DepArgs.RegionLocation)".ToLower()
 [string] $DepArgs.KeyVaultName = "$($DepArgs.ResourceGroup)-KV"
-[string] $DepArgs.SetupStorage = "$($DepArgs.Environment)$($DepArgs.RegionLocation)`ocpst002".ToLower()
+[string] $DepArgs.SetupStorage = "$($DepArgs.Environment)$($DepArgs.RegionLocation)`ocpst001".ToLower()
 [string] $DepArgs.SetupBlobContainer = "filesbl"
 $StorageAccountPrefix = "$($DepArgs.Environment)$($DepArgs.RegionLocation)".ToLower()
 [string] $DepArgs.DiagnosticsStorage = "$($StorageAccountPrefix)`diagst001".ToLower()
