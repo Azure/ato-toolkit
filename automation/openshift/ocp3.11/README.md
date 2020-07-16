@@ -180,7 +180,7 @@ Running the deployment will connect to Azure using the cli, deploy the needed re
 
 ## Post Deployment Steps
 
-When the installation completes, the password to access the OpenShift Console will be output to the console window. Additionally, by default, the deployment will use `nip.io` and will output the url to access the OpenShift Console. 
+When the installation completes, the password to access the OpenShift Console will be outputted to the console window. Additionally, by default, the deployment will use `nip.io` and will output the url to access in the OpenShift Console. 
 
 > [!TIP]
 > If you lose the OpenShift Console password, then it can be found in the KeyVault created in the deployment.
