@@ -411,6 +411,11 @@ sudo kubectl patch storageclass glusterfs-storage -p '{"metadata": {"annotations
     Log-Information "Deployment Complete!"
     Write-Host "Your OpenShift console password is: $OpenShiftPassword"
     Write-Host "Please retain to be able to log into administrator the cluster"
+    if ($RoutingSubDomainType -eq "nipio")
+    {
+        Write-Host "To access your console with nip.io use: https://$MasterLbIpAddress.nip.io/"        
+    }
+
     Read-Host "Press any key to close"
 }
 catch {
