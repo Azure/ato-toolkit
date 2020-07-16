@@ -178,6 +178,14 @@ Running the deployment will connect to Azure using the cli, deploy the needed re
 
 > coming
 
+## Post Deployment Steps
+
+When the installation completes, the password to access the OpenShift Console will be output to the console window. Additionally, by default, the deployment will use `nip.io` and will output the url to access the OpenShift Console. 
+
+> [!TIP]
+> If you lose the OpenShift Console password, then it can be found in the KeyVault created in the deployment.
+> If you lose the OpenShift Console url, then you can find the public ip of the Master Load Balancer (`ZTA-GOV-MSTR-LB-PIP`) and replace it in this: `https://[ipaddress].nip.io`
+
 ## Troubleshooting
 
 All installation logs are output to the `./deployment/deployment-output/` folder. Look there first for any issues.
