@@ -49,34 +49,8 @@ For Windows bases OSes the dependencies include PowerSTIG and other DSC configur
 
 ### Linux
 
-For Linux bases OSes the dependencies include DISA STIG files and following instructions will download and create offline yum package for to be used for offline deployment. For more information on what's being downloaded, refer '.\scripts\build.sh'.
-
-#### Prerequisites for Linux
-
-1. CentOS 7.7. To set one up easily in Azure [follow these steps](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-portal).
-2. Git installed. [how to](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
-3. Outbound Internet connectivity.
-
-#### Instructions for Linux dependency preparation
-
-1. Run  following command to clone Azure ato-toolkit repository to your local working directory.
-
-    `git clone https://github.com/Azure/ato-toolkit.git`
-
-    > [!TIP]
-    > Run `dir` to verify content of directory.
-
-2. Run following command to change the directory.
-
-    `cd ato-toolkit/automation/zero-trust-architecture-offline`
-
-4. Run following command to download all the required PowerShell module dependencies.
-
-    `.\scripts\DownloadPowerShellModules.ps1`
-
-5. Run following command to package all the dependencies.
-
-    `.\scripts\build.ps1`
+> [!IMPORTANT]
+> This section is work in progress and will be updated soon...
 
 ## Part 2 (transfer automation code/scripts, documentation and downloaded dependencies into offline environment)
 
