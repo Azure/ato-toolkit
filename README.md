@@ -14,7 +14,8 @@ For more information, questions, or feedback please [contact us](https://aka.ms/
 
 | File/folder       | Description                                |
 |-------------------|--------------------------------------------|
-| `automation`      | Zero Trust blueprint sample and associated artifacts.                        |
+| `automation/zero-trust-architecture`      | Zero Trust blueprint sample and associated artifacts.                        |
+| `automation/zero-trust-architecture-offline`      | Zero Trust blueprint sample and associated artifacts for offline (disconnected from internet) environment.                        |
 | `implementation-statements`      | Implementation statements, mapped to NIST security controls, describing the implementation deployed and configured by the automation to aid with compliance ATO process.                         |
 | `utils`      | General tools and utilities to assist with automation and implementation statements.                         |
 | `README.md`       | This README file.                          |
@@ -28,7 +29,8 @@ For more information, questions, or feedback please [contact us](https://aka.ms/
 ## Instructions
 
 1. [Zero Trust blueprint](/automation/zero-trust-architecture/README.md)
-2. [Implementation statements](/implementation-statements/README.md)
+2. [Zero Trust blueprint (offline)](/automation/zero-trust-architecture-offline/README.md)
+3. [Implementation statements](/implementation-statements/README.md)
     * [VSCode extension](/utils/authoring-assistant/README.md)
 
 ## Feedback

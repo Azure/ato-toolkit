@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/cccc23c7-8427-4f53-ad12-b6a63eb452b3",
+    "parameters": {
+      "listOfAllowedSKUs": {
+        "value": "[parameters('allowedVirtualMachineSKUs_listOfAllowedVirtualMachineSKUs')]"
+      }
+    },
+    "dependsOn": [],
+    "displayName": "Allowed virtual machine SKUs"
+  },
+  "kind": "policyAssignment",
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34/artifacts/05088c37-2381-4674-aa64-d3022d3839e9",
+  "type": "Microsoft.Blueprint/blueprints/artifacts",
+  "name": "05088c37-2381-4674-aa64-d3022d3839e9"
+}
