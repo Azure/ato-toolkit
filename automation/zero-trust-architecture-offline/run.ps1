@@ -3,11 +3,11 @@ $jConfig = Get-Content "./run.config.json" | ConvertFrom-Json
 $tempPath = $jConfig.args.tempPath
 $policyTemplate = $jConfig.args.policyTemplate
 $artifactsPath = $jConfig.args.artifactsPath
-$resourceLocation = $jConfig.args.resourceLocation
 $policyAssignmentPrefix = $jConfig.args.policyAssignmentPrefix
 $onlyGenerateTemplates = $jConfig.args.onlyGenerateTemplates
 $deploymentUserObjectIdParameterName = "deployment-user-object-id"
 
+$resourceLocation = $jConfig.parameters.location.value
 $jDefaultParams = Get-Content $jConfig.args.defaultParams | ConvertFrom-Json
 
 function Add-DefaultParamsToTemplate {
@@ -148,6 +148,8 @@ function New-ResourceDeployment {
 }
 
 # MAIN
+
+$ErrorActionPreference = "Stop"
 
 Set-Item Env:\SuppressAzurePowerShellBreakingChangeWarnings "true"
 New-Item -ItemType Directory -Force -Path $tempPath

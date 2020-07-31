@@ -13,9 +13,16 @@
         "azure-firewall-private-ip": {
           "type": "string",
           "metadata": {
-            "displayName": "Azure firewall private IP"
+            "displayName": "Azure Firewall private IP"
           },
-          "defaultValue": "10.0.4.4"
+          "defaultValue": "10.0.0.4"
+        },
+        "jump-box-private-ip": {
+          "type": "string",
+          "metadata": {
+            "displayName": "JumpBox private IP"
+          },
+          "defaultValue": "10.0.1.4"
         },
         "logs-retention-in-days": {
           "type": "int",
@@ -45,8 +52,9 @@
         "uniqueString": "[uniqueString(subscription().id, concat(variables('deployment-prefix'), '-log'))]",
         "diagnostic-storageAccount-prefix": "[concat(replace(variables('deployment-prefix'), '-', ''), 'diag')]",
         "diagnostic-storageAccount-name": "[toLower(substring(replace(concat(variables('diagnostic-storageAccount-prefix'), variables('uniqueString'), variables('uniqueString')), '-', ''), 0, 23) )]",
+        "jump-box-private-ip": "[parameters('jump-box-private-ip')]",
         "sharedsvcs-user-defined-routes": {
-          "name": "sharedsvcs-subnet",
+          "name": "default",
           "routes": [
             {
               "name": "default",
@@ -80,14 +88,13 @@
           "type": "Microsoft.Network/publicIPAddresses/providers/diagnosticSettings",
           "apiVersion": "2017-05-01-preview",
           "name": "[concat(variables('azure-fw-pip-name'), '/Microsoft.Insights/service')]",
-          "condition": "[not(parameters('noLogAnalytics'))]",
           "location": "[resourceGroup().location]",
           "dependsOn": [
             "[variables('azure-fw-pip-name')]"
           ],
           "properties": {
             "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-            "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+            "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
             "metrics": [
               {
                 "category": "AllMetrics",
@@ -116,8 +123,8 @@
           }
         },
         {
-          "apiVersion": "2019-11-01",
           "type": "Microsoft.Network/azureFirewalls",
+          "apiVersion": "2019-11-01",
           "name": "[variables('azure-fw-name')]",
           "location": "[resourceGroup().location]",
           "dependsOn": [
@@ -137,96 +144,32 @@
                 }
               }
             ],
-            "applicationRuleCollections": [
+            "applicationRuleCollections": [],
+            "natRuleCollections": [
               {
-                "name": "allow-app-rules",
+                "name": "DnatToJumpBox",
                 "properties": {
-                  "priority": 100,
+                  "priority": 3000,
                   "action": {
-                    "type": "allow"
+                    "type": "Dnat"
                   },
                   "rules": [
                     {
-                      "name": "allow-ase-tags",
-                      "sourceAddresses": [
-                        "*"
-                      ],
+                      "name": "rdp",
                       "protocols": [
-                        {
-                          "protocolType": "HTTP",
-                          "port": "80"
-                        },
-                        {
-                          "protocolType": "HTTPS",
-                          "port": "443"
-                        }
+                        "TCP"
                       ],
-                      "fqdnTags": [
-                        "AppServiceEnvironment",
-                        "WindowsUpdate"
-                      ]
-                    },
-                    {
-                      "name": "allow-ase-management",
+                      "translatedAddress": "[variables('jump-box-private-ip')]",
+                      "translatedPort": "3389",
                       "sourceAddresses": [
-                        "*"
+                        "[variables('jump-box-private-ip')]"
                       ],
-                      "protocols": [
-                        {
-                          "protocolType": "HTTP",
-                          "port": "80"
-                        },
-                        {
-                          "protocolType": "HTTPS",
-                          "port": "443"
-                        }
+                      "sourceIpGroups": [],
+                      "destinationAddresses": [
+                        "[reference(resourceId('Microsoft.Network/publicIPAddresses', variables('azure-fw-pip-name'))).ipAddress]"
                       ],
-                      "targetFqdns": [
-                        "management.azure.com",
-                        "*.digicert.com",
-                        "*.data.microsoft.com",
-                        "global.metrics.nsatc.net",
-                        "ocsp.msocsp.com"
-                      ]
-                    },
-                    {
-                      "name": "allow-sites",
-                      "sourceAddresses": [
-                        "*"
-                      ],
-                      "protocols": [
-                        {
-                          "protocolType": "HTTP",
-                          "port": "80"
-                        },
-                        {
-                          "protocolType": "HTTPS",
-                          "port": "443"
-                        }
-                      ],
-                      "targetFqdns": [
-                        "*.trafficmanager.net",
-                        "*.usgovtrafficmanager.net",
-                        "*.azureedge.net",
-                        "*.microsoft.com",
-                        "*.core.windows.net",
-                        "oms.microsoft.us",
-                        "*.oms.opinsights.azure.us",
-                        "*.ods.opinsights.azure.us",
-                        "*.blob.core.usgovcloudapi.net",
-                        "*.core.usgovcloudapi.net",
-                        "github.com",
-                        "*.github.com",
-                        "raw.githubusercontent.com",
-                        "aka.ms",
-                        "*.azure-automation.net",
-                        "*.azure-automation.us",
-                        "*.ubuntu.com",
-                        "api.snapcraft.io",
-                        "api.loganalytics.us",
-                        "*.azure.com",
-                        "portal.loganalytics.us",
-                        "docs.loganalytics.us"
+                      "destinationPorts": [
+                        "3389"
                       ]
                     }
                   ]
@@ -235,27 +178,29 @@
             ],
             "networkRuleCollections": [
               {
-                "name": "allow-network-rules",
+                "name": "AllowAzureCloud",
                 "properties": {
-                  "priority": 100,
+                  "priority": 3000,
                   "action": {
-                    "type": "allow"
+                    "type": "Allow"
                   },
                   "rules": [
                     {
-                      "name": "allow-ntp",
+                      "name": "azure-cloud",
+                      "protocols": [
+                        "TCP"
+                      ],
                       "sourceAddresses": [
                         "*"
                       ],
                       "destinationAddresses": [
-                        "*"
+                        "AzureCloud"
                       ],
+                      "sourceIpGroups": [],
+                      "destinationIpGroups": [],
+                      "destinationFqdns": [],
                       "destinationPorts": [
-                        "123",
-                        "12000"
-                      ],
-                      "protocols": [
-                        "Any"
+                        "443"
                       ]
                     }
                   ]
@@ -269,13 +214,12 @@
               "name": "[concat(variables('azure-fw-name'), '/Microsoft.Insights/service')]",
               "apiVersion": "2017-05-01-preview",
               "location": "[resourceGroup().location]",
-              "condition": "[not(parameters('noLogAnalytics'))]",
               "dependsOn": [
                 "[concat('Microsoft.Network/azureFirewalls/', variables('azure-fw-name'))]"
               ],
               "properties": {
                 "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-                "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+                "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
                 "logs": [
                   {
                     "category": "AzureFirewallApplicationRule",
@@ -309,13 +253,13 @@
           ]
         },
         {
-          "apiVersion": "2019-09-01",
-          "name": "nestedDeploySharedSvcsUDR",
           "type": "Microsoft.Resources/deployments",
-          "resourceGroup": "[variables('vnet-resourceGroup')]",
+          "apiVersion": "2019-09-01",
+          "name": "nested.configure.default-udr",
           "dependsOn": [
             "[resourceId('Microsoft.Network/azureFirewalls', variables('azure-fw-name'))]"
           ],
+          "resourceGroup": "[variables('vnet-resourceGroup')]",
           "properties": {
             "mode": "Incremental",
             "template": {

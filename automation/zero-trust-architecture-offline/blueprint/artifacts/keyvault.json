@@ -205,16 +205,15 @@
           "resources": [
             {
               "type": "Microsoft.KeyVault/vaults/providers/diagnosticsettings",
-              "name": "[concat(variables('key-vault-name'), '/Microsoft.Insights/service')]",
-              "condition": "[not(parameters('noLogAnalytics'))]",
               "apiVersion": "2016-09-01",
+              "name": "[concat(variables('key-vault-name'), '/Microsoft.Insights/service')]",
               "location": "[resourceGroup().location]",
               "dependsOn": [
                 "[concat('Microsoft.KeyVault/vaults/', variables('key-vault-name'))]"
               ],
               "properties": {
                 "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-                "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+                "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
                 "logs": [
                   {
                     "category": "AuditEvent",

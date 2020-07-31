@@ -26,16 +26,17 @@
         }
       },
       "variables": {
+        "location": "[resourceGroup().location]",
         "deployment-prefix": "[concat(parameters('resourcePrefix'), '-sharedsvcs')]",
         "oms-workspace-resourceGroup": "[concat(variables('deployment-prefix'), '-rg')]",
         "oms-workspace-name": "[concat(variables('deployment-prefix'), '-log')]",
-        "empty-array": [],
         "uniqueString": "[uniqueString(subscription().id, concat(variables('deployment-prefix'), '-log'))]",
         "diagnostic-storageAccount-prefix": "[concat(replace(variables('deployment-prefix'), '-', ''), 'diag')]",
         "diagnostic-storageAccount-name": "[toLower(substring(replace(concat(variables('diagnostic-storageAccount-prefix'), variables('uniqueString'), variables('uniqueString')), '-', ''), 0, 23) )]",
+        "network-watcher": "[concat('NetworkWatcher_', variables('location'))]",
         "application-security-groups": [
           {
-            "name": "jb"
+            "name": "jump-box"
           },
           {
             "name": "app"
@@ -43,49 +44,62 @@
         ],
         "network-security-groups": [
           {
-            "name": "sharedsvcs-subnet",
+            "name": "default-deny",
             "rules": [
               {
-                "name": "allow-rdp-ssh-into-jb",
+                "name": "DenyVnetInBound",
                 "properties": {
-                  "access": "Allow",
-                  "destinationAddressPrefixes": [],
-                  "destinationAddressPrefix": "",
-                  "destinationPortRanges": [
-                    "3389",
-                    "22"
-                  ],
-                  "destinationPortRange": "",
-                  "direction": "Inbound",
-                  "priority": 100,
-                  "protocol": "TCP",
-                  "sourceAddressPrefix": "VirtualNetwork",
+                  "protocol": "*",
                   "sourcePortRange": "*",
+                  "destinationPortRange": "*",
+                  "sourceAddressPrefix": "*",
+                  "destinationAddressPrefix": "VirtualNetwork",
+                  "access": "Deny",
+                  "priority": 4000,
+                  "direction": "Inbound",
                   "sourcePortRanges": [],
-                  "destinationApplicationSecurityGroups": [
-                    {
-                      "name": "jb"
-                    }
-                  ],
-                  "sourceApplicationSecurityGroups": []
+                  "destinationPortRanges": [],
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": []
                 }
               },
               {
-                "name": "deny-vnet",
+                "name": "DenyAllOutBound",
                 "properties": {
-                  "access": "Deny",
-                  "destinationAddressPrefix": "VirtualNetwork",
-                  "destinationAddressPrefixes": [],
-                  "destinationPortRange": "*",
-                  "destinationPortRanges": [],
-                  "direction": "Inbound",
-                  "priority": 4096,
                   "protocol": "*",
-                  "sourceAddressPrefix": "VirtualNetwork",
                   "sourcePortRange": "*",
+                  "destinationPortRange": "*",
+                  "sourceAddressPrefix": "*",
+                  "destinationAddressPrefix": "*",
+                  "access": "Deny",
+                  "priority": 4000,
+                  "direction": "Outbound",
                   "sourcePortRanges": [],
-                  "destinationApplicationSecurityGroups": [],
-                  "sourceApplicationSecurityGroups": []
+                  "destinationPortRanges": [],
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": []
+                }
+              }
+            ]
+          },
+          {
+            "name": "sharedsvcs-subnet",
+            "rules": [
+              {
+                "name": "AllowAzureCloudOutBound",
+                "properties": {
+                  "protocol": "TCP",
+                  "sourcePortRange": "*",
+                  "destinationPortRange": "443",
+                  "sourceAddressPrefix": "VirtualNetwork",
+                  "destinationAddressPrefix": "AzureCloud",
+                  "access": "Allow",
+                  "priority": 3600,
+                  "direction": "Outbound",
+                  "sourcePortRanges": [],
+                  "destinationPortRanges": [],
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": []
                 }
               }
             ]
@@ -94,144 +108,128 @@
             "name": "app-subnet",
             "rules": [
               {
-                "name": "allow-rdp-into-app",
+                "name": "AllowJumpBoxInBound",
                 "properties": {
-                  "access": "Allow",
-                  "destinationAddressPrefixes": [],
-                  "destinationAddressPrefix": "",
-                  "destinationPortRange": "3389",
-                  "destinationPortRanges": [],
-                  "direction": "Inbound",
-                  "priority": 140,
                   "protocol": "TCP",
-                  "sourceAddressPrefix": "",
                   "sourcePortRange": "*",
+                  "destinationPortRange": "",
+                  "sourceAddressPrefix": "",
+                  "destinationAddressPrefix": "",
+                  "access": "Allow",
+                  "priority": 3050,
+                  "direction": "Inbound",
                   "sourcePortRanges": [],
-                  "destinationApplicationSecurityGroups": [
-                    {
-                      "name": "app"
-                    }
+                  "destinationPortRanges": [
+                    "3389",
+                    "22"
                   ],
+                  "destinationAddressPrefixes": [],
+                  "sourceAddressPrefixes": [],
                   "sourceApplicationSecurityGroups": [
                     {
-                      "name": "jb"
+                      "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-jump-box-asg'))]"
+                    }
+                  ],
+                  "destinationApplicationSecurityGroups": [
+                    {
+                      "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-app-asg'))]"
                     }
                   ]
                 }
               },
               {
-                "name": "allow-tcp-vnet-app",
+                "name": "AllowAzureCloudOutBound",
                 "properties": {
-                  "access": "Allow",
-                  "destinationAddressPrefixes": [],
-                  "destinationAddressPrefix": "",
-                  "destinationPortRanges": [
-                    "389",
-                    "42",
-                    "88",
-                    "636",
-                    "3268",
-                    "3269",
-                    "445",
-                    "25",
-                    "135",
-                    "5722",
-                    "464",
-                    "9389",
-                    "139",
-                    "53",
-                    "49152-65535"
-                  ],
-                  "destinationPortRange": "",
-                  "direction": "Inbound",
-                  "priority": 160,
                   "protocol": "TCP",
-                  "sourceAddressPrefix": "VirtualNetwork",
                   "sourcePortRange": "*",
-                  "sourcePortRanges": [],
-                  "destinationApplicationSecurityGroups": [
-                    {
-                      "name": "app"
-                    }
-                  ],
-                  "sourceApplicationSecurityGroups": []
-                }
-              },
-              {
-                "name": "allow-udp-vnet-app",
-                "properties": {
+                  "destinationPortRange": "443",
+                  "sourceAddressPrefix": "VirtualNetwork",
+                  "destinationAddressPrefix": "AzureCloud",
                   "access": "Allow",
-                  "destinationAddressPrefixes": [],
-                  "destinationAddressPrefix": "",
-                  "destinationPortRanges": [
-                    "389",
-                    "88",
-                    "445",
-                    "123",
-                    "464",
-                    "138",
-                    "137",
-                    "53",
-                    "49152-65535"
-                  ],
-                  "destinationPortRange": "",
-                  "direction": "Inbound",
-                  "priority": 170,
-                  "protocol": "UDP",
-                  "sourceAddressPrefix": "VirtualNetwork",
-                  "sourcePortRange": "*",
+                  "priority": 3600,
+                  "direction": "Outbound",
                   "sourcePortRanges": [],
-                  "destinationApplicationSecurityGroups": [
-                    {
-                      "name": "app"
-                    }
-                  ],
-                  "sourceApplicationSecurityGroups": []
-                }
-              },
-              {
-                "name": "deny-vnet",
-                "properties": {
-                  "access": "Deny",
-                  "destinationAddressPrefix": "VirtualNetwork",
-                  "destinationAddressPrefixes": [],
-                  "destinationPortRange": "*",
                   "destinationPortRanges": [],
-                  "direction": "Inbound",
-                  "priority": 4096,
-                  "protocol": "*",
-                  "sourceAddressPrefix": "VirtualNetwork",
-                  "sourcePortRange": "*",
-                  "sourcePortRanges": [],
-                  "destinationApplicationSecurityGroups": [],
-                  "sourceApplicationSecurityGroups": []
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": []
                 }
               }
             ]
           },
           {
             "name": "bastion-subnet",
-            "rules": []
-          },
-          {
-            "name": "deny-nsg",
             "rules": [
               {
-                "name": "DenyAll",
+                "name": "AllowVnetInbound",
                 "properties": {
-                  "access": "Deny",
-                  "destinationAddressPrefix": "*",
-                  "destinationAddressPrefixes": [],
-                  "destinationPortRange": "*",
-                  "destinationPortRanges": [],
-                  "direction": "Inbound",
-                  "priority": 1000,
-                  "protocol": "*",
-                  "sourceAddressPrefix": "VirtualNetwork",
+                  "protocol": "TCP",
                   "sourcePortRange": "*",
+                  "destinationPortRange": "",
+                  "sourceAddressPrefix": "VirtualNetwork",
+                  "destinationAddressPrefix": "",
+                  "access": "Allow",
+                  "priority": 3050,
+                  "direction": "Inbound",
                   "sourcePortRanges": [],
-                  "destinationApplicationSecurityGroups": [],
-                  "sourceApplicationSecurityGroups": []
+                  "destinationPortRanges": [
+                    "3389",
+                    "22"
+                  ],
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": [],
+                  "sourceApplicationSecurityGroups": [],
+                  "destinationApplicationSecurityGroups": [
+                    {
+                      "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-jump-box-asg'))]"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "AllowJumpBoxOutBound",
+                "properties": {
+                  "protocol": "TCP",
+                  "sourcePortRange": "*",
+                  "destinationPortRange": "",
+                  "sourceAddressPrefix": "",
+                  "destinationAddressPrefix": "",
+                  "access": "Allow",
+                  "priority": 3550,
+                  "direction": "Outbound",
+                  "sourcePortRanges": [],
+                  "destinationPortRanges": [
+                    "22",
+                    "3389"
+                  ],
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": [],
+                  "sourceApplicationSecurityGroups": [
+                    {
+                      "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-jump-box-asg'))]"
+                    }
+                  ],
+                  "destinationApplicationSecurityGroups": [
+                    {
+                      "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-app-asg'))]"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "AllowAzureCloudOutBound",
+                "properties": {
+                  "protocol": "TCP",
+                  "sourcePortRange": "*",
+                  "destinationPortRange": "443",
+                  "sourceAddressPrefix": "VirtualNetwork",
+                  "destinationAddressPrefix": "AzureCloud",
+                  "access": "Allow",
+                  "priority": 3600,
+                  "direction": "Outbound",
+                  "sourcePortRanges": [],
+                  "destinationPortRanges": [],
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": []
                 }
               }
             ]
@@ -240,19 +238,19 @@
       },
       "resources": [
         {
-          "apiVersion": "2019-09-01",
           "type": "Microsoft.Network/applicationSecurityGroups",
+          "apiVersion": "2019-09-01",
+          "name": "[concat(variables('deployment-prefix'), '-', variables('application-security-groups')[copyIndex('asgLoop')].name, '-asg')]",
+          "location": "[variables('location')]",
           "copy": {
             "count": "[length(variables('application-security-groups'))]",
             "name": "asgLoop"
           },
-          "name": "[concat(variables('deployment-prefix'), '-', variables('application-security-groups')[copyIndex()].name, '-asg')]",
-          "location": "[resourceGroup().location]",
           "properties": {}
         },
         {
-          "apiVersion": "2019-09-01",
           "type": "Microsoft.Network/networkSecurityGroups",
+          "apiVersion": "2019-09-01",
           "name": "[concat(variables('deployment-prefix'), '-', variables('network-security-groups')[copyIndex()].name, '-nsg')]",
           "location": "[resourceGroup().location]",
           "copy": {
@@ -263,39 +261,15 @@
             "asgLoop"
           ],
           "properties": {
-            "copy": [
-              {
-                "name": "securityRules",
-                "count": "[length(variables('network-security-groups')[copyIndex('nsgLoop')].rules)]",
-                "input": {
-                  "name": "[variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].name]",
-                  "properties": {
-                    "access": "[variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.access]",
-                    "destinationAddressPrefix": "[if(equals(variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.destinationAddressPrefix, ''), json('null'), variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.destinationAddressPrefix)]",
-                    "destinationAddressPrefixes": "[if(equals(length(variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.destinationAddressPrefixes), 0), json('null'), variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.destinationAddressPrefixes)]",
-                    "destinationApplicationSecurityGroups": "[if(equals(length(variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.destinationApplicationSecurityGroups), 0), json('null'), concat(variables('empty-array'), array(json(concat('{\"id\": \"', resourceId('Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-', variables('network-security-groups')[copyIndex()].rules[copyIndex('securityRules')].properties.destinationApplicationSecurityGroups[0].name, '-asg')), '\"', ',', '\"location\": \"', resourceGroup().location, '\"}')))))]",
-                    "destinationPortRanges": "[if(equals(length(variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.destinationPortRanges), 0), json('null'), variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.destinationPortRanges)]",
-                    "destinationPortRange": "[if(equals(variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.destinationPortRange, ''), json('null'), variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.destinationPortRange)]",
-                    "direction": "[variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.direction]",
-                    "priority": "[int(variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.priority)]",
-                    "protocol": "[variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.protocol]",
-                    "sourceAddressPrefix": "[if(equals(variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.sourceAddressPrefix, ''), json('null'), variables('network-security-groups')[copyIndex()].rules[copyIndex('securityRules')].properties.sourceAddressPrefix)]",
-                    "sourceApplicationSecurityGroups": "[if(equals(length(variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.sourceApplicationSecurityGroups), 0), json('null'), concat(variables('empty-array'), array(json(concat('{\"id\": \"', resourceId('Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-', variables('network-security-groups')[copyIndex()].rules[copyIndex('securityRules')].properties.sourceApplicationSecurityGroups[0].name, '-asg')), '\"', ',', '\"location\": \"', resourceGroup().location, '\"}')))))]",
-                    "sourcePortRanges": "[if(equals(length(variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.sourcePortRanges), 0), json('null'), variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.sourcePortRanges)]",
-                    "sourcePortRange": "[variables('network-security-groups')[copyIndex('nsgLoop')].rules[copyIndex('securityRules')].properties.sourcePortRange]"
-                  }
-                }
-              }
-            ]
+            "securityRules": "[concat(if(equals(copyIndex('nsgLoop'), 0), json('[]'), variables('network-security-groups')[0].rules), variables('network-security-groups')[copyIndex('nsgLoop')].rules)]"
           },
           "resources": []
         },
         {
           "type": "Microsoft.Network/networkSecurityGroups/providers/diagnosticSettings",
-          "name": "[concat(variables('deployment-prefix'), '-', variables('network-security-groups')[copyIndex()].name, '-nsg','/Microsoft.Insights/setbypolicy')]",
           "apiVersion": "2017-05-01-preview",
-          "location": "[resourceGroup().location]",
-          "condition": "[not(parameters('noLogAnalytics'))]",
+          "name": "[concat(variables('deployment-prefix'), '-', variables('network-security-groups')[copyIndex()].name, '-nsg','/Microsoft.Insights/setbypolicy')]",
+          "location": "[variables('location')]",
           "copy": {
             "count": "[length(variables('network-security-groups'))]",
             "name": "nsgDiagnosticLoop"
@@ -305,7 +279,7 @@
           ],
           "properties": {
             "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-            "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+            "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
             "logs": [
               {
                 "category": "NetworkSecurityGroupEvent",
@@ -324,6 +298,110 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "Microsoft.Resources/deployments",
+          "apiVersion": "2019-09-01",
+          "name": "[concat('nested.configure.nsg-flow-logs-', variables('network-security-groups')[copyIndex('nsgFlowLogsLoop')].name, '-nsg')]",
+          "copy": {
+            "count": "[length(variables('network-security-groups'))]",
+            "name": "nsgFlowLogsLoop"
+          },
+          "dependsOn": [
+            "nsgLoop"
+          ],
+          "resourceGroup": "NetworkWatcherRG",
+          "subscriptionId": "[subscription().subscriptionId]",
+          "properties": {
+            "mode": "Incremental",
+            "expressionEvaluationOptions": {
+              "scope": "inner"
+            },
+            "template": {
+              "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+              "contentVersion": "1.0.0.0",
+              "parameters": {
+                "network-security-group-name": {
+                  "type": "string"
+                },
+                "deployment-prefix": {
+                  "type": "string"
+                },
+                "nsg-resource-group": {
+                  "type": "string"
+                },
+                "nsg-resource-group-location": {
+                  "type": "string"
+                },
+                "oms-workspace-resourceGroup": {
+                  "type": "string"
+                },
+                "oms-workspace-name": {
+                  "type": "string"
+                },
+                "diagnostic-storageAccount-name": {
+                  "type": "string"
+                },
+                "network-watcher": {
+                  "type": "string"
+                },
+                "noLogAnalytics": {
+                  "type": "bool"
+                }
+              },
+              "variables": {},
+              "resources": [
+                {
+                  "type": "Microsoft.Network/networkWatchers/FlowLogs",
+                  "apiVersion": "2019-11-01",
+                  "name": "[concat(parameters('network-watcher'),'/', parameters('network-security-group-name'), '-flow')]",
+                  "location": "[parameters('nsg-resource-group-location')]",
+                  "properties": {
+                    "targetResourceId": "[resourceId(parameters('nsg-resource-group'),'Microsoft.Network/networkSecurityGroups', concat(parameters('deployment-prefix'), '-', parameters('network-security-group-name'), '-nsg'))]",
+                    "storageId": "[resourceId(parameters('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('diagnostic-storageAccount-name'))]",
+                    "enabled": true,
+                    "retentionPolicy": {
+                      "days": 30,
+                      "enabled": true
+                    },
+                    "format": {
+                      "type": "JSON",
+                      "version": 2
+                    }
+                  }
+                }
+              ]
+            },
+            "parameters": {
+              "network-security-group-name": {
+                "value": "[variables('network-security-groups')[copyIndex('nsgFlowLogsLoop')].name]"
+              },
+              "deployment-prefix": {
+                "value": "[variables('deployment-prefix')]"
+              },
+              "nsg-resource-group": {
+                "value": "[resourceGroup().name]"
+              },
+              "nsg-resource-group-location": {
+                "value": "[variables('location')]"
+              },
+              "oms-workspace-resourceGroup": {
+                "value": "[variables('oms-workspace-resourceGroup')]"
+              },
+              "oms-workspace-name": {
+                "value": "[variables('oms-workspace-name')]"
+              },
+              "diagnostic-storageAccount-name": {
+                "value": "[variables('diagnostic-storageAccount-name')]"
+              },
+              "network-watcher": {
+                "value": "[variables('network-watcher')]"
+              },
+              "noLogAnalytics": {
+                "value": "[parameters('noLogAnalytics')]"
+              }
+            }
           }
         }
       ],
