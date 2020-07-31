@@ -58,6 +58,10 @@
           "metadata": {
             "description": "An Array of subnets into which each virtual machine will be deployed. They must match the vm order. e.g \"app\",\"app\",\"sharedsvcs\",\"sharedsvcs\""
           }
+        },
+        "noLogAnalytics": {
+          "type": "bool",
+          "defaultValue": true
         }
       },
       "variables": {
@@ -414,9 +418,8 @@
         {
           "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
           "apiVersion": "2017-05-01-preview",
-          "location": "[resourceGroup().location]",
-          "condition": "[not(parameters('isOffline'))]",
           "name": "[concat(variables('deployment-prefix'), '-', parameters('app-vm-names')[copyIndex()], '-nic/Microsoft.Insights/service')]",
+          "location": "[resourceGroup().location]",
           "dependsOn": [
             "[concat(variables('deployment-prefix'), '-', parameters('app-vm-names')[copyIndex()], '-nic')]"
           ],
@@ -426,7 +429,7 @@
           },
           "properties": {
             "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-            "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+            "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
             "metrics": [
               {
                 "category": "AllMetrics",
