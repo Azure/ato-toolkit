@@ -61,7 +61,7 @@ $CurrentAzureDns = "dev-openshift.com"
 # Full vnet range CIDR Notation - Example: 10.1.0.0/16
 [string] $DepArgs.AddressPrefixes = "10.0.0.0/16"
 # Example: OcpVNet
-[string] $DepArgs.VirtualNetworkName = "contest-sharedsvcs-vnet"
+[string] $DepArgs.VirtualNetworkName = "[your-zta-rg-prefix]-sharedsvcs-vnet"
 # Example: MasterInfraSubnet
 [string] $DepArgs.MasterInfraSubnetName = "MasterInfraSubnet"
 # Use CIDR Notation - Example: 10.1.101.0/24

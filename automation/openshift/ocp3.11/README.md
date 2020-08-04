@@ -83,7 +83,11 @@ Running the deployment will connect to Azure using the cli, deploy the needed re
     ```powershell
     [string] $DepArgs.TenantId = "12345678-1234-1234-1234-1234567890ab"
     ```
-7. To begin the deployment, open the latest version of Powershell, navigate to the `deployment` folder, and run: 
+7. Go to line 64 to find the VirtualNetworkName. Update the value to match the Resource Group that you created when the ZTA was deployed. Alternatively, search for the virtual network that was created `sharedsvcs-vnet` and input that.
+    ```powershell
+    [string] $DepArgs.VirtualNetworkName = "[your-zta-rg-prefix]-sharedsvcs-vnet"
+    ```
+8. To begin the deployment, open the latest version of Powershell, navigate to the `deployment` folder, and run: 
     ```powershell
     ./install.ps1 -VariableFile deployment.vars.commercial.ps1
     ```
@@ -118,7 +122,11 @@ Running the deployment will connect to Azure using the cli, deploy the needed re
     ```powershell
     [string] $DepArgs.TenantId = "12345678-1234-1234-1234-1234567890ab"
     ```
-7. To begin the deployment, open the latest version of Powershell, navigate to the `deployment` folder, and run: 
+7. Go to line 64 to find the VirtualNetworkName. Update the value to match the Resource Group that you created when the ZTA was deployed. Alternatively, search for the virtual network that was created `sharedsvcs-vnet` and input that.
+    ```powershell
+    [string] $DepArgs.VirtualNetworkName = "[your-zta-rg-prefix]-sharedsvcs-vnet"
+    ```
+8. To begin the deployment, open the latest version of Powershell, navigate to the `deployment` folder, and run: 
     ```powershell
     ./install.ps1 -VariableFile deployment.vars.usgovernment.ps1
     ```
