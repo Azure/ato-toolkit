@@ -62,6 +62,10 @@
                 "isOffline": {
                     "type": "bool",
                     "defaultValue": false
+                },
+                "noLogAnalytics": {
+                    "type": "bool",
+                    "defaultValue": true
                 }
             },
             "variables": {
@@ -360,42 +364,16 @@
                     }
                 },
                 {
-                    "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
-                    "apiVersion": "2017-05-01-preview",
-                    "location": "[resourceGroup().location]",
-                    "condition": "[not(parameters('isOffline'))]",
-                    "name": "[concat(variables('app-linux-virtualMachine-name-prefix'), '-nic', '/Microsoft.Insights/service')]",
-                    "dependsOn": [
-                        "[concat(variables('app-linux-virtualMachine-name-prefix'), '-nic')]"
-                    ],
-                    "properties": {
-                        "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-                        "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
-                        "metrics": [
-                            {
-                                "category": "AllMetrics",
-                                "timeGrain": null,
-                                "enabled": true,
-                                "retentionPolicy": {
-                                    "enabled": true,
-                                    "days": "[parameters('logs-retention-in-days')]"
-                                }
-                            }
-                        ]
-                    }
-                },
-                {
                     "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
                     "apiVersion": "2017-05-01-preview",
-                    "location": "[resourceGroup().location]",
-                    "condition": "[not(parameters('isOffline'))]",
                     "name": "[concat(variables('app-linux-virtualMachine-name-prefix'), '/Microsoft.Insights/service')]",
+                    "location": "[resourceGroup().location]",
                     "dependsOn": [
                         "[variables('app-linux-virtualMachine-name-prefix')]"
                     ],
                     "properties": {
                         "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-                        "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+                        "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
                         "metrics": [
                             {
                                 "category": "AllMetrics",

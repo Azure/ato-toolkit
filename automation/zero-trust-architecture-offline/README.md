@@ -90,8 +90,9 @@ By now you have executed all required steps to prepare dependencies and artifact
 
 1. Login on to the computer which is connected to offline environment and also contains all the artifacts transferred in Part 2. Ignore this and skip to #8 if using the same computer and session as in Part 3.
 2. Open the '.\run.config.json' in your favorite editor.
-3. Update the value of 'parameters.artifact-storage-account-uri' with artifact url from previous step.
-4. Review rest of the parameters carefully and make edits as necessary.
+3. Update the value of 'parameters.resourcePrefix' with less than 5 chars string to be used as prefix for resourceGroup and resource names.
+4. Update the value of 'parameters.artifact-storage-account-uri' with artifact url from previous step.
+5. Review rest of the parameters carefully and make edits as necessary.
 
 ### Initiate deployment
 

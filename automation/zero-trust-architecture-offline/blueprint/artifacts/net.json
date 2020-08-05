@@ -19,7 +19,7 @@
         },
         "sharedsvcs-subnet-address-prefix": {
           "type": "string",
-          "defaultValue": "10.0.0.0/24",
+          "defaultValue": "10.0.2.0/24",
           "metadata": {
             "displayName": "Shared services subnet address prefix",
             "description": "Value used in Virtual Network / Route Table, JumpBox and Application / OS templates"
@@ -34,28 +34,14 @@
         },
         "app-subnet-address-prefix": {
           "type": "string",
-          "defaultValue": "10.0.2.0/24",
+          "defaultValue": "10.0.3.0/24",
           "metadata": {
             "displayName": "Applications subnet address prefix"
           }
         },
-        "app-gateway-subnet-address-prefix": {
-          "type": "string",
-          "defaultValue": "10.0.3.0/24",
-          "metadata": {
-            "displayName": "Application Gateway subnet address prefix"
-          }
-        },
-        "gateway-subnet-address-prefix": {
-          "type": "string",
-          "defaultValue": "10.0.4.0/24",
-          "metadata": {
-            "displayName": "Virtual Network Gateway subnet address prefix"
-          }
-        },
         "azure-firewall-subnet-address-prefix": {
           "type": "string",
-          "defaultValue": "10.0.5.0/24",
+          "defaultValue": "10.0.0.0/26",
           "metadata": {
             "displayName": "Azure Firewall subnet address prefix"
           }
@@ -106,7 +92,7 @@
         },
         "user-defined-routes": [
           {
-            "name": "sharedsvcs-subnet",
+            "name": "default",
             "routes": []
           }
         ],
@@ -115,7 +101,7 @@
             "name": "sharedsvcs",
             "address-prefix": "[parameters('sharedsvcs-subnet-address-prefix')]",
             "network-security-group": "sharedsvcs-subnet",
-            "user-defined-route": "",
+            "user-defined-route": "default",
             "service-endpoints": [
               {
                 "service": "Microsoft.KeyVault"
@@ -126,28 +112,14 @@
             "name": "bastion",
             "address-prefix": "[parameters('bastion-subnet-address-prefix')]",
             "network-security-group": "bastion-subnet",
-            "user-defined-route": "",
+            "user-defined-route": "default",
             "service-endpoints": []
           },
           {
             "name": "app",
             "address-prefix": "[parameters('app-subnet-address-prefix')]",
             "network-security-group": "app-subnet",
-            "user-defined-route": "",
-            "service-endpoints": []
-          },
-          {
-            "name": "AppGateway",
-            "address-prefix": "[parameters('app-gateway-subnet-address-prefix')]",
-            "network-security-group": "",
-            "user-defined-route": "",
-            "service-endpoints": []
-          },
-          {
-            "name": "GatewaySubnet",
-            "address-prefix": "[parameters('gateway-subnet-address-prefix')]",
-            "network-security-group": "",
-            "user-defined-route": "",
+            "user-defined-route": "default",
             "service-endpoints": []
           },
           {
@@ -165,8 +137,8 @@
             "input": {
               "name": "[parameters('optional-subnet-name')[copyIndex('optional-subnets')]]",
               "address-prefix": "[parameters('optional-subnet-prefix')[copyIndex('optional-subnets')]]",
-              "user-defined-route": "",
-              "network-security-group": "deny-nsg",
+              "user-defined-route": "default",
+              "network-security-group": "app-subnet",
               "service-endpoints": []
             }
           }
@@ -242,111 +214,18 @@
             ]
           }
         },
-        {
-          "apiVersion": "2019-09-01",
-          "name": "[concat('nestedCreateNsgFlowLogs-', copyIndex('flowLogLoop'))]",
-          "type": "Microsoft.Resources/deployments",
-          "condition": "[not(equals(variables('subnets')[copyIndex('flowLogLoop')]['network-security-group'], ''))]",
-          "resourceGroup": "NetworkWatcherRG",
-          "subscriptionId": "[subscription().subscriptionId]",
-          "dependsOn": [
-            "[variables('vnet-name')]"
-          ],
-          "copy": {
-            "count": "[length(variables('subnets'))]",
-            "name": "flowLogLoop"
-          },
-          "properties": {
-            "mode": "Incremental",
-            "expressionEvaluationOptions": {
-              "scope": "inner"
-            },
-            "template": {
-              "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-              "contentVersion": "1.0.0.0",
-              "parameters": {
-                "network-security-group-name": {
-                  "type": "string"
-                },
-                "deployment-prefix": {
-                  "type": "string"
-                },
-                "vnet-resource-group": {
-                  "type": "string"
-                },
-                "vnet-resource-group-location": {
-                  "type": "string"
-                },
-                "nsg-flow-workspace": {
-                  "type": "string"
-                },
-                "nsg-flow-storage": {
-                  "type": "string"
-                },
-                "network-watcher": {
-                  "type": "string"
-                }
-              },
-              "variables": {},
-              "resources": [
-                {
-                  "name": "[concat(parameters('network-watcher'),'/', parameters('network-security-group-name'), '-flow')]",
-                  "type": "Microsoft.Network/networkWatchers/FlowLogs",
-                  "location": "[parameters('vnet-resource-group-location')]",
-                  "apiVersion": "2019-11-01",
-                  "properties": {
-                    "targetResourceId": "[resourceId(parameters('vnet-resource-group'),'Microsoft.Network/networkSecurityGroups', concat(parameters('deployment-prefix'), '-', parameters('network-security-group-name'), '-nsg'))]",
-                    "storageId": "[resourceId(parameters('vnet-resource-group'), 'Microsoft.Storage/storageAccounts', parameters('nsg-flow-storage'))]",
-                    "enabled": true,
-                    "retentionPolicy": {
-                      "days": 30,
-                      "enabled": true
-                    },
-                    "format": {
-                      "type": "JSON",
-                      "version": 2
-                    }
-                  }
-                }
-              ]
-            },
-            "parameters": {
-              "network-security-group-name": {
-                "value": "[variables('subnets')[copyIndex('flowLogLoop')]['network-security-group']]"
-              },
-              "deployment-prefix": {
-                "value": "[variables('deployment-prefix')]"
-              },
-              "vnet-resource-group": {
-                "value": "[resourceGroup().name]"
-              },
-              "vnet-resource-group-location": {
-                "value": "[variables('location')]"
-              },
-              "nsg-flow-workspace": {
-                "value": "[variables('oms-workspace-resourceGroup')]"
-              },
-              "nsg-flow-storage": {
-                "value": "[variables('diagnostic-storageAccount-name')]"
-              },
-              "network-watcher": {
-                "value": "[variables('network-watcher')]"
-              }
-            }
-          }
-        },
+        
         {
           "type": "Microsoft.Network/virtualNetworks/providers/diagnosticSettings",
           "apiVersion": "2017-05-01-preview",
           "name": "[concat(variables('vnet-name'),'/Microsoft.Insights/service')]",
-          "condition": "[not(parameters('noLogAnalytics'))]",
           "location": "[variables('location')]",
           "dependsOn": [
             "[variables('vnet-name')]"
           ],
           "properties": {
             "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-            "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+            "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
             "metrics": [
               {
                 "category": "AllMetrics",
@@ -381,12 +260,6 @@
       },
       "app-subnet-address-prefix": {
         "value": "[parameters('vnet_app-subnet-address-prefix')]"
-      },
-      "app-gateway-subnet-address-prefix": {
-        "value": "[parameters('vnet_app-gateway-subnet-address-prefix')]"
-      },
-      "gateway-subnet-address-prefix": {
-        "value": "[parameters('vnet_gateway-subnet-address-prefix')]"
       },
       "azure-firewall-subnet-address-prefix": {
         "value": "[parameters('vnet_azure-firewall-subnet-address-prefix')]"

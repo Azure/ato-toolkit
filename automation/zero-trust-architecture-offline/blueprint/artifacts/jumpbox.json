@@ -101,6 +101,10 @@
             "SSE",
             "ADE"
           ]
+        },
+        "noLogAnalytics": {
+          "type": "bool",
+          "defaultValue": true
         }
       },
       "variables": {
@@ -134,7 +138,8 @@
         "wad-cfgx-start": "[concat(variables('wad-logs'), variables('wad-perf-counters1'), variables('wad-perf-counters2'), '<Metrics resourceId=\"')]",
         "wad-metrics-resource-id": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name , '/providers/', 'Microsoft.Compute/virtualMachines/')]",
         "wad-cfgx-end": "\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>",
-        "jb-asg-id": "[resourceId(variables('vnet-resourceGroup'),'Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-jb-asg'))]",
+        "jump-box-asg-id": "[resourceId(variables('vnet-resourceGroup'),'Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-jump-box-asg'))]",
+        "sharedsvcs-asg-id": "[resourceId(variables('vnet-resourceGroup'),'Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-sharedsvcs-asg'))]",
         "pwd-min-length-config-name": "MinimumPasswordLength",
         "pwd-min-age-config-name": "MinimumPasswordAge",
         "pwd-not-last-24-config-name": "EnforcePasswordHistory",
@@ -219,27 +224,11 @@
           }
         },
         {
-          "apiVersion": "2019-12-01",
-          "type": "Microsoft.Network/publicIPAddresses",
-          "name": "[variables('public-ip-address')]",
-          "condition": "[and(equals(parameters('jumpbox-os'), 'Windows'), parameters('isOffline'))]",
-          "dependsOn": [
-            "[resourceId('Microsoft.Compute/availabilitySets/', variables('windows-availabilitySet-name'))]"
-          ],
-          "location": "[resourceGroup().location]",
-          "sku": {
-            "name": "Standard"
-          },
-          "properties": {
-            "publicIPAllocationMethod": "Static"
-          }
-        },
-        {
           "type": "Microsoft.Network/networkInterfaces",
           "apiVersion": "2019-07-01",
           "condition": "[equals(parameters('jumpbox-os'), 'Windows')]",
           "dependsOn": [
-            "[if(parameters('isOffline'), resourceId('Microsoft.Network/publicIPAddresses/', variables('public-ip-address')), resourceId('Microsoft.Compute/availabilitySets/', variables('windows-availabilitySet-name')))]"
+            "[resourceId('Microsoft.Compute/availabilitySets/', variables('windows-availabilitySet-name'))]"
           ],
           "location": "[resourceGroup().location]",
           "name": "[concat(variables('windows-virtualMachine-name-prefix'), '-bastion-nic')]",
@@ -249,14 +238,13 @@
               {
                 "name": "ipconfig1",
                 "properties": {
-                  "publicIPAddress": "[if(parameters('isOffline'), variables('public-ip-address-id'), json('null'))]",
                   "privateIPAllocationMethod": "Dynamic",
                   "subnet": {
                     "id": "[variables('bastion-subnet-id')]"
                   },
                   "applicationSecurityGroups": [
                     {
-                      "id": "[variables('jb-asg-id')]"
+                      "id": "[variables('jump-box-asg-id')]"
                     }
                   ]
                 }
@@ -282,7 +270,7 @@
                   },
                   "applicationSecurityGroups": [
                     {
-                      "id": "[variables('jb-asg-id')]"
+                      "id": "[variables('jump-box-asg-id')]"
                     }
                   ]
                 }
@@ -293,15 +281,15 @@
         {
           "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
           "apiVersion": "2017-05-01-preview",
-          "condition": "[and(equals(parameters('jumpbox-os'), 'Windows'), not(parameters('isOffline')))]",
-          "location": "[resourceGroup().location]",
           "name": "[concat(variables('windows-virtualMachine-name-prefix'), '-bastion-nic', '/Microsoft.Insights/service')]",
+          "location": "[resourceGroup().location]",
+          "condition": "[equals(parameters('jumpbox-os'), 'Windows')]",
           "dependsOn": [
             "[concat(variables('windows-virtualMachine-name-prefix'), '-bastion-nic')]"
           ],
           "properties": {
             "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-            "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+            "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
             "metrics": [
               {
                 "category": "AllMetrics",
@@ -318,15 +306,15 @@
         {
           "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
           "apiVersion": "2017-05-01-preview",
-          "condition": "[and(equals(parameters('jumpbox-os'), 'Windows'), not(parameters('isOffline')))]",
-          "location": "[resourceGroup().location]",
           "name": "[concat(variables('windows-virtualMachine-name-prefix'), '-sharedsvc-nic', '/Microsoft.Insights/service')]",
+          "location": "[resourceGroup().location]",
+          "condition": "[equals(parameters('jumpbox-os'), 'Windows')]",
           "dependsOn": [
             "[concat(variables('windows-virtualMachine-name-prefix'), '-sharedsvc-nic')]"
           ],
           "properties": {
             "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-            "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+            "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
             "metrics": [
               {
                 "category": "AllMetrics",
@@ -838,15 +826,15 @@
         {
           "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
           "apiVersion": "2017-05-01-preview",
-          "condition": "[and(equals(parameters('jumpbox-os'), 'Windows'), not(parameters('isOffline')))]",
-          "location": "[resourceGroup().location]",
           "name": "[concat(variables('windows-virtualMachine-name-prefix'), '/Microsoft.Insights/service')]",
+          "location": "[resourceGroup().location]",
+          "condition": "[equals(parameters('jumpbox-os'), 'Windows')]",
           "dependsOn": [
             "[resourceId('Microsoft.Resources/deployments', variables('windows-virtualMachine-name-prefix'))]"
           ],
           "properties": {
             "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-            "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+            "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
             "metrics": [
               {
                 "category": "AllMetrics",
@@ -1032,7 +1020,7 @@
         {
           "type": "Microsoft.Compute/availabilitySets",
           "apiVersion": "2019-07-01",
-          "condition": "[and(equals(parameters('jumpbox-os'), 'Linux'), not(parameters('isOffline')))]",
+          "condition": "[equals(parameters('jumpbox-os'), 'Linux')]",
           "location": "[resourceGroup().location]",
           "name": "[variables('linux-availabilitySet-name')]",
           "properties": {
@@ -1046,7 +1034,7 @@
         {
           "type": "Microsoft.Network/networkInterfaces",
           "apiVersion": "2017-09-01",
-          "condition": "[and(equals(parameters('jumpbox-os'), 'Linux'), not(parameters('isOffline')))]",
+          "condition": "[equals(parameters('jumpbox-os'), 'Linux')]",
           "location": "[resourceGroup().location]",
           "name": "[concat(variables('linux-virtualMachine-name-prefix'), '-bastion-nic')]",
           "properties": {
@@ -1062,7 +1050,7 @@
                   },
                   "applicationSecurityGroups": [
                     {
-                      "id": "[variables('jb-asg-id')]"
+                      "id": "[variables('jump-box-asg-id')]"
                     }
                   ]
                 }
@@ -1073,7 +1061,7 @@
         {
           "type": "Microsoft.Network/networkInterfaces",
           "apiVersion": "2017-09-01",
-          "condition": "[and(equals(parameters('jumpbox-os'), 'Linux'), not(parameters('isOffline')))]",
+          "condition": "[equals(parameters('jumpbox-os'), 'Linux')]",
           "location": "[resourceGroup().location]",
           "name": "[concat(variables('linux-virtualMachine-name-prefix'), '-sharedsvc-nic')]",
           "properties": {
@@ -1089,7 +1077,7 @@
                   },
                   "applicationSecurityGroups": [
                     {
-                      "id": "[variables('jb-asg-id')]"
+                      "id": "[variables('jump-box-asg-id')]"
                     }
                   ]
                 }
@@ -1100,15 +1088,15 @@
         {
           "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
           "apiVersion": "2017-05-01-preview",
-          "condition": "[and(equals(parameters('jumpbox-os'), 'Linux'), not(parameters('isOffline')))]",
-          "location": "[resourceGroup().location]",
           "name": "[concat(variables('linux-virtualMachine-name-prefix'), '-bastion-nic', '/Microsoft.Insights/service')]",
+          "location": "[resourceGroup().location]",
+          "condition": "[equals(parameters('jumpbox-os'), 'Linux')]",
           "dependsOn": [
             "[concat(variables('linux-virtualMachine-name-prefix'), '-bastion-nic')]"
           ],
           "properties": {
             "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-            "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+            "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
             "metrics": [
               {
                 "category": "AllMetrics",
@@ -1125,15 +1113,15 @@
         {
           "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
           "apiVersion": "2017-05-01-preview",
-          "condition": "[and(equals(parameters('jumpbox-os'), 'Linux'), not(parameters('isOffline')))]",
-          "location": "[resourceGroup().location]",
           "name": "[concat(variables('linux-virtualMachine-name-prefix'), '-sharedsvc-nic', '/Microsoft.Insights/service')]",
+          "location": "[resourceGroup().location]",
+          "condition": "[equals(parameters('jumpbox-os'), 'Linux')]",
           "dependsOn": [
             "[concat(variables('linux-virtualMachine-name-prefix'), '-sharedsvc-nic')]"
           ],
           "properties": {
             "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-            "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+            "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
             "metrics": [
               {
                 "category": "AllMetrics",
@@ -1150,7 +1138,7 @@
         {
           "type": "Microsoft.Resources/deployments",
           "apiVersion": "2019-09-01",
-          "condition": "[and(equals(parameters('jumpbox-os'), 'Linux'), not(parameters('isOffline')))]",
+          "condition": "[equals(parameters('jumpbox-os'), 'Linux')]",
           "name": "[variables('linux-virtualMachine-name-prefix')]",
           "dependsOn": [
             "[resourceId('Microsoft.Compute/availabilitySets', variables('linux-availabilitySet-name'))]",
@@ -1298,7 +1286,7 @@
                     "type": "SystemAssigned"
                   },
                   "apiVersion": "2019-07-01",
-                  "condition": "[and(equals(parameters('jumpbox-os'), 'Linux'), not(parameters('isOffline')))]",
+                  "condition": "[equals(parameters('jumpbox-os'), 'Linux')]",
                   "location": "[resourceGroup().location]",
                   "name": "[parameters('linux-virtualMachine-name-prefix')]",
                   "properties": {
@@ -1378,15 +1366,15 @@
                 {
                   "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
                   "apiVersion": "2017-05-01-preview",
-                  "condition": "[and(equals(parameters('jumpbox-os'), 'Linux'), not(parameters('isOffline')))]",
-                  "location": "[resourceGroup().location]",
                   "name": "[concat(parameters('linux-virtualMachine-name-prefix'), '/Microsoft.Insights/service')]",
+                  "location": "[resourceGroup().location]",
+                  "condition": "[equals(parameters('jumpbox-os'), 'Linux')]",
                   "dependsOn": [
                     "[resourceId('Microsoft.Compute/virtualMachines', parameters('linux-virtualMachine-name-prefix'))]"
                   ],
                   "properties": {
                     "storageAccountId": "[resourceId(parameters('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('diagnostic-storageAccount-name'))]",
-                    "workspaceId": "[resourceId(parameters('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', parameters('oms-workspace-name'))]",
+                    "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
                     "metrics": [
                       {
                         "category": "AllMetrics",

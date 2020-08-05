@@ -501,9 +501,16 @@
       "azure-firewall_azure-firewall-private-ip": {
         "type": "string",
         "metadata": {
-          "displayName": "Azure firewall private IP"
+          "displayName": "Azure Firewall private IP"
         },
-        "defaultValue": "10.0.4.4"
+        "defaultValue": "10.0.0.4"
+      },
+      "azure-firewall_jump-box-private-ip": {
+        "type": "string",
+        "metadata": {
+          "displayName": "JumpBox private IP"
+        },
+        "defaultValue": "10.0.1.4"
       },
       "azure-firewall_logs-retention-in-days": {
         "type": "int",
@@ -535,7 +542,7 @@
           "displayName": "Shared services subnet address prefix",
           "description": "Value used in Virtual Network / Route Table, Jumpbox and Application / OS templates"
         },
-        "defaultValue": "10.0.0.0/24",
+        "defaultValue": "10.0.2.0/24",
         "allowedValues": []
       },
       "vnet_bastion-subnet-address-prefix": {
@@ -551,23 +558,7 @@
         "metadata": {
           "displayName": "Application subnet address prefix"
         },
-        "defaultValue": "10.0.2.0/24",
-        "allowedValues": []
-      },
-      "vnet_app-gateway-subnet-address-prefix": {
-        "type": "string",
-        "metadata": {
-          "displayName": "Application Gateway subnet address prefix"
-        },
         "defaultValue": "10.0.3.0/24",
-        "allowedValues": []
-      },
-      "vnet_gateway-subnet-address-prefix": {
-        "type": "string",
-        "metadata": {
-          "displayName": "Virtual Network Gateway subnet address prefix"
-        },
-        "defaultValue": "10.0.4.0/24",
         "allowedValues": []
       },
       "vnet_azure-firewall-subnet-address-prefix": {
@@ -575,7 +566,7 @@
         "metadata": {
           "displayName": "Azure Firewall subnet address prefix"
         },
-        "defaultValue": "10.0.5.0/24",
+        "defaultValue": "10.0.0.0/26",
         "allowedValues": []
       },
       "vnet_optional-subnet-name": {
