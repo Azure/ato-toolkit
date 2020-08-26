@@ -11,11 +11,11 @@ Write-Output ""
 Write-Output "👩🏽‍💻 Applying the ECK operator"
 kubectl apply -f eck.yaml
 
+Start-Sleep -Seconds 3
 Write-Output ""
 Write-Output "👀 Showing the ECK operator pod"
 kubectl get pods -n $Namespace
 
-Start-Sleep -Seconds 5
 Write-Output ""
 Write-Output "😬 Waiting for the ECK operator to complete"
 kubectl wait --for=condition=Ready -n $Namespace pod/elastic-operator-0 --timeout=60s
