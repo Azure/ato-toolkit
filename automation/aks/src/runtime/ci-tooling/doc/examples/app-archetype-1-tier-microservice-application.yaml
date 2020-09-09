@@ -1,0 +1,19 @@
+---
+name: 1-tier-microservice-application
+app-containers:
+  - name: app
+    OS: linux
+attributes:
+  colour: grey
+  phase: liquid
+default-version: 0.0.2
+
+### TBC - policy, data handeing + mappping needs to be worked out
+
+# policy-initiatives-required:
+#   - SOX
+#   - ISO27001
+# data-classifications:
+#   - PII
+#   - CreditCards
+#   - user-credentials

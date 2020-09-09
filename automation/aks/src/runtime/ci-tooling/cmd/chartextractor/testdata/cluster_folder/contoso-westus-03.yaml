@@ -1,0 +1,15 @@
+---
+apiVersion: c12.microsoft.com/v1
+kind: ClusterConfig
+metadata:
+  name: contoso-westus-03
+spec:
+  location: westus
+  registry:
+    docker:
+      url: contosowestus0003.azurecr.io
+    helm:
+      url: https://contosowestus0003.azurecr.io/helm/v1/repo
+
+  kubernetes:
+    url: https://kubeapi-w-us-0003.k8s.az.com
