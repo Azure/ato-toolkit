@@ -1,0 +1,34 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: denydeploymentstonamespace
+spec:
+  crd:
+    spec:
+      names:
+        kind: "denydeploymentstonamespace"
+      validation:
+        openAPIV3Schema:
+          properties:
+            namespacestodeny:
+              type: "array"
+              items:
+                type: "string"
+
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package com.microsoft.c12.denydeploymentstonamespace
+
+
+        contains_items(haystack, needle) {
+          haystack[_] == needle
+        }
+
+        violation[{"msg": msg}] {
+          objectnamespace := input.review.object.metadata.namespace
+          contains_items(input.parameters.namespacestodeny, objectnamespace)
+          msg := sprintf("The deployment of the %v %v targets the %v namespace. This is not allowed. The following namespaces are blocked from user deployments: %v.", [input.review.object.metadata.name, input.review.object.kind, objectnamespace, input.parameters.namespacestodeny])
+        }
+
+
