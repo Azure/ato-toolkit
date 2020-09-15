@@ -1,0 +1,12 @@
+{
+  "properties": {
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/a9b99dd8-06c5-4317-8629-9d86a3c6e7d9",
+    "parameters": {},
+    "dependsOn": [],
+    "displayName": "Deploy network watcher when virtual networks are created"
+  },
+  "kind": "policyAssignment",
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34/artifacts/a0601552-2ed7-439f-a2f2-104130d3a20f",
+  "type": "Microsoft.Blueprint/blueprints/artifacts",
+  "name": "a0601552-2ed7-439f-a2f2-104130d3a20f"
+}

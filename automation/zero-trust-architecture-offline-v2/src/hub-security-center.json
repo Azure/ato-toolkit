@@ -1,0 +1,132 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.1",
+    "parameters": {
+        "namePrefix": {
+            "type": "string",
+            "metadata": {
+                "displayName": "Resource Group and Resource name prefix",
+                "description": "Resource Group and Resource identifier. String to be used as prefix to all Resource Group and Resource names."
+            }
+        },
+        "hubName": {
+            "type": "string",
+            "defaultValue": "hub-shared",
+            "metadata": {
+                "displayName": "Hub Shared name",
+                "description": "Hub Shared name."
+            }
+        },
+        "deployHub": {
+            "type": "bool",
+            "defaultValue": true,
+            "metadata": {
+                "displayName": "Deploy Hub",
+                "description": "Deploy Hub."
+            }
+        }
+    },
+    "variables": {
+        "deployment-prefix": "[toLower(concat(parameters('namePrefix'), '-', parameters('hubName')))]",
+        "unique-string": "[uniqueString(subscription().id, concat(variables('deployment-prefix')))]",
+        "diagnostic-storage-account-prefix": "[concat(replace(variables('deployment-prefix'), '-', ''), 'diag')]",
+        "diagnostic-storage-account-name": "[toLower(substring(replace(concat(variables('diagnostic-storage-account-prefix'), variables('unique-string'), variables('unique-string')), '-', ''), 0, 23) )]",
+        "oms-workspace-name": "[concat(variables('deployment-prefix'), '-log')]",
+        "oms-workspace-resource-group": "[concat(variables('deployment-prefix'), '-rg')]",
+        "oms-workspace-subscription-id": "[subscription().subscriptionId]",
+        "pricing": "Standard"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Insights/diagnosticSettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "service",
+            "condition": "[parameters('deployHub')]",
+            "dependsOn": [],
+            "properties": {
+                "storageAccountId": "[concat('/subscriptions/', variables('oms-workspace-subscription-id'), '/resourceGroups/', variables('oms-workspace-resource-group'), '/providers/Microsoft.Storage/storageAccounts/', variables('diagnostic-storage-account-name'))]",
+                "workspaceId": "[concat('/subscriptions/', variables('oms-workspace-subscription-id'), '/resourceGroups/', variables('oms-workspace-resource-group'), '/providers/Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]",
+                "logs": [
+                    {
+                        "category": "Administrative",
+                        "enabled": true
+                    },
+                    {
+                        "category": "Alert",
+                        "enabled": true
+                    },
+                    {
+                        "category": "Autoscale",
+                        "enabled": true
+                    },
+                    {
+                        "category": "Policy",
+                        "enabled": true
+                    },
+                    {
+                        "category": "Recommendation",
+                        "enabled": true
+                    },
+                    {
+                        "category": "ResourceHealth",
+                        "enabled": true
+                    },
+                    {
+                        "category": "Security",
+                        "enabled": true
+                    },
+                    {
+                        "category": "ServiceHealth",
+                        "enabled": true
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Security/pricings",
+            "apiVersion": "2017-08-01-preview",
+            "name": "default",
+            "condition": "[parameters('deployHub')]",
+            "properties": {
+                "pricingTier": "[variables('pricing')]"
+            }
+        },
+        {
+            "type": "Microsoft.Security/pricings",
+            "apiVersion": "2018-06-01",
+            "name": "StorageAccounts",
+            "condition": "[parameters('deployHub')]",
+            "dependsOn": [
+                "[concat('Microsoft.Security/pricings/default')]"
+            ],
+            "properties": {
+                "pricingTier": "[variables('pricing')]"
+            }
+        },
+        {
+            "type": "Microsoft.Security/pricings",
+            "apiVersion": "2018-06-01",
+            "name": "SqlServers",
+            "condition": "[parameters('deployHub')]",
+            "dependsOn": [
+                "[concat('Microsoft.Security/pricings/StorageAccounts')]"
+            ],
+            "properties": {
+                "pricingTier": "[variables('pricing')]"
+            }
+        },
+        {
+            "type": "Microsoft.Security/pricings",
+            "apiVersion": "2018-06-01",
+            "name": "VirtualMachines",
+            "condition": "[parameters('deployHub')]",
+            "dependsOn": [
+                "[concat('Microsoft.Security/pricings/SqlServers')]"
+            ],
+            "properties": {
+                "pricingTier": "[variables('pricing')]"
+            }
+        }
+    ],
+    "outputs": {}
+}
