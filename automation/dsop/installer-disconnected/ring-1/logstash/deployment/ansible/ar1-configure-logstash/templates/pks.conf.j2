@@ -1,0 +1,81 @@
+input {
+  tcp {
+    port => {{ pks.port }}
+    mode => "server"
+    ssl_enable => true
+    ssl_key => "{{ ssl.key_path }}"
+    ssl_cert => "{{ ssl.cert_path }}"
+    ssl_certificate_authorities => ["{{ ssl.ca_path }}"]
+    codec => plain
+    ssl_verify => false
+    dns_reverse_lookup_enabled => true
+  }
+} #ENDINPUT
+
+filter {
+  mutate {
+    add_field => { "pipeline_host" => "vmLS002" }
+    add_field => { "logging_app" => "pks" }
+    rename => { "host" => "pks.host" }
+  }
+
+  grok {
+    match => { 
+        # The below grok pattern will parse syslog messages per RFC3164
+        # https://tools.ietf.org/html/rfc3164 
+        "message" => "<%{INT:syslog_pri}>%{INT:syslog.version} %{TIMESTAMP_ISO8601:syslog.timestamp} %{DATA:syslog.host} (-|%{DATA:syslog.application})? (-|%{DATA:syslog.pid})? (-|%{DATA:syslog.message_id})? %{PKS_STRUCT_DATA}"
+    }
+    pattern_definitions => {
+        # This is a cusom pattern for the syslog structured data specific to PKS messages
+        "PKS_STRUCT_DATA" => "\[instance\@%{DATA:pks.instance_pid} director=\"%{DATA:pks.director}\" deployment=\"%{DATA:pks.deployment}\" group=\"%{DATA:pks.group}\" az=\"%{DATA:pks.az}\" id=\"%{DATA:pks.id}\"\]( %{GREEDYDATA:pks.message})?"
+    }
+    remove_field => "message"
+  }
+  
+  # Parse the syslog severity and priority
+  syslog_pri { 
+    remove_field => "syslog_pri"
+  }
+
+  # Rename the following fields so they are nested under syslog
+  mutate {
+    rename => { "syslog_facility" => "[syslog][facility]" }
+    rename => { "syslog_severity" => "[syslog][severity]" }
+    rename => { "syslog_facility_code" => "[syslog][facility_code]" }
+    rename => { "syslog_severity_code" => "[syslog][severity_code]" }
+  }
+
+  if ("CEF:0" in "pks.message") {
+    grok {
+      match => {
+        "pks.message" => "%{DATA:pks.event} fname=\"%{DATA:pks.fname}\" hostname=\"%{DATA:pks.hostname}\" opname=\"%{DATA:pks.opname}\" optype=%{INT:pks.optype} ts=%{INT:pks.ts} severity=%{INT:pks.severity}"
+      }
+    }
+  } else if "pks.message" =~ /^node\=.*/ {
+    kv {
+      source => "pks.message"
+      target => "pks"
+      remove_field => [ "pks.message" ]
+    }
+  } else {
+    # This should parse the pks.message field into the pks.json field if it contains valid json
+    json {
+      source => "pks.message"
+      target => "pks"
+      remove_field => [ "pks.message" ] 
+      skip_on_invalid_json => "true" # Don't throw an error if the json is invalid
+    }
+  }
+} #ENDFILTER	
+
+
+output {
+  elasticsearch {
+    hosts => ["https://{{ elasticsearch.lb_ip }}:{{ elasticsearch.port }}"]
+    index => "{{ pks.pipeline.index_pattern }}"
+    ssl_certificate_verification => false
+    user => "{{ pks.pipeline.username }}"
+    password => "{{ pks.pipeline.password }}"
+    ssl => true
+  }
+} #ENDOUTPUT
