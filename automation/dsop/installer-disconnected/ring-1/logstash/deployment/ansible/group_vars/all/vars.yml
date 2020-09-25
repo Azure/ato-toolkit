@@ -1,0 +1,112 @@
+---
+# See do-generate-ansible-vars.ps1 when updating this file
+
+# Deployment Variables
+OFFLINE_DEPLOYMENT: "false"
+
+# Offline apt_repository
+OFFLINE_YUM_REPO_URL: "[SOME HTTP ADDRESS]"
+
+# Logstash Variables
+logstash:
+  version: 7.6.2
+
+# Eleasticsearch Variables
+elasticsearch:
+  # Load balancer IP address (used for pipeline ingest)
+  lb_ip: 0.0.0.0
+  # Initial master node IP address (used for openssh get cert)
+  imn_ip: 0.0.0.0
+  port: 9200
+
+# SSL Varialbes
+ssl:
+  cert_path: /path/to/cert
+  key_path: /path/to/key
+  ca_path: /path/to/ca
+
+# Auditbeat Linux Pipeline Variables
+auditbeat_linux:
+  enabled: true
+  port: 0000
+  pipeline:
+    username: user
+    password: pass
+    index_pattern: audit-linux
+  
+# Auditbeat Windows Pipeline Variables
+auditbeat_windows:
+  enabled: true
+  port: 0000
+  pipeline:
+    username: user
+    password: pass
+    index_pattern: audit-windows
+
+# CFS Pipeline Variables
+cfs:
+  enabled: true
+  jdbc:
+    ip: 0.0.0.0
+    port: 0000
+    database: database_name
+    username: username
+    password: password
+  pipeline:
+    username: user
+    password: pass
+    index_pattern: cfs
+
+# Filebeat Generic Pipeline Variables
+filebeat:
+  enabled: true
+  port: 0000
+  pipeline:
+    username: user
+    password: pass
+    index_pattern: logs-application
+
+# Jira Filebeat Pipeline Variables
+jira:
+  enabled: true
+  port: 0000
+  pipeline:
+    username: user
+    password: pass
+    index_pattern: logs-application
+
+# Opsman Filebeat Pipeline Variables
+opsman:
+  enabled: true
+  port: 0000
+  pipeline:
+    username: user
+    password: pass
+    index_pattern: logs-pks
+
+# Bosh Pipeline Variables
+bosh:
+  enabled: true
+  port: 0000
+  pipeline:
+    username: user
+    password: pass
+    index_pattern: logs-pks
+
+# PKS Pipeline Variables
+pks:
+  enabled: true
+  port: 0000
+  pipeline:
+    username: user
+    password: pass
+    index_pattern: logs-pks
+
+# Container Pipeline Variables
+container:
+  enabled: true
+  port: 0000
+  pipeline:
+    username: user
+    password: pass
+    index_pattern: logs-container

@@ -1,0 +1,56 @@
+input {
+  tcp {
+    port => {{ opsman.port }}
+    mode => "server"
+    ssl_enable => true
+    ssl_key => "{{ ssl.key_path }}"
+    ssl_cert => "{{ ssl.cert_path }}"
+    ssl_certificate_authorities => ["{{ ssl.ca_path }}"]
+    codec => plain
+    ssl_verify => false
+    dns_reverse_lookup_enabled => true
+  }
+}
+
+filter {
+  mutate {
+    add_field => { "pipeline_host" => "{{ inventory_hostname }}" }
+    add_field => { "logging_app" => "opsman" }
+    rename => { "host" => "opsman.host" }
+  }
+}
+
+filter {
+  grok {
+    match => { "message" => "\<%{NUMBER:num}\>%{SYSLOGTIMESTAMP:opsman.timestamp} %{GREEDYDATA:opsman.node_name} audispd\: %{GREEDYDATA:opsman_kv}" }
+    remove_field => [ "num" ]
+  }
+  kv {
+    source => "opsman_kv"
+    target => "opsman"
+    remove_field => [ "opsman_kv", "message" ]
+  }
+}
+
+filter {
+  if "_grokparsefailure" in [tags] {
+    mutate {
+      remove_field => [ "tags" ]
+    }
+    grok {
+      match => { "message" => "\<%{NUMBER:num}\>%{SYSLOGTIMESTAMP:opsman.timestamp} %{DATA:opsman.node_name} %{GREEDYDATA:opsman.log}" }
+      remove_field => [ "num", "message" ]
+    }
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["https://{{ elasticsearch.lb_ip }}:{{ elasticsearch.port }}"]
+    index => "{{ opsman.pipeline.index_pattern }}"
+    ssl_certificate_verification => false
+    user => "{{ opsman.pipeline.username }}"
+    password => "{{ opsman.pipeline.password }}"
+    ssl => true
+  }
+}

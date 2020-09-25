@@ -1,0 +1,8 @@
+[initial-master-node]
+S3A-PPE-ESNM-001v ansible_ssh_user=cfscloudadmin ansible_ssh_extra_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' ansible_ssh_private_key_file=id_rsa jvm1=-Xms4g jvm2=-Xmx4g masterNode=true dataNode=false
+
+[additional-master-nodes]
+S3A-PPE-ESNM-002v ansible_ssh_user=cfscloudadmin ansible_ssh_extra_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' ansible_ssh_private_key_file=id_rsa jvm1=-Xms4g jvm2=-Xmx4g masterNode=true dataNode=false
+
+[data-nodes]
+S3A-PPE-ESND-001v ansible_ssh_user=cfscloudadmin ansible_ssh_extra_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null' ansible_ssh_private_key_file=id_rsa jvm1=-Xms4g jvm2=-Xmx4g masterNode=false dataNode=true

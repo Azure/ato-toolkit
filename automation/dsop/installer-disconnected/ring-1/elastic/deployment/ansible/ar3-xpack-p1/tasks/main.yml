@@ -1,0 +1,18 @@
+---
+# - pause:
+#     seconds: 60
+
+- name: Appending Xpack Configuration to Elasticsearch.yml (1/2)
+  lineinfile:
+    path: /etc/elasticsearch/elasticsearch.yml
+    line: |
+      xpack.security.enabled: true
+      xpack.security.transport.ssl.enabled: true
+      xpack.security.transport.ssl.verification_mode: certificate 
+      xpack.security.transport.ssl.keystore.path: /etc/elasticsearch/{{ ES_INITIAL_MASTER_HOSTNAME }}_cert.p12
+      xpack.security.transport.ssl.truststore.path: /etc/elasticsearch/{{ ES_INITIAL_MASTER_HOSTNAME }}_cert.p12
+
+- name: Restart Elastic Search to Set Xpack Configuration
+  service:
+    name: elasticsearch.service
+    state: started

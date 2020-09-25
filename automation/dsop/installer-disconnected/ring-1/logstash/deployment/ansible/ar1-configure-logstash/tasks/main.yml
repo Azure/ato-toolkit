@@ -1,0 +1,168 @@
+---
+- name: Copy Auditbeat Linux Pipeline
+  template:
+    src: auditbeat-linux.conf.j2
+    dest: /etc/logstash/conf.d/auditbeat-linux.conf
+    mode: 0644
+  when: auditbeat_linux.enabled == "true"
+
+- name: Copy Auditbeat Windows Pipeline
+  template:
+    src: auditbeat-windows.conf.j2
+    dest: /etc/logstash/conf.d/auditbeat-windows.conf
+    mode: 0644
+  when: auditbeat_windows.enabled == "true"
+
+- name: Copy CFS Pipeline
+  template:
+    src: cfs.conf.j2
+    dest: /etc/logstash/conf.d/cfs.conf
+    mode: 0644
+  when: cfs.enabled == "true"
+
+- name: Copy Filebeat Pipeline (Generic)
+  template:
+    src: filebeat.conf.j2
+    dest: /etc/logstash/conf.d/filebeat.conf
+    mode: 0644
+  when: filebeat.enabled == "true"
+
+- name: Copy Jira Filebeat Pipeline
+  template:
+    src: jira.conf.j2
+    dest: /etc/logstash/conf.d/jira.conf
+    mode: 0644
+  when: jira.enabled == "true"
+
+- name: Copy Opsman Pipeline
+  template:
+    src: opsman.conf.j2
+    dest: /etc/logstash/conf.d/opsman.conf
+    mode: 0644
+  when: opsman.enabled == "true"
+
+- name: Copy Bosh Pipeline
+  template:
+    src: bosh.conf.j2
+    dest: /etc/logstash/conf.d/bosh.conf
+    mode: 0644
+  when: bosh.enabled == "true"
+
+- name: Copy PKS Pipeline
+  template:
+    src: pks.conf.j2
+    dest: /etc/logstash/conf.d/pks.conf
+    mode: 0644
+  when: pks.enabled == "true"
+  
+# Copy Additional Pipelines Here
+
+- name: Open Firewall Port For Auditbeat Linux {{ auditbeat_linux.port }}
+  command: firewall-cmd --zone=public --add-port={{ auditbeat_linux.port }}/tcp --permanent
+  when: auditbeat_linux.enabled == "true"
+
+- name: Open Firewall Port For Auditbeat Windows {{ auditbeat_windows.port }}
+  command: firewall-cmd --zone=public --add-port={{ auditbeat_windows.port }}/tcp --permanent
+  when: auditbeat_windows.enabled == "true"
+
+- name: Open Firewall Port For Filebeat {{ filebeat.port }}
+  command: firewall-cmd --zone=public --add-port={{ filebeat.port }}/tcp --permanent
+  when: filebeat.enabled == "true"
+
+- name: Open Firewall Port For Jira {{ jira.port }}
+  command: firewall-cmd --zone=public --add-port={{ jira.port }}/tcp --permanent
+  when: jira.enabled == "true"
+
+- name: Open Firewall Port For Opsman {{ opsman.port }}
+  command: firewall-cmd --zone=public --add-port={{ opsman.port }}/tcp --permanent
+  when: opsman.enabled == "true"
+
+- name: Open Firewall Port For Bosh {{ bosh.port }}
+  command: firewall-cmd --zone=public --add-port={{ bosh.port }}/tcp --permanent
+  when: opsman.enabled == "true"
+
+- name: Open Firewall Port For PKS {{ pks.port }}
+  command: firewall-cmd --zone=public --add-port={{ pks.port }}/tcp --permanent
+  when: opsman.enabled == "true"
+
+# Add Additional Pipeline Port Rules Here
+
+- name: Reload Firewall
+  command: firewall-cmd --reload
+
+- name: Copy Logstash Pipelines File
+  template:
+    src: pipelines.yml.j2
+    dest: /etc/logstash/pipelines.yml
+    mode: 0644
+
+- name: Create Patterns Directory
+  file:
+    path: /etc/logstash/conf.d/patterns
+    state: directory
+    mode: '0755'
+
+- name: Copy Custom Patterns
+  template:
+    src: custom.j2
+    dest: /etc/logstash/conf.d/patterns/custom
+    mode: 0644
+
+- name: Copy JDBC Drivers
+  copy:
+    src: bin/driver
+    dest: /etc/logstash/
+
+- name: Enable Logstash Service
+  systemd:
+    name: logstash.service
+    enabled: yes
+
+- name: Restart Logstash Service
+  systemd:
+    name: logstash.service
+    state: restarted
+
+- shell: find /usr/lib/jvm -name cacerts
+  register: JAVA_HOME_OUT
+
+- name: Stop Logstash Service to Update Java Keystore
+  systemd:
+    name: logstash.service
+    state: stopped
+
+- name: Copy Cert Gen Script Template
+  template:
+    src: cert-gen.sh.j2
+    dest: /etc/logstash/cert-gen.sh
+    mode: 0744
+
+- name: Run Cert Gen Script
+  shell: /etc/logstash/cert-gen.sh
+
+- name: Import instance.crt into Java Keystore
+  java_cert:
+    cert_path: "/etc/logstash/instance.crt"
+    keystore_path: "{{ JAVA_HOME_OUT['stdout'] }}"
+    cert_alias: default
+    keystore_pass: changeit
+    state: present
+    
+- name: Import elastic.crt into Java Keystore
+  java_cert:
+    cert_path: "/etc/logstash/elastic.crt"
+    keystore_path: "{{ JAVA_HOME_OUT['stdout'] }}"
+    cert_alias: default
+    keystore_pass: changeit
+    state: present
+
+- name: Restart Logstash Service
+  systemd:
+    name: logstash.service
+    state: restarted
+
+- name: Ensure Logstash is started and enabled on boot.
+  service:
+    name: logstash
+    state: started
+    enabled: true
