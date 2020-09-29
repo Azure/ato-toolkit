@@ -184,7 +184,7 @@ Running the deployment will connect to Azure using the cli, deploy the needed re
 
 ### Azure Secret (Disconnected)
 
-> coming
+[Disconnected directory](https://github.com/Azure/ato-toolkit/tree/master/automation/dsop/installer-disconnected/ring-0/ocp-3.11)
 
 ## Post Deployment Steps
 
