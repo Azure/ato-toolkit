@@ -6,7 +6,9 @@
 2. Make sure you have the [Prerequisites](#prerequisites) installed.
 3. Follow the [Hydration Instructions](./hydration/hydration.md) to setup your Azure environment.
 4. Install OpenShift Container Platform 3.11, which is part of ring-0, by following the [OCP 3.11 Instructions](./ring-0/ocp-3.11/instructions.md)
-5. Selectively install rings 1-5 based on your needs. Assume Rings 1-5 are container based unless otherwise specified.
+5. Selectively install rings 1-5 based on your needs. Assume Rings 1-5 are container based unless otherwise specified. The download links for the applications are in the notes section.
+
+*** In a connected environment these steps would be performed in the same manner. The only difference would be changing the DeploymentType to Connected in any "vars" files below this directory.
 
 ## Dependency Diagram
 
@@ -17,18 +19,18 @@ ___
 |---|---|---|---
 ||Hydration|[instructions](./hydration.md)|This prepares the deployment vm
 |0|OCP 3.11|[instructions](./ring-0/ocp-3.11/instructions.md)|Check instructions and [download VHD](https://thesearemyfilesthankyou.blob.core.windows.net/deploy/bravo-registry-osDisk.vhd) to carry in. Also need the [RHEL image](https://thesearemyfilesthankyou.blob.core.windows.net/deploy/rhelbase77.vhd.zip?sv=2019-10-10&st=2020-09-15T13%3A09%3A17Z&se=2020-10-16T13%3A09%3A00Z&sr=b&sp=r&sig=7la8PQ6KYeu%2BAbg4SqFvJtL%2FHe0NwHdSzQaflRdRkVM%3D) if the marketplace doesn't have it.
-|0|OCPBastionPorterInstall|[instructions](./tools/docs/OcpBastionPorterInstaller.md)|This prepare the OCP Bastion by installing the Porter Binaries
+|0|OCPBastionPorterInstall|[instructions](./tools/docs/OcpBastionPorterInstaller.md)|This prepares the OCP Bastion by installing the Porter Binaries
 |0|OpenEBS|[instructions](./ring-0/openebs/instructions.md)|Uses porter CNAB bundle - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/openebs.tgz?sv=2019-02-02&st=2020-09-18T17%3A08%3A47Z&se=2020-10-19T17%3A08%3A00Z&sr=b&sp=r&sig=P3yBPPKcEYit%2Fl0jgEz93CnYvmCXnQ0kePU6Ae3GYeM%3D)
-|1|Elastic|[instructions](./ring-1/elastic/instructions.md)|VM based deployment
-|1|Logstash|[instructions](./ring-1/logstash/instructions.md)|VM based deployment
-|1|Kibana|[instructions](./ring-1/kibana/instructions.md)|Uses porter CNAB bundle
+|1|Elastic|[instructions](./ring-1/elastic/instructions.md)|VM based deployment - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/elastic.tgz?sv=2019-02-02&st=2020-09-18T17%3A08%3A47Z&se=2020-10-19T17%3A08%3A00Z&sr=b&sp=r&sig=P3yBPPKcEYit%2Fl0jgEz93CnYvmCXnQ0kePU6Ae3GYeM%3D)
+|1|Logstash|[instructions](./ring-1/logstash/instructions.md)|VM based deployment - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/logstash.tgz?sv=2019-02-02&st=2020-09-18T17%3A08%3A47Z&se=2020-10-19T17%3A08%3A00Z&sr=b&sp=r&sig=P3yBPPKcEYit%2Fl0jgEz93CnYvmCXnQ0kePU6Ae3GYeM%3D)
+|1|Kibana|[instructions](./ring-1/kibana/instructions.md)|Uses porter CNAB bundle - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/kibana.tgz?sv=2019-02-02&st=2020-09-18T17%3A08%3A47Z&se=2020-10-19T17%3A08%3A00Z&sr=b&sp=r&sig=P3yBPPKcEYit%2Fl0jgEz93CnYvmCXnQ0kePU6Ae3GYeM%3D)
 |2|Nessus|[instructions](./ring-2/nessus/instructions.md)|Uses porter CNAB bundle - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/nessus.tgz?sv=2019-02-02&st=2020-09-18T17%3A09%3A57Z&se=2020-10-10T17%3A09%3A00Z&sr=b&sp=r&sig=uMpzmcjVBG9YLcr8TvfKtk8ci0b6UZM9uwkC2HTNrCg%3D)
 |2|Fortify|[instructions](./ring-2/fortify/instructions.md)|Uses porter CNAB bundle - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/fortifyssc.tgz?sv=2019-02-02&st=2020-09-18T17%3A10%3A56Z&se=2020-10-10T17%3A10%3A00Z&sr=b&sp=r&sig=Z2%2FElANW7fDg%2FC3VOiuO%2BSQrmEu%2FFxLw6%2F2J7JbMzrA%3D)
 |2|Twistlock|[instructions](./ring-2/twistlock/instructions.md)|Uses porter CNAB bundle - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/twistlock.tgz?sv=2019-10-10&st=2020-09-15T13%3A54%3A15Z&se=2020-10-16T13%3A54%3A00Z&sr=b&sp=r&sig=0PFyzrHbZJMflHo26Vmo5BjtvoPu4SzXQahu%2FOn0w1I%3D)
 |2|Anchore|[instructions](./ring-2/anchore/instructions.md)|Uses porter CNAB bundle - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/anchore.tgz?sv=2019-10-10&st=2020-09-15T13%3A54%3A51Z&se=2020-10-16T13%3A54%3A00Z&sr=b&sp=r&sig=YGDN1iwLTWmMIRxgiMxCTvWeoMkFvC7wEcdFBm01sW4%3D) as well as the corresponding postgres porter CNAB bundle - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/anchore-postgres.tgz?sv=2019-02-02&st=2020-09-18T17%3A16%3A13Z&se=2020-10-10T17%3A16%3A00Z&sr=b&sp=r&sig=3o0onPFRsF2IzGkQmy0n%2BOjFRTt510HNi4O5uAkvpQk%3D)
-|3|Jira|[instructions](./ring-3/jira/instructions.md)|Uses porter CNAB bundle
-|3|Mattermost|[instructions](./ring-3/mattermost/instructions.md)|Uses porter CNAB bundle
-|3|Confluence|[instructions](./ring-3/confluence/instructions.md)|Uses porter CNAB bundle
+|3|Jira|[instructions](./ring-3/jira/instructions.md)|Uses porter CNAB bundle - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/jira.tgz?sv=2019-02-02&st=2020-09-18T17%3A08%3A47Z&se=2020-10-19T17%3A08%3A00Z&sr=b&sp=r&sig=P3yBPPKcEYit%2Fl0jgEz93CnYvmCXnQ0kePU6Ae3GYeM%3D)
+|3|Mattermost|[instructions](./ring-3/mattermost/instructions.md)|Uses porter CNAB bundle - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/mattermost.tgz?sv=2019-02-02&st=2020-09-18T17%3A08%3A47Z&se=2020-10-19T17%3A08%3A00Z&sr=b&sp=r&sig=P3yBPPKcEYit%2Fl0jgEz93CnYvmCXnQ0kePU6Ae3GYeM%3D)
+|3|Confluence|[instructions](./ring-3/confluence/instructions.md)|Uses porter CNAB bundle - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/confluence.tgz?sv=2019-02-02&st=2020-09-18T17%3A08%3A47Z&se=2020-10-19T17%3A08%3A00Z&sr=b&sp=r&sig=P3yBPPKcEYit%2Fl0jgEz93CnYvmCXnQ0kePU6Ae3GYeM%3D)
 |5|CFS|[instructions](./ring-5/cfs/instructions.md)|Uses porter CNAB bundle - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/cfs.tgz?sv=2019-02-02&st=2020-09-18T17%3A13%3A02Z&se=2020-10-10T17%3A13%3A00Z&sr=b&sp=r&sig=vlX4EPSloq2ENt7IAX4dmw9V3BOl53hz406SwSNXIko%3D)
 
 ## Prerequisites
