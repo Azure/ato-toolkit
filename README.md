@@ -30,9 +30,10 @@ For more information, questions, or feedback please [contact us](https://aka.ms/
 ## Instructions
 
 1. [Zero Trust blueprint](/automation/zero-trust-architecture/README.md)
-2. [Zero Trust blueprint (offline)](/automation/zero-trust-architecture-offline/README.md)
-3. [Zero Trust blueprint (offline) v2](/automation/zero-trust-architecture-offline-v2/README.md)
-4. [Implementation statements](/implementation-statements/README.md)
+2. [Zero Trust blueprint v2](/automation/zero-trust-architecture-v2/README.md)
+3. [Zero Trust blueprint (offline)](/automation/zero-trust-architecture-offline/README.md)
+4. [Zero Trust blueprint (offline) v2](/automation/zero-trust-architecture-offline-v2/README.md)
+5. [Implementation statements](/implementation-statements/README.md)
     * [VSCode extension](/utils/authoring-assistant/README.md)
 
 ## Feedback
