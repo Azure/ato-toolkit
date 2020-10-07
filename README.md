@@ -15,6 +15,7 @@ For more information, questions, or feedback please [contact us](https://aka.ms/
 | File/folder       | Description                                |
 |-------------------|--------------------------------------------|
 | `automation/zero-trust-architecture`      | Zero Trust blueprint sample and associated artifacts.                        |
+| `automation/zero-trust-architecture-v2`      | Zero Trust blueprint sample and associated artifacts. This has hub/spoke architecture.                        |
 | `automation/zero-trust-architecture-offline`      | Zero Trust blueprint sample and associated artifacts for offline (disconnected from internet) environment.
 | `automation/zero-trust-architecture-offline-v2`      | Zero Trust blueprint sample and associated artifacts for offline (disconnected from internet) environment. This has hub/spoke architecture.                    |
 | `implementation-statements`      | Implementation statements, mapped to NIST security controls, describing the implementation deployed and configured by the automation to aid with compliance ATO process.                         |
