@@ -17,7 +17,7 @@ ___
 
 |Ring|Application|Installer|Notes
 |---|---|---|---
-||Hydration|[instructions](./hydration.md)|This prepares the deployment vm
+||Hydration|[instructions](./hydration/hydration.md)|This prepares the deployment vm
 |0|OCP 3.11|[instructions](./ring-0/ocp-3.11/instructions.md)|Check instructions and [download VHD](https://thesearemyfilesthankyou.blob.core.windows.net/deploy/bravo-registry-osDisk.vhd) to carry in. Also need the [RHEL image](https://thesearemyfilesthankyou.blob.core.windows.net/deploy/rhelbase77.vhd.zip?sv=2019-10-10&st=2020-09-15T13%3A09%3A17Z&se=2020-10-16T13%3A09%3A00Z&sr=b&sp=r&sig=7la8PQ6KYeu%2BAbg4SqFvJtL%2FHe0NwHdSzQaflRdRkVM%3D) if the marketplace doesn't have it.
 |0|OCPBastionPorterInstall|[instructions](./tools/docs/OcpBastionPorterInstaller.md)|This prepares the OCP Bastion by installing the Porter Binaries
 |0|OpenEBS|[instructions](./ring-0/openebs/instructions.md)|Uses porter CNAB bundle - [download here](https://contest.blob.core.usgovcloudapi.net/vhdocp/openebs.tgz?sv=2019-02-02&st=2020-09-18T17%3A08%3A47Z&se=2020-10-19T17%3A08%3A00Z&sr=b&sp=r&sig=P3yBPPKcEYit%2Fl0jgEz93CnYvmCXnQ0kePU6Ae3GYeM%3D)
