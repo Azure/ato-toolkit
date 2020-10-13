@@ -16,7 +16,7 @@ git clone https://github.com/azure/ato-toolkit.git
   ```
   az aks create --resource-group my-rg --name mydemoAKSCluster --node-count 5 --enable-addons monitoring --generate-ssh-keys --vm-set-type AvailabilitySet
   ```
-  * OpenShift: [manual steps](https://docs.openshift.com/container-platform/4.5/installing/installing_azure/installing-azure-default.html) or [automated steps](https://github.com/Azure/ato-toolkit/tree/master/automation/dsop/installer-connected/ring-0/openshift/ocp3.11)
+  * OpenShift: [manual steps](https://docs.openshift.com/container-platform/4.5/installing/installing_azure/installing-azure-default.html) or [automated instructions](https://github.com/Azure/ato-toolkit/tree/master/automation/dsop/installer-connected/ring-0/openshift/ocp3.11)
 * Select the tools you want to install, follow either manual or automated instructions
 
 |Ring|Application|Manual|Automated|Disconnected Notes
