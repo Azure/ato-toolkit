@@ -7,6 +7,7 @@
 3. Follow the [Hydration Instructions](./hydration/hydration.md) to setup your Azure environment.
 4. Install OpenShift Container Platform 3.11, which is part of ring-0, by following the [OCP 3.11 Instructions](./ring-0/ocp-3.11/instructions.md)
 5. Selectively install rings 1-5 based on your needs. Assume Rings 1-5 are container based unless otherwise specified. The download links for the applications are in the notes section.
+6. Push updates back to repo!
 
 *** In a connected environment these steps would be performed in the same manner. The only difference would be changing the DeploymentType to Connected in any "vars" files below this directory.
 
