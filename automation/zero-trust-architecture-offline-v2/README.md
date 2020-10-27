@@ -127,4 +127,4 @@ By now you have executed all required steps to prepare dependencies and artifact
 
 3. From Azure portal, search for Azure Firewall name "\*-hub-shared-az-fw", Update existing DNAT rule to include Source IP Address and Translated address as Private IP address of Jump Box. [More info](https://docs.microsoft.com/en-us/azure/firewall/tutorial-firewall-dnat)
 
-4. Use firewall's public ip to connect to Jump Box VM to gain access to the environment. Default admin user name, unless changed during deployment, is 'jb-admin-user' and password retrieved in step#1. Repeat step#1 to retrieve passwords of other Virtual Machines deployed within spoke(s) (default user name is 'app-admin-user') and use their private IPs for establishing remote connection from Jump Box.
+4. Use firewall's public ip to connect to Jump Box VM to gain access to the environment. Default admin user name, unless changed during deployment, is 'jb-admin-user' and password retrieved in step#1. Repeat step#1 to retrieve passwords of other Virtual Machines deployed within spoke(s) (default user name is 'win-admin-user') and use their private IPs for establishing remote connection from Jump Box.
