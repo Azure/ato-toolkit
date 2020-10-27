@@ -78,13 +78,25 @@
         "description": "URI to the location of the folder which contains /online/<stig-scripts> OR /offline/<stig-scripts>. This value must NOT include a trailing slash."
       }
     },
+    "disk-encryption-type": {
+      "type": "string",
+      "metadata": {
+        "displayName": "For Disk Encryption with Customer Managed Key (CMK), use Server Side Encryption (SSE) or Azure Disk Encryption (ADE)",
+        "description": "For Disk Encryption with Customer Managed Key (CMK), choose whether the disk should be encrypted with SSE + CMK or ADE + CMK"
+      },
+      "defaultValue": "SSE",
+      "allowedValues": [
+        "SSE",
+        "ADE"
+      ]
+    },
+    "utcValue": {
+      "type": "string",
+      "defaultValue": "[utcNow()]"
+    },
     "isOffline": {
       "type": "bool",
       "defaultValue": false
-    },
-    "noLogAnalytics": {
-      "type": "bool",
-      "defaultValue": true
     }
   },
   "variables": {
@@ -100,7 +112,19 @@
     "win-server-2019-dsc-extension-filename": "WindowsServer2019Workgroup.ps1.zip",
     "required-modules-filename": "RequiredModules.ps1",
     "install-powershell-modules-script-extension-filename": "DownloadPowerShellModules.ps1",
-    "dsc-setup-win2019": "DSCSetupWin2019"
+    "dsc-setup-win2019": "DSCSetupWin2019",
+    "disk-encryption-set-id": "[concat('/subscriptions/', parameters('hubSubscriptionId'), '/resourceGroups/', variables('hub-resource-group-name') , '/providers/', 'Microsoft.Compute/diskEncryptionSets/', variables('hub-deployment-prefix'), '-disk-encryption-set')]",
+    "managed-disk-json": {
+      "storageAccountType": "Premium_LRS",
+      "diskEncryptionSet": {
+        "id": "[variables('disk-encryption-set-id')]"
+      }
+    },
+    "windowsDiskEncryptionExtensionName": "AzureDiskEncryption",
+    "windowsDiskEncryptionExtensionVersion": "2.2",
+    "windowsEncryptionOperation": "EnableEncryption",
+    "windowsKeyEncryptionAlgorithm": "RSA-OAEP",
+    "key-vault-resource-id": "[resourceId(parameters('hubSubscriptionId'), variables('hub-resource-group-name'), 'Microsoft.KeyVault/vaults', concat(variables('hub-deployment-prefix'), '-kv'))]"
   },
   "resources": [
     {
@@ -203,6 +227,33 @@
             "diagnostic-storageAccount-name": {
               "type": "string"
             },
+            "managed-disk-json": {
+              "type": "object"
+            },
+            "disk-encryption-type": {
+              "type": "string"
+            },
+            "windowsDiskEncryptionExtensionName": {
+              "type": "string"
+            },
+            "windowsDiskEncryptionExtensionVersion": {
+              "type": "string"
+            },
+            "windowsKeyEncryptionAlgorithm": {
+              "type": "string"
+            },
+            "windowsEncryptionOperation": {
+              "type": "string"
+            },
+            "key-vault-resource-id": {
+              "type": "string"
+            },
+            "utcValue": {
+              "type": "string"
+            },
+            "disk-key-encryption-key-url": {
+              "type": "string"
+            },
             "win-server-2019-dsc-extension-filename": {
               "type": "string"
             },
@@ -254,7 +305,8 @@
                   "osDisk": {
                     "name": "[replace(toLower(substring(concat(parameters('virtualMachine-name-prefix'), 'osdisk', '-', replace(concat(parameters('uniqueString'), parameters('uniqueString')), '-', '')), 0, 40)), '-', '')]",
                     "osType": "Windows",
-                    "createOption": "FromImage"
+                    "createOption": "FromImage",
+                    "managedDisk": "[if(bool(equals(parameters('disk-encryption-type'), 'ADE')), json('{\"storageAccountType\": \"Premium_LRS\"}'), parameters('managed-disk-json'))]"
                   },
                   "dataDisks": [
                     {
@@ -263,9 +315,7 @@
                       "diskSizeGB": 128,
                       "createOption": "Empty",
                       "caching": "ReadWrite",
-                      "managedDisk": {
-                        "storageAccountType": "Premium_LRS"
-                      }
+                      "managedDisk": "[if(bool(equals(parameters('disk-encryption-type'), 'ADE')), json('{\"storageAccountType\": \"Premium_LRS\"}'), parameters('managed-disk-json'))]"
                     }
                   ]
                 },
@@ -364,6 +414,33 @@
                   }
                 }
               ]
+            },
+            {
+              "type": "Microsoft.Compute/virtualMachines/extensions",
+              "name": "[concat('/', parameters('virtualMachine-name-prefix'), '/', parameters('windowsDiskEncryptionExtensionName'))]",
+              "location": "[resourceGroup().location]",
+              "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('virtualMachine-name-prefix'))]"
+              ],
+              "apiVersion": "2019-07-01",
+              "condition": "[bool(equals(parameters('disk-encryption-type'), 'ADE'))]",
+              "properties": {
+                "publisher": "Microsoft.Azure.Security",
+                "type": "[parameters('windowsDiskEncryptionExtensionName')]",
+                "typeHandlerVersion": "[parameters('windowsDiskEncryptionExtensionVersion')]",
+                "autoUpgradeMinorVersion": true,
+                "forceUpdateTag": "[parameters('utcValue')]",
+                "settings": {
+                  "EncryptionOperation": "[parameters('windowsEncryptionOperation')]",
+                  "KeyVaultURL": "[reference(parameters('key-vault-resource-id'), '2019-09-01').vaultUri]",
+                  "KeyVaultResourceId": "[parameters('key-vault-resource-id')]",
+                  "KeyEncryptionKeyURL": "[parameters('disk-key-encryption-key-url')]",
+                  "KekVaultResourceId": "[parameters('key-vault-resource-id')]",
+                  "KeyEncryptionAlgorithm": "[parameters('windowsKeyEncryptionAlgorithm')]",
+                  "VolumeType": "All",
+                  "ResizeOSDisk": false
+                }
+              }
             }
           ]
         },
@@ -383,7 +460,7 @@
           "app-admin-password": {
             "reference": {
               "keyVault": {
-                "id": "[resourceId(parameters('hubSubscriptionId'), variables('hub-resource-group-name'), 'Microsoft.KeyVault/vaults', concat(variables('hub-deployment-prefix'), '-kv'))]"
+                "id": "[variables('key-vault-resource-id')]"
               },
               "secretName": "app-windows-admin-user-password"
             }
@@ -402,6 +479,38 @@
           },
           "diagnostic-storageAccount-name": {
             "value": "[variables('diagnostic-storage-account-name')]"
+          },
+          "managed-disk-json": {
+            "value": "[variables('managed-disk-json')]"
+          },
+          "disk-encryption-type": {
+            "value": "[parameters('disk-encryption-type')]"
+          },
+          "windowsDiskEncryptionExtensionName": {
+            "value": "[variables('windowsDiskEncryptionExtensionName')]"
+          },
+          "windowsDiskEncryptionExtensionVersion": {
+            "value": "[variables('windowsDiskEncryptionExtensionVersion')]"
+          },
+          "windowsKeyEncryptionAlgorithm": {
+            "value": "[variables('windowsKeyEncryptionAlgorithm')]"
+          },
+          "windowsEncryptionOperation": {
+            "value": "[variables('windowsEncryptionOperation')]"
+          },
+          "key-vault-resource-id": {
+            "value": "[variables('key-vault-resource-id')]"
+          },
+          "utcValue": {
+            "value": "[parameters('utcValue')]"
+          },
+          "disk-key-encryption-key-url": {
+            "reference": {
+              "keyVault": {
+                "id": "[variables('key-vault-resource-id')]"
+              },
+              "secretName": "disk-key-kek-kid"
+            }
           },
           "win-server-2019-dsc-extension-filename": {
             "value": "[variables('win-server-2019-dsc-extension-filename')]"
@@ -438,7 +547,7 @@
       },
       "properties": {
         "storageAccountId": "[resourceId(parameters('hubSubscriptionId'), variables('hub-resource-group-name'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storage-account-name'))]",
-        "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(parameters('hubSubscriptionId'), variables('hub-resource-group-name'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
+        "workspaceId": "[resourceId(parameters('hubSubscriptionId'), variables('hub-resource-group-name'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
         "metrics": [
           {
             "category": "AllMetrics",

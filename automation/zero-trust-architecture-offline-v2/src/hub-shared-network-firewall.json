@@ -283,6 +283,14 @@
                   "enabled": true,
                   "days": "[parameters('logsRetentionInDays')]"
                 }
+              },
+              {
+                "category": "AzureFirewallDnsProxy",
+                "enabled": true,
+                "retentionPolicy": {
+                  "enabled": true,
+                  "days": "[parameters('logsRetentionInDays')]"
+                }
               }
             ],
             "metrics": [

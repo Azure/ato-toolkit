@@ -170,7 +170,11 @@
         "address-prefix": "[parameters('managementSubnetAddressPrefix')]",
         "network-security-group": "management-subnet",
         "user-defined-route": "default",
-        "service-endpoints": []
+        "service-endpoints": [
+          {
+            "service": "Microsoft.KeyVault"
+          }
+        ]
       },
       {
         "name": "jump-box-subnet",

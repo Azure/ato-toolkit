@@ -43,6 +43,9 @@
             "name": "service",
             "condition": "[parameters('deployHub')]",
             "dependsOn": [],
+            "tags": {
+                "tagName": "hub-security-center"
+            },
             "properties": {
                 "storageAccountId": "[concat('/subscriptions/', variables('oms-workspace-subscription-id'), '/resourceGroups/', variables('oms-workspace-resource-group'), '/providers/Microsoft.Storage/storageAccounts/', variables('diagnostic-storage-account-name'))]",
                 "workspaceId": "[concat('/subscriptions/', variables('oms-workspace-subscription-id'), '/resourceGroups/', variables('oms-workspace-resource-group'), '/providers/Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]",
@@ -87,6 +90,9 @@
             "apiVersion": "2017-08-01-preview",
             "name": "default",
             "condition": "[parameters('deployHub')]",
+            "tags": {
+                "tagName": "hub-security-center"
+            },
             "properties": {
                 "pricingTier": "[variables('pricing')]"
             }
@@ -99,6 +105,9 @@
             "dependsOn": [
                 "[concat('Microsoft.Security/pricings/default')]"
             ],
+            "tags": {
+                "tagName": "hub-security-center"
+            },
             "properties": {
                 "pricingTier": "[variables('pricing')]"
             }
@@ -111,6 +120,9 @@
             "dependsOn": [
                 "[concat('Microsoft.Security/pricings/StorageAccounts')]"
             ],
+            "tags": {
+                "tagName": "hub-security-center"
+            },
             "properties": {
                 "pricingTier": "[variables('pricing')]"
             }
@@ -123,6 +135,9 @@
             "dependsOn": [
                 "[concat('Microsoft.Security/pricings/SqlServers')]"
             ],
+            "tags": {
+                "tagName": "hub-security-center"
+            },
             "properties": {
                 "pricingTier": "[variables('pricing')]"
             }
