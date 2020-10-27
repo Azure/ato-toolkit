@@ -138,7 +138,7 @@
         {
             "name": "Hub->Shared->JumpBox",
             "artifact": "hub-shared-jump-box.json",
-            "enabled": false
+            "enabled": true
         },
         {
             "name": "Spoke->Workload->Network->Vnet",
