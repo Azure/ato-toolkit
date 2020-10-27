@@ -126,18 +126,23 @@
             "enabled": true
         },
         {
-            "name": "Spoke->Workload->Network->Vnet",
-            "artifact": "spoke-workload-network-vnet.json",
-            "enabled": true
-        },
-        {
             "name": "Hub->Shared->Security->KeyVault",
             "artifact": "hub-shared-security-kv.json",
             "enabled": true
         },
         {
+            "name": "Hub->Shared->Security->KeyVault",
+            "artifact": "hub-shared-security-kv.ps1",
+            "enabled": true
+        },
+        {
             "name": "Hub->Shared->JumpBox",
             "artifact": "hub-shared-jump-box.json",
+            "enabled": false
+        },
+        {
+            "name": "Spoke->Workload->Network->Vnet",
+            "artifact": "spoke-workload-network-vnet.json",
             "enabled": true
         },
         {
@@ -177,6 +182,9 @@
         "deployHub": {
             "value": true
         },
+        "hubName": {
+            "value": "hub-shared"
+        },
         "deploySpoke": {
             "value": true
         },
@@ -204,14 +212,32 @@
         "jumpbox-os": {
             "value": "Windows"
         },
+        "spokeOptionalSubnetNames": {
+            "value": []
+        },
+        "spokeOptionalSubnetPrefixes": {
+            "value": []
+        },
+        "vm-names": {
+            "value": [
+                "vm1",
+                "vm2"
+            ]
+        },
+        "vm-subnets": {
+            "value": [
+                "workload-subnet",
+                "workload-subnet"
+            ]
+        },
+        "disk-encryption-type": {
+            "value": "ADE"
+        },
         "artifact-storage-account-uri": {
             "value": "https://STORAGE-ACCOUNT-NAME.blob.core.usgovcloudapi.net/artifacts"
         },
         "isOffline": {
             "value": true
-        },
-        "noLogAnalytics": {
-            "value": false
         }
     }
 }

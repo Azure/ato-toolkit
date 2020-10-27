@@ -61,10 +61,6 @@
     "utcValue": {
       "type": "string",
       "defaultValue": "[utcNow()]"
-    },
-    "isOffline": {
-      "type": "bool",
-      "defaultValue": true
     }
   },
   "variables": {
@@ -86,7 +82,7 @@
     "diagnostic-storageAccount-name": "[toLower(substring(replace(concat(variables('diagnostic-storageAccount-prefix'), variables('uniqueString'), variables('uniqueString')), '-', ''), 0, 23) )]",
     "vnet-resourceGroup": "[concat(variables('deployment-prefix'), '-rg')]",
     "vnet-name": "[concat(variables('deployment-prefix'), '-vnet')]",
-    "sharedsvcs-subnet-ID": "[concat(resourceId(variables('vnet-resourceGroup'), 'Microsoft.Network/virtualNetworks', variables('vnet-name')) , '/subnets/management')]",
+    "sharedsvcs-subnet-ID": "[concat(resourceId(variables('vnet-resourceGroup'), 'Microsoft.Network/virtualNetworks', variables('vnet-name')) , '/subnets/management-subnet')]",
     "key-vault-acl": {
       "bypass": "AzureServices",
       "defaultAction": "Allow",
@@ -120,14 +116,12 @@
   "resources": [
     {
       "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
-      "condition": "[not(parameters('isOffline'))]",
       "apiVersion": "2018-11-30",
       "name": "[variables('key-vault-user-managed-identity')]",
       "location": "[resourceGroup().location]"
     },
     {
       "type": "Microsoft.Authorization/roleAssignments",
-      "condition": "[not(parameters('isOffline'))]",
       "apiVersion": "2020-03-01-preview",
       "name": "[variables('bootstrapRoleAssignmentId')]",
       "dependsOn": [
@@ -135,7 +129,7 @@
       ],
       "properties": {
         "roleDefinitionId": "[variables('contributorRoleDefinitionId')]",
-        "principalId": "[if(parameters('isOffline'), json('null'), reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('key-vault-user-managed-identity')), '2018-11-30').principalId)]",
+        "principalId": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('key-vault-user-managed-identity')), '2018-11-30').principalId]",
         "scope": "[resourceGroup().id]",
         "principalType": "ServicePrincipal"
       }
@@ -179,7 +173,7 @@
           "name": "[variables('vault-sku')]",
           "family": "A"
         },
-        "networkAcls": "[if(parameters('isOffline'), json('null'), variables('key-vault-acl'))]"
+        "networkAcls": "[variables('key-vault-acl')]"
       },
       "resources": [
         {
@@ -232,7 +226,6 @@
     {
       "type": "Microsoft.KeyVault/vaults/accessPolicies",
       "name": "[concat(variables('key-vault-name'), '/add')]",
-      "condition": "[not(parameters('isOffline'))]",
       "apiVersion": "2016-10-01",
       "dependsOn": [
         "[concat('Microsoft.KeyVault/vaults/', variables('key-vault-name'))]",
@@ -242,7 +235,7 @@
         "accessPolicies": [
           {
             "tenantId": "[subscription().tenantId]",
-            "objectId": "[if(parameters('isOffline'), json('null'), reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('key-vault-user-managed-identity')), '2018-11-30').principalId)]",
+            "objectId": "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', variables('key-vault-user-managed-identity')), '2018-11-30').principalId]",
             "permissions": {
               "keys": [
                 "all"
@@ -274,8 +267,8 @@
       "type": "Microsoft.Resources/deploymentScripts",
       "apiVersion": "2019-10-01-preview",
       "name": "createAzureKeyVaultKey",
+      "condition": false,
       "location": "[resourceGroup().location]",
-      "condition": "[not(parameters('isOffline'))]",
       "dependsOn": [
         "[resourceId('Microsoft.KeyVault/vaults', variables('key-vault-name'))]",
         "[resourceId('Microsoft.Authorization/roleAssignments', variables('bootstrapRoleAssignmentId'))]"
@@ -294,23 +287,18 @@
         "arguments": "[format(' -VaultName {0} -StorageAcctName {1} -ResourceGroupName {2} -LocationName {3} -DeployPrefix {4}', variables('key-vault-name'), variables('diagnostic-storageAccount-name'), variables('oms-workspace-resourceGroup'), resourceGroup().location, variables('deployment-prefix'))]",
         "scriptContent": "
               param(
-                [string
-            ] [Parameter(Mandatory=$true)
-            ] $VaultName,
-            [string
-            ] [Parameter(Mandatory=$true)
-            ] $StorageAcctName,
-            [string
-            ] [Parameter(Mandatory=$true)
-            ] $ResourceGroupName,
-            [string
-            ] [Parameter(Mandatory=$true)
-            ] $LocationName,
-            [string
-            ] [Parameter(Mandatory=$true)
-            ] $DeployPrefix  
+                  [string]
+                  [Parameter(Mandatory = $true)] $VaultName,
+                  [string]
+                  [Parameter(Mandatory = $true)] $StorageAcctName,
+                  [string] 
+                  [Parameter(Mandatory = $true)] $ResourceGroupName,
+                  [string]
+                  [Parameter(Mandatory = $true)] $LocationName,
+                  [string]
+                  [Parameter(Mandatory = $true)] $DeployPrefix  
               )
-        
+                      
               $ErrorActionPreference = 'Stop'
               $DeploymentScriptOutputs = @{}
 
@@ -322,93 +310,93 @@
               ###JACK: Add user managed identity to KV access policy here
 
               # Get KeyVault
-              $kv =  Get-AzKeyVault -Name $VaultName -ResourceGroupName $ResourceGroupName
-              
+              $kv = Get-AzKeyVault -Name $VaultName -ResourceGroupName $ResourceGroupName
+                            
               # Check if Disk Encryption Key exists
               $diskEncrptKey = `
-                (Get-AzKeyVaultKey `
-                    -VaultName $VaultName `
-                    -Name $KeyName `
-                    -ErrorAction SilentlyContinue).Id;
-                
-                # Create New Disk Encryption Key
-                if ($null -eq $diskEncrptKey) {
+              (Get-AzKeyVaultKey `
+                      -VaultName $VaultName `
+                      -Name $KeyName `
+                      -ErrorAction SilentlyContinue).Id;
+                              
+              # Create New Disk Encryption Key
+              if ($null -eq $diskEncrptKey) {
                   $diskEncrptKey = (Add-AzKeyVaultKey `
-                        -VaultName $VaultName `
-                        -Name $KeyName `
-                        -Destination 'HSM').Id;
-            }
+                          -VaultName $VaultName `
+                          -Name $KeyName `
+                          -Destination 'HSM').Id;
+              }
 
-                # Check if Storage Account Encryption Key exists
-                $storAcctKey = `
-                (Get-AzKeyVaultKey `
-                    -VaultName $VaultName `
-                    -Name $StorageAcctKeyName `
-                    -ErrorAction SilentlyContinue).Id;
+              # Check if Storage Account Encryption Key exists
+              $storAcctKey = `
+              (Get-AzKeyVaultKey `
+                      -VaultName $VaultName `
+                      -Name $StorageAcctKeyName `
+                      -ErrorAction SilentlyContinue).Id;
 
-                # Create New Storage Account Encryption Key
-                if ($null -eq $storAcctKey) {
+              # Create New Storage Account Encryption Key
+              if ($null -eq $storAcctKey) {
                   $storAcctKey = (Add-AzKeyVaultKey `
-                        -VaultName $VaultName `
-                        -Name $StorageAcctKeyName `
-                        -Destination 'Software').Id;
-            }
-                
-                # Get Disk Encryption Newly Created Key
-                $diskEncrptKey = (Get-AzKeyVaultKey `
-                    -VaultName $VaultName `
-                    -Name $KeyName)
+                          -VaultName $VaultName `
+                          -Name $StorageAcctKeyName `
+                          -Destination 'Software').Id;
+              }
+                              
+              # Get Disk Encryption Newly Created Key
+              $diskEncrptKey = (Get-AzKeyVaultKey `
+                      -VaultName $VaultName `
+                      -Name $KeyName)
 
-                # Update secret for KeK encryption with KV KeK URL
-                  $secretvalue = ConvertTo-SecureString $diskEncrptKey.Key.Kid -AsPlainText -Force
-                  $secret = Set-AzKeyVaultSecret -VaultName $VaultName -Name $kekEncryptionUrlSecretName -SecretValue $secretvalue
+              # Update secret for KeK encryption with KV KeK URL
+              $secretvalue = ConvertTo-SecureString $diskEncrptKey.Key.Kid -AsPlainText -Force
+              $secret = Set-AzKeyVaultSecret -VaultName $VaultName -Name $kekEncryptionUrlSecretName -SecretValue $secretvalue
 
-                # Create New Disk Encryption Set Config
-                $desConfig = (New-AzDiskEncryptionSetConfig `
+              # Create New Disk Encryption Set Config
+              $desConfig = (New-AzDiskEncryptionSetConfig `
                       -Location $LocationName `
                       -SourceVaultId $kv.ResourceId `
                       -KeyUrl $diskEncrptKey.Key.Kid `
                       -IdentityType SystemAssigned)
-                    
-                # Create New Disk Encryption Set
-                $desEncrySet = (New-AzDiskEncryptionSet `
-                          -Name $DiskEncryptionSetName `
-                          -ResourceGroupName $ResourceGroupName `
-                          -InputObject $desConfig)
+                                  
+              # Create New Disk Encryption Set
+              $desEncrySet = (New-AzDiskEncryptionSet `
+                      -Name $DiskEncryptionSetName `
+                      -ResourceGroupName $ResourceGroupName `
+                      -InputObject $desConfig)
 
-                # Get newly created disk encryption Set
-                $des = (Get-AzDiskEncryptionSet `
-                    -ResourceGroupName $ResourceGroupName `
-                    -Name $DiskEncryptionSetName)
-                      
-                # Add the Disk Encryption Set Application to Key Vault Access Policy
-                (Set-AzKeyVaultAccessPolicy `
+              # Get newly created disk encryption Set
+              $des = (Get-AzDiskEncryptionSet `
+                      -ResourceGroupName $ResourceGroupName `
+                      -Name $DiskEncryptionSetName)
+                                    
+              # Add the Disk Encryption Set Application to Key Vault Access Policy
+              (Set-AzKeyVaultAccessPolicy `
                       -VaultName $VaultName `
                       -ObjectId $des.Identity.PrincipalId `
-                      -PermissionsToKeys wrapkey,unwrapkey,get `
+                      -PermissionsToKeys wrapkey, unwrapkey, get `
                       -BypassObjectIdValidation)
 
-               # Encrypt Storage Account that is deployed in ZTA
-               # Set Managed identity in storage account:
-                $storageAccount = (Set-AzStorageAccount `
-                    -ResourceGroupName $ResourceGroupName `
-                    -Name $StorageAcctName `
-                    -AssignIdentity)
-              
+              # Encrypt Storage Account that is deployed in ZTA
+              # Set Managed identity in storage account:
+              $storageAccount = (Set-AzStorageAccount `
+                      -ResourceGroupName $ResourceGroupName `
+                      -Name $StorageAcctName `
+                      -AssignIdentity)
+                            
               # Add Storage Account identity to KeyVault Access Policy
               (Set-AzKeyVaultAccessPolicy `
-                  -VaultName $kv.VaultName `
-                  -ObjectId $storageAccount.Identity.PrincipalId `
-                  -PermissionsToKeys wrapkey,unwrapkey,get `
-                  -BypassObjectIdValidation)
-              
+                      -VaultName $kv.VaultName `
+                      -ObjectId $storageAccount.Identity.PrincipalId `
+                      -PermissionsToKeys wrapkey, unwrapkey, get `
+                      -BypassObjectIdValidation)
+                            
               # Get Storage Account Encryption Newly Created Key
               $storAcctKey = (Get-AzKeyVaultKey `
-                  -VaultName $VaultName `
-                  -Name $StorageAcctKeyName)
+                      -VaultName $VaultName `
+                      -Name $StorageAcctKeyName)
 
               # Encrypt the storage account with Key Vault Key
-                (Set-AzStorageAccount -ResourceGroupName $ResourceGroupName `
+              (Set-AzStorageAccount -ResourceGroupName $ResourceGroupName `
                       -AccountName $StorageAcctName `
                       -KeyvaultEncryption `
                       -KeyName $storAcctKey.Name `
@@ -416,8 +404,7 @@
                       -KeyVaultUri $kv.VaultUri)
 
               # Now that all KV actions are done, remove the network access
-              Update-AzKeyVaultNetworkRuleSet -VaultName $VaultName -DefaultAction Deny
-              
+              Update-AzKeyVaultNetworkRuleSet -VaultName $VaultName -DefaultAction Deny              
             ",
         "cleanupPreference": "OnSuccess",
         "retentionInterval": "P1D"

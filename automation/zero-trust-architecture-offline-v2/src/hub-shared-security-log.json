@@ -31,14 +31,14 @@
                 "description": "Service tier: Free, Standalone, PerNode or PerGB2018."
             }
         },
-        "dataRetention": {
+        "logsRetentionInDays": {
             "type": "int",
             "defaultValue": 365,
             "minValue": 0,
             "maxValue": 365,
             "metadata": {
                 "displayName": "Log retention in days",
-                "description": "Number of days data will be retained for."
+                "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely"
             }
         },
         "workspaceLocation": {
@@ -126,7 +126,7 @@
                 "sku": {
                     "name": "[parameters('serviceTier')]"
                 },
-                "retentionInDays": "[parameters('dataRetention')]"
+                "retentionInDays": "[parameters('logsRetentionInDays')]"
             },
             "resources": [
                 {
@@ -304,7 +304,6 @@
                 {
                     "type": "datasources",
                     "apiVersion": "2020-03-01-preview",
-                    
                     "name": "windowsPerfCounter6",
                     "condition": "[parameters('deployHub')]",
                     "dependsOn": [
@@ -368,7 +367,7 @@
                 },
                 {
                     "type": "datasources",
-                    "apiVersion": "2020-03-01-preview", 
+                    "apiVersion": "2020-03-01-preview",
                     "name": "windowsPerfCounter10",
                     "condition": "[parameters('deployHub')]",
                     "dependsOn": [
@@ -1076,9 +1075,7 @@
                     "contentVersion": "1.0.0.0",
                     "parameters": {},
                     "variables": {},
-                    "resources": [
-
-                    ]
+                    "resources": []
                 },
                 "parameters": {}
             }

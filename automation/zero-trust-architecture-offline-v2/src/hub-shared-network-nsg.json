@@ -17,6 +17,30 @@
         "description": "Hub Shared name."
       }
     },
+    "enableNsgFlowLogs": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "displayName": "Enable NSG Flow Logs",
+        "description": "Enable NSG Flow Logs."
+      }
+    },
+    "networkWatcherName": {
+      "defaultValue": "[concat('NetworkWatcher_', resourceGroup().location)]",
+      "type": "string",
+      "metadata": {
+        "displayName": "Network Watcher name",
+        "description": "Name of the Network Watcher resource."
+      }
+    },
+    "networkWatcherResourceGroup": {
+      "defaultValue": "NetworkWatcherRG",
+      "type": "string",
+      "metadata": {
+        "displayName": "Network Watcher Resource Group name",
+        "description": "Name of the Network Watcher Resource Group."
+      }
+    },
     "destinationAddresses": {
       "type": "string",
       "metadata": {
@@ -42,15 +66,8 @@
         "displayName": "Deploy Hub",
         "description": "Deploy Hub."
       }
-    },
-    "enableNsgFlowLogs": {
-      "type": "bool",
-      "defaultValue": true,
-      "metadata": {
-        "displayName": "Enable NSG Flow Logs",
-        "description": "Enable NSG Flow Logs."
-      }
     }
+
   },
   "variables": {
     "location": "[resourceGroup().location]",
@@ -60,9 +77,7 @@
     "diagnostic-storage-account-name": "[toLower(substring(replace(concat(variables('diagnostic-storage-account-prefix'), variables('unique-string'), variables('unique-string')), '-', ''), 0, 23) )]",
     "oms-workspace-name": "[concat(variables('deployment-prefix'), '-log')]",
     "oms-workspace-resourceGroup": "[concat(variables('deployment-prefix'), '-rg')]",
-    "network-watcher": "[concat('NetworkWatcher_', variables('location'))]",
     "application-security-groups": [
-
       {
         "name": "management"
       },
@@ -383,7 +398,7 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2019-10-01",
       "name": "[concat('nested.configure.nsg-flow-logs-', variables('network-security-groups')[copyIndex('nsgFlowLogsLoop')].name, '-nsg')]",
-      "condition": "[and(parameters('deployHub'), not(parameters('enableNsgFlowLogs')))]",
+      "condition": "[and(parameters('deployHub'), parameters('enableNsgFlowLogs'))]",
       "copy": {
         "count": "[length(variables('network-security-groups'))]",
         "name": "nsgFlowLogsLoop"
@@ -391,7 +406,7 @@
       "dependsOn": [
         "nsgDiagnosticLoop"
       ],
-      "resourceGroup": "NetworkWatcherRG",
+      "resourceGroup": "[parameters('networkWatcherResourceGroup')]",
       "subscriptionId": "[subscription().subscriptionId]",
       "properties": {
         "mode": "Incremental",
@@ -423,7 +438,7 @@
             "diagnosticStorageAccountName": {
               "type": "string"
             },
-            "networkWatcher": {
+            "networkWatcherName": {
               "type": "string"
             }
           },
@@ -432,7 +447,7 @@
             {
               "type": "Microsoft.Network/networkWatchers/FlowLogs",
               "apiVersion": "2019-11-01",
-              "name": "[concat(parameters('networkWatcher'),'/', parameters('networkSecurityGroupName'), '-flow')]",
+              "name": "[concat(parameters('networkWatcherName'),'/', parameters('networkSecurityGroupName'), '-flow')]",
               "location": "[parameters('nsgResourceGroupLocation')]",
               "properties": {
                 "targetResourceId": "[resourceId(parameters('nsgResourceGroup'),'Microsoft.Network/networkSecurityGroups', concat(parameters('deploymentPrefix'), '-', parameters('networkSecurityGroupName'), '-nsg'))]",
@@ -479,8 +494,8 @@
           "diagnosticStorageAccountName": {
             "value": "[variables('diagnostic-storage-account-name')]"
           },
-          "networkWatcher": {
-            "value": "[variables('network-watcher')]"
+          "networkWatcherName": {
+            "value": "[parameters('networkWatcherName')]"
           }
         }
       }

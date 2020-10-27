@@ -101,10 +101,6 @@
         "SSE",
         "ADE"
       ]
-    },
-    "noLogAnalytics": {
-      "type": "bool",
-      "defaultValue": true
     }
   },
   "variables": {
@@ -256,7 +252,7 @@
       ],
       "properties": {
         "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-        "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
+        "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
         "metrics": [
           {
             "category": "AllMetrics",
@@ -400,7 +396,7 @@
                     "name": "[replace(toLower(substring(concat(parameters('windows-virtualMachine-name-prefix'), '-osdisk', '-', replace(concat(parameters('uniqueString'), parameters('uniqueString')), '-', '')), 0, 40)), '-', '')]",
                     "osType": "Windows",
                     "createOption": "FromImage",
-                    "managedDisk": "[if(or(bool(equals(parameters('isOffline'), bool('true'))), bool(equals(parameters('disk-encryption-type'), 'ADE'))), json('null'), parameters('managed-disk-json'))]"
+                    "managedDisk": "[if(bool(equals(parameters('disk-encryption-type'), 'ADE')), json('{\"storageAccountType\": \"Premium_LRS\"}'), parameters('managed-disk-json'))]"
                   }
                 },
                 "networkProfile": {
@@ -510,7 +506,7 @@
                 "[resourceId('Microsoft.Compute/virtualMachines', parameters('windows-virtualMachine-name-prefix'))]"
               ],
               "apiVersion": "2019-07-01",
-              "condition": "[and(bool(equals(parameters('jumpbox-os'), 'Windows')), bool(equals(parameters('disk-encryption-type'), 'ADE')), not(parameters('isOffline')))]",
+              "condition": "[and(bool(equals(parameters('jumpbox-os'), 'Windows')), bool(equals(parameters('disk-encryption-type'), 'ADE')))]",
               "properties": {
                 "publisher": "Microsoft.Azure.Security",
                 "type": "[parameters('windowsDiskEncryptionExtensionName')]",
@@ -638,10 +634,10 @@
         "typeHandlerVersion": "1.0",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "workspaceId": "[if(parameters('isOffline'), '', reference(resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')), '2015-03-20').customerId)]"
+          "workspaceId": "[reference(resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')), '2015-03-20').customerId]"
         },
         "protectedSettings": {
-          "workspaceKey": "[if(parameters('isOffline'), '', listKeys(resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')), '2015-03-20').primarySharedKey)]"
+          "workspaceKey": "[listKeys(resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')), '2015-03-20').primarySharedKey]"
         }
       }
     },
@@ -763,7 +759,7 @@
       ],
       "properties": {
         "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-        "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
+        "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
         "metrics": [
           {
             "category": "AllMetrics",
@@ -998,7 +994,7 @@
       ],
       "properties": {
         "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
-        "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
+        "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
         "metrics": [
           {
             "category": "AllMetrics",
@@ -1137,9 +1133,6 @@
             },
             "isOffline": {
               "type": "bool"
-            },
-            "noLogAnalytics": {
-              "type": "bool"
             }
           },
           "variables": {
@@ -1189,7 +1182,7 @@
                     "name": "[replace(toLower(substring(concat(parameters('linux-virtualMachine-name-prefix'), '-osdisk', '-', replace(concat(parameters('uniqueString'), parameters('uniqueString')), '-', '')), 0, 40)), '-', '')]",
                     "osType": "Linux",
                     "createOption": "FromImage",
-                    "managedDisk": "[if(or(bool(equals(parameters('isOffline'), bool('true'))), bool(equals(parameters('disk-encryption-type'), 'ADE'))), json('null'), parameters('managed-disk-json'))]"
+                    "managedDisk": "[if(bool(equals(parameters('disk-encryption-type'), 'ADE')), json('{\"storageAccountType\": \"Premium_LRS\"}'), parameters('managed-disk-json'))]"
                   }
                 },
                 "networkProfile": {
@@ -1244,7 +1237,7 @@
               ],
               "properties": {
                 "storageAccountId": "[resourceId(parameters('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('diagnostic-storageAccount-name'))]",
-                "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(parameters('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', parameters('oms-workspace-name')))]",
+                "workspaceId": "[resourceId(parameters('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', parameters('oms-workspace-name'))]",
                 "metrics": [
                   {
                     "category": "AllMetrics",
@@ -1361,7 +1354,7 @@
               "type": "Microsoft.Compute/virtualMachines/extensions",
               "name": "[concat('/', parameters('linux-virtualMachine-name-prefix'), '/', parameters('linuxDiskEncryptionExtensionName'))]",
               "location": "[resourceGroup().location]",
-              "condition": "[and(parameters('linuxUseDiskEncryption'), bool(equals(parameters('jumpbox-os'), 'Linux')), bool(equals(parameters('disk-encryption-type'), 'ADE')), not(parameters('isOffline')))]",
+              "condition": "[and(parameters('linuxUseDiskEncryption'), bool(equals(parameters('jumpbox-os'), 'Linux')), bool(equals(parameters('disk-encryption-type'), 'ADE')))]",
               "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', parameters('linux-virtualMachine-name-prefix'))]",
                 "[resourceId('Microsoft.Compute/virtualMachines/extensions', parameters('linux-virtualMachine-name-prefix'), parameters('linuxOMSExtensionName'))]",
@@ -1508,9 +1501,6 @@
           },
           "isOffline": {
             "value": "[parameters('isOffline')]"
-          },
-          "noLogAnalytics": {
-            "value": "[parameters('noLogAnalytics')]"
           }
         }
       }

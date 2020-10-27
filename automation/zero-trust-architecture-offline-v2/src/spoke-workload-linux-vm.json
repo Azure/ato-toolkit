@@ -85,10 +85,6 @@
         "isOffline": {
             "type": "bool",
             "defaultValue": false
-        },
-        "noLogAnalytics": {
-            "type": "bool",
-            "defaultValue": true
         }
     },
     "variables": {
@@ -217,9 +213,6 @@
                         "logs-retention-in-days": {
                             "type": "int"
                         },
-                        "noLogAnalytics": {
-                            "type": "bool"
-                        },
                         "diagnostic-storageAccount-name": {
                             "type": "string"
                         },
@@ -315,7 +308,7 @@
                             ],
                             "properties": {
                                 "storageAccountId": "[resourceId(parameters('oms-workspace-Subscription'), parameters('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('diagnostic-storageAccount-name'))]",
-                                "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(parameters('oms-workspace-Subscription'), parameters('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', parameters('oms-workspace-name')))]",
+                                "workspaceId": "[resourceId(parameters('oms-workspace-Subscription'), parameters('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', parameters('oms-workspace-name'))]",
                                 "metrics": [
                                     {
                                         "category": "AllMetrics",
@@ -364,9 +357,6 @@
                     },
                     "logs-retention-in-days": {
                         "value": "[parameters('logs-retention-in-days')]"
-                    },
-                    "noLogAnalytics": {
-                        "value": "[parameters('noLogAnalytics')]"
                     },
                     "diagnostic-storageAccount-name": {
                         "value": "[variables('diagnostic-storage-account-name')]"
