@@ -12,8 +12,8 @@
         "type": "string",
         "defaultValue": "hub-shared",
         "metadata": {
-          "displayName": "Hub Shared name",
-          "description": "Hub Shared name."
+          "displayName": "Hub name",
+          "description": "Name of the Hub."
         }
       },
       "hubLocation": {
@@ -44,8 +44,8 @@
         "type": "string",
         "defaultValue": "spoke-workload",
         "metadata": {
-          "displayName": "Spoke Workload name",
-          "description": "Spoke Workload name."
+          "displayName": "Spoke name",
+          "description": "Name of the Spoke."
         }
       },
       "deploySpoke": {
@@ -82,6 +82,7 @@
       },
       "hub-shared-security-log_workspaceLocation": {
         "type": "string",
+        "defaultValue": "[parameters('hubLocation')]",
         "metadata": {
           "displayName": "Log Analytics Workspace location",
           "description": "Location where Log Analytics workspace to be created. Run `Get-AzLocation | Where-Object Providers -like 'Microsoft.OperationalInsights' | Select DisplayName` in Azure PowersShell to find available regions."
@@ -96,11 +97,19 @@
         }
       },
       "networkWatcherName": {
-        "defaultValue": "[concat('NetworkWatcher_', parameters('hubLocation'))]",
+        "defaultValue": "[concat('NetworkWatcher_', parameters('networkWatcherLocation'))]",
         "type": "string",
         "metadata": {
           "displayName": "Network Watcher name",
           "description": "Name of the Network Watcher resource."
+        }
+      },
+      "networkWatcherLocation": {
+        "defaultValue": "[parameters('hubLocation')]",
+        "type": "string",
+        "metadata": {
+          "displayName": "Network Watcher location",
+          "description": "Location of the Network Watcher resource."
         }
       },
       "networkWatcherResourceGroup": {
@@ -109,6 +118,14 @@
         "metadata": {
           "displayName": "Network Watcher Resource Group name",
           "description": "Name of the Network Watcher Resource Group."
+        }
+      },
+      "networkWatcherResourceGroupLocation": {
+        "defaultValue": "[parameters('hubLocation')]",
+        "type": "string",
+        "metadata": {
+          "displayName": "Network Watcher Resource Group location",
+          "description": "Location of the Network Watcher Resource Group."
         }
       },
       "hub-shared-network-nsg_enableNsgFlowLogs" : {
@@ -257,7 +274,7 @@
       },
       "NetworkWatcherResourceGroup": {
         "name": "[parameters('networkWatcherResourceGroup')]",
-        "location": "[parameters('hubLocation')]",
+        "location": "[parameters('networkWatcherResourceGroupLocation')]",
         "metadata": {
           "displayName": "Network Watcher Resource Group"
         }
