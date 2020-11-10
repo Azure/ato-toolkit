@@ -19,6 +19,14 @@
             "description": "Hub Shared name."
           }
         },
+        "enableNsgFlowLogs": {
+          "type": "bool",
+          "defaultValue": true,
+          "metadata": {
+            "displayName": "Enable NSG Flow Logs",
+            "description": "Enable NSG Flow Logs."
+          }
+        },
         "networkWatcherName": {
           "defaultValue": "[concat('NetworkWatcher_', resourceGroup().location)]",
           "type": "string",
@@ -331,6 +339,9 @@
             "count": "[length(variables('application-security-groups'))]",
             "name": "asgLoop"
           },
+          "tags": {
+            "component": "hub-shared-network-nsg"
+          },
           "properties": {}
         },
         {
@@ -346,6 +357,9 @@
           "dependsOn": [
             "asgLoop"
           ],
+          "tags": {
+            "component": "hub-shared-network-nsg"
+          },
           "properties": {
             "securityRules": "[concat(if(equals(copyIndex('nsgLoop'), 0), json('[]'), variables('network-security-groups')[0].rules), variables('network-security-groups')[copyIndex('nsgLoop')].rules)]"
           },
@@ -364,6 +378,9 @@
           "dependsOn": [
             "nsgLoop"
           ],
+          "tags": {
+            "component": "hub-shared-network-nsg"
+          },
           "properties": {
             "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storage-account-name'))]",
             "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
@@ -391,7 +408,7 @@
           "type": "Microsoft.Resources/deployments",
           "apiVersion": "2019-10-01",
           "name": "[concat('nested.configure.nsg-flow-logs-', variables('network-security-groups')[copyIndex('nsgFlowLogsLoop')].name, '-nsg')]",
-          "condition": "[parameters('deployHub')]",
+          "condition": "[and(parameters('deployHub'), parameters('enableNsgFlowLogs'))]",
           "copy": {
             "count": "[length(variables('network-security-groups'))]",
             "name": "nsgFlowLogsLoop"
@@ -401,6 +418,9 @@
           ],
           "resourceGroup": "[parameters('networkWatcherResourceGroup')]",
           "subscriptionId": "[subscription().subscriptionId]",
+          "tags": {
+            "component": "hub-shared-network-nsg"
+          },
           "properties": {
             "mode": "Incremental",
             "expressionEvaluationOptions": {
@@ -433,6 +453,16 @@
                 },
                 "networkWatcherName": {
                   "type": "string"
+                },
+                "logsRetentionInDays": {
+                  "type": "int",
+                  "defaultValue": 365,
+                  "minValue": 0,
+                  "maxValue": 365,
+                  "metadata": {
+                    "displayName": "Log retention in days",
+                    "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely"
+                  }
                 }
               },
               "variables": {},
@@ -442,12 +472,15 @@
                   "apiVersion": "2019-11-01",
                   "name": "[concat(parameters('networkWatcherName'),'/', parameters('networkSecurityGroupName'), '-flow')]",
                   "location": "[parameters('nsgResourceGroupLocation')]",
+                  "tags": {
+                    "component": "hub-shared-network-nsg"
+                  },
                   "properties": {
                     "targetResourceId": "[resourceId(parameters('nsgResourceGroup'),'Microsoft.Network/networkSecurityGroups', concat(parameters('deploymentPrefix'), '-', parameters('networkSecurityGroupName'), '-nsg'))]",
                     "storageId": "[resourceId(parameters('omsWorkspaceResourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('diagnosticStorageAccountName'))]",
                     "enabled": true,
                     "retentionPolicy": {
-                      "days": 30,
+                      "days": "[parameters('logsRetentionInDays')]",
                       "enabled": true
                     },
                     "format": {
@@ -489,6 +522,9 @@
               },
               "networkWatcherName": {
                 "value": "[parameters('networkWatcherName')]"
+              },
+              "logsRetentionInDays": {
+                "value": "[parameters('logsRetentionInDays')]"
               }
             }
           }
@@ -502,6 +538,9 @@
       },
       "hubName": {
         "value": "[parameters('hubName')]"
+      },
+      "enableNsgFlowLogs": {
+        "value": "[parameters('hub-shared-network-nsg_enableNsgFlowLogs')]"
       },
       "networkWatcherName" : {
         "value": "[parameters('networkWatcherName')]"

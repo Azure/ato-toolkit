@@ -31,6 +31,9 @@
           "name": "[parameters('networkWatcherName')]",
           "location": "[variables('location')]",
           "condition": "[parameters('deployHub')]",
+          "tags": {
+            "component": "hub-shared-network-vnet"
+          },
           "properties": {}
         }
       ],

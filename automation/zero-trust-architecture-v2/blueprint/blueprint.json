@@ -111,6 +111,14 @@
           "description": "Name of the Network Watcher Resource Group."
         }
       },
+      "hub-shared-network-nsg_enableNsgFlowLogs" : {
+        "type": "bool",
+        "defaultValue": true,
+        "metadata": {
+          "displayName": "Enable NSG Flow Logs",
+          "description": "Enable NSG Flow Logs."
+        }
+      },
       "destinationAddresses": {
         "type": "string",
         "metadata": {

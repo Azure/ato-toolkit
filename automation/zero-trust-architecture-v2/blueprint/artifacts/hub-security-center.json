@@ -19,6 +19,16 @@
                         "description": "Hub Shared name."
                     }
                 },
+                "logsRetentionInDays": {
+                    "type": "int",
+                    "defaultValue": 365,
+                    "minValue": 0,
+                    "maxValue": 365,
+                    "metadata": {
+                        "displayName": "Log retention in days",
+                        "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely"
+                    }
+                },
                 "deployHub": {
                     "type": "bool",
                     "defaultValue": true,
@@ -46,7 +56,7 @@
                     "condition": "[parameters('deployHub')]",
                     "dependsOn": [],
                     "tags": {
-                        "tagName": "hub-security-center"
+                        "component": "hub-security-center"
                     },
                     "properties": {
                         "storageAccountId": "[concat('/subscriptions/', variables('oms-workspace-subscription-id'), '/resourceGroups/', variables('oms-workspace-resource-group'), '/providers/Microsoft.Storage/storageAccounts/', variables('diagnostic-storage-account-name'))]",
@@ -54,35 +64,67 @@
                         "logs": [
                             {
                                 "category": "Administrative",
-                                "enabled": true
+                                "enabled": true,
+                                "retentionPolicy": {
+                                    "enabled": true,
+                                    "days": "[parameters('logsRetentionInDays')]"
+                                }
                             },
                             {
                                 "category": "Alert",
-                                "enabled": true
+                                "enabled": true,
+                                "retentionPolicy": {
+                                    "enabled": true,
+                                    "days": "[parameters('logsRetentionInDays')]"
+                                }
                             },
                             {
                                 "category": "Autoscale",
-                                "enabled": true
+                                "enabled": true,
+                                "retentionPolicy": {
+                                    "enabled": true,
+                                    "days": "[parameters('logsRetentionInDays')]"
+                                }
                             },
                             {
                                 "category": "Policy",
-                                "enabled": true
+                                "enabled": true,
+                                "retentionPolicy": {
+                                    "enabled": true,
+                                    "days": "[parameters('logsRetentionInDays')]"
+                                }
                             },
                             {
                                 "category": "Recommendation",
-                                "enabled": true
+                                "enabled": true,
+                                "retentionPolicy": {
+                                    "enabled": true,
+                                    "days": "[parameters('logsRetentionInDays')]"
+                                }
                             },
                             {
                                 "category": "ResourceHealth",
-                                "enabled": true
+                                "enabled": true,
+                                "retentionPolicy": {
+                                    "enabled": true,
+                                    "days": "[parameters('logsRetentionInDays')]"
+                                }
                             },
                             {
                                 "category": "Security",
-                                "enabled": true
+                                "enabled": true,
+                                "retentionPolicy": {
+                                    "enabled": true,
+                                    "days": "[parameters('logsRetentionInDays')]"
+                                }
                             },
                             {
                                 "category": "ServiceHealth",
-                                "enabled": true
+                                "enabled": true,
+                                "retentionPolicy": {
+                                    "enabled": true,
+                                    "days": "[parameters('logsRetentionInDays')]"
+                                }
                             }
                         ]
                     }
@@ -108,7 +150,7 @@
                         "[concat('Microsoft.Security/pricings/default')]"
                     ],
                     "tags": {
-                        "tagName": "hub-security-center"
+                        "component": "hub-security-center"
                     },
                     "properties": {
                         "pricingTier": "[variables('pricing')]"
@@ -123,7 +165,7 @@
                         "[concat('Microsoft.Security/pricings/StorageAccounts')]"
                     ],
                     "tags": {
-                        "tagName": "hub-security-center"
+                        "component": "hub-security-center"
                     },
                     "properties": {
                         "pricingTier": "[variables('pricing')]"
@@ -138,7 +180,7 @@
                         "[concat('Microsoft.Security/pricings/SqlServers')]"
                     ],
                     "tags": {
-                        "tagName": "hub-security-center"
+                        "component": "hub-security-center"
                     },
                     "properties": {
                         "pricingTier": "[variables('pricing')]"
@@ -153,6 +195,9 @@
             },
             "hubName": {
                 "value": "[parameters('hubName')]"
+            },
+            "logsRetentionInDays": {
+                "value": "[parameters('logsRetentionInDays')]"
             },
             "deployHub": {
                 "value": "[parameters('deployHub')]"

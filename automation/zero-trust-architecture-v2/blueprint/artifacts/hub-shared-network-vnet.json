@@ -214,7 +214,7 @@
           "location": "[variables('location')]",
           "condition": "[parameters('deployHub')]",
           "tags": {
-            "displayName": "[concat(variables('deployment-prefix'), '-', variables('user-defined-routes')[copyIndex()].name, '-udr')]"
+            "component": "hub-shared-network-vnet"
           },
           "copy": {
             "count": "[length(variables('user-defined-routes'))]",
@@ -229,7 +229,7 @@
           "location": "[variables('location')]",
           "condition": "[and(parameters('deployHub'), parameters('enableDdosProtection'))]",
           "tags": {
-            "displayName": "[variables('ddos-protection-plan-name')]"
+            "component": "hub-shared-network-vnet"
           },
           "properties": {}
         },
@@ -240,7 +240,7 @@
           "location": "[variables('location')]",
           "condition": "[parameters('deployHub')]",
           "tags": {
-            "displayName": "[variables('vnet-name')]"
+            "component": "hub-shared-network-vnet"
           },
           "dependsOn": [
             "udrLoop",
@@ -280,9 +280,22 @@
           "dependsOn": [
             "[variables('vnet-name')]"
           ],
+          "tags": {
+            "component": "hub-shared-network-vnet"
+          },
           "properties": {
             "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storage-account-name'))]",
             "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+            "logs": [
+              {
+                "category": "VMProtectionAlerts",
+                "enabled": true,
+                "retentionPolicy": {
+                  "enabled": true,
+                  "days": "[parameters('logsRetentionInDays')]"
+                }
+              }
+            ],
             "metrics": [
               {
                 "category": "AllMetrics",
