@@ -121,6 +121,9 @@
           "location": "[parameters('workspaceLocation')]",
           "name": "[variables('oms-workspace-name')]",
           "condition": "[parameters('deployHub')]",
+          "tags": {
+            "component": "hub-shared-security-log"
+          },
           "properties": {
             "features": {
               "searchVersion": "[variables('log-analytics-search-version')]"
@@ -139,6 +142,9 @@
               "dependsOn": [
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "etag": "*",
                 "DisplayName": "VMSS Instance Count",
@@ -154,6 +160,9 @@
               "dependsOn": [
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "etag": "*",
                 "DisplayName": "Azure Threat Deny",
@@ -171,6 +180,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "AzureActivityLog",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "linkedResourceId": "[concat(subscription().Id, '/providers/microsoft.insights/eventTypes/management')]"
               }
@@ -184,6 +196,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsEvent",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "eventLogName": "Application",
                 "eventTypes": [
@@ -208,6 +223,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsEvent",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "eventLogName": "System",
                 "eventTypes": [
@@ -232,6 +250,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Processor",
                 "instanceName": "*",
@@ -248,6 +269,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Processor",
                 "instanceName": "*",
@@ -264,6 +288,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Processor",
                 "instanceName": "*",
@@ -280,6 +307,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Processor",
                 "instanceName": "*",
@@ -296,6 +326,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Process",
                 "instanceName": "*",
@@ -312,6 +345,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Process",
                 "instanceName": "*",
@@ -328,6 +364,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "System",
                 "instanceName": "*",
@@ -344,6 +383,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "System",
                 "instanceName": "*",
@@ -360,6 +402,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "System",
                 "instanceName": "*",
@@ -376,6 +421,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "System",
                 "instanceName": "*",
@@ -392,6 +440,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Memory",
                 "instanceName": "*",
@@ -408,6 +459,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Memory",
                 "instanceName": "*",
@@ -424,6 +478,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Memory",
                 "instanceName": "*",
@@ -440,6 +497,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Memory",
                 "instanceName": "*",
@@ -456,6 +516,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Memory",
                 "instanceName": "*",
@@ -472,6 +535,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Memory",
                 "instanceName": "*",
@@ -488,6 +554,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Memory",
                 "instanceName": "*",
@@ -504,6 +573,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Memory",
                 "instanceName": "*",
@@ -520,6 +592,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Memory",
                 "instanceName": "*",
@@ -536,6 +611,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Process",
                 "instanceName": "*",
@@ -552,6 +630,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Process",
                 "instanceName": "*",
@@ -568,6 +649,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -584,6 +668,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -600,6 +687,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -616,6 +706,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -632,6 +725,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -648,6 +744,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -664,6 +763,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -680,6 +782,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -696,6 +801,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -712,6 +820,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -728,6 +839,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -744,6 +858,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -760,6 +877,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -776,6 +896,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -792,6 +915,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -808,6 +934,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -824,6 +953,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "LogicalDisk",
                 "instanceName": "*",
@@ -840,6 +972,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Network Interface",
                 "instanceName": "*",
@@ -856,6 +991,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Network Interface",
                 "instanceName": "*",
@@ -872,6 +1010,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Network Interface",
                 "instanceName": "*",
@@ -888,6 +1029,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Network Interface",
                 "instanceName": "*",
@@ -904,6 +1048,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Network Interface",
                 "instanceName": "*",
@@ -920,6 +1067,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Network Interface",
                 "instanceName": "*",
@@ -936,6 +1086,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Network Interface",
                 "instanceName": "*",
@@ -952,6 +1105,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "WindowsPerformanceCounter",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "objectName": "Network Interface",
                 "instanceName": "*",
@@ -968,6 +1124,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "IISLogs",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "state": "OnPremiseEnabled"
               }
@@ -981,6 +1140,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "LinuxSyslog",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "syslogName": "kern",
                 "syslogSeverities": [
@@ -1011,6 +1173,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "LinuxSyslogCollection",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "state": "Enabled"
               }
@@ -1024,6 +1189,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "LinuxPerformanceObject",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "performanceCounters": [
                   {
@@ -1059,6 +1227,9 @@
                 "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
               ],
               "kind": "LinuxPerformanceCollection",
+              "tags": {
+                "component": "hub-shared-security-log"
+              },
               "properties": {
                 "state": "Enabled"
               }
@@ -1070,6 +1241,9 @@
           "apiVersion": "2019-10-01",
           "name": "nestedTemplate",
           "condition": "[parameters('deployHub')]",
+          "tags": {
+            "component": "hub-shared-security-log"
+          },
           "properties": {
             "mode": "Incremental",
             "template": {
@@ -1095,6 +1269,9 @@
             "name": "solutionCopy",
             "count": "[length(variables('solutions'))]",
             "mode": "Serial"
+          },
+          "tags": {
+            "component": "hub-shared-security-log"
           },
           "properties": {
             "workspaceResourceId": "[resourceId('Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]"
@@ -1131,7 +1308,7 @@
             "name": "Standard_GRS"
           },
           "tags": {
-            "layer": "management"
+            "component": "hub-shared-security-log"
           },
           "properties": {
             "encryption": {
@@ -1173,6 +1350,9 @@
           "dependsOn": [
             "[concat('Microsoft.Storage/storageAccounts/', variables('diagnostic-storage-account-name'))]"
           ],
+          "tags": {
+            "component": "hub-shared-security-log"
+          },
           "properties": {
             "containers": [],
             "tables": [
@@ -1193,6 +1373,9 @@
           "name": "[concat(variables('oms-workspace-name'), '/' , 'Automation')]",
           "location": "[parameters('workspaceLocation')]",
           "condition": "[and(parameters('deployHub'), not(empty(parameters('automationAccountId'))))]",
+          "tags": {
+            "component": "hub-shared-security-log"
+          },
           "properties": {
             "resourceId": "[parameters('automationAccountId')]"
           }
@@ -1207,6 +1390,9 @@
             "[variables('oms-workspace-name')]",
             "[variables('diagnostic-storage-account-name')]"
           ],
+          "tags": {
+            "component": "hub-shared-security-log"
+          },
           "properties": {
             "storageAccountId": "[resourceId('Microsoft.Storage/storageAccounts', variables('diagnostic-storage-account-name'))]",
             "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",

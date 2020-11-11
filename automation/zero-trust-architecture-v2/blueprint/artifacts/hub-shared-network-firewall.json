@@ -62,8 +62,8 @@
         "vnet-resource-group": "[concat(variables('deployment-prefix'), '-rg')]",
         "vnet-name": "[concat(variables('deployment-prefix'), '-vnet')]",
         "azure-fw-subnet-id": "[concat(resourceId(variables('vnet-resource-group'), 'Microsoft.Network/virtualNetworks', variables('vnet-name')) , '/subnets/AzureFirewallSubnet')]",
-        "azure-fw-pip-name": "[concat(variables('deployment-prefix'), '-az-fw-pip')]",
-        "azure-fw-pip-id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('azure-fw-pip-name'))]",
+        "azure-fw-ip-name": "[concat(variables('deployment-prefix'), '-az-fw-ip')]",
+        "azure-fw-ip-id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('azure-fw-ip-name'))]",
         "azure-fw-name": "[concat(variables('deployment-prefix'), '-az-fw')]",
         "unique-string": "[uniqueString(subscription().id, concat(variables('deployment-prefix')))]",
         "diagnostic-storage-account-prefix": "[concat(replace(variables('deployment-prefix'), '-', ''), 'diag')]",
@@ -85,16 +85,16 @@
       },
       "resources": [
         {
-          "name": "[variables('azure-fw-pip-name')]",
           "type": "Microsoft.Network/publicIPAddresses",
           "apiVersion": "2019-11-01",
+          "name": "[variables('azure-fw-ip-name')]",
           "location": "[variables('location')]",
           "condition": "[parameters('deployHub')]",
           "sku": {
             "name": "Standard"
           },
           "tags": {
-            "displayName": "[variables('azure-fw-pip-name')]"
+            "component": "hub-shared-network-firewall"
           },
           "properties": {
             "publicIPAllocationMethod": "Static",
@@ -104,15 +104,44 @@
         {
           "type": "Microsoft.Network/publicIPAddresses/providers/diagnosticSettings",
           "apiVersion": "2017-05-01-preview",
-          "name": "[concat(variables('azure-fw-pip-name'), '/Microsoft.Insights/service')]",
+          "name": "[concat(variables('azure-fw-ip-name'), '/Microsoft.Insights/service')]",
           "location": "[variables('location')]",
           "condition": "[parameters('deployHub')]",
           "dependsOn": [
-            "[variables('azure-fw-pip-name')]"
+            "[variables('azure-fw-ip-name')]"
           ],
+          "tags": {
+            "component": "hub-shared-network-firewall"
+          },
           "properties": {
             "storageAccountId": "[resourceId(variables('oms-workspace-resource-group'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storage-account-name'))]",
             "workspaceId": "[resourceId(variables('oms-workspace-resource-group'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+            "logs": [
+              {
+                "category": "DDoSProtectionNotifications",
+                "enabled": true,
+                "retentionPolicy": {
+                  "enabled": true,
+                  "days": "[parameters('logsRetentionInDays')]"
+                }
+              },
+              {
+                "category": "DDoSMitigationFlowLogs",
+                "enabled": true,
+                "retentionPolicy": {
+                  "enabled": true,
+                  "days": "[parameters('logsRetentionInDays')]"
+                }
+              },
+              {
+                "category": "DDoSMitigationReports",
+                "enabled": true,
+                "retentionPolicy": {
+                  "enabled": true,
+                  "days": "[parameters('logsRetentionInDays')]"
+                }
+              }
+            ],
             "metrics": [
               {
                 "category": "AllMetrics",
@@ -122,20 +151,6 @@
                   "enabled": true,
                   "days": "[parameters('logsRetentionInDays')]"
                 }
-              }
-            ],
-            "logs": [
-              {
-                "category": "DDoSProtectionNotifications",
-                "enabled": true
-              },
-              {
-                "category": "DDoSMitigationFlowLogs",
-                "enabled": true
-              },
-              {
-                "category": "DDoSMitigationReports",
-                "enabled": true
               }
             ]
           }
@@ -147,8 +162,11 @@
           "location": "[variables('location')]",
           "condition": "[parameters('deployHub')]",
           "dependsOn": [
-            "[resourceId('Microsoft.Network/publicIPAddresses', variables('azure-fw-pip-name'))]"
+            "[variables('azure-fw-ip-name')]"
           ],
+          "tags": {
+            "component": "hub-shared-network-firewall"
+          },
           "properties": {
             "ipConfigurations": [
               {
@@ -158,7 +176,7 @@
                     "id": "[variables('azure-fw-subnet-id')]"
                   },
                   "publicIPAddress": {
-                    "id": "[variables('azure-fw-pip-id')]"
+                    "id": "[variables('azure-fw-ip-id')]"
                   }
                 }
               }
@@ -185,7 +203,7 @@
                       ],
                       "sourceIpGroups": [],
                       "destinationAddresses": [
-                        "[reference(resourceId('Microsoft.Network/publicIPAddresses', variables('azure-fw-pip-name'))).ipAddress]"
+                        "[reference(resourceId('Microsoft.Network/publicIPAddresses', variables('azure-fw-ip-name'))).ipAddress]"
                       ],
                       "destinationPorts": [
                         "3389"
@@ -255,69 +273,73 @@
                 }
               }
             ]
+          }
+        },            
+        {
+          "type": "Microsoft.Network/azureFirewalls/providers/diagnosticsettings",
+          "name": "[concat(variables('azure-fw-name'), '/Microsoft.Insights/service')]",
+          "apiVersion": "2017-05-01-preview",
+          "location": "[variables('location')]",
+          "condition": "[parameters('deployHub')]",
+          "dependsOn": [
+            "[variables('azure-fw-name')]"
+          ],
+          "tags": {
+            "component": "hub-shared-network-firewall"
           },
-          "resources": [
-            {
-              "type": "Microsoft.Network/azureFirewalls/providers/diagnosticsettings",
-              "name": "[concat(variables('azure-fw-name'), '/Microsoft.Insights/service')]",
-              "apiVersion": "2017-05-01-preview",
-              "location": "[variables('location')]",
-              "condition": "[parameters('deployHub')]",
-              "dependsOn": [
-                "[concat('Microsoft.Network/azureFirewalls/', variables('azure-fw-name'))]"
-              ],
-              "properties": {
-                "storageAccountId": "[resourceId(variables('oms-workspace-resource-group'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storage-account-name'))]",
-                "workspaceId": "[resourceId(variables('oms-workspace-resource-group'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
-                "logs": [
-                  {
-                    "category": "AzureFirewallApplicationRule",
-                    "enabled": true,
-                    "retentionPolicy": {
-                      "enabled": true,
-                      "days": "[parameters('logsRetentionInDays')]"
-                    }
-                  },
-                  {
-                    "category": "AzureFirewallNetworkRule",
-                    "enabled": true,
-                    "retentionPolicy": {
-                      "enabled": true,
-                      "days": "[parameters('logsRetentionInDays')]"
-                    }
-                  },
-                  {
-                    "category": "AzureFirewallDnsProxy",
-                    "enabled": true,
-                    "retentionPolicy": {
-                      "enabled": true,
-                      "days": "[parameters('logsRetentionInDays')]"
-                    }
-                  }
-                ],
-                "metrics": [
-                  {
-                    "category": "AllMetrics",
-                    "enabled": true,
-                    "retentionPolicy": {
-                      "enabled": true,
-                      "days": "[parameters('logsRetentionInDays')]"
-                    }
-                  }
-                ]
+          "properties": {
+            "storageAccountId": "[resourceId(variables('oms-workspace-resource-group'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storage-account-name'))]",
+            "workspaceId": "[resourceId(variables('oms-workspace-resource-group'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+            "logs": [
+              {
+                "category": "AzureFirewallApplicationRule",
+                "enabled": true,
+                "retentionPolicy": {
+                  "enabled": true,
+                  "days": "[parameters('logsRetentionInDays')]"
+                }
+              },
+              {
+                "category": "AzureFirewallNetworkRule",
+                "enabled": true,
+                "retentionPolicy": {
+                  "enabled": true,
+                  "days": "[parameters('logsRetentionInDays')]"
+                }
+              },
+              {
+                "category": "AzureFirewallDnsProxy",
+                "enabled": true,
+                "retentionPolicy": {
+                  "enabled": true,
+                  "days": "[parameters('logsRetentionInDays')]"
+                }
               }
-            }
-          ]
+            ],
+            "metrics": [
+              {
+                "category": "AllMetrics",
+                "enabled": true,
+                "retentionPolicy": {
+                  "enabled": true,
+                  "days": "[parameters('logsRetentionInDays')]"
+                }
+              }
+            ]
+          }
         },
         {
           "type": "Microsoft.Resources/deployments",
           "apiVersion": "2019-10-01",
           "name": "nested.configure.default-udr",
           "condition": "[parameters('deployHub')]",
-          "dependsOn": [
-            "[resourceId('Microsoft.Network/azureFirewalls', variables('azure-fw-name'))]"
-          ],
           "resourceGroup": "[variables('vnet-resource-group')]",
+          "dependsOn": [
+            "[variables('azure-fw-name')]"
+          ],
+          "tags": {
+            "component": "hub-shared-network-firewall"
+          },
           "properties": {
             "mode": "Incremental",
             "template": {
@@ -332,7 +354,7 @@
                   "location": "[resourceGroup().location]",
                   "name": "[concat(variables('deployment-prefix'), '-', variables('shared-user-defined-routes').name, '-udr')]",
                   "tags": {
-                    "displayName": "[concat(variables('deployment-prefix'), '-', variables('shared-user-defined-routes').name, '-udr')]"
+                    "component": "hub-shared-network-firewall"
                   },
                   "properties": {
                     "routes": "[variables('shared-user-defined-routes').routes]",

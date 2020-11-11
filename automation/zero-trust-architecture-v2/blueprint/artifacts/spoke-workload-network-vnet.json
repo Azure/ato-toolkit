@@ -143,7 +143,7 @@
                 "location": "[variables('location')]",
                 "condition": "[parameters('deploySpoke')]",
                 "tags": {
-                    "displayName": "[variables('vnet-name')]"
+                    "component": "spoke-workload-network-vnet"
                 },
                 "properties": {
                     "addressSpace": {
@@ -201,9 +201,22 @@
                 "dependsOn": [
                     "[variables('vnet-name')]"
                 ],
+                "tags": {
+                    "component": "spoke-workload-network-vnet"
+                },
                 "properties": {
                     "storageAccountId": "[resourceId(parameters('hubSubscriptionId'), variables('hub-resource-group-name'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storage-account-name'))]",
                     "workspaceId": "[resourceId(parameters('hubSubscriptionId'), variables('hub-resource-group-name'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+                    "logs": [
+                        {
+                            "category": "VMProtectionAlerts",
+                            "enabled": true,
+                            "retentionPolicy": {
+                                "enabled": true,
+                                "days": "[parameters('logsRetentionInDays')]"
+                            }
+                        }
+                    ],
                     "metrics": [
                         {
                             "category": "AllMetrics",
@@ -227,6 +240,9 @@
                 "dependsOn": [
                     "[resourceId('Microsoft.Network/virtualNetworks', variables('vnet-name'))]"
                 ],
+                "tags": {
+                    "component": "spoke-workload-network-vnet"
+                },
                 "properties": {
                     "mode": "Incremental",
                     "expressionEvaluationOptions": {

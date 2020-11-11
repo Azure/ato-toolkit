@@ -5,11 +5,19 @@
       "contentVersion": "1.0.0.0",
       "parameters": {
         "networkWatcherName": {
-          "defaultValue": "[concat('NetworkWatcher_', resourceGroup().location)]",
+          "defaultValue": "[concat('NetworkWatcher_', parameters('networkWatcherLocation'))]",
           "type": "string",
           "metadata": {
             "displayName": "Network Watcher name",
             "description": "Name of the Network Watcher resource."
+          }
+        },
+        "networkWatcherLocation": {
+          "defaultValue": "[resourceGroup().location]",
+          "type": "string",
+          "metadata": {
+            "displayName": "Network Watcher location",
+            "description": "Location of the Network Watcher resource."
           }
         },
         "deployHub": {
@@ -21,16 +29,17 @@
           }
         }
       },
-      "variables": {
-        "location": "[resourceGroup().location]"
-      },
+      "variables": {},
       "resources": [
         {
           "type": "Microsoft.Network/networkWatchers",
           "apiVersion": "2020-06-01",
           "name": "[parameters('networkWatcherName')]",
-          "location": "[variables('location')]",
+          "location": "[parameters('networkWatcherLocation')]",
           "condition": "[parameters('deployHub')]",
+          "tags": {
+            "component": "hub-shared-network-vnet"
+          },
           "properties": {}
         }
       ],
@@ -38,10 +47,13 @@
     },
     "parameters": {
       "networkWatcherName": {
-        "value" : "[parameters('networkWatcherName')]"
+        "value": "[parameters('networkWatcherName')]"
+      },
+      "networkWatcherLocation": {
+        "value": "[parameters('networkWatcherLocation')]"
       },
       "deployHub": {
-        "value" : "[parameters('deployHub')]"
+        "value": "[parameters('deployHub')]"
       }
     },
     "resourceGroup": "NetworkWatcherResourceGroup",
