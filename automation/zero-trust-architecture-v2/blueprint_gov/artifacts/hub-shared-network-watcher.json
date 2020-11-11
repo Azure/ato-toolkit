@@ -1,0 +1,67 @@
+﻿{
+  "properties": {
+    "template": {
+      "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "networkWatcherName": {
+          "defaultValue": "[concat('NetworkWatcher_', parameters('networkWatcherLocation'))]",
+          "type": "string",
+          "metadata": {
+            "displayName": "Network Watcher name",
+            "description": "Name of the Network Watcher resource."
+          }
+        },
+        "networkWatcherLocation": {
+          "defaultValue": "[resourceGroup().location]",
+          "type": "string",
+          "metadata": {
+            "displayName": "Network Watcher location",
+            "description": "Location of the Network Watcher resource."
+          }
+        },
+        "deployHub": {
+          "type": "bool",
+          "defaultValue": true,
+          "metadata": {
+            "displayName": "Deploy Hub",
+            "description": "Deploy Hub."
+          }
+        }
+      },
+      "variables": {},
+      "resources": [
+        {
+          "type": "Microsoft.Network/networkWatchers",
+          "apiVersion": "2020-06-01",
+          "name": "[parameters('networkWatcherName')]",
+          "location": "[parameters('networkWatcherLocation')]",
+          "condition": "[parameters('deployHub')]",
+          "tags": {
+            "component": "hub-shared-network-vnet"
+          },
+          "properties": {}
+        }
+      ],
+      "outputs": {}
+    },
+    "parameters": {
+      "networkWatcherName": {
+        "value": "[parameters('networkWatcherName')]"
+      },
+      "networkWatcherLocation": {
+        "value": "[parameters('networkWatcherLocation')]"
+      },
+      "deployHub": {
+        "value": "[parameters('deployHub')]"
+      }
+    },
+    "resourceGroup": "NetworkWatcherResourceGroup",
+    "displayName": "Azure Network Watcher template",
+    "description": "Azure Network Watcher template."
+  },
+  "kind": "template",
+  "id": "/providers/Microsoft.Blueprint/blueprints/c09d6b03-f048-4dd4-a5d9-46eda7e47ac4/artifacts/46d1d6ab-09b4-4cf2-87e7-fdf0516c932b",
+  "type": "Microsoft.Blueprint/blueprints/artifacts",
+  "name": "46d1d6ab-09b4-4cf2-87e7-fdf0516c932b"
+}
