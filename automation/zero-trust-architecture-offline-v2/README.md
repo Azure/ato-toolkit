@@ -90,9 +90,13 @@ By now you have executed all required steps to prepare dependencies and artifact
 
 1. Login on to the computer which is connected to offline environment and also contains all the artifacts transferred in Part 2. Ignore this and skip to #8 if using the same computer and session as in Part 3.
 2. Open the '.\run.config.json' in your favorite editor.
-3. Update the value of 'parameters.resourcePrefix' with less than 5 chars string to be used as prefix for resourceGroup and resource names.
+3. Update the value of 'parameters.namePrefix' with less than 5 chars string to be used as prefix for resourceGroup and resource names.
 4. Update the value of 'parameters.artifact-storage-account-uri' with artifact url from previous step.
-5. Review rest of the parameters carefully and make edits as necessary.
+5. 'parameters.deployment-user-object-id' is the Azure Active Directory object id of the user to which access polices are created in Key Vault. Leave it blank to use current users object id or provide one as necessary.
+6. When re-running the deployment to create additional spokes, update 'parameters.spokeName', 'parameters.spokeVnetAddressPrefix' and 'parameters.spokeSubnetAddressPrefix' to use new values that are different than existing spokes.
+7. Use 'parameters.destinationAddresses' to provide IP address to which outbound connectivity needs to be configured in Firewall and Network Security Groups.
+8. Use 'disk-encryption-type' to set desired disk encryption for all the Virtual Machines, ADE- uses SSE+PMK and ADE (CMK) and SSE- uses SSE+CMK. [More info](https://docs.microsoft.com/en-us/azure/security/fundamentals/azure-disk-encryption-vms-vmss)
+9. Review rest of the parameters carefully and make edits as necessary.
 
 ### Initiate deployment
 
@@ -113,10 +117,14 @@ By now you have executed all required steps to prepare dependencies and artifact
 
 ## Connect to environment
 
-1. From Azure portal, search for key vault with name "\*-sharedsvcs-kv" and configure it to allow access from specific network or from internet via firewall. [More info](https://docs.microsoft.com/en-us/azure/key-vault/general/network-security)
-    * This is required to retrieve JumpBox VM password from the key vault secrets. [More info](https://docs.microsoft.com/en-us/azure/key-vault/secrets/about-secrets)
+1. From Azure portal, search for key vault with name "*-hub-shared-kv" (Note : Replace 'hub-shared' if other than default name is used) and configure it to allow access from specific network or from internet via firewall.. [More info](https://docs.microsoft.com/en-us/azure/key-vault/general/network-security)
+    * This is required to retrieve Jump Box VM password from the key vault secrets. [More info](https://docs.microsoft.com/en-us/azure/key-vault/secrets/about-secrets)
 
     > [!IMPORTANT]
     > Do not forget to revert the changes back after retrieving the password to lock down key vault to intended networks only.
 
-2. From Azure portal, search for Azure Firewall name "\*-sharedsvcs-az-fw". Firewall is pre-configured with rule to allow access to JumpBox VM. Use firewall's public ip to connect to JumpBox VM to gain access to the environment. Default admin user name, unless changed during blueprint assignment, is 'jb-admin-user' and password retrieved in previous step.
+2. From Azure portal, search for Virtual Machine (Jump Box) with name "*-hub-shared-jb-win-vm". Please note the Private IP address of Jump Box. It is required to update the Firewall DNAT rule.
+
+3. From Azure portal, search for Azure Firewall name "\*-hub-shared-az-fw", Update existing DNAT rule to include Source IP Address and Translated address as Private IP address of Jump Box. [More info](https://docs.microsoft.com/en-us/azure/firewall/tutorial-firewall-dnat)
+
+4. Use firewall's public ip to connect to Jump Box VM to gain access to the environment. Default admin user name, unless changed during deployment, is 'jb-admin-user' and password retrieved in step#1. Repeat step#1 to retrieve passwords of other Virtual Machines deployed within spoke(s) (default user name is 'win-admin-user') and use their private IPs for establishing remote connection from Jump Box.

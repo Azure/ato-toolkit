@@ -1,0 +1,290 @@
+{
+  "properties": {
+    "parameters": {
+      "namePrefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Resource Group and Resource name prefix",
+          "description": "Resource Group and Resource identifier. String to be used as prefix to all Resource Group and Resource names."
+        }
+      },
+      "hubName": {
+        "type": "string",
+        "defaultValue": "hub-shared",
+        "metadata": {
+          "displayName": "Hub name",
+          "description": "Name of the Hub."
+        }
+      },
+      "hubLocation": {
+        "type": "string",
+        "metadata": {
+          "strongType": "location",
+          "displayName": "Hub Location",
+          "description": "Hub Resource Group Location."
+        }
+      },
+      "hubSubscriptionId": {
+        "type": "string",
+        "defaultValue": "[subscription().subscriptionId]",
+        "metadata": {
+          "displayName": "Hub Subscription Id",
+          "description": "Hub Subscription Id."
+        }
+      },
+      "deployHub": {
+        "type": "bool",
+        "defaultValue": true,
+        "metadata": {
+          "displayName": "Deploy Hub",
+          "description": "Deploy Hub."
+        }
+      },
+      "spokeName": {
+        "type": "string",
+        "defaultValue": "spoke-workload",
+        "metadata": {
+          "displayName": "Spoke name",
+          "description": "Name of the Spoke."
+        }
+      },
+      "deploySpoke": {
+        "type": "bool",
+        "defaultValue": true,
+        "metadata": {
+          "displayName": "Deploy Spoke",
+          "description": "Deploy Spoke."
+        }
+      },
+      "hub-shared-security-log_serviceTier": {
+        "type": "string",
+        "defaultValue": "PerNode",
+        "allowedValues": [
+          "Free",
+          "Standalone",
+          "PerNode",
+          "PerGB2018"
+        ],
+        "metadata": {
+          "displayName": "Azure Log Analytics Workspace Service tier",
+          "description": "Azure Log Analytics Workspace Service tier: Free, Standalone, PerNode or PerGB2018."
+        }
+      },
+      "logsRetentionInDays": {
+        "type": "int",
+        "defaultValue": 365,
+        "minValue": 0,
+        "maxValue": 365,
+        "metadata": {
+          "displayName": "Log retention in days",
+          "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely"
+        }
+      },
+      "hub-shared-security-log_workspaceLocation": {
+        "type": "string",
+        "defaultValue": "[parameters('hubLocation')]",
+        "metadata": {
+          "displayName": "Log Analytics Workspace location",
+          "description": "Location where Log Analytics workspace to be created. Run `Get-AzLocation | Where-Object Providers -like 'Microsoft.OperationalInsights' | Select DisplayName` in Azure PowersShell to find available regions."
+        }
+      },
+      "hub-shared-security-log_automationAccountId": {
+        "type": "string",
+        "defaultValue": "",
+        "metadata": {
+          "displayName": "Azure Automation account id",
+          "description": "Optional. Automation Account resource identifier, value used to create a LinkedService between Log Analytics and an Automation Account."
+        }
+      },
+      "networkWatcherName": {
+        "defaultValue": "[concat('NetworkWatcher_', parameters('networkWatcherLocation'))]",
+        "type": "string",
+        "metadata": {
+          "displayName": "Network Watcher name",
+          "description": "Name of the Network Watcher resource."
+        }
+      },
+      "networkWatcherLocation": {
+        "defaultValue": "[parameters('hubLocation')]",
+        "type": "string",
+        "metadata": {
+          "displayName": "Network Watcher location",
+          "description": "Location of the Network Watcher resource."
+        }
+      },
+      "networkWatcherResourceGroup": {
+        "defaultValue": "NetworkWatcherRG",
+        "type": "string",
+        "metadata": {
+          "displayName": "Network Watcher Resource Group name",
+          "description": "Name of the Network Watcher Resource Group."
+        }
+      },
+      "networkWatcherResourceGroupLocation": {
+        "defaultValue": "[parameters('hubLocation')]",
+        "type": "string",
+        "metadata": {
+          "displayName": "Network Watcher Resource Group location",
+          "description": "Location of the Network Watcher Resource Group."
+        }
+      },
+      "hub-shared-network-nsg_enableNsgFlowLogs": {
+        "type": "bool",
+        "defaultValue": true,
+        "metadata": {
+          "displayName": "Enable NSG Flow Logs",
+          "description": "Enable NSG Flow Logs."
+        }
+      },
+      "destinationAddresses": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Destination IP Addresses",
+          "description": "Destination IP addresses for outbound connectivity."
+        },
+        "defaultValue": "0.0.0.0"
+      },
+      "hub-shared-network-vnet_vnetAddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.0.0.0/16",
+        "metadata": {
+          "displayName": "Virtual Network address prefix",
+          "description": "Virtual Network address prefix."
+        }
+      },
+      "hub-shared-network-vnet_azureFirewallSubnetAddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.0.0.0/26",
+        "metadata": {
+          "displayName": "Azure Firewall subnet address prefix",
+          "description": "Azure Firewall subnet address prefix."
+        }
+      },
+      "hub-shared-network-vnet_bastionSubnetAddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.0.1.0/27",
+        "metadata": {
+          "displayName": "Bastion subnet address prefix",
+          "description": "Bastion subnet address prefix."
+        }
+      },
+      "hub-shared-network-vnet_gatewaySubnetAddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.0.2.0/24",
+        "metadata": {
+          "displayName": "Gateway subnet address prefix",
+          "description": "Gateway subnet address prefix."
+        }
+      },
+      "hub-shared-network-vnet_managementSubnetAddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.0.3.0/24",
+        "metadata": {
+          "displayName": "Management subnet address prefix",
+          "description": "Management subnet address prefix."
+        }
+      },
+      "hub-shared-network-vnet_jumpBoxSubnetAddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.0.4.0/24",
+        "metadata": {
+          "displayName": "JumpBox subnet address prefix",
+          "description": "JumpBox subnet address prefix."
+        }
+      },
+      "hub-shared-network-vnet_optionalSubnetNames": {
+        "type": "array",
+        "defaultValue": [],
+        "metadata": {
+          "displayName": "Optional subnet address names",
+          "description": "Optional. An Array of subnet names to deploy to the Virtual Network. e.g \"subnet1\",\"subnet2\""
+        }
+      },
+      "hub-shared-network-vnet_optionalSubnetPrefixes": {
+        "type": "array",
+        "defaultValue": [],
+        "metadata": {
+          "displayName": "Optional subnet address prefixes",
+          "description": "Optional. An Array of IP Address Prefixes for subnets. e.g \"10.0.7.0/24\",\"10.0.8.0/24\" "
+        }
+      },
+      "enableDdosProtection": {
+        "type": "bool",
+        "defaultValue": true,
+        "metadata": {
+          "displayName": "Enable Virtual Network DDoS protection",
+          "description": "Determines whether or not DDoS Protection is enabled in the Virtual Network."
+        }
+      },
+      "hub-shared-network-firewall_azureFirewallPrivateIP": {
+        "type": "string",
+        "defaultValue": "10.0.0.4",
+        "metadata": {
+          "displayName": "Azure Firewall private IP",
+          "description": "Azure Firewall private IP."
+        }
+      },
+      "spoke-workload-network-vnet_spokeVnetAddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.1.0.0/16",
+        "metadata": {
+          "displayName": "Virtual Network address prefix",
+          "description": "Virtual Network address prefix."
+        }
+      },
+      "spoke-workload-network-vnet_spokeSubnetAddressPrefix": {
+        "type": "string",
+        "defaultValue": "10.1.0.0/24",
+        "metadata": {
+          "displayName": "Subnet address prefix",
+          "description": "Subnet address prefix."
+        }
+      },
+      "spoke-workload-network-vnet_spokeOptionalSubnetNames": {
+        "type": "array",
+        "defaultValue": [],
+        "metadata": {
+          "displayName": "Optional subnet address names",
+          "description": "Optional. An Array of subnet names to deploy to the Virtual Network. e.g \"subnet1\",\"subnet2\""
+        }
+      },
+      "spoke-workload-network-vnet_spokeOptionalSubnetPrefixes": {
+        "type": "array",
+        "defaultValue": [],
+        "metadata": {
+          "displayName": "Optional subnet address prefixes",
+          "description": "Optional. An Array of IP Address Prefixes for subnets. e.g \"10.0.7.0/24\",\"10.0.8.0/24\" "
+        }
+      }
+    },
+    "resourceGroups": {
+      "HubResourceGroup": {
+        "name": "[concat(parameters('namePrefix'), '-', parameters('hubName'), '-rg')]",
+        "location": "[parameters('hubLocation')]",
+        "metadata": {
+          "displayName": "Hub Resource Group"
+        }
+      },
+      "SpokeResourceGroup": {
+        "name": "[concat(parameters('namePrefix'), '-', parameters('spokeName'), '-rg')]",
+        "location": "[parameters('hubLocation')]",
+        "metadata": {
+          "displayName": "Spoke Resource Group"
+        }
+      },
+      "NetworkWatcherResourceGroup": {
+        "name": "[parameters('networkWatcherResourceGroup')]",
+        "location": "[parameters('networkWatcherResourceGroupLocation')]",
+        "metadata": {
+          "displayName": "Network Watcher Resource Group"
+        }
+      }
+    },
+    "targetScope": "subscription",
+    "displayName": "Azure Zero Trust Architecture",
+    "description": "Deploys and configures Azure infrastructure and policies mapped to Zero Trust Architecture."
+  },
+  "id": "/providers/Microsoft.Blueprint/blueprints/c09d6b03-f048-4dd4-a5d9-46eda7e47ac4",
+  "type": "Microsoft.Blueprint/blueprints",
+  "name": "c09d6b03-f048-4dd4-a5d9-46eda7e47ac4"
+}

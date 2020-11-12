@@ -136,7 +136,6 @@ function New-ResourceDeployment {
     else {
         $jResourceTemplate = $jArtifact
     }
-
     
     foreach ($param in $jArtifact.properties.parameters.psobject.properties) {
         $defaultParamValues = Get-DefaultParameterValues -paramName $param.name -paramNames $param.value -jDefaultParams $jDefaultParams
@@ -205,8 +204,18 @@ foreach ($policy in $jConfig.policies) {
 
 foreach ($resource in $jConfig.resources) {
     if ($resource.enabled -eq $true) {
-        Write-Host "===== Start: Deploying resource '$($resource.name)' ====="
-        New-ResourceDeployment -artifact "$($artifactsPath)/$($resource.artifact)"
-        Write-Host "===== End: Deploying resource '$($resource.name)' ====="
+        if ($resource.artifact.EndsWith(".json")) {
+            Write-Host "===== Start: Deploying resource '$($resource.artifact)' ====="
+            New-ResourceDeployment -artifact "$($artifactsPath)/$($resource.artifact)"
+            Write-Host "===== End: Deploying resource '$($resource.artifact)' ====="
+        }
+        elseif ($resource.artifact.EndsWith(".ps1")) {
+            Write-Host "===== Start: Executing script '$($resource.artifact)' ====="
+            & "$($artifactsPath)/$($resource.artifact)" -namePrefix $jConfig.parameters.namePrefix.value -hubName $($jConfig.parameters.hubName.value) -location $resourceLocation
+            Write-Host "===== End: Executing script '$($resource.artifact)' ====="
+        }
+        else {
+            Write-Host "===== Error: Invalid artifact type '$($resource.artifact)' ====="
+        }
     }    
 }
