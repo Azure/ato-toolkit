@@ -77,7 +77,7 @@
         },
         "scriptsUri": {
             "type": "string",
-            "defaultValue": "https://raw.githubusercontent.com/Azure/ato-toolkit/master/stig/windows/scripts/",
+            "defaultValue": "https://raw.githubusercontent.com/Azure/ato-toolkit/master/stig/linux/scripts/",
             "metadata": {
                 "description": ""
             }
@@ -257,7 +257,7 @@
         "scriptFiles": [
             "[concat(parameters('scriptsUri'), variables('deploySTIGFile'))]"
         ],
-        "deploySTIGFile": "DeploySTIG.sh",
+        "deploySTIGFile": "deploySTIG.sh",
         "storageApiVersion" : "2019-06-01"
     },
     "resources": [
