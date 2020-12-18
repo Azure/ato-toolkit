@@ -1,0 +1,537 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+            "type": "string",
+            "defaultValue": "simple-vm",
+            "metadata": {
+                "description": "Name of the virtual machine."
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        },
+        "vmSize": {
+            "type": "string",
+            "defaultValue": "Standard_D2_v3",
+            "metadata": {
+                "description": "Size of the virtual machine."
+            }
+        },
+        "adminUsername": {
+            "type": "string",
+            "metadata": {
+                "description": "Username for the Virtual Machine."
+            }
+        },
+        "authenticationType": {
+            "type": "string",
+            "defaultValue": "password",
+            "allowedValues": [
+                "sshPublicKey",
+                "password"
+            ],
+            "metadata": {
+                "description": "Type of authentication to use on the Virtual Machine. SSH key is recommended."
+            }
+        },
+        "adminPasswordOrKey": {
+            "type": "securestring",
+            "metadata": {
+                "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
+            }
+        },
+        "osVersion": {
+            "type": "string",
+            "defaultValue": "CentOS77",
+            "allowedValues": [
+                "CentOS79",
+                "CentOS78",
+                "CentOS77",
+                "CentOS76",
+                "CentOS75",
+                "CentOS74",
+                "RHEL78",
+                "RHEL77",
+                "RHEL75",
+                "RHEL74",
+                "RHEL73",
+                "RHEL72"
+            ],
+            "metadata": {
+                "description": "The Linux version for the VM. This will pick a fully patched image of this given Linux version."
+            }
+        },
+        "managedDiskStorageAccountType": {
+            "type": "string",
+            "defaultValue": "StandardSSD_LRS",
+            "allowedValues": [ "StandardSSD_LRS" ],
+            "metadata": {
+                "description": ""
+            }
+        },
+        "scriptsUri": {
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com/Azure/ato-toolkit/master/stig/windows/scripts/",
+            "metadata": {
+                "description": ""
+            }
+        },
+        "vmVirtualNetwork": {
+            "type": "string",
+            "defaultValue": "stig-vm-vnet",
+            "metadata": {
+                "description": "Virtual Network for the VM Image."
+            }
+        },
+        "virtualNetworkResourceGroupName": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().name]",
+            "metadata": {
+                "description": "Name of the resource group for the existing virtual network"
+            }
+        },
+        "virtualNetworkNewOrExisting": {
+            "type": "string",
+            "defaultValue": "new",
+            "metadata": {
+                "description": "Is the Virtual Network new or existing for the VM Image."
+            }
+        },
+        "addressPrefix": {
+            "type": "string",
+            "defaultValue": "10.0.0.0/16",
+            "metadata": {
+                "description": "Address prefix of the virtual network"
+            }
+        },
+        "subnetName": {
+            "type": "string",
+            "defaultValue": "subnet1",
+            "metadata": {
+                "description": "Subnet name for the VM Image."
+            }
+        },
+        "subnetPrefix": {
+            "type": "string",
+            "defaultValue": "10.0.0.0/24",
+            "metadata": {
+                "description": "Subnet prefix of the virtual network"
+            }
+        },
+        "vmAvailabilitySetName": {
+            "type": "string",
+            "defaultValue": "stig-as",
+            "metadata": {
+                "description": "Availability Set configuration for VM."
+            }
+        },
+        "logsRetentionInDays": {
+            "type": "int",
+            "defaultValue": 365,
+            "minValue": 0,
+            "maxValue": 365,
+            "metadata": {
+                "description": "Log retention in days."
+            }
+        },
+        "diagnosticStorageResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Diagnostic Storage account Id."
+            }
+        },
+        "logAnalyticsWorkspaceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Log Analytics workspace Id."
+            }
+        }
+    },
+    "variables": {
+        "nicName": "[concat(parameters('vmName'), '-nic')]",
+        "vnetId": {
+            "new": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vmVirtualNetwork'))]",
+            "existing": "[resourceId(parameters('virtualNetworkResourceGroupName'),'Microsoft.Storage/virtualNetworks',parameters('vmVirtualNetwork'))]"
+        },
+        "subnetRef": "[concat(variables('vnetId')[parameters('virtualNetworkNewOrExisting')],'/subnets/',parameters('subnetName'))]",
+        "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
+        "availabilitySetId": {
+            "id": "[if(equals(parameters('vmAvailabilitySetName'), ''), json('null'), resourceId('Microsoft.Compute/availabilitySets', parameters('vmAvailabilitySetName')))]"
+        },
+        "imageReferences": {
+            "CentOS79": {
+                "publisher": "OpenLogic",
+                "offer": "CentOS",
+                "sku": "7.9",
+                "version": "latest"
+            },
+            "CentOS78": {
+                "publisher": "OpenLogic",
+                "offer": "CentOS",
+                "sku": "7.8",
+                "version": "latest"
+            },
+            "CentOS77": {
+                "publisher": "OpenLogic",
+                "offer": "CentOS",
+                "sku": "7.7",
+                "version": "latest"
+            },
+            "CentOS76": {
+                "publisher": "OpenLogic",
+                "offer": "CentOS",
+                "sku": "7.6",
+                "version": "latest"
+            },
+            "CentOS75": {
+                "publisher": "OpenLogic",
+                "offer": "CentOS",
+                "sku": "7.5",
+                "version": "latest"
+            },
+            "CentOS74": {
+                "publisher": "OpenLogic",
+                "offer": "CentOS",
+                "sku": "7.4",
+                "version": "latest"
+            },
+            "RHEL78": {
+                "publisher": "RedHat",
+                "offer": "RHEL",
+                "sku": "7.8",
+                "version": "latest"
+            },
+            "RHEL77": {
+                "publisher": "RedHat",
+                "offer": "RHEL",
+                "sku": "7.7",
+                "version": "latest"
+            },
+            "RHEL75": {
+                "publisher": "RedHat",
+                "offer": "RHEL",
+                "sku": "7.5",
+                "version": "latest"
+            },
+            "RHEL74": {
+                "publisher": "RedHat",
+                "offer": "RHEL",
+                "sku": "7.4",
+                "version": "latest"
+            },
+            "RHEL73": {
+                "publisher": "RedHat",
+                "offer": "RHEL",
+                "sku": "7.3",
+                "version": "latest"
+            },
+            "RHEL72": {
+                "publisher": "RedHat",
+                "offer": "RHEL",
+                "sku": "7.2",
+                "version": "latest"
+            }
+        },
+        "linuxConfiguration": {
+            "disablePasswordAuthentication": true,
+            "ssh": {
+                "publicKeys": [
+                    {
+                        "path": "[concat('/home/', parameters('adminUsername'), '/.ssh/authorized_keys')]",
+                        "keyData": "[parameters('adminPasswordOrKey')]"
+                    }
+                ]
+            }
+        },
+        "auditRemoteConnectionWithNoPwdConfigName": "PasswordPolicy_msid110",
+        "auditAccountsWithNoPwdConfigName": "PasswordPolicy_msid232",
+        "auditEtcPwdFilePermissionSetTo0644Configame": "PasswordPolicy_msid121",
+        "scriptFiles": [
+            "[concat(parameters('scriptsUri'), variables('deploySTIGFile'))]"
+        ],
+        "deploySTIGFile": "DeploySTIG.sh",
+        "storageApiVersion" : "2019-06-01"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2020-06-01",
+            "name": "[variables('networkSecurityGroupName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "default-allow-3389",
+                        "properties": {
+                            "priority": 1000,
+                            "access": "Allow",
+                            "direction": "Inbound",
+                            "destinationPortRange": "3389",
+                            "protocol": "Tcp",
+                            "sourcePortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('vmVirtualNetwork')]",
+            "location": "[parameters('location')]",
+            "condition": "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+            ],
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('addressPrefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnetName')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnetPrefix')]",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-06-01",
+            "name": "[variables('nicName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vmVirtualNetwork'))]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {            
+            "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(variables('nicName'), '/Microsoft.Insights/service')]",
+            "location": "[parameters('location')]",
+            "condition": "[and(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",         
+            "dependsOn": [
+                "[variables('nicName')]"
+            ],
+            "copy": {
+                "name": "nicDiagnosticLoop",
+                "count": 1
+            },
+            "properties": {
+                "storageAccountId": "[parameters('diagnosticStorageResourceId')]",
+                "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
+                "metrics": [
+                    {
+                        "category": "AllMetrics",
+                        "timeGrain": null,
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('logsRetentionInDays')]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Compute/availabilitySets",
+            "apiVersion": "2019-03-01",
+            "name": "[parameters('vmAvailabilitySetName')]",
+            "location": "[parameters('location')]",
+            "condition": "[not(equals(parameters('vmAvailabilitySetName'), ''))]",
+            "properties": {
+                "platformFaultDomainCount": 3,
+                "platformUpdateDomainCount": 5
+            },
+            "sku": {
+                "name": "Aligned"
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('vmName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces/', variables('nicName'))]",
+                "[parameters('vmAvailabilitySetName')]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('VmSize')]"
+                },
+                "storageProfile": {
+                    "osDisk": {
+                        "createOption": "fromImage",
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('managedDiskStorageAccountType')]"
+                        }
+                    },
+                    "imageReference": "[variables('imageReferences')[parameters('osVersion')]]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+                        }
+                    ]
+                },
+                "osProfile": {
+                    "computerName": "[parameters('vmName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPasswordOrKey')]",
+                    "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
+                },
+                "availabilitySet": "[if(equals(parameters('vmAvailabilitySetName'), ''), json('null'), variables('availabilitySetId'))]",
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
+                        "storageUri": "[if(not(equals(parameters('diagnosticStorageResourceId'), '')), reference(parameters('diagnosticStorageResourceId'), variables('storageApiVersion')).primaryEndpoints.blob, json('null'))]"
+                    }
+                }
+            },
+            "resources": [
+            ]
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/providers/guestConfigurationAssignments",
+            "apiVersion": "2018-11-20",
+            "name": "[concat(parameters('vmName'), '/Microsoft.GuestConfiguration/', variables('auditRemoteConnectionWithNoPwdConfigName'))]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+            ],
+            "properties": {
+                "guestConfiguration": {
+                    "name": "[variables('auditRemoteConnectionWithNoPwdConfigName')]",
+                    "version": "1.*"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/providers/guestConfigurationAssignments",
+            "apiVersion": "2018-11-20",
+            "name": "[concat(parameters('vmName'), '/Microsoft.GuestConfiguration/', variables('auditAccountsWithNoPwdConfigName'))]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+            ],
+            "properties": {
+                "guestConfiguration": {
+                    "name": "[variables('auditAccountsWithNoPwdConfigName')]",
+                    "version": "1.*"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/providers/guestConfigurationAssignments",
+            "apiVersion": "2018-11-20",
+            "name": "[concat(parameters('vmName'), '/Microsoft.GuestConfiguration/', variables('auditEtcPwdFilePermissionSetTo0644Configame'))]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+            ],
+            "properties": {
+                "guestConfiguration": {
+                    "name": "[variables('auditEtcPwdFilePermissionSetTo0644Configame')]",
+                    "version": "1.*"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2019-07-01",
+            "name": "[concat(parameters('vmName'), '/deploy-guest-configuration')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+            ],
+            "properties": {
+                "publisher": "Microsoft.GuestConfiguration",
+                "type": "ConfigurationforLinux",
+                "typeHandlerVersion": "1.0",
+                "autoUpgradeMinorVersion": true
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2019-07-01",
+            "name": "[concat(parameters('vmName'), '/deploy-stigs')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines/extensions/', parameters('vmName'), 'deploy-guest-configuration')]"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Azure.Extensions",
+                "type": "CustomScript",
+                "typeHandlerVersion": "2.0",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "skipDos2Unix": true,
+                    "timestamp": 123456789
+                },
+                "protectedSettings": {
+                    "fileUris": "[variables('scriptFiles')]",
+                    "commandToExecute": "[concat('bash ', variables('deploySTIGFile'), ' >> DeploySTIG.logs.txt')]"
+                }
+            }
+        },
+        {            
+            "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(parameters('vmName'), '/Microsoft.Insights/service')]",
+            "location": "[resourceGroup().location]",
+            "condition": "[and(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "dependsOn": [
+                "[parameters('vmName')]"
+            ],
+            "properties": {
+                "storageAccountId": "[parameters('diagnosticStorageResourceId')]",
+                "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
+                "metrics": [
+                    {
+                        "category": "AllMetrics",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('logsRetentionInDays')]"
+                        }
+                    }
+                ],
+                "logs": []
+            }
+        }
+    ],
+    "outputs": {
+    }
+}
