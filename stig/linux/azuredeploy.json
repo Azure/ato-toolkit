@@ -126,7 +126,7 @@
         },
         "vmAvailabilitySetName": {
             "type": "string",
-            "defaultValue": "",
+            "defaultValue": "stig-as",
             "metadata": {
                 "description": "Availability Set configuration for VM."
             }
