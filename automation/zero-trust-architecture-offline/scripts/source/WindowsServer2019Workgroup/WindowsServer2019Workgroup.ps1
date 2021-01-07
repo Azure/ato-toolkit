@@ -6,72 +6,38 @@ configuration WindowsServer2019Workgroup
         [String]$IsOffline = $false
     ) 
 
-    Import-DscResource -ModuleName PowerSTIG -ModuleVersion 4.3.0
-	Import-DscResource -ModuleName SecurityPolicyDsc -ModuleVersion 2.4.0.0
+    Import-DscResource -ModuleName PowerSTIG -ModuleVersion 4.7.0
     Import-DscResource -Module cChoco -ModuleVersion 2.4.0.0
     Import-DscResource -ModuleName PSDscResources -ModuleVersion 2.10.0.0
     Import-DscResource -ModuleName xPSDesiredStateConfiguration -ModuleVersion 9.1.0
 
     Node localhost
     {
-        LocalConfigurationManager            
-        {            
-            ActionAfterReboot = 'ContinueConfiguration'            
-            ConfigurationMode = 'ApplyOnly'            
-            RebootNodeIfNeeded = $true            
+        LocalConfigurationManager
+        {
+            ActionAfterReboot = 'ContinueConfiguration'
+            ConfigurationMode = 'ApplyOnly'
+            RebootNodeIfNeeded = $true
         }
 
         WindowsServer BaseLine
         {
             OsVersion    = '2019'
             OsRole       = 'MS'
-            StigVersion  = '1.2'
-            DomainName   = 'WORKGROUP'
-            ForestName   = 'WORKGROUP'
-             
-            SkipRule     = @(
-                # The underlying resource [WindowsDefenderDsc]ProcessMitigation throws an error
-                # when running Set-ProcessMitigation. This is a bug. For more info:
-                # https://github.com/MicrosoftDocs/windows-itpro-docs/issues/2179
-                # Skipping this rule does not affect the outcome of the vunerability scan. 
-                "V-93335", 
-                
-                # Some rules fail to apply to WORKGROUP systems.
-                # As a workaround, we ask PowerSTIG to skip them and 
-                # enforce them ourselves in the following resources.
-                "V-92965",
-                "V-93009",
-                "V-93011",
-                "V-93015"
-            )
-        }
-
-        UserRightsAssignment "V-92965_DenyGuestRemoteLogin"
-        {
-            Policy   = "Deny_log_on_through_Remote_Desktop_Services"
-            Identity = @("Guests")
-            Ensure   = "Present"
-        }
-
-        UserRightsAssignment "V-93009_DenyGuestNetworkAccess"
-        {
-            Policy   = "Deny_access_to_this_computer_from_the_network"
-            Identity = @("Guests")
-            Ensure   = "Present"
-        }
-
-        UserRightsAssignment "V-93011_DenyGuestLogonAsBatch"
-        {
-            Policy   = "Deny_log_on_as_a_batch_job"
-            Identity = @("Guests")
-            Ensure   = "Present"
-        }
-
-        UserRightsAssignment "V-93015_DenyGuestLogonLocally"
-        {
-            Policy   = "Deny_log_on_locally"
-            Identity = @("Guests")
-            Ensure   = "Present"
+            Exception   = @{
+                "V-205733" = @{
+                    Identity = "Guests"
+                }
+                "V-205672" = @{
+                    Identity = "Guests"
+                }
+                "V-205673" = @{
+                    Identity = "Guests"
+                }
+                "V-205675" = @{
+                    Identity = "Guests"
+                }
+            }
         }
 
         if(!$IsOffline) {
