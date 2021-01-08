@@ -166,78 +166,114 @@
         "availabilitySetId": {
             "id": "[if(equals(parameters('vmAvailabilitySetName'), ''), json('null'), resourceId('Microsoft.Compute/availabilitySets', parameters('vmAvailabilitySetName')))]"
         },
-        "imageReferences": {
+        "images": {
             "CentOS79": {
-                "publisher": "OpenLogic",
-                "offer": "CentOS",
-                "sku": "7_9",
-                "version": "latest"
+                "reference" : {
+                    "publisher": "OpenLogic",
+                    "offer": "CentOS",
+                    "sku": "7_9",
+                    "version": "latest"
+                },
+                "stigScriptFileName" : "rhel7-script-stig.sh"
             },
             "CentOS78": {
-                "publisher": "OpenLogic",
-                "offer": "CentOS",
-                "sku": "7_8",
-                "version": "latest"
+                "reference" : {
+                    "publisher": "OpenLogic",
+                    "offer": "CentOS",
+                    "sku": "7_8",
+                    "version": "latest"
+                },
+                "stigScriptFileName" : "rhel7-script-stig.sh"
             },
             "CentOS77": {
-                "publisher": "OpenLogic",
-                "offer": "CentOS",
-                "sku": "7.7",
-                "version": "latest"
+                "reference" : {
+                    "publisher": "OpenLogic",
+                    "offer": "CentOS",
+                    "sku": "7.7",
+                    "version": "latest"
+                },
+                "stigScriptFileName" : "rhel7-script-stig.sh"
             },
             "CentOS76": {
-                "publisher": "OpenLogic",
-                "offer": "CentOS",
-                "sku": "7.6",
-                "version": "latest"
+                "reference" : {
+                    "publisher": "OpenLogic",
+                    "offer": "CentOS",
+                    "sku": "7.6",
+                    "version": "latest"
+                },
+                "stigScriptFileName" : "rhel7-script-stig.sh"                
             },
             "CentOS75": {
-                "publisher": "OpenLogic",
-                "offer": "CentOS",
-                "sku": "7.5",
-                "version": "latest"
+                "reference" : {
+                    "publisher": "OpenLogic",
+                    "offer": "CentOS",
+                    "sku": "7.5",
+                    "version": "latest"
+                },
+                "stigScriptFileName" : "rhel7-script-stig.sh"                
             },
             "CentOS74": {
-                "publisher": "OpenLogic",
-                "offer": "CentOS",
-                "sku": "7.4",
-                "version": "latest"
+                "reference" : {
+                    "publisher": "OpenLogic",
+                    "offer": "CentOS",
+                    "sku": "7.4",
+                    "version": "latest"
+                },
+                "stigScriptFileName" : "rhel7-script-stig.sh"                
             },
             "RHEL78": {
-                "publisher": "RedHat",
-                "offer": "RHEL",
-                "sku": "7.8",
-                "version": "latest"
+                "reference" : {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "7.8",
+                    "version": "latest"
+                },
+                "stigScriptFileName" : "ssg-rhel7-role-stig-rhel7-disa.sh"                
             },
             "RHEL77": {
-                "publisher": "RedHat",
-                "offer": "RHEL",
-                "sku": "7.7",
-                "version": "latest"
+                "reference" : {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "7.7",
+                    "version": "latest"
+                },
+                "stigScriptFileName" : "ssg-rhel7-role-stig-rhel7-disa.sh"                
             },
             "RHEL75": {
-                "publisher": "RedHat",
-                "offer": "RHEL",
-                "sku": "7.5",
-                "version": "latest"
+                "reference" : {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "7.5",
+                    "version": "latest"
+                },
+                "stigScriptFileName" : "ssg-rhel7-role-stig-rhel7-disa.sh"
             },
             "RHEL74": {
-                "publisher": "RedHat",
-                "offer": "RHEL",
-                "sku": "7.4",
-                "version": "latest"
+                "reference" : {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "7.4",
+                    "version": "latest"
+                },
+                "stigScriptFileName" : "ssg-rhel7-role-stig-rhel7-disa.sh"                
             },
             "RHEL73": {
-                "publisher": "RedHat",
-                "offer": "RHEL",
-                "sku": "7.3",
-                "version": "latest"
+                "reference" : {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "7.3",
+                    "version": "latest"
+                },
+                "stigScriptFileName" : "ssg-rhel7-role-stig-rhel7-disa.sh"                
             },
             "RHEL72": {
-                "publisher": "RedHat",
-                "offer": "RHEL",
-                "sku": "7.2",
-                "version": "latest"
+                "reference" : {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "7.2",
+                    "version": "latest"
+                },
+                "stigScriptFileName" : "ssg-rhel7-role-stig-rhel7-disa.sh"                
             }
         },
         "linuxConfiguration": {
@@ -258,8 +294,7 @@
             "[concat(parameters('scriptsUri'), variables('deploySTIGFile'))]"
         ],
         "deploySTIGFile": "deploySTIG.sh",
-        "storageApiVersion" : "2019-06-01",
-        "downloadedStigScriptFileName" : "[if(startsWith(parameters('osVersion'), 'RHEL'), 'ssg-rhel7-role-stig-rhel7-disa.sh', ' rhel7-script-stig.sh')]"
+        "storageApiVersion" : "2019-06-01"
     },
     "resources": [
         {
@@ -398,7 +433,7 @@
                             "storageAccountType": "[parameters('managedDiskStorageAccountType')]"
                         }
                     },
-                    "imageReference": "[variables('imageReferences')[parameters('osVersion')]]"
+                    "imageReference": "[variables('images')[parameters('osVersion')].reference]"
                 },
                 "networkProfile": {
                     "networkInterfaces": [
@@ -503,7 +538,7 @@
                 },
                 "protectedSettings": {
                     "fileUris": "[variables('scriptFiles')]",
-                    "commandToExecute": "[concat('bash ', variables('deploySTIGFile'), ' ' , variables('downloadedStigScriptFileName'), ' >> DeploySTIG.logs.txt')]"
+                    "commandToExecute": "[concat('bash ', variables('deploySTIGFile'), ' ' , variables('images')[parameters('osVersion')].stigScriptFileName, ' >> DeploySTIG.logs.txt')]"
                 }
             }
         },
