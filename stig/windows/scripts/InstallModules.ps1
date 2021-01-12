@@ -8,3 +8,6 @@ $requiredModules = Get-RequiredModules
 foreach($requiredModule in $requiredModules) {
     Install-module -Name $requiredModule.ModuleName -RequiredVersion $requiredModule.ModuleVersion -Force
 }
+
+# Increase the MaxE
+Set-Item -Path WSMan:\localhost\MaxEnvelopeSizekb -Value 8192
