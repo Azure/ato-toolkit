@@ -15,6 +15,6 @@ function Get-RequiredModules {
         @{ModuleName = 'CertificateDsc'; ModuleVersion = '5.0.0'},
         @{ModuleName = 'cChoco'; ModuleVersion = '2.4.0.0'},
         @{ModuleName = 'xPSDesiredStateConfiguration'; ModuleVersion = '9.1.0'},
-        @{ModuleName = 'PowerSTIG'; ModuleVersion = '4.3.0'}
+        @{ModuleName = 'PowerSTIG'; ModuleVersion = '4.7.0'}
     )
 }
