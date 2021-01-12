@@ -259,7 +259,7 @@
             "location": "[parameters('location')]",
             "condition": "[not(equals(parameters('vmAvailabilitySetName'), ''))]",
             "properties": {
-                "platformFaultDomainCount": 3,
+                "platformFaultDomainCount": 2,
                 "platformUpdateDomainCount": 5
             },
             "sku": {
