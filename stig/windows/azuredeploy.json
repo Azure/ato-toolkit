@@ -56,7 +56,7 @@
         },
         "scriptsUri": {
             "type": "string",
-            "defaultValue": "https://raw.githubusercontent.com/Azure/ato-toolkit/master/stig/windows/scripts/",
+            "defaultValue": "https://raw.githubusercontent.com/erjenkin/ato-toolkit/master/stig/windows/scripts/",
             "metadata": {
                 "description": ""
             }
