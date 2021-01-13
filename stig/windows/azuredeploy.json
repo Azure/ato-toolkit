@@ -38,6 +38,7 @@
         },
         "OSVersion": {
             "type": "string",
+            "defaultValue": "2019-Datacenter",
             "allowedValues": [
                 "2019-Datacenter",
                 "2016-Datacenter"
