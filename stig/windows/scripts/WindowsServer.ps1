@@ -134,7 +134,7 @@ configuration WindowsServer
                 }
             }
 
-            if (!$IsOffline) {
+            if ($IsOffline -eq $true) {
                 $dodCertificates.invoke()
             }
         }
@@ -173,7 +173,7 @@ configuration WindowsServer
             }
         }
 
-        if (!$IsOffline) {
+        if ($IsOffline -eq $true) {
             $dodCertificates.invoke()
         }
     }
