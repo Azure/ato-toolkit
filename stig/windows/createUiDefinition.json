@@ -60,13 +60,16 @@
                         "name": "OSVersion",
                         "type": "Microsoft.Common.DropDown",
                         "label": "Windows OS Version",
-                        "defaultValue": "2019-Datacenter",
                         "toolTip": "The OS Version for the VM Image",
                         "constraints": {
                             "allowedValues": [
                                 {
                                     "value": "2019-Datacenter",
                                     "label": "2019-Datacenter"
+                                },
+                                {
+                                    "value": "2016-Datacenter",
+                                    "label": "2016-Datacenter"
                                 }
                             ],
                             "required": true

@@ -38,9 +38,9 @@
         },
         "OSVersion": {
             "type": "string",
-            "defaultValue": "2019-Datacenter",
             "allowedValues": [
-                "2019-Datacenter"
+                "2019-Datacenter",
+                "2016-Datacenter"
             ],
             "metadata": {
                 "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
