@@ -147,6 +147,36 @@ configuration WindowsServer
         {
             OsVersion   = '2016'
             OsRole      = 'MS'
+            SkipRule =  'V-224866','V-224867'
+            Exception   = @{
+                'V-225019' = @{
+                    Identity = 'Guests'
+                }
+                'V-225016' = @{
+                    Identity = 'Guests'
+                }
+                'V-225018' = @{
+                    Identity = 'Guests'
+                }
+            }
+
+            OrgSettings = @{
+                'V-225015' = @{
+                    Identity = 'Guests'
+                }
+                'V-225026' = @{
+                    OptionValue = 'xAdmin'
+                }
+                'V-225027' = @{
+                    OptionValue = 'xGuest'
+                }
+            }
+        }
+        
+        WindowsServer BaseLine2
+        {
+            OsVersion   = '2016'
+            OsRole      = 'MS'
 
             Exception   = @{
                 'V-225019' = @{
