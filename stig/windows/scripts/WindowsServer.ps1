@@ -134,77 +134,59 @@ configuration WindowsServer
                 }
             }
 
-            if ($IsOffline -eq $true) {
+            if (!$IsOffline) {
                 $dodCertificates.invoke()
             }
         }
     }
     elseif ($osversion -match "Server 2016")
     {
-        $localConfigurationManager.invoke()
-
-        WindowsServer BaseLine
+        Node localhost
         {
-            OsVersion   = '2016'
-            OsRole      = 'MS'
-            SkipRule =  'V-224866','V-224867'
-            Exception   = @{
-                'V-225019' = @{
-                    Identity = 'Guests'
+            $localConfigurationManager.invoke()
+
+            WindowsServer BaseLine
+            {
+                OsVersion   = '2016'
+                OsRole      = 'MS'
+                SkipRule =  'V-224866','V-224867', 'V-224868'
+                Exception   = @{
+                    'V-225019' = @{
+                        Identity = 'Guests'
+                    }
+                    'V-225016' = @{
+                        Identity = 'Guests'
+                    }
+                    'V-225018' = @{
+                        Identity = 'Guests'
+                    }
                 }
-                'V-225016' = @{
-                    Identity = 'Guests'
-                }
-                'V-225018' = @{
-                    Identity = 'Guests'
+
+                OrgSettings = @{
+                    'V-225015' = @{
+                        Identity = 'Guests'
+                    }
+                    'V-225026' = @{
+                        OptionValue = 'xAdmin'
+                    }
+                    'V-225027' = @{
+                        OptionValue = 'xGuest'
+                    }
                 }
             }
 
-            OrgSettings = @{
-                'V-225015' = @{
-                    Identity = 'Guests'
-                }
-                'V-225026' = @{
-                    OptionValue = 'xAdmin'
-                }
-                'V-225027' = @{
-                    OptionValue = 'xGuest'
-                }
-            }
-        }
-        
-        WindowsServer BaseLine2
-        {
-            OsVersion   = '2016'
-            OsRole      = 'MS'
-
-            Exception   = @{
-                'V-225019' = @{
-                    Identity = 'Guests'
-                }
-                'V-225016' = @{
-                    Identity = 'Guests'
-                }
-                'V-225018' = @{
-                    Identity = 'Guests'
-                }
+            #This is used as a workaround for an issues applying account policy via PowerSTIG on 2016
+            AccountPolicy BaseLine2
+            {
+                Name = "2016fix"
+                Account_lockout_threshold = 3
+                Account_lockout_duration = 15
+                Reset_account_lockout_counter_after = 15
             }
 
-            OrgSettings = @{
-                'V-225015' = @{
-                    Identity = 'Guests'
-                }
-                'V-225026' = @{
-                    OptionValue = 'xAdmin'
-                }
-                'V-225027' = @{
-                    OptionValue = 'xGuest'
-                }
+            if (!$IsOffline) {
+                $dodCertificates.invoke()
             }
-        }
-
-        if ($IsOffline -eq $true) {
-            $dodCertificates.invoke()
         }
     }
 }

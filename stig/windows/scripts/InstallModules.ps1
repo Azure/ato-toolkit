@@ -12,5 +12,5 @@ foreach($requiredModule in $requiredModules) {
     Install-module -Name $requiredModule.ModuleName -RequiredVersion $requiredModule.ModuleVersion -Force
 }
 
-# Increase the MaxE
+# Increase the MaxEnvelope Size
 Set-Item -Path WSMan:\localhost\MaxEnvelopeSizekb -Value 8192
