@@ -133,6 +133,15 @@
             "metadata": {
                 "description": "Log Analytics workspace Id."
             }
+        },
+        "vmAvailabilityFaultDomains": {
+            "type": "int",
+            "defaultValue": 2,
+            "minValue": 1,
+            "maxValue": 3,
+            "metadata": {
+                "description": "Availability Set Fault domains."
+            }
         }
     },
     "variables": {
@@ -260,7 +269,7 @@
             "location": "[parameters('location')]",
             "condition": "[not(equals(parameters('vmAvailabilitySetName'), ''))]",
             "properties": {
-                "platformFaultDomainCount": 2,
+                "platformFaultDomainCount": "[parameters('vmAvailabilityFaultDomains')]",
                 "platformUpdateDomainCount": 5
             },
             "sku": {

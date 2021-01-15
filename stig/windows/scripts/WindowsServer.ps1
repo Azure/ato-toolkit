@@ -176,7 +176,7 @@ configuration WindowsServer
                 }
             }
 
-            #This is used as a workaround for an issues applying account policy via PowerSTIG on 2016
+            #This is used as a workaround for an issue applying account policy via PowerSTIG on 2016
             AccountPolicy BaseLine2
             {
                 Name = "2016fix"
