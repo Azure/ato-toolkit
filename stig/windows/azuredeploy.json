@@ -142,6 +142,15 @@
             "metadata": {
                 "description": "Availability Set Fault domains."
             }
+        },
+        "vmAvailabilityUpdateDomains": {
+            "type": "int",
+            "defaultValue": 5,
+            "minValue": 1,
+            "maxValue": 20,
+            "metadata": {
+                "description": "Availability Set Update domains."
+            }
         }
     },
     "variables": {
@@ -270,7 +279,7 @@
             "condition": "[not(equals(parameters('vmAvailabilitySetName'), ''))]",
             "properties": {
                 "platformFaultDomainCount": "[parameters('vmAvailabilityFaultDomains')]",
-                "platformUpdateDomainCount": 5
+                "platformUpdateDomainCount": "[parameters('vmAvailabilityUpdateDomains')]"
             },
             "sku": {
                 "name": "Aligned"
