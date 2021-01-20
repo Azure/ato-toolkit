@@ -10,7 +10,6 @@ configuration WindowsServer
     Import-DscResource -Module cChoco -ModuleVersion 2.4.0.0
     Import-DscResource -ModuleName PSDscResources -ModuleVersion 2.12.0.0
     Import-DscResource -ModuleName xPSDesiredStateConfiguration -ModuleVersion 9.1.0
-    Import-DscResource -ModuleName SecurityPolicyDsc -ModuleVersion 2.10.0.0
 
     [scriptblock]$localConfigurationManager = {
         LocalConfigurationManager
@@ -96,98 +95,115 @@ configuration WindowsServer
         }
     }
 
-    #Get OS to determine which config to apply
-    $osVersion = (Get-WmiObject Win32_OperatingSystem).Caption
+    [scriptblock]$ie11Stig = {
 
-    if ($osversion -match "Server 2019")
-    {
-        Node localhost
+        InternetExplorer STIG_IE11
         {
-            $localConfigurationManager.invoke()
+            BrowserVersion  = '11'
+            SkipRule        = 'V-46477'
+        }
+    }
 
-            WindowsServer BaseLine
-            {
-                OsVersion    = '2019'
-                OsRole       = 'MS'
+    [scriptblock]$dotnetFrameworkStig = {
 
-                Exception   = @{
-                    'V-205733' = @{
-                        Identity = 'Guests'
-                    }
-                    'V-205672' = @{
-                        Identity = 'Guests'
-                    }
-                    'V-205673' = @{
-                        Identity = 'Guests'
-                    }
-                    'V-205675' = @{
-                        Identity = 'Guests'
-                    }
-                }
+        DotNetFramework STIG_DotnetFramework
+        {
+            FrameworkVersion = '4'
+        }
+    }
 
-                OrgSettings = @{
-                    'V-205909' = @{
-                        OptionValue = 'xAdmin'
-                    }
-                    'V-205910' = @{
-                        OptionValue = 'xGuest'
-                    }
-                }
-            }
+    [scriptblock]$windowsFirewallStig = {
 
-            if (!$IsOffline) {
-                $dodCertificates.invoke()
+        WindowsFirewall STIG_WindowsFirewall
+        {
+            OrgSettings = @{
+                'V-17425'   = @{ValueData = '16384'}
+                'V-17425.b' = @{ValueData = '16384'}
+                'V-17435'   = @{ValueData = '16384'}
+                'V-17435.b' = @{ValueData = '16384'}
+                'V-17445'   = @{ValueData = '16384'}
+                'V-17445.b' = @{ValueData = '16384'}
             }
         }
     }
-    elseif ($osversion -match "Server 2016")
-    {
-        Node localhost
+
+    [scriptblock]$windowsDefenderStig = {
+
+        WindowsDefender STIG_WindowsDefender
         {
-            $localConfigurationManager.invoke()
-
-            WindowsServer BaseLine
-            {
-                OsVersion   = '2016'
-                OsRole      = 'MS'
-                SkipRule =  'V-224866','V-224867', 'V-224868'
-                Exception   = @{
-                    'V-225019' = @{
-                        Identity = 'Guests'
-                    }
-                    'V-225016' = @{
-                        Identity = 'Guests'
-                    }
-                    'V-225018' = @{
-                        Identity = 'Guests'
-                    }
-                }
-
-                OrgSettings = @{
-                    'V-225015' = @{
-                        Identity = 'Guests'
-                    }
-                    'V-225026' = @{
-                        OptionValue = 'xAdmin'
-                    }
-                    'V-225027' = @{
-                        OptionValue = 'xGuest'
-                    }
-                }
-            }
-
-            #This is used as a workaround for an issue applying account policy via PowerSTIG on 2016
-            AccountPolicy BaseLine2
-            {
-                Name = "2016fix"
-                Account_lockout_threshold = 3
-                Account_lockout_duration = 15
-                Reset_account_lockout_counter_after = 15
-            }
-
-            if (!$IsOffline) {
-                $dodCertificates.invoke()
+            OrgSettings = @{
+                'V-213450' = @{ValueData = '1'}
+                'V-213452' = @{ValueData = '1'}
+                'V-213453' = @{ValueData = '1'}
+                'V-213455' = @{ValueData = '2'}
+                'V-213464' = @{ValueData = '2'}
+                'V-213465' = @{ValueData = '2'}
+                'V-213466' = @{ValueData = '2'}
             }
         }
+    }
+
+    [scriptblock]$windowsServerStig = {
+
+        $osVersion              = (Get-WmiObject Win32_OperatingSystem).Caption
+        $domainControllerCheck  = (Get-WindowsFeature -Name AD-Domain-Services) -eq 'Installed'
+       
+        switch ($domainControllerCheck)
+        {
+            $true   {$osRole = 'DC'}
+            default {$osRole = 'MS'}
+        }
+
+        switch -Wildcard ($osVersion)
+        {
+            "*2016*"
+            {
+                $osVersion      = '2016'
+                $exceptions   = @{
+                    'V-225019'  = @{Identity = 'Guests' }
+                    'V-225016'  = @{Identity = 'Guests'}
+                    'V-225018'  = @{Identity = 'Guests'}
+                }
+                $orgSettings = @{
+                    'V-225015'  = @{Identity    = 'Guests'}
+                    'V-225026'  = @{OptionValue = 'xAdmin'}
+                    'V-225027'  = @{OptionValue = 'Guests'}
+                }
+                break
+            }
+            "*2019*"
+            {
+                $osVersion = '2019'
+                $exceptions = @{
+                    'V-205733' = @{Identity = 'Guests'}
+                    'V-205672' = @{Identity = 'Guests'}
+                    'V-205673' = @{Identity = 'Guests'}
+                    'V-205675' = @{Identity = 'Guests'}
+                }
+                $orgSettings = @{
+                    'V-205909' = @{OptionValue = 'xAdmin'}
+                    'V-205910' = @{OptionValue = 'xGuest'}
+                }
+                break
+            }
+        }
+
+        WindowsServer STIG_WindowsServer
+        {
+            OsVersion   = $osVersion
+            OsRole      = $osRole
+            Exception   = $exceptions
+            OrgSettings = $orgSettings
+        }
+    }
+
+    Node localhost
+    {
+        $localConfigurationManager.invoke()
+        $windowsServerStig.invoke()
+        $ie11Stig.invoke()
+        $dotnetFrameworkStig.invoke()
+        $windowsDefenderStig.invoke()
+        $windowsFirewallStig.invoke()
     }
 }
