@@ -153,7 +153,7 @@ configuration WindowsServer
             "*2016*"
             {
                 $osVersion      = '2016'
-                $SkipRules      = @('V-225266','V-225267','V-225268')
+                $SkipRules      = @('V-224866','V-224867','V-224868')
                 $exceptions     = @{
                     'V-225019'  = @{Identity    = 'Guests' }
                     'V-225016'  = @{Identity    = 'Guests'}
