@@ -62,6 +62,13 @@
                 "description": ""
             }
         },
+        "isOffline": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": ""
+            }
+        },
         "vmVirtualNetwork": {
             "type": "string",
             "defaultValue": "stig-vm-vnet",
@@ -166,12 +173,12 @@
         },
         "requiredModulesFile": "RequiredModules.ps1",
         "installPSModulesFile": "InstallModules.ps1",
-        "storageApiVersion" : "2019-06-01"
+        "storageApiVersion": "2019-06-01"
     },
     "resources": [
         {
-            "type": "Microsoft.Network/networkSecurityGroups",            
-            "apiVersion": "2020-06-01",            
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2020-06-01",
             "name": "[variables('networkSecurityGroupName')]",
             "location": "[parameters('location')]",
             "properties": {
@@ -193,8 +200,8 @@
             }
         },
         {
-            "type": "Microsoft.Network/virtualNetworks",            
-            "apiVersion": "2020-06-01",            
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-06-01",
             "name": "[parameters('vmVirtualNetwork')]",
             "location": "[parameters('location')]",
             "condition": "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]",
@@ -221,7 +228,7 @@
             }
         },
         {
-            "type": "Microsoft.Network/networkInterfaces",            
+            "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2020-06-01",
             "name": "[variables('nicName')]",
             "location": "[parameters('location')]",
@@ -242,11 +249,11 @@
                 ]
             }
         },
-        {            
+        {
             "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
             "name": "[concat(variables('nicName'), '/Microsoft.Insights/service')]",
-            "location": "[parameters('location')]",            
+            "location": "[parameters('location')]",
             "condition": "[and(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
             "dependsOn": [
                 "[variables('nicName')]"
@@ -271,9 +278,9 @@
                 ]
             }
         },
-        {            
+        {
             "type": "Microsoft.Compute/availabilitySets",
-            "apiVersion": "2019-03-01",     
+            "apiVersion": "2019-03-01",
             "name": "[parameters('vmAvailabilitySetName')]",
             "location": "[parameters('location')]",
             "condition": "[not(equals(parameters('vmAvailabilitySetName'), ''))]",
@@ -338,7 +345,7 @@
                     "apiVersion": "2017-03-30",
                     "name": "install-powershell-modules",
                     "location": "[parameters('location')]",
-                    "condition": "[not(equals(parameters('scriptsUri'), ''))]",
+                    "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
                     "dependsOn": [
                         "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
                     ],
@@ -362,7 +369,7 @@
                     "apiVersion": "2017-03-30",
                     "name": "[concat('setup-win-dsc', '-online')]",
                     "location": "[parameters('location')]",
-                    "condition": "[not(equals(parameters('scriptsUri'), ''))]",
+                    "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
                     "dependsOn": [
                         "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
                         "[resourceId('Microsoft.Compute/virtualMachines/extensions', parameters('vmName'), 'install-powershell-modules')]"
@@ -384,10 +391,37 @@
                             }
                         }
                     }
+                },
+                {
+                    "type": "extensions",
+                    "name": "[concat('setup-win-dsc', '-offline')]",
+                    "apiVersion": "2017-03-30",
+                    "location": "[parameters('location')]",
+                    "condition": "[and(parameters('isOffline'), not(equals(parameters('scriptsUri'), '')))]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.Powershell",
+                        "type": "DSC",
+                        "typeHandlerVersion": "2.77",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "wmfVersion": "latest",
+                            "configuration": {
+                                "url": "[concat(parameters('scriptsUri'), 'WindowsServer.ps1.zip')]",
+                                "script": "WindowsServer.ps1",
+                                "function": "WindowsServer"
+                            },
+                            "configurationArguments": {
+                                "IsOffline": true
+                            }
+                        }
+                    }
                 }
             ]
         },
-        {            
+        {
             "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
             "name": "[concat(parameters('vmName'), '/Microsoft.Insights/service')]",

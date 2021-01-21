@@ -145,14 +145,7 @@ configuration WindowsServer
 
     [scriptblock]$windowsServerStig = {
 
-        $osVersion              = (Get-WmiObject Win32_OperatingSystem).Caption
-        $domainControllerCheck  = (Get-WindowsFeature -Name AD-Domain-Services) -eq 'Installed'
-       
-        switch ($domainControllerCheck)
-        {
-            $true   {$osRole = 'DC'}
-            default {$osRole = 'MS'}
-        }
+        $osVersion = (Get-WmiObject Win32_OperatingSystem).Caption
 
         switch -Wildcard ($osVersion)
         {
@@ -160,14 +153,14 @@ configuration WindowsServer
             {
                 $osVersion      = '2016'
                 $exceptions   = @{
-                    'V-225019'  = @{Identity = 'Guests' }
-                    'V-225016'  = @{Identity = 'Guests'}
-                    'V-225018'  = @{Identity = 'Guests'}
+                    'V-225019'  = @{Identity    = 'Guests' }
+                    'V-225016'  = @{Identity    = 'Guests'}
+                    'V-225018'  = @{Identity    = 'Guests'}
                 }
                 $orgSettings = @{
                     'V-225015'  = @{Identity    = 'Guests'}
                     'V-225026'  = @{OptionValue = 'xAdmin'}
-                    'V-225027'  = @{OptionValue = 'Guests'}
+                    'V-225027'  = @{OptionValue = 'xGuest'}
                 }
                 break
             }
@@ -175,10 +168,10 @@ configuration WindowsServer
             {
                 $osVersion = '2019'
                 $exceptions = @{
-                    'V-205733' = @{Identity = 'Guests'}
-                    'V-205672' = @{Identity = 'Guests'}
-                    'V-205673' = @{Identity = 'Guests'}
-                    'V-205675' = @{Identity = 'Guests'}
+                    'V-205733' = @{Identity     = 'Guests'}
+                    'V-205672' = @{Identity     = 'Guests'}
+                    'V-205673' = @{Identity     = 'Guests'}
+                    'V-205675' = @{Identity     = 'Guests'}
                 }
                 $orgSettings = @{
                     'V-205909' = @{OptionValue = 'xAdmin'}
@@ -191,7 +184,7 @@ configuration WindowsServer
         WindowsServer STIG_WindowsServer
         {
             OsVersion   = $osVersion
-            OsRole      = $osRole
+            OsRole      = 'MS'
             Exception   = $exceptions
             OrgSettings = $orgSettings
         }
