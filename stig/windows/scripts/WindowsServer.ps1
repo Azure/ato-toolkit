@@ -152,47 +152,72 @@ configuration WindowsServer
             "*2016*"
             {
                 $osVersion      = '2016'
-                $exceptions   = @{
+                $SkipRules      = @('V-225266','V-225267','V-225268')
+                $exceptions     = @{
                     'V-225019'  = @{Identity    = 'Guests' }
                     'V-225016'  = @{Identity    = 'Guests'}
                     'V-225018'  = @{Identity    = 'Guests'}
                 }
-                $orgSettings = @{
+                $orgSettings    = @{
                     'V-225015'  = @{Identity    = 'Guests'}
                     'V-225026'  = @{OptionValue = 'xAdmin'}
                     'V-225027'  = @{OptionValue = 'xGuest'}
+                }
+                
+                WindowsServer STIG_WindowsServer
+                {
+                    OsVersion   = $osVersion
+                    OsRole      = 'MS'
+                    Exception   = $exceptions
+                    OrgSettings = $orgSettings
+                    SkipRule    = $skipRules
+                }
+
+                AccountPolicy BaseLine2
+                {
+                    Name = "2016fix"
+                    Account_lockout_threshold = 3
+                    Account_lockout_duration = 15
+                    Reset_account_lockout_counter_after = 15
                 }
                 break
             }
             "*2019*"
             {
                 $osVersion = '2019'
-                $exceptions = @{
+                $exceptions    = @{
                     'V-205733' = @{Identity     = 'Guests'}
                     'V-205672' = @{Identity     = 'Guests'}
                     'V-205673' = @{Identity     = 'Guests'}
                     'V-205675' = @{Identity     = 'Guests'}
                 }
-                $orgSettings = @{
+                $orgSettings   = @{
                     'V-205909' = @{OptionValue = 'xAdmin'}
                     'V-205910' = @{OptionValue = 'xGuest'}
                 }
-                break
-            }
-        }
 
-        WindowsServer STIG_WindowsServer
-        {
-            OsVersion   = $osVersion
-            OsRole      = 'MS'
-            Exception   = $exceptions
-            OrgSettings = $orgSettings
+                WindowsServer STIG_WindowsServer
+                {
+                    OsVersion   = $osVersion
+                    OsRole      = 'MS'
+                    Exception   = $exceptions
+                    OrgSettings = $orgSettings
+                    SkipRule    = $skipRules
+                }
+                break
+            }     
         }
     }
 
     Node localhost
     {
         $localConfigurationManager.invoke()
+        
+        if (!$IsOffline) 
+        {
+            $dodCertificates.invoke()
+        }
+
         $windowsServerStig.invoke()
         $ie11Stig.invoke()
         $dotnetFrameworkStig.invoke()
