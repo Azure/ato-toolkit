@@ -6,7 +6,7 @@ configuration WindowsServer
         [String]$IsOffline = $false
     )
 
-    Import-DscResource -ModuleName PowerSTIG -ModuleVersion 4.7.0
+    Import-DscResource -ModuleName PowerSTIG -ModuleVersion 4.7.1
     Import-DscResource -Module cChoco -ModuleVersion 2.4.0.0
     Import-DscResource -ModuleName PSDscResources -ModuleVersion 2.12.0.0
     Import-DscResource -ModuleName xPSDesiredStateConfiguration -ModuleVersion 9.1.0
