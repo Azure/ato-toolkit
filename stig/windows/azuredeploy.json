@@ -113,7 +113,7 @@
         },
         "vmAvailabilitySetName": {
             "type": "string",
-            "defaultValue": "stig-as",
+            "defaultValue": "",
             "metadata": {
                 "description": "Availability Set configuration for VM."
             }
@@ -139,24 +139,6 @@
             "defaultValue": "",
             "metadata": {
                 "description": "Log Analytics workspace Id."
-            }
-        },
-        "vmAvailabilityFaultDomains": {
-            "type": "int",
-            "defaultValue": 2,
-            "minValue": 1,
-            "maxValue": 3,
-            "metadata": {
-                "description": "Availability Set Fault domains."
-            }
-        },
-        "vmAvailabilityUpdateDomains": {
-            "type": "int",
-            "defaultValue": 5,
-            "minValue": 1,
-            "maxValue": 20,
-            "metadata": {
-                "description": "Availability Set Update domains."
             }
         }
     },
@@ -279,27 +261,12 @@
             }
         },
         {
-            "type": "Microsoft.Compute/availabilitySets",
-            "apiVersion": "2019-03-01",
-            "name": "[parameters('vmAvailabilitySetName')]",
-            "location": "[parameters('location')]",
-            "condition": "[not(equals(parameters('vmAvailabilitySetName'), ''))]",
-            "properties": {
-                "platformFaultDomainCount": "[parameters('vmAvailabilityFaultDomains')]",
-                "platformUpdateDomainCount": "[parameters('vmAvailabilityUpdateDomains')]"
-            },
-            "sku": {
-                "name": "Aligned"
-            }
-        },
-        {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2020-06-01",
             "name": "[parameters('vmName')]",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]",
-                "[parameters('vmAvailabilitySetName')]"
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
             ],
             "properties": {
                 "hardwareProfile": {
