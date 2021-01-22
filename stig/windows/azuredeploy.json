@@ -173,7 +173,6 @@
         },
         "requiredModulesFile": "RequiredModules.ps1",
         "installPSModulesFile": "InstallModules.ps1",
-        "GenerateChecklist": "GenerateChecklist.ps1",
         "storageApiVersion": "2019-06-01"
     },
     "resources": [
@@ -417,54 +416,6 @@
                             "configurationArguments": {
                                 "IsOffline": true
                             }
-                        }
-                    }
-                },
-                {
-                    "type": "extensions",
-                    "apiVersion": "2017-03-30",
-                    "name": "Generate-Checklist-Files-Online",
-                    "location": "[parameters('location')]",
-                    "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
-                        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'),'/extensions/', 'setup-win-dsc-online')]"
-                    ],
-                    "properties": {
-                        "publisher": "Microsoft.Compute",
-                        "type": "CustomScriptExtension",
-                        "typeHandlerVersion": "1.9",
-                        "autoUpgradeMinorVersion": true,
-                        "settings": {
-                            "fileUris": [
-                                "[concat(parameters('scriptsUri'), variables('GenerateChecklist'))]"
-                            ],
-                            "timestamp": 123456788,
-                            "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('GenerateChecklist'))]"
-                        }
-                    }
-                },
-                {
-                    "type": "extensions",
-                    "apiVersion": "2017-03-30",
-                    "name": "Generate-Checklist-Files-Offline",
-                    "location": "[parameters('location')]",
-                    "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
-                        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'),'/extensions/', 'setup-win-dsc-offline')]"
-                    ],
-                    "properties": {
-                        "publisher": "Microsoft.Compute",
-                        "type": "CustomScriptExtension",
-                        "typeHandlerVersion": "1.9",
-                        "autoUpgradeMinorVersion": true,
-                        "settings": {
-                            "fileUris": [
-                                "[concat(parameters('scriptsUri'), variables('GenerateChecklist'))]"
-                            ],
-                            "timestamp": 123456788,
-                            "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('GenerateChecklist'))]"
                         }
                     }
                 }
