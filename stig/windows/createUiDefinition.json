@@ -105,7 +105,7 @@
                         "label": "Fault Domain Number",
                         "toolTip": "Virtual machines in the same fault domain share a common power source and physical network switch.",
                         "constraints": {
-                            "required": true
+                            "required": false
                         },
                         "visible": true
                     },
@@ -115,7 +115,7 @@
                         "label": "Update Domain Number",
                         "toolTip": "Virtual machines in the same update domain will be restarted together during planned maintenance. Azure never restarts more than one update domain at a time.",
                         "constraints": {
-                            "required": true
+                            "required": false
                         },
                         "visible": true
                     },
