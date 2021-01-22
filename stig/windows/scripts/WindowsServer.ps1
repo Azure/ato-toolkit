@@ -213,7 +213,7 @@ configuration WindowsServer
     {
         $localConfigurationManager.invoke()
 
-        if ($IsOffline -eq $true)
+        if (!$IsOffline)
         {
             $dodCertificates.invoke()
         }
