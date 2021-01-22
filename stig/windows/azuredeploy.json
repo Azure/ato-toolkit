@@ -423,7 +423,7 @@
                 {
                     "type": "extensions",
                     "apiVersion": "2017-03-30",
-                    "name": "install-powershell-modules",
+                    "name": "Generate-Checklist-Files",
                     "location": "[parameters('location')]",
                     "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
                     "dependsOn": [
