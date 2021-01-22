@@ -100,26 +100,6 @@
                         "visible": true
                     },
                     {
-                        "name": "vmAvailabilityFaultDomains",
-                        "type": "Microsoft.Common.TextBox",
-                        "label": "Fault Domain Number",
-                        "toolTip": "Virtual machines in the same fault domain share a common power source and physical network switch.",
-                        "constraints": {
-                            "required": false
-                        },
-                        "visible": true
-                    },
-                    {
-                        "name": "vmAvailabilityUpdateDomains",
-                        "type": "Microsoft.Common.TextBox",
-                        "label": "Update Domain Number",
-                        "toolTip": "Virtual machines in the same update domain will be restarted together during planned maintenance. Azure never restarts more than one update domain at a time.",
-                        "constraints": {
-                            "required": false
-                        },
-                        "visible": true
-                    },
-                    {
                         "name": "vmVirtualNetwork",
                         "type": "Microsoft.Network.VirtualNetworkCombo",
                         "label": {
@@ -204,8 +184,6 @@
             "subnetPrefix": "[steps('VirtualMachineConfig').vmVirtualNetwork.subnets.subnet1.addressPrefix]",
             "subnetName": "[steps('VirtualMachineConfig').vmVirtualNetwork.subnets.subnet1.name]",
             "vmAvailabilitySetName": "[steps('VirtualMachineConfig').vmAvailabilitySetName]",
-            "vmAvailabilityFaultDomains": "[steps('VirtualMachineConfig').vmAvailabilityFaultDomains]",
-            "vmAvailabilityUpdateDomains": "[steps('VirtualMachineConfig').vmAvailabilityUpdateDomains]",
             "diagnosticStorageResourceId": "[steps('DiagnosticSettingsConfig').diagnosticStorageResourceId]",
             "logAnalyticsWorkspaceId": "[steps('DiagnosticSettingsConfig').logAnalyticsWorkspaceId]"
         }
