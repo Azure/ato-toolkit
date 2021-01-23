@@ -117,14 +117,7 @@ configuration WindowsServer
 
         WindowsFirewall STIG_WindowsFirewall
         {
-            OrgSettings = @{
-                'V-17425'   = @{ValueData = '16384'}
-                'V-17425.b' = @{ValueData = '16384'}
-                'V-17435'   = @{ValueData = '16384'}
-                'V-17435.b' = @{ValueData = '16384'}
-                'V-17445'   = @{ValueData = '16384'}
-                'V-17445.b' = @{ValueData = '16384'}
-            }
+
         }
     }
 
@@ -134,12 +127,6 @@ configuration WindowsServer
         {
             OrgSettings = @{
                 'V-213450' = @{ValueData = '1'}
-                'V-213452' = @{ValueData = '1'}
-                'V-213453' = @{ValueData = '1'}
-                'V-213455' = @{ValueData = '2'}
-                'V-213464' = @{ValueData = '2'}
-                'V-213465' = @{ValueData = '2'}
-                'V-213466' = @{ValueData = '2'}
             }
         }
     }
