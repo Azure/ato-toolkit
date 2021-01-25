@@ -1,18 +1,3 @@
-<#
-.SYNOPSIS
-    When "Run as administrator" this script will generate a checklist file via PowerSTIG for Windows Server 2016/2019 that can be viewed with DISA'’'s StigViewer 
-    (https://public.cyber.mil/stigs/srg-stig-tools/).
-    A checklist is included with this script as an example of the compliance status with manual checklist entries added.
-    Please confirm all security settings once deployed to your environment.
-.DESCRIPTION
-    This script is able to generate checklist files for Server 2019 and 2016, with applications installed on base images (Windows Defender, Internet Explorer, Windows Firewall,
-    and DotNet Framework 4)
-.NOTES
-    This script is included to assist with generating a checklist of a newly deployed VM. Modifications to the script may be required based on organization requirements
-.EXAMPLE
-    .\GenerateChecklist.ps1
-#>
-
 Import-Module PowerStig -verbose -force
 
 #Get OS version
@@ -36,7 +21,7 @@ $powerSTIGpath = (Get-Module -Name PowerSTIG).ModuleBase
 # Wait for configuration to apply
 while((Get-DscLocalConfigurationManager).LCMState -notmatch "Idle")
 {
-    start-sleep 5
+    Start-Sleep 5
     Write-Host "Waiting 5 seconds for retry"
 }
 
