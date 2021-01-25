@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    When “Run as administrator” this script will generate a checklist file via PowerSTIG for Windows Server 2016/2019 that can be viewed with DISA’s StigViewer 
+    When "Run as administrator" this script will generate a checklist file via PowerSTIG for Windows Server 2016/2019 that can be viewed with DISA'’'s StigViewer 
     (https://public.cyber.mil/stigs/srg-stig-tools/).
     A checklist is included with this script as an example of the compliance status with manual checklist entries added.
     Please confirm all security settings once deployed to your environment.
