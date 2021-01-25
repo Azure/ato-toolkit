@@ -328,7 +328,7 @@
             "resources": [
                 {
                     "type": "Microsoft.Resources/deployments",
-                    "apiVersion": "2017-03-30",
+                    "apiVersion": "2018-05-01",
                     "name": "install-powershell-modules",
                     "location": "[parameters('location')]",
                     "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
@@ -364,7 +364,7 @@
                 },
                 {
                     "type": "extensions",
-                    "apiVersion": "2017-03-30",
+                    "apiVersion": "2018-05-01",
                     "name": "[concat('setup-win-dsc', '-online')]",
                     "location": "[parameters('location')]",
                     "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
