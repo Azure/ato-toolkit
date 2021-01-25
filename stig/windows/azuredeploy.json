@@ -324,113 +324,24 @@
                         "storageUri": "[if(not(equals(parameters('diagnosticStorageResourceId'), '')), reference(parameters('diagnosticStorageResourceId'), variables('storageApiVersion')).primaryEndpoints.blob, json('null'))]"
                     }
                 }
-            },
-            "resources": [
-                {
-                    "type": "Microsoft.Resources/deployments",
-                    "apiVersion": "2018-05-01",
-                    "name": "install-powershell-modules",
-                    "location": "[parameters('location')]",
-                    "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Resources/deployments', parameters('vmName'))]"
-                    ],
-                    "properties": {
-                        "mode": "Incremental",
-                        "templateLink": {
-                        "uri": "[variables('extensionUrl')]",
-                        "contentVersion": "1.0.0.0"
-                        },
-                        "parameters": {
-                            "location": {
-                                "value": "[parameters('location')]"
-                            },
-                            "extensionName": {
-                                "value": "cse"
-                            },
-                            "vmName": {
-                                "value": "[parameters('vmName')]"
-                            },
-                            "fileUris": {
-                                "value": [
-                                "[uri(parameters('_artifactsLocation'), concat(variables('script1File')))]"
-                                ]
-                            },
-                            "commandToExecute": {
-                                "value": "[variables('script1Command')]"
-                            }
-                        }
-                    }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
+            "name": "install-powershell-modules",
+            "location": "[parameters('location')]",
+            "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', parameters('vmName'))]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                "uri": "[variables('extensionUrl')]",
+                "contentVersion": "1.0.0.0"
                 },
-                {
-                    "type": "extensions",
-                    "apiVersion": "2018-05-01",
-                    "name": "[concat('setup-win-dsc', '-online')]",
-                    "location": "[parameters('location')]",
-                    "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
-                        "[resourceId('Microsoft.Compute/virtualMachines/extensions', parameters('vmName'), 'install-powershell-modules')]"
-                    ],
-                    "properties": {
-                        "publisher": "Microsoft.Powershell",
-                        "type": "DSC",
-                        "typeHandlerVersion": "2.77",
-                        "autoUpgradeMinorVersion": true,
-                        "settings": {
-                            "wmfVersion": "latest",
-                            "configuration": {
-                                "url": "[concat(parameters('scriptsUri'), 'WindowsServer.ps1.zip')]",
-                                "script": "WindowsServer.ps1",
-                                "function": "WindowsServer"
-                            },
-                            "configurationArguments": {
-                                "IsOffline": false
-                            }
-                        }
-                    }
-                },
-                {
-                    "type": "extensions",
-                    "name": "[concat('setup-win-dsc', '-offline')]",
-                    "apiVersion": "2017-03-30",
-                    "location": "[parameters('location')]",
-                    "condition": "[and(parameters('isOffline'), not(equals(parameters('scriptsUri'), '')))]",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-                    ],
-                    "properties": {
-                        "publisher": "Microsoft.Powershell",
-                        "type": "DSC",
-                        "typeHandlerVersion": "2.77",
-                        "autoUpgradeMinorVersion": true,
-                        "settings": {
-                            "wmfVersion": "latest",
-                            "configuration": {
-                                "url": "[concat(parameters('scriptsUri'), 'WindowsServer.ps1.zip')]",
-                                "script": "WindowsServer.ps1",
-                                "function": "WindowsServer"
-                            },
-                            "configurationArguments": {
-                                "IsOffline": true
-                            }
-                        }
-                    }
-                },
-                {
-                "type": "Microsoft.Resources/deployments",
-                "name": "GenerateChecklist",
-                "apiVersion": "2018-05-01",
-                "dependsOn": [
-                    "[concat('setup-win-dsc', '-online')]"
-                ],
-                "properties": {
-                    "mode": "Incremental",
-                    "templateLink": {
-                    "uri": "[variables('extensionUrl')]",
-                    "contentVersion": "1.0.0.0"
-                    },
-                    "parameters": {
+                "parameters": {
                     "location": {
                         "value": "[parameters('location')]"
                     },
@@ -442,16 +353,103 @@
                     },
                     "fileUris": {
                         "value": [
-                        "[uri(parameters('_artifactsLocation'), concat(variables('script2File')))]"
+                        "[uri(parameters('_artifactsLocation'), concat(variables('script1File')))]"
                         ]
                     },
                     "commandToExecute": {
-                        "value": "[variables('script2Command')]"
-                    }
+                        "value": "[variables('script1Command')]"
                     }
                 }
+            }
+        },
+        {
+            "type": "extensions",
+            "apiVersion": "2018-05-01",
+            "name": "[concat('setup-win-dsc', '-online')]",
+            "location": "[parameters('location')]",
+            "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
+                "[resourceId('Microsoft.Compute/virtualMachines/extensions', parameters('vmName'), 'install-powershell-modules')]"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.77",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "wmfVersion": "latest",
+                    "configuration": {
+                        "url": "[concat(parameters('scriptsUri'), 'WindowsServer.ps1.zip')]",
+                        "script": "WindowsServer.ps1",
+                        "function": "WindowsServer"
+                    },
+                    "configurationArguments": {
+                        "IsOffline": false
+                    }
                 }
-            ]
+            }
+        },
+        {
+            "type": "extensions",
+            "name": "[concat('setup-win-dsc', '-offline')]",
+            "apiVersion": "2017-03-30",
+            "location": "[parameters('location')]",
+            "condition": "[and(parameters('isOffline'), not(equals(parameters('scriptsUri'), '')))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.77",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "wmfVersion": "latest",
+                    "configuration": {
+                        "url": "[concat(parameters('scriptsUri'), 'WindowsServer.ps1.zip')]",
+                        "script": "WindowsServer.ps1",
+                        "function": "WindowsServer"
+                    },
+                    "configurationArguments": {
+                        "IsOffline": true
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "name": "GenerateChecklist",
+            "apiVersion": "2018-05-01",
+            "dependsOn": [
+                "[concat('setup-win-dsc', '-online')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                "uri": "[variables('extensionUrl')]",
+                "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                "location": {
+                    "value": "[parameters('location')]"
+                },
+                "extensionName": {
+                    "value": "cse"
+                },
+                "vmName": {
+                    "value": "[parameters('vmName')]"
+                },
+                "fileUris": {
+                    "value": [
+                    "[uri(parameters('_artifactsLocation'), concat(variables('script2File')))]"
+                    ]
+                },
+                "commandToExecute": {
+                    "value": "[variables('script2Command')]"
+                }
+                }
+            }
         },
         {
             "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
