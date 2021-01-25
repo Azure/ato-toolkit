@@ -363,7 +363,7 @@
             }
         },
         {
-            "type": "extensions",
+            "type": "Microsoft.Resources/deployments",
             "apiVersion": "2018-05-01",
             "name": "[concat('setup-win-dsc', '-online')]",
             "location": "[parameters('location')]",
@@ -391,7 +391,7 @@
             }
         },
         {
-            "type": "extensions",
+            "type": "Microsoft.Resources/deployments",
             "name": "[concat('setup-win-dsc', '-offline')]",
             "apiVersion": "2017-03-30",
             "location": "[parameters('location')]",
