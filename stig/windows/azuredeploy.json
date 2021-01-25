@@ -393,7 +393,7 @@
         {
             "type": "Microsoft.Resources/deployments",
             "name": "[concat('setup-win-dsc', '-offline')]",
-            "apiVersion": "2017-03-30",
+            "apiVersion": "2018-05-01",
             "location": "[parameters('location')]",
             "condition": "[and(parameters('isOffline'), not(equals(parameters('scriptsUri'), '')))]",
             "dependsOn": [
