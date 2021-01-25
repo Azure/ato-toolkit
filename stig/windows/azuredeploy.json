@@ -369,8 +369,8 @@
             "location": "[parameters('location')]",
             "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
-                "[resourceId('Microsoft.Compute/virtualMachines/extensions', parameters('vmName'), 'install-powershell-modules')]"
+                "[resourceId('Microsoft.Resources/deployments', parameters('vmName'))]",
+                "[resourceId('Microsoft.Resources/deployments', parameters('vmName'), 'install-powershell-modules')]"
             ],
             "properties": {
                 "publisher": "Microsoft.Powershell",
@@ -397,7 +397,7 @@
             "location": "[parameters('location')]",
             "condition": "[and(parameters('isOffline'), not(equals(parameters('scriptsUri'), '')))]",
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+                 "[resourceId('Microsoft.Resources/deployments', parameters('vmName'))]"
             ],
             "properties": {
                 "publisher": "Microsoft.Powershell",
