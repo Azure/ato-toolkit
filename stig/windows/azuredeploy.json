@@ -395,6 +395,7 @@
                     "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
                     "dependsOn": [
                         "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
+                        "[resourceId('Microsoft.Compute/virtualMachines/extensions', parameters('vmName'), 'install-powershell-modules')]",
                         "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'),'/extensions/', concat('setup-win-dsc', '-offline'))]"
                     ],
                     "properties": {
