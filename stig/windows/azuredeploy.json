@@ -155,7 +155,8 @@
         },
         "requiredModulesFile": "RequiredModules.ps1",
         "installPSModulesFile": "InstallModules.ps1",
-        "storageApiVersion": "2019-06-01"
+        "storageApiVersion": "2019-06-01",
+        "generateChecklist": "GenerateChecklist.ps1"
     },
     "resources": [
         {
@@ -383,6 +384,30 @@
                             "configurationArguments": {
                                 "IsOffline": true
                             }
+                        }
+                    }
+                },
+                {
+                    "type": "extensions",
+                    "apiVersion": "2017-03-30",
+                    "name": "Generate-Checklist",
+                    "location": "[parameters('location')]",
+                    "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
+                        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'),'/extensions/', concat('setup-win-dsc', '-offline'))]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.Compute",
+                        "type": "CustomScriptExtension",
+                        "typeHandlerVersion": "1.10",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "fileUris": [
+                                "[concat(parameters('scriptsUri'), variables('GenerateChecklist'))]",
+                            ],
+                            "timestamp": 123456788,
+                            "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('GenerateChecklist'))]"
                         }
                     }
                 }
