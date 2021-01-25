@@ -333,7 +333,7 @@
                     "location": "[parameters('location')]",
                     "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
                     "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+                        "[resourceId('Microsoft.Resources/deployments', parameters('vmName'))]"
                     ],
                     "properties": {
                         "mode": "Incremental",
