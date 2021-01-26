@@ -33,22 +33,9 @@
                         }
                     },
                     {
-                        "name": "storageSelector",
-                        "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Select storage accounts",
-                        "resourceType": "Microsoft.Storage/storageAccounts",
-                        "options": {
-                            "filter": {
-                                "subscription": "onBasics",
-                                "location": "onBasics"
-                            }
-                        }
-                    },
-                    {
                         "name": "vmAvailabilitySetResourceId",
                         "type": "Microsoft.Common.TextBox",
                         "label": "Availability set resource id",
-                        "resourceType": "Microsoft.Storage/storageAccounts",
                         "toolTip": "Availability set Name for the VM.",
                         "constraints": {
                             "required": false
@@ -199,14 +186,20 @@
                         }
                     },
                     {
-                        "name": "diagnosticStorageResourceId",
-                        "type": "Microsoft.Common.TextBox",
-                        "label": "Storage account resource id",
-                        "toolTip": "Storage account for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
-                        "constraints": {
-                            "required": false
+                        "name": "storageAccount",
+                        "type": "Microsoft.Storage.StorageAccountSelector",
+                        "label": "Diagnostic storage account",
+                        "toolTip": "Storage Account for the Virtual Machine's diagnostics",
+                        "defaultValue": {
+                            "type": "Standard_LRS",
+                            "name": "[concat(replace(basics('vmName'), '-', ''), take(replace(guid(), '-', ''), 10))]"
                         },
-                        "visible": true
+                        "constraints": {
+                            "allowedTypes": [
+                                "Standard_LRS",
+                                "Standard_GRS"
+                            ]
+                        }
                     },
                     {
                         "name": "logAnalyticsWorkspaceId",
@@ -236,7 +229,7 @@
             "addressPrefix": "[steps('networking').vmVirtualNetwork.addressPrefix]",
             "subnetPrefix": "[steps('networking').vmVirtualNetwork.subnets.subnet1.addressPrefix]",
             "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
-            "diagnosticStorageResourceId": "[steps('management').diagnosticStorageResourceId]",
+            "storageAccount": "[steps('management').storageAccount]",
             "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspaceId]"
         }
     }
