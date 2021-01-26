@@ -43,7 +43,7 @@
                                 "location": "onBasics"
                             }
                         }
-                    }
+                    },
                     {
                         "name": "vmAvailabilitySetResourceId",
                         "type": "Microsoft.Common.TextBox",
