@@ -33,9 +33,22 @@
                         }
                     },
                     {
+                        "name": "storageSelector",
+                        "type": "Microsoft.Solutions.ResourceSelector",
+                        "label": "Select storage accounts",
+                        "resourceType": "Microsoft.Storage/storageAccounts",
+                        "options": {
+                            "filter": {
+                                "subscription": "onBasics",
+                                "location": "onBasics"
+                            }
+                        }
+                    }
+                    {
                         "name": "vmAvailabilitySetResourceId",
                         "type": "Microsoft.Common.TextBox",
                         "label": "Availability set resource id",
+                        "resourceType": "Microsoft.Storage/storageAccounts",
                         "toolTip": "Availability set Name for the VM.",
                         "constraints": {
                             "required": false
@@ -211,6 +224,7 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
+            "storageName": "[steps('instance').storageSelector]",
             "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySetResourceId]",
             "OSVersion": "[steps('instance').OSVersion]",
             "vmSize": "[steps('instance').vmSize]",
