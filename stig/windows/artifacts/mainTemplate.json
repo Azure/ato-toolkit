@@ -55,12 +55,20 @@
                 "description": ""
             }
         },
-        "scriptsUri": {
+        "_artifactsLocation": {
             "type": "string",
-            "defaultValue": "https://raw.githubusercontent.com/erjenkin/ato-toolkit/master/stig/windows/scripts/",
+            "defaultValue": "[split(deployment().properties.templateLink.uri, 'mainTemplate.json')[0]]",
+            "metadata": {
+                "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+            }
+        },
+        "_artifactsLocationSasToken": {
+            "type": "string",
+            "defaultValue": "",
             "metadata": {
                 "description": ""
             }
+
         },
         "isOffline": {
             "type": "bool",
@@ -155,6 +163,7 @@
         },
         "requiredModulesFile": "RequiredModules.ps1",
         "installPSModulesFile": "InstallModules.ps1",
+        "generateStigChecklist": "GenerateStigChecklist.ps1",
         "storageApiVersion": "2019-06-01"
     },
     "resources": [
@@ -312,7 +321,7 @@
                     "apiVersion": "2017-03-30",
                     "name": "install-powershell-modules",
                     "location": "[parameters('location')]",
-                    "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
+                    "condition": "[and(not(parameters('isOffline')), not(equals(parameters('_artifactsLocation'), '')))]",
                     "dependsOn": [
                         "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
                     ],
@@ -323,8 +332,9 @@
                         "autoUpgradeMinorVersion": true,
                         "settings": {
                             "fileUris": [
-                                "[concat(parameters('scriptsUri'), variables('requiredModulesFile'))]",
-                                "[concat(parameters('scriptsUri'), variables('installPSModulesFile'))]"
+                                "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), parameters('_artifactsLocationSasToken'))]"
                             ],
                             "timestamp": 123456788,
                             "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'))]"
@@ -336,7 +346,7 @@
                     "apiVersion": "2017-03-30",
                     "name": "[concat('setup-win-dsc', '-online')]",
                     "location": "[parameters('location')]",
-                    "condition": "[and(not(parameters('isOffline')), not(equals(parameters('scriptsUri'), '')))]",
+                    "condition": "[and(not(parameters('isOffline')), not(equals(parameters('_artifactsLocation'), '')))]",
                     "dependsOn": [
                         "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
                         "[resourceId('Microsoft.Compute/virtualMachines/extensions', parameters('vmName'), 'install-powershell-modules')]"
@@ -349,7 +359,7 @@
                         "settings": {
                             "wmfVersion": "latest",
                             "configuration": {
-                                "url": "[concat(parameters('scriptsUri'), 'WindowsServer.ps1.zip')]",
+                                "url": "[concat(parameters('_artifactsLocation'), 'WindowsServer.ps1.zip', parameters('_artifactsLocationSasToken'))]",
                                 "script": "WindowsServer.ps1",
                                 "function": "WindowsServer"
                             },
@@ -364,7 +374,7 @@
                     "name": "[concat('setup-win-dsc', '-offline')]",
                     "apiVersion": "2017-03-30",
                     "location": "[parameters('location')]",
-                    "condition": "[and(parameters('isOffline'), not(equals(parameters('scriptsUri'), '')))]",
+                    "condition": "[and(parameters('isOffline'), not(equals(parameters('_artifactsLocation'), '')))]",
                     "dependsOn": [
                         "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
                     ],
@@ -376,7 +386,7 @@
                         "settings": {
                             "wmfVersion": "latest",
                             "configuration": {
-                                "url": "[concat(parameters('scriptsUri'), 'WindowsServer.ps1.zip')]",
+                                "url": "[concat(parameters('_artifactsLocation'), 'WindowsServer.ps1.zip', parameters('_artifactsLocationSasToken'))]",
                                 "script": "WindowsServer.ps1",
                                 "function": "WindowsServer"
                             },
