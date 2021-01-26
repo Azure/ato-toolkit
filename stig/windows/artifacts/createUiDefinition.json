@@ -186,20 +186,14 @@
                         }
                     },
                     {
-                        "name": "storageAccount",
-                        "type": "Microsoft.Storage.StorageAccountSelector",
-                        "label": "Diagnostic storage account",
-                        "toolTip": "Storage Account for the Virtual Machine's diagnostics",
-                        "defaultValue": {
-                            "type": "Standard_LRS",
-                            "name": "[concat(resourceGroup().name, '-', ''), take(replace(guid(), '-', ''), 10))]"
-                        },
+                        "name": "diagnosticStorageResourceId",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Storage account resource id",
+                        "toolTip": "Storage account for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
                         "constraints": {
-                            "allowedTypes": [
-                                "Standard_LRS",
-                                "Standard_GRS"
-                            ]
-                        }
+                            "required": false
+                        },
+                        "visible": true
                     },
                     {
                         "name": "logAnalyticsWorkspaceId",
@@ -217,7 +211,7 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
-            "storageName": "[steps('instance').storageSelector]",
+            "diagnosticStorageResourceId": "[steps('instance').diagnosticStorageResourceId]",
             "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySetResourceId]",
             "OSVersion": "[steps('instance').OSVersion]",
             "vmSize": "[steps('instance').vmSize]",
