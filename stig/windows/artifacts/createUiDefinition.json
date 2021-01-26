@@ -217,7 +217,7 @@
 								"location": "resourceGroup().location"
 							}
 						}
-                    }	
+                    }
                 ]
             }
         ],
