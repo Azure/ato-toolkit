@@ -3,64 +3,51 @@
     "handler": "Microsoft.Azure.CreateUIDef",
     "version": "0.1.2-preview",
     "parameters": {
-        "basics": [
-            {
-                "name": "vmName",
-                "type": "Microsoft.Common.TextBox",
-                "label": "Virtual Machine Name",
-                "toolTip": "The name of the Virtual Machine.",
-                "defaultValue": "simple-vm",
-                "constraints": {
-                    "required": true,
-                    "regex": "^[a-z0-9A-Z-]{3,15}$",
-                    "validationMessage": "The VM Name must be between 3 and 15 characters long and contain letters, numbers and hyphens only."
-                }
-            },
-            {
-                "name": "adminUsername",
-                "type": "Microsoft.Compute.UserNameTextBox",
-                "label": "Username",
-                "toolTip": "Admin username for the machine",
-                "defaultValue": "azureadmin",
-                "osPlatform": "Windows",
-                "constraints": {
-                    "required": true
-                }
-            },
-            {
-                "name": "password",
-                "type": "Microsoft.Common.PasswordBox",
-                "label": {
-                    "password": "Password",
-                    "confirmPassword": "Confirm password"
-                },
-                "toolTip": "Admin password for the virtual machine",
-                "constraints": {
-                    "required": true,
-                    "regex": "^(?=.*[A-Z])(?=.*[.!@#$%^&*()-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
-                    "validationMessage": "Password must be at least 12 characters long, and contain upper case, lower case, number and symbol"
-                },
-                "options": {
-                    "hideConfirmation": false
-                },
-                "visible": true
-            }
-        ],
+        "basics": [],
         "steps": [
             {
-                "name": "VirtualMachineConfig",
-                "label": "Virtual Machine Settings",
+                "name": "instance",
+                "label": "Instance",
                 "subLabel": {
                     "preValidation": "Configure the virtual machine's resources and settings",
                     "postValidation": "Done"
                 },
-                "bladeTitle": "Virtual Machine Settings",
+                "bladeTitle": "Instance",
                 "elements": [
+                    {
+                        "name": "textBlock0",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
+                            "text": "Instance details"
+                        }
+                    },
+                    {
+                        "name": "vmName",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Virtual machine name",
+                        "toolTip": "Virtual machines in Azure have two distinct names: virtual machine name used as the Azure resource identifier, and in guest host name. When you create a VM in the portal, the same name is used for both the virtual machine name and the host name. The virtual machine name cannot be changed after the VM is created. You can change the host name when you log into the virtual machine.",
+                        "constraints": {
+                            "required": true,
+                            "regex": "^[a-z0-9A-Z-]{3,15}$",
+                            "validationMessage": "Virtual machine Name must be between 3 and 15 characters long and contain letters, numbers and hyphens only."
+                        }
+                    },
+                    {
+                        "name": "vmAvailabilitySetResourceId",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Availability set resource id",
+                        "toolTip": "Availability set Name for the VM.",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": true
+                    },
                     {
                         "name": "OSVersion",
                         "type": "Microsoft.Common.DropDown",
-                        "label": "Windows OS Version",
-                        "toolTip": "The OS Version for the VM Image",
+                        "label": "Windows OS version",
+                        "toolTip": "The OS version for the VM Image",
+                        "defaultValue": "2019-Datacenter",
                         "constraints": {
                             "allowedValues": [
                                 {
@@ -79,8 +66,8 @@
                     {
                         "name": "vmSize",
                         "type": "Microsoft.Compute.SizeSelector",
-                        "label": "Virtual Machine Size",
-                        "toolTip": "The size of virtual machine to provision.",
+                        "label": "Size",
+                        "toolTip": "Select a VM size to support the workload that you want to run. The size that you choose then determines factors such as processing power, memory, and storage capacity. Azure offers a wide variety of sizes to support many types of uses. Azure charges an hourly price based on the VM's size and operating system.",
                         "recommendedSizes": [
                             "Standard_A2_v2",
                             "Standard_D2_v2",
@@ -90,14 +77,58 @@
                         "count": "1"
                     },
                     {
-                        "name": "vmAvailabilitySetName",
-                        "type": "Microsoft.Common.TextBox",
-                        "label": "Availability Set Name",
-                        "toolTip": "Availability Set Name for the VM.",
+                        "name": "textBlock1",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
+                            "text": "Administrator account"
+                        }
+                    },
+                    {
+                        "name": "adminUsername",
+                        "type": "Microsoft.Compute.UserNameTextBox",
+                        "label": "Username",
+                        "toolTip": "Admin username for the machine",
+                        "defaultValue": "azureadmin",
+                        "osPlatform": "Windows",
                         "constraints": {
-                            "required": false
+                            "required": true
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "type": "Microsoft.Common.PasswordBox",
+                        "label": {
+                            "password": "Password",
+                            "confirmPassword": "Confirm password"
+                        },
+                        "toolTip": "Admin password for the virtual machine",
+                        "constraints": {
+                            "required": true,
+                            "regex": "^(?=.*[A-Z])(?=.*[.!@#$%^&*()-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
+                            "validationMessage": "Password must be at least 12 characters long, and contain upper case, lower case, number and symbol"
+                        },
+                        "options": {
+                            "hideConfirmation": false
                         },
                         "visible": true
+                    }
+                ]
+            },
+            {
+                "name": "networking",
+                "label": "Networking",
+                "subLabel": {
+                    "preValidation": "Define network connectivity for your virtual machine by configuring network interface card (NIC) settings. You can control ports, inbound and outbound connectivity with security group rules, or place behind an existing load balancing solution.",
+                    "postValidation": "Done"
+                },
+                "bladeTitle": "Network interface",
+                "elements": [
+                    {
+                        "name": "textBlock0",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
+                            "text": "Network interface"
+                        }
                     },
                     {
                         "name": "vmVirtualNetwork",
@@ -111,7 +142,7 @@
                             "subnets": ""
                         },
                         "defaultValue": {
-                            "name": "vnet01",
+                            "name": "[concat(resourceGroup().name, '-vnet')]",
                             "addressPrefixSize": "/16"
                         },
                         "constraints": {
@@ -124,7 +155,7 @@
                             "subnet1": {
                                 "label": "Subnet",
                                 "defaultValue": {
-                                    "name": "subnet-1",
+                                    "name": "default",
                                     "addressPrefixSize": "/24"
                                 },
                                 "constraints": {
@@ -139,18 +170,25 @@
                 ]
             },
             {
-                "name": "DiagnosticSettingsConfig",
-                "label": "Diagnostic Settings",
+                "name": "management",
+                "label": "Management",
                 "subLabel": {
-                    "preValidation": "Configure the virtual machine's diagnostic settings",
+                    "preValidation": "Configure monitoring and management options for your VM.",
                     "postValidation": "Done"
                 },
-                "bladeTitle": "Diagnostic Settings",
+                "bladeTitle": "Management",
                 "elements": [
+                    {
+                        "name": "textBlock0",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
+                            "text": "Diagnostic settings"
+                        }
+                    },
                     {
                         "name": "diagnosticStorageResourceId",
                         "type": "Microsoft.Common.TextBox",
-                        "label": "Storage Account Id",
+                        "label": "Storage account resource id",
                         "toolTip": "Storage account for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
                         "constraints": {
                             "required": false
@@ -160,8 +198,8 @@
                     {
                         "name": "logAnalyticsWorkspaceId",
                         "type": "Microsoft.Common.TextBox",
-                        "label": "Log Analytics Workspace Id",
-                        "toolTip": "Log Analytics Workspace for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
+                        "label": "Log Analytics workspace resource id",
+                        "toolTip": "Log Analytics workspace for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
                         "constraints": {
                             "required": false
                         },
@@ -172,20 +210,20 @@
         ],
         "outputs": {
             "location": "[location()]",
-            "vmName": "[basics('vmName')]",
-            "adminUsername": "[basics('adminUsername')]",
-            "adminPassword": "[basics('password')]",
-            "vmSize": "[steps('VirtualMachineConfig').vmSize]",
-            "OSVersion": "[steps('VirtualMachineConfig').OSVersion]",
-            "vmVirtualNetwork": "[steps('VirtualMachineConfig').vmVirtualNetwork.name]",
-            "virtualNetworkNewOrExisting": "[steps('VirtualMachineConfig').vmVirtualNetwork.newOrExisting]",
-            "virtualNetworkResourceGroupName": "[steps('VirtualMachineConfig').vmVirtualNetwork.resourceGroup]",
-            "addressPrefix": "[steps('VirtualMachineConfig').vmVirtualNetwork.addressPrefix]",
-            "subnetPrefix": "[steps('VirtualMachineConfig').vmVirtualNetwork.subnets.subnet1.addressPrefix]",
-            "subnetName": "[steps('VirtualMachineConfig').vmVirtualNetwork.subnets.subnet1.name]",
-            "vmAvailabilitySetName": "[steps('VirtualMachineConfig').vmAvailabilitySetName]",
-            "diagnosticStorageResourceId": "[steps('DiagnosticSettingsConfig').diagnosticStorageResourceId]",
-            "logAnalyticsWorkspaceId": "[steps('DiagnosticSettingsConfig').logAnalyticsWorkspaceId]"
+            "vmName": "[steps('instance').vmName]",
+            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySetResourceId]",
+            "OSVersion": "[steps('instance').OSVersion]",
+            "vmSize": "[steps('instance').vmSize]",
+            "adminUsername": "[steps('instance').adminUsername]",
+            "adminPassword": "[steps('instance').password]",
+            "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",
+            "virtualNetworkNewOrExisting": "[steps('networking').vmVirtualNetwork.newOrExisting]",
+            "virtualNetworkResourceGroupName": "[steps('networking').vmVirtualNetwork.resourceGroup]",
+            "addressPrefix": "[steps('networking').vmVirtualNetwork.addressPrefix]",
+            "subnetPrefix": "[steps('networking').vmVirtualNetwork.subnets.subnet1.addressPrefix]",
+            "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
+            "diagnosticStorageResourceId": "[steps('management').diagnosticStorageResourceId]",
+            "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspaceId]"
         }
     }
 }
