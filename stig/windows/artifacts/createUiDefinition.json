@@ -67,7 +67,7 @@
                         "name": "vmSize",
                         "type": "Microsoft.Compute.SizeSelector",
                         "label": "Size",
-                        "toolTip": "Select a VM size to support the workload that you want to run. The size that you choose then determines factors such as processing power, memory, and storage capacity. Azure offers a wide variety of sizes to support many types of uses. Azure charges an hourly price based on the VM's size and operating system. [Learn More](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes)",
+                        "toolTip": "Select a VM size to support the workload that you want to run. The size that you choose then determines factors such as processing power, memory, and storage capacity. Azure offers a wide variety of sizes to support many types of uses. Azure charges an hourly price based on the VM's size and operating system.",
                         "recommendedSizes": [
                             "Standard_A2_v2",
                             "Standard_D2_v2",
@@ -187,23 +187,29 @@
                     },
                     {
                         "name": "diagnosticStorageResourceId",
-                        "type": "Microsoft.Common.TextBox",
+                        "type": "Microsoft.Solutions.ResourceSelector",
                         "label": "Storage account resource id",
-                        "toolTip": "Storage account for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
-                        "constraints": {
-                            "required": false
-                        },
-                        "visible": true
+                        "resourceType": "Microsoft.Storage/storageAccounts",
+                        "toolTip": "Storage Account for Diagnostic Settings.",
+                        "options": {
+                            "filter": {
+                                "subscription": "resourceGroup().subscription",
+                                "location": "resourceGroup().location"
+                            }
+                        }
                     },
                     {
-                        "name": "logAnalyticsWorkspaceId",
-                        "type": "Microsoft.Common.TextBox",
+                        "name": "logAnalyticsWorkspaceIdTest",
+                        "type": "Microsoft.Solutions.ResourceSelector",
                         "label": "Log Analytics workspace resource id",
-                        "toolTip": "Log Analytics workspace for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
-                        "constraints": {
-                            "required": false
-                        },
-                        "visible": true
+                        "resourceType": "Microsoft.OperationalInsights/workspaces",
+                        "toolTip": "Log Analytics workspace for Diagnostic Settings.",
+                        "options": {
+                            "filter": {
+                                "subscription": "resourceGroup().subscription",
+                                "location": "resourceGroup().location"
+                            }
+                        }
                     }
                 ]
             }
