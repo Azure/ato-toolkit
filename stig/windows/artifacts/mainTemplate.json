@@ -134,20 +134,6 @@
             "metadata": {
                 "description": "Log retention in days."
             }
-        },
-        "diagnosticStorageResourceId": {
-            "type": "object",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Diagnostic Storage account Id."
-            }
-        },
-        "logAnalyticsWorkspaceId": {
-            "type": "object",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Log Analytics workspace Id."
-            }
         }
     },
     "variables": {
