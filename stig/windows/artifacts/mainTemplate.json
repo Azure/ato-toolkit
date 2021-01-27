@@ -159,7 +159,7 @@
         "subnetRef": "[concat(variables('vnetId')[parameters('virtualNetworkNewOrExisting')],'/subnets/',parameters('subnetName'))]",
         "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
         "availabilitySetId": {
-            "id": "[if(equals(parameters('vmAvailabilitySetName'), ''), json('null'), resourceId('Microsoft.Compute/availabilitySets', parameters('vmAvailabilitySetName')))]"
+            "id": "[resourceId('Microsoft.Compute/availabilitySets/', parameters('vmAvailabilitySetName'))]"
         },
         "requiredModulesFile": "RequiredModules.ps1",
         "installPSModulesFile": "InstallModules.ps1",
