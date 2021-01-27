@@ -45,8 +45,8 @@
                     {
                         "name": "OSVersion",
                         "type": "Microsoft.Common.DropDown",
-                        "label": "Windows OS version",
-                        "toolTip": "The OS version for the VM Image",
+                        "label": "Image",
+                        "toolTip": "Choose the base operating system or application for the VM",
                         "defaultValue": "2019-Datacenter",
                         "constraints": {
                             "allowedValues": [
@@ -67,7 +67,7 @@
                         "name": "vmSize",
                         "type": "Microsoft.Compute.SizeSelector",
                         "label": "Size",
-                        "toolTip": "Select a VM size to support the workload that you want to run. The size that you choose then determines factors such as processing power, memory, and storage capacity. Azure offers a wide variety of sizes to support many types of uses. Azure charges an hourly price based on the VM's size and operating system.",
+                        "toolTip": "Select a VM size to support the workload that you want to run. The size that you choose then determines factors such as processing power, memory, and storage capacity. Azure offers a wide variety of sizes to support many types of uses. Azure charges an hourly price based on the VM's size and operating system. [Learn More](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes)",
                         "recommendedSizes": [
                             "Standard_A2_v2",
                             "Standard_D2_v2",
@@ -87,7 +87,7 @@
                         "name": "adminUsername",
                         "type": "Microsoft.Compute.UserNameTextBox",
                         "label": "Username",
-                        "toolTip": "Admin username for the machine",
+                        "toolTip": "The administrator username for the VM",
                         "defaultValue": "azureadmin",
                         "osPlatform": "Windows",
                         "constraints": {
@@ -101,7 +101,7 @@
                             "password": "Password",
                             "confirmPassword": "Confirm password"
                         },
-                        "toolTip": "Admin password for the virtual machine",
+                        "toolTip": "The administrator password for the VM",
                         "constraints": {
                             "required": true,
                             "regex": "^(?=.*[A-Z])(?=.*[.!@#$%^&*()-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
@@ -187,29 +187,23 @@
                     },
                     {
                         "name": "diagnosticStorageResourceId",
-                        "type": "Microsoft.Solutions.ResourceSelector",
+                        "type": "Microsoft.Common.TextBox",
                         "label": "Storage account resource id",
-                        "resourceType": "Microsoft.Storage/storageAccounts",
-                        "toolTip": "Storage Account for Diagnostic Settings.",
-                        "options": {
-                            "filter": {
-                                "subscription": "resourceGroup().subscription",
-                                "location": "resourceGroup().location"
-                            }
-                        }
+                        "toolTip": "Storage account for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": true
                     },
                     {
-                        "name": "logAnalyticsWorkspaceIdTest",
-                        "type": "Microsoft.Solutions.ResourceSelector",
+                        "name": "logAnalyticsWorkspaceId",
+                        "type": "Microsoft.Common.TextBox",
                         "label": "Log Analytics workspace resource id",
-                        "resourceType": "Microsoft.OperationalInsights/workspaces",
-                        "toolTip": "Log Analytics workspace for Diagnostic Settings.",
-                        "options": {
-                            "filter": {
-                                "subscription": "resourceGroup().subscription",
-                                "location": "resourceGroup().location"
-                            }
-                        }
+                        "toolTip": "Log Analytics workspace for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": true
                     }
                 ]
             }
