@@ -136,14 +136,14 @@
             }
         },
         "diagnosticStorageResourceId": {
-            "type": "object",
+            "type": "string",
             "defaultValue": "",
             "metadata": {
                 "description": "Diagnostic Storage account Id."
             }
         },
         "logAnalyticsWorkspaceId": {
-            "type": "object",
+            "type": "string",
             "defaultValue": "",
             "metadata": {
                 "description": "Log Analytics workspace Id."
