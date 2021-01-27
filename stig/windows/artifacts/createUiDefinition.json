@@ -36,7 +36,7 @@
                         "name": "vmAvailabilitySetResourceId",
                         "type": "Microsoft.Common.TextBox",
                         "label": "Availability set resource id",
-                        "toolTip": "Availability set Name for the VMtes.",
+                        "toolTip": "Availability set Name for the VM.",
                         "constraints": {
                             "required": false
                         },
