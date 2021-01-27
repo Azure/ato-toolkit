@@ -34,13 +34,16 @@
                     },
                     {
                         "name": "vmAvailabilitySetResourceId",
-                        "type": "Microsoft.Common.TextBox",
+                        "type": "Microsoft.Solutions.ResourceSelector",
                         "label": "Availability set resource id",
+                        "resourceType": "Microsoft.Compute/availabilitySets",
                         "toolTip": "Availability set Name for the VM.",
-                        "constraints": {
-                            "required": false
-                        },
-                        "visible": true
+                        "options": {
+                            "filter": {
+                                "subscription": "resourceGroup().subscription",
+                                "location": "resourceGroup().location"
+                            }
+                        }
                     },
                     {
                         "name": "OSVersion",
