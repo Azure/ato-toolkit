@@ -127,7 +127,7 @@
                         "name": "textBlock0",
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
-                            "text": "Network interface"
+                            "text": "When creating a virtual machine, a network interface will be created for you"
                         }
                     },
                     {
@@ -138,7 +138,7 @@
                             "subnets": "Subnets"
                         },
                         "toolTip": {
-                            "virtualNetwork": "Virtual Network for the VM Image.",
+                            "virtualNetwork": "Virtual networks are logically isolated from each other in Azure. You can configure their IP address ranges, subnets, route tables, gateways, and security settings, much like a traditional network in your data center. Virtual machines in the same virtual network can access each other by default.",
                             "subnets": ""
                         },
                         "defaultValue": {
@@ -187,23 +187,29 @@
                     },
                     {
                         "name": "diagnosticStorageResourceId",
-                        "type": "Microsoft.Common.TextBox",
+                        "type": "Microsoft.Solutions.ResourceSelector",
                         "label": "Storage account resource id",
-                        "toolTip": "Storage account for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
-                        "constraints": {
-                            "required": false
-                        },
-                        "visible": true
+                        "resourceType": "Microsoft.Storage/storageAccounts",
+                        "toolTip": "Storage Account for Diagnostic Settings.",
+                        "options": {
+                            "filter": {
+                                "subscription": "resourceGroup().subscription",
+                                "location": "resourceGroup().location"
+                            }
+                        }
                     },
                     {
-                        "name": "logAnalyticsWorkspaceId",
-                        "type": "Microsoft.Common.TextBox",
+                        "name": "logAnalyticsWorkspaceIdTest",
+                        "type": "Microsoft.Solutions.ResourceSelector",
                         "label": "Log Analytics workspace resource id",
-                        "toolTip": "Log Analytics workspace for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
-                        "constraints": {
-                            "required": false
-                        },
-                        "visible": true
+                        "resourceType": "Microsoft.OperationalInsights/workspaces",
+                        "toolTip": "Log Analytics workspace for Diagnostic Settings.",
+                        "options": {
+                            "filter": {
+                                "subscription": "resourceGroup().subscription",
+                                "location": "resourceGroup().location"
+                            }
+                        }
                     }
                 ]
             }
@@ -211,6 +217,7 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
+            "diagnosticStorageResourceId": "[steps('instance').diagnosticStorageResourceId]",
             "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySetResourceId]",
             "OSVersion": "[steps('instance').OSVersion]",
             "vmSize": "[steps('instance').vmSize]",
@@ -222,7 +229,7 @@
             "addressPrefix": "[steps('networking').vmVirtualNetwork.addressPrefix]",
             "subnetPrefix": "[steps('networking').vmVirtualNetwork.subnets.subnet1.addressPrefix]",
             "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
-            "diagnosticStorageResourceId": "[steps('management').diagnosticStorageResourceId]",
+            "storageAccount": "[steps('management').storageAccount]",
             "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspaceId]"
         }
     }
