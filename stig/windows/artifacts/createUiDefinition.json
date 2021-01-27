@@ -12,7 +12,7 @@
                     "preValidation": "Configure the virtual machine's resources and settings",
                     "postValidation": "Done"
                 },
-                "bladeTitle": "Instance",
+                "bladeTitle": "Updated",
                 "elements": [
                     {
                         "name": "textBlock0",
