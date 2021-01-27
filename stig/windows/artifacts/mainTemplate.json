@@ -1,239 +1,412 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
-    "handler": "Microsoft.Azure.CreateUIDef",
-    "version": "0.1.2-preview",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
     "parameters": {
-        "basics": [],
-        "steps": [
-            {
-                "name": "instance",
-                "label": "Instance",
-                "subLabel": {
-                    "preValidation": "Configure the virtual machine's resources and settings",
-                    "postValidation": "Done"
+        "vmName": {
+            "type": "string",
+            "defaultValue": "simple-vm",
+            "metadata": {
+                "description": "Name of the virtual machine."
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        },
+        "vmSize": {
+            "type": "string",
+            "defaultValue": "Standard_D2_v3",
+            "metadata": {
+                "description": "Size of the virtual machine."
+            }
+        },
+        "adminUsername": {
+            "type": "string",
+            "metadata": {
+                "description": "Username for the Virtual Machine."
+            }
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "minLength": 12,
+            "metadata": {
+                "description": "Password for the Virtual Machine."
+            }
+        },
+        "OSVersion": {
+            "type": "string",
+            "defaultValue": "2019-Datacenter",
+            "allowedValues": [
+                "2019-Datacenter",
+                "2016-Datacenter"
+            ],
+            "metadata": {
+                "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
+            }
+        },
+        "managedDiskStorageAccountType": {
+            "type": "string",
+            "defaultValue": "StandardSSD_LRS",
+            "allowedValues": [ "StandardSSD_LRS" ],
+            "metadata": {
+                "description": ""
+            }
+        },
+        "_artifactsLocation": {
+            "type": "string",
+            "defaultValue": "[split(deployment().properties.templateLink.uri, 'mainTemplate.json')[0]]",
+            "metadata": {
+                "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+            }
+        },
+        "_artifactsLocationSasToken": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": ""
+            }
+
+        },
+        "isOffline": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": ""
+            }
+        },
+        "vmVirtualNetwork": {
+            "type": "string",
+            "defaultValue": "stig-vm-vnet",
+            "metadata": {
+                "description": "Virtual Network for the VM Image."
+            }
+        },
+        "virtualNetworkResourceGroupName": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().name]",
+            "metadata": {
+                "description": "Name of the resource group for the existing virtual network"
+            }
+        },
+        "virtualNetworkNewOrExisting": {
+            "type": "string",
+            "defaultValue": "new",
+            "metadata": {
+                "description": "Is the Virtual Network new or existing for the VM Image."
+            }
+        },
+        "addressPrefix": {
+            "type": "string",
+            "defaultValue": "10.0.0.0/16",
+            "metadata": {
+                "description": "Address prefix of the virtual network"
+            }
+        },
+        "subnetName": {
+            "type": "string",
+            "defaultValue": "subnet1",
+            "metadata": {
+                "description": "Subnet name for the VM Image."
+            }
+        },
+        "subnetPrefix": {
+            "type": "string",
+            "defaultValue": "10.0.0.0/24",
+            "metadata": {
+                "description": "Subnet prefix of the virtual network"
+            }
+        },
+        "vmAvailabilitySetName": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Availability Set configuration for VM."
+            }
+        },
+        "logsRetentionInDays": {
+            "type": "int",
+            "defaultValue": 365,
+            "minValue": 0,
+            "maxValue": 365,
+            "metadata": {
+                "description": "Log retention in days."
+            }
+        },
+        "diagnosticStorageResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Diagnostic Storage account Id."
+            }
+        },
+        "logAnalyticsWorkspaceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Log Analytics workspace Id."
+            }
+        }
+    },
+    "variables": {
+        "nicName": "[concat(parameters('vmName'), '-nic')]",
+        "vnetId": {
+            "new": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vmVirtualNetwork'))]",
+            "existing": "[resourceId(parameters('virtualNetworkResourceGroupName'),'Microsoft.Storage/virtualNetworks',parameters('vmVirtualNetwork'))]"
+        },
+        "subnetRef": "[concat(variables('vnetId')[parameters('virtualNetworkNewOrExisting')],'/subnets/',parameters('subnetName'))]",
+        "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
+        "availabilitySetId": {
+            "id": "[if(equals(parameters('vmAvailabilitySetName'), ''), json('null'), resourceId('Microsoft.Compute/availabilitySets', parameters('vmAvailabilitySetName')))]"
+        },
+        "requiredModulesFile": "RequiredModules.ps1",
+        "installPSModulesFile": "InstallModules.ps1",
+        "generateStigChecklist": "GenerateStigChecklist.ps1",
+        "storageApiVersion": "2019-06-01"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2020-06-01",
+            "name": "[variables('networkSecurityGroupName')]",
+            "location": "[parameters('location')]"
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('vmVirtualNetwork')]",
+            "location": "[parameters('location')]",
+            "condition": "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+            ],
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('addressPrefix')]"
+                    ]
                 },
-                "bladeTitle": "Instance",
-                "elements": [
+                "subnets": [
                     {
-                        "name": "textBlock0",
-                        "type": "Microsoft.Common.TextBlock",
-                        "options": {
-                            "text": "Instance details"
-                        }
-                    },
-                    {
-                        "name": "vmName",
-                        "type": "Microsoft.Common.TextBox",
-                        "label": "Virtual machine name",
-                        "toolTip": "Virtual machines in Azure have two distinct names: virtual machine name used as the Azure resource identifier, and in guest host name. When you create a VM in the portal, the same name is used for both the virtual machine name and the host name. The virtual machine name cannot be changed after the VM is created. You can change the host name when you log into the virtual machine.",
-                        "constraints": {
-                            "required": true,
-                            "regex": "^[a-z0-9A-Z-]{3,15}$",
-                            "validationMessage": "Virtual machine Name must be between 3 and 15 characters long and contain letters, numbers and hyphens only."
-                        }
-                    },
-					{
-                        "name": "vmAvailabilitySetResourceId",
-                        "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Availability set resource id",
-                        "resourceType": "Microsoft.Compute/availabilitySets",
-                        "toolTip": "Availability set Name for the VM.",
-                        "options": {
-                            "filter": {
-                                "subscription": "resourceGroup().subscription",
-                                "location": "resourceGroup().location"
-                            }
-                        }
-                    },
-                    {
-                        "name": "OSVersion",
-                        "type": "Microsoft.Common.DropDown",
-                        "label": "Windows OS version",
-                        "toolTip": "The OS version for the VM Image",
-                        "defaultValue": "2019-Datacenter",
-                        "constraints": {
-                            "allowedValues": [
-                                {
-                                    "value": "2019-Datacenter",
-                                    "label": "2019-Datacenter"
-                                },
-                                {
-                                    "value": "2016-Datacenter",
-                                    "label": "2016-Datacenter"
-                                }
-                            ],
-                            "required": true
-                        },
-                        "visible": true
-                    },
-                    {
-                        "name": "vmSize",
-                        "type": "Microsoft.Compute.SizeSelector",
-                        "label": "Size",
-                        "toolTip": "Select a VM size to support the workload that you want to run. The size that you choose then determines factors such as processing power, memory, and storage capacity. Azure offers a wide variety of sizes to support many types of uses. Azure charges an hourly price based on the VM's size and operating system.",
-                        "recommendedSizes": [
-                            "Standard_A2_v2",
-                            "Standard_D2_v2",
-                            "Standard_D2_v3"
-                        ],
-                        "osPlatform": "Windows",
-                        "count": "1"
-                    },
-                    {
-                        "name": "textBlock1",
-                        "type": "Microsoft.Common.TextBlock",
-                        "options": {
-                            "text": "Administrator account"
-                        }
-                    },
-                    {
-                        "name": "adminUsername",
-                        "type": "Microsoft.Compute.UserNameTextBox",
-                        "label": "Username",
-                        "toolTip": "Admin username for the machine",
-                        "defaultValue": "azureadmin",
-                        "osPlatform": "Windows",
-                        "constraints": {
-                            "required": true
-                        }
-                    },
-                    {
-                        "name": "password",
-                        "type": "Microsoft.Common.PasswordBox",
-                        "label": {
-                            "password": "Password",
-                            "confirmPassword": "Confirm password"
-                        },
-                        "toolTip": "Admin password for the virtual machine",
-                        "constraints": {
-                            "required": true,
-                            "regex": "^(?=.*[A-Z])(?=.*[.!@#$%^&*()-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
-                            "validationMessage": "Password must be at least 12 characters long, and contain upper case, lower case, number and symbol"
-                        },
-                        "options": {
-                            "hideConfirmation": false
-                        },
-                        "visible": true
-                    }
-                ]
-            },
-            {
-                "name": "networking",
-                "label": "Networking",
-                "subLabel": {
-                    "preValidation": "Define network connectivity for your virtual machine by configuring network interface card (NIC) settings. You can control ports, inbound and outbound connectivity with security group rules, or place behind an existing load balancing solution.",
-                    "postValidation": "Done"
-                },
-                "bladeTitle": "Network interface",
-                "elements": [
-                    {
-                        "name": "textBlock0",
-                        "type": "Microsoft.Common.TextBlock",
-                        "options": {
-                            "text": "When creating a virtual machine, a network interface will be created for you"
-                        }
-                    },
-                    {
-                        "name": "vmVirtualNetwork",
-                        "type": "Microsoft.Network.VirtualNetworkCombo",
-                        "label": {
-                            "virtualNetwork": "Virtual Network",
-                            "subnets": "Subnets"
-                        },
-                        "toolTip": {
-                            "virtualNetwork": "Virtual networks are logically isolated from each other in Azure. You can configure their IP address ranges, subnets, route tables, gateways, and security settings, much like a traditional network in your data center. Virtual machines in the same virtual network can access each other by default.",
-                            "subnets": ""
-                        },
-                        "defaultValue": {
-                            "name": "[concat(resourceGroup().name, '-vnet')]",
-                            "addressPrefixSize": "/16"
-                        },
-                        "constraints": {
-                            "minAddressPrefixSize": "/16"
-                        },
-                        "options": {
-                            "hideExisting": false
-                        },
-                        "subnets": {
-                            "subnet1": {
-                                "label": "Subnet",
-                                "defaultValue": {
-                                    "name": "default",
-                                    "addressPrefixSize": "/24"
-                                },
-                                "constraints": {
-                                    "minAddressPrefixSize": "/24",
-                                    "minAddressCount": 12,
-                                    "requireContiguousAddresses": true
-                                }
-                            }
-                        },
-                        "visible": true
-                    }
-                ]
-            },
-            {
-                "name": "management",
-                "label": "Management",
-                "subLabel": {
-                    "preValidation": "Configure monitoring and management options for your VM.",
-                    "postValidation": "Done"
-                },
-                "bladeTitle": "Management",
-                "elements": [
-                    {
-                        "name": "textBlock0",
-                        "type": "Microsoft.Common.TextBlock",
-                        "options": {
-                            "text": "Diagnostic settings"
-                        }
-                    },
-                    {
-                        "name": "diagnosticStorageResourceId",
-                        "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Storage account resource id",
-                        "resourceType": "Microsoft.Storage/storageAccounts",
-                        "toolTip": "Storage Account for Diagnostic Settings.",
-                        "options": {
-                            "filter": {
-                                "subscription": "resourceGroup().subscription",
-                                "location": "resourceGroup().location"
-                            }
-                        }
-                    },
-                    {
-                        "name": "logAnalyticsWorkspaceIdTest",
-                        "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Log Analytics workspace resource id",
-                        "resourceType": "Microsoft.OperationalInsights/workspaces",
-                        "toolTip": "Log Analytics workspace for Diagnostic Settings.",
-                        "options": {
-                            "filter": {
-                                "subscription": "resourceGroup().subscription",
-                                "location": "resourceGroup().location"
+                        "name": "[parameters('subnetName')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnetPrefix')]",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
                             }
                         }
                     }
                 ]
             }
-        ],
-        "outputs": {
-            "location": "[location()]",
-            "vmName": "[steps('instance').vmName]",
-            "diagnosticStorageResourceId": "[steps('instance').diagnosticStorageResourceId]",
-            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySetResourceId]",
-            "OSVersion": "[steps('instance').OSVersion]",
-            "vmSize": "[steps('instance').vmSize]",
-            "adminUsername": "[steps('instance').adminUsername]",
-            "adminPassword": "[steps('instance').password]",
-            "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",
-            "virtualNetworkNewOrExisting": "[steps('networking').vmVirtualNetwork.newOrExisting]",
-            "virtualNetworkResourceGroupName": "[steps('networking').vmVirtualNetwork.resourceGroup]",
-            "addressPrefix": "[steps('networking').vmVirtualNetwork.addressPrefix]",
-            "subnetPrefix": "[steps('networking').vmVirtualNetwork.subnets.subnet1.addressPrefix]",
-            "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
-            "storageAccount": "[steps('management').storageAccount]",
-            "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspaceId]"
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-06-01",
+            "name": "[variables('nicName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vmVirtualNetwork'))]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(variables('nicName'), '/Microsoft.Insights/service')]",
+            "location": "[parameters('location')]",
+            "condition": "[and(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "dependsOn": [
+                "[variables('nicName')]"
+            ],
+            "copy": {
+                "name": "nicDiagnosticLoop",
+                "count": 1
+            },
+            "properties": {
+                "storageAccountId": "[parameters('diagnosticStorageResourceId')]",
+                "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
+                "metrics": [
+                    {
+                        "category": "AllMetrics",
+                        "timeGrain": null,
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('logsRetentionInDays')]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('vmName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('vmSize')]"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('vmName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "[parameters('OSVersion')]",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "createOption": "FromImage",
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('managedDiskStorageAccountType')]"
+                        }
+                    }
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+                        }
+                    ]
+                },
+                "availabilitySet": "[if(equals(parameters('vmAvailabilitySetName'), ''), json('null'), variables('availabilitySetId'))]",
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
+                        "storageUri": "[if(not(equals(parameters('diagnosticStorageResourceId'), '')), reference(parameters('diagnosticStorageResourceId'), variables('storageApiVersion')).primaryEndpoints.blob, json('null'))]"
+                    }
+                }
+            },
+            "resources": [
+                {
+                    "type": "extensions",
+                    "apiVersion": "2017-03-30",
+                    "name": "install-powershell-modules",
+                    "location": "[parameters('location')]",
+                    "condition": "[and(not(parameters('isOffline')), not(equals(parameters('_artifactsLocation'), '')))]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.Compute",
+                        "type": "CustomScriptExtension",
+                        "typeHandlerVersion": "1.10",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "fileUris": [
+                                "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), parameters('_artifactsLocationSasToken'))]"
+                            ],
+                            "timestamp": 123456788,
+                            "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'))]"
+                        }
+                    }
+                },
+                {
+                    "type": "extensions",
+                    "apiVersion": "2017-03-30",
+                    "name": "[concat('setup-win-dsc', '-online')]",
+                    "location": "[parameters('location')]",
+                    "condition": "[and(not(parameters('isOffline')), not(equals(parameters('_artifactsLocation'), '')))]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
+                        "[resourceId('Microsoft.Compute/virtualMachines/extensions', parameters('vmName'), 'install-powershell-modules')]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.Powershell",
+                        "type": "DSC",
+                        "typeHandlerVersion": "2.77",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "wmfVersion": "latest",
+                            "configuration": {
+                                "url": "[concat(parameters('_artifactsLocation'), 'WindowsServer.ps1.zip', parameters('_artifactsLocationSasToken'))]",
+                                "script": "WindowsServer.ps1",
+                                "function": "WindowsServer"
+                            },
+                            "configurationArguments": {
+                                "IsOffline": false
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "extensions",
+                    "name": "[concat('setup-win-dsc', '-offline')]",
+                    "apiVersion": "2017-03-30",
+                    "location": "[parameters('location')]",
+                    "condition": "[and(parameters('isOffline'), not(equals(parameters('_artifactsLocation'), '')))]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.Powershell",
+                        "type": "DSC",
+                        "typeHandlerVersion": "2.77",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "wmfVersion": "latest",
+                            "configuration": {
+                                "url": "[concat(parameters('_artifactsLocation'), 'WindowsServer.ps1.zip', parameters('_artifactsLocationSasToken'))]",
+                                "script": "WindowsServer.ps1",
+                                "function": "WindowsServer"
+                            },
+                            "configurationArguments": {
+                                "IsOffline": true
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(parameters('vmName'), '/Microsoft.Insights/service')]",
+            "location": "[resourceGroup().location]",
+            "condition": "[and(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "dependsOn": [
+                "[parameters('vmName')]"
+            ],
+            "properties": {
+                "storageAccountId": "[parameters('diagnosticStorageResourceId')]",
+                "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
+                "metrics": [
+                    {
+                        "category": "AllMetrics",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('logsRetentionInDays')]"
+                        }
+                    }
+                ],
+                "logs": []
+            }
         }
+    ],
+    "outputs": {
     }
 }
