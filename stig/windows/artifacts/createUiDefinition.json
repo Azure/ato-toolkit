@@ -187,29 +187,23 @@
                     },
                     {
                         "name": "diagnosticStorageResourceId",
-                        "type": "Microsoft.Solutions.ResourceSelector",
+                        "type": "Microsoft.Common.TextBox",
                         "label": "Storage account resource id",
-                        "resourceType": "Microsoft.Storage/storageAccounts",
-                        "toolTip": "Storage Account for Diagnostic Settings.",
-                        "options": {
-                            "filter": {
-                                "subscription": "resourceGroup().subscription",
-                                "location": "resourceGroup().location"
-                            }
-                        }
+                        "toolTip": "Storage account for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": true
                     },
                     {
-                        "name": "logAnalyticsWorkspaceIdTest",
-                        "type": "Microsoft.Solutions.ResourceSelector",
+                        "name": "logAnalyticsWorkspaceId",
+                        "type": "Microsoft.Common.TextBox",
                         "label": "Log Analytics workspace resource id",
-                        "resourceType": "Microsoft.OperationalInsights/workspaces",
-                        "toolTip": "Log Analytics workspace for Diagnostic Settings.",
-                        "options": {
-                            "filter": {
-                                "subscription": "resourceGroup().subscription",
-                                "location": "resourceGroup().location"
-                            }
-                        }
+                        "toolTip": "Log Analytics workspace for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": true
                     }
                 ]
             }
