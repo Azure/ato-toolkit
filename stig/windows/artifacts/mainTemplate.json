@@ -290,9 +290,7 @@
                         }
                     ]
                 },
-                "availabilitySet": {
-                    "id": "[resourceId('Microsoft.Compute/availabilitySets/', parameters('vmAvailabilitySetName'))]"
-                },
+                "availabilitySet": "[if(equals(parameters('vmAvailabilitySetName'), ''), json('null'), variables('availabilitySetId'))]",
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
