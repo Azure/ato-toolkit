@@ -40,7 +40,7 @@
                         "toolTip": "Availability set Name for the VM.",
                         "options": {
                             "filter": {
-                                "subscription": "onBasics",
+                                "subscription": "resourceGroup().subscription",
                                 "location": "onBasics"
                             }
                         }
