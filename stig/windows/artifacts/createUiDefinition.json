@@ -227,7 +227,7 @@
             "OSVersion": "[steps('instance').OSVersion]",
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
-            "adminPassword": "[steps('instance').adminPassword]",
+            "adminPassword": "[steps('instance').adminPassword.password]",
             "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",
             "virtualNetworkNewOrExisting": "[steps('networking').vmVirtualNetwork.newOrExisting]",
             "virtualNetworkResourceGroupName": "[steps('networking').vmVirtualNetwork.resourceGroup]",
