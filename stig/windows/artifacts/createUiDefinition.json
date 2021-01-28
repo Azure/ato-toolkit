@@ -40,7 +40,7 @@
                         "toolTip": "Availability set Name for the VM.",
                         "options": {
                             "filter": {
-                                "subscription": "onBasics",
+                                "subscription": "resourceGroup().subscription",
                                 "location": "onBasics"
                             }
                         }
@@ -223,7 +223,7 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
-            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySet.id]",
+            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySet.name]",
             "OSVersion": "[steps('instance').OSVersion]",
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
