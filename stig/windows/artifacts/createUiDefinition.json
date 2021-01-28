@@ -40,8 +40,8 @@
                         "toolTip": "Availability set Name for the VM.",
                         "options": {
                             "filter": {
-                                "subscription": "resourceGroup().subscription",
-                                "location": "resourceGroup().location"
+                                "subscription": "onBasics",
+                                "location": "onBasics"
                             }
                         }
                     },
@@ -130,7 +130,7 @@
                         "name": "textBlock0",
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
-                            "text": "When creating a virtual machine, a network interface will be created for you"
+                            "text": "Network interface"
                         }
                     },
                     {
@@ -220,7 +220,7 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
-            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySet.name]",
+            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySet.id]",
             "OSVersion": "[steps('instance').OSVersion]",
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
