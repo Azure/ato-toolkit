@@ -40,8 +40,8 @@
                         "toolTip": "Availability set Name for the VM.",
                         "options": {
                             "filter": {
-                                "resourcegroup": "onBasics",
-                                "location": "onBasics"
+                                "name": "resourceGroup().name",
+                                "location": "resourceGroup().location"
                             }
                         }
                     },
