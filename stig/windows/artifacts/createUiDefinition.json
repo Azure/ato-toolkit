@@ -40,8 +40,8 @@
                         "toolTip": "Availability set Name for the VM.",
                         "options": {
                             "filter": {
-                                "name": "resourceGroup().name",
-                                "location": "resourceGroup().location"
+                                "name": "onBasic",
+                                "location": "onBasic"
                             }
                         }
                     },
@@ -199,8 +199,8 @@
                         "toolTip": "Storage Account for Diagnostic Settings.",
                         "options": {
                             "filter": {
-                                "subscription": "resourceGroup().subscription",
-                                "location": "resourceGroup().location"
+                                "subscription": "onBasic",
+                                "location": "onBasic"
                             }
                         }
                     },
@@ -212,8 +212,8 @@
                         "toolTip": "Log Analytics workspace for Diagnostic Settings.",
                         "options": {
                             "filter": {
-                                "subscription": "resourceGroup().subscription",
-                                "location": "resourceGroup().location"
+                                "subscription": "onBasic",
+                                "location": "onBasic"
                             }
                         }
                     }
