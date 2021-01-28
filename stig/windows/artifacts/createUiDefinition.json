@@ -204,7 +204,7 @@
                     {
                         "name": "logAnalyticsWorkspace",
                         "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Log Analytics workspace",
+                        "label": "Log Analytics workspace Testing",
                         "resourceType": "Microsoft.OperationalInsights/workspaces",
                         "toolTip": "Log Analytics workspace for Diagnostic Settings.",
                         "options": {
