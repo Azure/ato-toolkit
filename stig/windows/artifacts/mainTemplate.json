@@ -36,7 +36,7 @@
                 "description": "Password for the Virtual Machine."
             }
         },
-        "OSVersion": {
+        "osVersion": {
             "type": "string",
             "defaultValue": "2019-Datacenter",
             "allowedValues": [
@@ -119,11 +119,11 @@
                 "description": "Subnet prefix of the virtual network"
             }
         },
-        "vmAvailabilitySetName": {
+        "availabilitySetResourceId": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": "Availability Set configuration for VM."
+                "description": "(Optional) Availability Set resource id."
             }
         },
         "logsRetentionInDays": {
@@ -139,14 +139,14 @@
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": "Diagnostic Storage account Id."
+                "description": "(Optional) Diagnostic Storage account resource id."
             }
         },
         "logAnalyticsWorkspaceId": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": "Log Analytics workspace Id."
+                "description": "(Optional) Log Analytics workspace resource id."
             }
         }
     },
@@ -158,9 +158,6 @@
         },
         "subnetRef": "[concat(variables('vnetId')[parameters('virtualNetworkNewOrExisting')],'/subnets/',parameters('subnetName'))]",
         "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
-        "availabilitySetId": {
-            "id": "[if(equals(parameters('vmAvailabilitySetName'), ''), json('null'), resourceId('Microsoft.Compute/availabilitySets', parameters('vmAvailabilitySetName')))]"
-        },
         "requiredModulesFile": "RequiredModules.ps1",
         "installPSModulesFile": "InstallModules.ps1",
         "generateStigChecklist": "GenerateStigChecklist.ps1",
@@ -230,17 +227,13 @@
             "apiVersion": "2017-05-01-preview",
             "name": "[concat(variables('nicName'), '/Microsoft.Insights/service')]",
             "location": "[parameters('location')]",
-            "condition": "[and(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
             "dependsOn": [
                 "[variables('nicName')]"
             ],
-            "copy": {
-                "name": "nicDiagnosticLoop",
-                "count": 1
-            },
             "properties": {
-                "storageAccountId": "[parameters('diagnosticStorageResourceId')]",
-                "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
+                "storageAccountId": "[if(equals(parameters('diagnosticStorageResourceId'), ''), json('null'), parameters('diagnosticStorageResourceId'))]",
+                "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), parameters('logAnalyticsWorkspaceId'))]",
                 "metrics": [
                     {
                         "category": "AllMetrics",
@@ -275,7 +268,7 @@
                     "imageReference": {
                         "publisher": "MicrosoftWindowsServer",
                         "offer": "WindowsServer",
-                        "sku": "[parameters('OSVersion')]",
+                        "sku": "[parameters('osVersion')]",
                         "version": "latest"
                     },
                     "osDisk": {
@@ -292,7 +285,7 @@
                         }
                     ]
                 },
-                "availabilitySet": "[if(equals(parameters('vmAvailabilitySetName'), ''), json('null'), variables('availabilitySetId'))]",
+                "availabilitySet": "[if(equals(parameters('availabilitySetResourceId'), ''), json('null'), parameters('availabilitySetResourceId'))]",
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
@@ -388,13 +381,13 @@
             "apiVersion": "2017-05-01-preview",
             "name": "[concat(parameters('vmName'), '/Microsoft.Insights/service')]",
             "location": "[resourceGroup().location]",
-            "condition": "[and(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
             "dependsOn": [
                 "[parameters('vmName')]"
             ],
             "properties": {
-                "storageAccountId": "[parameters('diagnosticStorageResourceId')]",
-                "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
+                "storageAccountId": "[if(equals(parameters('diagnosticStorageResourceId'), ''), json('null'), parameters('diagnosticStorageResourceId'))]",
+                "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), parameters('logAnalyticsWorkspaceId'))]",
                 "metrics": [
                     {
                         "category": "AllMetrics",

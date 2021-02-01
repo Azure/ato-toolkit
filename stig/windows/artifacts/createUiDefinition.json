@@ -46,7 +46,7 @@
                         }
                     },
                     {
-                        "name": "OSVersion",
+                        "name": "osVersion",
                         "type": "Microsoft.Common.DropDown",
                         "label": "Windows OS version",
                         "toolTip": "The OS version for the VM Image",
@@ -101,22 +101,22 @@
                         "visible": true
                     },
                     {
-                        "name": "adminPassword",
+                        "name": "adminCredentials",
                         "type": "Microsoft.Compute.CredentialsCombo",
                         "label": {
-                          "password": "Password",
-                          "confirmPassword": "Confirm password"
+                            "password": "Password",
+                            "confirmPassword": "Confirm password"
                         },
                         "toolTip": {
-                          "password": ""
+                            "password": ""
                         },
                         "constraints": {
-                          "required": true,
-                          "customPasswordRegex": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{12,}$",
-                          "customValidationMessage": "The password must be alphanumeric, contain at least 12 characters, and have at least 1 letter and 1 number."
+                            "required": true,
+                            "customPasswordRegex": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{12,}$",
+                            "customValidationMessage": "The password must be alphanumeric, contain at least 12 characters, and have at least 1 letter and 1 number."
                         },
                         "options": {
-                          "hideConfirmation": false
+                            "hideConfirmation": false
                         },
                         "osPlatform": "Windows",
                         "visible": true
@@ -226,11 +226,11 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
-            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySet.name]",
-            "OSVersion": "[steps('instance').OSVersion]",
+            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySet.id]",
+            "osVersion": "[steps('instance').osVersion]",
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
-            "adminPassword": "[steps('instance').adminPassword.password]",
+            "adminPassword": "[steps('instance').adminCredentials.password]",
             "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",
             "virtualNetworkNewOrExisting": "[steps('networking').vmVirtualNetwork.newOrExisting]",
             "virtualNetworkResourceGroupName": "[steps('networking').vmVirtualNetwork.resourceGroup]",
