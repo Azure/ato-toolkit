@@ -330,15 +330,7 @@
                             "fileUris": [
                                 "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), parameters('_artifactsLocationSasToken'))]",
                                 "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('diagnosticStorageResourceId'), '/certs/' ,variables('certificate1'))]",
-                                "[concat(parameters('diagnosticStorageResourceId'), '/certs/' ,variables('certificate2'))]",
-                                "[concat(parameters('diagnosticStorageResourceId'), '/certs/' ,variables('certificate3'))]",
-                                "[concat(parameters('diagnosticStorageResourceId'), '/certs/' ,variables('certificate4'))]",
-                                "[concat(parameters('diagnosticStorageResourceId'), '/certs/' ,variables('certificate5'))]",
-                                "[concat(parameters('diagnosticStorageResourceId'), '/certs/' ,variables('certificate6'))]",
-                                "[concat(parameters('diagnosticStorageResourceId'), '/certs/' ,variables('certificate7'))]",
-                                "[concat(parameters('diagnosticStorageResourceId'), '/certs/' ,variables('certificate8'))]"
+                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), parameters('_artifactsLocationSasToken'))]"
 
                             ],
                             "timestamp": 123456788,
