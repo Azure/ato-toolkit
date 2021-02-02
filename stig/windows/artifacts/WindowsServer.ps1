@@ -80,7 +80,7 @@ configuration WindowsServer
                     'V-225018' = @{Identity = 'Guests' }
                 }
 
-                if ($null -eq $certificateTest -or $certificateTest.count -le 8)
+                if ($null -eq $certificateTest -or $certificateTest.count -lt 8)
                 {
                     $orgSettings     = @{
                         'V-225015'   = @{Identity    = 'Guests'}
@@ -131,7 +131,7 @@ configuration WindowsServer
                     'V-205675' = @{Identity = 'Guests' }
                 }
 
-                if ($null -eq $certificateTest -or $certificateTest.count -le 8)
+                if ($null -eq $certificateTest -or $certificateTest.count -lt 8)
                 {
                     $orgSettings   = @{
                         'V-205909' = @{OptionValue = 'xAdmin'}
