@@ -38,14 +38,7 @@ configuration WindowsServer
 
         WindowsFirewall STIG_WindowsFirewall
         {
-            OrgSettings = @{
-                'V-17425'   = @{ValueData = '16384' }
-                'V-17425.b' = @{ValueData = '16384' }
-                'V-17435'   = @{ValueData = '16384' }
-                'V-17435.b' = @{ValueData = '16384' }
-                'V-17445'   = @{ValueData = '16384' }
-                'V-17445.b' = @{ValueData = '16384' }
-            }
+
         }
     }
 
@@ -55,12 +48,6 @@ configuration WindowsServer
         {
             OrgSettings = @{
                 'V-213450' = @{ValueData = '1' }
-                'V-213452' = @{ValueData = '1' }
-                'V-213453' = @{ValueData = '1' }
-                'V-213455' = @{ValueData = '2' }
-                'V-213464' = @{ValueData = '2' }
-                'V-213465' = @{ValueData = '2' }
-                'V-213466' = @{ValueData = '2' }
             }
         }
     }
@@ -75,12 +62,12 @@ configuration WindowsServer
                 $osVersion = '2016'
                 $SkipRules = @('V-224866', 'V-224867', 'V-224868')
                 $exceptions = @{
-                    'V-225019' = @{Identity = 'Guests' }
-                    'V-225016' = @{Identity = 'Guests' }
-                    'V-225018' = @{Identity = 'Guests' }
+                    'V-225019' = @{Identity = 'Guests'}
+                    'V-225016' = @{Identity = 'Guests'}
+                    'V-225018' = @{Identity = 'Guests'}
                 }
 
-                if ($null -eq $certificateTest -or $certificateTest.count -le 8)
+                if ($null -eq $certificateTest -or $certificateTest.count -lt 8)
                 {
                     $orgSettings     = @{
                         'V-225015'   = @{Identity    = 'Guests'}
@@ -131,7 +118,7 @@ configuration WindowsServer
                     'V-205675' = @{Identity = 'Guests' }
                 }
 
-                if ($null -eq $certificateTest -or $certificateTest.count -le 8)
+                if ($null -eq $certificateTest -or $certificateTest.count -lt 8)
                 {
                     $orgSettings   = @{
                         'V-205909' = @{OptionValue = 'xAdmin'}
