@@ -68,6 +68,7 @@ configuration WindowsServer
     [scriptblock]$windowsServerStig = {
 
         $osVersion = (Get-WmiObject Win32_OperatingSystem).Caption
+        $certificateTest = Get-ChildItem -Path "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\*\Downloads\0\*.cer"
 
         switch -Wildcard ($osVersion) {
             "*2016*" {
@@ -78,19 +79,31 @@ configuration WindowsServer
                     'V-225016' = @{Identity = 'Guests' }
                     'V-225018' = @{Identity = 'Guests' }
                 }
-                $orgSettings     = @{
-                    'V-225015'   = @{Identity    = 'Guests'}
-                    'V-225026'   = @{OptionValue = 'xAdmin'}
-                    'V-225027'   = @{OptionValue = 'xGuest'}
-                    'V-225021.a' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
-                    'V-225021.b' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
-                    'V-225021.c' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
-                    'V-225021.d' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
-                    'V-225022.a' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
-                    'V-225022.b' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
-                    'V-225023'   = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
+
+                if ($null -eq $certificateTest -or $certificateTest.count -le 7)
+                {
+                    $orgSettings     = @{
+                        'V-225015'   = @{Identity    = 'Guests'}
+                        'V-225026'   = @{OptionValue = 'xAdmin'}
+                        'V-225027'   = @{OptionValue = 'xGuest'}
+                    }
                 }
-                
+                else
+                {
+                    $orgSettings     = @{
+                        'V-225015'   = @{Identity    = 'Guests'}
+                        'V-225026'   = @{OptionValue = 'xAdmin'}
+                        'V-225027'   = @{OptionValue = 'xGuest'}
+                        'V-225021.a' = @{Location = $certificateTest[0].FullName}
+                        'V-225021.b' = @{Location = $certificateTest[1].FullName}
+                        'V-225021.c' = @{Location = $certificateTest[2].FullName}
+                        'V-225021.d' = @{Location = $certificateTest[3].FullName}
+                        'V-225022.a' = @{Location = $certificateTest[4].FullName}
+                        'V-225022.b' = @{Location = $certificateTest[5].FullName}
+                        'V-225023'   = @{Location = $certificateTest[6].FullName}
+                    }
+                }
+
                 WindowsServer STIG_WindowsServer
                 {
                     OsVersion   = $osVersion
@@ -117,23 +130,35 @@ configuration WindowsServer
                     'V-205673' = @{Identity = 'Guests' }
                     'V-205675' = @{Identity = 'Guests' }
                 }
-                $orgSettings   = @{
-                    'V-205909' = @{OptionValue = 'xAdmin'}
-                    'V-205910' = @{OptionValue = 'xGuest'}
-                    'V-205648.a' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
-                    'V-205648.b' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
-                    'V-205648.c' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
-                    'V-205648.d' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
-                    'V-205649.a' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
-                    'V-205649.b' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
-                    'V-205650.a' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
-                    'V-205650.b' = @{Location = "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\1.10.9\Downloads\0\"}
+
+                if ($null -eq $certificateTest -or $certificateTest.count -le 7)
+                {
+                    $orgSettings   = @{
+                        'V-205909' = @{OptionValue = 'xAdmin'}
+                        'V-205910' = @{OptionValue = 'xGuest'}
+                    }
+                }
+                else
+                {
+                    $orgSettings   = @{
+                        'V-205909' = @{OptionValue = 'xAdmin'}
+                        'V-205910' = @{OptionValue = 'xGuest'}
+                        'V-205648.a' = @{Location = $certificateTest[0].FullName}
+                        'V-205648.b' = @{Location = $certificateTest[1].FullName}
+                        'V-205648.c' = @{Location = $certificateTest[2].FullName}
+                        'V-205648.d' = @{Location = $certificateTest[3].FullName}
+                        'V-205649.a' = @{Location = $certificateTest[4].FullName}
+                        'V-205649.b' = @{Location = $certificateTest[5].FullName}
+                        'V-205650.a' = @{Location = $certificateTest[6].FullName}
+                        'V-205650.b' = @{Location = $certificateTest[7].FullName}
+                    }
                 }
 
                 WindowsServer STIG_WindowsServer
                 {
                     OsVersion   = $osVersion
-                    OsRo             Exception   = $exceptions
+                    OsRole      = 'MS'
+                    Exception   = $exceptions
                     OrgSettings = $orgSettings
                 }
                 break
