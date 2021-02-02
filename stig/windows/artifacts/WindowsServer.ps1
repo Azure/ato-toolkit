@@ -2,20 +2,97 @@ configuration WindowsServer
 {
     param
     (
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory=$false)]
         [String]$IsOffline = $false
     )
 
     Import-DscResource -ModuleName PowerSTIG -ModuleVersion 4.7.1
+    Import-DscResource -Module cChoco -ModuleVersion 2.4.0.0
+    Import-DscResource -ModuleName PSDscResources -ModuleVersion 2.12.0.0
+    Import-DscResource -ModuleName xPSDesiredStateConfiguration -ModuleVersion 9.1.0
     Import-DscResource -ModuleName SecurityPolicyDsc -ModuleVersion 2.10.0.0
 
     [scriptblock]$localConfigurationManager = {
-
-        LocalConfigurationManager 
+        LocalConfigurationManager
         {
-            ActionAfterReboot  = 'ContinueConfiguration'
-            ConfigurationMode  = 'ApplyOnly'
+            ActionAfterReboot = 'ContinueConfiguration'
+            ConfigurationMode = 'ApplyOnly'
             RebootNodeIfNeeded = $true
+        }
+    }
+
+    [scriptblock]$dodCertificates = {
+        # The InstallRoot software is installed and run to enforce SRG-OS-000066-GPOS-00034 and the
+        # following STIG rules: V-93487, V-93489, V-93491
+        cChocoInstaller InstallChoco
+        {
+            InstallDir = "c:\choco"
+        }
+
+        cChocoFeature EnableChocoFips
+        {
+            FeatureName = "useFipsCompliantChecksums"
+            DependsOn   = "[cChocoInstaller]InstallChoco"
+        }
+
+        cChocoPackageInstaller InstallDoDInstallRoot
+        {
+            Name        = "installroot"
+            Version     = "5.5"
+            DependsOn   = "[cChocoFeature]EnableChocoFips"
+        }
+
+        Script InstallDoDCerts
+        {
+            GetScript   = {
+                return @{}
+            }
+            SetScript   = {
+                . "C:\Program Files\DoD-PKE\InstallRoot\installroot.exe" --insert
+            }
+            TestScript  = {
+                # The test always returns false, which is not a good DSC resource
+                # design, but in ZTA this configuration is pushed once so it
+                # matters less.
+                return $false
+            }
+            DependsOn   = "[cChocoPackageInstaller]InstallDoDInstallRoot"
+        }
+
+        # The Federal Bridge Certification Authority (FBCA) Cross-Certificate Remover Tool is
+        # installed and run to enforce SRG-OS-000066-GPOS-00034 and the
+        # following STIG rules: V-93491
+        $fbcaCrossCertRemoverZipFilename = "unclass-fbca_crosscert_remover_v118.zip"
+        $fbcaCrossCertRemoverZipLocalPath = "C:\$fbcaCrossCertRemoverZipFilename"
+        $fbcaCrossCertRemoverLocalFolder = "C:\fbca_crosscert_remover"
+        xRemoteFile DownloadFbcaCrossCertRemover
+        {
+            DestinationPath = $fbcaCrossCertRemoverZipLocalPath
+            Uri             = "https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/zip/$fbcaCrossCertRemoverZipFilename"
+        }
+
+        Archive UnzipFbcaCrossCertRemover {
+            Ensure      = "Present"
+            Path        = $fbcaCrossCertRemoverZipLocalPath
+            Destination = $fbcaCrossCertRemoverLocalFolder
+            DependsOn   = "[xRemoteFile]DownloadFbcaCrossCertRemover"
+        }
+
+        Script RunFbcaCrossCertRemover
+        {
+            GetScript   = {
+                return @{}
+            }
+            SetScript   = {
+                . "$($using:fbcaCrossCertRemoverLocalFolder)\FBCA_crosscert_remover.exe" /SILENT
+            }
+            TestScript  = {
+                # The test always returns false, which is not a good DSC resource
+                # design, but in ZTA this configuration is pushed once so it
+                # matters less.
+                return $false
+            }
+            DependsOn   = "[Archive]UnzipFbcaCrossCertRemover"
         }
     }
 
@@ -23,8 +100,8 @@ configuration WindowsServer
 
         InternetExplorer STIG_IE11
         {
-            BrowserVersion = '11'
-            SkipRule       = 'V-46477'
+            BrowserVersion  = '11'
+            SkipRule        = 'V-46477'
         }
     }
 
@@ -49,7 +126,7 @@ configuration WindowsServer
         WindowsDefender STIG_WindowsDefender
         {
             OrgSettings = @{
-                'V-213450' = @{ValueData = '1' }
+                'V-213450' = @{ValueData = '1'}
             }
         }
     }
@@ -57,42 +134,24 @@ configuration WindowsServer
     [scriptblock]$windowsServerStig = {
 
         $osVersion = (Get-WmiObject Win32_OperatingSystem).Caption
-        $certificateTest = Get-ChildItem -Path "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\*\Downloads\0\*.cer"
 
-        switch -Wildcard ($osVersion) {
-            "*2016*" {
-                $osVersion = '2016'
-                $SkipRules = @('V-224866', 'V-224867', 'V-224868')
-                $exceptions = @{
-                    'V-225019' = @{Identity = 'Guests'}
-                    'V-225016' = @{Identity = 'Guests'}
-                    'V-225018' = @{Identity = 'Guests'}
+        switch -Wildcard ($osVersion)
+        {
+            "*2016*"
+            {
+                $osVersion      = '2016'
+                $SkipRules      = @('V-224866','V-224867','V-224868')
+                $exceptions     = @{
+                    'V-225019'  = @{Identity    = 'Guests' }
+                    'V-225016'  = @{Identity    = 'Guests'}
+                    'V-225018'  = @{Identity    = 'Guests'}
                 }
-
-                if ($null -eq $certificateTest -or $certificateTest.count -lt 8)
-                {
-                    $orgSettings     = @{
-                        'V-225015'   = @{Identity    = 'Guests'}
-                        'V-225026'   = @{OptionValue = 'xAdmin'}
-                        'V-225027'   = @{OptionValue = 'xGuest'}
-                    }
+                $orgSettings    = @{
+                    'V-225015'  = @{Identity    = 'Guests'}
+                    'V-225026'  = @{OptionValue = 'xAdmin'}
+                    'V-225027'  = @{OptionValue = 'xGuest'}
                 }
-                else
-                {
-                    $orgSettings     = @{
-                        'V-225015'   = @{Identity    = 'Guests'}
-                        'V-225026'   = @{OptionValue = 'xAdmin'}
-                        'V-225027'   = @{OptionValue = 'xGuest'}
-                        'V-225021.a' = @{Location = $certificateTest[0].FullName}
-                        'V-225021.b' = @{Location = $certificateTest[1].FullName}
-                        'V-225021.c' = @{Location = $certificateTest[2].FullName}
-                        'V-225021.d' = @{Location = $certificateTest[3].FullName}
-                        'V-225022.a' = @{Location = $certificateTest[4].FullName}
-                        'V-225022.b' = @{Location = $certificateTest[5].FullName}
-                        'V-225023'   = @{Location = $certificateTest[6].FullName}
-                    }
-                }
-
+                
                 WindowsServer STIG_WindowsServer
                 {
                     OsVersion   = $osVersion
@@ -104,43 +163,25 @@ configuration WindowsServer
 
                 AccountPolicy BaseLine2
                 {
-                    Name                                = "2016fix"
-                    Account_lockout_threshold           = 3
-                    Account_lockout_duration            = 15
+                    Name = "2016fix"
+                    Account_lockout_threshold = 3
+                    Account_lockout_duration = 15
                     Reset_account_lockout_counter_after = 15
                 }
                 break
             }
-            "*2019*" {
+            "*2019*"
+            {
                 $osVersion = '2019'
-                $exceptions = @{
-                    'V-205733' = @{Identity = 'Guests' }
-                    'V-205672' = @{Identity = 'Guests' }
-                    'V-205673' = @{Identity = 'Guests' }
-                    'V-205675' = @{Identity = 'Guests' }
+                $exceptions    = @{
+                    'V-205733' = @{Identity     = 'Guests'}
+                    'V-205672' = @{Identity     = 'Guests'}
+                    'V-205673' = @{Identity     = 'Guests'}
+                    'V-205675' = @{Identity     = 'Guests'}
                 }
-
-                if ($null -eq $certificateTest -or $certificateTest.count -lt 8)
-                {
-                    $orgSettings   = @{
-                        'V-205909' = @{OptionValue = 'xAdmin'}
-                        'V-205910' = @{OptionValue = 'xGuest'}
-                    }
-                }
-                else
-                {
-                    $orgSettings   = @{
-                        'V-205909' = @{OptionValue = 'xAdmin'}
-                        'V-205910' = @{OptionValue = 'xGuest'}
-                        'V-205648.a' = @{Location = $certificateTest[0].FullName}
-                        'V-205648.b' = @{Location = $certificateTest[1].FullName}
-                        'V-205648.c' = @{Location = $certificateTest[2].FullName}
-                        'V-205648.d' = @{Location = $certificateTest[3].FullName}
-                        'V-205649.a' = @{Location = $certificateTest[4].FullName}
-                        'V-205649.b' = @{Location = $certificateTest[5].FullName}
-                        'V-205650.a' = @{Location = $certificateTest[6].FullName}
-                        'V-205650.b' = @{Location = $certificateTest[7].FullName}
-                    }
+                $orgSettings   = @{
+                    'V-205909' = @{OptionValue = 'xAdmin'}
+                    'V-205910' = @{OptionValue = 'xGuest'}
                 }
 
                 WindowsServer STIG_WindowsServer
@@ -158,6 +199,12 @@ configuration WindowsServer
     Node localhost
     {
         $localConfigurationManager.invoke()
+
+        if ($IsOffline -eq $false)
+        {
+            $dodCertificates.invoke()
+        }
+
         $windowsServerStig.invoke()
         $ie11Stig.invoke()
         $dotnetFrameworkStig.invoke()
