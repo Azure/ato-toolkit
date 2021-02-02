@@ -10,7 +10,9 @@ configuration WindowsServer
     Import-DscResource -ModuleName SecurityPolicyDsc -ModuleVersion 2.10.0.0
 
     [scriptblock]$localConfigurationManager = {
-        LocalConfigurationManager {
+
+        LocalConfigurationManager 
+        {
             ActionAfterReboot  = 'ContinueConfiguration'
             ConfigurationMode  = 'ApplyOnly'
             RebootNodeIfNeeded = $true
