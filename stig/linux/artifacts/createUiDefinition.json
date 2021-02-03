@@ -37,7 +37,7 @@
                         "type": "Microsoft.Solutions.ResourceSelector",
                         "label": "Availability set",
                         "resourceType": "Microsoft.Compute/availabilitySets",
-                        "toolTip": "Select existing Availability set to be configured for Virtual machine. Availability set must be present in the same resource group.",
+                        "toolTip": "Availability set Name for the VM.",
                         "options": {
                             "filter": {
                                 "subscription": "onBasic",
@@ -46,20 +46,60 @@
                         }
                     },
                     {
-                        "name": "osVersion",
+                        "name": "OSVersion",
                         "type": "Microsoft.Common.DropDown",
-                        "label": "Windows OS version",
+                        "label": "Linux OS version",
                         "toolTip": "The OS version for the VM Image",
-                        "defaultValue": "2019-Datacenter",
+                        "defaultValue": "CentOS 7.7",
                         "constraints": {
                             "allowedValues": [
                                 {
-                                    "value": "2019-Datacenter",
-                                    "label": "2019-Datacenter"
+                                    "value": "CentOS79",
+                                    "label": "CentOS 7.9"
                                 },
                                 {
-                                    "value": "2016-Datacenter",
-                                    "label": "2016-Datacenter"
+                                    "value": "CentOS78",
+                                    "label": "CentOS 7.8"
+                                },
+                                {
+                                    "value": "CentOS77",
+                                    "label": "CentOS 7.7"
+                                },
+                                {
+                                    "value": "CentOS76",
+                                    "label": "CentOS 7.6"
+                                },
+                                {
+                                    "value": "CentOS75",
+                                    "label": "CentOS 7.5"
+                                },
+                                {
+                                    "value": "CentOS74",
+                                    "label": "CentOS 7.4"
+                                },
+                                {
+                                    "value": "RHEL78",
+                                    "label": "Red Hat Enterprise Linux 7.8"
+                                },
+                                {
+                                    "value": "RHEL77",
+                                    "label": "Red Hat Enterprise Linux 7.7"
+                                },
+                                {
+                                    "value": "RHEL75",
+                                    "label": "Red Hat Enterprise Linux 7.5"
+                                },
+                                {
+                                    "value": "RHEL74",
+                                    "label": "Red Hat Enterprise Linux 7.4"
+                                },
+                                {
+                                    "value": "RHEL73",
+                                    "label": "Red Hat Enterprise Linux 7.3"
+                                },
+                                {
+                                    "value": "RHEL72",
+                                    "label": "Red Hat Enterprise Linux 7.2"
                                 }
                             ],
                             "required": true
@@ -72,10 +112,11 @@
                         "label": "Size",
                         "toolTip": "Select a VM size to support the workload that you want to run. The size that you choose then determines factors such as processing power, memory, and storage capacity. Azure offers a wide variety of sizes to support many types of uses. Azure charges an hourly price based on the VM's size and operating system.",
                         "recommendedSizes": [
-                            "Standard_DS2_v2",
-                            "Standard_D2s_v3"
+                            "Standard_A2_v2",
+                            "Standard_D2_v2",
+                            "Standard_D2_v3"
                         ],
-                        "osPlatform": "Windows",
+                        "osPlatform": "Linux",
                         "count": "1"
                     },
                     {
@@ -89,118 +130,38 @@
                         "name": "adminUsername",
                         "type": "Microsoft.Compute.UserNameTextBox",
                         "label": "Username",
+                        "toolTip": "Admin username for the machine",
                         "defaultValue": "azureadmin",
-                        "toolTip": "Admin username for the virtual machine.",
+                        "osPlatform": "Linux",
                         "constraints": {
-                            "required": true,
-                            "regex": "^[a-z0-9A-Z]{1,30}$",
-                            "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
-                        },
-                        "osPlatform": "Windows",
-                        "visible": true
+                            "required": true
+                        }
                     },
                     {
                         "name": "adminCredentials",
                         "type": "Microsoft.Compute.CredentialsCombo",
                         "label": {
+                            "authenticationType": "Authentication type",
                             "password": "Password",
-                            "confirmPassword": "Confirm password"
+                            "confirmPassword": "Confirm password",
+                            "sshPublicKey": "SSH public key"
                         },
                         "toolTip": {
-                            "password": ""
+                            "authenticationType": "Authentication type (password or ssh public key) to connect to the virtual machine",
+                            "password": "Admin password for the virtual machine",
+                            "sshPublicKey": "Admin ssh public key for the virtual machine"
                         },
                         "constraints": {
                             "required": true,
-                            "customPasswordRegex": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{12,}$",
-                            "customValidationMessage": "The password must be alphanumeric, contain at least 12 characters, and have at least 1 letter and 1 number."
+                            "customPasswordRegex": "^(?=.*[A-Z])(?=.*[.!@#$%^&*()-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
+                            "customValidationMessage": "Password must be at least 12 characters long, and contain upper case, lower case, number and symbol"
                         },
                         "options": {
-                            "hideConfirmation": false
+                            "hideConfirmation": false,
+                            "hidePassword": false
                         },
-                        "osPlatform": "Windows",
+                        "osPlatform": "Linux",
                         "visible": true
-                    }
-                ]
-            },
-            {
-                "name": "disk",
-                "label": "Disk",
-                "subLabel": {
-                    "preValidation": "Configure the virtual machine's resources and settings",
-                    "postValidation": "Done"
-                },
-                "bladeTitle": "Disk",
-                "elements": [
-                    {
-                        "name": "textBlock0",
-                        "type": "Microsoft.Common.TextBlock",
-                        "options": {
-                            "text": "Disk options"
-                        }
-                    },
-                    {
-                        "name": "osDiskStorageType",
-                        "type": "Microsoft.Common.DropDown",
-                        "label": "OS disk type",
-                        "toolTip": "You can choose between Azure managed disks types to support your workload or scenario.",
-                        "defaultValue": "Premium SSD",
-                        "constraints": {
-                            "allowedValues": [
-                                {
-                                    "value": "Premium_LRS",
-                                    "label": "Premium SSD"
-                                },
-                                {
-                                    "value": "Standard_LRS",
-                                    "label": "Standard HDD"
-                                },
-                                {
-                                    "value": "StandardSSD_LRS",
-                                    "label": "Standard SSD"
-                                }
-                            ],
-                            "required": true
-                        },
-                        "visible": true
-                    },
-                    {
-                        "name": "osDiskEncryptionType",
-                        "type": "Microsoft.Common.DropDown",
-                        "label": "Encryption type",
-                        "toolTip": "",
-                        "defaultValue": "(Default) Encryption at-rest with a platform-managed key",
-                        "constraints": {
-                            "allowedValues": [
-                                {
-                                    "value": "default",
-                                    "label": "(Default) Encryption at-rest with a platform-managed key"
-                                },
-                                {
-                                    "value": "EncryptionAtRestWithCustomerKey",
-                                    "label": "Encryption at-rest with a customer-managed key"
-                                },
-                                {
-                                    "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
-                                    "label": "Double encryption with platform-managed and customer-managed keys"
-                                }
-                            ],
-                            "required": true
-                        },
-                        "visible": true
-                    },
-                    {
-                        "name": "osDiskEncryptionSet",
-                        "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Disk Encryption Set",
-                        "resourceType": "Microsoft.Compute/diskEncryptionSets",
-                        "toolTip": "A disk encryption set stores the customer key that a disk or snapshot will use for encrypting its data. You must choose an existing disk encryption set during this step. Disk encryption sets require access to key vault and keys.",
-                        "options": {
-                            "filter": {
-                                "subscription": "onBasic",
-                                "location": "onBasic"
-                            }
-                        },
-                        "visible": "[not(equals(steps('disk').osDiskEncryptionType, 'default'))]"
                     }
                 ]
             },
@@ -228,7 +189,7 @@
                             "subnets": "Subnets"
                         },
                         "toolTip": {
-                            "virtualNetwork": "Virtual networks are logically isolated from each other in Azure. You can configure their IP address ranges, subnets, route tables, gateways, and security settings, much like a traditional network in your data center. Virtual machines in the same virtual network can access each other by default.",
+                            "virtualNetwork": "Virtual Network for the VM Image.",
                             "subnets": ""
                         },
                         "defaultValue": {
@@ -307,13 +268,11 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
-            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySet.id]",
-            "osVersion": "[steps('instance').osVersion]",
+            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySet.name]",
+            "OSVersion": "[steps('instance').OSVersion]",
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
-            "adminPassword": "[steps('instance').adminCredentials.password]",
-            "osDiskStorageType": "[steps('disk').osDiskStorageType]",
-            "osDiskEncryptionSetResourceId": "[steps('disk').osDiskEncryptionType.id]",
+            "adminPasswordOrKey": "[if(equals(steps('instance').adminCredentials.authenticationType, 'password'), steps('instance').adminCredentials.password, steps('instance').adminCredentials.sshPublicKey)]",
             "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",
             "virtualNetworkNewOrExisting": "[steps('networking').vmVirtualNetwork.newOrExisting]",
             "virtualNetworkResourceGroupName": "[steps('networking').vmVirtualNetwork.resourceGroup]",
