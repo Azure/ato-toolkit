@@ -33,20 +33,17 @@
                         }
                     },
                     {
-                        "name": "vmAvailabilitySet",
-                        "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Availability set",
-                        "resourceType": "Microsoft.Compute/availabilitySets",
+                        "name": "vmAvailabilitySetResourceId",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Availability set resource id",
                         "toolTip": "Availability set Name for the VM.",
-                        "options": {
-                            "filter": {
-                                "subscription": "onBasic",
-                                "location": "onBasic"
-                            }
-                        }
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": true
                     },
                     {
-                        "name": "osVersion",
+                        "name": "OSVersion",
                         "type": "Microsoft.Common.DropDown",
                         "label": "Windows OS version",
                         "toolTip": "The OS version for the VM Image",
@@ -90,35 +87,29 @@
                         "name": "adminUsername",
                         "type": "Microsoft.Compute.UserNameTextBox",
                         "label": "Username",
+                        "toolTip": "Admin username for the machine",
                         "defaultValue": "azureadmin",
-                        "toolTip": "Admin username for the virtual machine.",
-                        "constraints": {
-                            "required": true,
-                            "regex": "^[a-z0-9A-Z]{1,30}$",
-                            "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
-                        },
                         "osPlatform": "Windows",
-                        "visible": true
+                        "constraints": {
+                            "required": true
+                        }
                     },
                     {
-                        "name": "adminCredentials",
-                        "type": "Microsoft.Compute.CredentialsCombo",
+                        "name": "password",
+                        "type": "Microsoft.Common.PasswordBox",
                         "label": {
                             "password": "Password",
                             "confirmPassword": "Confirm password"
                         },
-                        "toolTip": {
-                            "password": ""
-                        },
+                        "toolTip": "Admin password for the virtual machine",
                         "constraints": {
                             "required": true,
-                            "customPasswordRegex": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{12,}$",
-                            "customValidationMessage": "The password must be alphanumeric, contain at least 12 characters, and have at least 1 letter and 1 number."
+                            "regex": "^(?=.*[A-Z])(?=.*[.!@#$%^&*()-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
+                            "validationMessage": "Password must be at least 12 characters long, and contain upper case, lower case, number and symbol"
                         },
                         "options": {
                             "hideConfirmation": false
                         },
-                        "osPlatform": "Windows",
                         "visible": true
                     }
                 ]
@@ -147,7 +138,7 @@
                             "subnets": "Subnets"
                         },
                         "toolTip": {
-                            "virtualNetwork": "Virtual networks are logically isolated from each other in Azure. You can configure their IP address ranges, subnets, route tables, gateways, and security settings, much like a traditional network in your data center. Virtual machines in the same virtual network can access each other by default.",
+                            "virtualNetwork": "Virtual Network for the VM Image.",
                             "subnets": ""
                         },
                         "defaultValue": {
@@ -195,30 +186,24 @@
                         }
                     },
                     {
-                        "name": "diagnosticStorageAccount",
-                        "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Storage account",
-                        "resourceType": "Microsoft.Storage/storageAccounts",
-                        "toolTip": "Storage Account for Diagnostic Settings.",
-                        "options": {
-                            "filter": {
-                                "subscription": "onBasic",
-                                "location": "onBasic"
-                            }
-                        }
+                        "name": "diagnosticStorageResourceId",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Storage account resource id",
+                        "toolTip": "Storage account for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": true
                     },
                     {
-                        "name": "logAnalyticsWorkspace",
-                        "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Log Analytics workspace",
-                        "resourceType": "Microsoft.OperationalInsights/workspaces",
-                        "toolTip": "Log Analytics workspace for Diagnostic Settings.",
-                        "options": {
-                            "filter": {
-                                "subscription": "onBasic",
-                                "location": "onBasic"
-                            }
-                        }
+                        "name": "logAnalyticsWorkspaceId",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Log Analytics workspace resource id",
+                        "toolTip": "Log Analytics workspace for Diagnostic Settings. <br/><br/>Please enter the value in the format : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{resourceName} <br/><br/> [Learn More](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource?tabs=json#resourceid)",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": true
                     }
                 ]
             }
@@ -226,19 +211,19 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
-            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySet.id]",
-            "osVersion": "[steps('instance').osVersion]",
+            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySetResourceId]",
+            "OSVersion": "[steps('instance').OSVersion]",
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
-            "adminPassword": "[steps('instance').adminCredentials.password]",
+            "adminPassword": "[steps('instance').password]",
             "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",
             "virtualNetworkNewOrExisting": "[steps('networking').vmVirtualNetwork.newOrExisting]",
             "virtualNetworkResourceGroupName": "[steps('networking').vmVirtualNetwork.resourceGroup]",
             "addressPrefix": "[steps('networking').vmVirtualNetwork.addressPrefix]",
             "subnetPrefix": "[steps('networking').vmVirtualNetwork.subnets.subnet1.addressPrefix]",
             "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
-            "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
-            "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]"
+            "diagnosticStorageResourceId": "[steps('management').diagnosticStorageResourceId]",
+            "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspaceId]"
         }
     }
 }
