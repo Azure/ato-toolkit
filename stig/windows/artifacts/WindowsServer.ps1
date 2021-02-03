@@ -200,15 +200,15 @@ configuration WindowsServer
     {
         $localConfigurationManager.invoke()
 
-        if ($IsOffline -eq $false)
-        {
-            $dodCertificates.invoke()
-        }
-
         $windowsServerStig.invoke()
         $ie11Stig.invoke()
         $dotnetFrameworkStig.invoke()
         $windowsDefenderStig.invoke()
         $windowsFirewallStig.invoke()
+
+        if ($IsOffline -eq $false)
+        {
+            $dodCertificates.invoke()
+        }
     }
 }
