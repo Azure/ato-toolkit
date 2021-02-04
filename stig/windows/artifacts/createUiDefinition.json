@@ -350,7 +350,7 @@
             "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
             "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
             "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]",
-            "certificateLocation": "[steps('advanced').certificateLocation]"
+            "_certificateLocation": "[steps('advanced').certificateLocation]"
         }
     }
 }
