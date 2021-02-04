@@ -81,7 +81,7 @@
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": "Cert location - if github then raw - if storage then needs accesThe base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+                "description": "The location for all 8 DoD Root certificates required by DISA. Certificates must be named thumprint.cer (example: 4ECB5CC3095670454DA1CBD410FC921F46B8564B.cer) If using Github please use the following raw format (Example : https://raw.githubusercontent.com/Azure/ato-toolkit/master/stig/windows/artifacts/certificate/)"
             }
         },
         "autoInstallDependencies": {
@@ -338,14 +338,14 @@
                                 "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), parameters('_artifactsLocationSasToken'))]",
                                 "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), parameters('_artifactsLocationSasToken'))]",
                                 "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('__certificateLocation'), variables('certificate1')",
-                                "[concat(parameters('__certificateLocation'), variables('certificate2')",
-                                "[concat(parameters('__certificateLocation'), variables('certificate3')",
-                                "[concat(parameters('__certificateLocation'), variables('certificate4')",
-                                "[concat(parameters('__certificateLocation'), variables('certificate5')",
-                                "[concat(parameters('__certificateLocation'), variables('certificate6')",
-                                "[concat(parameters('__certificateLocation'), variables('certificate7')",
-                                "[concat(parameters('__certificateLocation'), variables('certificate8')"
+                                "[concat(parameters('_certificateLocation'), variables('certificate1'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate2'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate3'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate4'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate5'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate6'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate7'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate8'))]"
                             ],
                             "timestamp": 123456788,
                             "commandToExecute": "[if(parameters('autoInstallDependencies'), variables('commandToExecute'), 'echo \"No command to execute.\"')]"
