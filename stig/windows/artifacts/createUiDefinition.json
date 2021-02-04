@@ -335,7 +335,7 @@
             "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
             "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
             "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]",
-            "certificatestorageResourceId": "[steps('management').certificateStorageAccount.id]",
+            "certificatestorageResourceId": "[steps('management').certificateStorageAccount.id]"
         }
     }
 }
