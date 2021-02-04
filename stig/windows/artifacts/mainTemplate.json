@@ -350,9 +350,6 @@
                                 "url": "[concat(parameters('_artifactsLocation'), 'WindowsServer.ps1.zip', parameters('_artifactsLocationSasToken'))]",
                                 "script": "WindowsServer.ps1",
                                 "function": "WindowsServer"
-                            },
-                            "configurationArguments": {
-                                "IsOffline": "[bool(not(parameters('autoInstallDependencies')))]"
                             }
                         }
                     }
