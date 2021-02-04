@@ -278,7 +278,7 @@
                     {
                         "name": "diagnosticStorageAccount",
                         "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Storage account",
+                        "label": "Diagnostic Storage account",
                         "resourceType": "Microsoft.Storage/storageAccounts",
                         "toolTip": "Storage Account for Diagnostic Settings.",
                         "options": {
@@ -304,9 +304,9 @@
                     {
                         "name": "certificateStorageAccount",
                         "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Storage account",
+                        "label": "Certificate Storage account",
                         "resourceType": "Microsoft.Storage/storageAccounts",
-                        "toolTip": "Storage Account for Diagnostic Settings.",
+                        "toolTip": "Storage Account that holds 8 DoD Root Certificates required by DISA.",
                         "options": {
                             "filter": {
                                 "subscription": "onBasic",
