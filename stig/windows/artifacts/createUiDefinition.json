@@ -323,7 +323,7 @@
                         "name": "certificateLocation",
                         "type": "Microsoft.Common.TextBox",
                         "label": "Certificate Location",
-                        "toolTip": "Location must contain all 8 certificates required for Server 2019 and Server 2016 . <br/><br/>If using Github please use the following raw format (Example : https://raw.githubusercontent.com/Azure/ato-toolkit/master/stig/windows/artifacts/certificate/)",
+                        "toolTip": "Location must contain all 8 certificates required for Server 2019 and Server 2016 . <br/>If using Github please use the following raw format (Example : https://raw.githubusercontent.com/Azure/ato-toolkit/master/stig/windows/artifacts/certificates/)",
                         "constraints": {
                             "required": false
                         },
