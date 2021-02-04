@@ -170,7 +170,15 @@
         "generateStigChecklist": "GenerateStigChecklist.ps1",
         "storageApiVersion": "2019-06-01",
         "diskEncryptionSet": { "id": "[parameters('osDiskEncryptionSetResourceId')]" },
-        "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'))]"
+        "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'))]",
+        "certificate1": "4ECB5CC3095670454DA1CBD410FC921F46B8564B.cer",
+        "certificate2": "8C941B34EA1EA6ED9AE2BC54CF687252B4C9B561.cer",
+        "certificate3": "929BF3196896994C0A201DF4A5B71F603FEFBF2E.cer",
+        "certificate4": "A8C27332CCB4CA49554CE55D34062A7DD2850C02.cer",
+        "certificate5": "AC06108CA348CC03B53795C64BF84403C1DBD341.cer",
+        "certificate6": "AF132AC65DE86FC4FB3FE51FD637EBA0FF0B12A9.cer",
+        "certificate7": "B8269F25DBD937ECAFD4C35A9838571723F2D026.cer",
+        "certificate8": "D73CA91102A2204A36459ED32213B467D7CE97FB.cer"
     },
     "resources": [
         {
@@ -322,7 +330,15 @@
                             "fileUris": [
                                 "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), parameters('_artifactsLocationSasToken'))]",
                                 "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), parameters('_artifactsLocationSasToken'))]"
+                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('certificate1'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('certificate2'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('certificate3'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('certificate4'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('certificate5'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('certificate6'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('certificate7'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('certificate8'), parameters('_artifactsLocationSasToken'))]"
                             ],
                             "timestamp": 123456788,
                             "commandToExecute": "[if(parameters('autoInstallDependencies'), variables('commandToExecute'), 'echo \"No command to execute.\"')]"
