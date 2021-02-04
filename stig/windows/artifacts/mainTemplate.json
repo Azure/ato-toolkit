@@ -77,6 +77,13 @@
             }
 
         },
+        "_certificateLocation": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Cert location - if github then raw - if storage then needs accesThe base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+            }
+        },
         "autoInstallDependencies": {
             "type": "bool",
             "defaultValue": true,
@@ -331,14 +338,14 @@
                                 "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), parameters('_artifactsLocationSasToken'))]",
                                 "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), parameters('_artifactsLocationSasToken'))]",
                                 "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('certificate1'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('certificate2'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('certificate3'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('certificate4'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('certificate5'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('certificate6'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('certificate7'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('certificate8'), parameters('_artifactsLocationSasToken'))]"
+                                "[concat(parameters('__certificateLocation'), variables('certificate1')",
+                                "[concat(parameters('__certificateLocation'), variables('certificate2')",
+                                "[concat(parameters('__certificateLocation'), variables('certificate3')",
+                                "[concat(parameters('__certificateLocation'), variables('certificate4')",
+                                "[concat(parameters('__certificateLocation'), variables('certificate5')",
+                                "[concat(parameters('__certificateLocation'), variables('certificate6')",
+                                "[concat(parameters('__certificateLocation'), variables('certificate7')",
+                                "[concat(parameters('__certificateLocation'), variables('certificate8')"
                             ],
                             "timestamp": 123456788,
                             "commandToExecute": "[if(parameters('autoInstallDependencies'), variables('commandToExecute'), 'echo \"No command to execute.\"')]"
