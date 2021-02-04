@@ -155,13 +155,6 @@
             "metadata": {
                 "description": "(Optional) Log Analytics workspace resource id."
             }
-        },
-        "certificateStorageResourceId": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "(Optional) Location of 8 DoD certificates required by DISA."
-            }
         }
     },
     "variables": {
