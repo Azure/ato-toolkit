@@ -278,7 +278,7 @@
                     {
                         "name": "diagnosticStorageAccount",
                         "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Diagnostic Storage account",
+                        "label": "Storage account",
                         "resourceType": "Microsoft.Storage/storageAccounts",
                         "toolTip": "Storage Account for Diagnostic Settings.",
                         "options": {
@@ -302,34 +302,6 @@
                         }
                     }
                 ]
-            },
-            {
-                "name": "advanced",
-                "label": "Advanced",
-                "subLabel": {
-                    "preValidation": "Add DoD Root Certificates to Windows Server VM's",
-                    "postValidation": "Done"
-                },
-                "bladeTitle": "Advanced",
-                "elements": [
-                    {
-                        "name": "textBlock0",
-                        "type": "Microsoft.Common.TextBlock",
-                        "options": {
-                            "text": "Location of DoD Root Certificates"
-                        }
-                    },
-                    {
-                        "name": "certificateLocation",
-                        "type": "Microsoft.Common.TextBox",
-                        "label": "Certificate Location",
-                        "toolTip": "Location must contain all 8 certificates required for Server 2019 and Server 2016 . <br/>If using Github please use the following raw format (Example : https://raw.githubusercontent.com/Azure/ato-toolkit/master/stig/windows/artifacts/certificates/)",
-                        "constraints": {
-                            "required": false
-                        },
-                        "visible": true
-                    }
-                ]
             }
         ],
         "outputs": {
@@ -349,8 +321,7 @@
             "subnetPrefix": "[steps('networking').vmVirtualNetwork.subnets.subnet1.addressPrefix]",
             "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
             "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
-            "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]",
-            "_certificateLocation": "[steps('advanced').certificateLocation]"
+            "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]"
         }
     }
 }

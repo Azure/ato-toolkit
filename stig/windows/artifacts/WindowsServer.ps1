@@ -1,6 +1,5 @@
 configuration WindowsServer
 {
-
     Import-DscResource -ModuleName PowerSTIG -ModuleVersion 4.7.1
     Import-DscResource -ModuleName SecurityPolicyDsc -ModuleVersion 2.10.0.0
 

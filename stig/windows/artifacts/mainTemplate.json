@@ -77,13 +77,6 @@
             }
 
         },
-        "_certificateLocation": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "The location for all 8 DoD Root certificates required by DISA. Certificates must be named thumprint.cer (example: 4ECB5CC3095670454DA1CBD410FC921F46B8564B.cer) If using Github please use the following raw format (Example : https://raw.githubusercontent.com/Azure/ato-toolkit/master/stig/windows/artifacts/certificate/)"
-            }
-        },
         "autoInstallDependencies": {
             "type": "bool",
             "defaultValue": false,
@@ -176,15 +169,7 @@
         "installPSModulesFile": "InstallModules.ps1",
         "generateStigChecklist": "GenerateStigChecklist.ps1",
         "storageApiVersion": "2019-06-01",
-        "diskEncryptionSet": { "id": "[parameters('osDiskEncryptionSetResourceId')]" },
-        "certificate1": "4ECB5CC3095670454DA1CBD410FC921F46B8564B.cer",
-        "certificate2": "8C941B34EA1EA6ED9AE2BC54CF687252B4C9B561.cer",
-        "certificate3": "929BF3196896994C0A201DF4A5B71F603FEFBF2E.cer",
-        "certificate4": "A8C27332CCB4CA49554CE55D34062A7DD2850C02.cer",
-        "certificate5": "AC06108CA348CC03B53795C64BF84403C1DBD341.cer",
-        "certificate6": "AF132AC65DE86FC4FB3FE51FD637EBA0FF0B12A9.cer",
-        "certificate7": "B8269F25DBD937ECAFD4C35A9838571723F2D026.cer",
-        "certificate8": "D73CA91102A2204A36459ED32213B467D7CE97FB.cer"
+        "diskEncryptionSet": { "id": "[parameters('osDiskEncryptionSetResourceId')]" }
     },
     "resources": [
         {
@@ -318,39 +303,6 @@
                 }
             },
             "resources": [
-                                {
-                    "type": "extensions",
-                    "apiVersion": "2017-03-30",
-                    "name": "install-powershell-modules-and-certificates",
-                    "location": "[parameters('location')]",
-                    "condition": "[and(not(equals(parameters('_artifactsLocation'), '')),not(equals(parameters('_certificateLocation'), '')))]",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-                    ],
-                    "properties": {
-                        "publisher": "Microsoft.Compute",
-                        "type": "CustomScriptExtension",
-                        "typeHandlerVersion": "1.10",
-                        "autoUpgradeMinorVersion": true,
-                        "settings": {
-                            "fileUris": [
-                                "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate1'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate2'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate3'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate4'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate5'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate6'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate7'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate8'))]"
-                            ],
-                            "timestamp": 123456788,
-                            "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'), ' -autoInstallDependencies ', parameters('autoInstallDependencies'))]"
-                        }
-                    }
-                },
                 {
                     "type": "extensions",
                     "apiVersion": "2017-03-30",
