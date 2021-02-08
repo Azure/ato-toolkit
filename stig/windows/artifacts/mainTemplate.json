@@ -369,15 +369,7 @@
                             "fileUris": [
                                 "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), parameters('_artifactsLocationSasToken'))]",
                                 "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate1'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate2'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate3'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate4'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate5'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate6'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate7'))]",
-                                "[concat(parameters('_certificateLocation'), variables('certificate8'))]"
+                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), parameters('_artifactsLocationSasToken'))]"
                             ],
                             "timestamp": 123456788,
                             "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'), ' -autoInstallDependencies ', parameters('autoInstallDependencies'))]"
