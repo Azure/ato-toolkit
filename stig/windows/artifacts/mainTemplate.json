@@ -86,7 +86,7 @@
         },
         "autoInstallDependencies": {
             "type": "bool",
-            "defaultValue": true,
+            "defaultValue": false,
             "metadata": {
                 "description": ""
             }
@@ -177,7 +177,6 @@
         "generateStigChecklist": "GenerateStigChecklist.ps1",
         "storageApiVersion": "2019-06-01",
         "diskEncryptionSet": { "id": "[parameters('osDiskEncryptionSetResourceId')]" },
-        "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'))]",
         "certificate1": "4ECB5CC3095670454DA1CBD410FC921F46B8564B.cer",
         "certificate2": "8C941B34EA1EA6ED9AE2BC54CF687252B4C9B561.cer",
         "certificate3": "929BF3196896994C0A201DF4A5B71F603FEFBF2E.cer",
@@ -319,6 +318,39 @@
                 }
             },
             "resources": [
+                                {
+                    "type": "extensions",
+                    "apiVersion": "2017-03-30",
+                    "name": "install-powershell-modules-and-certificates",
+                    "location": "[parameters('location')]",
+                    "condition": "[and(not(equals(parameters('_artifactsLocation'), '')),not(equals(parameters('_certificateLocation'), '')))]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.Compute",
+                        "type": "CustomScriptExtension",
+                        "typeHandlerVersion": "1.10",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "fileUris": [
+                                "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), parameters('_artifactsLocationSasToken'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate1'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate2'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate3'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate4'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate5'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate6'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate7'))]",
+                                "[concat(parameters('_certificateLocation'), variables('certificate8'))]"
+                            ],
+                            "timestamp": 123456788,
+                            "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'), ' -autoInstallDependencies ', parameters('autoInstallDependencies'))]"
+                        }
+                    }
+                },
                 {
                     "type": "extensions",
                     "apiVersion": "2017-03-30",
@@ -348,7 +380,7 @@
                                 "[concat(parameters('_certificateLocation'), variables('certificate8'))]"
                             ],
                             "timestamp": 123456788,
-                            "commandToExecute": "[if(parameters('autoInstallDependencies'), variables('commandToExecute'), 'echo \"No command to execute.\"')]"
+                            "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'), ' -autoInstallDependencies ', parameters('autoInstallDependencies'))]"
                         }
                     }
                 },
