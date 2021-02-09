@@ -32,7 +32,11 @@ configuration WindowsServer
 
         WindowsFirewall STIG_WindowsFirewall
         {
-            Skiprule = @('V-17417.a','V-17417.b')#,'V-17438.a','V-17438.b')
+            #Skiprule = @('V-17417.a','V-17417.b')#,'V-17438.a','V-17438.b')
+            Exception = @{ 
+                'V-17417.a' = @{ValueData = '0' }
+                'V-17417.b' = @{ValueData = '0' }
+            }
         }
     }
 
