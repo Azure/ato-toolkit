@@ -52,14 +52,14 @@
             "defaultValue": "Premium_LRS",
             "allowedValues": [ "Premium_LRS", "Standard_LRS", "StandardSSD_LRS" ],
             "metadata": {
-                "description": ""
+                "description": "You can choose between Azure managed disks types to support your workload or scenario."
             }
         },
         "osDiskEncryptionSetResourceId": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": ""
+                "description": "OS Disk Encryption Set resource id."
             }
         },
         "_artifactsLocation": {
@@ -70,18 +70,18 @@
             }
         },
         "_artifactsLocationSasToken": {
-            "type": "string",
+            "type": "secureString",
             "defaultValue": "",
             "metadata": {
-                "description": ""
+                "description": "SAS Token to access the storage location containing artifacts"
             }
 
         },
         "autoInstallDependencies": {
             "type": "bool",
-            "defaultValue": true,
+            "defaultValue": false,
             "metadata": {
-                "description": ""
+                "description": "Boolean value to indicate an online or offline environment."
             }
         },
         "vmVirtualNetwork": {
@@ -170,7 +170,7 @@
         "generateStigChecklist": "GenerateStigChecklist.ps1",
         "storageApiVersion": "2019-06-01",
         "diskEncryptionSet": { "id": "[parameters('osDiskEncryptionSetResourceId')]" },
-        "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'))]"
+        "artifactsLocationSasToken": "[if(equals(parameters('_artifactsLocationSasToken'), ''), if(contains(deployment().properties.templateLink.uri, '?'), split(deployment().properties.templateLink.uri, 'mainTemplate.json')[1], ''), parameters('_artifactsLocationSasToken'))]"
     },
     "resources": [
         {
@@ -246,7 +246,6 @@
                 "metrics": [
                     {
                         "category": "AllMetrics",
-                        "timeGrain": null,
                         "enabled": true,
                         "retentionPolicy": {
                             "enabled": true,
@@ -306,7 +305,7 @@
             "resources": [
                 {
                     "type": "extensions",
-                    "apiVersion": "2017-03-30",
+                    "apiVersion": "2020-12-01",
                     "name": "install-powershell-modules",
                     "location": "[parameters('location')]",
                     "condition": "[not(equals(parameters('_artifactsLocation'), ''))]",
@@ -320,18 +319,18 @@
                         "autoUpgradeMinorVersion": true,
                         "settings": {
                             "fileUris": [
-                                "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), parameters('_artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), parameters('_artifactsLocationSasToken'))]"
+                                "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), variables('artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), variables('artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), variables('artifactsLocationSasToken'))]"
                             ],
                             "timestamp": 123456788,
-                            "commandToExecute": "[if(parameters('autoInstallDependencies'), variables('commandToExecute'), 'echo \"No command to execute.\"')]"
+                            "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'), ' -autoInstallDependencies ', parameters('autoInstallDependencies'))]"
                         }
                     }
                 },
                 {
                     "type": "extensions",
-                    "apiVersion": "2017-03-30",
+                    "apiVersion": "2020-12-01",
                     "name": "[concat('setup-win-dsc-stig')]",
                     "location": "[parameters('location')]",
                     "condition": "[not(equals(parameters('_artifactsLocation'), ''))]",
@@ -347,12 +346,9 @@
                         "settings": {
                             "wmfVersion": "latest",
                             "configuration": {
-                                "url": "[concat(parameters('_artifactsLocation'), 'WindowsServer.ps1.zip', parameters('_artifactsLocationSasToken'))]",
+                                "url": "[concat(parameters('_artifactsLocation'), 'WindowsServer.ps1.zip', variables('artifactsLocationSasToken'))]",
                                 "script": "WindowsServer.ps1",
                                 "function": "WindowsServer"
-                            },
-                            "configurationArguments": {
-                                "IsOffline": "[bool(not(parameters('autoInstallDependencies')))]"
                             }
                         }
                     }
@@ -363,7 +359,7 @@
             "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
             "name": "[concat(parameters('vmName'), '/Microsoft.Insights/service')]",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
             "dependsOn": [
                 "[parameters('vmName')]"
@@ -380,8 +376,7 @@
                             "days": "[parameters('logsRetentionInDays')]"
                         }
                     }
-                ],
-                "logs": []
+                ]
             }
         }
     ],
