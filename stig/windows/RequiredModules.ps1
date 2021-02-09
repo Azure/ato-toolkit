@@ -12,9 +12,6 @@ function Get-RequiredModules {
         @{ModuleName = 'WindowsDefenderDsc'; ModuleVersion = '2.0.0' },
         @{ModuleName = 'xDnsServer'; ModuleVersion = '1.16.0.0' },
         @{ModuleName = 'xWebAdministration'; ModuleVersion = '3.2.0' },
-        @{ModuleName = 'CertificateDsc'; ModuleVersion = '5.0.0' },
-        @{ModuleName = 'cChoco'; ModuleVersion = '2.4.0.0' },
-        @{ModuleName = 'xPSDesiredStateConfiguration'; ModuleVersion = '9.1.0' },
         @{ModuleName = 'PowerSTIG'; ModuleVersion = '4.7.1' }
     )
 }

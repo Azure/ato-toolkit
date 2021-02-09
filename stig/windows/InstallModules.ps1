@@ -1,15 +1,23 @@
-. "$PSScriptRoot\RequiredModules.ps1"
+Param(
+    [string] 
+    [Parameter(Mandatory = $false)]
+    $autoInstallDependencies = $false
+)
 
-# Added to support package provider download on Server 2016
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+if ($autoInstallDependencies -eq $true) {
+    . "$PSScriptRoot\RequiredModules.ps1"
 
-Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+    # Added to support package provider download on Server 2016
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$requiredModules = Get-RequiredModules
+    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 
-# Install the required modules
-foreach ($requiredModule in $requiredModules) {
-    Install-Module -Name $requiredModule.ModuleName -RequiredVersion $requiredModule.ModuleVersion -Force
+    $requiredModules = Get-RequiredModules
+
+    # Install the required modules
+    foreach ($requiredModule in $requiredModules) {
+        Install-Module -Name $requiredModule.ModuleName -RequiredVersion $requiredModule.ModuleVersion -Force
+    }
 }
 
 # Increase the MaxEnvelope Size
