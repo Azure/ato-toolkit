@@ -89,7 +89,7 @@
                         "name": "adminUsername",
                         "type": "Microsoft.Compute.UserNameTextBox",
                         "label": "Username",
-                        "defaultValue": "azureadmin",
+                        "defaultValue": "",
                         "toolTip": "Admin username for the virtual machine.",
                         "constraints": {
                             "required": true,
@@ -107,12 +107,12 @@
                             "confirmPassword": "Confirm password"
                         },
                         "toolTip": {
-                            "password": ""
+                            "password": "The administrator password for the VM"
                         },
                         "constraints": {
                             "required": true,
-                            "customPasswordRegex": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{12,}$",
-                            "customValidationMessage": "The password must be alphanumeric, contain at least 12 characters, and have at least 1 letter and 1 number."
+                            "customPasswordRegex": "^(?=.*[A-Z])(?=.*[.!@#$%^&*()-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
+                            "customValidationMessage": "Password must be at least 12 characters long, and contain upper case, lower case, number and symbol"
                         },
                         "options": {
                             "hideConfirmation": false
@@ -167,7 +167,7 @@
                         "name": "osDiskEncryptionType",
                         "type": "Microsoft.Common.DropDown",
                         "label": "Encryption type",
-                        "toolTip": "",
+                        "toolTip": "Select the encryption type for OS disk.",
                         "defaultValue": "(Default) Encryption at-rest with a platform-managed key",
                         "constraints": {
                             "allowedValues": [
@@ -229,7 +229,7 @@
                         },
                         "toolTip": {
                             "virtualNetwork": "Virtual networks are logically isolated from each other in Azure. You can configure their IP address ranges, subnets, route tables, gateways, and security settings, much like a traditional network in your data center. Virtual machines in the same virtual network can access each other by default.",
-                            "subnets": ""
+                            "subnets": "A subnet is a range of IP addresses in your virtual network, which can be used to isolate virtual machines from each other or from the Internet."
                         },
                         "defaultValue": {
                             "name": "[concat(resourceGroup().name, '-vnet')]",
@@ -307,7 +307,7 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
-            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySet.id]",
+            "availabilitySetResourceId": "[steps('instance').vmAvailabilitySet.id]",
             "osVersion": "[steps('instance').osVersion]",
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
