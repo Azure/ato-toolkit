@@ -101,6 +101,10 @@
         "virtualNetworkNewOrExisting": {
             "type": "string",
             "defaultValue": "new",
+            "allowedValues": [
+                "new",
+                "existing"
+            ],
             "metadata": {
                 "description": "Is the Virtual Network new or existing for the VM Image."
             }
