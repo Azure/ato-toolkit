@@ -231,10 +231,6 @@
                             "virtualNetwork": "Virtual networks are logically isolated from each other in Azure. You can configure their IP address ranges, subnets, route tables, gateways, and security settings, much like a traditional network in your data center. Virtual machines in the same virtual network can access each other by default.",
                             "subnets": ""
                         },
-                        "defaultValue": {
-                            "name": "[concat(resourceGroup().name, '-vnet')]",
-                            "addressPrefixSize": "/16"
-                        },
                         "constraints": {
                             "minAddressPrefixSize": "/16"
                         },
