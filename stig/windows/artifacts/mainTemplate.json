@@ -85,7 +85,6 @@
         },
         "vmVirtualNetwork": {
             "type": "string",
-            "defaultValue": "stig-vm-vnet",
             "metadata": {
                 "description": "Virtual Network for the VM Image."
             }
@@ -99,7 +98,11 @@
         },
         "virtualNetworkNewOrExisting": {
             "type": "string",
-            "defaultValue": "new",
+            "defaultValue": "existing",
+            "allowedValues": [
+                "new",
+                "existing"
+            ],
             "metadata": {
                 "description": "Is the Virtual Network new or existing for the VM Image."
             }
