@@ -73,9 +73,8 @@
             "type": "secureString",
             "defaultValue": "",
             "metadata": {
-                "description": "SAS Token to access the storage location containing artifacts"
+                "description": "SAS Token to access the storage location containing artifacts."
             }
-
         },
         "autoInstallDependencies": {
             "type": "bool",
