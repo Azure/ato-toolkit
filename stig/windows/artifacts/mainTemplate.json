@@ -86,7 +86,6 @@
         },
         "vmVirtualNetwork": {
             "type": "string",
-            "defaultValue": "stig-vm-vnet",
             "metadata": {
                 "description": "Virtual Network for the VM Image."
             }
