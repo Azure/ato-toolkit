@@ -15,9 +15,13 @@
 
 Import-Module PowerStig -verbose -force
 
-#Get OS version
-$osVersion = (Get-WmiObject Win32_OperatingSystem).Caption
-switch -Wildcard ($osVersion) {
+# Get OS version and Paths
+$powerSTIGpath  = (Get-Module -Name PowerSTIG).ModuleBase
+$outputFolder   = New-Item -Path "C:\STIG" -ItemType Directory -Force
+$outputPath     = "$outputFolder\$env:COMPUTERNAME-StigChecklist.ckl"
+$fullOsVersion  = (Get-WmiObject Win32_OperatingSystem).Caption
+
+switch -Wildcard ($fullOsVersion) {
     "*2016*" {
         $osVersion = "2016"
         break
@@ -28,49 +32,43 @@ switch -Wildcard ($osVersion) {
     }
 }
 
-$powerSTIGpath = (Get-Module -Name PowerSTIG).ModuleBase
-
-# Wait for configuration to apply
+# Wait for configuration to apply and get DSC Results
 while ((Get-DscLocalConfigurationManager).LCMState -notmatch "Idle") {
-    start-sleep 5
+    Start-Sleep 5
     Write-Host "Waiting 5 seconds for retry"
 }
-
 $dscResults = Test-DscConfiguration -Detailed
-$outputPath = "C:\$env:COMPUTERNAME.ckl"
-
-# Format Stig path for Manual CheckFile
 
 # Server STIGs
-$latestOsVersion = (Get-Stig -ListAvailable | Where-Object { $_.TechnologyVersion -eq $OsVersion -and $_.TechnologyRole -eq "MS" } | Measure-Object -Maximum -Property Version).Maximum
-$serverOsSTIG = '{0}\StigData\Archive\Windows.Server.{1}\U_MS_Windows_Server_{1}_MS_STIG_V{2}R{3}_Manual-xccdf.xml' -f $powerSTIGpath, $OsVersion, $latestOsVersion.Major, $latestOsVersion.Minor
-$manServerSTIG = "U_MS_Windows_Server_{0}_MS_STIG_V{1}R{2}_Manual-xccdf.xml" -f $OsVersion, $latestOsVersion.Major, $latestOsVersion.Minor
+$latestOsVersion        = (Get-Stig -ListAvailable | Where-Object { $_.TechnologyVersion -eq $OsVersion -and $_.TechnologyRole -eq "MS" } | Measure-Object -Maximum -Property Version).Maximum
+$serverOsSTIG           = '{0}\StigData\Archive\Windows.Server.{1}\U_MS_Windows_Server_{1}_MS_STIG_V{2}R{3}_Manual-xccdf.xml' -f $powerSTIGpath, $OsVersion, $latestOsVersion.Major, $latestOsVersion.Minor
+$manServerSTIG          = "U_MS_Windows_Server_{0}_MS_STIG_V{1}R{2}_Manual-xccdf.xml" -f $OsVersion, $latestOsVersion.Major, $latestOsVersion.Minor
 
 # Windows Defender STIG
-$latestDefenderVersion = (Get-Stig -ListAvailable | Where-Object Technology -eq "WindowsDefender" | Measure-Object -Maximum -Property Version).Maximum
-$defenderSTIG = '{0}\StigData\Archive\Windows.Defender\U_MS_Windows_Defender_Antivirus_STIG_V{1}R{2}_Manual-xccdf.xml' -f $powerSTIGpath, $latestDefenderVersion.Major, $latestDefenderVersion.Minor
+$latestDefenderVersion  = (Get-Stig -ListAvailable | Where-Object Technology -eq "WindowsDefender" | Measure-Object -Maximum -Property Version).Maximum
+$defenderSTIG           = '{0}\StigData\Archive\Windows.Defender\U_MS_Windows_Defender_Antivirus_STIG_V{1}R{2}_Manual-xccdf.xml' -f $powerSTIGpath, $latestDefenderVersion.Major, $latestDefenderVersion.Minor
 
 # Internet Explorer STIG
-$latestInternetExplorerVersion = (Get-Stig -ListAvailable | Where-Object Technology -eq "InternetExplorer" | Measure-Object -Maximum -Property Version).Maximum
-$internetExplorerSTIG = '{0}\StigData\Archive\InternetExplorer\U_MS_IE11_STIG_V{1}R{2}_Manual-xccdf.xml' -f $powerSTIGpath, $latestInternetExplorerVersion.Major, $latestInternetExplorerVersion.Minor
+$latestIEVersion        = (Get-Stig -ListAvailable | Where-Object Technology -eq "InternetExplorer" | Measure-Object -Maximum -Property Version).Maximum
+$internetExplorerSTIG   = '{0}\StigData\Archive\InternetExplorer\U_MS_IE11_STIG_V{1}R{2}_Manual-xccdf.xml' -f $powerSTIGpath, $latestIEVersion.Major, $latestIEVersion.Minor
 
 # Windows Firewall STIG
-$latestFirewallVersion = (Get-Stig -ListAvailable | Where-Object Technology -eq "WindowsFirewall" | Measure-Object -Maximum -Property Version).Maximum
-$firewallSTIG = '{0}\StigData\Archive\Windows.Firewall\U_Windows_Firewall_STIG_V{1}R{2}_Manual-xccdf.xml' -f $powerSTIGpath, $latestFirewallVersion.Major, $latestFirewallVersion.Minor
-$manfirewallSTIG = "U_Windows_Firewall_STIG_V{0}R{1}_Manual-xccdf.xml" -f $latestFirewallVersion.Major, $latestFirewallVersion.Minor
-
+$latestFirewallVersion  = (Get-Stig -ListAvailable | Where-Object Technology -eq "WindowsFirewall" | Measure-Object -Maximum -Property Version).Maximum
+$firewallSTIG           = '{0}\StigData\Archive\Windows.Firewall\U_Windows_Firewall_STIG_V{1}R{2}_Manual-xccdf.xml' -f $powerSTIGpath, $latestFirewallVersion.Major, $latestFirewallVersion.Minor
+$manfirewallSTIG        = "U_Windows_Firewall_STIG_V{0}R{1}_Manual-xccdf.xml" -f $latestFirewallVersion.Major, $latestFirewallVersion.Minor
 
 # Array of STIGS to add to checklist
-$xccdfPath = @($serverOsSTIG, $defenderSTIG, $internetExplorerSTIG, $firewallSTIG)
-$status = "NotAFinding"
-$comments = "Not Applicable"
-$details = 'Not applicable for this VM as of deployment time {0}, any changes to VM after deployement time may impact this rule' -f $(Get-Date)
+$xccdfPath  = @($serverOsSTIG, $defenderSTIG, $internetExplorerSTIG, $firewallSTIG)
+$status     = "NotAFinding"
+$comments   = "Not Applicable"
+$details    = 'Not applicable for this VM as of deployment time {0} any changes to VM after deployement time may impact this rule' -f $(Get-Date)
 
+# Set manual rule data
 $manualRules = @(
     @{
         osVersion = "2019"
         stig      = $manServerSTIG
-        id        = @("V-205624", "V-205657", "V-205661", "V-205664", "V-205677", "V-205699", "V-205721", "V-205727", "V-205746", "V-205844", "V-205847", "V-205848", "V-205852", "V-205853", "V-205854", "V-205855","V-205710","V-205707","V-205700","V-205658","V-205700","V-205846")
+        id        = @("V-205624", "V-205657", "V-205661", "V-205664", "V-205677", "V-205699", "V-205721", "V-205727", "V-205746", "V-205844", "V-205847", "V-205848", "V-205852", "V-205853", "V-205854", "V-205855", "V-205710", "V-205707", "V-205700", "V-205658", "V-205846")
     },
     @{
         osVersion = "2016"
@@ -86,10 +84,10 @@ $manualRules = @(
 )
 
 # Generate manual checklist file
-$outputPath2 = "c:\ManualCheck.xml"
-$xmlWriterSettings = [System.Xml.XmlWriterSettings]::new()
-$xmlWriterSettings.Indent = $true
-$xmlWriterSettings.IndentChars = "`t"
+$outputPath2                    = "c:\ManualCheck.xml"
+$xmlWriterSettings              = [System.Xml.XmlWriterSettings]::new()
+$xmlWriterSettings.Indent       = $true
+$xmlWriterSettings.IndentChars  = "`t"
 $xmlWriterSettings.NewLineChars = "`n"
 $writer = [System.Xml.XmlWriter]::Create($OutputPath2, $xmlWriterSettings)
 $writer.WriteStartElement("stigManualChecklistData")
@@ -126,5 +124,22 @@ $writer.Close()
 # Generate Checklist
 New-StigCheckList -DscResult $dscResults -XccdfPath $xccdfPath -OutputPath $outputPath -ManualChecklistEntriesFile $outputPath2
 
-# Cleanup checklist manual entries
-Remove-Item -Path $outputPath2 -Force -Confirm:$false
+# Get CKL Content and set Localhost Data
+[string]$localIP                = (Get-NetIPAddress -AddressFamily IPV4 | Where-Object { $_.IpAddress -notlike "127.*" } | Select-Object -First 1).IPAddress
+[string]$localMac               = (Get-NetAdapter | Where-Object {$_.Status -eq "Up"} | Select-Object MacAddress | Select-Object -First 1).MacAddress
+$xml                            = [xml](Get-Content $outputPath)
+$xml.CHECKLIST.ASSET.ROLE       = 'Member Server'
+$xml.CHECKLIST.ASSET.HOST_NAME  = $env:COMPUTERNAME
+$xml.CHECKLIST.ASSET.HOST_IP    = $localIP
+$xml.CHECKLIST.ASSET.HOST_MAC   = $localMac
+$xml.CHECKLIST.ASSET.HOST_FQDN  = $env:COMPUTERNAME
+
+# Import Localhost Data to Checklist
+$stringbuilder                  = New-Object System.Text.StringBuilder
+$writer                         = [System.Xml.XmlWriter]::Create($stringbuilder, $xmlWriterSettings)
+$xml.WriteContentTo($Writer)
+$Writer.Close()
+$xmlDoc                         = [System.Xml.XmlDocument]::new()
+$xmlDoc.PreserveWhitespace      = $true
+$xmlDoc.LoadXml($stringbuilder.ToString())
+$xmlDoc.save($outputPath)

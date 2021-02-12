@@ -113,7 +113,7 @@
         },
         "subnetName": {
             "type": "string",
-            "defaultValue": "subnet1",
+            "defaultValue": "default",
             "metadata": {
                 "description": "Subnet name for the VM Image."
             }
