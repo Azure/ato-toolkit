@@ -4,8 +4,7 @@ configuration WindowsServer
     Import-DscResource -ModuleName SecurityPolicyDsc -ModuleVersion 2.10.0.0
 
     [scriptblock]$localConfigurationManager = {
-        LocalConfigurationManager
-        {
+        LocalConfigurationManager {
             ActionAfterReboot  = 'ContinueConfiguration'
             ConfigurationMode  = 'ApplyOnly'
             RebootNodeIfNeeded = $true
@@ -52,10 +51,8 @@ configuration WindowsServer
         $osVersion = (Get-WmiObject Win32_OperatingSystem).Caption
         $certificateTest = Get-ChildItem -Path "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\*\Downloads\0\*.cer"
 
-        switch -Wildcard ($osVersion)
-        {
-            "*2016*"
-            {
+        switch -Wildcard ($osVersion) {
+            "*2016*" {
                 $osVersion = '2016'
                 $SkipRules = @('V-224866', 'V-224867', 'V-224868')
                 $exceptions = @{
@@ -108,8 +105,7 @@ configuration WindowsServer
                 }
                 break
             }
-            "*2019*"
-            {
+            "*2019*" {
                 $osVersion = '2019'
                 $exceptions = @{
                     'V-205733' = @{Identity = 'Guests'}
