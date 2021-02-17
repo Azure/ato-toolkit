@@ -49,10 +49,10 @@ function New-Artifacts {
         $containerName
     )
   
-    $azureDeployFile="azuredeploy.json"
-    $azureDeployFilePath="$PSScriptRoot\..\$($azuredeployFile)"
-    $createUIDefFile="createUiDefinition.json"
-    $scriptFile="WindowsServer.ps1.zip"
+    $azureDeployFile = "azuredeploy.json"
+    $azureDeployFilePath = "$PSScriptRoot\..\$($azuredeployFile)"
+    $createUIDefFile = "createUiDefinition.json"
+    $scriptFile = "WindowsServer.ps1.zip"
 
     # Create storage account and storage container.
     $context = (Get-AzStorageAccount | Where-Object { $_.StorageAccountName -eq $artifactStorageAccountName }).Context
@@ -60,12 +60,12 @@ function New-Artifacts {
     
     # Update template parameter default values for script location and offline deployment.
     $jAzureDeploy = Get-Content -raw "$azureDeployFilePath" | ConvertFrom-Json
-    $jAzureDeploy.parameters.scriptsUri.defaultValue = $context.BlobEndPoint + $containerName
-    $jAzureDeploy.parameters.isOffline.defaultValue = $true
+    $jAzureDeploy.parameters.autoInstallDependencies.defaultValue = $false
     $jAzureDeploy | ConvertTo-Json -Depth 100 | % { [System.Text.RegularExpressions.Regex]::Unescape($_) } | Set-Content "$($PSScriptRoot)\offline\$($azureDeployFile)" -Force
     
     Set-AzStorageBlobContent -File "$($PSScriptRoot)\offline\$($azureDeployFile)" -Container $containerName -Blob $azureDeployFile -Context $context -Force
     Set-AzStorageBlobContent -File "$($PSScriptRoot)\..\$($createUIDefFile)" -Container $containerName -Blob $createUIDefFile -Context $context -Force
+    Set-AzStorageBlobContent -File "$($PSScriptRoot)\..\GenerateStigChecklist.ps1" -Container $containerName -Blob "GenerateStigChecklist.ps1" -Context $context -Force
     Set-AzStorageBlobContent -File "$($PSScriptRoot)\offline\WindowsServer.ps1.zip" -Container $containerName -Blob $scriptFile -Context $context -Force
 
     Write-Host "Uploaded file(s) to Container '$($containerName)' in Storage Account '$($artifactStorageAccountName)'."
@@ -73,9 +73,9 @@ function New-Artifacts {
     $azureDeployUrl = New-AzStorageBlobSASToken -Container $containerName -Blob (Split-Path $azureDeployFile -leaf) -Context $context -FullUri -Permission r
     $createUIDefUrl = New-AzStorageBlobSASToken -Container $containerName -Blob (Split-Path $createUIDefFile -leaf) -Context $context -FullUri -Permission r
 
-    $azureDeployUrlEncoded=[uri]::EscapeDataString($azureDeployUrl)
-    $createUIDefUrlEncoded=[uri]::EscapeDataString($createUIDefUrl)
-    $deployUrl="https://portal.azure.us/#create/Microsoft.Template/uri/$($azureDeployUrlEncoded)/createUIDefinitionUri/$($createUIDefUrlEncoded)"
+    $azureDeployUrlEncoded = [uri]::EscapeDataString($azureDeployUrl)
+    $createUIDefUrlEncoded = [uri]::EscapeDataString($createUIDefUrl)
+    $deployUrl = "https://portal.azure.us/#create/Microsoft.Template/uri/$($azureDeployUrlEncoded)/createUIDefinitionUri/$($createUIDefUrlEncoded)"
     
     Write-Host "Azure Storage Container Uri: $($context.BlobEndPoint + $containerName)"
     Write-Host "Deployment Uri: $($deployUrl)"

@@ -1,8 +1,8 @@
 . "$PSScriptRoot/RequiredModules.ps1"
 
 if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
-    [Security.Principal.WindowsBuiltInRole] "Administrator")) {
-        throw "Insufficient permissions to run this script. Open the PowerShell console as an administrator and run this script again."
+            [Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    throw "Insufficient permissions to run this script. Open the PowerShell console as an administrator and run this script again."
 }
 
 # We will output everything to the deployment root.
@@ -21,8 +21,8 @@ Remove-Item $buildDirectory -Recurse -Confirm:$false -Force -ErrorAction Silentl
 New-Item -Path $buildDirectory -ItemType "directory"
 Copy-Item -Path "$windowsStigDscPackageRootPath" -Destination "$buildDirectory" -Recurse
 
-foreach($requiredModule in $requiredModules) {
-    $FullyQualifedName = @{ModuleName="$($requiredModule.ModuleName)";ModuleVersion="$($requiredModule.ModuleVersion)"}
+foreach ($requiredModule in $requiredModules) {
+    $FullyQualifedName = @{ModuleName = "$($requiredModule.ModuleName)"; ModuleVersion = "$($requiredModule.ModuleVersion)" }
     $ModulePath = (Get-Module -FullyQualifiedName $FullyQualifedName -ListAvailable)[0].ModuleBase | Split-Path
     Write-Verbose "Copying $ModulePath to build folder."
     Copy-Item -Path "$ModulePath" -Destination "$buildDirectory\$windowsStigDscPackageRoot" -Recurse
