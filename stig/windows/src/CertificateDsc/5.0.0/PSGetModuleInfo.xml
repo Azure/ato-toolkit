@@ -1,0 +1,132 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>Microsoft.PowerShell.Commands.PSRepositoryItemInfo</T>
+      <T>System.Management.Automation.PSCustomObject</T>
+      <T>System.Object</T>
+    </TN>
+    <MS>
+      <S N="Name">CertificateDsc</S>
+      <S N="Version">5.0.0</S>
+      <S N="Type">Module</S>
+      <S N="Description">DSC resources for managing certificates on a Windows Server.</S>
+      <S N="Author">DSC Community</S>
+      <Obj N="CompanyName" RefId="1">
+        <TN RefId="1">
+          <T>System.Object[]</T>
+          <T>System.Array</T>
+          <T>System.Object</T>
+        </TN>
+        <LST>
+          <S>PowerShellTeam</S>
+          <S>gaelcolas</S>
+          <S>dsccommunity</S>
+        </LST>
+      </Obj>
+      <S N="Copyright">Copyright the DSC Community contributors. All rights reserved.</S>
+      <DT N="PublishedDate">2020-10-16T05:47:34-07:00</DT>
+      <Nil N="InstalledDate" />
+      <Nil N="UpdatedDate" />
+      <URI N="LicenseUri">https://github.com/dsccommunity/CertificateDsc/blob/master/LICENSE</URI>
+      <URI N="ProjectUri">https://github.com/dsccommunity/CertificateDsc</URI>
+      <URI N="IconUri">https://dsccommunity.org/images/DSC_Logo_300p.png</URI>
+      <Obj N="Tags" RefId="2">
+        <TNRef RefId="1" />
+        <LST>
+          <S>DesiredStateConfiguration</S>
+          <S>DSC</S>
+          <S>DSCResource</S>
+          <S>Certificate</S>
+          <S>PKI</S>
+          <S>PSModule</S>
+        </LST>
+      </Obj>
+      <Obj N="Includes" RefId="3">
+        <TN RefId="2">
+          <T>System.Collections.Hashtable</T>
+          <T>System.Object</T>
+        </TN>
+        <DCT>
+          <En>
+            <S N="Key">Function</S>
+            <Obj N="Value" RefId="4">
+              <TNRef RefId="1" />
+              <LST />
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">DscResource</S>
+            <Obj N="Value" RefId="5">
+              <TNRef RefId="1" />
+              <LST>
+                <S>CertificateExport</S>
+                <S>CertificateImport</S>
+                <S>CertReq</S>
+                <S>PfxImport</S>
+                <S>WaitForCertificateServices</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+        </DCT>
+      </Obj>
+      <Nil N="PowerShellGetFormatVersion" />
+      <S N="ReleaseNotes">## [5.0.0] - 2020-10-16_x000A__x000D__x000A_### Changed_x000D__x000A__x000D__x000A_- Corrected incorrectly located entries in `CHANGELOG.MD`._x000D__x000A_- Fix bug `Find-Certificate` when invalid certificate path is passed - fixes_x000D__x000A_  [Issue #208](https://github.com/dsccommunity/CertificateDsc/issues/208)._x000D__x000A_- CertReq:_x000D__x000A_  - Added `Get-CertificateCommonName` function as a fix for multiple_x000D__x000A_    certificates being issued when having a third party CA which doesn't_x000D__x000A_    format the Issuer CN in the same order as a MS CA - fixes [Issue #207](https://github.com/dsccommunity/CertificateDsc/issues/207)._x000D__x000A_  - Updated `Compare-CertificateIssuer` to use the new_x000D__x000A_    `Get-CertificateCommonName` function._x000D__x000A_  - Added check for X500 subject name in Get-TargetResource, which already_x000D__x000A_    exists in Test- and Set-TargetResource - fixes [Issue #210](https://github.com/dsccommunity/CertificateDsc/issues/210)._x000D__x000A_  - Corrected name of working path to remove `x` - fixes [Issue #211](https://github.com/dsccommunity/CertificateDsc/issues/211)._x000D__x000A_- BREAKING CHANGE: Changed resource prefix from MSFT to DSC._x000D__x000A_- Updated to use continuous delivery pattern using Azure DevOps - Fixes_x000D__x000A_  [Issue #215](https://github.com/dsccommunity/CertificateDsc/issues/215)._x000D__x000A_- Updated Examples and Module Manifest to be DSC Community from Microsoft._x000D__x000A_- Fix style issues in `Certificate.PDT` and `Certificate.Common` modules._x000D__x000A_- Update badges in README.MD to refer to correct pipeline._x000D__x000A_- Correct version number in `GitVersion.yml` file._x000D__x000A_- Change Azure DevOps Pipeline definition to include `source/*` - Fixes [Issue #226](https://github.com/dsccommunity/CertificateDsc/issues/226)._x000D__x000A_- Updated pipeline to use `latest` version of `ModuleBuilder` - Fixes [Issue #226](https://github.com/dsccommunity/CertificateDsc/issues/226)._x000D__x000A_- Merge `HISTORIC_CHANGELOG.md` into `CHANGELOG.md` - Fixes [Issue #227](https://github.com/dsccommunity/CertificateDsc/issues/227)._x000D__x000A_- Fixed build failures caused by changes in `ModuleBuilder` module v1.7.0_x000D__x000A_  by changing `CopyDirectories` to `CopyPaths` - Fixes [Issue #230](https://github.com/dsccommunity/CertificateDsc/issues/230)._x000D__x000A_- Updated to use the common module _DscResource.Common_ - Fixes [Issue #229](https://github.com/dsccommunity/CertificateDsc/issues/229)._x000D__x000A_- Pin `Pester` module to 4.10.1 because Pester 5.0 is missing code_x000D__x000A_  coverage - Fixes [Issue #233](https://github.com/dsccommunity/CertificateDsc/issues/233)._x000D__x000A_- Added a catch for certreq generic errors which fixes [Issue #224](https://github.com/dsccommunity/CertificateDsc/issues/224)_x000D__x000A_- CertificateDsc_x000D__x000A_  - Automatically publish documentation to GitHub Wiki - Fixes [Issue #235](https://github.com/dsccommunity/CertificateDsc/issues/235)._x000D__x000A__x000D__x000A_### Added_x000D__x000A__x000D__x000A_- PfxImport:_x000D__x000A_  - Added example showing importing private key using `PsDscRunAsCredential`_x000D__x000A_    to specify an administrator account - Fixes [Issue #213](https://github.com/dsccommunity/CertificateDsc/issues/213).</S>
+      <Obj N="Dependencies" RefId="6">
+        <TNRef RefId="1" />
+        <LST />
+      </Obj>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2/</S>
+      <S N="Repository">PSGallery</S>
+      <S N="PackageManagementProvider">NuGet</S>
+      <Obj N="AdditionalMetadata" RefId="7">
+        <TN RefId="3">
+          <T>System.Management.Automation.PSCustomObject</T>
+          <T>System.Object</T>
+        </TN>
+        <MS>
+          <S N="copyright">Copyright the DSC Community contributors. All rights reserved.</S>
+          <S N="description">DSC resources for managing certificates on a Windows Server.</S>
+          <S N="requireLicenseAcceptance">False</S>
+          <S N="releaseNotes">## [5.0.0] - 2020-10-16_x000A__x000D__x000A_### Changed_x000D__x000A__x000D__x000A_- Corrected incorrectly located entries in `CHANGELOG.MD`._x000D__x000A_- Fix bug `Find-Certificate` when invalid certificate path is passed - fixes_x000D__x000A_  [Issue #208](https://github.com/dsccommunity/CertificateDsc/issues/208)._x000D__x000A_- CertReq:_x000D__x000A_  - Added `Get-CertificateCommonName` function as a fix for multiple_x000D__x000A_    certificates being issued when having a third party CA which doesn't_x000D__x000A_    format the Issuer CN in the same order as a MS CA - fixes [Issue #207](https://github.com/dsccommunity/CertificateDsc/issues/207)._x000D__x000A_  - Updated `Compare-CertificateIssuer` to use the new_x000D__x000A_    `Get-CertificateCommonName` function._x000D__x000A_  - Added check for X500 subject name in Get-TargetResource, which already_x000D__x000A_    exists in Test- and Set-TargetResource - fixes [Issue #210](https://github.com/dsccommunity/CertificateDsc/issues/210)._x000D__x000A_  - Corrected name of working path to remove `x` - fixes [Issue #211](https://github.com/dsccommunity/CertificateDsc/issues/211)._x000D__x000A_- BREAKING CHANGE: Changed resource prefix from MSFT to DSC._x000D__x000A_- Updated to use continuous delivery pattern using Azure DevOps - Fixes_x000D__x000A_  [Issue #215](https://github.com/dsccommunity/CertificateDsc/issues/215)._x000D__x000A_- Updated Examples and Module Manifest to be DSC Community from Microsoft._x000D__x000A_- Fix style issues in `Certificate.PDT` and `Certificate.Common` modules._x000D__x000A_- Update badges in README.MD to refer to correct pipeline._x000D__x000A_- Correct version number in `GitVersion.yml` file._x000D__x000A_- Change Azure DevOps Pipeline definition to include `source/*` - Fixes [Issue #226](https://github.com/dsccommunity/CertificateDsc/issues/226)._x000D__x000A_- Updated pipeline to use `latest` version of `ModuleBuilder` - Fixes [Issue #226](https://github.com/dsccommunity/CertificateDsc/issues/226)._x000D__x000A_- Merge `HISTORIC_CHANGELOG.md` into `CHANGELOG.md` - Fixes [Issue #227](https://github.com/dsccommunity/CertificateDsc/issues/227)._x000D__x000A_- Fixed build failures caused by changes in `ModuleBuilder` module v1.7.0_x000D__x000A_  by changing `CopyDirectories` to `CopyPaths` - Fixes [Issue #230](https://github.com/dsccommunity/CertificateDsc/issues/230)._x000D__x000A_- Updated to use the common module _DscResource.Common_ - Fixes [Issue #229](https://github.com/dsccommunity/CertificateDsc/issues/229)._x000D__x000A_- Pin `Pester` module to 4.10.1 because Pester 5.0 is missing code_x000D__x000A_  coverage - Fixes [Issue #233](https://github.com/dsccommunity/CertificateDsc/issues/233)._x000D__x000A_- Added a catch for certreq generic errors which fixes [Issue #224](https://github.com/dsccommunity/CertificateDsc/issues/224)_x000D__x000A_- CertificateDsc_x000D__x000A_  - Automatically publish documentation to GitHub Wiki - Fixes [Issue #235](https://github.com/dsccommunity/CertificateDsc/issues/235)._x000D__x000A__x000D__x000A_### Added_x000D__x000A__x000D__x000A_- PfxImport:_x000D__x000A_  - Added example showing importing private key using `PsDscRunAsCredential`_x000D__x000A_    to specify an administrator account - Fixes [Issue #213](https://github.com/dsccommunity/CertificateDsc/issues/213).</S>
+          <S N="isLatestVersion">True</S>
+          <S N="isAbsoluteLatestVersion">False</S>
+          <S N="versionDownloadCount">16053</S>
+          <S N="downloadCount">15344620</S>
+          <S N="packageSize">66584</S>
+          <S N="published">10/16/2020 5:47:34 AM -07:00</S>
+          <S N="created">10/16/2020 5:47:34 AM -07:00</S>
+          <S N="lastUpdated">2/17/2021 6:28:41 PM -08:00</S>
+          <S N="tags">DesiredStateConfiguration DSC DSCResource Certificate PKI PSModule PSDscResource_CertificateExport PSDscResource_CertificateImport PSDscResource_CertReq PSDscResource_PfxImport PSDscResource_WaitForCertificateServices PSIncludes_DscResource</S>
+          <S N="developmentDependency">False</S>
+          <S N="updated">2021-02-17T18:28:41Z</S>
+          <S N="NormalizedVersion">5.0.0</S>
+          <S N="Authors">DSC Community</S>
+          <S N="IsPrerelease">false</S>
+          <S N="ItemType">Module</S>
+          <S N="FileList">CertificateDsc.nuspec|CertificateDsc.psd1|en-US\about_CertificateDsc.help.txt|Modules\CertificateDsc.PDT\CertificateDsc.PDT.psm1|Modules\CertificateDsc.Common\CertificateDsc.Common.psm1|DSCResources\DSC_PfxImport\README.md|DSCResources\DSC_PfxImport\DSC_PfxImport.schema.mof|DSCResources\DSC_PfxImport\DSC_PfxImport.psm1|DSCResources\DSC_CertificateImport\DSC_CertificateImport.psm1|DSCResources\DSC_CertificateImport\README.md|DSCResources\DSC_CertificateImport\DSC_CertificateImport.schema.mof|DSCResources\DSC_CertReq\DSC_CertReq.psm1|DSCResources\DSC_CertReq\README.md|DSCResources\DSC_CertReq\DSC_CertReq.schema.mof|DSCResources\DSC_WaitForCertificateServices\README.md|DSCResources\DSC_WaitForCertificateServices\DSC_WaitForCertificateServices.psm1|DSCResources\DSC_WaitForCertificateServices\DSC_WaitForCertificateServices.schema.mof|DSCResources\DSC_CertificateExport\README.md|DSCResources\DSC_CertificateExport\DSC_CertificateExport.schema.mof|DSCResources\DSC_CertificateExport\DSC_CertificateExport.psm1|Modules\DscResource.Common\0.9.3\DscResource.Common.psd1|Modules\DscResource.Common\0.9.3\DscResource.Common.psm1|Modules\CertificateDsc.PDT\en-US\CertificateDsc.PDT.strings.psd1|Modules\CertificateDsc.Common\en-US\CertificateDsc.Common.strings.psd1|DSCResources\DSC_PfxImport\en-US\about_PfxImport.help.txt|DSCResources\DSC_PfxImport\en-US\DSC_PfxImport.strings.psd1|DSCResources\DSC_CertificateImport\en-US\DSC_CertificateImport.strings.psd1|DSCResources\DSC_CertificateImport\en-US\about_CertificateImport.help.txt|DSCResources\DSC_CertReq\en-US\about_CertReq.help.txt|DSCResources\DSC_CertReq\en-US\DSC_CertReq.strings.psd1|DSCResources\DSC_WaitForCertificateServices\en-US\DSC_WaitForCertificateServices.strings.psd1|DSCResources\DSC_WaitForCertificateServices\en-US\about_WaitForCertificateServices.help.txt|DSCResources\DSC_CertificateExport\en-US\about_CertificateExport.help.txt|DSCResources\DSC_CertificateExport\en-US\DSC_CertificateExport.strings.psd1|Modules\DscResource.Common\0.9.3\en-US\about_DscResource.Common.help.txt|Modules\DscResource.Common\0.9.3\en-US\DscResource.Common.strings.psd1</S>
+          <S N="GUID">1b8d785e-79ae-4d95-ae58-b2460aec1031</S>
+          <S N="PowerShellVersion">4.0</S>
+          <S N="CLRVersion">4.0</S>
+          <S N="CompanyName">DSC Community</S>
+        </MS>
+      </Obj>
+      <S N="InstalledLocation">C:\Users\sdubey\Code\azure-ecosystem\pc1\project-chairlift\windows\src\CertificateDsc\5.0.0</S>
+    </MS>
+  </Obj>
+</Objs>

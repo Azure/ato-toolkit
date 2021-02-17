@@ -1,0 +1,254 @@
+.NAME
+    PfxImport
+
+.DESCRIPTION
+    The resource is used to import a PFX certificate into a Windows certificate
+    store.
+
+    ## Credentials for Importing a Private Key
+
+    Depending on your operating system and domain configuration, you may need to
+    use a local or domain administrator credential to import certificates with a
+    private key. To do this, set the `PsDscRunAsCredential` parameter with this
+    resource to the credential of a local or domain administrator for this machine.
+
+    If you still have problems importing the PFX into the Local Machine store
+    please check the account specified in `PsDscRunAsCredential` has permissions
+    to `$env:SystemDrive:\Documents and Settings\All Users\Application Data\Microsoft\Crypto\RSA\MachineKeys`.
+    See [this page](https://docs.microsoft.com/en-us/troubleshoot/iis/cannot-import-ssl-pfx-local-certificate)
+    for more information.
+
+    ## Requirements
+
+    - Target machine must be running Windows Server 2008 R2 or later.
+    - To import a certificate exported using `AES256_SHA256` cryptographic
+      algorithm, the target machine must be running build 1709 or later of
+      Windows 10 or Windows Server 2016.
+
+      If importing a PFX certificate exported with `AES256_SHA256` cryptographic
+      algorithm on a target machine running a Windows 10 or Windows Server 2016
+      build earlier than 1709, the following error will occur:
+
+      `The PFX file you are trying to import requires either a different password
+      or membership in an Active Directory principal to which it is protected.`
+
+.PARAMETER Thumbprint
+    Key - String
+    The thumbprint (unique identifier) of the PFX file you're importing.
+
+.PARAMETER Path
+    Write - String
+    The path to the PFX file you want to import.
+
+.PARAMETER Location
+    Key - String
+    Allowed values: LocalMachine, CurrentUser
+    The Windows Certificate Store Location to import the PFX file to.
+
+.PARAMETER Store
+    Key - String
+    The Windows Certificate Store Name to import the PFX file to.
+
+.PARAMETER Exportable
+    Write - Boolean
+    Determines whether the private key is exportable from the machine after it has been imported
+
+.PARAMETER Credential
+    Write - Instance
+    A `PSCredential` object that is used to decrypt the PFX file.
+
+.PARAMETER Ensure
+    Write - String
+    Allowed values: Present, Absent
+    Specifies whether the PFX file should be present or absent.
+
+.PARAMETER FriendlyName
+    Write - String
+    The friendly name of the certificate to set in the Windows Certificate Store.
+
+.EXAMPLE 1
+
+Import a PFX into the 'WebHosting' Local Machine certificate store and
+bind it to an IIS Web Site.
+
+Configuration PfxImport_InstallPFXForWebSite_Config
+{
+    param
+    (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullorEmpty()]
+        [System.Management.Automation.PSCredential]
+        $Credential
+    )
+
+    Import-DscResource -ModuleName CertificateDsc
+    Import-DscResource -ModuleName xWebAdministration -ModuleVersion 3.1.1
+
+    Node localhost
+    {
+        WindowsFeature IIS
+        {
+            Ensure = 'Present'
+            Name   = 'Web-Server'
+        }
+
+        PfxImport CompanyCert
+        {
+            Thumbprint = 'c81b94933420221a7ac004a90242d8b1d3e5070d'
+            Path       = '\\Server\Share\Certificates\CompanyCert.pfx'
+            Location   = 'LocalMachine'
+            Store      = 'WebHosting'
+            Credential = $Credential
+            DependsOn  = '[WindowsFeature]IIS'
+        }
+
+        xWebsite CompanySite
+        {
+            Ensure          = 'Present'
+            Name            = 'CompanySite'
+            State           = 'Started'
+            PhysicalPath    = "B:\Web\CompanySite"
+            ApplicationPool = "CompanyPool"
+            BindingInfo     =
+                    MSFT_xWebBindingInformation {
+                        Protocol = 'HTTPS'
+                        Port = 443
+                        CertificateThumbprint = 'c81b94933420221a7ac004a90242d8b1d3e5070d'
+                        CertificateStoreName = 'WebHosting'
+                        HostName = "www.example.com"
+                    }
+            DependsOn       = '[WindowsFeature]IIS','[PfxImport]CompanyCert'
+        }
+    }
+}
+
+.EXAMPLE 2
+
+Import a PFX into the 'My' Local Machine certificate store.
+
+Configuration PfxImport_InstallPFX_Config
+{
+    param
+    (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullorEmpty()]
+        [System.Management.Automation.PSCredential]
+        $Credential
+    )
+
+    Import-DscResource -ModuleName CertificateDsc
+
+    Node localhost
+    {
+        PfxImport CompanyCert
+        {
+            Thumbprint = 'c81b94933420221a7ac004a90242d8b1d3e5070d'
+            Path       = '\\Server\Share\Certificates\CompanyCert.pfx'
+            Location   = 'LocalMachine'
+            Store      = 'My'
+            Credential = $Credential
+        }
+    }
+}
+
+.EXAMPLE 3
+
+Remove a PFX certificate from the 'My' Local Machine certificate store.
+
+Configuration PfxImport_RemovePFX_Config
+{
+    param
+    (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullorEmpty()]
+        [System.Management.Automation.PSCredential]
+        $Credential
+    )
+
+    Import-DscResource -ModuleName CertificateDsc
+
+    Node localhost
+    {
+        PfxImport CompanyCert
+        {
+            Thumbprint = 'c81b94933420221a7ac004a90242d8b1d3e5070d'
+            Location   = 'LocalMachine'
+            Store      = 'My'
+            Credential = $Credential
+            Ensure     = 'Absent'
+        }
+    }
+}
+
+.EXAMPLE 4
+
+Import a PFX into the 'My' Local Machine certificate store and
+set the Fiendly Name to 'Web Site Certificate'.
+
+Configuration PfxImport_FriendlyName_Config
+{
+    param
+    (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullorEmpty()]
+        [System.Management.Automation.PSCredential]
+        $Credential
+    )
+
+    Import-DscResource -ModuleName CertificateDsc
+
+    Node localhost
+    {
+        PfxImport CompanyCert
+        {
+            Thumbprint   = 'c81b94933420221a7ac004a90242d8b1d3e5070d'
+            Path         = '\\Server\Share\Certificates\CompanyCert.pfx'
+            Location     = 'LocalMachine'
+            Store        = 'My'
+            Credential   = $Credential
+            FriendlyName = 'Web Site Certificate'
+        }
+    }
+}
+
+.EXAMPLE 5
+
+Import a PFX into the 'Root' Local Machine certificate store using
+an administrator credential. The password in the Credential parameter
+is used to decrypt the PFX file and the PsDscRunAsCredential is the
+account that is used to import the certificate and private key into
+Local Machine store. The PsDscRunAsCredential must have permission
+to import the certificate and private key.
+
+Configuration PfxImport_InstallPFXAdministrator_Config
+{
+    param
+    (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullorEmpty()]
+        [System.Management.Automation.PSCredential]
+        $Credential,
+
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullorEmpty()]
+        [System.Management.Automation.PSCredential]
+        $AdminCredential
+    )
+
+    Import-DscResource -ModuleName CertificateDsc
+
+    Node localhost
+    {
+        PfxImport CompanyCert
+        {
+            Thumbprint           = 'c81b94933420221a7ac004a90242d8b1d3e5070d'
+            Path                 = '\\Server\Share\Certificates\CompanyCert.pfx'
+            Location             = 'LocalMachine'
+            Store                = 'Root'
+            Credential           = $Credential
+            PsDscRunAsCredential = $AdminCredential
+        }
+    }
+}
+
+

@@ -1,0 +1,397 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+            "type": "string",
+            "defaultValue": "simple-vm",
+            "metadata": {
+                "description": "Name of the virtual machine."
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        },
+        "vmSize": {
+            "type": "string",
+            "defaultValue": "Standard_D2s_v3",
+            "metadata": {
+                "description": "Size of the virtual machine."
+            }
+        },
+        "adminUsername": {
+            "type": "string",
+            "metadata": {
+                "description": "Username for the Virtual Machine."
+            }
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "minLength": 12,
+            "metadata": {
+                "description": "Password for the Virtual Machine."
+            }
+        },
+        "osVersion": {
+            "type": "string",
+            "defaultValue": "2019-Datacenter",
+            "allowedValues": [
+                "2019-Datacenter",
+                "2016-Datacenter"
+            ],
+            "metadata": {
+                "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
+            }
+        },
+        "osDiskStorageType": {
+            "type": "string",
+            "defaultValue": "Premium_LRS",
+            "allowedValues": [ "Premium_LRS", "Standard_LRS", "StandardSSD_LRS" ],
+            "metadata": {
+                "description": "You can choose between Azure managed disks types to support your workload or scenario."
+            }
+        },
+        "osDiskEncryptionSetResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "OS Disk Encryption Set resource id."
+            }
+        },
+        "_artifactsLocation": {
+            "type": "string",
+            "defaultValue": "[split(deployment().properties.templateLink.uri, 'mainTemplate.json')[0]]",
+            "metadata": {
+                "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+            }
+        },
+        "_artifactsLocationSasToken": {
+            "type": "secureString",
+            "defaultValue": "",
+            "metadata": {
+                "description": "SAS Token to access the storage location containing artifacts."
+            }
+        },
+        "autoInstallDependencies": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Boolean value to indicate an online or offline environment."
+            }
+        },
+        "vmVirtualNetwork": {
+            "type": "string",
+            "defaultValue": "stig-vm-vnet",
+            "metadata": {
+                "description": "Virtual Network for the VM Image."
+            }
+        },
+        "virtualNetworkResourceGroupName": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().name]",
+            "metadata": {
+                "description": "Name of the resource group for the existing virtual network"
+            }
+        },
+        "virtualNetworkNewOrExisting": {
+            "type": "string",
+            "defaultValue": "new",
+            "metadata": {
+                "description": "Is the Virtual Network new or existing for the VM Image."
+            }
+        },
+        "addressPrefix": {
+            "type": "string",
+            "defaultValue": "10.0.0.0/16",
+            "metadata": {
+                "description": "Address prefix of the virtual network"
+            }
+        },
+        "subnetName": {
+            "type": "string",
+            "defaultValue": "default",
+            "metadata": {
+                "description": "Subnet name for the VM Image."
+            }
+        },
+        "subnetPrefix": {
+            "type": "string",
+            "defaultValue": "10.0.0.0/24",
+            "metadata": {
+                "description": "Subnet prefix of the virtual network"
+            }
+        },
+        "availabilitySetResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Availability Set resource id."
+            }
+        },
+        "logsRetentionInDays": {
+            "type": "int",
+            "defaultValue": 365,
+            "minValue": 0,
+            "maxValue": 365,
+            "metadata": {
+                "description": "Log retention in days."
+            }
+        },
+        "diagnosticStorageResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Diagnostic Storage account resource id."
+            }
+        },
+        "logAnalyticsWorkspaceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Log Analytics workspace resource id."
+            }
+        }
+    },
+    "variables": {
+        "nicName": "[concat(parameters('vmName'), '-nic')]",
+        "vnetId": {
+            "new": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vmVirtualNetwork'))]",
+            "existing": "[resourceId(parameters('virtualNetworkResourceGroupName'),'Microsoft.Storage/virtualNetworks',parameters('vmVirtualNetwork'))]"
+        },
+        "subnetRef": "[concat(variables('vnetId')[parameters('virtualNetworkNewOrExisting')],'/subnets/',parameters('subnetName'))]",
+        "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
+        "requiredModulesFile": "RequiredModules.ps1",
+        "installPSModulesFile": "InstallModules.ps1",
+        "generateStigChecklist": "GenerateStigChecklist.ps1",
+        "storageApiVersion": "2019-06-01",
+        "diskEncryptionSet": { "id": "[parameters('osDiskEncryptionSetResourceId')]" },
+        "artifactsLocationSasToken": "[if(equals(parameters('_artifactsLocationSasToken'), ''), if(contains(deployment().properties.templateLink.uri, '?'), split(deployment().properties.templateLink.uri, 'mainTemplate.json')[1], ''), parameters('_artifactsLocationSasToken'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2020-06-01",
+            "name": "[variables('networkSecurityGroupName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('vmVirtualNetwork')]",
+            "location": "[parameters('location')]",
+            "condition": "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+            ],
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('addressPrefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnetName')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnetPrefix')]",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-06-01",
+            "name": "[variables('nicName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vmVirtualNetwork'))]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(variables('nicName'), '/Microsoft.Insights/service')]",
+            "location": "[parameters('location')]",
+            "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "dependsOn": [
+                "[variables('nicName')]"
+            ],
+            "properties": {
+                "storageAccountId": "[if(equals(parameters('diagnosticStorageResourceId'), ''), json('null'), parameters('diagnosticStorageResourceId'))]",
+                "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), parameters('logAnalyticsWorkspaceId'))]",
+                "metrics": [
+                    {
+                        "category": "AllMetrics",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('logsRetentionInDays')]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('vmName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('vmSize')]"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('vmName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "[parameters('osVersion')]",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "createOption": "FromImage",
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('osDiskStorageType')]",
+                            "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
+                        }
+                    }
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+                        }
+                    ]
+                },
+                "availabilitySet": "[if(equals(parameters('availabilitySetResourceId'), ''), json('null'), parameters('availabilitySetResourceId'))]",
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
+                        "storageUri": "[if(not(equals(parameters('diagnosticStorageResourceId'), '')), reference(parameters('diagnosticStorageResourceId'), variables('storageApiVersion')).primaryEndpoints.blob, json('null'))]"
+                    }
+                }
+            },
+            "resources": [
+                {
+                    "type": "extensions",
+                    "apiVersion": "2020-12-01",
+                    "name": "install-powershell-modules",
+                    "location": "[parameters('location')]",
+                    "condition": "[not(equals(parameters('_artifactsLocation'), ''))]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.Compute",
+                        "type": "CustomScriptExtension",
+                        "typeHandlerVersion": "1.10",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "fileUris": [
+                                "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), variables('artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), variables('artifactsLocationSasToken'))]",
+                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), variables('artifactsLocationSasToken'))]"
+                            ],
+                            "timestamp": 123456788,
+                            "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'), ' -autoInstallDependencies ', parameters('autoInstallDependencies'))]"
+                        }
+                    }
+                },
+                {
+                    "type": "extensions",
+                    "apiVersion": "2020-12-01",
+                    "name": "[concat('setup-win-dsc-stig')]",
+                    "location": "[parameters('location')]",
+                    "condition": "[not(equals(parameters('_artifactsLocation'), ''))]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
+                        "[resourceId('Microsoft.Compute/virtualMachines/extensions', parameters('vmName'), 'install-powershell-modules')]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.Powershell",
+                        "type": "DSC",
+                        "typeHandlerVersion": "2.77",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "wmfVersion": "latest",
+                            "configuration": {
+                                "url": "[concat(parameters('_artifactsLocation'), 'WindowsServer.ps1.zip', variables('artifactsLocationSasToken'))]",
+                                "script": "WindowsServer.ps1",
+                                "function": "WindowsServer"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(parameters('vmName'), '/Microsoft.Insights/service')]",
+            "location": "[parameters('location')]",
+            "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "dependsOn": [
+                "[parameters('vmName')]"
+            ],
+            "properties": {
+                "storageAccountId": "[if(equals(parameters('diagnosticStorageResourceId'), ''), json('null'), parameters('diagnosticStorageResourceId'))]",
+                "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), parameters('logAnalyticsWorkspaceId'))]",
+                "metrics": [
+                    {
+                        "category": "AllMetrics",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('logsRetentionInDays')]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "name": "pid-86c800bd-a723-40a8-b487-334be411b2d0",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": []
+                }
+            }
+        }
+    ],
+    "outputs": {
+    }
+}

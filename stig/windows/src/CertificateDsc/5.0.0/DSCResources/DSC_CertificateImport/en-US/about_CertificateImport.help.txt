@@ -1,0 +1,76 @@
+.NAME
+    CertificateImport
+
+.DESCRIPTION
+    The resource is used to import a certificate into a Windows certificate
+    store.
+
+.PARAMETER Thumbprint
+    Key - String
+    The thumbprint (unique identifier) of the certificate you're importing.
+
+.PARAMETER Path
+    Required - String
+    The path to the CER file you want to import.
+
+.PARAMETER Location
+    Key - String
+    Allowed values: LocalMachine, CurrentUser
+    The Windows Certificate Store Location to import the certificate to.
+
+.PARAMETER Store
+    Key - String
+    The Windows Certificate Store Name to import the certificate to.
+
+.PARAMETER Ensure
+    Write - String
+    Allowed values: Present, Absent
+    Specifies whether the certificate should be present or absent.
+
+.PARAMETER FriendlyName
+    Write - String
+    The friendly name of the certificate to set in the Windows Certificate Store.
+
+.EXAMPLE 1
+
+Import public key certificate into Trusted Root store.
+
+Configuration CertificateImport_MinimalUsage_Config
+{
+    Import-DscResource -ModuleName CertificateDsc
+
+    Node localhost
+    {
+        CertificateImport MyTrustedRoot
+        {
+            Thumbprint = 'c81b94933420221a7ac004a90242d8b1d3e5070d'
+            Location   = 'LocalMachine'
+            Store      = 'Root'
+            Path       = '\\Server\Share\Certificates\MyTrustedRoot.cer'
+        }
+    }
+}
+
+.EXAMPLE 2
+
+Import public key certificate into Trusted Root store and
+set the Fiendly Name to 'Contoso Root CA'.
+
+Configuration CertificateImport_FriendlyName_Config
+{
+    Import-DscResource -ModuleName CertificateDsc
+
+    Node localhost
+    {
+        CertificateImport MyTrustedRoot
+        {
+            Thumbprint   = 'c81b94933420221a7ac004a90242d8b1d3e5070d'
+            Location     = 'LocalMachine'
+            Store        = 'Root'
+            Path         = '\\Server\Share\Certificates\MyTrustedRoot.cer'
+            FriendlyName = 'Contoso Root CA'
+        }
+    }
+}
+
+

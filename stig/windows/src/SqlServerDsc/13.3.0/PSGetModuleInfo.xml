@@ -1,0 +1,164 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>Microsoft.PowerShell.Commands.PSRepositoryItemInfo</T>
+      <T>System.Management.Automation.PSCustomObject</T>
+      <T>System.Object</T>
+    </TN>
+    <MS>
+      <S N="Name">SqlServerDsc</S>
+      <S N="Version">13.3.0</S>
+      <S N="Type">Module</S>
+      <S N="Description">Module with DSC resources for deployment and configuration of Microsoft SQL Server.</S>
+      <S N="Author">DSC Community</S>
+      <Obj N="CompanyName" RefId="1">
+        <TN RefId="1">
+          <T>System.Object[]</T>
+          <T>System.Array</T>
+          <T>System.Object</T>
+        </TN>
+        <LST>
+          <S>PowerShellTeam</S>
+          <S>gaelcolas</S>
+          <S>dsccommunity</S>
+        </LST>
+      </Obj>
+      <S N="Copyright">Copyright the DSC Community contributors. All rights reserved.</S>
+      <DT N="PublishedDate">2020-01-17T20:26:30-08:00</DT>
+      <Nil N="InstalledDate" />
+      <Nil N="UpdatedDate" />
+      <URI N="LicenseUri">https://github.com/dsccommunity/SqlServerDsc/blob/master/LICENSE</URI>
+      <URI N="ProjectUri">https://github.com/dsccommunity/SqlServerDsc</URI>
+      <URI N="IconUri">https://dsccommunity.org/images/DSC_Logo_300p.png</URI>
+      <Obj N="Tags" RefId="2">
+        <TNRef RefId="1" />
+        <LST>
+          <S>DesiredStateConfiguration</S>
+          <S>DSC</S>
+          <S>DSCResourceKit</S>
+          <S>DSCResource</S>
+          <S>PSModule</S>
+        </LST>
+      </Obj>
+      <Obj N="Includes" RefId="3">
+        <TN RefId="2">
+          <T>System.Collections.Hashtable</T>
+          <T>System.Object</T>
+        </TN>
+        <DCT>
+          <En>
+            <S N="Key">Function</S>
+            <Obj N="Value" RefId="4">
+              <TNRef RefId="1" />
+              <LST />
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">DscResource</S>
+            <Obj N="Value" RefId="5">
+              <TNRef RefId="1" />
+              <LST>
+                <S>SqlAG</S>
+                <S>SqlAGDatabase</S>
+                <S>SqlAgentAlert</S>
+                <S>SqlAgentFailsafe</S>
+                <S>SqlAgentOperator</S>
+                <S>SqlAGListener</S>
+                <S>SqlAGReplica</S>
+                <S>SqlAlias</S>
+                <S>SqlAlwaysOnService</S>
+                <S>SqlDatabase</S>
+                <S>SqlDatabaseDefaultLocation</S>
+                <S>SqlDatabaseOwner</S>
+                <S>SqlDatabasePermission</S>
+                <S>SqlDatabaseRecoveryModel</S>
+                <S>SqlDatabaseRole</S>
+                <S>SqlDatabaseUser</S>
+                <S>SqlRS</S>
+                <S>SqlRSSetup</S>
+                <S>SqlScript</S>
+                <S>SqlScriptQuery</S>
+                <S>SqlServerConfiguration</S>
+                <S>SqlServerDatabaseMail</S>
+                <S>SqlServerEndpoint</S>
+                <S>SqlServerEndpointPermission</S>
+                <S>SqlServerEndpointState</S>
+                <S>SqlServerLogin</S>
+                <S>SqlServerMaxDop</S>
+                <S>SqlServerMemory</S>
+                <S>SqlServerNetwork</S>
+                <S>SqlServerPermission</S>
+                <S>MSFT_SqlServerReplication</S>
+                <S>SqlServerRole</S>
+                <S>SqlServerSecureConnection</S>
+                <S>SqlServiceAccount</S>
+                <S>SqlSetup</S>
+                <S>SqlWaitForAG</S>
+                <S>SqlWindowsFirewall</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+        </DCT>
+      </Obj>
+      <Nil N="PowerShellGetFormatVersion" />
+      <S N="ReleaseNotes"># Change log for SqlServerDsc_x000D__x000A__x000D__x000A_The format is based on and uses the types of changes according to [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),_x000D__x000A_and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)._x000D__x000A__x000D__x000A_For older change log history see the [historic changelog](HISTORIC_CHANGELOG.md)._x000D__x000A__x000D__x000A_## [Unreleased]_x000D__x000A__x000D__x000A_### Added_x000D__x000A__x000D__x000A_- SqlServerDsc_x000D__x000A_  - Added continuous delivery with a new CI pipeline._x000D__x000A_    - Update build.ps1 from latest template._x000D__x000A__x000D__x000A_### Changed_x000D__x000A__x000D__x000A_- SqlServerDsc_x000D__x000A_  - Add .gitattributes file to checkout file correctly with CRLF._x000D__x000A_  - Updated .vscode/analyzersettings.psd1 file to correct use PSSA rules_x000D__x000A_    and custom rules in VS Code._x000D__x000A_  - Fix hashtables to align with style guideline ([issue #1437](https://github.com/PowerShell/SqlServerDsc/issues/1437))._x000D__x000A_  - Updated most examples to remove the need for the variable `$ConfigurationData`,_x000D__x000A_    and fixed style issues._x000D__x000A_  - Ignore commit in `GitVersion.yml` to force the correct initial release._x000D__x000A_  - Set a display name on all the jobs and tasks in the CI pipeline._x000D__x000A_  - Removing file 'Tests.depend.ps1' as it is no longer required._x000D__x000A_- SqlServerMaxDop_x000D__x000A_  - Fix line endings in code which did not use the correct format._x000D__x000A_- SqlAlwaysOnService_x000D__x000A_  - The integration test has been temporarily disabled because when_x000D__x000A_    the cluster feature is installed it requires a reboot on the_x000D__x000A_    Windows Server 2019 build worker._x000D__x000A_- SqlDatabaseRole_x000D__x000A_  - Update unit test to have the correct description on the `Describe`-block_x000D__x000A_    for the test of `Set-TargetResource`._x000D__x000A_- SqlServerRole_x000D__x000A_  - Add support for nested role membership ([issue #1452](https://github.com/dsccommunity/SqlServerDsc/issues/1452))_x000D__x000A_  - Removed use of case-sensitive Contains() function when evalutating role membership._x000D__x000A_    ([issue #1153](https://github.com/dsccommunity/SqlServerDsc/issues/1153))_x000D__x000A_  - Refactored mocks and unit tests to increase performance. ([issue #979](https://github.com/dsccommunity/SqlServerDsc/issues/979))_x000D__x000A__x000D__x000A_### Fixed_x000D__x000A__x000D__x000A_- SqlServerDsc_x000D__x000A_  - Fixed unit tests to call the function `Invoke-TestSetup` outside the_x000D__x000A_    try-block._x000D__x000A_  - Update GitVersion.yml with the correct regular expression._x000D__x000A_  - Fix import statement in all tests, making sure it throws if module_x000D__x000A_    DscResource.Test cannot be imported._x000D__x000A_- SqlAlwaysOnService_x000D__x000A_  - When failing to enable AlwaysOn the resource should now fail with an_x000D__x000A_    error ([issue #1190](https://github.com/dsccommunity/SqlServerDsc/issues/1190))._x000D__x000A_- SqlAgListener_x000D__x000A_  - Fix IPv6 addresses failing Test-TargetResource after listener creation.</S>
+      <Obj N="Dependencies" RefId="6">
+        <TNRef RefId="1" />
+        <LST />
+      </Obj>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2/</S>
+      <S N="Repository">PSGallery</S>
+      <S N="PackageManagementProvider">NuGet</S>
+      <Obj N="AdditionalMetadata" RefId="7">
+        <TN RefId="3">
+          <T>System.Management.Automation.PSCustomObject</T>
+          <T>System.Object</T>
+        </TN>
+        <MS>
+          <S N="copyright">Copyright the DSC Community contributors. All rights reserved.</S>
+          <S N="description">Module with DSC resources for deployment and configuration of Microsoft SQL Server.</S>
+          <S N="requireLicenseAcceptance">False</S>
+          <S N="releaseNotes"># Change log for SqlServerDsc_x000D__x000A__x000D__x000A_The format is based on and uses the types of changes according to [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),_x000D__x000A_and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)._x000D__x000A__x000D__x000A_For older change log history see the [historic changelog](HISTORIC_CHANGELOG.md)._x000D__x000A__x000D__x000A_## [Unreleased]_x000D__x000A__x000D__x000A_### Added_x000D__x000A__x000D__x000A_- SqlServerDsc_x000D__x000A_  - Added continuous delivery with a new CI pipeline._x000D__x000A_    - Update build.ps1 from latest template._x000D__x000A__x000D__x000A_### Changed_x000D__x000A__x000D__x000A_- SqlServerDsc_x000D__x000A_  - Add .gitattributes file to checkout file correctly with CRLF._x000D__x000A_  - Updated .vscode/analyzersettings.psd1 file to correct use PSSA rules_x000D__x000A_    and custom rules in VS Code._x000D__x000A_  - Fix hashtables to align with style guideline ([issue #1437](https://github.com/PowerShell/SqlServerDsc/issues/1437))._x000D__x000A_  - Updated most examples to remove the need for the variable `$ConfigurationData`,_x000D__x000A_    and fixed style issues._x000D__x000A_  - Ignore commit in `GitVersion.yml` to force the correct initial release._x000D__x000A_  - Set a display name on all the jobs and tasks in the CI pipeline._x000D__x000A_  - Removing file 'Tests.depend.ps1' as it is no longer required._x000D__x000A_- SqlServerMaxDop_x000D__x000A_  - Fix line endings in code which did not use the correct format._x000D__x000A_- SqlAlwaysOnService_x000D__x000A_  - The integration test has been temporarily disabled because when_x000D__x000A_    the cluster feature is installed it requires a reboot on the_x000D__x000A_    Windows Server 2019 build worker._x000D__x000A_- SqlDatabaseRole_x000D__x000A_  - Update unit test to have the correct description on the `Describe`-block_x000D__x000A_    for the test of `Set-TargetResource`._x000D__x000A_- SqlServerRole_x000D__x000A_  - Add support for nested role membership ([issue #1452](https://github.com/dsccommunity/SqlServerDsc/issues/1452))_x000D__x000A_  - Removed use of case-sensitive Contains() function when evalutating role membership._x000D__x000A_    ([issue #1153](https://github.com/dsccommunity/SqlServerDsc/issues/1153))_x000D__x000A_  - Refactored mocks and unit tests to increase performance. ([issue #979](https://github.com/dsccommunity/SqlServerDsc/issues/979))_x000D__x000A__x000D__x000A_### Fixed_x000D__x000A__x000D__x000A_- SqlServerDsc_x000D__x000A_  - Fixed unit tests to call the function `Invoke-TestSetup` outside the_x000D__x000A_    try-block._x000D__x000A_  - Update GitVersion.yml with the correct regular expression._x000D__x000A_  - Fix import statement in all tests, making sure it throws if module_x000D__x000A_    DscResource.Test cannot be imported._x000D__x000A_- SqlAlwaysOnService_x000D__x000A_  - When failing to enable AlwaysOn the resource should now fail with an_x000D__x000A_    error ([issue #1190](https://github.com/dsccommunity/SqlServerDsc/issues/1190))._x000D__x000A_- SqlAgListener_x000D__x000A_  - Fix IPv6 addresses failing Test-TargetResource after listener creation.</S>
+          <S N="isLatestVersion">False</S>
+          <S N="isAbsoluteLatestVersion">False</S>
+          <S N="versionDownloadCount">465646</S>
+          <S N="downloadCount">2863429</S>
+          <S N="packageSize">200285</S>
+          <S N="published">1/17/2020 8:26:30 PM -08:00</S>
+          <S N="created">1/17/2020 8:26:30 PM -08:00</S>
+          <S N="lastUpdated">2/17/2021 6:13:41 PM -08:00</S>
+          <S N="tags">DesiredStateConfiguration DSC DSCResourceKit DSCResource PSModule</S>
+          <S N="developmentDependency">False</S>
+          <S N="updated">2021-02-17T18:13:41Z</S>
+          <S N="NormalizedVersion">13.3.0</S>
+          <S N="Authors">DSC Community</S>
+          <S N="IsPrerelease">false</S>
+          <S N="ItemType">Module</S>
+          <S N="FileList">SqlServerDsc.nuspec|SqlServerDsc.psd1|en-US\about_SqlServerDsc.help.txt|Modules\SqlServerDsc.Common\SqlServerDsc.Common.psm1|Modules\SqlServerDsc.Common\SqlServerDsc.Common.psd1|DSCResources\MSFT_SqlDatabaseDefaultLocation\MSFT_SqlDatabaseDefaultLocation.psm1|DSCResources\MSFT_SqlDatabaseDefaultLocation\MSFT_SqlDatabaseDefaultLocation.schema.mof|DSCResources\MSFT_SqlAgentOperator\MSFT_SqlAgentOperator.schema.mof|DSCResources\MSFT_SqlAgentOperator\MSFT_SqlAgentOperator.psm1|DSCResources\MSFT_SqlRS\MSFT_SqlRS.schema.mof|DSCResources\MSFT_SqlRS\MSFT_SqlRS.psm1|DSCResources\MSFT_SqlServerEndpointPermission\MSFT_SqlServerEndpointPermission.psm1|DSCResources\MSFT_SqlServerEndpointPermission\MSFT_SqlServerEndpointPermission.schema.mof|DSCResources\MSFT_SqlServerEndpointState\MSFT_SqlServerEndpointState.psm1|DSCResources\MSFT_SqlServerEndpointState\MSFT_SqlServerEndpointState.schema.mof|DSCResources\MSFT_SqlServerPermission\MSFT_SqlServerPermission.schema.mof|DSCResources\MSFT_SqlServerPermission\MSFT_SqlServerPermission.psm1|DSCResources\MSFT_SqlWindowsFirewall\MSFT_SqlWindowsFirewall.psm1|DSCResources\MSFT_SqlWindowsFirewall\MSFT_SqlWindowsFirewall.schema.mof|DSCResources\MSFT_SqlDatabaseOwner\MSFT_SqlDatabaseOwner.schema.mof|DSCResources\MSFT_SqlDatabaseOwner\MSFT_SqlDatabaseOwner.psm1|DSCResources\MSFT_SqlAGReplica\MSFT_SqlAGReplica.schema.mof|DSCResources\MSFT_SqlAGReplica\MSFT_SqlAGReplica.psm1|DSCResources\MSFT_SqlDatabaseUser\MSFT_SqlDatabaseUser.psm1|DSCResources\MSFT_SqlDatabaseUser\MSFT_SqlDatabaseUser.schema.mof|DSCResources\MSFT_SqlAGListener\MSFT_SqlAGListener.schema.mof|DSCResources\MSFT_SqlAGListener\MSFT_SqlAGListener.psm1|DSCResources\MSFT_SqlDatabase\MSFT_SqlDatabase.schema.mof|DSCResources\MSFT_SqlDatabase\MSFT_SqlDatabase.psm1|DSCResources\MSFT_SqlServerConfiguration\MSFT_SqlServerConfiguration.psm1|DSCResources\MSFT_SqlServerConfiguration\MSFT_SqlServerConfiguration.schema.mof|DSCResources\MSFT_SqlAlwaysOnService\MSFT_SqlAlwaysOnService.psm1|DSCResources\MSFT_SqlAlwaysOnService\MSFT_SqlAlwaysOnService.schema.mof|DSCResources\MSFT_SqlServerDatabaseMail\MSFT_SqlServerDatabaseMail.schema.mof|DSCResources\MSFT_SqlServerDatabaseMail\MSFT_SqlServerDatabaseMail.psm1|DSCResources\MSFT_SqlAgentFailsafe\MSFT_SqlAgentFailsafe.psm1|DSCResources\MSFT_SqlAgentFailsafe\MSFT_SqlAgentFailsafe.schema.mof|DSCResources\MSFT_SqlDatabaseRecoveryModel\MSFT_SqlDatabaseRecoveryModel.schema.mof|DSCResources\MSFT_SqlDatabaseRecoveryModel\MSFT_SqlDatabaseRecoveryModel.psm1|DSCResources\MSFT_SqlRSSetup\MSFT_SqlRSSetup.schema.mof|DSCResources\MSFT_SqlRSSetup\MSFT_SqlRSSetup.psm1|DSCResources\MSFT_SqlServerEndpoint\MSFT_SqlServerEndpoint.schema.mof|DSCResources\MSFT_SqlServerEndpoint\MSFT_SqlServerEndpoint.psm1|DSCResources\MSFT_SqlAGDatabase\MSFT_SqlAGDatabase.psm1|DSCResources\MSFT_SqlAGDatabase\MSFT_SqlAGDatabase.schema.mof|DSCResources\MSFT_SqlAG\MSFT_SqlAG.psm1|DSCResources\MSFT_SqlAG\MSFT_SqlAG.schema.mof|DSCResources\MSFT_SqlServerMaxDop\MSFT_SqlServerMaxDop.schema.mof|DSCResources\MSFT_SqlServerMaxDop\MSFT_SqlServerMaxDop.psm1|DSCResources\MSFT_SqlServerMemory\MSFT_SqlServerMemory.psm1|DSCResources\MSFT_SqlServerMemory\MSFT_SqlServerMemory.schema.mof|DSCResources\MSFT_SqlDatabaseRole\MSFT_SqlDatabaseRole.psm1|DSCResources\MSFT_SqlDatabaseRole\MSFT_SqlDatabaseRole.schema.mof|DSCResources\MSFT_SqlDatabasePermission\MSFT_SqlDatabasePermission.psm1|DSCResources\MSFT_SqlDatabasePermission\MSFT_SqlDatabasePermission.schema.mof|DSCResources\MSFT_SqlSetup\MSFT_SqlSetup.schema.mof|DSCResources\MSFT_SqlSetup\MSFT_SqlSetup.psm1|DSCResources\MSFT_SqlServerRole\MSFT_SqlServerRole.psm1|DSCResources\MSFT_SqlServerRole\MSFT_SqlServerRole.schema.mof|DSCResources\MSFT_SqlAlias\MSFT_SqlAlias.psm1|DSCResources\MSFT_SqlAlias\MSFT_SqlAlias.schema.mof|DSCResources\MSFT_SqlScript\MSFT_SqlScript.schema.mof|DSCResources\MSFT_SqlScript\MSFT_SqlScript.psm1|DSCResources\MSFT_SqlServerLogin\MSFT_SqlServerLogin.psm1|DSCResources\MSFT_SqlServerLogin\MSFT_SqlServerLogin.schema.mof|DSCResources\MSFT_SqlServerSecureConnection\MSFT_SqlServerSecureConnection.schema.mof|DSCResources\MSFT_SqlServerSecureConnection\MSFT_SqlServerSecureConnection.psm1|DSCResources\MSFT_SqlWaitForAG\MSFT_SqlWaitForAG.schema.mof|DSCResources\MSFT_SqlWaitForAG\MSFT_SqlWaitForAG.psm1|DSCResources\MSFT_SqlServerNetwork\MSFT_SqlServerNetwork.schema.mof|DSCResources\MSFT_SqlServerNetwork\MSFT_SqlServerNetwork.psm1|DSCResources\MSFT_SqlAgentAlert\MSFT_SqlAgentAlert.schema.mof|DSCResources\MSFT_SqlAgentAlert\MSFT_SqlAgentAlert.psm1|DSCResources\MSFT_SqlServerReplication\MSFT_SqlServerReplication.psm1|DSCResources\MSFT_SqlServerReplication\MSFT_SqlServerReplication.schema.mof|DSCResources\MSFT_SqlServiceAccount\MSFT_SqlServiceAccount.schema.mof|DSCResources\MSFT_SqlServiceAccount\MSFT_SqlServiceAccount.psm1|DSCResources\MSFT_SqlScriptQuery\MSFT_SqlScriptQuery.schema.mof|DSCResources\MSFT_SqlScriptQuery\MSFT_SqlScriptQuery.psm1|Modules\SqlServerDsc.Common\en-US\SqlServerDsc.Common.strings.psd1|Modules\SqlServerDsc.Common\sv-SE\SqlServerDsc.Common.strings.psd1|DSCResources\MSFT_SqlDatabaseDefaultLocation\en-US\MSFT_SqlDatabaseDefaultLocation.strings.psd1|DSCResources\MSFT_SqlAgentOperator\en-US\MSFT_SqlAgentOperator.strings.psd1|DSCResources\MSFT_SqlRS\en-US\MSFT_SqlRS.strings.psd1|DSCResources\MSFT_SqlServerEndpointPermission\en-US\MSFT_SqlServerEndpointPermission.strings.psd1|DSCResources\MSFT_SqlServerEndpointState\en-US\MSFT_SqlServerEndpointState.strings.psd1|DSCResources\MSFT_SqlServerPermission\en-US\MSFT_SqlServerPermission.strings.psd1|DSCResources\MSFT_SqlWindowsFirewall\en-US\MSFT_SqlWindowsFirewall.strings.psd1|DSCResources\MSFT_SqlDatabaseOwner\en-US\MSFT_SqlDatabaseOwner.strings.psd1|DSCResources\MSFT_SqlAGReplica\en-US\MSFT_SqlAGReplica.strings.psd1|DSCResources\MSFT_SqlDatabaseUser\en-US\MSFT_SqlDatabaseUser.strings.psd1|DSCResources\MSFT_SqlAGListener\en-US\MSFT_SqlAGListener.strings.psd1|DSCResources\MSFT_SqlDatabase\en-US\MSFT_SqlDatabase.strings.psd1|DSCResources\MSFT_SqlServerConfiguration\en-US\MSFT_SqlServerConfiguration.strings.psd1|DSCResources\MSFT_SqlAlwaysOnService\en-US\MSFT_SqlAlwaysOnService.strings.psd1|DSCResources\MSFT_SqlServerDatabaseMail\en-US\MSFT_SqlServerDatabaseMail.strings.psd1|DSCResources\MSFT_SqlAgentFailsafe\en-US\MSFT_SqlAgentFailsafe.strings.psd1|DSCResources\MSFT_SqlDatabaseRecoveryModel\en-US\MSFT_SqlDatabaseRecoveryModel.strings.psd1|DSCResources\MSFT_SqlRSSetup\en-US\MSFT_SqlRSSetup.strings.psd1|DSCResources\MSFT_SqlServerEndpoint\en-US\MSFT_SqlServerEndpoint.strings.psd1|DSCResources\MSFT_SqlAGDatabase\en-US\MSFT_SqlAGDatabase.strings.psd1|DSCResources\MSFT_SqlAGDatabase\en-US\about_SqlAGDatabase.help.txt|DSCResources\MSFT_SqlAG\en-US\MSFT_SqlAG.strings.psd1|DSCResources\MSFT_SqlServerMaxDop\en-US\MSFT_SqlServerMaxDop.strings.psd1|DSCResources\MSFT_SqlServerMemory\en-US\MSFT_SqlServerMemory.strings.psd1|DSCResources\MSFT_SqlDatabaseRole\en-US\MSFT_SqlDatabaseRole.strings.psd1|DSCResources\MSFT_SqlDatabasePermission\en-US\MSFT_SqlDatabasePermission.strings.psd1|DSCResources\MSFT_SqlSetup\en-US\MSFT_SqlSetup.strings.psd1|DSCResources\MSFT_SqlSetup\sv-SE\MSFT_SqlSetup.strings.psd1|DSCResources\MSFT_SqlServerRole\en-US\MSFT_SqlServerRole.strings.psd1|DSCResources\MSFT_SqlAlias\en-US\MSFT_SqlAlias.strings.psd1|DSCResources\MSFT_SqlScript\en-US\MSFT_SqlScript.strings.psd1|DSCResources\MSFT_SqlServerLogin\en-US\MSFT_SqlServerLogin.strings.psd1|DSCResources\MSFT_SqlServerSecureConnection\en-US\MSFT_SqlServerSecureConnection.strings.psd1|DSCResources\MSFT_SqlWaitForAG\en-US\MSFT_SqlWaitForAG.strings.psd1|DSCResources\MSFT_SqlServerNetwork\en-US\MSFT_SqlServerNetwork.strings.psd1|DSCResources\MSFT_SqlAgentAlert\en-US\MSFT_SqlAgentAlert.strings.psd1|DSCResources\MSFT_SqlServerReplication\en-US\MSFT_SqlServerReplication.strings.psd1|DSCResources\MSFT_SqlServiceAccount\en-US\MSFT_SqlServiceAccount.strings.psd1|DSCResources\MSFT_SqlScriptQuery\en-US\MSFT_SqlScriptQuery.strings.psd1</S>
+          <S N="DscResources">SqlAG SqlAGDatabase SqlAgentAlert SqlAgentFailsafe SqlAgentOperator SqlAGListener SqlAGReplica SqlAlias SqlAlwaysOnService SqlDatabase SqlDatabaseDefaultLocation SqlDatabaseOwner SqlDatabasePermission SqlDatabaseRecoveryModel SqlDatabaseRole SqlDatabaseUser SqlRS SqlRSSetup SqlScript SqlScriptQuery SqlServerConfiguration SqlServerDatabaseMail SqlServerEndpoint SqlServerEndpointPermission SqlServerEndpointState SqlServerLogin SqlServerMaxDop SqlServerMemory SqlServerNetwork SqlServerPermission MSFT_SqlServerReplication SqlServerRole SqlServerSecureConnection SqlServiceAccount SqlSetup SqlWaitForAG SqlWindowsFirewall</S>
+          <S N="GUID">693ee082-ed36-45a7-b490-88b07c86b42f</S>
+          <S N="PowerShellVersion">5.0</S>
+          <S N="CLRVersion">4.0</S>
+          <S N="CompanyName">DSC Community</S>
+        </MS>
+      </Obj>
+      <S N="InstalledLocation">C:\Users\sdubey\Code\azure-ecosystem\pc1\project-chairlift\windows\src\SqlServerDsc\13.3.0</S>
+    </MS>
+  </Obj>
+</Objs>

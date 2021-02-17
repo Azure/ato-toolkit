@@ -1,0 +1,411 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>Microsoft.PowerShell.Commands.PSRepositoryItemInfo</T>
+      <T>System.Management.Automation.PSCustomObject</T>
+      <T>System.Object</T>
+    </TN>
+    <MS>
+      <S N="Name">PowerSTIG</S>
+      <S N="Version">4.7.1</S>
+      <S N="Type">Module</S>
+      <S N="Description">The PowerStig module provides a set of PowerShell classes to access DISA STIG settings extracted from the xccdf. The module provides a unified way to access the parsed STIG data by enabling the concepts of:_x000D__x000A_1. Exceptions (overriding and auto-documenting)_x000D__x000A_2. Ignoring a single or entire class of rules (auto-documenting)_x000D__x000A_3. Organizational settings to address STIG rules that have allowable ranges._x000D__x000A__x000D__x000A_This module is intended to be used by additional automation as a lightweight portable database to audit and enforce the parsed STIG data.</S>
+      <S N="Author">Microsoft Corporation</S>
+      <Obj N="CompanyName" RefId="1">
+        <TN RefId="1">
+          <T>System.Object[]</T>
+          <T>System.Array</T>
+          <T>System.Object</T>
+        </TN>
+        <LST>
+          <S>adamhay</S>
+          <S>rgibson</S>
+          <S>JasonW</S>
+        </LST>
+      </Obj>
+      <S N="Copyright">Copyright (c) Microsoft Corporation. All rights reserved. 2020</S>
+      <DT N="PublishedDate">2021-01-22T17:11:15-08:00</DT>
+      <Nil N="InstalledDate" />
+      <Nil N="UpdatedDate" />
+      <URI N="LicenseUri">https://github.com/Microsoft/PowerStig/blob/master/LICENSE</URI>
+      <URI N="ProjectUri">https://github.com/Microsoft/PowerStig</URI>
+      <Nil N="IconUri" />
+      <Obj N="Tags" RefId="2">
+        <TNRef RefId="1" />
+        <LST>
+          <S>DSC</S>
+          <S>DesiredStateConfiguration</S>
+          <S>STIG</S>
+          <S>PowerStig</S>
+          <S>PSModule</S>
+        </LST>
+      </Obj>
+      <Obj N="Includes" RefId="3">
+        <TN RefId="2">
+          <T>System.Collections.Hashtable</T>
+          <T>System.Object</T>
+        </TN>
+        <DCT>
+          <En>
+            <S N="Key">Function</S>
+            <Obj N="Value" RefId="4">
+              <TNRef RefId="1" />
+              <LST>
+                <S>Get-DomainName</S>
+                <S>Get-Stig</S>
+                <S>New-StigCheckList</S>
+                <S>Get-StigRuleList</S>
+                <S>Get-StigVersionNumber</S>
+                <S>Get-PowerStigFilelist</S>
+                <S>Split-BenchmarkId</S>
+                <S>Get-StigRule</S>
+                <S>Get-StigRuleExceptionString</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Obj N="Value" RefId="5">
+              <TNRef RefId="1" />
+              <LST>
+                <S>Get-DomainName</S>
+                <S>Get-Stig</S>
+                <S>New-StigCheckList</S>
+                <S>Get-StigRuleList</S>
+                <S>Get-StigVersionNumber</S>
+                <S>Get-PowerStigFilelist</S>
+                <S>Split-BenchmarkId</S>
+                <S>Get-StigRule</S>
+                <S>Get-StigRuleExceptionString</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">DscResource</S>
+            <Obj N="Value" RefId="6">
+              <TNRef RefId="1" />
+              <LST>
+                <S>Adobe</S>
+                <S>DotNetFramework</S>
+                <S>FireFox</S>
+                <S>IisServer</S>
+                <S>IisSite</S>
+                <S>InternetExplorer</S>
+                <S>Chrome</S>
+                <S>McAfee</S>
+                <S>Office</S>
+                <S>OracleJRE</S>
+                <S>SqlServer</S>
+                <S>WindowsClient</S>
+                <S>WindowsDefender</S>
+                <S>WindowsDnsServer</S>
+                <S>WindowsFirewall</S>
+                <S>WindowsServer</S>
+                <S>Vsphere</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Obj N="Value" RefId="7">
+              <TNRef RefId="1" />
+              <LST />
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="7" />
+          </En>
+          <En>
+            <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="7" />
+          </En>
+        </DCT>
+      </Obj>
+      <Nil N="PowerShellGetFormatVersion" />
+      <S N="ReleaseNotes">* ConvertTo-ManualCheckListHashTable function call is missing mandatory argument: [#823](https://github.com/microsoft/PowerStig/issues/823)</S>
+      <Obj N="Dependencies" RefId="8">
+        <TNRef RefId="1" />
+        <LST>
+          <Obj RefId="9">
+            <TN RefId="3">
+              <T>System.Collections.Specialized.OrderedDictionary</T>
+              <T>System.Object</T>
+            </TN>
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">AuditPolicyDsc</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">1.4.0</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:AuditPolicyDsc/[1.4.0]</S>
+              </En>
+            </DCT>
+          </Obj>
+          <Obj RefId="10">
+            <TNRef RefId="3" />
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">AuditSystemDsc</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">1.1.0</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:AuditSystemDsc/[1.1.0]</S>
+              </En>
+            </DCT>
+          </Obj>
+          <Obj RefId="11">
+            <TNRef RefId="3" />
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">AccessControlDsc</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">1.4.1</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:AccessControlDsc/[1.4.1]</S>
+              </En>
+            </DCT>
+          </Obj>
+          <Obj RefId="12">
+            <TNRef RefId="3" />
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">ComputerManagementDsc</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">8.4.0</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:ComputerManagementDsc/[8.4.0]</S>
+              </En>
+            </DCT>
+          </Obj>
+          <Obj RefId="13">
+            <TNRef RefId="3" />
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">FileContentDsc</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">1.3.0.151</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:FileContentDsc/[1.3.0.151]</S>
+              </En>
+            </DCT>
+          </Obj>
+          <Obj RefId="14">
+            <TNRef RefId="3" />
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">GPRegistryPolicyDsc</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">1.2.0</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:GPRegistryPolicyDsc/[1.2.0]</S>
+              </En>
+            </DCT>
+          </Obj>
+          <Obj RefId="15">
+            <TNRef RefId="3" />
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">PSDscResources</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">2.12.0</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:PSDscResources/[2.12.0]</S>
+              </En>
+            </DCT>
+          </Obj>
+          <Obj RefId="16">
+            <TNRef RefId="3" />
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">SecurityPolicyDsc</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">2.10.0</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:SecurityPolicyDsc/[2.10.0]</S>
+              </En>
+            </DCT>
+          </Obj>
+          <Obj RefId="17">
+            <TNRef RefId="3" />
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">SqlServerDsc</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">13.3.0</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:SqlServerDsc/[13.3.0]</S>
+              </En>
+            </DCT>
+          </Obj>
+          <Obj RefId="18">
+            <TNRef RefId="3" />
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">WindowsDefenderDsc</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">2.0.0</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:WindowsDefenderDsc/[2.0.0]</S>
+              </En>
+            </DCT>
+          </Obj>
+          <Obj RefId="19">
+            <TNRef RefId="3" />
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">xDnsServer</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">1.16.0</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:xDnsServer/[1.16.0]</S>
+              </En>
+            </DCT>
+          </Obj>
+          <Obj RefId="20">
+            <TNRef RefId="3" />
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">xWebAdministration</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">3.2.0</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:xWebAdministration/[3.2.0]</S>
+              </En>
+            </DCT>
+          </Obj>
+          <Obj RefId="21">
+            <TNRef RefId="3" />
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">CertificateDsc</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">5.0.0</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:CertificateDsc/[5.0.0]</S>
+              </En>
+            </DCT>
+          </Obj>
+          <Obj RefId="22">
+            <TNRef RefId="3" />
+            <DCT>
+              <En>
+                <S N="Key">Name</S>
+                <S N="Value">Vmware.vSphereDsc</S>
+              </En>
+              <En>
+                <S N="Key">RequiredVersion</S>
+                <S N="Value">2.1.0.58</S>
+              </En>
+              <En>
+                <S N="Key">CanonicalId</S>
+                <S N="Value">nuget:Vmware.vSphereDsc/[2.1.0.58]</S>
+              </En>
+            </DCT>
+          </Obj>
+        </LST>
+      </Obj>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2/</S>
+      <S N="Repository">PSGallery</S>
+      <S N="PackageManagementProvider">NuGet</S>
+      <Obj N="AdditionalMetadata" RefId="23">
+        <TN RefId="4">
+          <T>System.Management.Automation.PSCustomObject</T>
+          <T>System.Object</T>
+        </TN>
+        <MS>
+          <S N="copyright">Copyright (c) Microsoft Corporation. All rights reserved. 2020</S>
+          <S N="description">The PowerStig module provides a set of PowerShell classes to access DISA STIG settings extracted from the xccdf. The module provides a unified way to access the parsed STIG data by enabling the concepts of:_x000D__x000A_1. Exceptions (overriding and auto-documenting)_x000D__x000A_2. Ignoring a single or entire class of rules (auto-documenting)_x000D__x000A_3. Organizational settings to address STIG rules that have allowable ranges._x000D__x000A__x000D__x000A_This module is intended to be used by additional automation as a lightweight portable database to audit and enforce the parsed STIG data.</S>
+          <S N="requireLicenseAcceptance">False</S>
+          <S N="releaseNotes">* ConvertTo-ManualCheckListHashTable function call is missing mandatory argument: [#823](https://github.com/microsoft/PowerStig/issues/823)</S>
+          <S N="isLatestVersion">True</S>
+          <S N="isAbsoluteLatestVersion">True</S>
+          <S N="versionDownloadCount">393</S>
+          <S N="downloadCount">22079</S>
+          <S N="packageSize">4558429</S>
+          <S N="published">1/22/2021 5:11:15 PM -08:00</S>
+          <S N="created">1/22/2021 5:11:15 PM -08:00</S>
+          <S N="lastUpdated">2/17/2021 6:13:41 PM -08:00</S>
+          <S N="tags">DSC DesiredStateConfiguration STIG PowerStig PSModule PSFunction_Get-DomainName PSCommand_Get-DomainName PSFunction_Get-Stig PSCommand_Get-Stig PSFunction_New-StigCheckList PSCommand_New-StigCheckList PSFunction_Get-StigRuleList PSCommand_Get-StigRuleList PSFunction_Get-StigVersionNumber PSCommand_Get-StigVersionNumber PSFunction_Get-PowerStigFilelist PSCommand_Get-PowerStigFilelist PSFunction_Split-BenchmarkId PSCommand_Split-BenchmarkId PSFunction_Get-StigRule PSCommand_Get-StigRule PSFunction_Get-StigRuleExceptionString PSCommand_Get-StigRuleExceptionString PSIncludes_Function PSDscResource_Adobe PSDscResource_DotNetFramework PSDscResource_FireFox PSDscResource_IisServer PSDscResource_IisSite PSDscResource_InternetExplorer PSDscResource_Chrome PSDscResource_McAfee PSDscResource_Office PSDscResource_OracleJRE PSDscResource_SqlServer PSDscResource_WindowsClient PSDscResource_WindowsDefender PSDscResource_WindowsDnsServer PSDscResource_WindowsFirewall PSDscResource_WindowsServer PSDscResource_Vsphere PSIncludes_DscResource</S>
+          <S N="developmentDependency">False</S>
+          <S N="updated">2021-02-17T18:13:41Z</S>
+          <S N="NormalizedVersion">4.7.1</S>
+          <S N="Authors">Microsoft Corporation</S>
+          <S N="IsPrerelease">false</S>
+          <S N="ItemType">Module</S>
+          <S N="FileList">PowerStig.nuspec|PowerStig.Convert.psm1|PowerStig.psd1|PowerStig.psm1|PSGetModuleInfo.xml|DSCResources\ActiveDirectory.md|DSCResources\helper.psm1|DSCResources\Adobe\Adobe.psd1|DSCResources\Adobe\Adobe.schema.psm1|DSCResources\Chrome\Chrome.psd1|DSCResources\Chrome\Chrome.schema.psm1|DSCResources\DotNetFramework\DotNetFramework.psd1|DSCResources\DotNetFramework\DotNetFramework.schema.psm1|DSCResources\FireFox\FireFox.psd1|DSCResources\FireFox\FireFox.schema.psm1|DSCResources\IisServer\IisServer.psd1|DSCResources\IisServer\IisServer.schema.psm1|DSCResources\IisSite\IisSite.psd1|DSCResources\IisSite\IisSite.schema.psm1|DSCResources\InternetExplorer\InternetExplorer.psd1|DSCResources\InternetExplorer\InternetExplorer.schema.psm1|DSCResources\McAfee\McAfee.psd1|DSCResources\McAfee\McAfee.schema.psm1|DSCResources\Office\Office.psd1|DSCResources\Office\Office.schema.psm1|DSCResources\OracleJRE\OracleJRE.psd1|DSCResources\OracleJRE\OracleJRE.schema.psm1|DSCResources\Resources\disaWarning.Message.ps1|DSCResources\Resources\firefox.ReplaceText.ps1|DSCResources\Resources\oraclejre.KeyValuePairFile.ps1|DSCResources\Resources\readme.md|DSCResources\Resources\SqlServer.ScriptQuery.ps1|DSCResources\Resources\Vsphere.VmHostAcceptanceLevel.ps1|DSCResources\Resources\Vsphere.VmHostAdvancedSettings.ps1|DSCResources\Resources\Vsphere.VMHostNtpSettings.ps1|DSCResources\Resources\Vsphere.VmHostService.ps1|DSCResources\Resources\Vsphere.VmHostSNMPAgent.ps1|DSCResources\Resources\Vsphere.VmHostVMKernelActiveDumpPartition.ps1|DSCResources\Resources\Vsphere.VmHostVssPortGroupSecurity.ps1|DSCResources\Resources\Vsphere.VmHostVssSecurity.ps1|DSCResources\Resources\windows.AccessControl.ps1|DSCResources\Resources\windows.AccountPolicy.ps1|DSCResources\Resources\windows.AuditPolicySubcategory.ps1|DSCResources\Resources\windows.AuditSetting.ps1|DSCResources\Resources\windows.ProcessMitigation.ps1|DSCResources\Resources\windows.RefreshRegistryPolicy.ps1|DSCResources\Resources\windows.Registry.ps1|DSCResources\Resources\windows.RootCertificate.ps1|DSCResources\Resources\windows.Script.RootHint.ps1|DSCResources\Resources\windows.Script.skip.ps1|DSCResources\Resources\windows.SecurityOption.ps1|DSCResources\Resources\windows.Service.ps1|DSCResources\Resources\windows.UserRightsAssignment.ps1|DSCResources\Resources\windows.WindowsEventLog.ps1|DSCResources\Resources\windows.WindowsFeature.ps1|DSCResources\Resources\windows.WindowsOptionalFeature.ps1|DSCResources\Resources\windows.xDnsServerSetting.ps1|DSCResources\Resources\windows.xIisLogging.ps1|DSCResources\Resources\windows.xIisMimeTypeMapping.ps1|DSCResources\Resources\windows.xSslSettings.ps1|DSCResources\Resources\windows.xWebAppPool.ps1|DSCResources\Resources\windows.xWebConfigProperty.ps1|DSCResources\Resources\windows.xWebSite.ps1|DSCResources\SqlServer\SqlServer.psd1|DSCResources\SqlServer\SqlServer.schema.psm1|DSCResources\Vsphere\Vsphere.psd1|DSCResources\Vsphere\Vsphere.schema.psm1|DSCResources\WindowsClient\WindowsClient.psd1|DSCResources\WindowsClient\WindowsClient.schema.psm1|DSCResources\WindowsDefender\WindowsDefender.psd1|DSCResources\WindowsDefender\WindowsDefender.schema.psm1|DSCResources\WindowsDnsServer\WindowsDnsServer.psd1|DSCResources\WindowsDnsServer\WindowsDnsServer.schema.psm1|DSCResources\WindowsFirewall\WindowsFirewall.psd1|DSCResources\WindowsFirewall\WindowsFirewall.schema.psm1|DSCResources\WindowsServer\WindowsServer.psd1|DSCResources\WindowsServer\WindowsServer.schema.psm1|Module\Common\Common.psm1|Module\Common\Function.Xccdf.ps1|Module\Common\Functions.Helper.ps1|Module\Common\Functions.XccdfXml.ps1|Module\Common\Convert\Data.ps1|Module\Common\Convert\Function.Helper.ps1|Module\Common\Convert\Function.RangeConversion.ps1|Module\Rule\Rule.LoadFactory.psm1|Module\Rule\Rule.psm1|Module\Rule\Convert\ConvertFactory.psm1|Module\Rule\Convert\Data.Chrome.ps1|Module\Rule\Convert\Data.Core.ps1|Module\Rule\Convert\Data.McAfee.ps1|Module\Rule\Convert\Data.Office.ps1|Module\Rule\Convert\Data.Windows.Defender.ps1|Module\Rule\Convert\Functions.ps1|Module\Rule\Convert\Methods.ps1|Module\Rule.AccountPolicy\AccountPolicyRule.psm1|Module\Rule.AccountPolicy\Convert\AccountPolicyRule.Convert.psm1|Module\Rule.AuditPolicy\AuditPolicyRule.psm1|Module\Rule.AuditPolicy\Convert\AuditPolicyRule.Convert.psm1|Module\Rule.AuditSetting\AuditSettingRule.psm1|Module\Rule.AuditSetting\Convert\AuditSettingRule.Convert.psm1|Module\Rule.DnsServerRootHint\DnsServerRootHintRule.psm1|Module\Rule.DnsServerRootHint\Convert\DnsServerRootHintRule.Convert.psm1|Module\Rule.DnsServerSetting\DnsServerSettingRule.psm1|Module\Rule.DnsServerSetting\Convert\Data.ps1|Module\Rule.DnsServerSetting\Convert\DnsServerSettingRule.Convert.psm1|Module\Rule.DnsServerSetting\Convert\Methods.ps1|Module\Rule.Document\DocumentRule.psm1|Module\Rule.Document\Convert\DocumentRule.Convert.psm1|Module\Rule.FileContent\FileContentRule.psm1|Module\Rule.FileContent\Convert\Data.ps1|Module\Rule.FileContent\Convert\FileContentRule.Convert.psm1|Module\Rule.FileContent\Convert\Methods.ps1|Module\Rule.FileContent\Convert\FileContentType\FileContentType.psm1|Module\Rule.FileContent\Convert\FileContentType\Methods.MozillaFirefox.ps1|Module\Rule.FileContent\Convert\FileContentType\Methods.OracleJRE.ps1|Module\Rule.Group\GroupRule.psm1|Module\Rule.Group\Convert\GroupRule.Convert.psm1|Module\Rule.Group\Convert\Methods.ps1|Module\Rule.Group\Convert\Template.GroupDetail.txt|Module\Rule.HardCoded\Convert\HardCodedRule.Convert.psm1|Module\Rule.IISLogging\IISLoggingRule.psm1|Module\Rule.IISLogging\Convert\Data.ps1|Module\Rule.IISLogging\Convert\IISLoggingRule.Convert.psm1|Module\Rule.IISLogging\Convert\Methods.ps1|Module\Rule.Manual\ManualRule.psm1|Module\Rule.Manual\Convert\ManualRule.Convert.psm1|Module\Rule.MimeType\MimeTypeRule.psm1|Module\Rule.MimeType\Convert\Data.ps1|Module\Rule.MimeType\Convert\Methods.ps1|Module\Rule.MimeType\Convert\MimeTypeRule.Convert.psm1|Module\Rule.Permission\PermissionRule.psm1|Module\Rule.Permission\Convert\Data.ps1|Module\Rule.Permission\Convert\Methods.ps1|Module\Rule.Permission\Convert\PermissionRule.Convert.psm1|Module\Rule.ProcessMitigation\ProcessMitigationRule.psm1|Module\Rule.ProcessMitigation\Convert\Data.ps1|Module\Rule.ProcessMitigation\Convert\Methods.ps1|Module\Rule.ProcessMitigation\Convert\ProcessMitigationRule.Convert.psm1|Module\Rule.Registry\RegistryRule.psm1|Module\Rule.Registry\Convert\Data.ps1|Module\Rule.Registry\Convert\Functions.SingleLine.ps1|Module\Rule.Registry\Convert\Methods.ps1|Module\Rule.Registry\Convert\RegistryRule.Convert.psm1|Module\Rule.RootCertificate\RootCertificateRule.psm1|Module\Rule.RootCertificate\Convert\Methods.ps1|Module\Rule.RootCertificate\Convert\RootCertificateRule.Convert.psm1|Module\Rule.SecurityOption\SecurityOptionRule.psm1|Module\Rule.SecurityOption\Convert\SecurityOptionRule.Convert.psm1|Module\Rule.Service\ServiceRule.psm1|Module\Rule.Service\Convert\Data.ps1|Module\Rule.Service\Convert\Methods.ps1|Module\Rule.Service\Convert\ServiceRule.Convert.psm1|Module\Rule.Skip\Skip.psm1|Module\Rule.SqlScriptQuery\SqlScriptQueryRule.psm1|Module\Rule.SqlScriptQuery\Convert\Methods.ps1|Module\Rule.SqlScriptQuery\Convert\SqlScriptQueryRule.Convert.psm1|Module\Rule.SslSettings\SslSettingsRule.psm1|Module\Rule.SslSettings\Convert\SslSettingsRule.Convert.psm1|Module\Rule.UserRight\UserRightRule.psm1|Module\Rule.UserRight\Convert\Data.ps1|Module\Rule.UserRight\Convert\Methods.ps1|Module\Rule.UserRight\Convert\UserRightRule.Convert.psm1|Module\Rule.VsphereAcceptanceLevel\VsphereAcceptanceLevelRule.psm1|Module\Rule.VsphereAcceptanceLevel\Convert\Methods.ps1|Module\Rule.VsphereAcceptanceLevel\Convert\VsphereAcceptanceLevelRule.Convert.psm1|Module\Rule.VsphereAdvancedSettings\VsphereAdvancedSettingsRule.psm1|Module\Rule.VsphereAdvancedSettings\Convert\Methods.ps1|Module\Rule.VsphereAdvancedSettings\Convert\VsphereAdvancedSettingsRule.Convert.psm1|Module\Rule.VsphereKernelActiveDumpPartition\VsphereKernelActiveDumpPartitionRule.psm1|Module\Rule.VsphereKernelActiveDumpPartition\Convert\Methods.ps1|Module\Rule.VsphereKernelActiveDumpPartition\Convert\VsphereKernelActiveDumpPartitionRule.Convert.psm1|Module\Rule.VsphereNtpSettings\VsphereNtpSettingsRule.psm1|Module\Rule.VsphereNtpSettings\Convert\Methods.ps1|Module\Rule.VsphereNtpSettings\Convert\VsphereNtpSettingsRule.Convert.psm1|Module\Rule.VspherePortGroupSecurity\VspherePortGroupSecurityRule.psm1|Module\Rule.VspherePortGroupSecurity\Convert\Methods.ps1|Module\Rule.VspherePortGroupSecurity\Convert\VspherePortGroupSecurityRule.Convert.psm1|Module\Rule.VsphereService\VsphereServiceRule.psm1|Module\Rule.VsphereService\Convert\Methods.ps1|Module\Rule.VsphereService\Convert\VsphereServiceRule.Convert.psm1|Module\Rule.VsphereSnmpAgent\VsphereSnmpAgentRule.psm1|Module\Rule.VsphereSnmpAgent\Convert\Methods.ps1|Module\Rule.VsphereSnmpAgent\Convert\VsphereSnmpAgentRule.Convert.psm1|Module\Rule.VsphereVssSecurity\VsphereVssSecurityRule.psm1|Module\Rule.VsphereVssSecurity\Convert\Methods.ps1|Module\Rule.VsphereVssSecurity\Convert\VsphereVssSecurityRule.Convert.psm1|Module\Rule.WebAppPool\WebAppPoolRule.psm1|Module\Rule.WebAppPool\Convert\Methods.ps1|Module\Rule.WebAppPool\Convert\WebAppPoolRule.Convert.psm1|Module\Rule.WebConfigurationProperty\WebConfigurationPropertyRule.psm1|Module\Rule.WebConfigurationProperty\Convert\Data.ps1|Module\Rule.WebConfigurationProperty\Convert\Methods.ps1|Module\Rule.WebConfigurationProperty\Convert\WebConfigurationPropertyRule.Convert.psm1|Module\Rule.WindowsFeature\WindowsFeatureRule.psm1|Module\Rule.WindowsFeature\Convert\Data.ps1|Module\Rule.WindowsFeature\Convert\Methods.ps1|Module\Rule.WindowsFeature\Convert\WindowsFeatureRule.Convert.psm1|Module\Rule.WinEventLog\WinEventLogRule.psm1|Module\Rule.WinEventLog\Convert\Data.ps1|Module\Rule.WinEventLog\Convert\Methods.ps1|Module\Rule.WinEventLog\Convert\WinEventLogRule.Convert.psm1|Module\STIG\Functions.Checklist.ps1|Module\STIG\Functions.DomainName.ps1|Module\STIG\Functions.RuleQuery.ps1|Module\STIG\STIG.psm1|Module\STIG\Convert\Convert.Main.psm1|Module\STIG\Convert\Data.ps1|Module\STIG\Convert\Functions.PowerStigXml.ps1|Module\STIG\Convert\Functions.Report.ps1|StigData\Archive\formatting.md|StigData\Archive\Adobe\U_Adobe_Acrobat_Reader_DC_Continuous_STIG_V1R6_Manual-xccdf.log|StigData\Archive\Adobe\U_Adobe_Acrobat_Reader_DC_Continuous_STIG_V1R6_Manual-xccdf.xml|StigData\Archive\browser\U_Mozilla_FireFox_V4R28_Manual-xccdf.xml|StigData\Archive\browser\U_Mozilla_FireFox_V4R29_Manual-xccdf.xml|StigData\Archive\Chrome\U_Google_Chrome_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Chrome\U_Google_Chrome_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\DotNet\U_MS_DotNet_Framework_4-0_STIG_V1R8_Manual-xccdf.log|StigData\Archive\DotNet\U_MS_DotNet_Framework_4-0_STIG_V1R8_Manual-xccdf.xml|StigData\Archive\DotNet\U_MS_DotNet_Framework_4-0_STIG_V1R9_Manual-xccdf.log|StigData\Archive\DotNet\U_MS_DotNet_Framework_4-0_STIG_V1R9_Manual-xccdf.xml|StigData\Archive\InternetExplorer\U_MS_IE11_STIG_V1R18_Manual-xccdf.log|StigData\Archive\InternetExplorer\U_MS_IE11_STIG_V1R18_Manual-xccdf.xml|StigData\Archive\InternetExplorer\U_MS_IE11_STIG_V1R19_Manual-xccdf.log|StigData\Archive\InternetExplorer\U_MS_IE11_STIG_V1R19_Manual-xccdf.xml|StigData\Archive\McAfee\U_McAfee_VirusScan88_Local_Client_STIG_V5R16_Manual-xccdf.log|StigData\Archive\McAfee\U_McAfee_VirusScan88_Local_Client_STIG_V5R16_Manual-xccdf.xml|StigData\Archive\Office\U_MicrosoftOutlook2013_STIG_V1R12_Manual-xccdf.log|StigData\Archive\Office\U_MicrosoftOutlook2013_STIG_V1R12_Manual-xccdf.xml|StigData\Archive\Office\U_MicrosoftOutlook2013_STIG_V1R13_Manual-xccdf.log|StigData\Archive\Office\U_MicrosoftOutlook2013_STIG_V1R13_Manual-xccdf.xml|StigData\Archive\Office\U_Microsoft_Office_System_2016_STIG_V1R1_Manual-xccdf.log|StigData\Archive\Office\U_Microsoft_Office_System_2016_STIG_V1R1_Manual-xccdf.xml|StigData\Archive\Office\U_Microsoft_Outlook_2016_STIG_V1R2_Manual-xccdf.log|StigData\Archive\Office\U_Microsoft_Outlook_2016_STIG_V1R2_Manual-xccdf.xml|StigData\Archive\Office\U_Microsoft_PowerPoint_2016_STIG_V1R1_Manual-xccdf.log|StigData\Archive\Office\U_Microsoft_PowerPoint_2016_STIG_V1R1_Manual-xccdf.xml|StigData\Archive\Office\U_Microsoft_Word_2016_STIG_V1R1_Manual-xccdf.log|StigData\Archive\Office\U_Microsoft_Word_2016_STIG_V1R1_Manual-xccdf.xml|StigData\Archive\Office\U_MS_Excel_2013_STIG_V1R7_Manual-xccdf.xml|StigData\Archive\Office\U_MS_Excel_2016_STIG_V1R2_Manual-xccdf.log|StigData\Archive\Office\U_MS_Excel_2016_STIG_V1R2_Manual-xccdf.xml|StigData\Archive\Office\U_MS_OfficeSystem_2013_STIG_V1R9_Manual-xccdf.log|StigData\Archive\Office\U_MS_OfficeSystem_2013_STIG_V1R9_Manual-xccdf.xml|StigData\Archive\Office\U_MS_OfficeSystem_2013_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Office\U_MS_OfficeSystem_2013_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Office\U_MS_Outlook_2016_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Office\U_MS_Outlook_2016_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Office\U_MS_PowerPoint_2013_V1R6_Manual-xccdf.xml|StigData\Archive\Office\U_MS_Visio_2013_STIG_V1R4_Manual-xccdf.xml|StigData\Archive\Office\U_MS_Word_2013_STIG_V1R6_Manual-xccdf.xml|StigData\Archive\OracleJRE\U_Oracle_JRE_8_Windows_STIG_V1R5_Manual-xccdf.log|StigData\Archive\OracleJRE\U_Oracle_JRE_8_Windows_STIG_V1R5_Manual-xccdf.xml|StigData\Archive\SQL Server\U_MS_SQL_Server_2012_Database_STIG_V1R19_Manual-xccdf.xml|StigData\Archive\SQL Server\U_MS_SQL_Server_2012_Database_STIG_V1R20_Manual-xccdf.xml|StigData\Archive\SQL Server\U_MS_SQL_Server_2012_Instance_STIG_V1R19_Manual-xccdf.log|StigData\Archive\SQL Server\U_MS_SQL_Server_2012_Instance_STIG_V1R19_Manual-xccdf.xml|StigData\Archive\SQL Server\U_MS_SQL_Server_2016_Instance_STIG_V1R10_Manual-xccdf.log|StigData\Archive\SQL Server\U_MS_SQL_Server_2016_Instance_STIG_V1R10_Manual-xccdf.xml|StigData\Archive\SQL Server\U_MS_SQL_Server_2016_Instance_STIG_V2R1_Manual-xccdf.log|StigData\Archive\SQL Server\U_MS_SQL_Server_2016_Instance_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\SQL Server\U_MS_SQL_Server_Instance_2012_V1R20_Manual-xccdf.log|StigData\Archive\SQL Server\U_MS_SQL_Server_Instance_2012_V1R20_Manual-xccdf.xml|StigData\Archive\Vsphere\U_VMware_vSphere_6-5_ESXi_STIG_V1R3_Manual-xccdf.log|StigData\Archive\Vsphere\U_VMware_vSphere_6-5_ESXi_STIG_V1R3_Manual-xccdf.xml|StigData\Archive\Vsphere\U_VMW_vSphere_6-5_ESXi_STIG_V1R4_Manual-xccdf.log|StigData\Archive\Vsphere\U_VMW_vSphere_6-5_ESXi_STIG_V1R4_Manual-xccdf.xml|StigData\Archive\Web Server\U_MS_IIS_10-0_Server_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Web Server\U_MS_IIS_10-0_Server_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Web Server\U_MS_IIS_10-0_Server_V1R2_Manual-xccdf.log|StigData\Archive\Web Server\U_MS_IIS_10-0_Server_V1R2_Manual-xccdf.xml|StigData\Archive\Web Server\U_MS_IIS_10-0_Site_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Web Server\U_MS_IIS_10-0_Site_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Web Server\U_MS_IIS_10-0_Site_V1R2_Manual-xccdf.log|StigData\Archive\Web Server\U_MS_IIS_10-0_Site_V1R2_Manual-xccdf.xml|StigData\Archive\Web Server\U_MS_IIS_8-5_Server_STIG_V1R11_Manual-xccdf.log|StigData\Archive\Web Server\U_MS_IIS_8-5_Server_STIG_V1R11_Manual-xccdf.xml|StigData\Archive\Web Server\U_MS_IIS_8-5_Server_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Web Server\U_MS_IIS_8-5_Server_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Web Server\U_MS_IIS_8-5_Site_STIG_V1R11_Manual-xccdf.log|StigData\Archive\Web Server\U_MS_IIS_8-5_Site_STIG_V1R11_Manual-xccdf.xml|StigData\Archive\Web Server\U_MS_IIS_8-5_Site_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Web Server\U_MS_IIS_8-5_Site_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Windows.Client\U_MS_Windows_10_STIG_V1R23_Manual-xccdf.log|StigData\Archive\Windows.Client\U_MS_Windows_10_STIG_V1R23_Manual-xccdf.xml|StigData\Archive\Windows.Client\U_MS_Windows_10_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Windows.Client\U_MS_Windows_10_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Windows.Defender\U_MS_Windows_Defender_Antivirus_STIG_V1R8_Manual-xccdf.log|StigData\Archive\Windows.Defender\U_MS_Windows_Defender_Antivirus_STIG_V1R8_Manual-xccdf.xml|StigData\Archive\Windows.Defender\U_MS_Windows_Defender_Antivirus_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Windows.Defender\U_MS_Windows_Defender_Antivirus_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Windows.DNS\U_Microsoft_Windows_2012_Server_DNS_STIG_V1R15_Manual-xccdf.log|StigData\Archive\Windows.DNS\U_Microsoft_Windows_2012_Server_DNS_STIG_V1R15_Manual-xccdf.xml|StigData\Archive\Windows.DNS\U_Microsoft_Windows_2012_Server_DNS_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Windows.DNS\U_Microsoft_Windows_2012_Server_DNS_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Windows.Firewall\U_Windows_Firewall_STIG_V1R6_Manual-xccdf.xml|StigData\Archive\Windows.Firewall\U_Windows_Firewall_STIG_V1R7_Manual-xccdf.xml|StigData\Archive\Windows.Server.2012R2\U_MS_Windows_2012_and_2012_R2_DC_STIG_V2R21_Manual-xccdf.log|StigData\Archive\Windows.Server.2012R2\U_MS_Windows_2012_and_2012_R2_DC_STIG_V2R21_Manual-xccdf.xml|StigData\Archive\Windows.Server.2012R2\U_MS_Windows_2012_and_2012_R2_DC_STIG_V3R1_Manual-xccdf.log|StigData\Archive\Windows.Server.2012R2\U_MS_Windows_2012_and_2012_R2_DC_STIG_V3R1_Manual-xccdf.xml|StigData\Archive\Windows.Server.2012R2\U_MS_Windows_2012_and_2012_R2_MS_V2R19_Manual-xccdf.log|StigData\Archive\Windows.Server.2012R2\U_MS_Windows_2012_and_2012_R2_MS_V2R19_Manual-xccdf.xml|StigData\Archive\Windows.Server.2012R2\U_MS_Windows_2012_and_2012_R2_MS_V3R1_Manual-xccdf.log|StigData\Archive\Windows.Server.2012R2\U_MS_Windows_2012_and_2012_R2_MS_V3R1_Manual-xccdf.xml|StigData\Archive\Windows.Server.2016\U_MS_Windows_Server_2016_DC_STIG_V1R12_Manual-xccdf.log|StigData\Archive\Windows.Server.2016\U_MS_Windows_Server_2016_DC_STIG_V1R12_Manual-xccdf.xml|StigData\Archive\Windows.Server.2016\U_MS_Windows_Server_2016_DC_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Windows.Server.2016\U_MS_Windows_Server_2016_DC_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Windows.Server.2016\U_MS_Windows_Server_2016_MS_STIG_V1R12_Manual-xccdf.log|StigData\Archive\Windows.Server.2016\U_MS_Windows_Server_2016_MS_STIG_V1R12_Manual-xccdf.xml|StigData\Archive\Windows.Server.2016\U_MS_Windows_Server_2016_MS_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Windows.Server.2016\U_MS_Windows_Server_2016_MS_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Windows.Server.2016\U_MS_Windows_Server_2016_STIG_V1R12_Manual-xccdf.xml|StigData\Archive\Windows.Server.2016\U_MS_Windows_Server_2016_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Windows.Server.2019\U_MS_Windows_Server_2019_DC_STIG_V1R5_Manual-xccdf.log|StigData\Archive\Windows.Server.2019\U_MS_Windows_Server_2019_DC_STIG_V1R5_Manual-xccdf.xml|StigData\Archive\Windows.Server.2019\U_MS_Windows_Server_2019_DC_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Windows.Server.2019\U_MS_Windows_Server_2019_DC_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Windows.Server.2019\U_MS_Windows_Server_2019_MS_STIG_V1R5_Manual-xccdf.log|StigData\Archive\Windows.Server.2019\U_MS_Windows_Server_2019_MS_STIG_V1R5_Manual-xccdf.xml|StigData\Archive\Windows.Server.2019\U_MS_Windows_Server_2019_MS_STIG_V2R1_Manual-xccdf.log|StigData\Archive\Windows.Server.2019\U_MS_Windows_Server_2019_MS_STIG_V2R1_Manual-xccdf.xml|StigData\Archive\Windows.Server.2019\U_MS_Windows_Server_2019_STIG_V1R5_Manual-xccdf.xml|StigData\Archive\Windows.Server.2019\U_MS_Windows_Server_2019_STIG_V2R1_Manual-xccdf.xml|StigData\Processed\Adobe-AcrobatReader-1.6.org.default.xml|StigData\Processed\Adobe-AcrobatReader-1.6.xml|StigData\Processed\DotNetFramework-4-1.8.org.default.xml|StigData\Processed\DotNetFramework-4-1.8.xml|StigData\Processed\DotNetFramework-4-1.9.org.default.xml|StigData\Processed\DotNetFramework-4-1.9.xml|StigData\Processed\FireFox-All-4.28.org.default.xml|StigData\Processed\FireFox-All-4.28.xml|StigData\Processed\FireFox-All-4.29.org.default.xml|StigData\Processed\FireFox-All-4.29.xml|StigData\Processed\Google-Chrome-2.1.org.default.xml|StigData\Processed\Google-Chrome-2.1.xml|StigData\Processed\IISServer-10.0-1.2.org.default.xml|StigData\Processed\IISServer-10.0-1.2.xml|StigData\Processed\IISServer-10.0-2.1.org.default.xml|StigData\Processed\IISServer-10.0-2.1.xml|StigData\Processed\IISServer-8.5-1.11.org.default.xml|StigData\Processed\IISServer-8.5-1.11.xml|StigData\Processed\IISServer-8.5-2.1.org.default.xml|StigData\Processed\IISServer-8.5-2.1.xml|StigData\Processed\IISSite-10.0-1.2.org.default.xml|StigData\Processed\IISSite-10.0-1.2.xml|StigData\Processed\IISSite-10.0-2.1.org.default.xml|StigData\Processed\IISSite-10.0-2.1.xml|StigData\Processed\IISSite-8.5-1.11.org.default.xml|StigData\Processed\IISSite-8.5-1.11.xml|StigData\Processed\IISSite-8.5-2.1.org.default.xml|StigData\Processed\IISSite-8.5-2.1.xml|StigData\Processed\InternetExplorer-11-1.18.org.default.xml|StigData\Processed\InternetExplorer-11-1.18.xml|StigData\Processed\InternetExplorer-11-1.19.org.default.xml|StigData\Processed\InternetExplorer-11-1.19.xml|StigData\Processed\McAfee-8.8-VirusScan-5.16.org.default.xml|StigData\Processed\McAfee-8.8-VirusScan-5.16.xml|StigData\Processed\Office-Excel2013-1.7.org.default.xml|StigData\Processed\Office-Excel2013-1.7.xml|StigData\Processed\Office-Excel2016-1.2.org.default.xml|StigData\Processed\Office-Excel2016-1.2.xml|StigData\Processed\Office-Outlook2013-1.12.org.default.xml|StigData\Processed\Office-Outlook2013-1.12.xml|StigData\Processed\Office-Outlook2013-1.13.org.default.xml|StigData\Processed\Office-Outlook2013-1.13.xml|StigData\Processed\Office-Outlook2016-1.2.org.default.xml|StigData\Processed\Office-Outlook2016-1.2.xml|StigData\Processed\Office-Outlook2016-2.1.org.default.xml|StigData\Processed\Office-Outlook2016-2.1.xml|StigData\Processed\Office-PowerPoint2013-1.6.org.default.xml|StigData\Processed\Office-PowerPoint2013-1.6.xml|StigData\Processed\Office-PowerPoint2016-1.1.org.default.xml|StigData\Processed\Office-PowerPoint2016-1.1.xml|StigData\Processed\Office-System2013-1.9.org.default.xml|StigData\Processed\Office-System2013-1.9.xml|StigData\Processed\Office-System2013-2.1.org.default.xml|StigData\Processed\Office-System2013-2.1.xml|StigData\Processed\Office-System2016-1.1.org.default.xml|StigData\Processed\Office-System2016-1.1.xml|StigData\Processed\Office-Visio2013-1.4.org.default.xml|StigData\Processed\Office-Visio2013-1.4.xml|StigData\Processed\Office-Word2013-1.6.org.default.xml|StigData\Processed\Office-Word2013-1.6.xml|StigData\Processed\Office-Word2016-1.1.org.default.xml|StigData\Processed\Office-Word2016-1.1.xml|StigData\Processed\OracleJRE-8-1.5.org.default.xml|StigData\Processed\OracleJRE-8-1.5.xml|StigData\Processed\SqlServer-2012-Database-1.19.org.default.xml|StigData\Processed\SqlServer-2012-Database-1.19.xml|StigData\Processed\SqlServer-2012-Database-1.20.org.default.xml|StigData\Processed\SqlServer-2012-Database-1.20.xml|StigData\Processed\SqlServer-2012-Instance-1.19.org.default.xml|StigData\Processed\SqlServer-2012-Instance-1.19.xml|StigData\Processed\SqlServer-2012-Instance-1.20.org.default.xml|StigData\Processed\SqlServer-2012-Instance-1.20.xml|StigData\Processed\SqlServer-2016-Instance-1.10.org.default.xml|StigData\Processed\SqlServer-2016-Instance-1.10.xml|StigData\Processed\SqlServer-2016-Instance-2.1.org.default.xml|StigData\Processed\SqlServer-2016-Instance-2.1.xml|StigData\Processed\vSphere-6.5-1.3.org.default.xml|StigData\Processed\vSphere-6.5-1.3.xml|StigData\Processed\Vsphere-6.5-1.4.org.default.xml|StigData\Processed\Vsphere-6.5-1.4.xml|StigData\Processed\WindowsClient-10-1.23.org.default.xml|StigData\Processed\WindowsClient-10-1.23.xml|StigData\Processed\WindowsClient-10-2.1.org.default.xml|StigData\Processed\WindowsClient-10-2.1.xml|StigData\Processed\WindowsDefender-All-1.8.org.default.xml|StigData\Processed\WindowsDefender-All-1.8.xml|StigData\Processed\WindowsDefender-All-2.1.org.default.xml|StigData\Processed\WindowsDefender-All-2.1.xml|StigData\Processed\WindowsDnsServer-2012R2-1.15.org.default.xml|StigData\Processed\WindowsDnsServer-2012R2-1.15.xml|StigData\Processed\WindowsDnsServer-2012R2-2.1.org.default.xml|StigData\Processed\WindowsDnsServer-2012R2-2.1.xml|StigData\Processed\WindowsFirewall-All-1.6.org.default.xml|StigData\Processed\WindowsFirewall-All-1.6.xml|StigData\Processed\WindowsFirewall-All-1.7.org.default.xml|StigData\Processed\WindowsFirewall-All-1.7.xml|StigData\Processed\WindowsServer-2012R2-DC-2.21.org.default.xml|StigData\Processed\WindowsServer-2012R2-DC-2.21.xml|StigData\Processed\WindowsServer-2012R2-DC-3.1.org.default.xml|StigData\Processed\WindowsServer-2012R2-DC-3.1.xml|StigData\Processed\WindowsServer-2012R2-MS-2.19.org.default.xml|StigData\Processed\WindowsServer-2012R2-MS-2.19.xml|StigData\Processed\WindowsServer-2012R2-MS-3.1.org.default.xml|StigData\Processed\WindowsServer-2012R2-MS-3.1.xml|StigData\Processed\WindowsServer-2016-DC-1.12.org.default.xml|StigData\Processed\WindowsServer-2016-DC-1.12.xml|StigData\Processed\WindowsServer-2016-DC-2.1.org.default.xml|StigData\Processed\WindowsServer-2016-DC-2.1.xml|StigData\Processed\WindowsServer-2016-MS-1.12.org.default.xml|StigData\Processed\WindowsServer-2016-MS-1.12.xml|StigData\Processed\WindowsServer-2016-MS-2.1.org.default.xml|StigData\Processed\WindowsServer-2016-MS-2.1.xml|StigData\Processed\WindowsServer-2019-DC-1.5.org.default.xml|StigData\Processed\WindowsServer-2019-DC-1.5.xml|StigData\Processed\WindowsServer-2019-DC-2.1.org.default.xml|StigData\Processed\WindowsServer-2019-DC-2.1.xml|StigData\Processed\WindowsServer-2019-MS-1.5.org.default.xml|StigData\Processed\WindowsServer-2019-MS-1.5.xml|StigData\Processed\WindowsServer-2019-MS-2.1.org.default.xml|StigData\Processed\WindowsServer-2019-MS-2.1.xml|StigData\Samples\ManualChecklistEntriesSample.xlsx|StigData\Samples\ManualChecklistEntriesSample.xml|StigData\Samples\ManualCheckListEntriesSchema.xsd|StigData\Schema\Checklist.xsd|StigData\Schema\PowerStig.xsd|StigData\Schema\xccdf-1.1.4.xsd</S>
+          <S N="GUID">a132f6a5-8f96-4942-be25-b213ee7e4af3</S>
+          <S N="PowerShellVersion">5.1</S>
+          <S N="CLRVersion">4.0</S>
+          <S N="CompanyName">Microsoft Corporation</S>
+        </MS>
+      </Obj>
+      <S N="InstalledLocation">C:\Users\sdubey\Code\azure-ecosystem\pc1\project-chairlift\windows\src\PowerSTIG\4.7.1</S>
+    </MS>
+  </Obj>
+</Objs>
