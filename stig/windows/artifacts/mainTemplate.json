@@ -293,7 +293,11 @@
                         }
                     ]
                 },
-                "availabilitySet": "[if(equals(parameters('availabilitySetResourceId'), ''), json('null'), parameters('availabilitySetResourceId'))]",
+                "availabilitySet": [
+                    {
+                        "id": "[if(equals(parameters('availabilitySetResourceId'), ''), json('null'), parameters('availabilitySetResourceId'))]"
+                    }
+                ],
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
