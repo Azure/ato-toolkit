@@ -307,7 +307,7 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
-            "availabilitySetResourceId": "[steps('instance').vmAvailabilitySet.name]",
+            "availabilitySetResourceId": "[steps('instance').vmAvailabilitySet.id]",
             "osVersion": "[steps('instance').osVersion]",
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
