@@ -33,17 +33,47 @@
                         }
                     },
                     {
-                        "name": "vmAvailabilitySet",
-                        "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Availability set",
-                        "resourceType": "Microsoft.Compute/availabilitySets",
-                        "toolTip": "Select existing Availability set to be configured for Virtual machine. Availability set must be present in the same resource group.",
-                        "options": {
-                            "filter": {
-                                "subscription": "onBasic",
-                                "location": "onBasic"
-                            }
+                        "name": "vmCount",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Virtual machine count",
+                        "toolTip": "Number of virtual machines to be created.",
+                        "constraints": {
+                            "required": true,
+                            "regex": "^[1-5]$",
+                            "validationMessage": "Virtual machine count could be only between 1-5."
                         }
+                    },
+                    {
+                        "name": "configureAvailabilitySet",
+                        "type": "Microsoft.Common.OptionsGroup",
+                        "label": "Configure Availability set",
+                        "defaultValue": "Yes",
+                        "toolTip": "Please select 'Yes' or 'No' to create Availability set for the virtual machine(s).",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "label": "Yes",
+                                    "value": "true"
+                                },
+                                {
+                                    "label": "No",
+                                    "value": "false"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "vmAvailabilitySetName",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Availability set",
+                        "toolTip": "Availability set to be configured for Virtual machine(s). Availability set will be deployed in the same resource group.",
+                        "constraints": {
+                            "regex": "^[a-z0-9A-Z-]{3,15}$",
+                            "validationMessage": "Availability set name must be between 3 and 15 characters long and contain letters, numbers and hyphens only."
+                        },
+                        "visible" : "[bool(steps('instance').configureAvailabilitySet)]"
                     },
                     {
                         "name": "osVersion",
@@ -307,7 +337,9 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
-            "availabilitySetResourceId": "[steps('instance').vmAvailabilitySet.id]",
+            "vmCount": "[steps('instance').vmCount]",
+            "configureAvailabilitySet" : "[steps('instance').configureAvailabilitySet]",
+            "availabilitySetResourceName": "[steps('instance').vmAvailabilitySetName]",
             "osVersion": "[steps('instance').osVersion]",
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
