@@ -148,7 +148,7 @@
                 "description": "(Optional) Diagnostic Storage account resource id."
             }
         },
-        "diagnosticStorageResourceName": {
+        "diagnosticStorageName": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
@@ -176,7 +176,13 @@
         "generateStigChecklist": "GenerateStigChecklist.ps1",
         "storageApiVersion": "2019-06-01",
         "diskEncryptionSet": { "id": "[parameters('osDiskEncryptionSetResourceId')]" },
-        "artifactsLocationSasToken": "[if(equals(parameters('_artifactsLocationSasToken'), ''), if(contains(deployment().properties.templateLink.uri, '?'), split(deployment().properties.templateLink.uri, 'mainTemplate.json')[1], ''), parameters('_artifactsLocationSasToken'))]"
+        "artifactsLocationSasToken": "[if(equals(parameters('_artifactsLocationSasToken'), ''), if(contains(deployment().properties.templateLink.uri, '?'), split(deployment().properties.templateLink.uri, 'mainTemplate.json')[1], ''), parameters('_artifactsLocationSasToken'))]",
+        "metricsresourceid": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',resourceGroup().name ,'/providers/','Microsoft.Compute/virtualMachines/', parameters('vmName'))]",
+        "wadlogs": "<WadCfg> <DiagnosticMonitorConfiguration overallQuotaInMB=\"4096\" xmlns=\"https://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration\"> <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter=\"Error\"/> <WindowsEventLog scheduledTransferPeriod=\"PT1M\" > <DataSource name=\"Application!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"Security!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"System!*[System[(Level = 1 or Level = 2)]]\" /></WindowsEventLog>",
+        "wadperfcounters": "<PerformanceCounters scheduledTransferPeriod=\"PT1M\"><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% Processor Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU utilization\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% Privileged Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU privileged time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% User Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU user time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor Information(_Total)\\Processor Frequency\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"CPU frequency\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\System\\Processes\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Processes\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Process(_Total)\\Thread Count\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Threads\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Process(_Total)\\Handle Count\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Handles\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\% Committed Bytes In Use\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Memory usage\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Available Bytes\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory available\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Committed Bytes\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory committed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Commit Limit\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory commit limit\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active time\" locale=\"en-us\"/></PerformanceCounterConfiguration>",
+        "wadperfcounters2": "<PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Read Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active read time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Write Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active write time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Transfers/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Reads/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk read operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Writes/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk write operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Read Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk read speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Write Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk write speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\LogicalDisk(_Total)\\% Free Space\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk free space (percentage)\" locale=\"en-us\"/></PerformanceCounterConfiguration></PerformanceCounters>",
+        "wadmetrics": "[concat('<Metrics resourceId=\"',variables('metricsresourceid'),'\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>')]",
+        "wadcfgx": "[concat(variables('wadlogs'),variables('wadperfcounters'),variables('wadperfcounters2'),variables('wadmetrics'))]"
     },
     "resources": [
         {
@@ -386,290 +392,28 @@
             }
         },
         {
-            "name": "[concat(parameters('vmName'),'/Microsoft.Insights.VMDiagnosticsSettings')]",
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "apiVersion": "2017-12-01",
-            "location": "[parameters('location')]",
-            "properties": {
-                "publisher": "Microsoft.Azure.Diagnostics",
-                "type": "IaaSDiagnostics",
-                "typeHandlerVersion": "1.5",
-                "autoUpgradeMinorVersion": true,
-                "settings": {
-                    "StorageAccount": "[parameters('diagnosticStorageResourceName')]",
-                    "WadCfg": {
-                        "DiagnosticMonitorConfiguration": {
-                            "overallQuotaInMB": 5120,
-                            "Metrics": {
-                                "resourceId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/', 'Microsoft.Compute/virtualMachines/', parameters('vmName'))]",
-                                "MetricAggregation": [
-                                    {
-                                        "scheduledTransferPeriod": "PT1H"
-                                    },
-                                    {
-                                        "scheduledTransferPeriod": "PT1M"
-                                    }
-                                ]
-                            },
-                            "DiagnosticInfrastructureLogs": {
-                                "scheduledTransferLogLevelFilter": "Error"
-                            },
-                            "PerformanceCounters": {
-                                "scheduledTransferPeriod": "PT1M",
-                                "PerformanceCounterConfiguration": [
-                                    {
-                                        "counterSpecifier": "\\Processor Information(_Total)\\% Processor Time",
-                                        "unit": "Percent",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Processor Information(_Total)\\% Privileged Time",
-                                        "unit": "Percent",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Processor Information(_Total)\\% User Time",
-                                        "unit": "Percent",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Processor Information(_Total)\\Processor Frequency",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\System\\Processes",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Process(_Total)\\Thread Count",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Process(_Total)\\Handle Count",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\System\\System Up Time",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\System\\Context Switches/sec",
-                                        "unit": "CountPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\System\\Processor Queue Length",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Memory\\% Committed Bytes In Use",
-                                        "unit": "Percent",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Memory\\Available Bytes",
-                                        "unit": "Bytes",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Memory\\Committed Bytes",
-                                        "unit": "Bytes",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Memory\\Cache Bytes",
-                                        "unit": "Bytes",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Memory\\Pool Paged Bytes",
-                                        "unit": "Bytes",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Memory\\Pool Nonpaged Bytes",
-                                        "unit": "Bytes",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Memory\\Pages/sec",
-                                        "unit": "CountPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Memory\\Page Faults/sec",
-                                        "unit": "CountPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Process(_Total)\\Working Set",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Process(_Total)\\Working Set - Private",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\% Disk Time",
-                                        "unit": "Percent",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\% Disk Read Time",
-                                        "unit": "Percent",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\% Disk Write Time",
-                                        "unit": "Percent",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\% Idle Time",
-                                        "unit": "Percent",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\Disk Bytes/sec",
-                                        "unit": "BytesPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\Disk Read Bytes/sec",
-                                        "unit": "BytesPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\Disk Write Bytes/sec",
-                                        "unit": "BytesPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\Disk Transfers/sec",
-                                        "unit": "BytesPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\Disk Reads/sec",
-                                        "unit": "BytesPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\Disk Writes/sec",
-                                        "unit": "BytesPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\Avg. Disk sec/Transfer",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\Avg. Disk sec/Read",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\Avg. Disk sec/Write",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\Avg. Disk Queue Length",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\Avg. Disk Read Queue Length",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\Avg. Disk Write Queue Length",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\% Free Space",
-                                        "unit": "Percent",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\LogicalDisk(_Total)\\Free Megabytes",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Network Interface(*)\\Bytes Total/sec",
-                                        "unit": "BytesPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Network Interface(*)\\Bytes Sent/sec",
-                                        "unit": "BytesPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Network Interface(*)\\Bytes Received/sec",
-                                        "unit": "BytesPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Network Interface(*)\\Packets/sec",
-                                        "unit": "BytesPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Network Interface(*)\\Packets Sent/sec",
-                                        "unit": "BytesPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Network Interface(*)\\Packets Received/sec",
-                                        "unit": "BytesPerSecond",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Network Interface(*)\\Packets Outbound Errors",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    },
-                                    {
-                                        "counterSpecifier": "\\Network Interface(*)\\Packets Received Errors",
-                                        "unit": "Count",
-                                        "sampleRate": "PT60S"
-                                    }
-                                ]
-                            },
-                            "WindowsEventLog": {
-                                "scheduledTransferPeriod": "PT1M",
-                                "DataSource": [
-                                    {
-                                        "name": "Application!*[System[(Level = 1 or Level = 2 or Level = 3)]]"
-                                    },
-                                    {
-                                        "name": "Security!*[System[band(Keywords,4503599627370496)]]"
-                                    },
-                                    {
-                                        "name": "System!*[System[(Level = 1 or Level = 2 or Level = 3)]]"
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                }
+          "type": "extensions",
+          "name": "Microsoft.Insights.VMDiagnosticsSettings",
+          "apiVersion": "2015-05-01-preview",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+          ],
+          "properties": {
+            "publisher": "Microsoft.Azure.Diagnostics",
+            "type": "IaaSDiagnostics",
+            "typeHandlerVersion": "1.4",
+            "autoUpgradeMinorVersion": true,
+            "settings": {
+              "xmlCfg": "[base64(variables('wadcfgx'))]",
+              "StorageAccount": "[parameters('diagnosticStorageName')]"
             },
-            "dependsOn": [
-                "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
-            ]
+            "protectedSettings": {
+              "storageAccountName": "[parameters('diagnosticStorageName')]",
+              "storageAccountKey": "[listKeys(variables('accountid'),'2015-05-01-preview').key1]",
+              "storageAccountEndPoint": "https://core.windows.net/"
+            }
+          }
         },
         {
             "apiVersion": "2020-06-01",
