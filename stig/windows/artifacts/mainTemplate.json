@@ -364,6 +364,30 @@
                             }
                         }
                     }
+                },
+                {
+                    "type": "extensions",
+                    "name": "Microsoft.Insights.VMDiagnosticsSettings",
+                    "apiVersion": "2015-05-01-preview",
+                    "location": "[parameters('location')]",
+                    "dependsOn": [
+                        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.Azure.Diagnostics",
+                        "type": "IaaSDiagnostics",
+                        "typeHandlerVersion": "1.4",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                        "xmlCfg": "[base64(variables('wadcfgx'))]",
+                        "StorageAccount": "[parameters('diagnosticStorageName')]"
+                        },
+                        "protectedSettings": {
+                            "storageAccountName": "[parameters('diagnosticStorageName')]",
+                            "storageAccountKey": "[listKeys(variables('accountid'),'2015-05-01-preview').key1]",
+                            "storageAccountEndPoint": "https://core.windows.net/"
+                        }
+                    }
                 }
             ]
         },
@@ -390,30 +414,6 @@
                     }
                 ]
             }
-        },
-        {
-          "type": "extensions",
-          "name": "Microsoft.Insights.VMDiagnosticsSettings",
-          "apiVersion": "2015-05-01-preview",
-          "location": "[parameters('location')]",
-          "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
-          ],
-          "properties": {
-            "publisher": "Microsoft.Azure.Diagnostics",
-            "type": "IaaSDiagnostics",
-            "typeHandlerVersion": "1.4",
-            "autoUpgradeMinorVersion": true,
-            "settings": {
-              "xmlCfg": "[base64(variables('wadcfgx'))]",
-              "StorageAccount": "[parameters('diagnosticStorageName')]"
-            },
-            "protectedSettings": {
-              "storageAccountName": "[parameters('diagnosticStorageName')]",
-              "storageAccountKey": "[listKeys(variables('accountid'),'2015-05-01-preview').key1]",
-              "storageAccountEndPoint": "https://core.windows.net/"
-            }
-          }
         },
         {
             "apiVersion": "2020-06-01",
