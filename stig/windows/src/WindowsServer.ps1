@@ -54,7 +54,7 @@ configuration WindowsServer
         switch -Wildcard ($osVersion) {
             "*2016*" {
                 $osVersion = '2016'
-                $SkipRules = @('V-224866', 'V-224867', 'V-224868')
+                $skipRules = @('V-224866', 'V-224867', 'V-224868')
                 $exceptions = @{
                     'V-225019' = @{Identity = 'Guests'}
                     'V-225016' = @{Identity = 'Guests'}
@@ -65,7 +65,6 @@ configuration WindowsServer
                 {
                     $orgSettings = @{
                         'V-225015' = @{Identity     = 'Guests'}
-                        'V-225026' = @{OptionValue  = 'xAdmin'}
                         'V-225027' = @{OptionValue  = 'xGuest'}
                         'V-225063' = @{ValueData      = '2'}
                     }
@@ -74,7 +73,6 @@ configuration WindowsServer
                 {
                     $orgSettings = @{
                         'V-225015'   = @{Identity       = 'Guests'}
-                        'V-225026'   = @{OptionValue    = 'xAdmin'}
                         'V-225027'   = @{OptionValue    = 'xGuest'}
                         'V-225063'   = @{ValueData      = '2'}
                         'V-225021.a' = @{Location = ($certificateTest | Where-Object FullName -match "8C941B34EA1EA6ED9AE2BC54CF687252B4C9B561.cer").FullName}
@@ -117,7 +115,6 @@ configuration WindowsServer
                 if ($null -eq $certificateTest -or $certificateTest.count -lt 8)
                 {
                     $orgSettings = @{
-                        'V-205909' = @{OptionValue = 'xAdmin'}
                         'V-205910' = @{OptionValue = 'xGuest'}
                         'V-205717' = @{ValueData   = '2'}
                     }
@@ -125,7 +122,6 @@ configuration WindowsServer
                 else
                 {
                     $orgSettings = @{
-                        'V-205909'   = @{OptionValue = 'xAdmin'}
                         'V-205910'   = @{OptionValue = 'xGuest'}
                         'V-205717'   = @{ValueData   = '2'}
                         'V-205648.a' = @{Location = ($certificateTest | Where-Object FullName -match "8C941B34EA1EA6ED9AE2BC54CF687252B4C9B561.cer").FullName}

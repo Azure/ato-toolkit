@@ -24,7 +24,7 @@
         </LST>
       </Obj>
       <S N="Copyright">(c) 2018 Microsoft. All rights reserved.</S>
-      <DT N="PublishedDate">2020-08-25T14:53:20-07:00</DT>
+      <DT N="PublishedDate">2020-08-25T14:53:20-04:00</DT>
       <Nil N="InstalledDate" />
       <Nil N="UpdatedDate" />
       <URI N="LicenseUri">https://github.com/jcwalker/WindowsDefenderDsc/blob/master/LICENSE</URI>
@@ -48,7 +48,7 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">Function</S>
+            <S N="Key">Workflow</S>
             <Obj N="Value" RefId="4">
               <TNRef RefId="1" />
               <LST />
@@ -68,15 +68,15 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">Workflow</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">RoleCapability</S>
+            <S N="Key">Function</S>
             <Ref N="Value" RefId="4" />
           </En>
           <En>
             <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
             <Ref N="Value" RefId="4" />
           </En>
         </DCT>
@@ -87,7 +87,7 @@
         <TNRef RefId="1" />
         <LST />
       </Obj>
-      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2/</S>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2</S>
       <S N="Repository">PSGallery</S>
       <S N="PackageManagementProvider">NuGet</S>
       <Obj N="AdditionalMetadata" RefId="7">
@@ -101,15 +101,15 @@
           <S N="requireLicenseAcceptance">False</S>
           <S N="isLatestVersion">False</S>
           <S N="isAbsoluteLatestVersion">False</S>
-          <S N="versionDownloadCount">3114</S>
-          <S N="downloadCount">23450</S>
+          <S N="versionDownloadCount">3167</S>
+          <S N="downloadCount">23570</S>
           <S N="packageSize">14615</S>
-          <S N="published">8/25/2020 2:53:20 PM -07:00</S>
-          <S N="created">8/25/2020 2:53:20 PM -07:00</S>
-          <S N="lastUpdated">2/17/2021 6:13:41 PM -08:00</S>
+          <S N="published">8/25/2020 2:53:20 PM -04:00</S>
+          <S N="created">8/25/2020 2:53:20 PM -04:00</S>
+          <S N="lastUpdated">2/19/2021 9:09:32 PM -05:00</S>
           <S N="tags">DSC ProcessMitigation DesiredStateConfiguration DSCResource PSModule PSEdition_Desktop PSDscResource_ProcessMitigation PSIncludes_DscResource</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-02-17T18:13:41Z</S>
+          <S N="updated">2021-02-19T21:09:32Z</S>
           <S N="NormalizedVersion">2.0.0</S>
           <S N="Authors">Jason Walker</S>
           <S N="IsPrerelease">false</S>
@@ -120,7 +120,7 @@
           <S N="CompanyName">Microsoft Corporation</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\sdubey\Code\azure-ecosystem\pc1\project-chairlift\windows\src\WindowsDefenderDsc\2.0.0</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\WindowsDefenderDsc\2.0.0</S>
     </MS>
   </Obj>
 </Objs>

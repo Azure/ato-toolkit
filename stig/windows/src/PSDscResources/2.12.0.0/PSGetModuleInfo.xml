@@ -13,7 +13,7 @@
       <S N="Author">Microsoft Corporation</S>
       <S N="CompanyName">PowerShellTeam</S>
       <S N="Copyright">(c) 2016 Microsoft Corporation. All rights reserved.</S>
-      <DT N="PublishedDate">2019-06-26T21:35:44-07:00</DT>
+      <DT N="PublishedDate">2019-06-26T21:35:44-04:00</DT>
       <Nil N="InstalledDate" />
       <Nil N="UpdatedDate" />
       <URI N="LicenseUri">https://github.com/PowerShell/PSDscResources/blob/master/LICENSE</URI>
@@ -41,7 +41,7 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">Function</S>
+            <S N="Key">Workflow</S>
             <Obj N="Value" RefId="3">
               <TNRef RefId="1" />
               <LST />
@@ -77,15 +77,15 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">Workflow</S>
-            <Ref N="Value" RefId="3" />
-          </En>
-          <En>
-            <S N="Key">RoleCapability</S>
+            <S N="Key">Function</S>
             <Ref N="Value" RefId="3" />
           </En>
           <En>
             <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
             <Ref N="Value" RefId="3" />
           </En>
         </DCT>
@@ -96,7 +96,7 @@
         <TNRef RefId="1" />
         <LST />
       </Obj>
-      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2/</S>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2</S>
       <S N="Repository">PSGallery</S>
       <S N="PackageManagementProvider">NuGet</S>
       <Obj N="AdditionalMetadata" RefId="6">
@@ -111,15 +111,15 @@
           <S N="releaseNotes">* Ports style fixes that were recently made in xPSDesiredStateConfiguration_x000D__x000A_  on test related files._x000D__x000A_* Ports most of the style upgrades from xPSDesiredStateConfiguration that have_x000D__x000A_  been made in files in the DscResources folder._x000D__x000A_* Ports fixes for the following issues:_x000D__x000A_  [Issue 505](https://github.com/PowerShell/xPSDesiredStateConfiguration/issues/505)_x000D__x000A_  [Issue 590](https://github.com/PowerShell/xPSDesiredStateConfiguration/issues/590)_x000D__x000A_  Changes to test helper Enter-DscResourceTestEnvironment so that it only_x000D__x000A_  updates DSCResource.Tests when it is longer than 120 minutes since_x000D__x000A_  it was last pulled. This is to improve performance of test execution_x000D__x000A_  and reduce the likelihood of connectivity issues caused by inability to_x000D__x000A_  pull DSCResource.Tests._x000D__x000A_* Fixes issue where MsiPackage Integration tests fail if the test HttpListener_x000D__x000A_  fails to start. Moves the test HttpListener objects to dynamically assigned,_x000D__x000A_  higher numbered ports to avoid conflicts with other services, and also checks_x000D__x000A_  to ensure that the ports are available before using them. Adds checks to_x000D__x000A_  ensure that no outstanding HTTP server jobs are running before attempting to_x000D__x000A_  setup a new one. Also adds additional instrumentation to make it easier to_x000D__x000A_  troubleshoot issues with the test HttpListener objects in the future._x000D__x000A_  Specifically fixes_x000D__x000A_  [Issue 142](https://github.com/PowerShell/PSDscResources/issues/142)_x000D__x000A_* Improved speed of Test-IsNanoServer function_x000D__x000A_* Remove the Byte Order Mark (BOM) from all affected files_x000D__x000A_* Opt-in to "Validate Module Files" and "Validate Script Files" common meta-tests_x000D__x000A_* Opt-in to "Common Tests - Relative Path Length" common meta-test_x000D__x000A_* Fix README markdownlint validation failures_x000D__x000A_* Move change log from README.md to CHANGELOG.md</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">True</S>
-          <S N="versionDownloadCount">562993</S>
-          <S N="downloadCount">14266032</S>
+          <S N="versionDownloadCount">565420</S>
+          <S N="downloadCount">14298579</S>
           <S N="packageSize">331184</S>
-          <S N="published">6/26/2019 9:35:44 PM -07:00</S>
-          <S N="created">6/26/2019 9:35:44 PM -07:00</S>
-          <S N="lastUpdated">2/17/2021 6:38:42 PM -08:00</S>
+          <S N="published">6/26/2019 9:35:44 PM -04:00</S>
+          <S N="created">6/26/2019 9:35:44 PM -04:00</S>
+          <S N="lastUpdated">2/19/2021 10:39:33 PM -05:00</S>
           <S N="tags">DesiredStateConfiguration DSC DSCResourceKit DSCResource AzureAutomationNotSupported PSModule PSDscResource_Archive PSDscResource_Environment PSDscResource_Group PSDscResource_GroupSet PSDscResource_MsiPackage PSDscResource_Registry PSDscResource_Script PSDscResource_Service PSDscResource_ServiceSet PSDscResource_User PSDscResource_WindowsFeature PSDscResource_WindowsFeatureSet PSDscResource_WindowsOptionalFeature PSDscResource_WindowsOptionalFeatureSet PSDscResource_WindowsPackageCab PSDscResource_WindowsProcess PSDscResource_ProcessSet PSIncludes_DscResource</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-02-17T18:38:42Z</S>
+          <S N="updated">2021-02-19T22:39:33Z</S>
           <S N="NormalizedVersion">2.12.0</S>
           <S N="Authors">Microsoft Corporation</S>
           <S N="IsPrerelease">false</S>
@@ -130,7 +130,7 @@
           <S N="CompanyName">Microsoft Corporation</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\sdubey\Code\azure-ecosystem\pc1\project-chairlift\windows\src\PSDscResources\2.12.0.0</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\PSDscResources\2.12.0.0</S>
     </MS>
   </Obj>
 </Objs>

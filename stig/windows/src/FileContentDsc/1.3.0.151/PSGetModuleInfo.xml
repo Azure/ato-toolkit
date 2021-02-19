@@ -23,7 +23,7 @@
         </LST>
       </Obj>
       <S N="Copyright">(c) 2018 Daniel Scott-Raynsford. All rights reserved.</S>
-      <DT N="PublishedDate">2019-07-20T20:48:47-07:00</DT>
+      <DT N="PublishedDate">2019-07-20T20:48:47-04:00</DT>
       <Nil N="InstalledDate" />
       <Nil N="UpdatedDate" />
       <URI N="LicenseUri">https://github.com/PowerShell/FileContentDsc/blob/master/LICENSE</URI>
@@ -46,7 +46,7 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">Function</S>
+            <S N="Key">Workflow</S>
             <Obj N="Value" RefId="4">
               <TNRef RefId="1" />
               <LST />
@@ -68,15 +68,15 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">Workflow</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">RoleCapability</S>
+            <S N="Key">Function</S>
             <Ref N="Value" RefId="4" />
           </En>
           <En>
             <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
             <Ref N="Value" RefId="4" />
           </En>
         </DCT>
@@ -87,7 +87,7 @@
         <TNRef RefId="1" />
         <LST />
       </Obj>
-      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2/</S>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2</S>
       <S N="Repository">PSGallery</S>
       <S N="PackageManagementProvider">NuGet</S>
       <Obj N="AdditionalMetadata" RefId="7">
@@ -102,15 +102,15 @@
           <S N="releaseNotes">Initial release of FileContentDsc</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">False</S>
-          <S N="versionDownloadCount">100180</S>
-          <S N="downloadCount">184733</S>
+          <S N="versionDownloadCount">100260</S>
+          <S N="downloadCount">184849</S>
           <S N="packageSize">37908</S>
-          <S N="published">7/20/2019 8:48:47 PM -07:00</S>
-          <S N="created">7/20/2019 8:48:47 PM -07:00</S>
-          <S N="lastUpdated">2/17/2021 6:13:41 PM -08:00</S>
+          <S N="published">7/20/2019 8:48:47 PM -04:00</S>
+          <S N="created">7/20/2019 8:48:47 PM -04:00</S>
+          <S N="lastUpdated">2/19/2021 9:59:32 PM -05:00</S>
           <S N="tags">DesiredStateConfiguration DSC DSCResourceKit DSCResource PSModule PSDscResource_ReplaceText PSDscResource_KeyValuePairFile PSDscResource_IniSettingsFile PSIncludes_DscResource</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-02-17T18:13:41Z</S>
+          <S N="updated">2021-02-19T21:59:32Z</S>
           <S N="NormalizedVersion">1.3.0.151</S>
           <S N="Authors">Daniel Scott-Raynsford</S>
           <S N="IsPrerelease">false</S>
@@ -121,7 +121,7 @@
           <S N="CLRVersion">4.0</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\sdubey\Code\azure-ecosystem\pc1\project-chairlift\windows\src\FileContentDsc\1.3.0.151</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\FileContentDsc\1.3.0.151</S>
     </MS>
   </Obj>
 </Objs>

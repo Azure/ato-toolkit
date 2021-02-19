@@ -24,7 +24,7 @@
         </LST>
       </Obj>
       <S N="Copyright">(c) 2016 Microsoft Corporation. All rights reserved.</S>
-      <DT N="PublishedDate">2019-01-10T00:20:24-08:00</DT>
+      <DT N="PublishedDate">2019-01-10T00:20:24-05:00</DT>
       <Nil N="InstalledDate" />
       <Nil N="UpdatedDate" />
       <URI N="LicenseUri">https://github.com/PowerShell/AuditPolicyDsc/blob/master/LICENSE</URI>
@@ -48,7 +48,7 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">Function</S>
+            <S N="Key">Workflow</S>
             <Obj N="Value" RefId="4">
               <TNRef RefId="1" />
               <LST />
@@ -71,15 +71,15 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">Workflow</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">RoleCapability</S>
+            <S N="Key">Function</S>
             <Ref N="Value" RefId="4" />
           </En>
           <En>
             <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
             <Ref N="Value" RefId="4" />
           </En>
         </DCT>
@@ -90,7 +90,7 @@
         <TNRef RefId="1" />
         <LST />
       </Obj>
-      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2/</S>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2</S>
       <S N="Repository">PSGallery</S>
       <S N="PackageManagementProvider">NuGet</S>
       <Obj N="AdditionalMetadata" RefId="7">
@@ -105,15 +105,15 @@
           <S N="releaseNotes">* Explicitly removed extra hidden files from release package</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">True</S>
-          <S N="versionDownloadCount">315127</S>
-          <S N="downloadCount">372911</S>
+          <S N="versionDownloadCount">315799</S>
+          <S N="downloadCount">373626</S>
           <S N="packageSize">44958</S>
-          <S N="published">1/10/2019 12:20:24 AM -08:00</S>
-          <S N="created">1/10/2019 12:20:24 AM -08:00</S>
-          <S N="lastUpdated">2/17/2021 6:38:42 PM -08:00</S>
+          <S N="published">1/10/2019 12:20:24 AM -05:00</S>
+          <S N="created">1/10/2019 12:20:24 AM -05:00</S>
+          <S N="lastUpdated">2/19/2021 9:59:32 PM -05:00</S>
           <S N="tags">DSC DesiredStateConfiguration DSCResourceKit DSCResource AuditPolicy PSModule PSDscResource_AuditPolicyCsv PSDscResource_AuditPolicyGUID PSDscResource_AuditPolicyOption PSDscResource_AuditPolicySubcategory PSIncludes_DscResource</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-02-17T18:38:42Z</S>
+          <S N="updated">2021-02-19T21:59:32Z</S>
           <S N="NormalizedVersion">1.4.0</S>
           <S N="Authors">Microsoft Corporation</S>
           <S N="IsPrerelease">false</S>
@@ -124,7 +124,7 @@
           <S N="CompanyName">Microsoft Corporation</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\sdubey\Code\azure-ecosystem\pc1\project-chairlift\windows\src\AuditPolicyDsc\1.4.0.0</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\AuditPolicyDsc\1.4.0.0</S>
     </MS>
   </Obj>
 </Objs>

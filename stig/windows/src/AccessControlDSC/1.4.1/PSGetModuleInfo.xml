@@ -13,7 +13,7 @@
       <S N="Author">Microsoft Corporation</S>
       <S N="CompanyName">macoller</S>
       <S N="Copyright">(c) 2020 Microsoft. All rights reserved.</S>
-      <DT N="PublishedDate">2020-08-03T14:34:11-07:00</DT>
+      <DT N="PublishedDate">2020-08-03T14:34:11-04:00</DT>
       <Nil N="InstalledDate" />
       <Nil N="UpdatedDate" />
       <URI N="LicenseUri">https://github.com/mcollera/AccessControlDsc/blob/master/LICENSE</URI>
@@ -44,7 +44,7 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">Function</S>
+            <S N="Key">Workflow</S>
             <Obj N="Value" RefId="3">
               <TNRef RefId="1" />
               <LST />
@@ -68,15 +68,15 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">Workflow</S>
-            <Ref N="Value" RefId="3" />
-          </En>
-          <En>
-            <S N="Key">RoleCapability</S>
+            <S N="Key">Function</S>
             <Ref N="Value" RefId="3" />
           </En>
           <En>
             <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
             <Ref N="Value" RefId="3" />
           </En>
         </DCT>
@@ -87,7 +87,7 @@
         <TNRef RefId="1" />
         <LST />
       </Obj>
-      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2/</S>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2</S>
       <S N="Repository">PSGallery</S>
       <S N="PackageManagementProvider">NuGet</S>
       <Obj N="AdditionalMetadata" RefId="6">
@@ -101,15 +101,15 @@
           <S N="requireLicenseAcceptance">False</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">True</S>
-          <S N="versionDownloadCount">35816</S>
-          <S N="downloadCount">202079</S>
+          <S N="versionDownloadCount">36004</S>
+          <S N="downloadCount">202330</S>
           <S N="packageSize">36978</S>
-          <S N="published">8/3/2020 2:34:11 PM -07:00</S>
-          <S N="created">8/3/2020 2:34:11 PM -07:00</S>
-          <S N="lastUpdated">2/17/2021 6:38:42 PM -08:00</S>
+          <S N="published">8/3/2020 2:34:11 PM -04:00</S>
+          <S N="created">8/3/2020 2:34:11 PM -04:00</S>
+          <S N="lastUpdated">2/19/2021 9:59:32 PM -05:00</S>
           <S N="tags">DesiredStateConfiguration DSC DSCResourceKit DSCResource AccessControlDsc DACL SACL Permissions PSModule PSDscResource_ActiveDirectoryAccessEntry PSDscResource_ActiveDirectoryAuditRuleEntry PSDscResource_FileSystemAuditRuleEntry PSDscResource_NTFSAccessEntry PSDscResource_RegistryAccessEntry PSIncludes_DscResource</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-02-17T18:38:42Z</S>
+          <S N="updated">2021-02-19T21:59:32Z</S>
           <S N="NormalizedVersion">1.4.1</S>
           <S N="Authors">Microsoft Corporation</S>
           <S N="IsPrerelease">false</S>
@@ -120,7 +120,7 @@
           <S N="CompanyName">Microsoft Corporation</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\sdubey\Code\azure-ecosystem\pc1\project-chairlift\windows\src\AccessControlDSC\1.4.1</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\AccessControlDSC\1.4.1</S>
     </MS>
   </Obj>
 </Objs>

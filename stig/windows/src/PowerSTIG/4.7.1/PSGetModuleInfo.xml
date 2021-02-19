@@ -24,7 +24,7 @@
         </LST>
       </Obj>
       <S N="Copyright">Copyright (c) Microsoft Corporation. All rights reserved. 2020</S>
-      <DT N="PublishedDate">2021-01-22T17:11:15-08:00</DT>
+      <DT N="PublishedDate">2021-01-22T17:11:15-05:00</DT>
       <Nil N="InstalledDate" />
       <Nil N="UpdatedDate" />
       <URI N="LicenseUri">https://github.com/Microsoft/PowerStig/blob/master/LICENSE</URI>
@@ -47,20 +47,10 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">Function</S>
+            <S N="Key">Workflow</S>
             <Obj N="Value" RefId="4">
               <TNRef RefId="1" />
-              <LST>
-                <S>Get-DomainName</S>
-                <S>Get-Stig</S>
-                <S>New-StigCheckList</S>
-                <S>Get-StigRuleList</S>
-                <S>Get-StigVersionNumber</S>
-                <S>Get-PowerStigFilelist</S>
-                <S>Split-BenchmarkId</S>
-                <S>Get-StigRule</S>
-                <S>Get-StigRuleExceptionString</S>
-              </LST>
+              <LST />
             </Obj>
           </En>
           <En>
@@ -106,19 +96,29 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">Workflow</S>
+            <S N="Key">Function</S>
             <Obj N="Value" RefId="7">
               <TNRef RefId="1" />
-              <LST />
+              <LST>
+                <S>Get-DomainName</S>
+                <S>Get-Stig</S>
+                <S>New-StigCheckList</S>
+                <S>Get-StigRuleList</S>
+                <S>Get-StigVersionNumber</S>
+                <S>Get-PowerStigFilelist</S>
+                <S>Split-BenchmarkId</S>
+                <S>Get-StigRule</S>
+                <S>Get-StigRuleExceptionString</S>
+              </LST>
             </Obj>
           </En>
           <En>
-            <S N="Key">RoleCapability</S>
-            <Ref N="Value" RefId="7" />
+            <S N="Key">Cmdlet</S>
+            <Ref N="Value" RefId="4" />
           </En>
           <En>
-            <S N="Key">Cmdlet</S>
-            <Ref N="Value" RefId="7" />
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="4" />
           </En>
         </DCT>
       </Obj>
@@ -370,7 +370,7 @@
           </Obj>
         </LST>
       </Obj>
-      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2/</S>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2</S>
       <S N="Repository">PSGallery</S>
       <S N="PackageManagementProvider">NuGet</S>
       <Obj N="AdditionalMetadata" RefId="23">
@@ -385,15 +385,15 @@
           <S N="releaseNotes">* ConvertTo-ManualCheckListHashTable function call is missing mandatory argument: [#823](https://github.com/microsoft/PowerStig/issues/823)</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">True</S>
-          <S N="versionDownloadCount">393</S>
-          <S N="downloadCount">22079</S>
+          <S N="versionDownloadCount">443</S>
+          <S N="downloadCount">22175</S>
           <S N="packageSize">4558429</S>
-          <S N="published">1/22/2021 5:11:15 PM -08:00</S>
-          <S N="created">1/22/2021 5:11:15 PM -08:00</S>
-          <S N="lastUpdated">2/17/2021 6:13:41 PM -08:00</S>
+          <S N="published">1/22/2021 5:11:15 PM -05:00</S>
+          <S N="created">1/22/2021 5:11:15 PM -05:00</S>
+          <S N="lastUpdated">2/19/2021 9:04:32 PM -05:00</S>
           <S N="tags">DSC DesiredStateConfiguration STIG PowerStig PSModule PSFunction_Get-DomainName PSCommand_Get-DomainName PSFunction_Get-Stig PSCommand_Get-Stig PSFunction_New-StigCheckList PSCommand_New-StigCheckList PSFunction_Get-StigRuleList PSCommand_Get-StigRuleList PSFunction_Get-StigVersionNumber PSCommand_Get-StigVersionNumber PSFunction_Get-PowerStigFilelist PSCommand_Get-PowerStigFilelist PSFunction_Split-BenchmarkId PSCommand_Split-BenchmarkId PSFunction_Get-StigRule PSCommand_Get-StigRule PSFunction_Get-StigRuleExceptionString PSCommand_Get-StigRuleExceptionString PSIncludes_Function PSDscResource_Adobe PSDscResource_DotNetFramework PSDscResource_FireFox PSDscResource_IisServer PSDscResource_IisSite PSDscResource_InternetExplorer PSDscResource_Chrome PSDscResource_McAfee PSDscResource_Office PSDscResource_OracleJRE PSDscResource_SqlServer PSDscResource_WindowsClient PSDscResource_WindowsDefender PSDscResource_WindowsDnsServer PSDscResource_WindowsFirewall PSDscResource_WindowsServer PSDscResource_Vsphere PSIncludes_DscResource</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-02-17T18:13:41Z</S>
+          <S N="updated">2021-02-19T21:04:32Z</S>
           <S N="NormalizedVersion">4.7.1</S>
           <S N="Authors">Microsoft Corporation</S>
           <S N="IsPrerelease">false</S>
@@ -405,7 +405,7 @@
           <S N="CompanyName">Microsoft Corporation</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\sdubey\Code\azure-ecosystem\pc1\project-chairlift\windows\src\PowerSTIG\4.7.1</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\PowerSTIG\4.7.1</S>
     </MS>
   </Obj>
 </Objs>
