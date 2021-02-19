@@ -322,6 +322,7 @@
             "subnetPrefix": "[steps('networking').vmVirtualNetwork.subnets.subnet1.addressPrefix]",
             "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
             "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
+            "diagnosticsStorageAccountName": "[steps('management').diagnosticStorageAccount.name]",
             "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]"
         }
     }
