@@ -43,7 +43,8 @@
                                 "subscription": "onBasic",
                                 "location": "onBasic"
                             }
-                        }
+                        },
+                        "visible": false
                     },
                     {
                         "name": "osVersion",

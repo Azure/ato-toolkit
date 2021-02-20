@@ -22,3 +22,7 @@ if ($autoInstallDependencies -eq $true) {
 
 # Increase the MaxEnvelope Size
 Set-Item -Path WSMan:\localhost\MaxEnvelopeSizekb -Value 8192
+
+# Set Local Admin account password expires True (V-205658)
+$localAdmin = Get-LocalUser | Where-Object Description -eq "Built-in account for administering the computer/domain"
+Set-LocalUser -name $localAdmin.Name -PasswordNeverExpires $false
