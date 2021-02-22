@@ -321,6 +321,7 @@
                     "type": "extensions",
                     "location": "[parameters('location')]",
                     "apiVersion": "2020-06-01",
+                    "condition": "[not(equals(parameters('diagnosticStorageResourceId'), ''))]",
                     "dependsOn": [
                         "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
                     ],
