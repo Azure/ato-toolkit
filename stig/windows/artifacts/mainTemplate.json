@@ -322,7 +322,8 @@
                     "location": "[parameters('location')]",
                     "apiVersion": "2020-06-01",
                     "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('diagnosticStorageResourceId'))]"
                     ],
                     "tags": {
                         "displayName": "AzureDiagnostics"
