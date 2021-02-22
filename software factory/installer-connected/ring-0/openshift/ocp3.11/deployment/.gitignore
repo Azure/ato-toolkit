@@ -1,0 +1,8 @@
+**/certs/*
+**/deployment-output/*
+**/Ring-0/extra-scripts/*
+
+**/validateocp.json
+**/deployOpenShift.json
+**/dnsmasq-settings.sh
+**/dnsmasq-settings.sh.json

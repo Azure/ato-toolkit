@@ -1,0 +1,53 @@
+# trigger:
+# - master
+
+jobs:
+- job: shell_lint_and_unit_test
+  displayName: Shell lint and unit test
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  steps:
+  - script: sudo apt-get install -y xsltproc
+    displayName: Installing xsltproc
+
+  - script: make shellcheck_ci
+    displayName: 'Running ShellCheck'
+
+  - script: xsltproc -o $(Build.ArtifactStagingDirectory)/shellcheck.html tests/tools/checkstyle.xsl shellcheck.xml
+    displayName: 'Outputing XML to HTML'
+    condition: always()
+
+  - script: make bats_ci
+    displayName: 'Running Docker Bats'
+    condition: always()
+
+  - script: cat bats.tap | docker run -i filipfilmar/tap2junit:v0.0.7 > bats.junit.xml
+    displayName: 'Outputing tap to JUnit'
+    condition: always()
+
+  - script: xsltproc -o shellcheck.junit.xml tests/tools/junit.xsl shellcheck.xml
+    displayName: 'Outputing XML to JUnit'
+    condition: always()
+
+  - script: docker run --rm -w /mnt -v $(pwd):/mnt -t stelligent/config-lint:v0.0.44 -terraform12 .
+    displayName: 'Running Docker Config-lint Terraform'
+    condition: always()
+
+  - script: make opa_test
+    displayName: 'Running OPA Unit tests'
+    condition: always()
+
+  - task: PublishTestResults@2
+    condition: always()
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '*.junit.xml'
+
+  - task: PublishBuildArtifacts@1
+    condition: always()
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'shellcheck.html'
+      publishLocation: 'Container'
+

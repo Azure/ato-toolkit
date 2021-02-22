@@ -1,0 +1,1192 @@
+﻿{
+    "properties": {
+        "template": {
+            "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {
+                "resourcePrefix": {
+                    "type": "string",
+                    "metadata": {
+                        "displayName": "Resource Group and Resource identifier. String to be used as prefix to all Resource Group and Resource names."
+                    }
+                },
+                "service-tier": {
+                    "type": "string",
+                    "defaultValue": "PerNode",
+                    "allowedValues": [
+                        "Free",
+                        "Standalone",
+                        "PerNode",
+                        "PerGB2018"
+                    ],
+                    "metadata": {
+                        "displayName": "Service tier",
+                        "description": "Service tier: Free, Standalone, PerNode or PerGB2018"
+                    }
+                },
+                "data-retention": {
+                    "type": "int",
+                    "defaultValue": 365,
+                    "minValue": 0,
+                    "maxValue": 365,
+                    "metadata": {
+                        "displayName": "Log retention in days",
+                        "description": "Number of days data will be retained for"
+                    }
+                },
+                "location": {
+                    "type": "string",
+                    "metadata": {
+                        "displayName": "Log workspace location",
+                        "description": "Location where Log Analytics workspace to be created"
+                    }
+                },
+                "automation-account-id": {
+                    "type": "string",
+                    "defaultValue": "",
+                    "metadata": {
+                        "description": "Optional. Automation Account resource identifier, value used to create a LinkedService between Log Analytics and an Automation Account."
+                    }
+                },
+                "noLogAnalytics": {
+                    "type": "bool",
+                    "defaultValue": true
+                }
+            },
+            "variables": {
+                "deployment-prefix": "[concat(parameters('resourcePrefix'), '-sharedsvcs')]",
+                "uniqueString": "[uniqueString(subscription().id, concat(variables('deployment-prefix'), '-log'))]",
+                "diagnostic-storageAccount-prefix": "[concat(replace(variables('deployment-prefix'), '-', ''), 'diag')]",
+                "diagnostic-storageAccount-name": "[toLower(substring(replace(concat(variables('diagnostic-storageAccount-prefix'), variables('uniqueString'), variables('uniqueString')), '-', ''), 0, 23) )]",
+                "oms-workspace-name": "[concat(variables('deployment-prefix'), '-log')]",
+                "log-analytics-search-version": 1,
+                "solutions": [
+                    {
+                        "name": "[concat('Updates', '(', variables('oms-workspace-name'), ')')]",
+                        "galleryName": "Updates"
+                    },
+                    {
+                        "name": "[concat('AzureAutomation', '(', variables('oms-workspace-name'), ')')]",
+                        "galleryName": "AzureAutomation"
+                    },
+                    {
+                        "name": "[concat('AntiMalware', '(', variables('oms-workspace-name'), ')')]",
+                        "galleryName": "AntiMalware"
+                    },
+                    {
+                        "name": "[concat('SQLAssessment', '(', variables('oms-workspace-name'), ')')]",
+                        "galleryName": "SQLAssessment"
+                    },
+                    {
+                        "name": "[concat('Security', '(', variables('oms-workspace-name'), ')')]",
+                        "galleryName": "Security"
+                    },
+                    {
+                        "name": "[concat('ChangeTracking', '(', variables('oms-workspace-name'), ')')]",
+                        "galleryName": "ChangeTracking"
+                    },
+                    {
+                        "name": "[concat('KeyVaultAnalytics', '(', variables('oms-workspace-name'), ')')]",
+                        "galleryName": "KeyVaultAnalytics"
+                    },
+                    {
+                        "name": "[concat('AzureSQLAnalytics', '(', variables('oms-workspace-name'), ')')]",
+                        "galleryName": "AzureSQLAnalytics"
+                    },
+                    {
+                        "name": "[concat('ServiceMap', '(', variables('oms-workspace-name'), ')')]",
+                        "galleryName": "ServiceMap"
+                    }
+                ]
+            },
+            "resources": [
+                {
+                    "type": "Microsoft.OperationalInsights/workspaces",
+                    "apiVersion": "2020-03-01-preview",
+                    "location": "[parameters('location')]",
+                    "condition": "[not(parameters('noLogAnalytics'))]",
+                    "name": "[variables('oms-workspace-name')]",
+                    "properties": {
+                        "features": {
+                            "searchVersion": "[variables('log-analytics-search-version')]"
+                        },
+                        "sku": {
+                            "name": "[parameters('service-tier')]"
+                        },
+                        "retentionInDays": "[parameters('data-retention')]"
+                    },
+                    "resources": [
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "name": "VMSSQueries",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "type": "savedSearches",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "properties": {
+                                "etag": "*",
+                                "DisplayName": "VMSS Instance Count",
+                                "Category": "VDC Saved Searches",
+                                "Query": "Event | where Source == \"ServiceFabricNodeBootstrapAgent\" | summarize AggregatedValue = count() by Computer"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "name": "AzureFirewallThreatDeny",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "type": "savedSearches",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "properties": {
+                                "etag": "*",
+                                "DisplayName": "Azure Threat Deny",
+                                "Category": "VDC Saved Searches",
+                                "Query": "AzureDiagnostics | where ResourceType == 'AZUREFIREWALLS' and msg_s contains 'Deny'"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "kind": "AzureActivityLog",
+                            "name": "[subscription().subscriptionId]",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "location": "[parameters('location')]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "properties": {
+                                "linkedResourceId": "[concat(subscription().Id, '/providers/microsoft.insights/eventTypes/management')]"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "applicationEvent",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsEvent",
+                            "properties": {
+                                "eventLogName": "Application",
+                                "eventTypes": [
+                                    {
+                                        "eventType": "Error"
+                                    },
+                                    {
+                                        "eventType": "Warning"
+                                    },
+                                    {
+                                        "eventType": "Information"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "systemEvent",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsEvent",
+                            "properties": {
+                                "eventLogName": "System",
+                                "eventTypes": [
+                                    {
+                                        "eventType": "Error"
+                                    },
+                                    {
+                                        "eventType": "Warning"
+                                    },
+                                    {
+                                        "eventType": "Information"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter1",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Processor",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "% Processor Time"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter2",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Processor",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "% Privileged Time"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter3",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Processor",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "% User Time"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter4",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Processor",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Processor Frequency"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter5",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Process",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Thread Count"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter6",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Process",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Handle Count"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter7",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "System",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "System Up Time"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter8",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "System",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Context Switches/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter9",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "System",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Processor Queue Length"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter10",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "System",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Processes"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter11",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Memory",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "% Committed Bytes In Use"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter12",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Memory",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Available MBytes"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter13",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Memory",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Available Bytes"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter14",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Memory",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Committed Bytes"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter15",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Memory",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Cache Bytes"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter16",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Memory",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Pool Paged Bytes"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter17",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Memory",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Pool Nonpaged Bytes"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter18",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Memory",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Pages/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter19",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Memory",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Page Faults/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter20",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Process",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Working Set"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter21",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Process",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Working Set - Private"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter22",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "% Disk Time"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter23",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "% Disk Read Time"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter24",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "% Disk Write Time"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter25",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "% Idle Time"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter26",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Disk Bytes/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter27",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Disk Read Bytes/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter28",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Disk Write Bytes/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter29",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Disk Transfers/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter30",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Disk Reads/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter31",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Disk Writes/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter32",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Avg. Disk sec/Transfer"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter33",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Avg. Disk sec/Read"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter34",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Avg. Disk sec/Write"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter35",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Avg. Disk Queue Length"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter36",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Avg. Disk Write Queue Length"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter37",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "% Free Space"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter38",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "LogicalDisk",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Free Megabytes"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter39",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Network Interface",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Bytes Total/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter40",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Network Interface",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Bytes Sent/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter41",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Network Interface",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Bytes Received/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter42",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Network Interface",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Packets/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter43",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Network Interface",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Packets Sent/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter44",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Network Interface",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Packets Received/sec"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter45",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Network Interface",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Packets Outbound Errors"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "windowsPerfCounter46",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "WindowsPerformanceCounter",
+                            "properties": {
+                                "objectName": "Network Interface",
+                                "instanceName": "*",
+                                "intervalSeconds": 60,
+                                "counterName": "Packets Received Errors"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "sampleIISLog1",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "IISLogs",
+                            "properties": {
+                                "state": "OnPremiseEnabled"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "sampleSyslog1",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "LinuxSyslog",
+                            "properties": {
+                                "syslogName": "kern",
+                                "syslogSeverities": [
+                                    {
+                                        "severity": "emerg"
+                                    },
+                                    {
+                                        "severity": "alert"
+                                    },
+                                    {
+                                        "severity": "crit"
+                                    },
+                                    {
+                                        "severity": "err"
+                                    },
+                                    {
+                                        "severity": "warning"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "sampleSyslogCollection1",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "LinuxSyslogCollection",
+                            "properties": {
+                                "state": "Enabled"
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "sampleLinuxPerf1",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "LinuxPerformanceObject",
+                            "properties": {
+                                "performanceCounters": [
+                                    {
+                                        "counterName": "% Used Inodes"
+                                    },
+                                    {
+                                        "counterName": "Free Megabytes"
+                                    },
+                                    {
+                                        "counterName": "% Used Space"
+                                    },
+                                    {
+                                        "counterName": "Disk Transfers/sec"
+                                    },
+                                    {
+                                        "counterName": "Disk Reads/sec"
+                                    },
+                                    {
+                                        "counterName": "Disk Writes/sec"
+                                    }
+                                ],
+                                "objectName": "Logical Disk",
+                                "instanceName": "*",
+                                "intervalSeconds": 10
+                            }
+                        },
+                        {
+                            "apiVersion": "2020-03-01-preview",
+                            "type": "datasources",
+                            "name": "sampleLinuxPerfCollection1",
+                            "condition": "[not(parameters('noLogAnalytics'))]",
+                            "dependsOn": [
+                                "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                            ],
+                            "kind": "LinuxPerformanceCollection",
+                            "properties": {
+                                "state": "Enabled"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Microsoft.OperationsManagement/solutions",
+                    "apiVersion": "2015-11-01-preview",
+                    "name": "[concat(variables('solutions')[copyIndex()].name)]",
+                    "location": "[parameters('location')]",
+                    "condition": "[not(parameters('noLogAnalytics'))]",
+                    "dependsOn": [
+                        "[concat('Microsoft.OperationalInsights/workspaces/', variables('oms-workspace-name'))]"
+                    ],
+                    "copy": {
+                        "name": "solutionCopy",
+                        "count": "[length(variables('solutions'))]",
+                        "mode": "Serial"
+                    },
+                    "properties": {
+                        "workspaceResourceId": "[resourceId('Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]"
+                    },
+                    "plan": {
+                        "name": "[variables('solutions')[copyIndex()].name]",
+                        "product": "[concat('OMSGallery/', variables('solutions')[copyIndex()].galleryName)]",
+                        "promotionCode": "",
+                        "publisher": "Microsoft"
+                    }
+                },
+                {
+                    "type": "Microsoft.OperationalInsights/workspaces/providers/locks",
+                    "apiVersion": "2017-04-01",
+                    "name": "[concat(variables('oms-workspace-name'), '/Microsoft.Authorization/logAnalyticsDoNotDelete')]",
+                    "condition": "[not(parameters('noLogAnalytics'))]",
+                    "dependsOn": [
+                        "[variables('oms-workspace-name')]"
+                    ],
+                    "comments": "Resource lock on Log Analytics",
+                    "properties": {
+                        "level": "CannotDelete"
+                    }
+                },
+                {
+                    "comments": "----DIAGNOSTICS STORAGE ACCOUNT-----",
+                    "type": "Microsoft.Storage/storageAccounts",
+                    "name": "[variables('diagnostic-storageAccount-name')]",
+                    "apiVersion": "2019-06-01",
+                    "location": "[resourceGroup().location]",
+                    "kind": "StorageV2",
+                    "sku": {
+                        "name": "Standard_GRS"
+                    },
+                    "tags": {
+                        "layer": "management"
+                    },
+                    "properties": {
+                        "encryption": {
+                            "keySource": "Microsoft.Storage",
+                            "services": {
+                                "blob": {
+                                    "enabled": true
+                                },
+                                "file": {
+                                    "enabled": true
+                                }
+                            }
+                        },
+                        "supportsHttpsTrafficOnly": true,
+                        "networkAcls": {
+                            "bypass": "AzureServices",
+                            "defaultAction": "Deny"
+                        }
+                    }
+                },
+                {
+                    "type": "Microsoft.Storage/storageAccounts/providers/locks",
+                    "apiVersion": "2016-09-01",
+                    "name": "[concat(variables('diagnostic-storageAccount-name'), '/Microsoft.Authorization/storageDoNotDelete')]",
+                    "dependsOn": [
+                        "[concat('Microsoft.Storage/storageAccounts/', variables('diagnostic-storageAccount-name'))]"
+                    ],
+                    "comments": "Resource lock on diagnostic storage account",
+                    "properties": {
+                        "level": "CannotDelete"
+                    }
+                },
+                {
+                    "name": "[concat(variables('oms-workspace-name'), '/', variables('diagnostic-storageAccount-name'))]",
+                    "type": "Microsoft.OperationalInsights/workspaces/storageinsightconfigs",
+                    "apiVersion": "2020-03-01-preview",
+                    "condition": "[not(parameters('noLogAnalytics'))]",
+                    "dependsOn": [
+                        "[concat('Microsoft.Storage/storageAccounts/', variables('diagnostic-storageAccount-name'))]"
+                    ],
+                    "properties": {
+                        "containers": [],
+                        "tables": [
+                            "WADWindowsEventLogsTable",
+                            "WADETWEventTable",
+                            "WADServiceFabric*EventTable",
+                            "LinuxsyslogVer2v0"
+                        ],
+                        "storageAccount": {
+                            "id": "[resourceId('Microsoft.Storage/storageAccounts/', variables('diagnostic-storageAccount-name'))]",
+                            "key": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]"
+                        }
+                    }
+                },
+                {
+                    "type": "Microsoft.OperationalInsights/workspaces/linkedServices",
+                    "name": "[concat(variables('oms-workspace-name'), '/' , 'Automation')]",
+                    "apiVersion": "2020-03-01-preview",
+                    "condition": "[and(not(empty(parameters('automation-account-id'))), not(parameters('useLogAnalytics')))]",
+                    "location": "[parameters('location')]",
+                    "properties": {
+                        "resourceId": "[parameters('automation-account-id')]"
+                    }
+                }
+            ],
+            "outputs": {}
+        },
+        "parameters": {
+            "resourcePrefix": {
+                "value": "[parameters('resourcePrefix')]"
+            },
+            "service-tier": {
+                "value": "[parameters('log-analytics_service-tier')]"
+            },
+            "data-retention": {
+                "value": "[parameters('log-analytics_data-retention')]"
+            },
+            "location": {
+                "value": "[parameters('log-analytics_location')]"
+            }
+        },
+        "dependsOn": [],
+        "resourceGroup": "ResourceGroup",
+        "displayName": "Log Analytics template",
+        "description": ""
+    },
+    "kind": "template",
+    "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34/artifacts/log-analytics",
+    "type": "Microsoft.Blueprint/blueprints/artifacts",
+    "name": "log-analytics"
+}

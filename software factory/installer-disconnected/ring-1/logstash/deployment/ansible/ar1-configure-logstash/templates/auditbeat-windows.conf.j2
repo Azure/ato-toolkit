@@ -1,0 +1,28 @@
+input {
+  beats {
+    port => {{ auditbeat_windows.port }}
+    id => "audit-windows"
+    ssl => true
+    ssl_key => "{{ ssl.key_path }}"
+    ssl_certificate => "{{ ssl.cert_path }}"
+    ssl_certificate_authorities => ["{{ ssl.ca_path }}"]
+    ssl_verify_mode => "force_peer"
+  }
+}
+
+filter {
+  mutate {
+    add_field => { "pipeline_host" => "{{ inventory_hostname }}" }
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["https://{{ elasticsearch.lb_ip }}:{{ elasticsearch.port }}"]
+    index => "{{ auditbeat_windows.pipeline.index_pattern }}"
+    ssl_certificate_verification => false
+    user => "{{ auditbeat_windows.pipeline.username }}"
+    password => "{{ auditbeat_windows.pipeline.password }}"
+    ssl => true
+  }
+}

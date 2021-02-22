@@ -1,0 +1,15 @@
+nodeSelector:
+    beta.kubernetes.io/os: linux
+
+configureRepositories:
+  # Enable volume mount for a repositories.yaml configuration file and repository cache
+  enable: true
+  # repositories-yaml	Name of the volume for the repositories.yaml file
+  #volumeName: "repositories-yaml"
+  # flux-helm-repositories	Name of the secret containing the contents of the repositories.yaml file
+  #secretName: "flux-helm-repositories"
+  #Name for the repository cache volume
+  #cacheName: "repositories-cache"
+  #	List of custom Helm repositories to add. If non empty, the corresponding secret with a repositories.yaml will be created
+#  repositories:	None
+

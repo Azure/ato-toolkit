@@ -1,0 +1,36 @@
+---
+name: tufin-bank-admin
+
+archetype:
+  name: 1-tier-microservice-application
+  paramaters:
+    uses-logging-sidecar: false
+
+lifecycles:
+  - type: dev
+    # resources:
+    #   limit: #match k8s here
+    #     min:
+    #       cpu: 0.1
+    #     max:
+    #       cpu: 10
+    archetype:
+      paramaters:
+        replicas: 20
+    clusters:
+      - name: northeurope-0001
+        archetype:
+          paramaters:
+            replicas: 5
+      - name: westeurope-0006
+    # external-network-access: #rename this
+    #   - direction: out
+    #     dest: 10.0.0.10/32
+    #     port: 53
+    #     type: UDP
+    # internal-network-access: #rename this
+    #   - type: service
+    #     app: tufin-bank-customer
+    #     lifecycle: dev
+    #     service-name: foobar # expands to foobar.tufin-bank-customer-dev.svc.cluster.local
+

@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: denydeploymentstonamespace
+metadata:
+  name: "denydeploymentstonamespace"
+spec:
+  match:
+    kinds:
+      - apiGroups: 
+        - "*"
+        kinds:
+        - "*"
+        
+  parameters:
+    namespacestodeny: ['default']

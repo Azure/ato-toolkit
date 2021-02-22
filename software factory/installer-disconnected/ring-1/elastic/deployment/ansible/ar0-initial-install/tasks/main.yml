@@ -1,0 +1,71 @@
+---
+- name: Add Elastic Search GPG Key - Online Deployment
+  rpm_key:
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+  when: OFFLINE_DEPLOYMENT == "false"
+
+- name: Add Elastic Search Repo - Online Deployment
+  template:
+    src: elasticsearch.repo.j2
+    dest: /etc/yum.repos.d/elasticsearch.repo
+    mode: 0644
+  when: OFFLINE_DEPLOYMENT == "false"
+
+- name: Install Elastic Search - Online Deployment
+  yum:
+    name: elasticsearch-{{ ELASTICSEARCH_VERSION }}
+    state: installed
+  when: OFFLINE_DEPLOYMENT == "false"
+
+- name: Copy Elasticsearch RPM File for Offline Deployment
+  copy:
+    src: bin/elasticsearch-{{ ELASTICSEARCH_VERSION }}-x86_64.rpm
+    dest: /usr/local/src/elasticsearch-{{ ELASTICSEARCH_VERSION }}-x86_64.rpm
+    mode: 0644
+  when: OFFLINE_DEPLOYMENT == "true"
+
+- name: Install Elasticsearch - Offline
+  command: rpm -i /usr/local/src/elasticsearch-{{ ELASTICSEARCH_VERSION }}-x86_64.rpm
+  when: OFFLINE_DEPLOYMENT == "true"
+
+- name: Configure JVM Heap Sizes (1/2)
+  replace:
+    path: /etc/elasticsearch/jvm.options
+    regexp: '-Xms1g'
+    replace: '{{ jvm1 }}'
+
+- name: Configure JVM Heap Sizes (2/2)
+  replace:
+    path: /etc/elasticsearch/jvm.options
+    regexp: '-Xmx1g'
+    replace: '{{ jvm2 }}'
+
+- name: Configure Elasticsearch.yml File
+  template:
+    src: elasticsearch.yml.j2
+    dest: /etc/elasticsearch/elasticsearch.yml
+    mode: 0644
+
+- name: Restarting Daemon
+  systemd:
+    daemon_reload: yes
+
+- name: Enable Elastic Search Service
+  systemd:
+    name: elasticsearch.service
+    enabled: yes
+
+- name: Start Elastic Search Service
+  systemd:
+    name: elasticsearch.service
+    state: started
+
+- name: Open Firewall Port {{ ES_DEFAULT_PORT_1 }}
+  command: firewall-cmd --zone=public --add-port={{ ES_DEFAULT_PORT_1 }}/tcp --permanent
+
+- name: Open Firewall Port {{ ES_DEFAULT_PORT_2 }}
+  command: firewall-cmd --zone=public --add-port={{ ES_DEFAULT_PORT_2 }}/tcp --permanent
+
+- name: Reload Firewall
+  command: firewall-cmd --reload

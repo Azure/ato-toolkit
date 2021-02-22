@@ -1,0 +1,258 @@
+﻿{
+  "properties": {
+    "template": {
+      "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "resourcePrefix": {
+          "type": "string",
+          "metadata": {
+            "displayName": "Resource Group and Resource identifier. String to be used as prefix to all Resource Group and Resource names."
+          }
+        },
+        "deployment-user-object-id": {
+          "type": "string",
+          "metadata": {
+            "displayName": "AAD object ID",
+            "description": "AAD object ID of the user that requires access to Key Vault. To retrieve this value go to Microsoft Azure Portal > Azure Active Directory > Users > (user) and copy the User’s Object ID"
+          }
+        },
+        "logs-retention-in-days": {
+          "type": "int",
+          "defaultValue": 365,
+          "minValue": 0,
+          "maxValue": 365,
+          "metadata": {
+            "displayName": "Log retention in days",
+            "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely"
+          }
+        },
+        "secret-unique-value1": {
+          "type": "string",
+          "defaultValue": "[newGuid()]",
+          "metadata": {
+            "displayName": "Unique value1 for secret generation",
+            "description": "Unique value that will be used to auto generate secrets"
+          }
+        },
+        "secret-unique-value2": {
+          "type": "string",
+          "defaultValue": "[newGuid()]",
+          "metadata": {
+            "displayName": "Unique value2 for secret generation",
+            "description": "Unique value that will be used to auto generate secrets"
+          }
+        },
+        "secret-unique-value3": {
+          "type": "string",
+          "defaultValue": "[newGuid()]",
+          "metadata": {
+            "displayName": "Unique value3 for secret generation",
+            "description": "Unique value that will be used to auto generate secrets"
+          }
+        },
+        "secret-unique-value4": {
+          "type": "string",
+          "defaultValue": "[newGuid()]",
+          "metadata": {
+            "displayName": "Unique value4 for secret generation",
+            "description": "Unique value that will be used to auto generate secrets"
+          }
+        },
+        "secret-unique-value5": {
+          "type": "string",
+          "defaultValue": "[newGuid()]",
+          "metadata": {
+            "displayName": "Unique value5 for secret generation",
+            "description": "Unique value that will be used to auto generate secrets"
+          }
+        },
+        "secret-unique-value6": {
+          "type": "string",
+          "defaultValue": "[newGuid()]",
+          "metadata": {
+            "displayName": "Unique value6 for secret generation",
+            "description": "Unique value that will be used to auto generate secrets"
+          }
+        }
+      },
+      "variables": {
+        "deployment-prefix": "[concat(parameters('resourcePrefix'), '-sharedsvcs')]",
+        "enable-vault-for-deployment": true,
+        "enable-vault-for-templateDeployment": true,
+        "enable-vault-for-diskEncryption": true,
+        "vault-sku": "Premium",
+        "jumpbox-local-admin-user-password-secret-value": "[concat(toUpper(uniqueString(parameters('secret-unique-value1'))), uniqueString(parameters('secret-unique-value2')), toLower(uniqueString(parameters('secret-unique-value3'))), '@')]",
+        "ad-domain-admin-user-password-secret-value": "[concat(toUpper(uniqueString(parameters('secret-unique-value4'))), uniqueString(parameters('secret-unique-value5')), toLower(uniqueString(parameters('secret-unique-value6'))), '!')]",
+        "oms-workspace-resourceGroup": "[concat(variables('deployment-prefix'), '-rg')]",
+        "oms-workspace-name": "[concat(variables('deployment-prefix'), '-log')]",
+        "key-vault-name": "[concat(variables('deployment-prefix'), '-kv')]",
+        "enableSoftDelete": true,
+        "enablePurgeProtection": true,
+        "uniqueString": "[uniqueString(subscription().id, concat(variables('deployment-prefix'), '-log'))]",
+        "diagnostic-storageAccount-prefix": "[concat(replace(variables('deployment-prefix'), '-', ''), 'diag')]",
+        "diagnostic-storageAccount-name": "[toLower(substring(replace(concat(variables('diagnostic-storageAccount-prefix'), variables('uniqueString'), variables('uniqueString')), '-', ''), 0, 23) )]",
+        "vnet-resourceGroup": "[concat(variables('deployment-prefix'), '-rg')]",
+        "vnet-name": "[concat(variables('deployment-prefix'), '-vnet')]",
+        "sharedsvcs-subnet-ID": "[concat(resourceId(variables('vnet-resourceGroup'), 'Microsoft.Network/virtualNetworks', variables('vnet-name')) , '/subnets/sharedsvcs')]",
+        "secrets-object": {
+          "secrets": [
+            {
+              "secretName": "jb-admin-user-password",
+              "secretValue": "[variables('jumpbox-local-admin-user-password-secret-value')]"
+            },
+            {
+              "secretName": "domain-admin-user-password",
+              "secretValue": "[variables('ad-domain-admin-user-password-secret-value')]"
+            }
+          ]
+        },
+        "access-policies": [
+          {
+            "tenantId": "[subscription().tenantId]",
+            "objectId": "[parameters('deployment-user-object-id')]",
+            "permissions": {
+              "certificates": [
+                "All"
+              ],
+              "keys": [
+                "All"
+              ],
+              "secrets": [
+                "All"
+              ]
+            }
+          }
+        ],
+        "subnets": [
+          {
+            "name": "sharedsvcs"
+          },
+          {
+            "name": "bastion"
+          },
+          {
+            "name": "AppGateway"
+          }
+        ]
+      },
+      "resources": [
+        {
+          "type": "Microsoft.KeyVault/vaults",
+          "name": "[variables('key-vault-name')]",
+          "apiVersion": "2016-10-01",
+          "location": "[resourceGroup().location]",
+          "tags": {
+            "displayName": "[variables('key-vault-name')]"
+          },          
+          "properties": {
+            "enabledForDeployment": "[variables('enable-vault-for-deployment')]",
+            "enabledForTemplateDeployment": "[variables('enable-vault-for-templateDeployment')]",
+            "enabledForDiskEncryption": "[variables('enable-vault-for-diskEncryption')]",
+            "enableSoftDelete": "[variables('enableSoftDelete')]",
+            "enablePurgeProtection": "[variables('enablePurgeProtection')]",
+            "tenantId": "[subscription().tenantId]",
+            "accessPolicies": "[variables('access-policies')]",
+            "sku": {
+              "name": "[variables('vault-sku')]",
+              "family": "A"
+            },
+            "networkAcls": {
+              "bypass": "AzureServices",
+              "defaultAction": "Deny",
+              "virtualNetworkRules": [
+                {
+                  "id": "[variables('sharedsvcs-subnet-ID')]"
+                }
+              ]
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.KeyVault/vaults/providers/diagnosticsettings",
+              "name": "[concat(variables('key-vault-name'), '/Microsoft.Insights/service')]",
+              "apiVersion": "2016-09-01",
+              "location": "[resourceGroup().location]",
+              "dependsOn": [
+                "[concat('Microsoft.KeyVault/vaults/', variables('key-vault-name'))]"
+              ],
+              "properties": {
+                "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
+                "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+                "logs": [
+                  {
+                    "category": "AuditEvent",
+                    "enabled": true,
+                    "retentionPolicy": {
+                      "enabled": true,
+                      "days": "[parameters('logs-retention-in-days')]"
+                    }
+                  }
+                ],
+                "metrics": [
+                  {
+                    "category": "AllMetrics",
+                    "enabled": true,
+                    "retentionPolicy": {
+                      "enabled": true,
+                      "days": "[parameters('logs-retention-in-days')]"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "Microsoft.KeyVault/vaults/providers/locks",
+          "apiVersion": "2016-09-01",
+          "name": "[concat(variables('key-vault-name'), '/Microsoft.Authorization/keyVaultDoNotDelete')]",
+          "dependsOn": [
+            "[concat('Microsoft.KeyVault/vaults/', variables('key-vault-name'))]"
+          ],
+          "comments": "Resource lock on key vault",
+          "properties": {
+            "level": "CannotDelete"
+          }
+        },
+        {
+          "type": "Microsoft.KeyVault/vaults/secrets",
+          "name": "[concat(variables('key-vault-name'), '/', variables('secrets-object').secrets[copyIndex()].secretName)]",
+          "apiVersion": "2015-06-01",
+          "properties": {
+            "value": "[variables('secrets-object').secrets[copyIndex()].secretValue]"
+          },
+          "dependsOn": [
+            "[concat('Microsoft.KeyVault/vaults/', variables('key-vault-name'))]"
+          ],
+          "copy": {
+            "name": "secretsCopy",
+            "count": "[length(variables('secrets-object').secrets)]"
+          }
+        }
+      ],
+      "outputs": {}
+    },
+    "parameters": {
+      "resourcePrefix": {
+        "value": "[parameters('resourcePrefix')]"
+      },
+      "deployment-user-object-id": {
+        "value": "[parameters('keyvault_deployment-user-object-id')]"
+      },
+      "logs-retention-in-days": {
+        "value": "[parameters('keyvault_logs-retention-in-days')]"
+      }
+    },
+    "dependsOn": [
+      "net"
+    ],
+    "resourceGroup": "ResourceGroup",
+    "displayName": "Key Vault template",
+    "description": ""
+  },
+  "kind": "template",
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34/artifacts/keyvault",
+  "type": "Microsoft.Blueprint/blueprints/artifacts",
+  "name": "keyvault"
+}
