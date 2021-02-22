@@ -1,5 +1,0 @@
-echo QUIT | openssl s_client -showcerts -connect {{ elasticsearch.imn_ip }}:{{ elasticsearch.port }} | awk '/^-----BEGIN/,/-----END CERTIFICATE-----$/ { print }' > cert.txt
- 
-cat cert.txt | awk 'split_after==1{n++;split_after=0} /-----END CERTIFICATE-----/ {split_after=1} {if (n==1) print > "/etc/logstash/elastic.crt"; else print > "/etc/logstash/instance.crt";}'
- 
-rm cert.txt

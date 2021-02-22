@@ -1,7 +1,0 @@
-node_modules
-npm-debug.log
-ironbank/**/*
-!ironbank/.gitkeep
-*.tar
-backstage/**/*
-.DS_Store
