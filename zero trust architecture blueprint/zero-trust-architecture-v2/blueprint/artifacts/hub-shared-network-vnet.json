@@ -1,0 +1,368 @@
+﻿{
+  "properties": {
+    "template": {
+      "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "namePrefix": {
+          "type": "string",
+          "metadata": {
+            "displayName": "Resource Group and Resource name prefix",
+            "description": "Resource Group and Resource identifier. String to be used as prefix to all Resource Group and Resource names."
+          }
+        },
+        "hubName": {
+          "type": "string",
+          "defaultValue": "hub-shared",
+          "metadata": {
+            "displayName": "Hub Shared name",
+            "description": "Hub Shared name."
+          }
+        },
+        "vnetAddressPrefix": {
+          "type": "string",
+          "defaultValue": "10.0.0.0/16",
+          "metadata": {
+            "displayName": "Virtual Network address prefix",
+            "description": "Virtual Network address prefix."
+          }
+        },
+        "azureFirewallSubnetAddressPrefix": {
+          "type": "string",
+          "defaultValue": "10.0.0.0/26",
+          "metadata": {
+            "displayName": "Azure Firewall subnet address prefix",
+            "description": "Azure Firewall subnet address prefix."
+          }
+        },
+        "bastionSubnetAddressPrefix": {
+          "type": "string",
+          "defaultValue": "10.0.1.0/27",
+          "metadata": {
+            "displayName": "Bastion subnet address prefix",
+            "description": "Bastion subnet address prefix."
+          }
+        },
+        "gatewaySubnetAddressPrefix": {
+          "type": "string",
+          "defaultValue": "10.0.2.0/24",
+          "metadata": {
+            "displayName": "Gateway subnet address prefix",
+            "description": "Gateway subnet address prefix."
+          }
+        },
+        "managementSubnetAddressPrefix": {
+          "type": "string",
+          "defaultValue": "10.0.3.0/24",
+          "metadata": {
+            "displayName": "Management subnet address prefix",
+            "description": "Management subnet address prefix."
+          }
+        },
+        "jumpBoxSubnetAddressPrefix": {
+          "type": "string",
+          "defaultValue": "10.0.4.0/24",
+          "metadata": {
+            "displayName": "JumpBox subnet address prefix",
+            "description": "JumpBox subnet address prefix."
+          }
+        },
+        "optionalSubnetNames": {
+          "type": "array",
+          "defaultValue": [],
+          "metadata": {
+            "displayName": "Optional subnet address names",
+            "description": "Optional. An Array of subnet names to deploy to the Virtual Network. e.g \"subnet1\",\"subnet2\""
+          }
+        },
+        "optionalSubnetPrefixes": {
+          "type": "array",
+          "defaultValue": [],
+          "metadata": {
+            "displayName": "Optional subnet address prefixes",
+            "description": "Optional. An Array of IP Address Prefixes for subnets. e.g \"10.0.7.0/24\",\"10.0.8.0/24\" "
+          }
+        },
+        "enableDdosProtection": {
+          "type": "bool",
+          "defaultValue": true,
+          "metadata": {
+            "displayName": "Enable Virtual Network DDoS protection",
+            "description": "Determines whether or not DDoS Protection is enabled in the Virtual Network."
+          }
+        },
+        "logsRetentionInDays": {
+          "type": "int",
+          "defaultValue": 365,
+          "minValue": 0,
+          "maxValue": 365,
+          "metadata": {
+            "displayName": "Log retention in days",
+            "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely."
+          }
+        },
+        "deployHub": {
+          "type": "bool",
+          "defaultValue": true,
+          "metadata": {
+            "displayName": "Deploy Hub",
+            "description": "Deploy Hub."
+          }
+        }
+      },
+      "variables": {
+        "deployment-prefix": "[toLower(concat(parameters('namePrefix'), '-', parameters('hubName')))]",
+        "vnet-name": "[concat(variables('deployment-prefix'), '-vnet')]",
+        "ddos-protection-plan-name": "[concat(variables('deployment-prefix'), '-ddos-plan')]",
+        "ddos-protection-plan-id": {
+          "id": "[resourceId('Microsoft.Network/ddosProtectionPlans', variables('ddos-protection-plan-name'))]"
+        },
+        "user-defined-routes": [
+          {
+            "name": "default",
+            "routes": []
+          }
+        ],
+        "static-subnets": [
+          {
+            "name": "AzureFirewallSubnet",
+            "address-prefix": "[parameters('azureFirewallSubnetAddressPrefix')]",
+            "network-security-group": "",
+            "user-defined-route": "",
+            "service-endpoints": []
+          },
+          {
+            "name": "AzureBastionSubnet",
+            "address-prefix": "[parameters('bastionSubnetAddressPrefix')]",
+            "network-security-group": "",
+            "user-defined-route": "",
+            "service-endpoints": []
+          },
+          {
+            "name": "GatewaySubnet",
+            "address-prefix": "[parameters('gatewaySubnetAddressPrefix')]",
+            "network-security-group": "",
+            "user-defined-route": "",
+            "service-endpoints": [
+              {
+                "service": "Microsoft.AzureCosmosDB"
+              },
+              {
+                "service": "Microsoft.CognitiveServices"
+              },
+              {
+                "service": "Microsoft.ContainerRegistry"
+              },
+              {
+                "service": "Microsoft.EventHub"
+              },
+              {
+                "service": "Microsoft.KeyVault"
+              },
+              {
+                "service": "Microsoft.ServiceBus"
+              },
+              {
+                "service": "Microsoft.Sql"
+              },
+              {
+                "service": "Microsoft.Storage"
+              }
+            ]
+          },
+          {
+            "name": "management-subnet",
+            "address-prefix": "[parameters('managementSubnetAddressPrefix')]",
+            "network-security-group": "management-subnet",
+            "user-defined-route": "default",
+            "service-endpoints": []
+          },
+          {
+            "name": "jump-box-subnet",
+            "address-prefix": "[parameters('jumpBoxSubnetAddressPrefix')]",
+            "network-security-group": "jump-box-subnet",
+            "user-defined-route": "default",
+            "service-endpoints": []
+          }
+        ],
+        "copy": [
+          {
+            "name": "optional-subnets",
+            "count": "[length(parameters('optionalSubnetNames'))]",
+            "input": {
+              "name": "[parameters('optionalSubnetNames')[copyIndex('optional-subnets')]]",
+              "address-prefix": "[parameters('optionalSubnetPrefixes')[copyIndex('optional-subnets')]]",
+              "user-defined-route": "default",
+              "network-security-group": "default-deny",
+              "service-endpoints": []
+            }
+          }
+        ],
+        "location": "[resourceGroup().location]",
+        "subnets": "[union(variables('static-subnets'), variables('optional-subnets'))]",
+        "oms-workspace-resourceGroup": "[concat(variables('deployment-prefix'), '-rg')]",
+        "oms-workspace-name": "[concat(variables('deployment-prefix'), '-log')]",
+        "unique-string": "[uniqueString(subscription().id, concat(variables('deployment-prefix')))]",
+        "diagnostic-storage-account-prefix": "[concat(replace(variables('deployment-prefix'), '-', ''), 'diag')]",
+        "diagnostic-storage-account-name": "[toLower(substring(replace(concat(variables('diagnostic-storage-account-prefix'), variables('unique-string'), variables('unique-string')), '-', ''), 0, 23) )]"
+      },
+      "resources": [
+        {
+          "type": "Microsoft.Network/routeTables",
+          "apiVersion": "2019-09-01",
+          "name": "[concat(variables('deployment-prefix'), '-', variables('user-defined-routes')[copyIndex()].name, '-udr')]",
+          "location": "[variables('location')]",
+          "condition": "[parameters('deployHub')]",
+          "tags": {
+            "component": "hub-shared-network-vnet"
+          },
+          "copy": {
+            "count": "[length(variables('user-defined-routes'))]",
+            "name": "udrLoop"
+          },
+          "properties": {}
+        },
+        {
+          "type": "Microsoft.Network/ddosProtectionPlans",
+          "apiVersion": "2019-09-01",
+          "name": "[variables('ddos-protection-plan-name')]",
+          "location": "[variables('location')]",
+          "condition": "[and(parameters('deployHub'), parameters('enableDdosProtection'))]",
+          "tags": {
+            "component": "hub-shared-network-vnet"
+          },
+          "properties": {}
+        },
+        {
+          "apiVersion": "2019-09-01",
+          "type": "Microsoft.Network/virtualNetworks",
+          "name": "[variables('vnet-name')]",
+          "location": "[variables('location')]",
+          "condition": "[parameters('deployHub')]",
+          "tags": {
+            "component": "hub-shared-network-vnet"
+          },
+          "dependsOn": [
+            "udrLoop",
+            "[variables('ddos-protection-plan-name')]"
+          ],
+          "properties": {
+            "addressSpace": {
+              "addressPrefixes": [
+                "[parameters('vnetAddressPrefix')]"
+              ]
+            },
+            "enableDdosProtection": "[parameters('enableDdosProtection')]",
+            "ddosProtectionPlan": "[if(parameters('enableDdosProtection'), variables('ddos-protection-plan-id'), json('null'))]",
+            "copy": [
+              {
+                "name": "subnets",
+                "count": "[length(variables('subnets'))]",
+                "input": {
+                  "name": "[variables('subnets')[copyIndex('subnets')].name]",
+                  "properties": {
+                    "addressPrefix": "[variables('subnets')[copyIndex('subnets')]['address-prefix']]",
+                    "networkSecurityGroup": "[if(equals(variables('subnets')[copyIndex('subnets')]['network-security-group'], ''), json('null'), json(concat('{\"id\": \"', resourceId('Microsoft.Network/networkSecurityGroups', concat(variables('deployment-prefix'), '-', variables('subnets')[copyIndex('subnets')]['network-security-group'], '-nsg')), '\"}')))]",
+                    "routeTable": "[if(equals(variables('subnets')[copyIndex('subnets')]['user-defined-route'], ''), json('null'), json(concat('{\"id\": \"', resourceId('Microsoft.Network/routeTables', concat(variables('deployment-prefix'), '-', variables('subnets')[copyIndex('subnets')]['user-defined-route'], '-udr')), '\"}')))]",
+                    "serviceEndpoints": "[if(equals(length(variables('subnets')[copyIndex('subnets')]['service-endpoints']), 0), json('null'), variables('subnets')[copyIndex('subnets')]['service-endpoints'])]"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Microsoft.Network/virtualNetworks/providers/diagnosticSettings",
+          "apiVersion": "2017-05-01-preview",
+          "name": "[concat(variables('vnet-name'),'/Microsoft.Insights/service')]",
+          "location": "[variables('location')]",
+          "condition": "[parameters('deployHub')]",
+          "dependsOn": [
+            "[variables('vnet-name')]"
+          ],
+          "tags": {
+            "component": "hub-shared-network-vnet"
+          },
+          "properties": {
+            "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storage-account-name'))]",
+            "workspaceId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name'))]",
+            "logs": [
+              {
+                "category": "VMProtectionAlerts",
+                "enabled": true,
+                "retentionPolicy": {
+                  "enabled": true,
+                  "days": "[parameters('logsRetentionInDays')]"
+                }
+              }
+            ],
+            "metrics": [
+              {
+                "category": "AllMetrics",
+                "timeGrain": null,
+                "enabled": true,
+                "retentionPolicy": {
+                  "enabled": false,
+                  "days": "[parameters('logsRetentionInDays')]"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "outputs": {}
+    },
+    "parameters": {
+      "namePrefix": {
+        "value": "[parameters('namePrefix')]"
+      },
+      "hubName": {
+        "value": "[parameters('hubName')]"
+      },
+      "vnetAddressPrefix": {
+        "value": "[parameters('hub-shared-network-vnet_vnetAddressPrefix')]"
+      },
+      "azureFirewallSubnetAddressPrefix": {
+        "value": "[parameters('hub-shared-network-vnet_azureFirewallSubnetAddressPrefix')]"
+      },
+      "bastionSubnetAddressPrefix": {
+        "value": "[parameters('hub-shared-network-vnet_bastionSubnetAddressPrefix')]"
+      },
+      "gatewaySubnetAddressPrefix": {
+        "value": "[parameters('hub-shared-network-vnet_gatewaySubnetAddressPrefix')]"
+      },
+      "managementSubnetAddressPrefix": {
+        "value": "[parameters('hub-shared-network-vnet_managementSubnetAddressPrefix')]"
+      },
+      "jumpBoxSubnetAddressPrefix": {
+        "value": "[parameters('hub-shared-network-vnet_jumpBoxSubnetAddressPrefix')]"
+      },
+      "optionalSubnetNames": {
+        "value": "[parameters('hub-shared-network-vnet_optionalSubnetNames')]"
+      },
+      "optionalSubnetPrefixes": {
+        "value": "[parameters('hub-shared-network-vnet_optionalSubnetPrefixes')]"
+      },
+      "enableDdosProtection": {
+        "value": "[parameters('enableDdosProtection')]"
+      },
+      "logsRetentionInDays": {
+        "value": "[parameters('logsRetentionInDays')]"
+      },
+      "deployHub": {
+        "value": "[parameters('deployHub')]"
+      }
+    },
+    "dependsOn": [
+      "hub-shared-security-log",
+      "hub-shared-network-nsg"
+    ],
+    "resourceGroup": "HubResourceGroup",
+    "displayName": "Azure Virtual Network template",
+    "description": "Azure Virtual Network template."
+  },
+  "kind": "template",
+  "id": "/providers/Microsoft.Blueprint/blueprints/c09d6b03-f048-4dd4-a5d9-46eda7e47ac4/artifacts/9653aa4a-e0f0-463e-a7f0-2cbca99fd141",
+  "type": "Microsoft.Blueprint/blueprints/artifacts",
+  "name": "9653aa4a-e0f0-463e-a7f0-2cbca99fd141"
+}

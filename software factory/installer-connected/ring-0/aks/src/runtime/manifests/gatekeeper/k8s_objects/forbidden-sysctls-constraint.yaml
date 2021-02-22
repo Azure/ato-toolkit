@@ -1,0 +1,14 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPForbiddenSysctls
+metadata:
+  name: "forbiddensysctls"
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        
+        kinds:
+        - "Pod"
+        
+  parameters:
+    forbiddenSysctls: ['kernel.*']

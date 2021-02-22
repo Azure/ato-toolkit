@@ -1,0 +1,97 @@
+# This pipeline ingests block values with additional metadata.
+# No changes have been made to the initial query yet.
+# Conversation needed to discuss what data we would like to capture.
+
+input {
+  jdbc {
+    #Connection String
+    jdbc_connection_string => "jdbc:sqlserver://{{ cfs.jdbc.ip }}:{{ cfs.jdbc.port }};database={{ cfs.jdbc.database }};loginTimeout=30;"
+    #Username
+    jdbc_user => "{{ cfs.jdbc.username }}"
+    #Password
+    jdbc_password => "{{ cfs.jdbc.password }}"
+    #Jdbc driver path
+    jdbc_driver_library => "/etc/logstash/driver/sqljdbc_4.0/enu/sqljdbc42.jar"
+    #Jdbc driver class
+    jdbc_driver_class => "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+    #Schedule
+    schedule => "*/30 * * * * *"
+    #Query
+    statement => "SELECT * FROM vw_BlockValueResults WHERE Block_Value_Modified > :sql_last_value"
+    record_last_run => true
+  }
+}
+
+filter {
+  mutate {
+    add_field => { "pipeline_id" => "block-value-results" }
+    add_field => { "pipeline_host" => "{{ inventory_hostname }}" }
+  }
+  mutate {
+    copy => { "block_value_modified" => "@timestamp" }
+    copy => { "tenant_name" => "customershortname" }
+  }
+  if [operation_duration] {
+    grok {
+      match => { "operation_duration" => "%{INT:hours}:%{INT:minutes}:%{BASE10NUM:seconds}" }
+    }
+    ruby {
+      code => "event.set( 'duration', event.get('hours').to_i*3600 + event.get('minutes').to_i*60 + event.get('seconds').to_f)"
+    }
+    mutate {
+      rename => { "duration" => "[metricResult][execution_duration]" }
+    }
+    mutate {
+      convert => { "[metricResult][execution_duration]" => "float" }
+    } 
+  }
+  if [block_type_name] in ["Numeric", "Boolean", "NumericOperationResult"]  {
+    mutate {
+      copy => { "block_value" => "result_value_numeric" }
+    }
+    mutate {
+      convert => { "result_value_numeric" => "float" }
+    }
+  }
+  else {
+    mutate {
+      copy => { "block_value" => "result_value_text" }
+    }
+    mutate {
+      convert => { "result_value_text" => "string" }
+    }
+  }
+  if [block_type_name] == "DeviceHeartbeat" {
+    mutate {
+      split => ["result_value_text" , ";"]
+      add_field => { "cpu" => "%{[result_value_text][0]}" }
+      add_field => { "memory" => "%{[result_value_text][1]}" }
+      add_field => { "disk" => "%{[result_value_text][2]}" }
+      add_field => { "network" => "%{[result_value_text][3]}" }
+    }
+    mutate {
+      convert => { "cpu" => "float" }
+      convert => { "memory" => "float" }
+      convert => { "disk" => "float" }
+      convert => { "network" => "float" }
+    }
+    mutate {
+      rename => { "cpu" => "[metricResult][cpu]" }
+      rename => { "memory" => "[metricResult][memory]" }
+      rename => { "disk" => "[metricResult][disk]" }
+      rename => { "network" => "[metricResult][network]" }
+    }
+  }
+}
+
+# Output to ES 
+output {
+  elasticsearch {
+    hosts => ["https://{{ elasticsearch.lb_ip }}:{{ elasticsearch.port }}"]
+    index => "{{ cfs.pipeline.index_pattern }}"
+    ssl_certificate_verification => false
+    user => "{{ cfs.pipeline.username }}"
+    password => "{{ cfs.pipeline.password }}"
+    ssl => true
+  }
+}

@@ -1,0 +1,10 @@
+# action.yml
+name: 'Check and Generate Ideal Repositories'
+description: 'Generate and destroyies all application repositories required in Application Management Configs'
+author: Project C12
+runs:
+  using: 'docker'
+  image: 'docker://$docker_login_server/c12/ci-tooling'
+  entrypoint: '/bin/bash'
+  args:
+    - '/github/workspace/.c12/scripts/generate-clone-repos.sh'

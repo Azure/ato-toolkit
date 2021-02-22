@@ -1,0 +1,10 @@
+---
+- name: Stop Elastic Search (To Set Bootstrap)
+  service:
+    name: elasticsearch.service
+    state: stopped
+
+- name: Set Bootstrap Temporary Password
+  shell: printf "cfs1234" | ./elasticsearch-keystore add bootstrap.password -x
+  args:
+    chdir: /usr/share/elasticsearch/bin/

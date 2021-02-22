@@ -1,0 +1,16 @@
+---
+
+# INSTALLING LOGSTASH
+# ar0-install-logstash
+- hosts: logstash
+  become: yes
+  roles:
+  - role: ar0-install-logstash
+    become: yes
+
+# CONFIGURING LOGSTASH
+# ar1-configure-logstash
+- hosts: logstash
+  become: yes
+  roles:
+  - role: ar1-configure-logstash

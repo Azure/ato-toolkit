@@ -1,0 +1,695 @@
+﻿{
+  "properties": {
+    "parameters": {
+      "allowedStorageAccountSKUs_listOfAllowedStorageSKUs": {
+        "type": "array",
+        "metadata": {
+          "displayName": "Allowed storage SKUs",
+          "description": "SKU used in Diagnostic Log storage accounts",
+          "strongType": "storageSKUs"
+        },
+        "defaultValue": [
+          "Standard_LRS"
+        ],
+        "allowedValues": [
+          "Standard_ZRS",
+          "Premium_LRS",
+          "Standard_GRS",
+          "Standard_RAGRS",
+          "Standard_ZRS",
+          "Premium_LRS",
+          "Standard_LRS"
+        ]
+      },
+      "allowedVirtualMachineSKUs_listOfAllowedVirtualMachineSKUs": {
+        "type": "array",
+        "metadata": {
+          "displayName": "Allowed virtual machine SKUs",
+          "description": "Allowed virtual machine SKUs. Run `Get-AzureRmComputeResourceSku | Where-Object ResourceType -eq VirtualMachines | Select-Object Name` from Azure PowerShell to get available skus.",
+          "strongType": "vmSKUs"
+        },
+        "defaultValue": [
+          "Standard_DS1_v2",
+          "Standard_DS2_v2"
+        ],
+        "allowedValues": []
+      },
+      "deployLogAnalyticsAgentforLinuxVMs_listOfImageIdToInclude": {
+        "type": "array",
+        "metadata": {
+          "displayName": "Optional: List of VM images that have supported Linux OS to add to scope (Policy: [Preview]: Deploy Log Analytics Agent for Linux VMs)"
+        },
+        "defaultValue": [
+          "none"
+        ],
+        "allowedValues": []
+      },
+      "deployLogAnalyticsAgentforWindowsVMs_listOfImageIdToInclude": {
+        "type": "array",
+        "metadata": {
+          "displayName": "Optional: List of VM images that have supported Windows OS to add to scope (Policy: [Preview]: Deploy Log Analytics Agent for Windows VMs)"
+        },
+        "defaultValue": [
+          "none"
+        ],
+        "allowedValues": []
+      },
+      "deployLogAnalyticsAgentforWindowsVMScaleSets_listOfImageIdToInclude": {
+        "type": "array",
+        "metadata": {
+          "displayName": "Optional: List of VM images that have supported Windows OS to add to scope (Policy: [Preview]: Deploy Log Analytics Agent for Windows VM Scale Sets (VMSS))"
+        },
+        "defaultValue": [
+          "none"
+        ],
+        "allowedValues": []
+      },
+      "deployLogAnalyticsAgentforLinuxVMScaleSets_listOfImageIdToInclude": {
+        "type": "array",
+        "metadata": {
+          "displayName": "Optional: List of VM images that have supported Linux OS to add to scope (Policy: [Preview]: Deploy Log Analytics Agent for Linux VM Scale Sets (VMSS))"
+        },
+        "defaultValue": [
+          "none"
+        ],
+        "allowedValues": []
+      },
+      "deployAuditingonSQLservers_retentionDays": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Retention days to deploy Auditing on SQL servers(optional, 180 days if unspecified)",
+          "description": "The value in days of the retention period (0 indicates unlimited retention)"
+        },
+        "defaultValue": "180",
+        "allowedValues": []
+      },
+      "deployAuditingonSQLservers_storageAccountsResourceGroup": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Resource group name for storage accounts to deploy Auditing on SQL servers",
+          "description": "Auditing writes database events to an audit log in your Azure Storage account (a storage account will be created in each region where a SQL Server is created that will be shared by all servers in that region). Important - for proper operation of Auditing do not delete or rename the resource group or the storage accounts.",
+          "strongType": "existingResourceGroups"
+        },
+        "defaultValue": "[concat(subscription().id, '/resourceGroups/', concat(parameters('resourcePrefix'), '-sharedsvcs-rg'))]",
+        "allowedValues": []
+      },
+      "deployDiagnosticSettingsforNetworkSecurityGroups_storagePrefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Storage Account Prefix for Regional Storage Account",
+          "description": "This prefix will be combined with the network security group location to form the created storage account name."
+        },
+        "defaultValue": "[concat(parameters('resourcePrefix'), 'sharedsvcsdiag')]",
+        "allowedValues": []
+      },
+      "deployDiagnosticSettingsforNetworkSecurityGroups_rgName": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Resource Group Name for Storage Account (must exist)",
+          "description": "The resource group that the storage account will be created in. This resource group must already exist.",
+          "strongType": "ExistingResourceGroups"
+        },
+        "defaultValue": "[concat(subscription().id, '/resourceGroups/', concat(parameters('resourcePrefix'), '-sharedsvcs-rg'))]",
+        "allowedValues": []
+      },
+      "listOfAllowedLocationsForResourcesAndResourceGroups": {
+        "type": "array",
+        "metadata": {
+          "displayName": "Allowed locations for resources and resource groups",
+          "description": "This policy enables you to restrict the locations your organization can specify when creating resource groups or deploying resources. Use to enforce your geo-compliance requirements. Excludes Microsoft.AzureActiveDirectory/b2cDirectories, and resources that use the 'global' region.",
+          "strongType": "location"
+        },
+        "allowedValues": []
+      },
+      "membersToIncludeInAdministratorsLocalGroup": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Members to be included in the Administrators local group",
+          "description": "A semicolon-separated list of members that should be included in the Administrators local group. Ex: Administrator; myUser1; myUser2"
+        },
+        "allowedValues": []
+      },
+      "membersToExcludeInAdministratorsLocalGroup": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Members that should be excluded in the Administrators local group",
+          "description": "A semicolon-separated list of members that should be excluded in the Administrators local group. Ex: Administrator; myUser1; myUser2"
+        },
+        "allowedValues": []
+      },
+      "listOfResourceTypes": {
+        "type": "array",
+        "metadata": {
+          "displayName": "List of resource types that should have diagnostic logs enabled (Policy: DoD Impact Level 4)"
+        },
+        "defaultValue": [
+          "Microsoft.AnalysisServices/servers",
+          "Microsoft.ApiManagement/service",
+          "Microsoft.Network/applicationGateways",
+          "Microsoft.Automation/automationAccounts",
+          "Microsoft.ContainerInstance/containerGroups",
+          "Microsoft.ContainerRegistry/registries",
+          "Microsoft.ContainerService/managedClusters",
+          "Microsoft.Batch/batchAccounts",
+          "Microsoft.Cdn/profiles/endpoints",
+          "Microsoft.CognitiveServices/accounts",
+          "Microsoft.DocumentDB/databaseAccounts",
+          "Microsoft.DataFactory/factories",
+          "Microsoft.DataLakeAnalytics/accounts",
+          "Microsoft.DataLakeStore/accounts",
+          "Microsoft.EventGrid/eventSubscriptions",
+          "Microsoft.EventGrid/topics",
+          "Microsoft.EventHub/namespaces",
+          "Microsoft.Network/expressRouteCircuits",
+          "Microsoft.Network/azureFirewalls",
+          "Microsoft.HDInsight/clusters",
+          "Microsoft.Devices/IotHubs",
+          "Microsoft.KeyVault/vaults",
+          "Microsoft.Network/loadBalancers",
+          "Microsoft.Logic/integrationAccounts",
+          "Microsoft.Logic/workflows",
+          "Microsoft.DBforMySQL/servers",
+          "Microsoft.Network/networkInterfaces",
+          "Microsoft.Network/networkSecurityGroups",
+          "Microsoft.DBforPostgreSQL/servers",
+          "Microsoft.PowerBIDedicated/capacities",
+          "Microsoft.Network/publicIPAddresses",
+          "Microsoft.RecoveryServices/vaults",
+          "Microsoft.Cache/redis",
+          "Microsoft.Relay/namespaces",
+          "Microsoft.Search/searchServices",
+          "Microsoft.ServiceBus/namespaces",
+          "Microsoft.SignalRService/SignalR",
+          "Microsoft.Sql/servers/databases",
+          "Microsoft.Sql/servers/elasticPools",
+          "Microsoft.StreamAnalytics/streamingjobs",
+          "Microsoft.TimeSeriesInsights/environments",
+          "Microsoft.Network/trafficManagerProfiles",
+          "Microsoft.Compute/virtualMachines",
+          "Microsoft.Compute/virtualMachineScaleSets",
+          "Microsoft.Network/virtualNetworks",
+          "Microsoft.Network/virtualNetworkGateways"
+        ],
+        "allowedValues": [
+          "Microsoft.AnalysisServices/servers",
+          "Microsoft.ApiManagement/service",
+          "Microsoft.Network/applicationGateways",
+          "Microsoft.Automation/automationAccounts",
+          "Microsoft.ContainerInstance/containerGroups",
+          "Microsoft.ContainerRegistry/registries",
+          "Microsoft.ContainerService/managedClusters",
+          "Microsoft.Batch/batchAccounts",
+          "Microsoft.Cdn/profiles/endpoints",
+          "Microsoft.CognitiveServices/accounts",
+          "Microsoft.DocumentDB/databaseAccounts",
+          "Microsoft.DataFactory/factories",
+          "Microsoft.DataLakeAnalytics/accounts",
+          "Microsoft.DataLakeStore/accounts",
+          "Microsoft.EventGrid/eventSubscriptions",
+          "Microsoft.EventGrid/topics",
+          "Microsoft.EventHub/namespaces",
+          "Microsoft.Network/expressRouteCircuits",
+          "Microsoft.Network/azureFirewalls",
+          "Microsoft.HDInsight/clusters",
+          "Microsoft.Devices/IotHubs",
+          "Microsoft.KeyVault/vaults",
+          "Microsoft.Network/loadBalancers",
+          "Microsoft.Logic/integrationAccounts",
+          "Microsoft.Logic/workflows",
+          "Microsoft.DBforMySQL/servers",
+          "Microsoft.Network/networkInterfaces",
+          "Microsoft.Network/networkSecurityGroups",
+          "Microsoft.DBforPostgreSQL/servers",
+          "Microsoft.PowerBIDedicated/capacities",
+          "Microsoft.Network/publicIPAddresses",
+          "Microsoft.RecoveryServices/vaults",
+          "Microsoft.Cache/redis",
+          "Microsoft.Relay/namespaces",
+          "Microsoft.Search/searchServices",
+          "Microsoft.ServiceBus/namespaces",
+          "Microsoft.SignalRService/SignalR",
+          "Microsoft.Sql/servers/databases",
+          "Microsoft.Sql/servers/elasticPools",
+          "Microsoft.StreamAnalytics/streamingjobs",
+          "Microsoft.TimeSeriesInsights/environments",
+          "Microsoft.Network/trafficManagerProfiles",
+          "Microsoft.Compute/virtualMachines",
+          "Microsoft.Compute/virtualMachineScaleSets",
+          "Microsoft.Network/virtualNetworks",
+          "Microsoft.Network/virtualNetworkGateways"
+        ]
+      },
+      "logAnalyticsWorkspaceIdForVMs": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Log Analytics Workspace Id that VMs should be configured for",
+          "description": "This is the Id (GUID) of the Log Analytics Workspace that the VMs should be configured for"
+        },
+        "defaultValue": "[concat(subscription().id, '/resourceGroups/', concat(parameters('resourcePrefix'), '-sharedsvcs-rg'), '/providers/Microsoft.OperationalInsights/workspaces/', concat(parameters('resourcePrefix'), '-sharedsvcs-log'))]",
+        "allowedValues": []
+      },
+      "longtermGeoRedundantBackupEnabledAzureSQLDatabasesEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Long-term geo-redundant backup should be enabled for Azure SQL Databases",
+          "description": "This policy audits any Azure SQL Database with long-term geo-redundant backup not enabled"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "vulnerabilityAssessmentOnManagedInstanceMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Vulnerability assessment should be enabled on your SQL managed instances",
+          "description": "Audit SQL managed instances which do not have recurring vulnerability assessment scans enabled. Vulnerability assessment can discover, track, and help you remediate potential database vulnerabilities."
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "vulnerabilityAssessmentOnServerMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Vulnerability assessment should be enabled on your SQL servers",
+          "description": "Audit Azure SQL servers which do not have recurring vulnerability assessment scans enabled. Vulnerability assessment can discover, track, and help you remediate potential database vulnerabilities."
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "geoRedundancyEnabledForStorageAccountsEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Geo-redundant storage should be enabled for Storage Accounts",
+          "description": "This policy audits any Storage Account with geo-redundant storage not enabled."
+        },
+        "defaultValue": "Audit",
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ]
+      },
+      "geoRedundancyEnabledForAzureDatabaseForMySQLEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Geo-redundant backup should be enabled for Azure Database for MySQL",
+          "description": "This policy audits any Azure Database for MySQL with geo-redundant backup not enabled."
+        },
+        "defaultValue": "Audit",
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ]
+      },
+      "geoRedundancyEnabledForAzureDatabaseForPostgreSQLEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Geo-redundant backup should be enabled for Azure Database for PostgreSQL",
+          "description": "This policy audits any Azure Database for PostgreSQL with geo-redundant backup not enabled."
+        },
+        "defaultValue": "Audit",
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ]
+      },
+      "webAppEnforceHttpsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Web Application should only be accessible over HTTPS",
+          "description": "Enable or disable the monitoring of the use of HTTPS in Web App"
+        },
+        "defaultValue": "Audit",
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ]
+      },
+      "functionAppEnforceHttpsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Function App should only be accessible over HTTPS",
+          "description": "Enable or disable the monitoring of the use of HTTPS in function App"
+        },
+        "defaultValue": "Audit",
+        "allowedValues": [
+          "Audit",
+          "Disabled"
+        ]
+      },
+      "identityRemoveExternalAccountWithWritePermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "External accounts with write permissions should be removed from your subscription",
+          "description": "Enable or disable the monitoring of external accounts with write permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityRemoveExternalAccountWithReadPermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "External accounts with read permissions should be removed from your subscription",
+          "description": "Enable or disable the monitoring of external accounts with read permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityRemoveExternalAccountWithOwnerPermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "External accounts with owner permissions should be removed from your subscription",
+          "description": "Enable or disable the monitoring of external accounts with owner permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityRemoveDeprecatedAccountWithOwnerPermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Deprecated accounts with owner permissions should be removed from your subscription",
+          "description": "Enable or disable the monitoring of deprecated accounts with owner permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityRemoveDeprecatedAccountMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Deprecated accounts should be removed from your subscription",
+          "description": "Enable or disable the monitoring of deprecated accounts in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "webAppRestrictCORSAccessMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "CORS should not allow every resource to access your Web Application",
+          "description": "Enable or disable the monitoring of CORS restrictions for API Web"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "vmssSystemUpdatesMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "System updates on virtual machine scale sets should be installed",
+          "description": "Enable or disable virtual machine scale sets reporting of system updates"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityEnableMFAForReadPermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "MFA should be enabled on accounts with read permissions on your subscription",
+          "description": "Enable or disable the monitoring of MFA for accounts with read permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityEnableMFAForOwnerPermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "MFA should be enabled on accounts with owner permissions on your subscription",
+          "description": "Enable or disable the monitoring of MFA for accounts with owner permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "identityEnableMFAForWritePermissionsMonitoringEffect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "MFA should be enabled accounts with write permissions on your subscription",
+          "description": "Enable or disable the monitoring of MFA for accounts with write permissions in subscription"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      },
+      "resourcePrefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Resource Group and Resource identifier. String to be used as prefix to all Resource Group and Resource names."
+        }
+      },
+      "log-analytics_service-tier": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Service tier",
+          "description": "Service tier: Free, Standalone, PerNode or PerGB2018"
+        },
+        "defaultValue": "PerNode",
+        "allowedValues": [
+          "Free",
+          "Standalone",
+          "PerNode",
+          "PerGB2018"
+        ]
+      },
+      "log-analytics_data-retention": {
+        "type": "int",
+        "metadata": {
+          "displayName": "Log retention in days",
+          "description": "Number of days data will be retained for"
+        },
+        "defaultValue": 365
+      },
+      "log-analytics_location": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Location",
+          "description": "Region used when establishing the workspace. Run `Get-AzLocation | Where-Object Providers -like 'Microsoft.OperationalInsights' | Select DisplayName` in Azure PowersShell to find available regions."
+        }
+      },      
+      "azure-firewall_azure-firewall-private-ip": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Azure firewall private IP"
+        },
+        "defaultValue": "10.0.4.4"
+      },
+      "azure-firewall_logs-retention-in-days": {
+        "type": "int",
+        "metadata": {
+          "displayName": "Log retention in days",
+          "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely"
+        },
+        "defaultValue": 365
+      },
+      "vnet_vnet-address-prefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Virtual Network address prefix"
+        },
+        "defaultValue": "10.0.0.0/16",
+        "allowedValues": []
+      },
+      "vnet_enable-ddos-protection": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Enable Virtual Network DDoS protection",
+          "description": "Determines whether or not DDoS Protection is enabled in the Virtual Network"
+        },
+        "defaultValue": "true"
+      },
+      "vnet_sharedsvcs-subnet-address-prefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Shared services subnet address prefix",
+          "description": "Value used in Virtual Network / Route Table, Jumpbox and Active Directory Domain Services templates"
+        },
+        "defaultValue": "10.0.0.0/24",
+        "allowedValues": []
+      },
+      "vnet_bastion-subnet-address-prefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Bastion subnet address prefix"
+        },
+        "defaultValue": "10.0.1.0/24",
+        "allowedValues": []
+      },
+      "vnet_app-subnet-address-prefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Application subnet address prefix"
+        },
+        "defaultValue": "10.0.2.0/24",
+        "allowedValues": []
+      },
+      "vnet_app-gateway-subnet-address-prefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Application Gateway subnet address prefix"
+        },
+        "defaultValue": "10.0.3.0/24",
+        "allowedValues": []
+      },
+      "vnet_gateway-subnet-address-prefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Virtual Network Gateway subnet address prefix"
+        },
+        "defaultValue": "10.0.4.0/24",
+        "allowedValues": []
+      },
+      "vnet_azure-firewall-subnet-address-prefix": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Azure Firewall subnet address prefix"
+        },
+        "defaultValue": "10.0.5.0/24",
+        "allowedValues": []
+      },
+      "vnet_logs-retention-in-days": {
+        "type": "int",
+        "metadata": {
+          "displayName": "Log retention in days",
+          "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely"
+        },
+        "defaultValue": 365
+      },
+      "nsg_logs-retention-in-days": {
+        "type": "int",
+        "metadata": {
+          "displayName": "Log retention in days",
+          "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely"
+        },
+        "defaultValue": 365
+      },
+      "keyvault_deployment-user-object-id": {
+        "type": "string",
+        "metadata": {
+          "displayName": "AAD object ID",
+          "description": "AAD object ID of the user that requires access to Key Vault. To retrieve this value go to Microsoft Azure Portal > Azure Active Directory > Users > (user) and copy the User’s Object ID"
+        }
+      },
+      "keyvault_logs-retention-in-days": {
+        "type": "int",
+        "metadata": {
+          "displayName": "Log retention in days",
+          "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely"
+        },
+        "defaultValue": 365
+      },
+      "jumpbox_jumpbox-local-admin-username": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Jumpbox admin username",
+          "description": "The username used to access jumpbox VMs"
+        },
+        "defaultValue": "jb-admin-user"
+      },
+      "jumpbox_jumpbox-os": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Jumpbox Operating System",
+          "description": "Choose between Linux or Windows"
+        },
+        "defaultValue": "Windows",
+        "allowedValues": [
+          "Windows",
+          "Linux"
+        ]
+      },
+      "jumpbox_logs-retention-in-days": {
+        "type": "int",
+        "metadata": {
+          "displayName": "Log retention in days",
+          "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely"
+        },
+        "defaultValue": 365
+      },
+      "active-directory-domain-services_domain-name": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Domain name",
+          "description": "AD domain name"
+        },
+        "defaultValue": "contoso.com"
+      },
+      "active-directory-domain-services_logs-retention-in-days": {
+        "type": "int",
+        "metadata": {
+          "displayName": "Log retention in days",
+          "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely"
+        },
+        "defaultValue": 365
+      },
+      "active-directory-domain-services_ad-domain-admin-username": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Domain admin username",
+          "description": "Domain user that has privileges to join a VM into a Domain"
+        },
+        "defaultValue": "domain-admin-user"
+      },
+      "resource-group-location": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Shared Services resource group location",
+          "description": "Location where Resource Group(s) and Resources to be created",
+          "strongType": "location"
+        }
+      }
+    },
+    "resourceGroups": {
+      "ResourceGroup": {
+        "name": "[concat(parameters('resourcePrefix'),'-sharedsvcs-rg')]",
+        "location": "[parameters('resource-group-location')]",
+        "metadata": {
+          "displayName": "Shared Services resource group"
+        },
+        "dependsOn": []
+      }
+    },
+    "targetScope": "subscription",
+    "status": {
+      "timeCreated": "2019-03-08T20:46:27+00:00",
+      "lastModified": "2019-04-02T21:14:14+00:00"
+    },
+    "displayName": "Azure Zero Trust Architecture",
+    "description": "Deploys and configures Azure infrastructure and policies mapped to Zero Trust Architecture (TIC 3.0)."
+  },
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34",
+  "type": "Microsoft.Blueprint/blueprints",
+  "name": "bce24a0e-4bb8-45bd-b705-8493e0180a34"
+}

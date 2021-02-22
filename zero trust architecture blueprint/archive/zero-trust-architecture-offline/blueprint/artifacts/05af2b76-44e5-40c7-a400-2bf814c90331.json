@@ -1,0 +1,12 @@
+{
+  "properties": {
+    "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/465f0161-0087-490a-9ad9-ad6217f4f43a",
+    "parameters": {},
+    "dependsOn": [],
+    "displayName": "Enforce automatic OS upgrade with app health checks on VMSS"
+  },
+  "kind": "policyAssignment",
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34/artifacts/05af2b76-44e5-40c7-a400-2bf814c90331",
+  "type": "Microsoft.Blueprint/blueprints/artifacts",
+  "name": "05af2b76-44e5-40c7-a400-2bf814c90331"
+}

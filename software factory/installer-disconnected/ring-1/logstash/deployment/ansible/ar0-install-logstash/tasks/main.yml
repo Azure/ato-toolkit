@@ -1,0 +1,92 @@
+---
+- name: Online Install of java
+  block:
+    - name: Install Java
+      yum:
+        name: java-1.8.0-openjdk
+        state: installed
+
+    - name: Add Elasticsearch GPG key
+      rpm_key:
+        key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        state: present
+
+    - name: Add Logstash Repository
+      template:
+        src: logstash.repo.j2
+        dest: /etc/yum.repos.d/logstash.repo
+        mode: 0644
+
+    - name: Install Logstash
+      yum:
+        name: logstash-{{ logstash.version }}
+        state: installed
+
+  when: OFFLINE_DEPLOYMENT == "false"
+
+- name: Offline Local Repository Install of java
+  block:
+    - name: Add Offline Local Repository
+      template:
+        src: local.repo.j2
+        dest: /etc/yum.repos.d/local.repo
+        mode: 0644
+
+    - name: Install Java Repo Offline
+      command: yum install -y java-1.8.0-openjdk.x86_64 --disablerepo="*" --enablerepo="localrepo"
+
+  when: OFFLINE_DEPLOYMENT == "true" and OFFLINE_YUM_REPO_URL != ""
+  become: true
+  become_user: root
+  ignore_errors: yes
+
+- name: Offline RPM Install of java
+  block:
+    - name: Copy Java RPM Files for Offline Deployment
+      copy:
+        src: bin/
+        dest: /usr/local/src
+        mode: 0644
+
+    - name: Remove yum Repo File
+      file:
+        path: /etc/yum.repos.d/
+        state: absent
+
+    - name: Install Java Packages - Offline
+      shell: yum --nogpgcheck localinstall -y *.rpm chdir=/usr/local/src/java/
+
+  when: OFFLINE_DEPLOYMENT == "true" and OFFLINE_YUM_REPO_URL == ""
+  become: true
+  become_user: root
+  ignore_errors: yes
+
+- name: Logstash RPM for Offline Deployment
+  block: 
+    - name: Copy Logstash RPM File for Offline Deployment
+      copy:
+        src: bin/
+        dest: /usr/local/src
+        mode: 0644
+
+    - name: Remove yum Repo File
+      file:
+        path: /etc/yum.repos.d/
+        state: absent
+
+    - name: Install Logstash - Offline
+      shell: yum --nogpgcheck localinstall -y logstash-*.rpm chdir=/usr/local/src/
+
+  when: OFFLINE_DEPLOYMENT == "true"
+
+- name: Ensure Logstash Is Started And Enabled On Boot
+  service:
+    name: logstash
+    state: started
+    enabled: true
+
+- name: Restart Logstash
+  service:
+    name: logstash
+    state: restarted
+    enabled: true

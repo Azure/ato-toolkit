@@ -1,0 +1,429 @@
+﻿{
+  "properties": {
+    "template": {
+      "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "resourcePrefix": {
+          "type": "string",
+          "metadata": {
+            "displayName": "Resource Group and Resource identifier. String to be used as prefix to all Resource Group and Resource names."
+          }
+        },
+        "logs-retention-in-days": {
+          "type": "int",
+          "defaultValue": 365,
+          "minValue": 0,
+          "maxValue": 365,
+          "metadata": {
+            "displayName": "Log retention in days",
+            "description": "Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely"
+          }
+        },
+        "noLogAnalytics": {
+          "type": "bool",
+          "defaultValue": true
+        }
+      },
+      "variables": {
+        "location": "[resourceGroup().location]",
+        "deployment-prefix": "[concat(parameters('resourcePrefix'), '-sharedsvcs')]",
+        "oms-workspace-resourceGroup": "[concat(variables('deployment-prefix'), '-rg')]",
+        "oms-workspace-name": "[concat(variables('deployment-prefix'), '-log')]",
+        "uniqueString": "[uniqueString(subscription().id, concat(variables('deployment-prefix'), '-log'))]",
+        "diagnostic-storageAccount-prefix": "[concat(replace(variables('deployment-prefix'), '-', ''), 'diag')]",
+        "diagnostic-storageAccount-name": "[toLower(substring(replace(concat(variables('diagnostic-storageAccount-prefix'), variables('uniqueString'), variables('uniqueString')), '-', ''), 0, 23) )]",
+        "network-watcher": "[concat('NetworkWatcher_', variables('location'))]",
+        "application-security-groups": [
+          {
+            "name": "jump-box"
+          },
+          {
+            "name": "app"
+          }
+        ],
+        "network-security-groups": [
+          {
+            "name": "default-deny",
+            "rules": [
+              {
+                "name": "DenyVnetInBound",
+                "properties": {
+                  "protocol": "*",
+                  "sourcePortRange": "*",
+                  "destinationPortRange": "*",
+                  "sourceAddressPrefix": "*",
+                  "destinationAddressPrefix": "VirtualNetwork",
+                  "access": "Deny",
+                  "priority": 4000,
+                  "direction": "Inbound",
+                  "sourcePortRanges": [],
+                  "destinationPortRanges": [],
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": []
+                }
+              },
+              {
+                "name": "DenyAllOutBound",
+                "properties": {
+                  "protocol": "*",
+                  "sourcePortRange": "*",
+                  "destinationPortRange": "*",
+                  "sourceAddressPrefix": "*",
+                  "destinationAddressPrefix": "*",
+                  "access": "Deny",
+                  "priority": 4000,
+                  "direction": "Outbound",
+                  "sourcePortRanges": [],
+                  "destinationPortRanges": [],
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": []
+                }
+              }
+            ]
+          },
+          {
+            "name": "sharedsvcs-subnet",
+            "rules": [
+              {
+                "name": "AllowAzureCloudOutBound",
+                "properties": {
+                  "protocol": "TCP",
+                  "sourcePortRange": "*",
+                  "destinationPortRange": "443",
+                  "sourceAddressPrefix": "VirtualNetwork",
+                  "destinationAddressPrefix": "AzureCloud",
+                  "access": "Allow",
+                  "priority": 3600,
+                  "direction": "Outbound",
+                  "sourcePortRanges": [],
+                  "destinationPortRanges": [],
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": []
+                }
+              }
+            ]
+          },
+          {
+            "name": "app-subnet",
+            "rules": [
+              {
+                "name": "AllowJumpBoxInBound",
+                "properties": {
+                  "protocol": "TCP",
+                  "sourcePortRange": "*",
+                  "destinationPortRange": "",
+                  "sourceAddressPrefix": "",
+                  "destinationAddressPrefix": "",
+                  "access": "Allow",
+                  "priority": 3050,
+                  "direction": "Inbound",
+                  "sourcePortRanges": [],
+                  "destinationPortRanges": [
+                    "3389",
+                    "22"
+                  ],
+                  "destinationAddressPrefixes": [],
+                  "sourceAddressPrefixes": [],
+                  "sourceApplicationSecurityGroups": [
+                    {
+                      "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-jump-box-asg'))]"
+                    }
+                  ],
+                  "destinationApplicationSecurityGroups": [
+                    {
+                      "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-app-asg'))]"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "AllowAzureCloudOutBound",
+                "properties": {
+                  "protocol": "TCP",
+                  "sourcePortRange": "*",
+                  "destinationPortRange": "443",
+                  "sourceAddressPrefix": "VirtualNetwork",
+                  "destinationAddressPrefix": "AzureCloud",
+                  "access": "Allow",
+                  "priority": 3600,
+                  "direction": "Outbound",
+                  "sourcePortRanges": [],
+                  "destinationPortRanges": [],
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": []
+                }
+              }
+            ]
+          },
+          {
+            "name": "bastion-subnet",
+            "rules": [
+              {
+                "name": "AllowVnetInbound",
+                "properties": {
+                  "protocol": "TCP",
+                  "sourcePortRange": "*",
+                  "destinationPortRange": "",
+                  "sourceAddressPrefix": "VirtualNetwork",
+                  "destinationAddressPrefix": "",
+                  "access": "Allow",
+                  "priority": 3050,
+                  "direction": "Inbound",
+                  "sourcePortRanges": [],
+                  "destinationPortRanges": [
+                    "3389",
+                    "22"
+                  ],
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": [],
+                  "sourceApplicationSecurityGroups": [],
+                  "destinationApplicationSecurityGroups": [
+                    {
+                      "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-jump-box-asg'))]"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "AllowJumpBoxOutBound",
+                "properties": {
+                  "protocol": "TCP",
+                  "sourcePortRange": "*",
+                  "destinationPortRange": "",
+                  "sourceAddressPrefix": "",
+                  "destinationAddressPrefix": "",
+                  "access": "Allow",
+                  "priority": 3550,
+                  "direction": "Outbound",
+                  "sourcePortRanges": [],
+                  "destinationPortRanges": [
+                    "22",
+                    "3389"
+                  ],
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": [],
+                  "sourceApplicationSecurityGroups": [
+                    {
+                      "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-jump-box-asg'))]"
+                    }
+                  ],
+                  "destinationApplicationSecurityGroups": [
+                    {
+                      "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', concat(variables('deployment-prefix'), '-app-asg'))]"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "AllowAzureCloudOutBound",
+                "properties": {
+                  "protocol": "TCP",
+                  "sourcePortRange": "*",
+                  "destinationPortRange": "443",
+                  "sourceAddressPrefix": "VirtualNetwork",
+                  "destinationAddressPrefix": "AzureCloud",
+                  "access": "Allow",
+                  "priority": 3600,
+                  "direction": "Outbound",
+                  "sourcePortRanges": [],
+                  "destinationPortRanges": [],
+                  "sourceAddressPrefixes": [],
+                  "destinationAddressPrefixes": []
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "resources": [
+        {
+          "type": "Microsoft.Network/applicationSecurityGroups",
+          "apiVersion": "2019-09-01",
+          "name": "[concat(variables('deployment-prefix'), '-', variables('application-security-groups')[copyIndex('asgLoop')].name, '-asg')]",
+          "location": "[variables('location')]",
+          "copy": {
+            "count": "[length(variables('application-security-groups'))]",
+            "name": "asgLoop"
+          },
+          "properties": {}
+        },
+        {
+          "type": "Microsoft.Network/networkSecurityGroups",
+          "apiVersion": "2019-09-01",
+          "name": "[concat(variables('deployment-prefix'), '-', variables('network-security-groups')[copyIndex()].name, '-nsg')]",
+          "location": "[resourceGroup().location]",
+          "copy": {
+            "count": "[length(variables('network-security-groups'))]",
+            "name": "nsgLoop"
+          },
+          "dependsOn": [
+            "asgLoop"
+          ],
+          "properties": {
+            "securityRules": "[concat(if(equals(copyIndex('nsgLoop'), 0), json('[]'), variables('network-security-groups')[0].rules), variables('network-security-groups')[copyIndex('nsgLoop')].rules)]"
+          },
+          "resources": []
+        },
+        {
+          "type": "Microsoft.Network/networkSecurityGroups/providers/diagnosticSettings",
+          "apiVersion": "2017-05-01-preview",
+          "name": "[concat(variables('deployment-prefix'), '-', variables('network-security-groups')[copyIndex()].name, '-nsg','/Microsoft.Insights/setbypolicy')]",
+          "location": "[variables('location')]",
+          "copy": {
+            "count": "[length(variables('network-security-groups'))]",
+            "name": "nsgDiagnosticLoop"
+          },
+          "dependsOn": [
+            "nsgLoop"
+          ],
+          "properties": {
+            "storageAccountId": "[resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', variables('diagnostic-storageAccount-name'))]",
+            "workspaceId": "[if(parameters('noLogAnalytics'), json('null'), resourceId(variables('oms-workspace-resourceGroup'), 'Microsoft.OperationalInsights/workspaces', variables('oms-workspace-name')))]",
+            "logs": [
+              {
+                "category": "NetworkSecurityGroupEvent",
+                "enabled": true,
+                "retentionPolicy": {
+                  "enabled": true,
+                  "days": "[parameters('logs-retention-in-days')]"
+                }
+              },
+              {
+                "category": "NetworkSecurityGroupRuleCounter",
+                "enabled": true,
+                "retentionPolicy": {
+                  "enabled": true,
+                  "days": "[parameters('logs-retention-in-days')]"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "Microsoft.Resources/deployments",
+          "apiVersion": "2019-09-01",
+          "name": "[concat('nested.configure.nsg-flow-logs-', variables('network-security-groups')[copyIndex('nsgFlowLogsLoop')].name, '-nsg')]",
+          "copy": {
+            "count": "[length(variables('network-security-groups'))]",
+            "name": "nsgFlowLogsLoop"
+          },
+          "dependsOn": [
+            "nsgLoop"
+          ],
+          "resourceGroup": "NetworkWatcherRG",
+          "subscriptionId": "[subscription().subscriptionId]",
+          "properties": {
+            "mode": "Incremental",
+            "expressionEvaluationOptions": {
+              "scope": "inner"
+            },
+            "template": {
+              "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+              "contentVersion": "1.0.0.0",
+              "parameters": {
+                "network-security-group-name": {
+                  "type": "string"
+                },
+                "deployment-prefix": {
+                  "type": "string"
+                },
+                "nsg-resource-group": {
+                  "type": "string"
+                },
+                "nsg-resource-group-location": {
+                  "type": "string"
+                },
+                "oms-workspace-resourceGroup": {
+                  "type": "string"
+                },
+                "oms-workspace-name": {
+                  "type": "string"
+                },
+                "diagnostic-storageAccount-name": {
+                  "type": "string"
+                },
+                "network-watcher": {
+                  "type": "string"
+                },
+                "noLogAnalytics": {
+                  "type": "bool"
+                }
+              },
+              "variables": {},
+              "resources": [
+                {
+                  "type": "Microsoft.Network/networkWatchers/FlowLogs",
+                  "apiVersion": "2019-11-01",
+                  "name": "[concat(parameters('network-watcher'),'/', parameters('network-security-group-name'), '-flow')]",
+                  "location": "[parameters('nsg-resource-group-location')]",
+                  "properties": {
+                    "targetResourceId": "[resourceId(parameters('nsg-resource-group'),'Microsoft.Network/networkSecurityGroups', concat(parameters('deployment-prefix'), '-', parameters('network-security-group-name'), '-nsg'))]",
+                    "storageId": "[resourceId(parameters('oms-workspace-resourceGroup'), 'Microsoft.Storage/storageAccounts', parameters('diagnostic-storageAccount-name'))]",
+                    "enabled": true,
+                    "retentionPolicy": {
+                      "days": 30,
+                      "enabled": true
+                    },
+                    "format": {
+                      "type": "JSON",
+                      "version": 2
+                    }
+                  }
+                }
+              ]
+            },
+            "parameters": {
+              "network-security-group-name": {
+                "value": "[variables('network-security-groups')[copyIndex('nsgFlowLogsLoop')].name]"
+              },
+              "deployment-prefix": {
+                "value": "[variables('deployment-prefix')]"
+              },
+              "nsg-resource-group": {
+                "value": "[resourceGroup().name]"
+              },
+              "nsg-resource-group-location": {
+                "value": "[variables('location')]"
+              },
+              "oms-workspace-resourceGroup": {
+                "value": "[variables('oms-workspace-resourceGroup')]"
+              },
+              "oms-workspace-name": {
+                "value": "[variables('oms-workspace-name')]"
+              },
+              "diagnostic-storageAccount-name": {
+                "value": "[variables('diagnostic-storageAccount-name')]"
+              },
+              "network-watcher": {
+                "value": "[variables('network-watcher')]"
+              },
+              "noLogAnalytics": {
+                "value": "[parameters('noLogAnalytics')]"
+              }
+            }
+          }
+        }
+      ],
+      "outputs": {}
+    },
+    "parameters": {
+      "resourcePrefix": {
+        "value": "[parameters('resourcePrefix')]"
+      },
+      "logs-retention-in-days": {
+        "value": "[parameters('nsg_logs-retention-in-days')]"
+      }
+    },
+    "dependsOn": [
+      "log-analytics"
+    ],
+    "resourceGroup": "ResourceGroup",
+    "displayName": "Network Security Group template",
+    "description": ""
+  },
+  "kind": "template",
+  "id": "/providers/Microsoft.Blueprint/blueprints/bce24a0e-4bb8-45bd-b705-8493e0180a34/artifacts/nsg",
+  "type": "Microsoft.Blueprint/blueprints/artifacts",
+  "name": "nsg"
+}

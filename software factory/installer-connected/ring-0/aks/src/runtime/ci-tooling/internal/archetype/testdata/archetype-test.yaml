@@ -1,0 +1,9 @@
+---
+apiVersion: c12.microsoft.com/v1
+kind: ArchetypeConfig
+metadata:
+  name: simple-webservice
+spec:
+  versions:
+    - 1.0.0
+    - 1.1.0
