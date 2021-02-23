@@ -340,7 +340,7 @@
                         },
                         "protectedSettings": {
                         "storageAccountName": "[variables('storageAccountName')]",
-                        "storageAccountKey": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', listkeys(variables('accountid'), '2019-06-01').keys[0])]",
+                        "storageAccountKey": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', listkeys(variables('accountid'), '2019-06-01').keys[0].value)]",
                         "storageAccountEndPoint": "[concat('https://', environment().suffixes.storage)]"
                         }
                     }
