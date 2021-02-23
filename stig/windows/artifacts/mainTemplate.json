@@ -338,7 +338,7 @@
                         },
                         "protectedSettings": {
                         "storageAccountName": "csu10033fffaa3e0854",
-                        "storageAccountKey": "[listkeys(variables('accountid'), '2019-06-01').keys[0].value]",
+                        "storageAccountKey": "[listkeys(variables('accountid'), '2019-06-01').keys[0]]",
                         "storageAccountEndPoint": "[concat('https://', environment().suffixes.storage)]"
                         }
                     }
