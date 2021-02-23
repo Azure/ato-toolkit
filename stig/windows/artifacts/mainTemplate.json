@@ -334,10 +334,10 @@
                         "autoUpgradeMinorVersion": true,
                         "settings": {
                         "xmlCfg": "[base64(concat(variables('wadcfgxstart'), variables('wadmetricsresourceid'), variables('wadcfgxend')))]",
-                        "storageAccount": "[parameters('diagnosticStorageResourceId')]"
+                        "storageAccount": "testsg"
                         },
                         "protectedSettings": {
-                        "storageAccountName": "[parameters('diagnosticStorageResourceId')]",
+                        "storageAccountName": "testsg",
                         "storageAccountKey": "[listkeys(variables('accountid'), '2019-06-01').keys[0].value]",
                         "storageAccountEndPoint": "[concat('https://', environment().suffixes.storage)]"
                         }
