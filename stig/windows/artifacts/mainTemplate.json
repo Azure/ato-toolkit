@@ -154,13 +154,6 @@
             "metadata": {
                 "description": "(Optional) Log Analytics workspace resource id."
             }
-        },
-        "diagnosticsStorageResourceGroup": {
-            "type": "string",
-            "defaultValue": "[resourceGroup().name]",
-            "metadata": {
-                "description": "The resource group for the storage account specified in diagnosticsStorageAccountName"
-            }
         }
     },
     "variables": {
