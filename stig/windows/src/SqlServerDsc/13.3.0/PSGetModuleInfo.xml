@@ -47,14 +47,26 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">Workflow</S>
+            <S N="Key">Cmdlet</S>
             <Obj N="Value" RefId="4">
               <TNRef RefId="1" />
               <LST />
             </Obj>
           </En>
           <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
             <S N="Key">Command</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
             <Ref N="Value" RefId="4" />
           </En>
           <En>
@@ -102,18 +114,6 @@
               </LST>
             </Obj>
           </En>
-          <En>
-            <S N="Key">Function</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">Cmdlet</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">RoleCapability</S>
-            <Ref N="Value" RefId="4" />
-          </En>
         </DCT>
       </Obj>
       <Nil N="PowerShellGetFormatVersion" />
@@ -137,15 +137,15 @@
           <S N="releaseNotes"># Change log for SqlServerDsc_x000D__x000A__x000D__x000A_The format is based on and uses the types of changes according to [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),_x000D__x000A_and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)._x000D__x000A__x000D__x000A_For older change log history see the [historic changelog](HISTORIC_CHANGELOG.md)._x000D__x000A__x000D__x000A_## [Unreleased]_x000D__x000A__x000D__x000A_### Added_x000D__x000A__x000D__x000A_- SqlServerDsc_x000D__x000A_  - Added continuous delivery with a new CI pipeline._x000D__x000A_    - Update build.ps1 from latest template._x000D__x000A__x000D__x000A_### Changed_x000D__x000A__x000D__x000A_- SqlServerDsc_x000D__x000A_  - Add .gitattributes file to checkout file correctly with CRLF._x000D__x000A_  - Updated .vscode/analyzersettings.psd1 file to correct use PSSA rules_x000D__x000A_    and custom rules in VS Code._x000D__x000A_  - Fix hashtables to align with style guideline ([issue #1437](https://github.com/PowerShell/SqlServerDsc/issues/1437))._x000D__x000A_  - Updated most examples to remove the need for the variable `$ConfigurationData`,_x000D__x000A_    and fixed style issues._x000D__x000A_  - Ignore commit in `GitVersion.yml` to force the correct initial release._x000D__x000A_  - Set a display name on all the jobs and tasks in the CI pipeline._x000D__x000A_  - Removing file 'Tests.depend.ps1' as it is no longer required._x000D__x000A_- SqlServerMaxDop_x000D__x000A_  - Fix line endings in code which did not use the correct format._x000D__x000A_- SqlAlwaysOnService_x000D__x000A_  - The integration test has been temporarily disabled because when_x000D__x000A_    the cluster feature is installed it requires a reboot on the_x000D__x000A_    Windows Server 2019 build worker._x000D__x000A_- SqlDatabaseRole_x000D__x000A_  - Update unit test to have the correct description on the `Describe`-block_x000D__x000A_    for the test of `Set-TargetResource`._x000D__x000A_- SqlServerRole_x000D__x000A_  - Add support for nested role membership ([issue #1452](https://github.com/dsccommunity/SqlServerDsc/issues/1452))_x000D__x000A_  - Removed use of case-sensitive Contains() function when evalutating role membership._x000D__x000A_    ([issue #1153](https://github.com/dsccommunity/SqlServerDsc/issues/1153))_x000D__x000A_  - Refactored mocks and unit tests to increase performance. ([issue #979](https://github.com/dsccommunity/SqlServerDsc/issues/979))_x000D__x000A__x000D__x000A_### Fixed_x000D__x000A__x000D__x000A_- SqlServerDsc_x000D__x000A_  - Fixed unit tests to call the function `Invoke-TestSetup` outside the_x000D__x000A_    try-block._x000D__x000A_  - Update GitVersion.yml with the correct regular expression._x000D__x000A_  - Fix import statement in all tests, making sure it throws if module_x000D__x000A_    DscResource.Test cannot be imported._x000D__x000A_- SqlAlwaysOnService_x000D__x000A_  - When failing to enable AlwaysOn the resource should now fail with an_x000D__x000A_    error ([issue #1190](https://github.com/dsccommunity/SqlServerDsc/issues/1190))._x000D__x000A_- SqlAgListener_x000D__x000A_  - Fix IPv6 addresses failing Test-TargetResource after listener creation.</S>
           <S N="isLatestVersion">False</S>
           <S N="isAbsoluteLatestVersion">False</S>
-          <S N="versionDownloadCount">465719</S>
-          <S N="downloadCount">2879184</S>
+          <S N="versionDownloadCount">465977</S>
+          <S N="downloadCount">2950176</S>
           <S N="packageSize">200285</S>
           <S N="published">1/17/2020 8:26:30 PM -05:00</S>
           <S N="created">1/17/2020 8:26:30 PM -05:00</S>
-          <S N="lastUpdated">2/19/2021 9:59:32 PM -05:00</S>
+          <S N="lastUpdated">3/1/2021 9:51:16 PM -05:00</S>
           <S N="tags">DesiredStateConfiguration DSC DSCResourceKit DSCResource PSModule PSDscResource_SqlAG PSDscResource_SqlAGDatabase PSDscResource_SqlAgentAlert PSDscResource_SqlAgentFailsafe PSDscResource_SqlAgentOperator PSDscResource_SqlAGListener PSDscResource_SqlAGReplica PSDscResource_SqlAlias PSDscResource_SqlAlwaysOnService PSDscResource_SqlDatabase PSDscResource_SqlDatabaseDefaultLocation PSDscResource_SqlDatabaseOwner PSDscResource_SqlDatabasePermission PSDscResource_SqlDatabaseRecoveryModel PSDscResource_SqlDatabaseRole PSDscResource_SqlDatabaseUser PSDscResource_SqlRS PSDscResource_SqlRSSetup PSDscResource_SqlScript PSDscResource_SqlScriptQuery PSDscResource_SqlServerConfiguration PSDscResource_SqlServerDatabaseMail PSDscResource_SqlServerEndpoint PSDscResource_SqlServerEndpointPermission PSDscResource_SqlServerEndpointState PSDscResource_SqlServerLogin PSDscResource_SqlServerMaxDop PSDscResource_SqlServerMemory PSDscResource_SqlServerNetwork PSDscResource_SqlServerPermission PSDscResource_MSFT_SqlServerReplication PSDscResource_SqlServerRole PSDscResource_SqlServerSecureConnection PSDscResource_SqlServiceAccount PSDscResource_SqlSetup PSDscResource_SqlWaitForAG PSDscResource_SqlWindowsFirewall PSIncludes_DscResource</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-02-19T21:59:32Z</S>
+          <S N="updated">2021-03-01T21:51:16Z</S>
           <S N="NormalizedVersion">13.3.0</S>
           <S N="Authors">DSC Community</S>
           <S N="IsPrerelease">false</S>
@@ -157,7 +157,7 @@
           <S N="CompanyName">DSC Community</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\SqlServerDsc\13.3.0</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\chairlift_master\project-chairlift\windows\src\SqlServerDsc\13.3.0</S>
     </MS>
   </Obj>
 </Objs>

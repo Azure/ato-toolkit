@@ -49,14 +49,26 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">Workflow</S>
+            <S N="Key">Cmdlet</S>
             <Obj N="Value" RefId="4">
               <TNRef RefId="1" />
               <LST />
             </Obj>
           </En>
           <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
             <S N="Key">Command</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
             <Ref N="Value" RefId="4" />
           </En>
           <En>
@@ -70,18 +82,6 @@
                 <S>UserRightsAssignment</S>
               </LST>
             </Obj>
-          </En>
-          <En>
-            <S N="Key">Function</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">Cmdlet</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">RoleCapability</S>
-            <Ref N="Value" RefId="4" />
           </En>
         </DCT>
       </Obj>
@@ -106,15 +106,15 @@
           <S N="releaseNotes">* Changes to SecurityPolicyDsc_x000D__x000A_  * Opt-in to the following DSC Resource Common Meta Tests:_x000D__x000A_    * Common Tests - Validate Module Files_x000D__x000A_    * Common Tests - Validate Script Files_x000D__x000A_    * Common Tests - Validate Markdown Files_x000D__x000A_    * Common Tests - Required Script Analyzer Rules_x000D__x000A_    * Common Tests - Flagged Script Analyzer Rules_x000D__x000A_    * Common Tests - New Error-Level Script Analyzer Rules_x000D__x000A_    * Common Tests - Custom Script Analyzer Rules_x000D__x000A_    * Common Tests - Validate Markdown Links_x000D__x000A_    * Common Tests - Relative Path Length_x000D__x000A_    * Common Tests - Validate Example Files_x000D__x000A_    * Common Tests - Validate Example Files To Be Published_x000D__x000A_  * Fix keywords to lower-case to align with guideline.</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">False</S>
-          <S N="versionDownloadCount">167467</S>
-          <S N="downloadCount">381269</S>
+          <S N="versionDownloadCount">172708</S>
+          <S N="downloadCount">386883</S>
           <S N="packageSize">75172</S>
           <S N="published">9/19/2019 2:32:09 AM -04:00</S>
           <S N="created">9/19/2019 2:32:09 AM -04:00</S>
-          <S N="lastUpdated">2/19/2021 10:39:33 PM -05:00</S>
+          <S N="lastUpdated">3/1/2021 9:51:16 PM -05:00</S>
           <S N="tags">DesiredStateConfiguration DSC DSCResourceKit DSCResource Secedit SecurityPolicyDsc PSModule PSDscResource_AccountPolicy PSDscResource_SecurityOption PSDscResource_SecurityTemplate PSDscResource_UserRightsAssignment PSIncludes_DscResource</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-02-19T22:39:33Z</S>
+          <S N="updated">2021-03-01T21:51:16Z</S>
           <S N="NormalizedVersion">2.10.0</S>
           <S N="Authors">Microsoft Corporation</S>
           <S N="IsPrerelease">false</S>
@@ -125,7 +125,7 @@
           <S N="CompanyName">Microsoft Corporation</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\SecurityPolicyDsc\2.10.0.0</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\chairlift_master\project-chairlift\windows\src\SecurityPolicyDsc\2.10.0.0</S>
     </MS>
   </Obj>
 </Objs>

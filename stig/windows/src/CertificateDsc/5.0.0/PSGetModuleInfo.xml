@@ -48,14 +48,26 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">Workflow</S>
+            <S N="Key">Cmdlet</S>
             <Obj N="Value" RefId="4">
               <TNRef RefId="1" />
               <LST />
             </Obj>
           </En>
           <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
             <S N="Key">Command</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
             <Ref N="Value" RefId="4" />
           </En>
           <En>
@@ -70,18 +82,6 @@
                 <S>WaitForCertificateServices</S>
               </LST>
             </Obj>
-          </En>
-          <En>
-            <S N="Key">Function</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">Cmdlet</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">RoleCapability</S>
-            <Ref N="Value" RefId="4" />
           </En>
         </DCT>
       </Obj>
@@ -104,17 +104,17 @@
           <S N="description">DSC resources for managing certificates on a Windows Server.</S>
           <S N="requireLicenseAcceptance">False</S>
           <S N="releaseNotes">## [5.0.0] - 2020-10-16_x000A__x000D__x000A_### Changed_x000D__x000A__x000D__x000A_- Corrected incorrectly located entries in `CHANGELOG.MD`._x000D__x000A_- Fix bug `Find-Certificate` when invalid certificate path is passed - fixes_x000D__x000A_  [Issue #208](https://github.com/dsccommunity/CertificateDsc/issues/208)._x000D__x000A_- CertReq:_x000D__x000A_  - Added `Get-CertificateCommonName` function as a fix for multiple_x000D__x000A_    certificates being issued when having a third party CA which doesn't_x000D__x000A_    format the Issuer CN in the same order as a MS CA - fixes [Issue #207](https://github.com/dsccommunity/CertificateDsc/issues/207)._x000D__x000A_  - Updated `Compare-CertificateIssuer` to use the new_x000D__x000A_    `Get-CertificateCommonName` function._x000D__x000A_  - Added check for X500 subject name in Get-TargetResource, which already_x000D__x000A_    exists in Test- and Set-TargetResource - fixes [Issue #210](https://github.com/dsccommunity/CertificateDsc/issues/210)._x000D__x000A_  - Corrected name of working path to remove `x` - fixes [Issue #211](https://github.com/dsccommunity/CertificateDsc/issues/211)._x000D__x000A_- BREAKING CHANGE: Changed resource prefix from MSFT to DSC._x000D__x000A_- Updated to use continuous delivery pattern using Azure DevOps - Fixes_x000D__x000A_  [Issue #215](https://github.com/dsccommunity/CertificateDsc/issues/215)._x000D__x000A_- Updated Examples and Module Manifest to be DSC Community from Microsoft._x000D__x000A_- Fix style issues in `Certificate.PDT` and `Certificate.Common` modules._x000D__x000A_- Update badges in README.MD to refer to correct pipeline._x000D__x000A_- Correct version number in `GitVersion.yml` file._x000D__x000A_- Change Azure DevOps Pipeline definition to include `source/*` - Fixes [Issue #226](https://github.com/dsccommunity/CertificateDsc/issues/226)._x000D__x000A_- Updated pipeline to use `latest` version of `ModuleBuilder` - Fixes [Issue #226](https://github.com/dsccommunity/CertificateDsc/issues/226)._x000D__x000A_- Merge `HISTORIC_CHANGELOG.md` into `CHANGELOG.md` - Fixes [Issue #227](https://github.com/dsccommunity/CertificateDsc/issues/227)._x000D__x000A_- Fixed build failures caused by changes in `ModuleBuilder` module v1.7.0_x000D__x000A_  by changing `CopyDirectories` to `CopyPaths` - Fixes [Issue #230](https://github.com/dsccommunity/CertificateDsc/issues/230)._x000D__x000A_- Updated to use the common module _DscResource.Common_ - Fixes [Issue #229](https://github.com/dsccommunity/CertificateDsc/issues/229)._x000D__x000A_- Pin `Pester` module to 4.10.1 because Pester 5.0 is missing code_x000D__x000A_  coverage - Fixes [Issue #233](https://github.com/dsccommunity/CertificateDsc/issues/233)._x000D__x000A_- Added a catch for certreq generic errors which fixes [Issue #224](https://github.com/dsccommunity/CertificateDsc/issues/224)_x000D__x000A_- CertificateDsc_x000D__x000A_  - Automatically publish documentation to GitHub Wiki - Fixes [Issue #235](https://github.com/dsccommunity/CertificateDsc/issues/235)._x000D__x000A__x000D__x000A_### Added_x000D__x000A__x000D__x000A_- PfxImport:_x000D__x000A_  - Added example showing importing private key using `PsDscRunAsCredential`_x000D__x000A_    to specify an administrator account - Fixes [Issue #213](https://github.com/dsccommunity/CertificateDsc/issues/213).</S>
-          <S N="isLatestVersion">True</S>
+          <S N="isLatestVersion">False</S>
           <S N="isAbsoluteLatestVersion">False</S>
-          <S N="versionDownloadCount">16452</S>
-          <S N="downloadCount">15444108</S>
+          <S N="versionDownloadCount">17616</S>
+          <S N="downloadCount">15913971</S>
           <S N="packageSize">66584</S>
           <S N="published">10/16/2020 5:47:34 AM -04:00</S>
           <S N="created">10/16/2020 5:47:34 AM -04:00</S>
-          <S N="lastUpdated">2/19/2021 10:34:33 PM -05:00</S>
+          <S N="lastUpdated">3/1/2021 9:51:16 PM -05:00</S>
           <S N="tags">DesiredStateConfiguration DSC DSCResource Certificate PKI PSModule</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-02-19T22:34:33Z</S>
+          <S N="updated">2021-03-01T21:51:16Z</S>
           <S N="NormalizedVersion">5.0.0</S>
           <S N="Authors">DSC Community</S>
           <S N="IsPrerelease">false</S>
@@ -127,7 +127,7 @@
           <S N="CompanyName">DSC Community</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\CertificateDsc\5.0.0</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\chairlift_master\project-chairlift\windows\src\CertificateDsc\5.0.0</S>
     </MS>
   </Obj>
 </Objs>

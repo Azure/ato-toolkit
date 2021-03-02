@@ -1,6 +1,8 @@
 . "$PSScriptRoot\artifacts\RequiredModules.ps1"
 $srcPath = "$PSScriptRoot\src"
 
+Get-ChildItem $srcPath -Recurse | Where-Object Name -ne "WindowsServer.ps1" | Remove-Item -Confirm:$false -Force -Recurse
+
 $requiredModules = Get-RequiredModules
 foreach ($requiredModule in $requiredModules) {
     Write-Host "Downloading "$($requiredModule.ModuleName)" to $srcPath folder..."

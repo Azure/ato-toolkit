@@ -46,14 +46,26 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">Workflow</S>
+            <S N="Key">Cmdlet</S>
             <Obj N="Value" RefId="4">
               <TNRef RefId="1" />
               <LST />
             </Obj>
           </En>
           <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
             <S N="Key">Command</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
             <Ref N="Value" RefId="4" />
           </En>
           <En>
@@ -80,18 +92,6 @@
               </LST>
             </Obj>
           </En>
-          <En>
-            <S N="Key">Function</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">Cmdlet</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">RoleCapability</S>
-            <Ref N="Value" RefId="4" />
-          </En>
         </DCT>
       </Obj>
       <Nil N="PowerShellGetFormatVersion" />
@@ -115,27 +115,28 @@
           <S N="releaseNotes">## [8.4.0] - 2020-08-03_x000A__x000D__x000A_### Changed_x000D__x000A__x000D__x000A_- ComputerManagementDsc_x000D__x000A_  - Automatically publish documentation to GitHub Wiki - Fixes [Issue #342](https://github.com/dsccommunity/ComputerManagementDsc/issues/342).</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">False</S>
-          <S N="versionDownloadCount">104253</S>
-          <S N="downloadCount">28356381</S>
+          <S N="versionDownloadCount">113455</S>
+          <S N="downloadCount">29197956</S>
           <S N="packageSize">106467</S>
           <S N="published">8/3/2020 7:05:04 AM -04:00</S>
           <S N="created">8/3/2020 7:05:04 AM -04:00</S>
-          <S N="lastUpdated">2/19/2021 10:39:33 PM -05:00</S>
-          <S N="tags">DesiredStateConfiguration DSC DSCResource PSModule PSDscResource_Computer PSDscResource_OfflineDomainJoin PSDscResource_PendingReboot PSDscResource_PowerPlan PSDscResource_PowerShellExecutionPolicy PSDscResource_RemoteDesktopAdmin PSDscResource_ScheduledTask PSDscResource_SmbServerConfiguration PSDscResource_SmbShare PSDscResource_SystemLocale PSDscResource_TimeZone PSDscResource_VirtualMemory PSDscResource_WindowsEventLog PSDscResource_WindowsCapability PSDscResource_IEEnhancedSecurityConfiguration PSDscResource_UserAccountControl PSIncludes_DscResource</S>
+          <S N="lastUpdated">3/1/2021 9:51:16 PM -05:00</S>
+          <S N="tags">DesiredStateConfiguration DSC DSCResource PSModule</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-02-19T22:39:33Z</S>
+          <S N="updated">2021-03-01T21:51:16Z</S>
           <S N="NormalizedVersion">8.4.0</S>
           <S N="Authors">DSC Community</S>
           <S N="IsPrerelease">false</S>
           <S N="ItemType">Module</S>
           <S N="FileList">ComputerManagementDsc.nuspec|ComputerManagementDsc.psd1|en-US\about_ComputerManagementDsc.help.txt|Modules\ComputerManagementDsc.Common\ComputerManagementDsc.Common.psm1|Modules\ComputerManagementDsc.Common\SetTimeZone.cs|DSCResources\DSC_PowerShellExecutionPolicy\DSC_PowerShellExecutionPolicy.schema.mof|DSCResources\DSC_PowerShellExecutionPolicy\README.md|DSCResources\DSC_PowerShellExecutionPolicy\DSC_PowerShellExecutionPolicy.psm1|DSCResources\DSC_PowerPlan\README.md|DSCResources\DSC_PowerPlan\DSC_PowerPlan.psm1|DSCResources\DSC_PowerPlan\DSC_PowerPlan.schema.mof|DSCResources\DSC_Computer\README.md|DSCResources\DSC_Computer\DSC_Computer.schema.mof|DSCResources\DSC_Computer\DSC_Computer.psm1|DSCResources\DSC_IEEnhancedSecurityConfiguration\README.md|DSCResources\DSC_IEEnhancedSecurityConfiguration\DSC_IEEnhancedSecurityConfiguration.schema.mof|DSCResources\DSC_IEEnhancedSecurityConfiguration\DSC_IEEnhancedSecurityConfiguration.psm1|DSCResources\DSC_PendingReboot\README.md|DSCResources\DSC_PendingReboot\DSC_PendingReboot.schema.mof|DSCResources\DSC_PendingReboot\DSC_PendingReboot.psm1|DSCResources\DSC_WindowsEventLog\README.md|DSCResources\DSC_WindowsEventLog\DSC_WindowsEventLog.psm1|DSCResources\DSC_WindowsEventLog\DSC_WindowsEventLog.schema.mof|DSCResources\DSC_SmbShare\DSC_SmbShare.psm1|DSCResources\DSC_SmbShare\README.md|DSCResources\DSC_SmbShare\DSC_SmbShare.schema.mof|DSCResources\DSC_UserAccountControl\README.md|DSCResources\DSC_UserAccountControl\DSC_UserAccountControl.psm1|DSCResources\DSC_UserAccountControl\DSC_UserAccountControl.schema.mof|DSCResources\DSC_ScheduledTask\README.md|DSCResources\DSC_ScheduledTask\DSC_ScheduledTask.psm1|DSCResources\DSC_ScheduledTask\DSC_ScheduledTask.schema.mof|DSCResources\DSC_TimeZone\README.md|DSCResources\DSC_TimeZone\DSC_TimeZone.schema.mof|DSCResources\DSC_TimeZone\DSC_TimeZone.psm1|DSCResources\DSC_SystemLocale\README.md|DSCResources\DSC_SystemLocale\DSC_SystemLocale.schema.mof|DSCResources\DSC_SystemLocale\DSC_SystemLocale.psm1|DSCResources\DSC_VirtualMemory\README.md|DSCResources\DSC_VirtualMemory\DSC_VirtualMemory.psm1|DSCResources\DSC_VirtualMemory\DSC_VirtualMemory.schema.mof|DSCResources\DSC_SmbServerConfiguration\README.md|DSCResources\DSC_SmbServerConfiguration\DSC_SmbServerConfiguration.psm1|DSCResources\DSC_SmbServerConfiguration\DSC_SmbServerConfiguration.data.psd1|DSCResources\DSC_SmbServerConfiguration\DSC_SmbServerConfiguration.schema.mof|DSCResources\DSC_OfflineDomainJoin\README.md|DSCResources\DSC_OfflineDomainJoin\DSC_OfflineDomainJoin.psm1|DSCResources\DSC_OfflineDomainJoin\DSC_OfflineDomainJoin.schema.mof|DSCResources\DSC_WindowsCapability\README.md|DSCResources\DSC_WindowsCapability\DSC_WindowsCapability.psm1|DSCResources\DSC_WindowsCapability\DSC_WindowsCapability.schema.mof|DSCResources\DSC_RemoteDesktopAdmin\DSC_RemoteDesktopAdmin.schema.mof|DSCResources\DSC_RemoteDesktopAdmin\README.md|DSCResources\DSC_RemoteDesktopAdmin\DSC_RemoteDesktopAdmin.psm1|Modules\ComputerManagementDsc.Common\en-US\ComputerManagementDsc.Common.strings.psd1|Modules\DscResource.Common\0.9.3\DscResource.Common.psm1|Modules\DscResource.Common\0.9.3\DscResource.Common.psd1|DSCResources\DSC_PowerShellExecutionPolicy\en-US\DSC_PowerShellExecutionPolicy.strings.psd1|DSCResources\DSC_PowerPlan\en-US\DSC_PowerPlan.strings.psd1|DSCResources\DSC_PowerPlan\en-US\DSC_PowerPlan.schema.mfl|DSCResources\DSC_Computer\en-US\DSC_Computer.strings.psd1|DSCResources\DSC_IEEnhancedSecurityConfiguration\en-US\DSC_IEEnhancedSecurityConfiguration.strings.psd1|DSCResources\DSC_PendingReboot\en-US\DSC_PendingReboot.strings.psd1|DSCResources\DSC_PendingReboot\en-US\DSC_PendingReboot.data.psd1|DSCResources\DSC_WindowsEventLog\en-US\DSC_WindowsEventLog.strings.psd1|DSCResources\DSC_SmbShare\en-US\DSC_SmbShare.strings.psd1|DSCResources\DSC_SmbShare\en-US\DSC_SmbShare.schema.mfl|DSCResources\DSC_UserAccountControl\en-US\DSC_UserAccountControl.strings.psd1|DSCResources\DSC_ScheduledTask\en-US\DSC_ScheduledTask.strings.psd1|DSCResources\DSC_TimeZone\en-US\DSC_TimeZone.strings.psd1|DSCResources\DSC_SystemLocale\en-US\DSC_SystemLocale.strings.psd1|DSCResources\DSC_VirtualMemory\en-US\DSC_VirtualMemory.strings.psd1|DSCResources\DSC_SmbServerConfiguration\en-US\DSC_SmbServerConfiguration.schema.mfl|DSCResources\DSC_SmbServerConfiguration\en-US\DSC_SmbServerConfiguration.strings.psd1|DSCResources\DSC_OfflineDomainJoin\en-US\DSC_OfflineDomainJoin.strings.psd1|DSCResources\DSC_WindowsCapability\en-US\DSC_WindowsCapability.strings.psd1|DSCResources\DSC_RemoteDesktopAdmin\en-US\DSC_RemoteDesktopAdmin.strings.psd1|Modules\DscResource.Common\0.9.3\en-US\DscResource.Common.strings.psd1|Modules\DscResource.Common\0.9.3\en-US\about_DscResource.Common.help.txt</S>
+          <S N="DscResources">Computer OfflineDomainJoin PendingReboot PowerPlan PowerShellExecutionPolicy RemoteDesktopAdmin ScheduledTask SmbServerConfiguration SmbShare SystemLocale TimeZone VirtualMemory WindowsEventLog WindowsCapability IEEnhancedSecurityConfiguration UserAccountControl</S>
           <S N="GUID">B5004952-489E-43EA-999C-F16A25355B89</S>
           <S N="PowerShellVersion">4.0</S>
           <S N="CLRVersion">4.0</S>
           <S N="CompanyName">DSC Community</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\ComputerManagementDsc\8.4.0</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\chairlift_master\project-chairlift\windows\src\ComputerManagementDsc\8.4.0</S>
     </MS>
   </Obj>
 </Objs>

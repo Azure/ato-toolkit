@@ -47,14 +47,26 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">Workflow</S>
+            <S N="Key">Cmdlet</S>
             <Obj N="Value" RefId="4">
               <TNRef RefId="1" />
               <LST />
             </Obj>
           </En>
           <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
             <S N="Key">Command</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
             <Ref N="Value" RefId="4" />
           </En>
           <En>
@@ -79,18 +91,6 @@
               </LST>
             </Obj>
           </En>
-          <En>
-            <S N="Key">Function</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">Cmdlet</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">RoleCapability</S>
-            <Ref N="Value" RefId="4" />
-          </En>
         </DCT>
       </Obj>
       <Nil N="PowerShellGetFormatVersion" />
@@ -114,15 +114,15 @@
           <S N="releaseNotes">* Changes to XDnsServerADZone_x000D__x000A_  * Raise an exception if `DirectoryPartitionName` is specified and `ReplicationScope` is not `Custom`._x000D__x000A_  ([issue 110](https://github.com/PowerShell/xDnsServer/issues/110))._x000D__x000A_  * Enforce the `ReplicationScope` parameter being passed to `Set-DnsServerPrimaryZone` if_x000D__x000A_  `DirectoryPartitionName` has changed._x000D__x000A_* xDnsServer:_x000D__x000A_  * OptIn to the following Dsc Resource Meta Tests:_x000D__x000A_    * Common Tests - Relative Path Length_x000D__x000A_    * Common Tests - Validate Markdown Links_x000D__x000A_    * Common Tests - Custom Script Analyzer Rules_x000D__x000A_    * Common Tests - Required Script Analyzer Rules_x000D__x000A_    * Common Tests - Flagged Script Analyzer Rules</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">False</S>
-          <S N="versionDownloadCount">141626</S>
-          <S N="downloadCount">335762</S>
+          <S N="versionDownloadCount">146074</S>
+          <S N="downloadCount">340387</S>
           <S N="packageSize">137210</S>
           <S N="published">10/30/2019 7:21:52 PM -04:00</S>
           <S N="created">10/30/2019 7:21:52 PM -04:00</S>
-          <S N="lastUpdated">2/19/2021 10:34:33 PM -05:00</S>
+          <S N="lastUpdated">3/1/2021 9:51:16 PM -05:00</S>
           <S N="tags">DesiredStateConfiguration DSC DSCResourceKit DSCResource PSModule PSDscResource_MSFT_x005F_xDnsARecord PSDscResource_MSFT_x005F_xDnsRecord PSDscResource_MSFT_x005F_xDnsServerADZone PSDscResource_MSFT_x005F_xDnsServerClientSubnet PSDscResource_MSFT_x005F_xDnsServerConditionalForwarder PSDscResource_MSFT_x005F_xDnsServerDiagnostics PSDscResource_MSFT_x005F_xDnsServerForwarder PSDscResource_MSFT_x005F_xDnsServerPrimaryZone PSDscResource_MSFT_x005F_xDnsServerRootHint PSDscResource_MSFT_x005F_xDnsServerSecondaryZone PSDscResource_MSFT_x005F_xDnsServerSetting PSDscResource_MSFT_x005F_xDnsServerZoneAging PSDscResource_MSFT_x005F_xDnsServerZoneScope PSDscResource_MSFT_x005F_xDnsServerZoneTransfer PSIncludes_DscResource</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-02-19T22:34:33Z</S>
+          <S N="updated">2021-03-01T21:51:16Z</S>
           <S N="NormalizedVersion">1.16.0</S>
           <S N="Authors">Microsoft Corporation</S>
           <S N="IsPrerelease">false</S>
@@ -133,7 +133,7 @@
           <S N="CompanyName">Microsoft Corporation</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\xDnsServer\1.16.0.0</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\chairlift_master\project-chairlift\windows\src\xDnsServer\1.16.0.0</S>
     </MS>
   </Obj>
 </Objs>
