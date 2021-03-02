@@ -37,16 +37,17 @@
                         "type": "Microsoft.Solutions.ResourceSelector",
                         "label": "Availability set",
                         "resourceType": "Microsoft.Compute/availabilitySets",
-                        "toolTip": "Availability set Name for the VM.",
+                        "toolTip": "Select existing Availability set to be configured for Virtual machine. Availability set must be present in the same resource group.",
                         "options": {
                             "filter": {
                                 "subscription": "onBasic",
                                 "location": "onBasic"
                             }
-                        }
+                        },
+                        "visible": false
                     },
                     {
-                        "name": "OSVersion",
+                        "name": "osVersion",
                         "type": "Microsoft.Common.DropDown",
                         "label": "Linux OS version",
                         "toolTip": "The OS version for the VM Image",
@@ -100,6 +101,10 @@
                                 {
                                     "value": "RHEL72",
                                     "label": "Red Hat Enterprise Linux 7.2"
+                                },
+                                {
+                                    "value": "Ubuntu1804",
+                                    "label": "Canonical Ubuntu 18.04 LTS"
                                 }
                             ],
                             "required": true
@@ -112,9 +117,8 @@
                         "label": "Size",
                         "toolTip": "Select a VM size to support the workload that you want to run. The size that you choose then determines factors such as processing power, memory, and storage capacity. Azure offers a wide variety of sizes to support many types of uses. Azure charges an hourly price based on the VM's size and operating system.",
                         "recommendedSizes": [
-                            "Standard_A2_v2",
-                            "Standard_D2_v2",
-                            "Standard_D2_v3"
+                            "Standard_DS2_v2",
+                            "Standard_D2s_v3"
                         ],
                         "osPlatform": "Linux",
                         "count": "1"
@@ -130,12 +134,15 @@
                         "name": "adminUsername",
                         "type": "Microsoft.Compute.UserNameTextBox",
                         "label": "Username",
-                        "toolTip": "Admin username for the machine",
-                        "defaultValue": "azureadmin",
-                        "osPlatform": "Linux",
+                        "defaultValue": "",
+                        "toolTip": "Admin username for the virtual machine.",
                         "constraints": {
-                            "required": true
-                        }
+                            "required": true,
+                            "regex": "^[a-z0-9A-Z]{1,30}$",
+                            "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
+                        },
+                        "osPlatform": "Linux",
+                        "visible": true
                     },
                     {
                         "name": "adminCredentials",
@@ -166,6 +173,91 @@
                 ]
             },
             {
+                "name": "disk",
+                "label": "Disk",
+                "subLabel": {
+                    "preValidation": "Configure the virtual machine's resources and settings",
+                    "postValidation": "Done"
+                },
+                "bladeTitle": "Disk",
+                "elements": [
+                    {
+                        "name": "textBlock0",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
+                            "text": "Disk options"
+                        }
+                    },
+                    {
+                        "name": "osDiskStorageType",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "OS disk type",
+                        "toolTip": "You can choose between Azure managed disks types to support your workload or scenario.",
+                        "defaultValue": "Premium SSD",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "value": "Premium_LRS",
+                                    "label": "Premium SSD"
+                                },
+                                {
+                                    "value": "Standard_LRS",
+                                    "label": "Standard HDD"
+                                },
+                                {
+                                    "value": "StandardSSD_LRS",
+                                    "label": "Standard SSD"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "osDiskEncryptionType",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "Encryption type",
+                        "toolTip": "Select the encryption type for OS disk.",
+                        "defaultValue": "(Default) Encryption at-rest with a platform-managed key",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "value": "default",
+                                    "label": "(Default) Encryption at-rest with a platform-managed key"
+                                },
+                                {
+                                    "value": "EncryptionAtRestWithCustomerKey",
+                                    "label": "Encryption at-rest with a customer-managed key"
+                                },
+                                {
+                                    "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
+                                    "label": "Double encryption with platform-managed and customer-managed keys"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "osDiskEncryptionSet",
+                        "type": "Microsoft.Solutions.ResourceSelector",
+                        "label": "Disk encryption set",
+                        "resourceType": "Microsoft.Compute/diskEncryptionSets",
+                        "toolTip": "A disk encryption set stores the customer key that a disk or snapshot will use for encrypting its data. You must choose an existing disk encryption set during this step. Disk encryption sets require access to key vault and keys.",
+                        "options": {
+                            "filter": {
+                                "subscription": "onBasic",
+                                "location": "onBasic"
+                            }
+                        },
+                        "constraints": {
+                            "required": true
+                        },
+                        "visible": "[not(equals(steps('disk').osDiskEncryptionType, 'default'))]"
+                    }
+                ]
+            },
+            {
                 "name": "networking",
                 "label": "Networking",
                 "subLabel": {
@@ -185,12 +277,12 @@
                         "name": "vmVirtualNetwork",
                         "type": "Microsoft.Network.VirtualNetworkCombo",
                         "label": {
-                            "virtualNetwork": "Virtual Network",
+                            "virtualNetwork": "Virtual network",
                             "subnets": "Subnets"
                         },
                         "toolTip": {
-                            "virtualNetwork": "Virtual Network for the VM Image.",
-                            "subnets": ""
+                            "virtualNetwork": "Virtual networks are logically isolated from each other in Azure. You can configure their IP address ranges, subnets, route tables, gateways, and security settings, much like a traditional network in your data center. Virtual machines in the same virtual network can access each other by default.",
+                            "subnets": "A subnet is a range of IP addresses in your virtual network, which can be used to isolate virtual machines from each other or from the Internet."
                         },
                         "defaultValue": {
                             "name": "[concat(resourceGroup().name, '-vnet')]",
@@ -215,6 +307,17 @@
                                     "requireContiguousAddresses": true
                                 }
                             }
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "vmApplicationSecurityGroup",
+                        "type": "Microsoft.Solutions.ResourceSelector",
+                        "label": "Application security group",
+                        "resourceType": "Microsoft.Network/applicationSecurityGroups",
+                        "toolTip": "Application security groups enable you to configure network security as a natural extension of an application's structure, allowing you to group virtual machines and define network security policies based on those groups.",
+                        "constraints": {
+                            "required": false
                         },
                         "visible": true
                     }
@@ -261,6 +364,49 @@
                                 "location": "onBasic"
                             }
                         }
+                    },
+                    {
+                        "name": "textBlock1",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
+                            "text": "Custom data and cloud init"
+                        },
+                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
+                    },
+                    {
+                        "name": "textBlock2",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
+                            "text": "Pass a cloud-init script, configuration file, or other data into the virtual machine while it is being provisioned. The data will be saved on the VM in a known location."
+                        },
+                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
+                    },
+                    {
+                        "name": "customData",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Custom data",
+                        "toolTip": "Custom data.",
+                        "multiLine": true,
+                        "constraints": {
+                            "required": false,
+                            "validations": [
+                                {
+                                    "regex": ".*",
+                                    "message": "Allows any charaters, numbers of symbols."
+                                }
+                            ]
+                        },
+                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
+                    },
+                    {
+                        "name": "infoBox0",
+                        "type": "Microsoft.Common.InfoBox",
+                        "options": {
+                            "icon": "Info",
+                            "text": "Your image must have code to support consumption of custom data. If your image supports cloud-init, custom-data will be processed by cloud-init.",
+                            "uri": "http://go.microsoft.com/fwlink/?LinkId=2125807"
+                        },
+                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
                     }
                 ]
             }
@@ -268,17 +414,22 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
-            "vmAvailabilitySetName": "[steps('instance').vmAvailabilitySet.name]",
-            "OSVersion": "[steps('instance').OSVersion]",
+            "availabilitySetResourceId": "[steps('instance').vmAvailabilitySet.id]",
+            "osVersion": "[steps('instance').osVersion]",
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
+            "authenticationType": "[steps('instance').adminCredentials.authenticationType]",
             "adminPasswordOrKey": "[if(equals(steps('instance').adminCredentials.authenticationType, 'password'), steps('instance').adminCredentials.password, steps('instance').adminCredentials.sshPublicKey)]",
+            "osDiskStorageType": "[steps('disk').osDiskStorageType]",
+            "osDiskEncryptionSetResourceId": "[steps('disk').osDiskEncryptionSet.id]",
+            "customData": "[if(not(empty(steps('management').customData)), steps('management').customData, '')]",
             "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",
             "virtualNetworkNewOrExisting": "[steps('networking').vmVirtualNetwork.newOrExisting]",
             "virtualNetworkResourceGroupName": "[steps('networking').vmVirtualNetwork.resourceGroup]",
             "addressPrefix": "[steps('networking').vmVirtualNetwork.addressPrefix]",
             "subnetPrefix": "[steps('networking').vmVirtualNetwork.subnets.subnet1.addressPrefix]",
             "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
+            "applicationSecurityGroupResourceId": "[steps('networking').vmApplicationSecurityGroup.id]",
             "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
             "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]"
         }

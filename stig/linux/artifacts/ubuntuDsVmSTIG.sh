@@ -57,9 +57,11 @@ chmod -c 0750 /var/log
 echo "Setting group ownership to root for /lib, /usr/lib and /lib64..."
 find /lib /usr/lib /lib64 ! -group root -type f -exec chgrp -c root '{}' \;
 echo "Setting ownership to root for /bin, /sbin, /usr/bin, /usr/sbin, /usr/local/bin and /usr/local/sbin..."
+set +e
 find -L /bin /sbin /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin ! -user root -type f -exec chown -c root '{}' \;
 echo "Setting group ownership to root for /bin, /sbin, /usr/bin, /usr/sbin, /usr/local/bin and /usr/local/sbin..."
 find -L /bin /sbin /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin ! -group root -type f -exec chgrp -c root '{}' \;
+set -e
 echo "Setting mode to 0600 for /var/log/audit/*..."
 chmod -c 0600 /var/log/audit/*
 

@@ -84,11 +84,17 @@ $configurationData = @{
             StigType  = 'Ubuntu'
             OsVersion = '18.04'
             SkipRule  = @('V-219159', 'V-219167.a', 'V-219167.b', 'V-219167.c')
+        },
+        @{
+            NodeName  = 'Ubuntu1804-DataScience'
+            StigType  = 'Ubuntu'
+            OsVersion = '18.04'
+            SkipRule  = @('V-219159', 'V-219167.a', 'V-219167.b', 'V-219167.c')
         }
     )
 }
 
-# this configuraiton generates all configuration data based configurations (linux)
+# this configuraiton generates all configuration data based nodes (linux)
 configuration LinuxBaseLine
 {
     Import-DscResource -ModuleName nx
@@ -125,7 +131,26 @@ configuration LinuxBaseLine
 # configuration parameter splat
 $configurationParams = @{
     ConfigurationData = $configurationData
-    OutputPath        = Join-Path -Path $PSScriptRoot -ChildPath "artifacts/mofStore"
+    OutputPath        = Join-Path -Path $PSScriptRoot -ChildPath "artifacts/mof"
 }
 
+# compile all mofs based on configuration data defined above
 LinuxBaseLine @configurationParams
+
+# remove personal information from compiled mofs
+$mofStorePath = Join-Path -Path $PSScriptRoot -ChildPath 'artifacts/mof'
+$mofs = Get-ChildItem -Path $mofStorePath | Select-Object -ExpandProperty FullName
+$mofs | ForEach-Object -Process {(Get-Content -Path $_ -Raw) -creplace "$env:USERNAME|$env:COMPUTERNAME", 'Microsoft' | Set-Content -Path $_ -Force}
+foreach ($mof in $mofs)
+{
+    try
+    {
+        # testing to ensure mofs are parseable by dsc after the removal of personal data
+        [void][Microsoft.PowerShell.DesiredStateConfiguration.Internal.DscClassCache]::ImportInstances($mof, 4)
+    }
+    catch
+    {
+        # not throwing because we want the loop to continue to test all mofs
+        Write-Warning -Message "$($_.Exception.InnerException.Message)"
+    }
+}

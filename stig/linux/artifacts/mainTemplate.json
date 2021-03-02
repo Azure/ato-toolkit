@@ -18,7 +18,7 @@
         },
         "vmSize": {
             "type": "string",
-            "defaultValue": "Standard_D2_v3",
+            "defaultValue": "Standard_D2s_v3",
             "metadata": {
                 "description": "Size of the virtual machine."
             }
@@ -63,18 +63,33 @@
                 "RHEL74",
                 "RHEL73",
                 "RHEL72",
-                "Ubuntu1804"
+                "Ubuntu1804",
+                "Ubuntu1804-DataScience"
             ],
             "metadata": {
                 "description": "The Linux version for the VM. This will pick a fully patched image of this given Linux version."
             }
         },
-        "managedDiskStorageAccountType": {
+        "osDiskStorageType": {
             "type": "string",
-            "defaultValue": "StandardSSD_LRS",
-            "allowedValues": [ "StandardSSD_LRS" ],
+            "defaultValue": "Premium_LRS",
+            "allowedValues": [ "Premium_LRS", "Standard_LRS", "StandardSSD_LRS" ],
             "metadata": {
-                "description": ""
+                "description": "You can choose between Azure managed disks types to support your workload or scenario."
+            }
+        },
+        "osDiskEncryptionSetResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "OS Disk Encryption Set resource id."
+            }
+        },
+        "customData": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Pass a script, configuration file, or other data into the virtual machine while it is being provisioned. The data will be saved on the VM in a known location."
             }
         },
         "_artifactsLocation": {
@@ -85,17 +100,10 @@
             }
         },
         "_artifactsLocationSasToken": {
-            "type": "string",
+            "type": "secureString",
             "defaultValue": "",
             "metadata": {
-                "description": ""
-            }
-        },
-        "_artifactsMofStoreLocation": {
-            "type": "string",
-            "defaultValue": "[concat(parameters('_artifactsLocation'), 'mofStore/')]",
-            "metadata": {
-                "description": ""
+                "description": "SAS Token to access the storage location containing artifacts."
             }
         },
         "vmVirtualNetwork": {
@@ -128,7 +136,7 @@
         },
         "subnetName": {
             "type": "string",
-            "defaultValue": "subnet1",
+            "defaultValue": "default",
             "metadata": {
                 "description": "Subnet name for the VM Image."
             }
@@ -140,11 +148,18 @@
                 "description": "Subnet prefix of the virtual network"
             }
         },
-        "vmAvailabilitySetName": {
+        "applicationSecurityGroupResourceId": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": "Availability Set configuration for VM."
+                "description": "(Optional) Application Security Group resource id."
+            }
+        },
+        "availabilitySetResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Availability Set resource id."
             }
         },
         "logsRetentionInDays": {
@@ -160,14 +175,14 @@
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": "Diagnostic Storage account Id."
+                "description": "(Optional) Diagnostic Storage account resource id."
             }
         },
         "logAnalyticsWorkspaceId": {
             "type": "string",
             "defaultValue": "",
             "metadata": {
-                "description": "Log Analytics workspace Id."
+                "description": "(Optional) Log Analytics workspace resource id."
             }
         }
     },
@@ -179,161 +194,146 @@
         },
         "subnetRef": "[concat(variables('vnetId')[parameters('virtualNetworkNewOrExisting')],'/subnets/',parameters('subnetName'))]",
         "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
-        "availabilitySetId": {
-            "id": "[if(equals(parameters('vmAvailabilitySetName'), ''), json('null'), resourceId('Microsoft.Compute/availabilitySets', parameters('vmAvailabilitySetName')))]"
-        },
-        "stigMof": "[concat(parameters('osVersion'), '.mof')]",
-        "dscEmptyMofFile": "[concat(parameters('_artifactsMofStoreLocation'), 'localhost.mof', parameters('_artifactsLocationSasToken'))]",
-        "centOsRehlStigFile": "rhel7STIG.sh",
-        "centOsRehlFileUri": [
-            "[concat(parameters('_artifactsLocation'), variables('centOsRehlStigFile'), parameters('_artifactsLocationSasToken'))]",
-            "[concat(parameters('_artifactsMofStoreLocation'), variables('stigMof'), parameters('_artifactsLocationSasToken'))]"
-        ],
-        "ubuntuStigFile": "ubuntuSTIG.sh",
-        "ubuntuFileUris": [
-            "[concat(parameters('_artifactsLocation'), variables('ubuntuStigFile'), parameters('_artifactsLocationSasToken'))]",
-            "[concat(parameters('_artifactsMofStoreLocation'), variables('stigMof'), parameters('_artifactsLocationSasToken'))]"
+        "applicationSecurityGroup": [
+            {
+                "id": "[parameters('applicationSecurityGroupResourceId')]"
+            }
         ],
         "images": {
             "CentOS79": {
-                "reference" : {
+                "reference": {
                     "publisher": "OpenLogic",
                     "offer": "CentOS",
                     "sku": "7_9",
                     "version": "latest"
                 },
-                "fileUri" : "[variables('centOsRehlFileUri')]",
-                "cmdToExecute" : "[concat('sh ', variables('centOsRehlStigFile'))]"
+                "stigFileName": "rhel7STIG.sh"
             },
             "CentOS78": {
-                "reference" : {
+                "reference": {
                     "publisher": "OpenLogic",
                     "offer": "CentOS",
                     "sku": "7_8",
                     "version": "latest"
                 },
-                "fileUri" : "[variables('centOsRehlFileUri')]",
-                "cmdToExecute": "[concat('sh ', variables('centOsRehlStigFile'))]"
+                "stigFileName": "rhel7STIG.sh"
             },
             "CentOS77": {
-                "reference" : {
+                "reference": {
                     "publisher": "OpenLogic",
                     "offer": "CentOS",
                     "sku": "7.7",
                     "version": "latest"
                 },
-                "fileUri" : "[variables('centOsRehlFileUri')]",
-                "cmdToExecute": "[concat('sh ', variables('centOsRehlStigFile'))]"
+                "stigFileName": "rhel7STIG.sh"
             },
             "CentOS76": {
-                "reference" : {
+                "reference": {
                     "publisher": "OpenLogic",
                     "offer": "CentOS",
                     "sku": "7.6",
                     "version": "latest"
                 },
-                "fileUri" : "[variables('centOsRehlFileUri')]",
-                "cmdToExecute": "[concat('sh ', variables('centOsRehlStigFile'))]"
+                "stigFileName": "rhel7STIG.sh"
             },
             "CentOS75": {
-                "reference" : {
+                "reference": {
                     "publisher": "OpenLogic",
                     "offer": "CentOS",
                     "sku": "7.5",
                     "version": "latest"
                 },
-                "fileUri": "[variables('centOsRehlFileUri')]",
-                "cmdToExecute": "[concat('sh ', variables('centOsRehlStigFile'))]"
+                "stigFileName": "rhel7STIG.sh"
             },
             "CentOS74": {
-                "reference" : {
+                "reference": {
                     "publisher": "OpenLogic",
                     "offer": "CentOS",
                     "sku": "7.4",
                     "version": "latest"
                 },
-                "fileUri" : "[variables('centOsRehlFileUri')]",
-                "cmdToExecute": "[concat('sh ', variables('centOsRehlStigFile'))]"
+                "stigFileName": "rhel7STIG.sh"
             },
             "RHEL79": {
-                "reference" : {
+                "reference": {
                     "publisher": "RedHat",
                     "offer": "RHEL",
                     "sku": "7_9",
                     "version": "latest"
                 },
-                "fileUri": "rhel7STIG.sh",
-                "cmdToExecute": "sh rhel7STIG.sh"
+                "stigFileName": "rhel7STIG.sh"
             },
             "RHEL78": {
-                "reference" : {
+                "reference": {
                     "publisher": "RedHat",
                     "offer": "RHEL",
                     "sku": "7.8",
                     "version": "latest"
                 },
-                "fileUri" : "[variables('centOsRehlFileUri')]",
-                "cmdToExecute": "[concat('sh ', variables('centOsRehlStigFile'))]"
+                "stigFileName": "rhel7STIG.sh"
             },
             "RHEL77": {
-                "reference" : {
+                "reference": {
                     "publisher": "RedHat",
                     "offer": "RHEL",
                     "sku": "7.7",
                     "version": "latest"
                 },
-                "fileUri" : "[variables('centOsRehlFileUri')]",
-                "cmdToExecute": "[concat('sh ', variables('centOsRehlStigFile'))]"
+                "stigFileName": "rhel7STIG.sh"
             },
             "RHEL75": {
-                "reference" : {
+                "reference": {
                     "publisher": "RedHat",
                     "offer": "RHEL",
                     "sku": "7.5",
                     "version": "latest"
                 },
-                "fileUri" : "[variables('centOsRehlFileUri')]",
-                "cmdToExecute": "[concat('sh ', variables('centOsRehlStigFile'))]"
+                "stigFileName": "rhel7STIG.sh"
             },
             "RHEL74": {
-                "reference" : {
+                "reference": {
                     "publisher": "RedHat",
                     "offer": "RHEL",
                     "sku": "7.4",
                     "version": "latest"
                 },
-                "fileUri" : "[variables('centOsRehlFileUri')]",
-                "cmdToExecute": "[concat('sh ', variables('centOsRehlStigFile'))]"
+                "stigFileName": "rhel7STIG.sh"
             },
             "RHEL73": {
-                "reference" : {
+                "reference": {
                     "publisher": "RedHat",
                     "offer": "RHEL",
                     "sku": "7.3",
                     "version": "latest"
                 },
-                "fileUri" : "[variables('centOsRehlFileUri')]",
-                "cmdToExecute": "[concat('sh ', variables('centOsRehlStigFile'))]"
+                "stigFileName": "rhel7STIG.sh"
             },
             "RHEL72": {
-                "reference" : {
+                "reference": {
                     "publisher": "RedHat",
                     "offer": "RHEL",
                     "sku": "7.2",
                     "version": "latest"
                 },
-                "fileUri" : "[variables('centOsRehlFileUri')]",
-                "cmdToExecute": "[concat('sh ', variables('centOsRehlStigFile'))]"
+                "stigFileName": "rhel7STIG.sh"
             },
             "Ubuntu1804": {
-                "reference" : {
+                "reference": {
                     "publisher": "Canonical",
                     "offer": "UbuntuServer",
                     "sku": "18.04-LTS",
                     "version": "latest"
                 },
-                "fileUri": "[variables('ubuntuFileUris')]",
-                "cmdToExecute" : "[concat('sh ', variables('ubuntuStigFile'))]"
+                "stigFileName": "ubuntuSTIG.sh"
+            },
+            "Ubuntu1804-DataScience": {
+                "reference": {
+                    "publisher": "microsoft-dsvm",
+                    "offer": "ubuntu-1804",
+                    "sku": "1804",
+                    "version": "latest"
+                },
+                "stigFileName": "ubuntuDsVmSTIG.sh"
             }
         },
         "linuxConfiguration": {
@@ -347,10 +347,9 @@
                 ]
             }
         },
-        "auditRemoteConnectionWithNoPwdConfigName": "PasswordPolicy_msid110",
-        "auditAccountsWithNoPwdConfigName": "PasswordPolicy_msid232",
-        "auditEtcPwdFilePermissionSetTo0644Configame": "PasswordPolicy_msid121",
-        "storageApiVersion" : "2019-06-01"
+        "storageApiVersion": "2019-06-01",
+        "diskEncryptionSet": { "id": "[parameters('osDiskEncryptionSetResourceId')]" },
+        "artifactsLocationSasToken": "[if(equals(parameters('_artifactsLocationSasToken'), ''), if(contains(deployment().properties.templateLink.uri, '?'), split(deployment().properties.templateLink.uri, 'mainTemplate.json')[1], ''), parameters('_artifactsLocationSasToken'))]"
     },
     "resources": [
         {
@@ -398,6 +397,7 @@
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('vmVirtualNetwork'))]"
             ],
             "properties": {
+                "networkSecurityGroup": { "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]" },
                 "ipConfigurations": [
                     {
                         "name": "ipconfig1",
@@ -405,7 +405,8 @@
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
                                 "id": "[variables('subnetRef')]"
-                            }
+                            },
+                            "applicationSecurityGroups": "[if(equals(parameters('applicationSecurityGroupResourceId'), ''), json('null'), variables('applicationSecurityGroup'))]"
                         }
                     }
                 ]
@@ -426,7 +427,6 @@
                 "metrics": [
                     {
                         "category": "AllMetrics",
-                        "timeGrain": null,
                         "enabled": true,
                         "retentionPolicy": {
                             "enabled": true,
@@ -442,7 +442,7 @@
             "name": "[parameters('vmName')]",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -450,9 +450,10 @@
                 },
                 "storageProfile": {
                     "osDisk": {
-                        "createOption": "fromImage",
+                        "createOption": "FromImage",
                         "managedDisk": {
-                            "storageAccountType": "[parameters('managedDiskStorageAccountType')]"
+                            "storageAccountType": "[parameters('osDiskStorageType')]",
+                            "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
                         }
                     },
                     "imageReference": "[variables('images')[parameters('osVersion')].reference]"
@@ -468,9 +469,10 @@
                     "computerName": "[parameters('vmName')]",
                     "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPasswordOrKey')]",
-                    "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
+                    "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]",
+                    "customData": "[if(equals(parameters('customData'), ''), json('null'), base64(parameters('customData')))]"
                 },
-                "availabilitySet": "[if(equals(parameters('vmAvailabilitySetName'), ''), json('null'), variables('availabilitySetId'))]",
+                "availabilitySet": "[if(equals(parameters('availabilitySetResourceId'), ''), json('null'), parameters('availabilitySetResourceId'))]",
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
@@ -482,69 +484,9 @@
             ]
         },
         {
-            "type": "Microsoft.Compute/virtualMachines/providers/guestConfigurationAssignments",
-            "apiVersion": "2018-11-20",
-            "name": "[concat(parameters('vmName'), '/Microsoft.GuestConfiguration/', variables('auditRemoteConnectionWithNoPwdConfigName'))]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-            ],
-            "properties": {
-                "guestConfiguration": {
-                    "name": "[variables('auditRemoteConnectionWithNoPwdConfigName')]",
-                    "version": "1.*"
-                }
-            }
-        },
-        {
-            "type": "Microsoft.Compute/virtualMachines/providers/guestConfigurationAssignments",
-            "apiVersion": "2018-11-20",
-            "name": "[concat(parameters('vmName'), '/Microsoft.GuestConfiguration/', variables('auditAccountsWithNoPwdConfigName'))]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-            ],
-            "properties": {
-                "guestConfiguration": {
-                    "name": "[variables('auditAccountsWithNoPwdConfigName')]",
-                    "version": "1.*"
-                }
-            }
-        },
-        {
-            "type": "Microsoft.Compute/virtualMachines/providers/guestConfigurationAssignments",
-            "apiVersion": "2018-11-20",
-            "name": "[concat(parameters('vmName'), '/Microsoft.GuestConfiguration/', variables('auditEtcPwdFilePermissionSetTo0644Configame'))]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-            ],
-            "properties": {
-                "guestConfiguration": {
-                    "name": "[variables('auditEtcPwdFilePermissionSetTo0644Configame')]",
-                    "version": "1.*"
-                }
-            }
-        },
-        {
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "apiVersion": "2019-07-01",
-            "name": "[concat(parameters('vmName'), '/deploy-guest-configuration')]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-            ],
-            "properties": {
-                "publisher": "Microsoft.GuestConfiguration",
-                "type": "ConfigurationforLinux",
-                "typeHandlerVersion": "1.0",
-                "autoUpgradeMinorVersion": true
-            }
-        },
-        {
             "apiVersion": "2020-06-01",
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('vmName'),'/enabledsc')]",
+            "name": "[concat(parameters('vmName'),'/setup-linux-dsc')]",
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
@@ -556,18 +498,17 @@
                 "autoUpgradeMinorVersion": "true",
                 "settings": {
                     "Mode": "Push",
-                    "FileUri": "[variables('dscEmptyMofFile')]"
+                    "FileUri": "[concat(parameters('_artifactsLocation'), 'mof/localhost.mof', variables('artifactsLocationSasToken'))]"
                 }
             }
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "apiVersion": "2019-07-01",
-            "name": "[concat(parameters('vmName'), '/deploy-stigs')]",
+            "name": "[concat(parameters('vmName'), '/setup-linux-dsc-stig')]",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines/extensions/', parameters('vmName'), 'deploy-guest-configuration')]",
-                "[resourceId('Microsoft.Compute/virtualMachines/extensions/', parameters('vmName'), 'enabledsc')]"
+                "[resourceId('Microsoft.Compute/virtualMachines/extensions/', parameters('vmName'), 'setup-linux-dsc')]"
             ],
             "properties": {
                 "publisher": "Microsoft.Azure.Extensions",
@@ -579,8 +520,11 @@
                     "timestamp": 123456789
                 },
                 "protectedSettings": {
-                    "fileUris": "[variables('images')[parameters('osVersion')].fileUri]",
-                    "commandToExecute": "[variables('images')[parameters('osVersion')].cmdToExecute]"
+                    "fileUris": [
+                        "[concat(parameters('_artifactsLocation'), variables('images')[parameters('osVersion')].stigFileName, variables('artifactsLocationSasToken'))]",
+                        "[concat(parameters('_artifactsLocation'), 'mof/', parameters('osVersion'), '.mof', variables('artifactsLocationSasToken'))]"
+                    ],
+                    "commandToExecute": "[concat('sh ', variables('images')[parameters('osVersion')].stigFileName, ' ', parameters('adminUsername'))]"
                 }
             }
         },
@@ -588,7 +532,7 @@
             "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
             "name": "[concat(parameters('vmName'), '/Microsoft.Insights/service')]",
-            "location": "[resourceGroup().location]",
+            "location": "[parameters('location')]",
             "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
             "dependsOn": [
                 "[parameters('vmName')]"
@@ -605,8 +549,20 @@
                             "days": "[parameters('logsRetentionInDays')]"
                         }
                     }
-                ],
-                "logs": []
+                ]
+            }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "name": "pid-212401b4-aef7-457e-815d-3321a6407400",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": []
+                }
             }
         }
     ],

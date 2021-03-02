@@ -1,7 +1,7 @@
 /*
 @TargetNode='Ubuntu1804'
 @GeneratedBy=Microsoft
-@GenerationDate=02/02/2021 23:10:11
+@GenerationDate=02/11/2021 13:43:35
 @GenerationHost=Microsoft
 */
 
@@ -231,39 +231,6 @@ ResourceID = "[nxFileLine][V-219156.b][medium][SRG-OS-000437-GPOS-00194]::[Ubunt
 };
 instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource5ref
 {
-ResourceID = "[nxFileLine][V-219164][low][SRG-OS-000480-GPOS-00226]::[Ubuntu]Baseline";
- ContainsLine = "auth required pam_faildelay.so delay=4000000";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerStig\\4.8.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
- FilePath = "/etc/pam.d/common-auth";
- ModuleName = "nx";
- ModuleVersion = "1.0";
- DoesNotContainPattern = "^#\\s*auth\\s*required\\s*pam_faildelay.so.*";
- ConfigurationName = "LinuxBaseLine";
-};
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource6ref
-{
-ResourceID = "[nxFileLine][V-219165][low][SRG-OS-000480-GPOS-00227]::[Ubuntu]Baseline";
- ContainsLine = "session required pam_lastlog.so showfailed";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerStig\\4.8.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
- FilePath = "/etc/pam.d/login";
- ModuleName = "nx";
- ModuleVersion = "1.0";
- DoesNotContainPattern = "^\\s*session\\s*(?!required)\\w*\\s*pam_lastlog\\.so.*|#\\s*session\\s*\\w*\\s*pam_lastlog\\.so.*|^\\s*session(?:\\t+|\\s{2,})required(?:\\t+|\\s{2,})pam_lastlog\\.so.*";
- ConfigurationName = "LinuxBaseLine";
-};
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource7ref
-{
-ResourceID = "[nxFileLine][V-219166][medium][SRG-OS-000021-GPOS-00005]::[Ubuntu]Baseline";
- ContainsLine = "auth required pam_tally2.so onerr=fail deny=3";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerStig\\4.8.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
- FilePath = "/etc/pam.d/common-auth";
- ModuleName = "nx";
- ModuleVersion = "1.0";
- DoesNotContainPattern = "#\\s*auth\\s*required\\s*pam_tally2.so\\s*onerr\\s*=\\s*fail\\s*deny\\s*=\\s*3";
- ConfigurationName = "LinuxBaseLine";
-};
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource8ref
-{
 ResourceID = "[nxFileLine][V-219170.a][medium][SRG-OS-000228-GPOS-00088]::[Ubuntu]Baseline";
  ContainsLine = "Banner /etc/issue";
  SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerStig\\4.8.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
@@ -273,7 +240,7 @@ ResourceID = "[nxFileLine][V-219170.a][medium][SRG-OS-000228-GPOS-00088]::[Ubunt
  DoesNotContainPattern = "#\\s*Banner\\s*/etc/issue";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource9ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource6ref
 {
 ResourceID = "[nxFileLine][V-219170.b][medium][SRG-OS-000228-GPOS-00088]::[Ubuntu]Baseline";
  ContainsLine = "You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.\n\nBy using this IS (which includes any device attached to this IS), you consent to the following conditions.\n\n-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.\n\n-At any time, the USG may inspect and seize data stored on this IS.\n\n-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.\n\n-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.\n\n-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.";
@@ -284,7 +251,7 @@ ResourceID = "[nxFileLine][V-219170.b][medium][SRG-OS-000228-GPOS-00088]::[Ubunt
  DoesNotContainPattern = "#\\s*You\\s*are\\s*accessing\\s*a\\s*U.S.\\s*Government\\s*(USG)\\s*Information\\s*System\\s*(IS)\\s*that\\s*is\\s*provided\\s*for\\s*USG-authorized\\s*use\\s*only.\\s*By\\s*using\\s*this\\s*IS\\s*(which\\s*includes\\s*any\\s*device\\s*attached\\s*to\\s*this\\s*IS),\\s*you\\s*consent\\s*to\\s*the\\s*following\\s*conditions.\\s*-The\\s*USG\\s*routinely\\s*intercepts\\s*and\\s*monitors\\s*communications\\s*on\\s*this\\s*IS\\s*for\\s*purposes\\s*including,\\s*but\\s*not\\s*limited\\s*to,\\s*penetration\\s*testing,\\s*COMSEC\\s*monitoring,\\s*network\\s*operations\\s*and\\s*defense,\\s*personnel\\s*misconduct\\s*(PM),\\s*law\\s*enforcement\\s*(LE),\\s*and\\s*counterintelligence\\s*(CI)\\s*investigations.\\s*-At\\s*any\\s*time,\\s*the\\s*USG\\s*may\\s*inspect\\s*and\\s*seize\\s*data\\s*stored\\s*on\\s*this\\s*IS.\\s*-Communications\\s*using,\\s*or\\s*data\\s*stored\\s*on,\\s*this\\s*IS\\s*are\\s*not\\s*private,\\s*are\\s*subject\\s*to\\s*routine\\s*monitoring,\\s*interception,\\s*and\\s*search,\\s*and\\s*may\\s*be\\s*disclosed\\s*or\\s*used\\s*for\\s*any\\s*USG-authorized\\s*purpose.\\s*-This\\s*IS\\s*includes\\s*security\\s*measures\\s*(e.g.,\\s*authentication\\s*and\\s*access\\s*controls)\\s*to\\s*protect\\s*USG\\s*interests--not\\s*for\\s*your\\s*personal\\s*benefit\\s*or\\s*privacy.\\s*-Notwithstanding\\s*the\\s*above,\\s*using\\s*this\\s*IS\\s*does\\s*not\\s*constitute\\s*consent\\s*to\\s*PM,\\s*LE\\s*or\\s*CI\\s*investigative\\s*searching\\s*or\\s*monitoring\\s*of\\s*the\\s*content\\s*of\\s*privileged\\s*communications,\\s*or\\s*work\\s*product,\\s*related\\s*to\\s*personal\\s*representation\\s*or\\s*services\\s*by\\s*attorneys,\\s*psychotherapists,\\s*or\\s*clergy,\\s*and\\s*their\\s*assistants.\\s*Such\\s*communications\\s*and\\s*work\\s*product\\s*are\\s*private\\s*and\\s*confidential.\\s*See\\s*User\\s*Agreement\\s*for\\s*details.";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource10ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource7ref
 {
 ResourceID = "[nxFileLine][V-219172][low][SRG-OS-000069-GPOS-00037]::[Ubuntu]Baseline";
  ContainsLine = "ucredit=-1";
@@ -295,7 +262,7 @@ ResourceID = "[nxFileLine][V-219172][low][SRG-OS-000069-GPOS-00037]::[Ubuntu]Bas
  DoesNotContainPattern = "^#\\s*ucredit.*$|^ucredit\\s*=\\s*(?!-1\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource11ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource8ref
 {
 ResourceID = "[nxFileLine][V-219173][low][SRG-OS-000070-GPOS-00038]::[Ubuntu]Baseline";
  ContainsLine = "lcredit=-1";
@@ -306,7 +273,7 @@ ResourceID = "[nxFileLine][V-219173][low][SRG-OS-000070-GPOS-00038]::[Ubuntu]Bas
  DoesNotContainPattern = "^#\\s*lcredit.*$|^lcredit\\s*=\\s*(?!-1\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource12ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource9ref
 {
 ResourceID = "[nxFileLine][V-219174][low][SRG-OS-000071-GPOS-00039]::[Ubuntu]Baseline";
  ContainsLine = "dcredit=-1";
@@ -317,7 +284,7 @@ ResourceID = "[nxFileLine][V-219174][low][SRG-OS-000071-GPOS-00039]::[Ubuntu]Bas
  DoesNotContainPattern = "^#\\s*dcredit.*$|^dcredit\\s*=\\s*(?!-1\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource13ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource10ref
 {
 ResourceID = "[nxFileLine][V-219175][low][SRG-OS-000072-GPOS-00040]::[Ubuntu]Baseline";
  ContainsLine = "difok=8";
@@ -328,7 +295,7 @@ ResourceID = "[nxFileLine][V-219175][low][SRG-OS-000072-GPOS-00040]::[Ubuntu]Bas
  DoesNotContainPattern = "^\\s*difok\\s*=\\s*(-|)[0-7]$|#\\s*difok\\s*=.*|difok\\s+=\\s+.*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource14ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource11ref
 {
 ResourceID = "[nxFileLine][V-219176][medium][SRG-OS-000073-GPOS-00041]::[Ubuntu]Baseline";
  ContainsLine = "ENCRYPT_METHOD SHA512";
@@ -339,7 +306,7 @@ ResourceID = "[nxFileLine][V-219176][medium][SRG-OS-000073-GPOS-00041]::[Ubuntu]
  DoesNotContainPattern = "#\\s*ENCRYPT_METHOD\\s*SHA512";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource15ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource12ref
 {
 ResourceID = "[nxFileLine][V-219178][low][SRG-OS-000075-GPOS-00043]::[Ubuntu]Baseline";
  ContainsLine = "PASS_MIN_DAYS 1";
@@ -350,7 +317,7 @@ ResourceID = "[nxFileLine][V-219178][low][SRG-OS-000075-GPOS-00043]::[Ubuntu]Bas
  DoesNotContainPattern = "^\\s*PASS_MIN_DAYS\\s*[0]*$|#\\s*PASS_MIN_DAYS.*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource16ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource13ref
 {
 ResourceID = "[nxFileLine][V-219179][low][SRG-OS-000076-GPOS-00044]::[Ubuntu]Baseline";
  ContainsLine = "PASS_MAX_DAYS 60";
@@ -361,18 +328,7 @@ ResourceID = "[nxFileLine][V-219179][low][SRG-OS-000076-GPOS-00044]::[Ubuntu]Bas
  DoesNotContainPattern = "^\\s*PASS_MAX_DAYS\\s*([6][1-9]|[7-9][0-9]|\\d{3,})$|#\\s*PASS_MAX_DAYS.*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource17ref
-{
-ResourceID = "[nxFileLine][V-219180][low][SRG-OS-000077-GPOS-00045]::[Ubuntu]Baseline";
- ContainsLine = "password [success=1 default=ignore] pam_unix.so sha512 shadow remember=5 rounds=5000";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerStig\\4.8.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
- FilePath = "/etc/pam.d/common-password";
- ModuleName = "nx";
- ModuleVersion = "1.0";
- DoesNotContainPattern = "^#password\\s*[success=1\\s*default=ignore]\\s*pam_unix.so\\s*sha512\\s*shadow\\s*remember=.*";
- ConfigurationName = "LinuxBaseLine";
-};
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource18ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource14ref
 {
 ResourceID = "[nxFileLine][V-219181][medium][SRG-OS-000078-GPOS-00046]::[Ubuntu]Baseline";
  ContainsLine = "minlen=15";
@@ -383,18 +339,7 @@ ResourceID = "[nxFileLine][V-219181][medium][SRG-OS-000078-GPOS-00046]::[Ubuntu]
  DoesNotContainPattern = "^\\s*minlen\\s*=\\s*([0-9]|[1][1-4])$|#\\s*minlen.*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource19ref
-{
-ResourceID = "[nxFileLine][V-219182][medium][SRG-OS-000120-GPOS-00061]::[Ubuntu]Baseline";
- ContainsLine = "password [success=1 default=ignore] pam_unix.so obscure sha512";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerStig\\4.8.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
- FilePath = "/etc/pam.d/common-password";
- ModuleName = "nx";
- ModuleVersion = "1.0";
- DoesNotContainPattern = "#\\s*password\\s*[success\\s*=\\s*1\\s*default\\s*=\\s*ignore]\\s*pam_unix.so\\s*obscure\\s*sha512";
- ConfigurationName = "LinuxBaseLine";
-};
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource20ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource15ref
 {
 ResourceID = "[nxFileLine][V-219184][medium][SRG-OS-000480-GPOS-00225]::[Ubuntu]Baseline";
  ContainsLine = "dictcheck=1";
@@ -405,20 +350,9 @@ ResourceID = "[nxFileLine][V-219184][medium][SRG-OS-000480-GPOS-00225]::[Ubuntu]
  DoesNotContainPattern = "^\\s*dictcheck\\s*=\\s*((?!1)|[1]\\d+)\\d*$|#\\s*dictcheck.*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource21ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource16ref
 {
 ResourceID = "[nxFileLine][V-219186.b][medium][SRG-OS-000480-GPOS-00225]::[Ubuntu]Baseline";
- ContainsLine = "password requisite pam_pwquality.so retry=3 enforce_for_root";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerStig\\4.8.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
- FilePath = "/etc/pam.d/common-password";
- ModuleName = "nx";
- ModuleVersion = "1.0";
- DoesNotContainPattern = "^#\\s*password\\s*requisite\\s*pam_pwquality.so.*retry=.*";
- ConfigurationName = "LinuxBaseLine";
-};
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource22ref
-{
-ResourceID = "[nxFileLine][V-219186.c][medium][SRG-OS-000480-GPOS-00225]::[Ubuntu]Baseline";
  ContainsLine = "enforcing = 1";
  SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerStig\\4.8.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
  FilePath = "/etc/security/pwquality.conf";
@@ -427,7 +361,7 @@ ResourceID = "[nxFileLine][V-219186.c][medium][SRG-OS-000480-GPOS-00225]::[Ubunt
  DoesNotContainPattern = "^\\s*enforcing\\s*=\\s*((?!1)|[1]\\d+)\\d*$|#\\s*enforcing.*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource23ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource17ref
 {
 ResourceID = "[nxFileLine][V-219210][low][SRG-OS-000266-GPOS-00101]::[Ubuntu]Baseline";
  ContainsLine = "ocredit=-1";
@@ -438,7 +372,7 @@ ResourceID = "[nxFileLine][V-219210][low][SRG-OS-000266-GPOS-00101]::[Ubuntu]Bas
  DoesNotContainPattern = "^#\\s*ocredit.*$|^ocredit\\s*=\\s*(?!-1)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource24ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource18ref
 {
 ResourceID = "[nxFileLine][V-219213][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-w /var/log/tallylog -p wa -k logins";
@@ -449,7 +383,7 @@ ResourceID = "[nxFileLine][V-219213][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/var/log/tallylog\\s*-p\\s*wa\\s*-k\\s*logins";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource25ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource19ref
 {
 ResourceID = "[nxFileLine][V-219214][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-w /var/log/faillog -p wa -k logins";
@@ -460,7 +394,7 @@ ResourceID = "[nxFileLine][V-219214][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/var/log/faillog\\s*-p\\s*wa\\s*-k\\s*logins";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource26ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource20ref
 {
 ResourceID = "[nxFileLine][V-219215][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-w /var/log/lastlog -p wa -k logins";
@@ -471,7 +405,7 @@ ResourceID = "[nxFileLine][V-219215][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/var/log/lastlog\\s*-p\\s*wa\\s*-k\\s*logins";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource27ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource21ref
 {
 ResourceID = "[nxFileLine][V-219216][medium][SRG-OS-000471-GPOS-00215]::[Ubuntu]Baseline";
  ContainsLine = "-w /var/log/sudo.log -p wa -k priv_actions";
@@ -482,7 +416,7 @@ ResourceID = "[nxFileLine][V-219216][medium][SRG-OS-000471-GPOS-00215]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/var/log/sudo.log\\s*-p\\s*wa\\s*-k\\s*priv_actions";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource28ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource22ref
 {
 ResourceID = "[nxFileLine][V-219217][medium][SRG-OS-000472-GPOS-00217]::[Ubuntu]Baseline";
  ContainsLine = "-w /var/log/wtmp -p wa -k logins";
@@ -493,7 +427,7 @@ ResourceID = "[nxFileLine][V-219217][medium][SRG-OS-000472-GPOS-00217]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/var/log/wtmp\\s*-p\\s*wa\\s*-k\\s*logins";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource29ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource23ref
 {
 ResourceID = "[nxFileLine][V-219218][medium][SRG-OS-000472-GPOS-00217]::[Ubuntu]Baseline";
  ContainsLine = "-w /var/run/wtmp -p wa -k logins";
@@ -504,7 +438,7 @@ ResourceID = "[nxFileLine][V-219218][medium][SRG-OS-000472-GPOS-00217]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/var/run/wtmp\\s*-p\\s*wa\\s*-k\\s*logins";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource30ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource24ref
 {
 ResourceID = "[nxFileLine][V-219219][medium][SRG-OS-000472-GPOS-00217]::[Ubuntu]Baseline";
  ContainsLine = "-w /var/log/btmp -p wa -k logins";
@@ -515,7 +449,7 @@ ResourceID = "[nxFileLine][V-219219][medium][SRG-OS-000472-GPOS-00217]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/var/log/btmp\\s*-p\\s*wa\\s*-k\\s*logins";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource31ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource25ref
 {
 ResourceID = "[nxFileLine][V-219220][medium][SRG-OS-000476-GPOS-00221]::[Ubuntu]Baseline";
  ContainsLine = "-w /etc/passwd -p wa -k usergroup_modification";
@@ -526,7 +460,7 @@ ResourceID = "[nxFileLine][V-219220][medium][SRG-OS-000476-GPOS-00221]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/etc/passwd\\s*-p\\s*wa\\s*-k\\s*usergroup_modification";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource32ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource26ref
 {
 ResourceID = "[nxFileLine][V-219221][medium][SRG-OS-000476-GPOS-00221]::[Ubuntu]Baseline";
  ContainsLine = "-w /etc/group -p wa -k usergroup_modification";
@@ -537,7 +471,7 @@ ResourceID = "[nxFileLine][V-219221][medium][SRG-OS-000476-GPOS-00221]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/etc/group\\s*-p\\s*wa\\s*-k\\s*usergroup_modification";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource33ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource27ref
 {
 ResourceID = "[nxFileLine][V-219222][medium][SRG-OS-000476-GPOS-00221]::[Ubuntu]Baseline";
  ContainsLine = "-w /etc/gshadow -p wa -k usergroup_modification";
@@ -548,7 +482,7 @@ ResourceID = "[nxFileLine][V-219222][medium][SRG-OS-000476-GPOS-00221]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/etc/gshadow\\s*-p\\s*wa\\s*-k\\s*usergroup_modification";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource34ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource28ref
 {
 ResourceID = "[nxFileLine][V-219223][medium][SRG-OS-000476-GPOS-00221]::[Ubuntu]Baseline";
  ContainsLine = "-w /etc/shadow -p wa -k usergroup_modification";
@@ -559,7 +493,7 @@ ResourceID = "[nxFileLine][V-219223][medium][SRG-OS-000476-GPOS-00221]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/etc/shadow\\s*-p\\s*wa\\s*-k\\s*usergroup_modification";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource35ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource29ref
 {
 ResourceID = "[nxFileLine][V-219224][medium][SRG-OS-000476-GPOS-00221]::[Ubuntu]Baseline";
  ContainsLine = "-w /etc/security/opasswd -p wa -k usergroup_modification";
@@ -570,7 +504,7 @@ ResourceID = "[nxFileLine][V-219224][medium][SRG-OS-000476-GPOS-00221]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/etc/security/opasswd\\s*-p\\s*wa\\s*-k\\s*usergroup_modification";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource36ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource30ref
 {
 ResourceID = "[nxFileLine][V-219226][medium][SRG-OS-000046-GPOS-00022]::[Ubuntu]Baseline";
  ContainsLine = "action_mail_acct = root";
@@ -581,7 +515,7 @@ ResourceID = "[nxFileLine][V-219226][medium][SRG-OS-000046-GPOS-00022]::[Ubuntu]
  DoesNotContainPattern = "#\\s*action_mail_acct\\s*=\\s*root";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource37ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource31ref
 {
 ResourceID = "[nxFileLine][V-219227][medium][SRG-OS-000047-GPOS-00023]::[Ubuntu]Baseline";
  ContainsLine = "disk_full_action = HALT";
@@ -589,10 +523,10 @@ ResourceID = "[nxFileLine][V-219227][medium][SRG-OS-000047-GPOS-00023]::[Ubuntu]
  FilePath = "/etc/audit/auditd.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
- DoesNotContainPattern = "#\\s*disk_full_action.*";
+ DoesNotContainPattern = "#\\s*disk_full_action.*|^\\s*disk_full_action\\s*=\\s*(?!HALT\\b)\\w+";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource38ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource32ref
 {
 ResourceID = "[nxFileLine][V-219238][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/bin/su -F perm=x -F auid>=1000 -F auid!=-1 -k privileged-priv_change";
@@ -603,7 +537,7 @@ ResourceID = "[nxFileLine][V-219238][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/bin/su\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*privileged-priv_change";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource39ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource33ref
 {
 ResourceID = "[nxFileLine][V-219239][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/chfn -F perm=x -F auid>=1000 -F auid!=-1 -k privileged-chfn";
@@ -614,7 +548,7 @@ ResourceID = "[nxFileLine][V-219239][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/bin/chfn\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*privileged-chfn";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource40ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource34ref
 {
 ResourceID = "[nxFileLine][V-219240][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/bin/mount -F perm=x -F auid>=1000 -F auid!=-1 -k privileged-mount";
@@ -625,7 +559,7 @@ ResourceID = "[nxFileLine][V-219240][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/bin/mount\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*privileged-mount";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource41ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource35ref
 {
 ResourceID = "[nxFileLine][V-219241][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/bin/umount -F perm=x -F auid>=1000 -F auid!=-1 -k privileged-umount";
@@ -636,7 +570,7 @@ ResourceID = "[nxFileLine][V-219241][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/bin/umount\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*privileged-umount";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource42ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource36ref
 {
 ResourceID = "[nxFileLine][V-219242][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/ssh-agent -F perm=x -F auid>=1000 -F auid!=-1 -k privileged-ssh";
@@ -647,7 +581,7 @@ ResourceID = "[nxFileLine][V-219242][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/bin/ssh-agent\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*privileged-ssh";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource43ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource37ref
 {
 ResourceID = "[nxFileLine][V-219243][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/lib/openssh/ssh-keysign -F perm=x -F auid>=1000 -F auid!=-1 -k privileged-ssh";
@@ -658,7 +592,7 @@ ResourceID = "[nxFileLine][V-219243][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/lib/openssh/ssh-keysign\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*privileged-ssh";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource44ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource38ref
 {
 ResourceID = "[nxFileLine][V-219244.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S setxattr -F auid>=1000 -F auid!=-1 -k perm_mod";
@@ -669,7 +603,7 @@ ResourceID = "[nxFileLine][V-219244.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*setxattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource45ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource39ref
 {
 ResourceID = "[nxFileLine][V-219244.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S setxattr -F auid=0 -k perm_mod";
@@ -680,7 +614,7 @@ ResourceID = "[nxFileLine][V-219244.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*setxattr\\s*-F\\s*auid\\s*=\\s*0\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource46ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource40ref
 {
 ResourceID = "[nxFileLine][V-219244.c][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S setxattr -F auid>=1000 -F auid!=-1 -k perm_mod";
@@ -691,7 +625,7 @@ ResourceID = "[nxFileLine][V-219244.c][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*setxattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource47ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource41ref
 {
 ResourceID = "[nxFileLine][V-219244.d][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S setxattr -F auid=0 -k perm_mod";
@@ -702,7 +636,7 @@ ResourceID = "[nxFileLine][V-219244.d][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*setxattr\\s*-F\\s*auid\\s*=\\s*0\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource48ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource42ref
 {
 ResourceID = "[nxFileLine][V-219245.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S lsetxattr -F auid>=1000 -F auid!=-1 -k perm_mod";
@@ -713,7 +647,7 @@ ResourceID = "[nxFileLine][V-219245.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*lsetxattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource49ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource43ref
 {
 ResourceID = "[nxFileLine][V-219245.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S lsetxattr -F auid=0 -k perm_mod";
@@ -724,7 +658,7 @@ ResourceID = "[nxFileLine][V-219245.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*lsetxattr\\s*-F\\s*auid\\s*=\\s*0\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource50ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource44ref
 {
 ResourceID = "[nxFileLine][V-219245.c][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S lsetxattr -F auid>=1000 -F auid!=-1 -k perm_mod";
@@ -735,7 +669,7 @@ ResourceID = "[nxFileLine][V-219245.c][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*lsetxattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource51ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource45ref
 {
 ResourceID = "[nxFileLine][V-219245.d][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S lsetxattr -F auid=0 -k perm_mod";
@@ -746,7 +680,7 @@ ResourceID = "[nxFileLine][V-219245.d][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*lsetxattr\\s*-F\\s*auid\\s*=\\s*0\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource52ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource46ref
 {
 ResourceID = "[nxFileLine][V-219246.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fsetxattr -F auid>=1000 -F auid!=-1 -k perm_mod";
@@ -757,7 +691,7 @@ ResourceID = "[nxFileLine][V-219246.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*fsetxattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource53ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource47ref
 {
 ResourceID = "[nxFileLine][V-219246.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fsetxattr -F auid=0 -k perm_mod";
@@ -768,7 +702,7 @@ ResourceID = "[nxFileLine][V-219246.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*fsetxattr\\s*-F\\s*auid\\s*=\\s*0\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource54ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource48ref
 {
 ResourceID = "[nxFileLine][V-219246.c][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fsetxattr -F auid>=1000 -F auid!=-1 -k perm_mod";
@@ -779,7 +713,7 @@ ResourceID = "[nxFileLine][V-219246.c][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*fsetxattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource55ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource49ref
 {
 ResourceID = "[nxFileLine][V-219246.d][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fsetxattr -F auid=0 -k perm_mod";
@@ -790,7 +724,7 @@ ResourceID = "[nxFileLine][V-219246.d][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*fsetxattr\\s*-F\\s*auid\\s*=\\s*0\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource56ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource50ref
 {
 ResourceID = "[nxFileLine][V-219247.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S removexattr -F auid>=1000 -F auid!=-1 -k perm_mod";
@@ -801,7 +735,7 @@ ResourceID = "[nxFileLine][V-219247.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*removexattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource57ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource51ref
 {
 ResourceID = "[nxFileLine][V-219247.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S removexattr -F auid=0 -k perm_mod";
@@ -812,7 +746,7 @@ ResourceID = "[nxFileLine][V-219247.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*removexattr\\s*-F\\s*auid\\s*=\\s*0\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource58ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource52ref
 {
 ResourceID = "[nxFileLine][V-219247.c][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S removexattr -F auid>=1000 -F auid!=-1 -k perm_mod";
@@ -823,7 +757,7 @@ ResourceID = "[nxFileLine][V-219247.c][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*removexattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource59ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource53ref
 {
 ResourceID = "[nxFileLine][V-219247.d][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S removexattr -F auid=0 -k perm_mod";
@@ -834,7 +768,7 @@ ResourceID = "[nxFileLine][V-219247.d][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*removexattr\\s*-F\\s*auid\\s*=\\s*0\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource60ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource54ref
 {
 ResourceID = "[nxFileLine][V-219248.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S lremovexattr -F auid>=1000 -F auid!=-1 -k perm_mod";
@@ -845,7 +779,7 @@ ResourceID = "[nxFileLine][V-219248.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*lremovexattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource61ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource55ref
 {
 ResourceID = "[nxFileLine][V-219248.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S lremovexattr -F auid=0 -k perm_mod";
@@ -856,7 +790,7 @@ ResourceID = "[nxFileLine][V-219248.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*lremovexattr\\s*-F\\s*auid\\s*=\\s*0\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource62ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource56ref
 {
 ResourceID = "[nxFileLine][V-219248.c][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S lremovexattr -F auid>=1000 -F auid!=-1 -k perm_mod";
@@ -867,7 +801,7 @@ ResourceID = "[nxFileLine][V-219248.c][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*lremovexattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource63ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource57ref
 {
 ResourceID = "[nxFileLine][V-219248.d][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S lremovexattr -F auid=0 -k perm_mod";
@@ -878,7 +812,7 @@ ResourceID = "[nxFileLine][V-219248.d][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*lremovexattr\\s*-F\\s*auid\\s*=\\s*0\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource64ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource58ref
 {
 ResourceID = "[nxFileLine][V-219249.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fremovexattr -F auid>=1000 -F auid!=-1 -k perm_mod";
@@ -889,7 +823,7 @@ ResourceID = "[nxFileLine][V-219249.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*fremovexattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource65ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource59ref
 {
 ResourceID = "[nxFileLine][V-219249.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fremovexattr -F auid=0 -k perm_mod";
@@ -900,7 +834,7 @@ ResourceID = "[nxFileLine][V-219249.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*fremovexattr\\s*-F\\s*auid\\s*=\\s*0\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource66ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource60ref
 {
 ResourceID = "[nxFileLine][V-219249.c][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fremovexattr -F auid>=1000 -F auid!=-1 -k perm_mod";
@@ -911,7 +845,7 @@ ResourceID = "[nxFileLine][V-219249.c][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*fremovexattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource67ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource61ref
 {
 ResourceID = "[nxFileLine][V-219249.d][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fremovexattr -F auid=0 -k perm_mod";
@@ -922,7 +856,7 @@ ResourceID = "[nxFileLine][V-219249.d][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*fremovexattr\\s*-F\\s*auid\\s*=\\s*0\\s*-k\\s*perm_mod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource68ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource62ref
 {
 ResourceID = "[nxFileLine][V-219250.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S chown -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -933,7 +867,7 @@ ResourceID = "[nxFileLine][V-219250.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*chown\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource69ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource63ref
 {
 ResourceID = "[nxFileLine][V-219250.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S chown -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -944,7 +878,7 @@ ResourceID = "[nxFileLine][V-219250.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*chown\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource70ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource64ref
 {
 ResourceID = "[nxFileLine][V-219251.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fchown -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -955,7 +889,7 @@ ResourceID = "[nxFileLine][V-219251.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*fchown\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource71ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource65ref
 {
 ResourceID = "[nxFileLine][V-219251.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fchown -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -966,7 +900,7 @@ ResourceID = "[nxFileLine][V-219251.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*fchown\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource72ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource66ref
 {
 ResourceID = "[nxFileLine][V-219252.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fchownat -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -977,7 +911,7 @@ ResourceID = "[nxFileLine][V-219252.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*fchownat\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource73ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource67ref
 {
 ResourceID = "[nxFileLine][V-219252.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fchownat -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -988,7 +922,7 @@ ResourceID = "[nxFileLine][V-219252.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*fchownat\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource74ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource68ref
 {
 ResourceID = "[nxFileLine][V-219253.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S lchown -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -999,7 +933,7 @@ ResourceID = "[nxFileLine][V-219253.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*lchown\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource75ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource69ref
 {
 ResourceID = "[nxFileLine][V-219253.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S lchown -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1010,7 +944,7 @@ ResourceID = "[nxFileLine][V-219253.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*lchown\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource76ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource70ref
 {
 ResourceID = "[nxFileLine][V-219254.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S chmod -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1021,7 +955,7 @@ ResourceID = "[nxFileLine][V-219254.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*chmod\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource77ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource71ref
 {
 ResourceID = "[nxFileLine][V-219254.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S chmod -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1032,7 +966,7 @@ ResourceID = "[nxFileLine][V-219254.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*chmod\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource78ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource72ref
 {
 ResourceID = "[nxFileLine][V-219255.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fchmod -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1043,7 +977,7 @@ ResourceID = "[nxFileLine][V-219255.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*fchmod\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource79ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource73ref
 {
 ResourceID = "[nxFileLine][V-219255.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fchmod -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1054,7 +988,7 @@ ResourceID = "[nxFileLine][V-219255.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*fchmod\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource80ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource74ref
 {
 ResourceID = "[nxFileLine][V-219256.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fchmodat -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1065,7 +999,7 @@ ResourceID = "[nxFileLine][V-219256.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*fchmodat\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource81ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource75ref
 {
 ResourceID = "[nxFileLine][V-219256.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fchmodat -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1076,7 +1010,7 @@ ResourceID = "[nxFileLine][V-219256.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*fchmodat\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource82ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource76ref
 {
 ResourceID = "[nxFileLine][V-219257.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S open -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1087,7 +1021,7 @@ ResourceID = "[nxFileLine][V-219257.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*open\\s*-F\\s*exit\\s*=\\s*-EPERM\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource83ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource77ref
 {
 ResourceID = "[nxFileLine][V-219257.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S open -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1098,7 +1032,7 @@ ResourceID = "[nxFileLine][V-219257.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*open\\s*-F\\s*exit\\s*=\\s*-EACCES\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource84ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource78ref
 {
 ResourceID = "[nxFileLine][V-219257.c][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S open -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1109,7 +1043,7 @@ ResourceID = "[nxFileLine][V-219257.c][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*open\\s*-F\\s*exit\\s*=\\s*-EPERM\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource85ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource79ref
 {
 ResourceID = "[nxFileLine][V-219257.d][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S open -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1120,7 +1054,7 @@ ResourceID = "[nxFileLine][V-219257.d][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*open\\s*-F\\s*exit\\s*=\\s*-EACCES\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource86ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource80ref
 {
 ResourceID = "[nxFileLine][V-219261.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S openat -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1131,7 +1065,7 @@ ResourceID = "[nxFileLine][V-219261.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*openat\\s*-F\\s*exit\\s*=\\s*-EPERM\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource87ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource81ref
 {
 ResourceID = "[nxFileLine][V-219261.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S openat -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1142,7 +1076,7 @@ ResourceID = "[nxFileLine][V-219261.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*openat\\s*-F\\s*exit\\s*=\\s*-EACCES\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource88ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource82ref
 {
 ResourceID = "[nxFileLine][V-219261.c][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S openat -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1153,7 +1087,7 @@ ResourceID = "[nxFileLine][V-219261.c][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*openat\\s*-F\\s*exit\\s*=\\s*-EPERM\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource89ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource83ref
 {
 ResourceID = "[nxFileLine][V-219261.d][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S openat -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1164,7 +1098,7 @@ ResourceID = "[nxFileLine][V-219261.d][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*openat\\s*-F\\s*exit\\s*=\\s*-EACCES\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource90ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource84ref
 {
 ResourceID = "[nxFileLine][V-219262.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1175,7 +1109,7 @@ ResourceID = "[nxFileLine][V-219262.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*open_by_handle_at\\s*-F\\s*exit\\s*=\\s*-EPERM\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource91ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource85ref
 {
 ResourceID = "[nxFileLine][V-219262.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1186,7 +1120,7 @@ ResourceID = "[nxFileLine][V-219262.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*open_by_handle_at\\s*-F\\s*exit\\s*=\\s*-EACCES\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource92ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource86ref
 {
 ResourceID = "[nxFileLine][V-219262.c][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1197,7 +1131,7 @@ ResourceID = "[nxFileLine][V-219262.c][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*open_by_handle_at\\s*-F\\s*exit\\s*=\\s*-EPERM\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource93ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource87ref
 {
 ResourceID = "[nxFileLine][V-219262.d][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1208,7 +1142,7 @@ ResourceID = "[nxFileLine][V-219262.d][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*open_by_handle_at\\s*-F\\s*exit\\s*=\\s*-EACCES\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource94ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource88ref
 {
 ResourceID = "[nxFileLine][V-219263][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/sudo -F perm=x -F auid>=1000 -F auid!=-1 -k priv_cmd";
@@ -1219,7 +1153,7 @@ ResourceID = "[nxFileLine][V-219263][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/bin/sudo\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*priv_cmd";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource95ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource89ref
 {
 ResourceID = "[nxFileLine][V-219264][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/sudoedit -F perm=x -F auid>=1000 -F auid!=-1 -k priv_cmd";
@@ -1230,7 +1164,7 @@ ResourceID = "[nxFileLine][V-219264][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/bin/sudoedit\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*priv_cmd";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource96ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource90ref
 {
 ResourceID = "[nxFileLine][V-219265][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/chsh -F perm=x -F auid>=1000 -F auid!=-1 -k priv_cmd";
@@ -1241,7 +1175,7 @@ ResourceID = "[nxFileLine][V-219265][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/bin/chsh\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*priv_cmd";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource97ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource91ref
 {
 ResourceID = "[nxFileLine][V-219266][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/newgrp -F perm=x -F auid>=1000 -F auid!=-1 -k priv_cmd";
@@ -1252,7 +1186,7 @@ ResourceID = "[nxFileLine][V-219266][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/bin/newgrp\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*priv_cmd";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource98ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource92ref
 {
 ResourceID = "[nxFileLine][V-219267][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/chcon -F perm=x -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1263,7 +1197,7 @@ ResourceID = "[nxFileLine][V-219267][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/bin/chcon\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource99ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource93ref
 {
 ResourceID = "[nxFileLine][V-219268][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/sbin/apparmor_parser -F perm=x -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1274,7 +1208,7 @@ ResourceID = "[nxFileLine][V-219268][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/sbin/apparmor_parser\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource100ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource94ref
 {
 ResourceID = "[nxFileLine][V-219269][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/setfacl -F perm=x -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1285,7 +1219,7 @@ ResourceID = "[nxFileLine][V-219269][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/bin/setfacl\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource101ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource95ref
 {
 ResourceID = "[nxFileLine][V-219270][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/chacl -F perm=x -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1296,7 +1230,7 @@ ResourceID = "[nxFileLine][V-219270][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/bin/chacl\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource102ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource96ref
 {
 ResourceID = "[nxFileLine][V-219271][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=-1 -k privileged-passwd";
@@ -1307,7 +1241,7 @@ ResourceID = "[nxFileLine][V-219271][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/bin/passwd\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*privileged-passwd";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource103ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource97ref
 {
 ResourceID = "[nxFileLine][V-219272][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/sbin/unix_update -F perm=x -F auid>=1000 -F auid!=-1 -k privileged-unix-update";
@@ -1318,7 +1252,7 @@ ResourceID = "[nxFileLine][V-219272][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/sbin/unix_update\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*privileged-unix-update";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource104ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource98ref
 {
 ResourceID = "[nxFileLine][V-219273][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/gpasswd -F perm=x -F auid>=1000 -F auid!=-1 -k privileged-gpasswd";
@@ -1329,7 +1263,7 @@ ResourceID = "[nxFileLine][V-219273][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/bin/gpasswd\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*privileged-gpasswd";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource105ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource99ref
 {
 ResourceID = "[nxFileLine][V-219274][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/chage -F perm=x -F auid>=1000 -F auid!=-1 -k privileged-chage";
@@ -1340,7 +1274,7 @@ ResourceID = "[nxFileLine][V-219274][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/bin/chage\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*privileged-chage";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource106ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource100ref
 {
 ResourceID = "[nxFileLine][V-219275][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/sbin/usermod -F perm=x -F auid>=1000 -F auid!=-1 -k privileged-usermod";
@@ -1351,7 +1285,7 @@ ResourceID = "[nxFileLine][V-219275][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/sbin/usermod\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*privileged-usermod";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource107ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource101ref
 {
 ResourceID = "[nxFileLine][V-219276][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/crontab -F perm=x -F auid>=1000 -F auid!=-1 -k privileged-crontab";
@@ -1362,7 +1296,7 @@ ResourceID = "[nxFileLine][V-219276][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/bin/crontab\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*privileged-crontab";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource108ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource102ref
 {
 ResourceID = "[nxFileLine][V-219277][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/sbin/pam_timestamp_check -F perm=x -F auid>=1000 -F auid!=-1 -k privileged-pam_timestamp_check";
@@ -1373,7 +1307,7 @@ ResourceID = "[nxFileLine][V-219277][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*path\\s*=\\s*/usr/sbin/pam_timestamp_check\\s*-F\\s*perm\\s*=\\s*x\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*privileged-pam_timestamp_check";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource109ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource103ref
 {
 ResourceID = "[nxFileLine][V-219278.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S init_module -F auid>=1000 -F auid!=-1 -k module_chng";
@@ -1384,7 +1318,7 @@ ResourceID = "[nxFileLine][V-219278.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*init_module\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*module_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource110ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource104ref
 {
 ResourceID = "[nxFileLine][V-219278.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S init_module -F auid>=1000 -F auid!=-1 -k module_chng";
@@ -1395,7 +1329,7 @@ ResourceID = "[nxFileLine][V-219278.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*init_module\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*module_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource111ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource105ref
 {
 ResourceID = "[nxFileLine][V-219279.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S finit_module -F auid>=1000 -F auid!=-1 -k module_chng";
@@ -1406,7 +1340,7 @@ ResourceID = "[nxFileLine][V-219279.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*finit_module\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*module_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource112ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource106ref
 {
 ResourceID = "[nxFileLine][V-219279.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S finit_module -F auid>=1000 -F auid!=-1 -k module_chng";
@@ -1417,7 +1351,7 @@ ResourceID = "[nxFileLine][V-219279.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*finit_module\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*module_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource113ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource107ref
 {
 ResourceID = "[nxFileLine][V-219280.a][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S delete_module -F auid>=1000 -F auid!=-1 -k module_chng";
@@ -1428,7 +1362,7 @@ ResourceID = "[nxFileLine][V-219280.a][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*delete_module\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*module_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource114ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource108ref
 {
 ResourceID = "[nxFileLine][V-219280.b][medium][SRG-OS-000064-GPOS-00033]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S delete_module -F auid>=1000 -F auid!=-1 -k module_chng";
@@ -1439,7 +1373,7 @@ ResourceID = "[nxFileLine][V-219280.b][medium][SRG-OS-000064-GPOS-00033]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*delete_module\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*module_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource115ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource109ref
 {
 ResourceID = "[nxFileLine][V-219281.a][medium][SRG-OS-000326-GPOS-00126]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -F key=execpriv";
@@ -1450,7 +1384,7 @@ ResourceID = "[nxFileLine][V-219281.a][medium][SRG-OS-000326-GPOS-00126]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*execve\\s*-C\\s*uid!\\s*=\\s*euid\\s*-F\\s*euid\\s*=\\s*0\\s*-F\\s*key\\s*=\\s*execpriv";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource116ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource110ref
 {
 ResourceID = "[nxFileLine][V-219281.b][medium][SRG-OS-000326-GPOS-00126]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -F key=execpriv";
@@ -1461,7 +1395,7 @@ ResourceID = "[nxFileLine][V-219281.b][medium][SRG-OS-000326-GPOS-00126]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*execve\\s*-C\\s*gid!\\s*=\\s*egid\\s*-F\\s*egid\\s*=\\s*0\\s*-F\\s*key\\s*=\\s*execpriv";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource117ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource111ref
 {
 ResourceID = "[nxFileLine][V-219281.c][medium][SRG-OS-000326-GPOS-00126]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -F key=execpriv";
@@ -1472,7 +1406,7 @@ ResourceID = "[nxFileLine][V-219281.c][medium][SRG-OS-000326-GPOS-00126]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*execve\\s*-C\\s*uid!\\s*=\\s*euid\\s*-F\\s*euid\\s*=\\s*0\\s*-F\\s*key\\s*=\\s*execpriv";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource118ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource112ref
 {
 ResourceID = "[nxFileLine][V-219281.d][medium][SRG-OS-000326-GPOS-00126]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -F key=execpriv";
@@ -1483,7 +1417,7 @@ ResourceID = "[nxFileLine][V-219281.d][medium][SRG-OS-000326-GPOS-00126]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*execve\\s*-C\\s*gid!\\s*=\\s*egid\\s*-F\\s*egid\\s*=\\s*0\\s*-F\\s*key\\s*=\\s*execpriv";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource119ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource113ref
 {
 ResourceID = "[nxFileLine][V-219282.a][medium][SRG-OS-000462-GPOS-00206]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S setxattr -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1494,7 +1428,7 @@ ResourceID = "[nxFileLine][V-219282.a][medium][SRG-OS-000462-GPOS-00206]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*setxattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource120ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource114ref
 {
 ResourceID = "[nxFileLine][V-219282.b][medium][SRG-OS-000462-GPOS-00206]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S setxattr -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1505,7 +1439,7 @@ ResourceID = "[nxFileLine][V-219282.b][medium][SRG-OS-000462-GPOS-00206]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*setxattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource121ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource115ref
 {
 ResourceID = "[nxFileLine][V-219283.a][medium][SRG-OS-000462-GPOS-00206]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S lsetxattr -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1516,7 +1450,7 @@ ResourceID = "[nxFileLine][V-219283.a][medium][SRG-OS-000462-GPOS-00206]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*lsetxattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource122ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource116ref
 {
 ResourceID = "[nxFileLine][V-219283.b][medium][SRG-OS-000462-GPOS-00206]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S lsetxattr -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1527,7 +1461,7 @@ ResourceID = "[nxFileLine][V-219283.b][medium][SRG-OS-000462-GPOS-00206]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*lsetxattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource123ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource117ref
 {
 ResourceID = "[nxFileLine][V-219284.a][medium][SRG-OS-000462-GPOS-00206]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fsetxattr -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1538,7 +1472,7 @@ ResourceID = "[nxFileLine][V-219284.a][medium][SRG-OS-000462-GPOS-00206]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*fsetxattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource124ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource118ref
 {
 ResourceID = "[nxFileLine][V-219284.b][medium][SRG-OS-000462-GPOS-00206]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fsetxattr -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1549,7 +1483,7 @@ ResourceID = "[nxFileLine][V-219284.b][medium][SRG-OS-000462-GPOS-00206]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*fsetxattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource125ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource119ref
 {
 ResourceID = "[nxFileLine][V-219285.a][medium][SRG-OS-000462-GPOS-00206]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S removexattr -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1560,7 +1494,7 @@ ResourceID = "[nxFileLine][V-219285.a][medium][SRG-OS-000462-GPOS-00206]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*removexattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource126ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource120ref
 {
 ResourceID = "[nxFileLine][V-219285.b][medium][SRG-OS-000462-GPOS-00206]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S removexattr -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1571,7 +1505,7 @@ ResourceID = "[nxFileLine][V-219285.b][medium][SRG-OS-000462-GPOS-00206]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*removexattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource127ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource121ref
 {
 ResourceID = "[nxFileLine][V-219286.a][medium][SRG-OS-000462-GPOS-00206]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S lremovexattr -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1582,7 +1516,7 @@ ResourceID = "[nxFileLine][V-219286.a][medium][SRG-OS-000462-GPOS-00206]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*lremovexattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource128ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource122ref
 {
 ResourceID = "[nxFileLine][V-219286.b][medium][SRG-OS-000462-GPOS-00206]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S lremovexattr -F auid>=1000 -F auid!=-1 -k perm_chng";
@@ -1593,7 +1527,7 @@ ResourceID = "[nxFileLine][V-219286.b][medium][SRG-OS-000462-GPOS-00206]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*lremovexattr\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_chng";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource129ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource123ref
 {
 ResourceID = "[nxFileLine][V-219287.a][medium][SRG-OS-000468-GPOS-00212]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S unlink -F auid>=1000 -F auid!=-1 -k delete";
@@ -1604,7 +1538,7 @@ ResourceID = "[nxFileLine][V-219287.a][medium][SRG-OS-000468-GPOS-00212]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*unlink\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*delete";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource130ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource124ref
 {
 ResourceID = "[nxFileLine][V-219287.b][medium][SRG-OS-000468-GPOS-00212]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S unlink -F auid>=1000 -F auid!=-1 -k delete";
@@ -1615,7 +1549,7 @@ ResourceID = "[nxFileLine][V-219287.b][medium][SRG-OS-000468-GPOS-00212]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*unlink\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*delete";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource131ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource125ref
 {
 ResourceID = "[nxFileLine][V-219288.a][medium][SRG-OS-000468-GPOS-00212]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S unlinkat -F auid>=1000 -F auid!=-1 -k delete";
@@ -1626,7 +1560,7 @@ ResourceID = "[nxFileLine][V-219288.a][medium][SRG-OS-000468-GPOS-00212]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*unlinkat\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*delete";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource132ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource126ref
 {
 ResourceID = "[nxFileLine][V-219288.b][medium][SRG-OS-000468-GPOS-00212]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S unlinkat -F auid>=1000 -F auid!=-1 -k delete";
@@ -1637,7 +1571,7 @@ ResourceID = "[nxFileLine][V-219288.b][medium][SRG-OS-000468-GPOS-00212]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*unlinkat\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*delete";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource133ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource127ref
 {
 ResourceID = "[nxFileLine][V-219289.a][medium][SRG-OS-000468-GPOS-00212]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S rename -F auid>=1000 -F auid!=-1 -k delete";
@@ -1648,7 +1582,7 @@ ResourceID = "[nxFileLine][V-219289.a][medium][SRG-OS-000468-GPOS-00212]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*rename\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*delete";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource134ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource128ref
 {
 ResourceID = "[nxFileLine][V-219289.b][medium][SRG-OS-000468-GPOS-00212]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S rename -F auid>=1000 -F auid!=-1 -k delete";
@@ -1659,7 +1593,7 @@ ResourceID = "[nxFileLine][V-219289.b][medium][SRG-OS-000468-GPOS-00212]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*rename\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*delete";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource135ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource129ref
 {
 ResourceID = "[nxFileLine][V-219290.a][medium][SRG-OS-000468-GPOS-00212]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S renameat -F auid>=1000 -F auid!=-1 -k delete";
@@ -1670,7 +1604,7 @@ ResourceID = "[nxFileLine][V-219290.a][medium][SRG-OS-000468-GPOS-00212]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*renameat\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*delete";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource136ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource130ref
 {
 ResourceID = "[nxFileLine][V-219290.b][medium][SRG-OS-000468-GPOS-00212]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S renameat -F auid>=1000 -F auid!=-1 -k delete";
@@ -1681,7 +1615,7 @@ ResourceID = "[nxFileLine][V-219290.b][medium][SRG-OS-000468-GPOS-00212]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*renameat\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*delete";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource137ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource131ref
 {
 ResourceID = "[nxFileLine][V-219291.a][medium][SRG-OS-000471-GPOS-00216]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S init_module -S finit_module -k modules";
@@ -1692,7 +1626,7 @@ ResourceID = "[nxFileLine][V-219291.a][medium][SRG-OS-000471-GPOS-00216]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*init_module\\s*-S\\s*finit_module\\s*-k\\s*modules";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource138ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource132ref
 {
 ResourceID = "[nxFileLine][V-219291.b][medium][SRG-OS-000471-GPOS-00216]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S init_module -S finit_module -k modules";
@@ -1703,7 +1637,7 @@ ResourceID = "[nxFileLine][V-219291.b][medium][SRG-OS-000471-GPOS-00216]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*init_module\\s*-S\\s*finit_module\\s*-k\\s*modules";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource139ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource133ref
 {
 ResourceID = "[nxFileLine][V-219292.a][medium][SRG-OS-000471-GPOS-00216]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S delete_module -k modules";
@@ -1714,7 +1648,7 @@ ResourceID = "[nxFileLine][V-219292.a][medium][SRG-OS-000471-GPOS-00216]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*delete_module\\s*-k\\s*modules";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource140ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource134ref
 {
 ResourceID = "[nxFileLine][V-219292.b][medium][SRG-OS-000471-GPOS-00216]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S delete_module -k modules";
@@ -1725,7 +1659,7 @@ ResourceID = "[nxFileLine][V-219292.b][medium][SRG-OS-000471-GPOS-00216]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*delete_module\\s*-k\\s*modules";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource141ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource135ref
 {
 ResourceID = "[nxFileLine][V-219293.a][medium][SRG-OS-000474-GPOS-00219]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S truncate -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1736,7 +1670,7 @@ ResourceID = "[nxFileLine][V-219293.a][medium][SRG-OS-000474-GPOS-00219]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*truncate\\s*-F\\s*exit\\s*=\\s*-EPERM\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource142ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource136ref
 {
 ResourceID = "[nxFileLine][V-219293.b][medium][SRG-OS-000474-GPOS-00219]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S truncate -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1747,7 +1681,7 @@ ResourceID = "[nxFileLine][V-219293.b][medium][SRG-OS-000474-GPOS-00219]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*truncate\\s*-F\\s*exit\\s*=\\s*-EACCES\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource143ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource137ref
 {
 ResourceID = "[nxFileLine][V-219293.c][medium][SRG-OS-000474-GPOS-00219]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S truncate -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1758,7 +1692,7 @@ ResourceID = "[nxFileLine][V-219293.c][medium][SRG-OS-000474-GPOS-00219]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*truncate\\s*-F\\s*exit\\s*=\\s*-EPERM\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource144ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource138ref
 {
 ResourceID = "[nxFileLine][V-219293.d][medium][SRG-OS-000474-GPOS-00219]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S truncate -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1769,7 +1703,7 @@ ResourceID = "[nxFileLine][V-219293.d][medium][SRG-OS-000474-GPOS-00219]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*truncate\\s*-F\\s*exit\\s*=\\s*-EACCES\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource145ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource139ref
 {
 ResourceID = "[nxFileLine][V-219294.a][medium][SRG-OS-000474-GPOS-00219]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1780,7 +1714,7 @@ ResourceID = "[nxFileLine][V-219294.a][medium][SRG-OS-000474-GPOS-00219]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*ftruncate\\s*-F\\s*exit\\s*=\\s*-EPERM\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource146ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource140ref
 {
 ResourceID = "[nxFileLine][V-219294.b][medium][SRG-OS-000474-GPOS-00219]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1791,7 +1725,7 @@ ResourceID = "[nxFileLine][V-219294.b][medium][SRG-OS-000474-GPOS-00219]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*ftruncate\\s*-F\\s*exit\\s*=\\s*-EACCES\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource147ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource141ref
 {
 ResourceID = "[nxFileLine][V-219294.c][medium][SRG-OS-000474-GPOS-00219]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1802,7 +1736,7 @@ ResourceID = "[nxFileLine][V-219294.c][medium][SRG-OS-000474-GPOS-00219]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*ftruncate\\s*-F\\s*exit\\s*=\\s*-EPERM\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource148ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource142ref
 {
 ResourceID = "[nxFileLine][V-219294.d][medium][SRG-OS-000474-GPOS-00219]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1813,7 +1747,7 @@ ResourceID = "[nxFileLine][V-219294.d][medium][SRG-OS-000474-GPOS-00219]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*ftruncate\\s*-F\\s*exit\\s*=\\s*-EACCES\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource149ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource143ref
 {
 ResourceID = "[nxFileLine][V-219295.a][medium][SRG-OS-000474-GPOS-00219]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S creat -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1824,7 +1758,7 @@ ResourceID = "[nxFileLine][V-219295.a][medium][SRG-OS-000474-GPOS-00219]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*creat\\s*-F\\s*exit\\s*=\\s*-EPERM\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource150ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource144ref
 {
 ResourceID = "[nxFileLine][V-219295.b][medium][SRG-OS-000474-GPOS-00219]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S creat -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1835,7 +1769,7 @@ ResourceID = "[nxFileLine][V-219295.b][medium][SRG-OS-000474-GPOS-00219]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*creat\\s*-F\\s*exit\\s*=\\s*-EACCES\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource151ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource145ref
 {
 ResourceID = "[nxFileLine][V-219295.c][medium][SRG-OS-000474-GPOS-00219]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S creat -F exit=-EPERM -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1846,7 +1780,7 @@ ResourceID = "[nxFileLine][V-219295.c][medium][SRG-OS-000474-GPOS-00219]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*creat\\s*-F\\s*exit\\s*=\\s*-EPERM\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource152ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource146ref
 {
 ResourceID = "[nxFileLine][V-219295.d][medium][SRG-OS-000474-GPOS-00219]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S creat -F exit=-EACCES -F auid>=1000 -F auid!=-1 -k perm_access";
@@ -1857,7 +1791,7 @@ ResourceID = "[nxFileLine][V-219295.d][medium][SRG-OS-000474-GPOS-00219]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*creat\\s*-F\\s*exit\\s*=\\s*-EACCES\\s*-F\\s*auid>\\s*=\\s*1000\\s*-F\\s*auid!\\s*=\\s*-1\\s*-k\\s*perm_access";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource153ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource147ref
 {
 ResourceID = "[nxFileLine][V-219296.a][medium][SRG-OS-000477-GPOS-00222]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S init_module -S finit_module -F key=modules";
@@ -1868,7 +1802,7 @@ ResourceID = "[nxFileLine][V-219296.a][medium][SRG-OS-000477-GPOS-00222]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*init_module\\s*-S\\s*finit_module\\s*-F\\s*key\\s*=\\s*modules";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource154ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource148ref
 {
 ResourceID = "[nxFileLine][V-219296.b][medium][SRG-OS-000477-GPOS-00222]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S init_module -S finit_module -F key=modules";
@@ -1879,7 +1813,7 @@ ResourceID = "[nxFileLine][V-219296.b][medium][SRG-OS-000477-GPOS-00222]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*init_module\\s*-S\\s*finit_module\\s*-F\\s*key\\s*=\\s*modules";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource155ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource149ref
 {
 ResourceID = "[nxFileLine][V-219297.a][medium][SRG-OS-000477-GPOS-00222]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S delete_module -F key=modules";
@@ -1890,7 +1824,7 @@ ResourceID = "[nxFileLine][V-219297.a][medium][SRG-OS-000477-GPOS-00222]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b64\\s*-S\\s*delete_module\\s*-F\\s*key\\s*=\\s*modules";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource156ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource150ref
 {
 ResourceID = "[nxFileLine][V-219297.b][medium][SRG-OS-000477-GPOS-00222]::[Ubuntu]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S delete_module -F key=modules";
@@ -1901,7 +1835,7 @@ ResourceID = "[nxFileLine][V-219297.b][medium][SRG-OS-000477-GPOS-00222]::[Ubunt
  DoesNotContainPattern = "#\\s*-a\\s*always,exit\\s*-F\\s*arch\\s*=\\s*b32\\s*-S\\s*delete_module\\s*-F\\s*key\\s*=\\s*modules";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource157ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource151ref
 {
 ResourceID = "[nxFileLine][V-219298][medium][SRG-OS-000477-GPOS-00222]::[Ubuntu]Baseline";
  ContainsLine = "-w /sbin/modprobe -p x -k modules";
@@ -1912,7 +1846,7 @@ ResourceID = "[nxFileLine][V-219298][medium][SRG-OS-000477-GPOS-00222]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/sbin/modprobe\\s*-p\\s*x\\s*-k\\s*modules";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource158ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource152ref
 {
 ResourceID = "[nxFileLine][V-219299][medium][SRG-OS-000477-GPOS-00222]::[Ubuntu]Baseline";
  ContainsLine = "-w /bin/kmod -p x -k module";
@@ -1923,7 +1857,7 @@ ResourceID = "[nxFileLine][V-219299][medium][SRG-OS-000477-GPOS-00222]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/bin/kmod\\s*-p\\s*x\\s*-k\\s*module";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource159ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource153ref
 {
 ResourceID = "[nxFileLine][V-219300][medium][SRG-OS-000477-GPOS-00222]::[Ubuntu]Baseline";
  ContainsLine = "-w /sbin/fdisk -p x -k fdisk";
@@ -1934,7 +1868,7 @@ ResourceID = "[nxFileLine][V-219300][medium][SRG-OS-000477-GPOS-00222]::[Ubuntu]
  DoesNotContainPattern = "#\\s*-w\\s*/sbin/fdisk\\s*-p\\s*x\\s*-k\\s*fdisk";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource160ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource154ref
 {
 ResourceID = "[nxFileLine][V-219301][low][SRG-OS-000027-GPOS-00008]::[Ubuntu]Baseline";
  ContainsLine = "* hard maxlogins 10";
@@ -1945,7 +1879,7 @@ ResourceID = "[nxFileLine][V-219301][low][SRG-OS-000027-GPOS-00008]::[Ubuntu]Bas
  DoesNotContainPattern = "^\\s*\\*\\s*hard\\s*maxlogins\\s*([1][1-9]|[2-9]\\d+|[1-9][0-9]\\d+)$|^#\\s*\\*\\s*hard\\s*maxlogins.*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource161ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource155ref
 {
 ResourceID = "[nxFileLine][V-219303.b][medium][SRG-OS-000029-GPOS-00010]::[Ubuntu]Baseline";
  ContainsLine = "TMOUT=900";
@@ -1956,7 +1890,7 @@ ResourceID = "[nxFileLine][V-219303.b][medium][SRG-OS-000029-GPOS-00010]::[Ubunt
  DoesNotContainPattern = "^\\s*TMOUT\\s*=\\s*[0-8]?[0-9]?[0-9]?$|^#\\s*TMOUT.*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource162ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource156ref
 {
 ResourceID = "[nxFileLine][V-219303.c][medium][SRG-OS-000029-GPOS-00010]::[Ubuntu]Baseline";
  ContainsLine = "readonly TMOUT";
@@ -1967,7 +1901,7 @@ ResourceID = "[nxFileLine][V-219303.c][medium][SRG-OS-000029-GPOS-00010]::[Ubunt
  DoesNotContainPattern = "^\\s*readonly\\s+(?!TMOUT\\b).*$|^\\s*#\\s*readonly.*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource163ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource157ref
 {
 ResourceID = "[nxFileLine][V-219303.d][medium][SRG-OS-000029-GPOS-00010]::[Ubuntu]Baseline";
  ContainsLine = "export TMOUT";
@@ -1978,7 +1912,7 @@ ResourceID = "[nxFileLine][V-219303.d][medium][SRG-OS-000029-GPOS-00010]::[Ubunt
  DoesNotContainPattern = "^\\s*export\\s+(?!TMOUT\\b).*$|^\\s*#\\s*export.*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource164ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource158ref
 {
 ResourceID = "[nxFileLine][V-219306.a][medium][SRG-OS-000032-GPOS-00013]::[Ubuntu]Baseline";
  ContainsLine = "auth.*,authpriv.* /var/log/secure";
@@ -1989,7 +1923,7 @@ ResourceID = "[nxFileLine][V-219306.a][medium][SRG-OS-000032-GPOS-00013]::[Ubunt
  DoesNotContainPattern = "#\\s*auth\\.\\*,\\s*authpriv\\.\\*.*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource165ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource159ref
 {
 ResourceID = "[nxFileLine][V-219306.b][medium][SRG-OS-000032-GPOS-00013]::[Ubuntu]Baseline";
  ContainsLine = "daemon.notice /var/log/messages";
@@ -2000,7 +1934,7 @@ ResourceID = "[nxFileLine][V-219306.b][medium][SRG-OS-000032-GPOS-00013]::[Ubunt
  DoesNotContainPattern = "#\\s*daemon.notice.*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource166ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource160ref
 {
 ResourceID = "[nxFileLine][V-219307][medium][SRG-OS-000033-GPOS-00014]::[Ubuntu]Baseline";
  ContainsLine = "Ciphers aes256-ctr,aes192-ctr,aes128-ctr";
@@ -2011,7 +1945,7 @@ ResourceID = "[nxFileLine][V-219307][medium][SRG-OS-000033-GPOS-00014]::[Ubuntu]
  DoesNotContainPattern = "^#\\s*Ciphers.*|^\\s*Ciphers\\s*aes128-ctr.*|^\\s*Ciphers\\s*aes192-ctr.*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource167ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource161ref
 {
 ResourceID = "[nxFileLine][V-219308][high][SRG-OS-000112-GPOS-00057]::[Ubuntu]Baseline";
  ContainsLine = "Protocol 2";
@@ -2022,7 +1956,7 @@ ResourceID = "[nxFileLine][V-219308][high][SRG-OS-000112-GPOS-00057]::[Ubuntu]Ba
  DoesNotContainPattern = "^#\\s*Protocol.*$|^Protocol\\s*(?!2\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource168ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource162ref
 {
 ResourceID = "[nxFileLine][V-219309][medium][SRG-OS-000125-GPOS-00065]::[Ubuntu]Baseline";
  ContainsLine = "UsePAM yes";
@@ -2033,7 +1967,7 @@ ResourceID = "[nxFileLine][V-219309][medium][SRG-OS-000125-GPOS-00065]::[Ubuntu]
  DoesNotContainPattern = "#\\s*UsePAM\\s*yes";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource169ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource163ref
 {
 ResourceID = "[nxFileLine][V-219310][medium][SRG-OS-000126-GPOS-00066]::[Ubuntu]Baseline";
  ContainsLine = "ClientAliveCountMax 1";
@@ -2044,7 +1978,7 @@ ResourceID = "[nxFileLine][V-219310][medium][SRG-OS-000126-GPOS-00066]::[Ubuntu]
  DoesNotContainPattern = "^#\\s*ClientAliveCountMax.*$|^ClientAliveCountMax\\s*(?!1\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource170ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource164ref
 {
 ResourceID = "[nxFileLine][V-219311][medium][SRG-OS-000163-GPOS-00072]::[Ubuntu]Baseline";
  ContainsLine = "ClientAliveInterval 600";
@@ -2055,7 +1989,7 @@ ResourceID = "[nxFileLine][V-219311][medium][SRG-OS-000163-GPOS-00072]::[Ubuntu]
  DoesNotContainPattern = "^\\s*ClientAliveInterval\\s*[0-5]?[0-9]?[0-9]?\\s*$|^#\\s*ClientAliveInterval.*|^\\s*ClientAliveInterval\\s*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource171ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource165ref
 {
 ResourceID = "[nxFileLine][V-219312][medium][SRG-OS-000250-GPOS-00093]::[Ubuntu]Baseline";
  ContainsLine = "MACs hmac-sha2-512,hmac-sha2-256";
@@ -2066,7 +2000,7 @@ ResourceID = "[nxFileLine][V-219312][medium][SRG-OS-000250-GPOS-00093]::[Ubuntu]
  DoesNotContainPattern = "#\\s*MACs.*|\\s*MACs\\s*hmac-(?!sha2-512).*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource172ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource166ref
 {
 ResourceID = "[nxFileLine][V-219314.a][high][SRG-OS-000480-GPOS-00229]::[Ubuntu]Baseline";
  ContainsLine = "PermitEmptyPasswords no";
@@ -2077,7 +2011,7 @@ ResourceID = "[nxFileLine][V-219314.a][high][SRG-OS-000480-GPOS-00229]::[Ubuntu]
  DoesNotContainPattern = "^#\\s*PermitEmptyPasswords.*$|^PermitEmptyPasswords\\s*(?!no\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource173ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource167ref
 {
 ResourceID = "[nxFileLine][V-219314.b][high][SRG-OS-000480-GPOS-00229]::[Ubuntu]Baseline";
  ContainsLine = "PermitUserEnvironment no";
@@ -2088,7 +2022,7 @@ ResourceID = "[nxFileLine][V-219314.b][high][SRG-OS-000480-GPOS-00229]::[Ubuntu]
  DoesNotContainPattern = "^#\\s*PermitUserEnvironment.*$|^PermitUserEnvironment\\s*(?!no\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource174ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource168ref
 {
 ResourceID = "[nxFileLine][V-219328][medium][SRG-OS-000480-GPOS-00228]::[Ubuntu]Baseline";
  ContainsLine = "UMASK 077";
@@ -2099,7 +2033,7 @@ ResourceID = "[nxFileLine][V-219328][medium][SRG-OS-000480-GPOS-00228]::[Ubuntu]
  DoesNotContainPattern = "^\\s*UMASK(?!\\s077\\b)\\s*\\d*\\s*$|^#\\s*UMASK.*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource175ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource169ref
 {
 ResourceID = "[nxFileLine][V-219339.b][medium][SRG-OS-000378-GPOS-00163]::[Ubuntu]Baseline";
  ContainsLine = "install usb-storage /bin/true";
@@ -2110,7 +2044,7 @@ ResourceID = "[nxFileLine][V-219339.b][medium][SRG-OS-000378-GPOS-00163]::[Ubunt
  DoesNotContainPattern = "#\\s*install\\s*usb-storage\\s*/bin/true";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource176ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource170ref
 {
 ResourceID = "[nxFileLine][V-219339.c][medium][SRG-OS-000378-GPOS-00163]::[Ubuntu]Baseline";
  ContainsLine = "blacklist usb-storage";
@@ -2121,7 +2055,7 @@ ResourceID = "[nxFileLine][V-219339.c][medium][SRG-OS-000378-GPOS-00163]::[Ubunt
  DoesNotContainPattern = "#\\s*blacklist\\s*usb-storage";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource177ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource171ref
 {
 ResourceID = "[nxFileLine][V-233779][medium][SRG-OS-000480-GPOS-00227]::[Ubuntu]Baseline";
  ContainsLine = "X11Forwarding no";
@@ -2132,7 +2066,7 @@ ResourceID = "[nxFileLine][V-233779][medium][SRG-OS-000480-GPOS-00227]::[Ubuntu]
  DoesNotContainPattern = "^#\\s*X11Forwarding.*$|^X11Forwarding\\s*(?!no\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource178ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource172ref
 {
 ResourceID = "[nxFileLine][V-233780][medium][SRG-OS-000480-GPOS-00227]::[Ubuntu]Baseline";
  ContainsLine = "X11UseLocalhost yes";
@@ -2291,7 +2225,7 @@ instance of OMI_ConfigurationDocument
  
                         Author="Microsoft";
  
-                        GenerationDate="02/02/2021 23:10:11";
+                        GenerationDate="02/11/2021 13:43:35";
  
                         GenerationHost="Microsoft";
  
