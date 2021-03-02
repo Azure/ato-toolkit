@@ -259,6 +259,7 @@
         ],
         "deploySTIGFile": "deploySTIG.sh",
         "storageApiVersion" : "2019-06-01",
+        "storageAccountResourceid": "[if(equals(parameters('diagnosticStorageResourceId'), ''), 'fakestorageaccountresourceid', parameters('diagnosticStorageResourceId'))]",
         "storageAccountName": "[if(equals(parameters('diagnosticStorageResourceId'), ''), 'fakestorageaccountname', split(parameters('diagnosticStorageResourceId'), '/')[8])]",
         "metricsresourceid": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/', 'Microsoft.Compute/virtualMachines/', parameters('vmName'))]",
         "metricsclosing": "[concat('<Metrics resourceId=\"', variables('metricsresourceid'), '\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>')]",
@@ -446,7 +447,7 @@
                         },
                         "protectedSettings": {
                         "storageAccountName": "[variables('storageAccountName')]",
-                        "storageAccountKey": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', listkeys(parameters('diagnosticStorageResourceId'), '2019-06-01').keys[0].value)]",
+                        "storageAccountKey": "[if(equals(variables('storageAccountResourceid'), ''), '', listkeys(variables('storageAccountResourceid'), '2019-06-01').keys[0].value)]",
                         "storageAccountEndPoint": "[concat('https://', environment().suffixes.storage)]"
                         }
                     }
