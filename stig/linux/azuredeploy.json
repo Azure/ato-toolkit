@@ -494,9 +494,9 @@
                 "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
             ],
             "properties": {
-                "publisher": "Microsoft.Azure.Diagnostics",
+                "publisher": "Microsoft.OSTCExtensions",
                 "type": "LinuxDiagnostic",
-                "typeHandlerVersion": "3.0",
+                "typeHandlerVersion": "2.3",
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "StorageAccount": "[variables('storageAccountName')]",
