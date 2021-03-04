@@ -63,6 +63,17 @@ find -L /bin /sbin /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin ! -group ro
 echo "Setting mode to 0600 for /var/log/audit/*..."
 chmod -c 0600 /var/log/audit/*
 
+# chmod persistent cloud-init per-boot script
+if [ ! -f /var/lib/cloud/scripts/per-boot/per-boot.sh ]; then
+    echo "Writing /var/lib/cloud/scripts/per-boot/per-boot.sh to address chmod persistence post reboot..."
+    echo '#!/bin/bash' > /var/lib/cloud/scripts/per-boot/per-boot.sh
+    echo 'echo $(date) > /var/log/cloud-init-per-boot.log' >> /var/lib/cloud/scripts/per-boot/per-boot.sh
+    echo 'find /var/log -perm /137 -type f -exec chmod -c 640 '{}' \; >> /var/log/cloud-init-per-boot.log' >> /var/lib/cloud/scripts/per-boot/per-boot.sh
+    echo 'chmod -c 0750 /var/log >> /var/log/cloud-init-per-boot.log' >> /var/lib/cloud/scripts/per-boot/per-boot.sh
+    echo 'chmod -c 0600 /var/log/audit/* >> /var/log/cloud-init-per-boot.log' >> /var/lib/cloud/scripts/per-boot/per-boot.sh
+    chmod +x /var/lib/cloud/scripts/per-boot/per-boot.sh
+fi
+
 # boot / audit automation
 echo "Adding 'audit=1' to /etc/default/grub to enable auditing at system startup..."
 cp --force /etc/default/grub /etc/default/backup.grub
