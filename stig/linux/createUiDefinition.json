@@ -241,7 +241,7 @@
                     {
                         "name": "osDiskEncryptionSet",
                         "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Disk Encryption Set",
+                        "label": "Disk encryption set",
                         "resourceType": "Microsoft.Compute/diskEncryptionSets",
                         "toolTip": "A disk encryption set stores the customer key that a disk or snapshot will use for encrypting its data. You must choose an existing disk encryption set during this step. Disk encryption sets require access to key vault and keys.",
                         "options": {
@@ -249,6 +249,9 @@
                                 "subscription": "onBasic",
                                 "location": "onBasic"
                             }
+                        },
+                        "constraints": {
+                            "required": true
                         },
                         "visible": "[not(equals(steps('disk').osDiskEncryptionType, 'default'))]"
                     }
@@ -274,7 +277,7 @@
                         "name": "vmVirtualNetwork",
                         "type": "Microsoft.Network.VirtualNetworkCombo",
                         "label": {
-                            "virtualNetwork": "Virtual Network",
+                            "virtualNetwork": "Virtual network",
                             "subnets": "Subnets"
                         },
                         "toolTip": {
@@ -304,6 +307,17 @@
                                     "requireContiguousAddresses": true
                                 }
                             }
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "vmApplicationSecurityGroup",
+                        "type": "Microsoft.Solutions.ResourceSelector",
+                        "label": "Application security group",
+                        "resourceType": "Microsoft.Network/applicationSecurityGroups",
+                        "toolTip": "Application security groups enable you to configure network security as a natural extension of an application's structure, allowing you to group virtual machines and define network security policies based on those groups.",
+                        "constraints": {
+                            "required": false
                         },
                         "visible": true
                     }
@@ -350,6 +364,49 @@
                                 "location": "onBasic"
                             }
                         }
+                    },
+                    {
+                        "name": "textBlock1",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
+                            "text": "Custom data and cloud init"
+                        },
+                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
+                    },
+                    {
+                        "name": "textBlock2",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
+                            "text": "Pass a cloud-init script, configuration file, or other data into the virtual machine while it is being provisioned. The data will be saved on the VM in a known location."
+                        },
+                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
+                    },
+                    {
+                        "name": "customData",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Custom data",
+                        "toolTip": "Custom data.",
+                        "multiLine": true,
+                        "constraints": {
+                            "required": false,
+                            "validations": [
+                                {
+                                    "regex": ".*",
+                                    "message": "Allows any charaters, numbers of symbols."
+                                }
+                            ]
+                        },
+                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
+                    },
+                    {
+                        "name": "infoBox0",
+                        "type": "Microsoft.Common.InfoBox",
+                        "options": {
+                            "icon": "Info",
+                            "text": "Your image must have code to support consumption of custom data. If your image supports cloud-init, custom-data will be processed by cloud-init.",
+                            "uri": "http://go.microsoft.com/fwlink/?LinkId=2125807"
+                        },
+                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
                     }
                 ]
             }
@@ -364,13 +421,15 @@
             "authenticationType": "[steps('instance').adminCredentials.authenticationType]",
             "adminPasswordOrKey": "[if(equals(steps('instance').adminCredentials.authenticationType, 'password'), steps('instance').adminCredentials.password, steps('instance').adminCredentials.sshPublicKey)]",
             "osDiskStorageType": "[steps('disk').osDiskStorageType]",
-            "osDiskEncryptionSetResourceId": "[steps('disk').osDiskEncryptionType.id]",
+            "osDiskEncryptionSetResourceId": "[steps('disk').osDiskEncryptionSet.id]",
+            "customData": "[if(not(empty(steps('management').customData)), steps('management').customData, '')]",
             "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",
             "virtualNetworkNewOrExisting": "[steps('networking').vmVirtualNetwork.newOrExisting]",
             "virtualNetworkResourceGroupName": "[steps('networking').vmVirtualNetwork.resourceGroup]",
             "addressPrefix": "[steps('networking').vmVirtualNetwork.addressPrefix]",
             "subnetPrefix": "[steps('networking').vmVirtualNetwork.subnets.subnet1.addressPrefix]",
             "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
+            "applicationSecurityGroupResourceId": "[steps('networking').vmApplicationSecurityGroup.id]",
             "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
             "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]"
         }

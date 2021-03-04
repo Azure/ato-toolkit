@@ -63,7 +63,8 @@
                 "RHEL74",
                 "RHEL73",
                 "RHEL72",
-                "Ubuntu1804"
+                "Ubuntu1804",
+                "Ubuntu1804-DataScience"
             ],
             "metadata": {
                 "description": "The Linux version for the VM. This will pick a fully patched image of this given Linux version."
@@ -82,6 +83,13 @@
             "defaultValue": "",
             "metadata": {
                 "description": "OS Disk Encryption Set resource id."
+            }
+        },
+        "customData": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Pass a script, configuration file, or other data into the virtual machine while it is being provisioned. The data will be saved on the VM in a known location."
             }
         },
         "_artifactsLocation": {
@@ -140,6 +148,13 @@
                 "description": "Subnet prefix of the virtual network"
             }
         },
+        "applicationSecurityGroupResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Application Security Group resource id."
+            }
+        },
         "availabilitySetResourceId": {
             "type": "string",
             "defaultValue": "",
@@ -179,6 +194,11 @@
         },
         "subnetRef": "[concat(variables('vnetId')[parameters('virtualNetworkNewOrExisting')],'/subnets/',parameters('subnetName'))]",
         "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
+        "applicationSecurityGroup": [
+            {
+                "id": "[parameters('applicationSecurityGroupResourceId')]"
+            }
+        ],
         "images": {
             "CentOS79": {
                 "reference": {
@@ -305,6 +325,15 @@
                     "version": "latest"
                 },
                 "stigFileName": "ubuntuSTIG.sh"
+            },
+            "Ubuntu1804-DataScience": {
+                "reference": {
+                    "publisher": "microsoft-dsvm",
+                    "offer": "ubuntu-1804",
+                    "sku": "1804",
+                    "version": "latest"
+                },
+                "stigFileName": "ubuntuDsVmSTIG.sh"
             }
         },
         "linuxConfiguration": {
@@ -318,9 +347,6 @@
                 ]
             }
         },
-        "auditRemoteConnectionWithNoPwdConfigName": "PasswordPolicy_msid110",
-        "auditAccountsWithNoPwdConfigName": "PasswordPolicy_msid232",
-        "auditEtcPwdFilePermissionSetTo0644Configame": "PasswordPolicy_msid121",
         "storageApiVersion": "2019-06-01",
         "diskEncryptionSet": { "id": "[parameters('osDiskEncryptionSetResourceId')]" },
         "artifactsLocationSasToken": "[if(equals(parameters('_artifactsLocationSasToken'), ''), if(contains(deployment().properties.templateLink.uri, '?'), split(deployment().properties.templateLink.uri, 'mainTemplate.json')[1], ''), parameters('_artifactsLocationSasToken'))]"
@@ -371,6 +397,7 @@
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('vmVirtualNetwork'))]"
             ],
             "properties": {
+                "networkSecurityGroup": { "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]" },
                 "ipConfigurations": [
                     {
                         "name": "ipconfig1",
@@ -378,7 +405,8 @@
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
                                 "id": "[variables('subnetRef')]"
-                            }
+                            },
+                            "applicationSecurityGroups": "[if(equals(parameters('applicationSecurityGroupResourceId'), ''), json('null'), variables('applicationSecurityGroup'))]"
                         }
                     }
                 ]
@@ -441,7 +469,8 @@
                     "computerName": "[parameters('vmName')]",
                     "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPasswordOrKey')]",
-                    "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
+                    "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]",
+                    "customData": "[if(equals(parameters('customData'), ''), json('null'), base64(parameters('customData')))]"
                 },
                 "availabilitySet": "[if(equals(parameters('availabilitySetResourceId'), ''), json('null'), parameters('availabilitySetResourceId'))]",
                 "diagnosticsProfile": {
@@ -453,66 +482,6 @@
             },
             "resources": [
             ]
-        },
-        {
-            "type": "Microsoft.Compute/virtualMachines/providers/guestConfigurationAssignments",
-            "apiVersion": "2018-11-20",
-            "name": "[concat(parameters('vmName'), '/Microsoft.GuestConfiguration/', variables('auditRemoteConnectionWithNoPwdConfigName'))]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-            ],
-            "properties": {
-                "guestConfiguration": {
-                    "name": "[variables('auditRemoteConnectionWithNoPwdConfigName')]",
-                    "version": "1.*"
-                }
-            }
-        },
-        {
-            "type": "Microsoft.Compute/virtualMachines/providers/guestConfigurationAssignments",
-            "apiVersion": "2018-11-20",
-            "name": "[concat(parameters('vmName'), '/Microsoft.GuestConfiguration/', variables('auditAccountsWithNoPwdConfigName'))]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-            ],
-            "properties": {
-                "guestConfiguration": {
-                    "name": "[variables('auditAccountsWithNoPwdConfigName')]",
-                    "version": "1.*"
-                }
-            }
-        },
-        {
-            "type": "Microsoft.Compute/virtualMachines/providers/guestConfigurationAssignments",
-            "apiVersion": "2018-11-20",
-            "name": "[concat(parameters('vmName'), '/Microsoft.GuestConfiguration/', variables('auditEtcPwdFilePermissionSetTo0644Configame'))]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-            ],
-            "properties": {
-                "guestConfiguration": {
-                    "name": "[variables('auditEtcPwdFilePermissionSetTo0644Configame')]",
-                    "version": "1.*"
-                }
-            }
-        },
-        {
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "apiVersion": "2019-07-01",
-            "name": "[concat(parameters('vmName'), '/deploy-guest-configuration')]",
-            "location": "[parameters('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-            ],
-            "properties": {
-                "publisher": "Microsoft.GuestConfiguration",
-                "type": "ConfigurationforLinux",
-                "typeHandlerVersion": "1.0",
-                "autoUpgradeMinorVersion": true
-            }
         },
         {
             "apiVersion": "2020-06-01",
@@ -539,7 +508,6 @@
             "name": "[concat(parameters('vmName'), '/setup-linux-dsc-stig')]",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines/extensions/', parameters('vmName'), 'deploy-guest-configuration')]",
                 "[resourceId('Microsoft.Compute/virtualMachines/extensions/', parameters('vmName'), 'setup-linux-dsc')]"
             ],
             "properties": {
