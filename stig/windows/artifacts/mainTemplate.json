@@ -154,6 +154,13 @@
             "metadata": {
                 "description": "(Optional) Log Analytics workspace resource id."
             }
+        },
+        "enableHybridBenefitServerLicenses": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "(Optional) Enable Azure Hybrid Benefit to use your on-premises Windows Server licenses and reduce cost. See https://docs.microsoft.com/en-us/azure/virtual-machines/windows/hybrid-use-benefit-licensing for more information."
+            }
         }
     },
     "variables": {
@@ -307,7 +314,8 @@
                         "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
                         "storageUri": "[if(not(equals(parameters('diagnosticStorageResourceId'), '')), reference(parameters('diagnosticStorageResourceId'), variables('storageApiVersion')).primaryEndpoints.blob, json('null'))]"
                     }
-                }
+                },
+                "licenseType": "[if(equals(parameters('enableHybridBenefitServerLicenses'), true()), 'Windows_Server', json('null'))]"
             },
             "resources": [
                 {
