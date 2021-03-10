@@ -120,6 +120,22 @@
                         },
                         "osPlatform": "Windows",
                         "visible": true
+                    },
+                    {
+                        "name": "textBlock2",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
+                            "text": "Licensing"
+                        }
+                    },
+                    {
+                        "name": "legalAccept",
+                        "type": "Microsoft.Common.CheckBox",
+                        "label": "Would you like to use an existing Windows Server license?",
+                        "constraints": {
+                            "required": false
+                        },
+                        "toolTip": "If you own Windows licenses with active Software Assurance (SA) or have an active Windows Server subscription, use Azure Hybrid Benefit to save compute cost."
                     }
                 ]
             },
@@ -313,6 +329,7 @@
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
             "adminPassword": "[steps('instance').adminCredentials.password]",
+            "hybridUseBenefitSelection": "[steps('instance').legalAccept]",
             "osDiskStorageType": "[steps('disk').osDiskStorageType]",
             "osDiskEncryptionSetResourceId": "[steps('disk').osDiskEncryptionType.id]",
             "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",
