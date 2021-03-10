@@ -129,7 +129,7 @@
                         }
                     },
                     {
-                        "name": "legalAccept",
+                        "name": "enableHybridBenefit",
                         "type": "Microsoft.Common.CheckBox",
                         "label": "Would you like to use an existing Windows Server license?",
                         "constraints": {
@@ -329,7 +329,7 @@
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
             "adminPassword": "[steps('instance').adminCredentials.password]",
-            "hybridUseBenefitSelection": "[steps('instance').legalAccept]",
+            "enableHybridBenefitServerLicense": "[steps('instance').enableHybridBenefit]",
             "osDiskStorageType": "[steps('disk').osDiskStorageType]",
             "osDiskEncryptionSetResourceId": "[steps('disk').osDiskEncryptionType.id]",
             "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",
