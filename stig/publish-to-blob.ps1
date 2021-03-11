@@ -14,7 +14,12 @@ Param(
 
     [string]
     [Parameter(Mandatory = $false)]
-    $containerName = "artifacts"
+    $containerName = "artifacts",
+
+    [string]
+    [Parameter(Mandatory = $true)]
+    [Validateset("windows","linux")]
+    $osSelection
 )
 
 $ErrorActionPreference = "Stop"
@@ -25,21 +30,33 @@ if (-not(Get-AzStorageContainer -Context $context -Prefix $containerName)) {
     New-AzStorageContainer -Context $context -Name $containerName -Permission Off
 }
 
-Get-ChildItem -Path "." -Exclude "publish-to-blob.ps1","*.md" -File -Recurse | Set-AzStorageBlobContent -Context $context -Container $containerName -Force
+$osPath = '.\{0}' -f $osSelection
+
+Get-ChildItem -Path $osPath -Exclude "publish-to-blob.ps1","*.md" -File -Recurse | Set-AzStorageBlobContent -Context $context -Container $containerName -Force
 
 $sasToken = New-AzStorageContainerSASToken -Context $context -Name $containerName -Permission rwdl
-$mainTemplateWinUrl = (Get-AzStorageBlob -Context $context -Container $containerName -Blob "windows/mainTemplate.json").ICloudBlob.Uri.AbsoluteUri + $sasToken
-$createUIDefWinUrl = (Get-AzStorageBlob -Context $context -Container $containerName -Blob "windows/createUiDefinition.json").ICloudBlob.Uri.AbsoluteUri + $sasToken
-$mainTemplateLinUrl = (Get-AzStorageBlob -Context $context -Container $containerName -Blob "linux/mainTemplate.json").ICloudBlob.Uri.AbsoluteUri + $sasToken
-$createUIDefLinUrl = (Get-AzStorageBlob -Context $context -Container $containerName -Blob "linux/createUiDefinition.json").ICloudBlob.Uri.AbsoluteUri + $sasToken
 
 $portalUrl = "https://portal.azure.com"
 if ((Get-AzContext).Environment.Name -eq "AzureUSGovernment") {
     $portalUrl = "https://portal.azure.us"
 }
 
-$win = "/#create/Microsoft.Template/uri/$([uri]::EscapeDataString($mainTemplateWinUrl))/createUIDefinitionUri/$([uri]::EscapeDataString($createUIDefWinUrl))"
-$lin = "/#create/Microsoft.Template/uri/$([uri]::EscapeDataString($mainTemplateLinUrl))/createUIDefinitionUri/$([uri]::EscapeDataString($createUIDefLinUrl))"
+if ($osSelection -eq "windows")
+{
+    $mainTemplateWinUrl = (Get-AzStorageBlob -Context $context -Container $containerName -Blob "mainTemplate.json").ICloudBlob.Uri.AbsoluteUri + $sasToken
+    $createUIDefWinUrl = (Get-AzStorageBlob -Context $context -Container $containerName -Blob "createUiDefinition.json").ICloudBlob.Uri.AbsoluteUri + $sasToken
 
-Write-Host "Windows:    $($portalUrl)$($win)"
-Write-Host "Linux:    $($portalUrl)$($lin)"
+    $win = "/#create/Microsoft.Template/uri/$([uri]::EscapeDataString($mainTemplateWinUrl))/createUIDefinitionUri/$([uri]::EscapeDataString($createUIDefWinUrl))"
+
+    Write-Host "Windows:    $($portalUrl)$($win)"
+}
+
+if ($osSelection -eq "linux")
+{
+    $mainTemplateLinUrl = (Get-AzStorageBlob -Context $context -Container $containerName -Blob "mainTemplate.json").ICloudBlob.Uri.AbsoluteUri + $sasToken
+    $createUIDefLinUrl = (Get-AzStorageBlob -Context $context -Container $containerName -Blob "createUiDefinition.json").ICloudBlob.Uri.AbsoluteUri + $sasToken
+
+    $lin = "/#create/Microsoft.Template/uri/$([uri]::EscapeDataString($mainTemplateLinUrl))/createUIDefinitionUri/$([uri]::EscapeDataString($createUIDefLinUrl))"
+
+    Write-Host "Linux:    $($portalUrl)$($lin)"
+}
