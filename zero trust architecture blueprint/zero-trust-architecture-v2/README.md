@@ -45,11 +45,11 @@ More on Azure Blueprint can be found [here](https://docs.microsoft.com/en-us/azu
 
 5. Run the following command to import artifacts as blueprint and save it within the specified subscription or management group.
     ```powershell
-    Import-AzBlueprintWithArtifact -Name "YourBlueprintName" -SubscriptionId "00000000-1111-0000-1111-000000000000" -InputPath "$HOME/clouddrive/ato-toolkit/automation/zero-trust-architecture-v2/blueprint"
+    Import-AzBlueprintWithArtifact -Name "YourBlueprintName" -SubscriptionId "00000000-1111-0000-1111-000000000000" -InputPath "$HOME/clouddrive/ato-toolkit/zero trust architecture blueprint/zero-trust-architecture-v2/blueprint"
     ```
 
     > [!IMPORTANT]
-    > Use -InputPath "$HOME/clouddrive/ato-toolkit/automation/zero-trust-architecture-v2/blueprint_gov" for AzureUSGovernment environment.
+    > Use -InputPath "$HOME/clouddrive/ato-toolkit/zero trust architecture blueprint/zero-trust-architecture-v2/blueprint_gov" for AzureUSGovernment environment.
 
     > [!NOTE]
     > The input path must point to the folder where blueprint.json file is placed.
