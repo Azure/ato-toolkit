@@ -1,4 +1,4 @@
-This page has now been deprecated and will not reflect latest changes. [Please click here to be re-directed to new page.](https://docs.microsoft.com/en-us/azure/azure-government/documentation-government-stig-linux-vm)
+> **ATTENTION**: This page has now been deprecated and will not reflect latest changes. [Please click here to be re-directed to new page.](https://docs.microsoft.com/en-us/azure/azure-government/documentation-government-stig-linux-vm)
 
 # Deploy Azure Virtual Machine (Linux) and apply STIG
 
