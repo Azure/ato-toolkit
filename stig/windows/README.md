@@ -1,4 +1,4 @@
-This page has now been deprecated and will not reflect latest changes. [Please click here to be re-directed to new page.](https://docs.microsoft.com/en-us/azure/azure-government/documentation-government-stig-windows-vm)
+> **ATTENTION**: This page has now been deprecated and will not reflect latest changes. [Please click here to be re-directed to new page.](https://docs.microsoft.com/en-us/azure/azure-government/documentation-government-stig-windows-vm)
 
 # Deploy Azure Virtual Machine (Windows) and apply STIG
 
