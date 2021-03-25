@@ -155,13 +155,6 @@
                 "description": "(Optional) Log Analytics workspace resource id."
             }
         },
-        "logAnalyticsWorkspaceName": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "(Optional) Log Analytics workspace resource name."
-            }
-        },
         "enableHybridBenefitServerLicense": {
             "type": "bool",
             "defaultValue": false,
