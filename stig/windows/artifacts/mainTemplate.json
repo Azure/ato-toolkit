@@ -417,7 +417,7 @@
                     "typeHandlerVersion": "1.0",
                     "autoUpgradeMinorVersion": true,
                     "settings": {
-                    "workspaceId": "[reference(resourceId('Microsoft.OperationalInsights/workspaces/', parameters('logAnalyticsWorkspaceName')), '2015-03-20').customerId]"
+                    "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), parameters('logAnalyticsWorkspaceId'))]"
                     },
                     "protectedSettings": {
                     "workspaceKey": "[listKeys(resourceId('Microsoft.OperationalInsights/workspaces/', parameters('logAnalyticsWorkspaceName')), '2015-03-20').primarySharedKey]"
