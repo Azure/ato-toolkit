@@ -406,7 +406,7 @@
                 },
                 {
                     "type": "extensions",
-                    "name": "Microsoft.EnterpriseCloud.Monitoring",
+                    "name": "[concat(concat(parameters('vmName')),'/OMSExtension')]",
                     "apiVersion": "2020-12-01",
                     "location": "[parameters('location')]",
                     "dependsOn": [
