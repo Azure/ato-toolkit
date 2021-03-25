@@ -404,25 +404,26 @@
                     }
                 },
                 {
-                "type": "extensions",
-                "name": "Microsoft.EnterpriseCloud.Monitoring",
-                "apiVersion": "2015-06-15",
-                "location": "[parameters('location')]",
-                "dependsOn": [
-                    "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-                ],
-                "properties": {
-                    "publisher": "Microsoft.EnterpriseCloud.Monitoring",
-                    "type": "MicrosoftMonitoringAgent",
-                    "typeHandlerVersion": "1.0",
-                    "autoUpgradeMinorVersion": true,
-                    "settings": {
-                    "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'),'2015-03-20').customerId)]"
-                    },
-                    "protectedSettings": {
-                    "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), '', listkeys(parameters('logAnalyticsWorkspaceId'), '2015-03-20').primarySharedKey)]"
+                    "type": "extensions",
+                    "name": "Microsoft.EnterpriseCloud.Monitoring",
+                    "apiVersion": "2015-06-15",
+                    "location": "[parameters('location')]",
+                    "condition": "[not(equals(parameters('logAnalyticsWorkspaceId'), ''))]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.EnterpriseCloud.Monitoring",
+                        "type": "MicrosoftMonitoringAgent",
+                        "typeHandlerVersion": "1.0",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                        "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'),'2015-03-20').customerId)]"
+                        },
+                        "protectedSettings": {
+                        "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), '', listkeys(parameters('logAnalyticsWorkspaceId'), '2015-03-20').primarySharedKey)]"
+                        }
                     }
-                }
                 }
             ]
         },
