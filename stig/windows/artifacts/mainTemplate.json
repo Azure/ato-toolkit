@@ -421,7 +421,7 @@
                         "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), parameters('logAnalyticsWorkspaceId'))]"
                         },
                         "protectedSettings": {
-                        "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceKey'), ''), json('null'), parameters('logAnalyticsWorkspaceKey'))]"
+                        "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), parameters('logAnalyticsWorkspaceId').primarySharedKey)]"
                         }
                     }
                 }
