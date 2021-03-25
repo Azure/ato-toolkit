@@ -398,7 +398,7 @@
                 },
                 {
                     "type": "extensions",
-                    "name": "[concat(concat(parameters('vmName')),'/OMSExtension')]",
+                    "name": "[concat(parameters('vmName'),'/OMSExtension')]",
                     "apiVersion": "2020-12-01",
                     "location": "[parameters('location')]",
                     "dependsOn": [
