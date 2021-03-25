@@ -417,7 +417,7 @@
                     "typeHandlerVersion": "1.0",
                     "autoUpgradeMinorVersion": true,
                     "settings": {
-                    "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), parameters('logAnalyticsWorkspaceId'))]"
+                    "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'),'2015-03-20').customerId)]"
                     },
                     "protectedSettings": {
                     "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), '', listkeys(parameters('logAnalyticsWorkspaceId'), '2015-03-20').primarySharedKey)]"
