@@ -420,7 +420,7 @@
                     "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), parameters('logAnalyticsWorkspaceId'))]"
                     },
                     "protectedSettings": {
-                    "workspaceKey": "[listKeys(resourceId('Microsoft.OperationalInsights/workspaces/', parameters('logAnalyticsWorkspaceName')), '2015-03-20').primarySharedKey]"
+                    "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), '', listkeys(parameters('logAnalyticsWorkspaceName'), '2019-06-01').keys[0].value)]"
                     }
                 }
                 }
