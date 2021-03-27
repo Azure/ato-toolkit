@@ -125,6 +125,13 @@
                 "description": "Subnet prefix of the virtual network"
             }
         },
+        "applicationSecurityGroupResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Application Security Group resource id."
+            }
+        },
         "availabilitySetResourceId": {
             "type": "string",
             "defaultValue": "",
@@ -171,6 +178,11 @@
         },
         "subnetRef": "[concat(variables('vnetId')[parameters('virtualNetworkNewOrExisting')],'/subnets/',parameters('subnetName'))]",
         "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
+        "applicationSecurityGroup": [
+            {
+                "id": "[parameters('applicationSecurityGroupResourceId')]"
+            }
+        ],
         "requiredModulesFile": "RequiredModules.ps1",
         "installPSModulesFile": "InstallModules.ps1",
         "generateStigChecklist": "GenerateStigChecklist.ps1",
@@ -232,6 +244,7 @@
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('vmVirtualNetwork'))]"
             ],
             "properties": {
+                "networkSecurityGroup": { "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]" },
                 "ipConfigurations": [
                     {
                         "name": "ipconfig1",
@@ -239,7 +252,8 @@
                             "privateIPAllocationMethod": "Dynamic",
                             "subnet": {
                                 "id": "[variables('subnetRef')]"
-                            }
+                            },
+                            "applicationSecurityGroups": "[if(equals(parameters('applicationSecurityGroupResourceId'), ''), json('null'), variables('applicationSecurityGroup'))]"
                         }
                     }
                 ]
@@ -336,13 +350,13 @@
                         "typeHandlerVersion": "1.5",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                        "xmlCfg": "[base64(concat(variables('wadcfgxstart'), variables('wadmetricsresourceid'), variables('wadcfgxend')))]",
-                        "storageAccount": "[variables('storageAccountName')]"
+                            "xmlCfg": "[base64(concat(variables('wadcfgxstart'), variables('wadmetricsresourceid'), variables('wadcfgxend')))]",
+                            "storageAccount": "[variables('storageAccountName')]"
                         },
                         "protectedSettings": {
-                        "storageAccountName": "[variables('storageAccountName')]",
-                        "storageAccountKey": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', listkeys(variables('storageAccountResourceid'), '2019-06-01').keys[0].value)]",
-                        "storageAccountEndPoint": "[concat('https://', environment().suffixes.storage)]"
+                            "storageAccountName": "[variables('storageAccountName')]",
+                            "storageAccountKey": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', listkeys(variables('storageAccountResourceid'), '2019-06-01').keys[0].value)]",
+                            "storageAccountEndPoint": "[concat('https://', environment().suffixes.storage)]"
                         }
                     }
                 },
@@ -411,10 +425,10 @@
                         "typeHandlerVersion": "1.0",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                        "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'),'2015-03-20').customerId)]"
+                        "workspaceId": "[reference(parameters('logAnalyticsWorkspaceId'), '2015-03-20').customerId)]"
                         },
                         "protectedSettings": {
-                        "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), '', listkeys(parameters('logAnalyticsWorkspaceId'), '2015-03-20').primarySharedKey)]"
+                        "workspaceKey": "[listkeys(parameters('logAnalyticsWorkspaceId'), '2015-03-20').primarySharedKey)]"
                         }
                     }
                 }
