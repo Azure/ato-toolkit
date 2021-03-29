@@ -425,10 +425,10 @@
                         "typeHandlerVersion": "1.0",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                       "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'), '2015-03-20').customerId)]"
+                            "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'), '2015-03-20').customerId)]"
                         },
                         "protectedSettings": {
-                        "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), listkeys(parameters('logAnalyticsWorkspaceId'), '2015-03-20').primarySharedKey)]"
+                            "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), listkeys(parameters('logAnalyticsWorkspaceId'), '2015-03-20').primarySharedKey)]"
                         }
                     }
                 }
