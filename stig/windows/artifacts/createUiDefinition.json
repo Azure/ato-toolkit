@@ -208,7 +208,7 @@
                     {
                         "name": "osDiskEncryptionSet",
                         "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Disk Encryption Set",
+                        "label": "Disk encryption set",
                         "resourceType": "Microsoft.Compute/diskEncryptionSets",
                         "toolTip": "A disk encryption set stores the customer key that a disk or snapshot will use for encrypting its data. You must choose an existing disk encryption set during this step. Disk encryption sets require access to key vault and keys.",
                         "options": {
@@ -216,6 +216,9 @@
                                 "subscription": "onBasic",
                                 "location": "onBasic"
                             }
+                        },
+                        "constraints": {
+                            "required": true
                         },
                         "visible": "[not(equals(steps('disk').osDiskEncryptionType, 'default'))]"
                     }
@@ -241,7 +244,7 @@
                         "name": "vmVirtualNetwork",
                         "type": "Microsoft.Network.VirtualNetworkCombo",
                         "label": {
-                            "virtualNetwork": "Virtual Network",
+                            "virtualNetwork": "Virtual network",
                             "subnets": "Subnets"
                         },
                         "toolTip": {
@@ -271,6 +274,17 @@
                                     "requireContiguousAddresses": true
                                 }
                             }
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "vmApplicationSecurityGroup",
+                        "type": "Microsoft.Solutions.ResourceSelector",
+                        "label": "Application security group",
+                        "resourceType": "Microsoft.Network/applicationSecurityGroups",
+                        "toolTip": "Application security groups enable you to configure network security as a natural extension of an application's structure, allowing you to group virtual machines and define network security policies based on those groups.",
+                        "constraints": {
+                            "required": false
                         },
                         "visible": true
                     }
@@ -331,16 +345,16 @@
             "adminPassword": "[steps('instance').adminCredentials.password]",
             "enableHybridBenefitServerLicense": "[steps('instance').enableHybridBenefit]",
             "osDiskStorageType": "[steps('disk').osDiskStorageType]",
-            "osDiskEncryptionSetResourceId": "[steps('disk').osDiskEncryptionType.id]",
+            "osDiskEncryptionSetResourceId": "[steps('disk').osDiskEncryptionSet.id]",
             "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",
             "virtualNetworkNewOrExisting": "[steps('networking').vmVirtualNetwork.newOrExisting]",
             "virtualNetworkResourceGroupName": "[steps('networking').vmVirtualNetwork.resourceGroup]",
             "addressPrefix": "[steps('networking').vmVirtualNetwork.addressPrefix]",
             "subnetPrefix": "[steps('networking').vmVirtualNetwork.subnets.subnet1.addressPrefix]",
             "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
+            "applicationSecurityGroupResourceId": "[steps('networking').vmApplicationSecurityGroup.id]",
             "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
-            "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]",
-            "logAnalyticsWorkspaceName": "[steps('management').logAnalyticsWorkspace.name]"
+            "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]"
         }
     }
 }
