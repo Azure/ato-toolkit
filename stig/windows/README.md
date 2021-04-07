@@ -7,6 +7,10 @@
 
 Use this template to deploy Azure Virtual Machine with select Windows 2019 Operating Systems. Template executes automation provided by [PowerSTIG](https://github.com/microsoft/PowerStig) via [Azure Custom Scripts Extension](https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows) to apply [STIG](https://public.cyber.mil/stigs/).
 
+For examples that show alternative use of the STIG templates, see:
+- [Publish to Shared Gallery](https://raw.githubusercontent.com/Azure/ato-toolkit/master/stig/windows/Publish-to-Shared-Gallery.md)
+- [Publish to Existing VM](https://raw.githubusercontent.com/Azure/ato-toolkit/master/stig/windows/Publish-to-Existing-VM.md)
+
 If you're new to Azure virtual machines, see:
 
 - [Azure Virtual Machines](https://azure.microsoft.com/services/virtual-machines/)
