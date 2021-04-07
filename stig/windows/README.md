@@ -1,3 +1,5 @@
+> **ATTENTION**: For latest and up to date documentation [please click here to be re-directed to Azure Government Documentation page.](https://docs.microsoft.com/en-us/azure/azure-government/documentation-government-stig-windows-vm)
+
 # Deploy Azure Virtual Machine (Windows) and apply STIG
 
 [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fato-toolkit%2Fmaster%2Fstig%2Fwindows%2FmainTemplate.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fato-toolkit%2Fmaster%2Fstig%2Fwindows%2FcreateUiDefinition.json)
