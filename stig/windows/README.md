@@ -1,7 +1,7 @@
 # Deploy Azure Virtual Machine (Windows) and apply STIG
 
-[![Deploy To Azure](https://docs.microsoft.com/en-us/azure/azure-government/documentation-government-stig-windows-vm)
-[![Deploy To Azure Gov](https://docs.microsoft.com/en-us/azure/azure-government/documentation-government-stig-windows-vm)
+[[Deploy To Azure](https://docs.microsoft.com/en-us/azure/azure-government/documentation-government-stig-windows-vm)
+[[Deploy To Azure Gov](https://docs.microsoft.com/en-us/azure/azure-government/documentation-government-stig-windows-vm)
 
 Use this template to deploy Azure Virtual Machine with select Windows 2019 Operating Systems. Template executes automation provided by [PowerSTIG](https://github.com/microsoft/PowerStig) via [Azure Custom Scripts Extension](https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows) to apply [STIG](https://public.cyber.mil/stigs/).
 
