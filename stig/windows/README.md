@@ -3,10 +3,9 @@
 [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ferjenkin%2Fato-toolkit%2Fmaster%2Fstig%2Fwindows%2Fartifacts%2FmainTemplate.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Ferjenkin%2Fato-toolkit%2Fmaster%2Fstig%2Fwindows%2Fartifacts%2FcreateUiDefinition.json)
 [![Deploy To Azure Gov](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazuregov.svg?sanitize=true)](https://portal.azure.us/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ferjenkin%2Fato-toolkit%2Fmaster%2Fstig%2Fwindows%2Fartifacts%2FmainTemplate.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Ferjenkin%2Fato-toolkit%2Fmaster%2Fstig%2Fwindows%2Fartifacts%2FcreateUiDefinition.json)
 
-# Example Scripts
+For examples that show alternative use of the STIG templates, see:
 - [Publish to Shared Gallery](https://github.com/erjenkin/ato-toolkit/blob/master/stig/windows/Publish-to-Shared-Gallery.md)
 - [Publish to Existing VM](https://github.com/erjenkin/ato-toolkit/blob/master/stig/windows/Publish-to-Existing-VM.md)
-#
 
 If you're new to Azure virtual machines, see:
 
