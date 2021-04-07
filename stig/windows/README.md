@@ -6,7 +6,7 @@
 # Example Scripts
 - [Publish to Shared Gallery] (https://github.com/erjenkin/ato-toolkit/blob/master/stig/windows/Publish-to-Shared-Gallery.md)
 - [Publish to Existing VM] (https://github.com/erjenkin/ato-toolkit/blob/master/stig/windows/Publish-to-Existing-VM.md)
-
+#
 
 If you're new to Azure virtual machines, see:
 
