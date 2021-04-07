@@ -8,8 +8,8 @@
 Use this template to deploy Azure Virtual Machine with select Red Hat Enterprise Linux 7 and CentOS 7 Operating Systems. Template executes automation developed by [ComplianceAsCode](https://github.com/ComplianceAsCode/content) via [Azure Custom Scripts Extension](https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-linux) to apply [STIG](https://public.cyber.mil/stigs/).
 
 For add-ons to the STIG templates, see:
-- [Publish to Shared Gallery](https://github.com/Azure/ato-toolkit/blob/master/stig/windows/Publish-to-Shared-Gallery.md)
-- [Publish to Existing VM](https://github.com/Azure/ato-toolkit/blob/master/stig/windows/Publish-to-Existing-VM.md)
+- [Publish to Shared Gallery](https://github.com/Azure/ato-toolkit/blob/master/stig/publish-to-shared-gallery.md)
+- [Publish to Existing VM](https://github.com/Azure/ato-toolkit/blob/master/stig/publish-to-existing-vm.md)
 
 If you're new to Azure virtual machines, see:
 

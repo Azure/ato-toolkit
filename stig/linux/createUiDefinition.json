@@ -105,11 +105,24 @@
                                 {
                                     "value": "Ubuntu1804",
                                     "label": "Canonical Ubuntu 18.04 LTS"
+                                },
+                                {
+                                    "value": "Ubuntu1804-DataScience",
+                                    "label": "Data Science Virtual Machine - Ubuntu 18.04"
                                 }
                             ],
                             "required": true
                         },
                         "visible": true
+                    },
+                    {
+                        "name": "infoBox0",
+                        "type": "Microsoft.Common.InfoBox",
+                        "options": {
+                            "icon": "Info",
+                            "text": "The Ubuntu Data Science VM contains Ubuntu 18.04 STIG automation only. No additional STIG automation is provided."
+                        },
+                        "visible": "[equals(steps('instance').osVersion, 'Ubuntu1804-DataScience')]"
                     },
                     {
                         "name": "vmSize",
@@ -371,7 +384,7 @@
                         "options": {
                             "text": "Custom data and cloud init"
                         },
-                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
+                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'Ubuntu1804-DataScience'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
                     },
                     {
                         "name": "textBlock2",
@@ -379,7 +392,7 @@
                         "options": {
                             "text": "Pass a cloud-init script, configuration file, or other data into the virtual machine while it is being provisioned. The data will be saved on the VM in a known location."
                         },
-                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
+                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'Ubuntu1804-DataScience'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
                     },
                     {
                         "name": "customData",
@@ -396,7 +409,7 @@
                                 }
                             ]
                         },
-                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
+                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'Ubuntu1804-DataScience'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
                     },
                     {
                         "name": "infoBox0",
@@ -406,7 +419,7 @@
                             "text": "Your image must have code to support consumption of custom data. If your image supports cloud-init, custom-data will be processed by cloud-init.",
                             "uri": "http://go.microsoft.com/fwlink/?LinkId=2125807"
                         },
-                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
+                        "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'Ubuntu1804-DataScience'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
                     }
                 ]
             }
