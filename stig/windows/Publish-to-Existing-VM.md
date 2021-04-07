@@ -2,7 +2,7 @@
 
 The following script was created to enable the usage of the STIG templates on an existing VM. This script should not be used in a production environment. 
 
-#Notes
+# Notes
 The script is dependent on first running publish-to-blob.ps1, to ensure all of the template files are available for automation.
 
 
@@ -13,7 +13,7 @@ The script is dependent on first running publish-to-blob.ps1, to ensure all of t
         This script is designed deploy a the STIG configuration to an existing Server 2016 or Server 2019 instance.
 
     .DESCRIPTION
-        This script is designed to apply the folling STIG configurations to Server 2019 or Server 2016
+        This script is designed to apply the following STIG configurations to Server 2019 or Server 2016
 
         WindowsServerStig (2016\2019)
         Internet Explorer 11
