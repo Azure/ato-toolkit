@@ -553,6 +553,28 @@
             }
         },
         {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('vmName'), '/Microsoft.EnterpriseCloud.Monitoring')]",
+            "apiVersion": "2015-06-15",
+            "location": "[parameters('location')]",
+            "condition": "[not(equals(parameters('logAnalyticsWorkspaceId'), ''))]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+            ],
+            "properties": {
+                "publisher": "Microsoft.EnterpriseCloud.Monitoring",
+                "type": "OmsAgentForLinux",
+                "typeHandlerVersion": "1.13",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'),'2015-03-20').customerId)]"
+                },
+                "protectedSettings": {
+                    "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), listkeys(parameters('logAnalyticsWorkspaceId'),'2015-03-20').primarySharedKey)]"
+                }
+            }
+        },
+        {
             "apiVersion": "2020-06-01",
             "name": "pid-93aca1dd-7b6a-4db4-a130-45f5b7c82c5c",
             "type": "Microsoft.Resources/deployments",
