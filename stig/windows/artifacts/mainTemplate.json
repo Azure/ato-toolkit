@@ -42,7 +42,7 @@
             "allowedValues": [
                 "2019-Datacenter",
                 "2016-Datacenter",
-                "Windows-10"
+                "20h2-pro"
             ],
             "metadata": {
                 "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
