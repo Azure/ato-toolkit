@@ -135,14 +135,44 @@ configuration WindowsServer
                     }
                 }
 
-                WindowsServer STIG_WindowsServer
+                if($osVersion -match "*Windows 10*")
                 {
-                    OsVersion   = $osVersion
-                    OsRole      = 'MS'
-                    Exception   = $exceptions
-                    OrgSettings = $orgSettings
+                    WindowsClient STIG_WindowsServer
+                    {
+                        OsVersion   = '10'
+                        Exception   = @{
+                            'V-220972' = @{
+                                Identity = 'Guests'
+                            }
+                            'V-220968' = @{
+                                Identity = 'Guests'
+                            }
+                            'V-220969' = @{
+                                Identity = 'Guests'
+                            }
+                            'V-220971' = @{
+                                Identity = 'Guests'
+                            }
+                        }
+                        OrgSettings =  @{
+                            'V-220912' = @{
+                                OptionValue = 'xGuest'
+                            }
+                        }
+                    }
+                    break
                 }
-                break
+                else
+                {
+                    WindowsServer STIG_WindowsServer
+                    {
+                        OsVersion   = $osVersion
+                        OsRole      = 'MS'
+                        Exception   = $exceptions
+                        OrgSettings = $orgSettings
+                    }
+                    break
+                }
             }
         }
     }

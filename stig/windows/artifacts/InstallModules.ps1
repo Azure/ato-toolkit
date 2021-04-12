@@ -4,12 +4,11 @@ Param(
     $autoInstallDependencies = $false
 )
 
-$osVersion = (Get-WmiObject Win32_OperatingSystem).Version
+$osVersion = (Get-WmiObject Win32_OperatingSystem).Caption
 
-if($osVersion -Match "10.*")
+if($osVersion -Match "*Windows 10*")
 {
     winrm quickconfig -quiet
-
 }
 
 if ($autoInstallDependencies -eq $true) {
