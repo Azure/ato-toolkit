@@ -4,6 +4,14 @@ Param(
     $autoInstallDependencies = $false
 )
 
+$osVersion = (Get-WmiObject Win32_OperatingSystem).Version
+
+if($osVersion -Match "10.*")
+{
+    winrm quickconfig -quiet
+
+}
+
 if ($autoInstallDependencies -eq $true) {
     . "$PSScriptRoot\RequiredModules.ps1"
 
