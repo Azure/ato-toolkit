@@ -61,6 +61,10 @@
                                 {
                                     "value": "2016-Datacenter",
                                     "label": "2016-Datacenter"
+                                },
+                                {
+                                    "value": "Windows-10",
+                                    "label": "Windows-10"
                                 }
                             ],
                             "required": true
