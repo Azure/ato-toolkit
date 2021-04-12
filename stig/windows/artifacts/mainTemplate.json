@@ -201,7 +201,7 @@
         "serverPublisher": "MicrosoftWindowsServer",
         "clientPublisher": "MicrosoftWindowsDesktop",
         "serverOffer": "WindowsServer",
-        "clientOffer": "WindowsServer"
+        "clientOffer": "Windows-10"
     },
     "resources": [
         {
