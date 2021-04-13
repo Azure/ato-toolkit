@@ -6,7 +6,7 @@ Param(
 
 $osVersion = (Get-WmiObject Win32_OperatingSystem).Caption
 
-if($osVersion -Match "*Windows 10*")
+if($osVersion -Match "Windows 10")
 {
     winrm quickconfig -quiet
 }
