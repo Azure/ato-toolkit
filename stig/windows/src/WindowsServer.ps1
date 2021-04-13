@@ -56,7 +56,7 @@ configuration WindowsServer
             WindowsClient STIG_WindowsServer
             {
                 OsVersion   = '10'
-                SkipRule    = @("V-220740","V-220739","V-220741")
+                SkipRule    = @("V-220740","V-220739","V-220741", "V-220908")
                 Exception   = @{
                     'V-220972' = @{
                         Identity = 'Guests'
