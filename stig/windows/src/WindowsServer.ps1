@@ -56,6 +56,7 @@ configuration WindowsServer
             WindowsClient STIG_WindowsServer
             {
                 OsVersion   = '10'
+                SkipRule    = @("V-220740","V-220739","V-220741")
                 Exception   = @{
                     'V-220972' = @{
                         Identity = 'Guests'
@@ -75,6 +76,13 @@ configuration WindowsServer
                         OptionValue = 'xGuest'
                     }
                 }
+            }
+            AccountPolicy BaseLine2
+            {
+                Name                                = "Windows10fix"
+                Account_lockout_threshold           = 3
+                Account_lockout_duration            = 15
+                Reset_account_lockout_counter_after = 15
             }
             break
         }
