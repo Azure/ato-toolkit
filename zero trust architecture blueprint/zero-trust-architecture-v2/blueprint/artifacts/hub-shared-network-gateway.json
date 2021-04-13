@@ -61,13 +61,13 @@
           "location": "[variables('location')]",
           "condition": "[parameters('deployHub')]",
           "sku": {
-            "name": "Standard"
+            "name": "Basic"
           },
           "tags": {
             "component": "hub-shared-network-gateway"
           },
           "properties": {
-            "publicIPAllocationMethod": "Static",
+            "publicIPAllocationMethod": "Dynamic",
             "publicIPAddressVersion": "IPv4"
           }
         },
