@@ -51,6 +51,34 @@ configuration WindowsServer
         $osVersion = (Get-WmiObject Win32_OperatingSystem).Caption
         $certificateTest = Get-ChildItem -Path "C:\Packages\Plugins\Microsoft.Compute.CustomScriptExtension\*\Downloads\0\*.cer"
 
+        if($osVersion -match "Windows 10")
+        {
+            WindowsClient STIG_WindowsServer
+            {
+                OsVersion   = '10'
+                Exception   = @{
+                    'V-220972' = @{
+                        Identity = 'Guests'
+                    }
+                    'V-220968' = @{
+                        Identity = 'Guests'
+                    }
+                    'V-220969' = @{
+                        Identity = 'Guests'
+                    }
+                    'V-220971' = @{
+                        Identity = 'Guests'
+                    }
+                }
+                OrgSettings =  @{
+                    'V-220912' = @{
+                        OptionValue = 'xGuest'
+                    }
+                }
+            }
+            break
+        }
+
         switch -Wildcard ($osVersion) {
             "*2016*" {
                 $osVersion = '2016'
@@ -135,44 +163,14 @@ configuration WindowsServer
                     }
                 }
 
-                if($osVersion -match "*Windows 10*")
+                WindowsServer STIG_WindowsServer
                 {
-                    WindowsClient STIG_WindowsServer
-                    {
-                        OsVersion   = '10'
-                        Exception   = @{
-                            'V-220972' = @{
-                                Identity = 'Guests'
-                            }
-                            'V-220968' = @{
-                                Identity = 'Guests'
-                            }
-                            'V-220969' = @{
-                                Identity = 'Guests'
-                            }
-                            'V-220971' = @{
-                                Identity = 'Guests'
-                            }
-                        }
-                        OrgSettings =  @{
-                            'V-220912' = @{
-                                OptionValue = 'xGuest'
-                            }
-                        }
-                    }
-                    break
+                    OsVersion   = $osVersion
+                    OsRole      = 'MS'
+                    Exception   = $exceptions
+                    OrgSettings = $orgSettings
                 }
-                else
-                {
-                    WindowsServer STIG_WindowsServer
-                    {
-                        OsVersion   = $osVersion
-                        OsRole      = 'MS'
-                        Exception   = $exceptions
-                        OrgSettings = $orgSettings
-                    }
-                    break
-                }
+                break
             }
         }
     }
