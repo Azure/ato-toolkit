@@ -14,8 +14,6 @@ if($osVersion -Match "Windows 10")
     $networkName = (Get-NetConnectionProfile)[0].Name
     Set-NetConnectionProfile -Name $networkName -NetworkCategory Private
 
-    # Rule V-220726 requires this to be set
-    BCDEDIT /set "{current}" nx OptOut
 }
 
 if ($autoInstallDependencies -eq $true) {
