@@ -8,9 +8,14 @@ $osVersion = (Get-WmiObject Win32_OperatingSystem).Caption
 
 if($osVersion -Match "Windows 10")
 {
-    winrm quickconfig -quiet
+    winrm   quickconfig -quiet
+
+    # winrm settings require NIC to be not Public
     $networkName = (Get-NetConnectionProfile)[0].Name
     Set-NetConnectionProfile -Name $networkName -NetworkCategory Private
+
+    # Rule V-220726 requires this to be set
+    BCDEDIT /set "{current}" nx OptOut
 }
 
 if ($autoInstallDependencies -eq $true) {
