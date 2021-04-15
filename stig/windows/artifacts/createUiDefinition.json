@@ -136,7 +136,6 @@
                         "name": "enableHybridBenefit",
                         "type": "Microsoft.Common.CheckBox",
                         "label": "Would you like to use an existing Windows Server license?",
-                        "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), (equals(steps('instance').osVersion, '2016-Datacenter')]",
                         "constraints": {
                             "required": false
                         },
