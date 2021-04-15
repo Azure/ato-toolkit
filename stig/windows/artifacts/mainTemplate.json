@@ -198,10 +198,32 @@
         "wadcfgxstart": "[concat(variables('wadlogs'), variables('wadperfcounters1'), variables('wadperfcounters2'), '<Metrics resourceId=\"')]",
         "wadmetricsresourceid": "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
         "wadcfgxend": "\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>",
-        "serverPublisher": "MicrosoftWindowsServer",
-        "clientPublisher": "MicrosoftWindowsDesktop",
-        "serverOffer": "WindowsServer",
-        "clientOffer": "Windows-10"
+        "images":{
+            "2019-Datacenter": {
+                "reference": {
+                    "publisher": "MicrosoftWindowsServer",
+                    "offer": "WindowsServer",
+                    "sku": "2019-Datacenter",
+                    "version": "latest"
+                }
+            },
+            "2016-Datacenter": {
+                "reference": {
+                    "publisher": "MicrosoftWindowsServer",
+                    "offer": "WindowsServer",
+                    "sku": "2016-Datacenter",
+                    "version": "latest"
+                }
+            },
+            "20h2-ent": {
+                "reference": {
+                    "publisher": "MicrosoftWindowsDesktop",
+                    "offer": "Windows-10",
+                    "sku": "20h2-ent",
+                    "version": "latest"
+                }
+            }
+        }
     },
     "resources": [
         {
@@ -306,12 +328,7 @@
                     "adminPassword": "[parameters('adminPassword')]"
                 },
                 "storageProfile": {
-                    "imageReference": {
-                        "publisher": "[if(equals(parameters('osVersion'), '2019-Datacenter'), variables('serverPublisher'), variables('clientPublisher'))]",
-                        "offer": "[if(equals(parameters('osVersion'), '2019-Datacenter'), variables('serverOffer'), variables('clientOffer'))]",
-                        "sku": "[parameters('osVersion')]",
-                        "version": "latest"
-                    },
+                    "imageReference": "[variables('images')[parameters('osVersion')].reference]",
                     "osDisk": {
                         "createOption": "FromImage",
                         "managedDisk": {
