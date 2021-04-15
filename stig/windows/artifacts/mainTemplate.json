@@ -308,7 +308,7 @@
                 "storageProfile": {
                     "imageReference": {
                         "publisher": "[if(equals(parameters('osVersion'), '2019-Datacenter|2016-Datacenter'), variables('serverPublisher'), variables('clientPublisher'))]",
-                        "offer": "[if(equals(parameters('osVersion'), '2019-Datacenter|2016-Datacenter'), variables('serverOffer'), variables('clientOffer'))]",
+                        "offer": "[if(equals(parameters('osVersion'), '2019-Datacenter'), variables('serverOffer'), variables('clientOffer'))]",
                         "sku": "[parameters('osVersion')]",
                         "version": "latest"
                     },
