@@ -63,7 +63,7 @@
                                     "label": "2016-Datacenter"
                                 },
                                 {
-                                    "value": "20h2-ent",
+                                    "value": "19h2-ent",
                                     "label": "Windows-10"
                                 }
                             ],
@@ -139,6 +139,7 @@
                         "constraints": {
                             "required": false
                         },
+                        "visible": false,
                         "toolTip": "If you own Windows licenses with active Software Assurance (SA) or have an active Windows Server subscription, use Azure Hybrid Benefit to save compute cost."
                     }
                 ]
