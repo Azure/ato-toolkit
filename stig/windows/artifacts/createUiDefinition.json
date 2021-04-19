@@ -128,6 +128,7 @@
                     {
                         "name": "textBlock2",
                         "type": "Microsoft.Common.TextBlock",
+                        "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'))]",
                         "options": {
                             "text": "Licensing"
                         }
@@ -139,7 +140,7 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible": false,
+                        "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'))]",
                         "toolTip": "If you own Windows licenses with active Software Assurance (SA) or have an active Windows Server subscription, use Azure Hybrid Benefit to save compute cost."
                     }
                 ]
