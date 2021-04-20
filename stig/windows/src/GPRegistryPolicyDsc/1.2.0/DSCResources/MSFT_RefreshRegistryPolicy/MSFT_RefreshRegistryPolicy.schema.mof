@@ -1,0 +1,7 @@
+[ClassVersion("1.0.0.0"), FriendlyName("RefreshRegistryPolicy")]
+class MSFT_RefreshRegistryPolicy : OMI_BaseResource
+{
+    [Key, Description("Specifies the resource is a single instance, the value must be 'Yes'"), ValueMap{"Yes"}, Values{"Yes"}] String IsSingleInstance;
+    [Read, Description("Returns the value of the GPRegistryPolicy key indicating a group policy refresh is needed.")] String RefreshRequiredKey;
+    [Read, Description("Returns the path of the RefreshRequired property indicating a group policy refresh is needed.")] String Path;
+};

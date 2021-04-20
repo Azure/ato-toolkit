@@ -1,0 +1,84 @@
+.NAME
+    IniSettingsFile
+
+.DESCRIPTION
+    The resource is used to add, set or clear entries in Windows INI
+    settings files.
+
+.PARAMETER Path
+    Key - String
+    The path to the INI settings file to set the entry in.
+
+.PARAMETER Section
+    Key - String
+    The section to add or set the entry in.
+
+.PARAMETER Key
+    Key - String
+    The name of the key to add or set in the section.
+
+.PARAMETER Type
+    Write - String
+    Allowed values: Text,  Secret
+    Specifies the value type that contains the value to set the entry to. Defaults to 'Text'.
+
+.PARAMETER Text
+    Write - String
+    The text to set the entry value to. Only used when Type is set to 'Text'.
+
+.PARAMETER Secret
+    write - String
+    The secret text to set the entry value to. Only used when Type is set to 'Secret'.
+
+.EXAMPLE 1
+
+Set the `Level` entry in the [Logging] section to `Information`
+in the file `c:\myapp\myapp.ini`.
+
+Configuration IniSettingsFile_SetPlainTextEntry_Config
+{
+    Import-DSCResource -ModuleName FileContentDsc
+
+    Node localhost
+    {
+        IniSettingsFile SetLogging
+        {
+            Path    = 'c:\myapp\myapp.ini'
+            Section = 'Logging'
+            Key     = 'Level'
+            Text    = 'Information'
+        }
+    }
+}
+
+.EXAMPLE 2
+
+Set the `ConnectionString` entry in the [Database] section to the password
+provided in the $Secret credential object in the file `c:\myapp\myapp.ini`.
+
+Configuration IniSettingsFile_SetSecretTextEntry_Config
+{
+    param
+    (
+        [Parameter()]
+        [ValidateNotNullorEmpty()]
+        [PSCredential]
+        $Secret
+    )
+
+    Import-DSCResource -ModuleName FileContentDsc
+
+    Node localhost
+    {
+        IniSettingsFile SetConnectionString
+        {
+            Path    = 'c:\myapp\myapp.ini'
+            Section = 'Database'
+            Key     = 'ConnectionString'
+            Type    = 'Secret'
+            Secret  = $Secret
+        }
+    }
+}
+
+

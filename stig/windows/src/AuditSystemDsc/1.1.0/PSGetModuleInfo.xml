@@ -1,0 +1,120 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>Microsoft.PowerShell.Commands.PSRepositoryItemInfo</T>
+      <T>System.Management.Automation.PSCustomObject</T>
+      <T>System.Object</T>
+    </TN>
+    <MS>
+      <S N="Name">AuditSystemDsc</S>
+      <S N="Version">1.1.0</S>
+      <S N="Type">Module</S>
+      <S N="Description">This module contains resources used to audit system settings/verify compliance.</S>
+      <S N="Author">Jason Walker</S>
+      <S N="CompanyName">JasonW</S>
+      <S N="Copyright">(c) 2019 Jason Walker. All rights reserved.</S>
+      <DT N="PublishedDate">2019-09-04T19:52:01-04:00</DT>
+      <Nil N="InstalledDate" />
+      <Nil N="UpdatedDate" />
+      <URI N="LicenseUri">https://github.com/jcwalker/AuditSystemDsc/blob/dev/LICENSE</URI>
+      <URI N="ProjectUri">https://github.com/jcwalker/AuditSystemDsc</URI>
+      <Nil N="IconUri" />
+      <Obj N="Tags" RefId="1">
+        <TN RefId="1">
+          <T>System.Object[]</T>
+          <T>System.Array</T>
+          <T>System.Object</T>
+        </TN>
+        <LST>
+          <S>DesiredStateConfiguration</S>
+          <S>DSC</S>
+          <S>Audit</S>
+          <S>Compliance</S>
+          <S>DSCResource</S>
+          <S>PSModule</S>
+        </LST>
+      </Obj>
+      <Obj N="Includes" RefId="2">
+        <TN RefId="2">
+          <T>System.Collections.Hashtable</T>
+          <T>System.Object</T>
+        </TN>
+        <DCT>
+          <En>
+            <S N="Key">Cmdlet</S>
+            <Obj N="Value" RefId="3">
+              <TNRef RefId="1" />
+              <LST />
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">DscResource</S>
+            <Obj N="Value" RefId="4">
+              <TNRef RefId="1" />
+              <LST>
+                <S>AuditSetting</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+        </DCT>
+      </Obj>
+      <Nil N="PowerShellGetFormatVersion" />
+      <S N="ReleaseNotes">* Added NameSpace parameter to AuditSetting [#8](https://github.com/jcwalker/AuditSystemDsc/issues/8)_x000D__x000A_        * Add example demonstrating how to assert service pack level.</S>
+      <Obj N="Dependencies" RefId="5">
+        <TNRef RefId="1" />
+        <LST />
+      </Obj>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2</S>
+      <S N="Repository">PSGallery</S>
+      <S N="PackageManagementProvider">NuGet</S>
+      <Obj N="AdditionalMetadata" RefId="6">
+        <TN RefId="3">
+          <T>System.Management.Automation.PSCustomObject</T>
+          <T>System.Object</T>
+        </TN>
+        <MS>
+          <S N="copyright">(c) 2019 Jason Walker. All rights reserved.</S>
+          <S N="description">This module contains resources used to audit system settings/verify compliance.</S>
+          <S N="requireLicenseAcceptance">False</S>
+          <S N="releaseNotes">* Added NameSpace parameter to AuditSetting [#8](https://github.com/jcwalker/AuditSystemDsc/issues/8)_x000D__x000A_        * Add example demonstrating how to assert service pack level.</S>
+          <S N="isLatestVersion">True</S>
+          <S N="isAbsoluteLatestVersion">True</S>
+          <S N="versionDownloadCount">12146</S>
+          <S N="downloadCount">13020</S>
+          <S N="packageSize">21689</S>
+          <S N="published">9/4/2019 7:52:01 PM -04:00</S>
+          <S N="created">9/4/2019 7:52:01 PM -04:00</S>
+          <S N="lastUpdated">4/20/2021 8:42:24 PM -04:00</S>
+          <S N="tags">DesiredStateConfiguration DSC Audit Compliance DSCResource PSModule PSDscResource_AuditSetting PSIncludes_DscResource</S>
+          <S N="developmentDependency">False</S>
+          <S N="updated">2021-04-20T20:42:24Z</S>
+          <S N="NormalizedVersion">1.1.0</S>
+          <S N="Authors">Jason Walker</S>
+          <S N="IsPrerelease">false</S>
+          <S N="ItemType">Module</S>
+          <S N="FileList">AuditSystemDsc.nuspec|.codecov.yml|.markdownlint.json|.MetaTestOptIn.json|appveyor.yml|AuditSystemDsc.psd1|CHANGELOG.md|CODE_OF_CONDUCT.md|CONTRIBUTING.md|LICENSE|README.md|DSCResources\AuditSetting\AuditSetting.psm1|DSCResources\AuditSetting\AuditSetting.schema.mof|DSCResources\AuditSetting\en-US\AuditSetting.strings.psd1|Examples\Resources\README.md|Examples\Resources\AuditSetting\1-AuditSetting_AuditVolumneNtfs.ps1|Examples\Resources\AuditSetting\2-AuditSetting_AuditUsersPasswordNotRequired.ps1|Examples\Resources\AuditSetting\3-AuditSetting_VerifyNetworkPrefixLength.ps1|Examples\Resources\AuditSetting\4-AuditSetting_VerifyServicePackLevel.ps1|Modules\AuditSystemDsc.Common\AuditSystemDsc.Common.psm1|Tests\Integration\AuditSetting.config.ps1|Tests\Integration\AuditSetting.Integration.tests.ps1|Tests\Integration\README.md|Tests\Unit\AuditSystem.tests.ps1|Tests\Unit\AuditSystemDsc.Common.Tests.ps1</S>
+          <S N="GUID">4e702818-a3b0-4a19-a8f1-92341a2a734a</S>
+          <S N="PowerShellVersion">4.0</S>
+          <S N="CLRVersion">4.0</S>
+        </MS>
+      </Obj>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\AuditSystemDsc\1.1.0</S>
+    </MS>
+  </Obj>
+</Objs>

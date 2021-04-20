@@ -1,0 +1,25 @@
+[ClassVersion("1.0.0.0"), FriendlyName("ActiveDirectoryAccessEntry")]
+class ActiveDirectoryAccessEntry : OMI_BaseResource
+{
+    [Key, Description("Indicates the Distinguished Name value for the target Active Directory Object.")] String DistinguishedName;
+    [Required, Description("Indicates the access control information in the form of an array of instances of the ActiveDirectoryAccessControlList CIM class."), EmbeddedInstance("ActiveDirectoryAccessControlList")] String AccessControlList[];
+};
+
+[ClassVersion("1.0.0.0")]
+class ActiveDirectoryAccessRule 
+{
+    [Required, Description("Indicates whether to allow or deny access to the target item."), ValueMap{"Allow","Deny"}, Values{"Allow","Deny"}] String AccessControlType;    
+    [Required, Description("Specifies the access rights that are assigned to an Active Directory Domain Services object."), ValueMap{"AccessSystemSecurity","CreateChild","Delete","DeleteChild","DeleteTree","ExtendedRight","GenericAll","GenericExecute","GenericRead","GenericWrite","ListChildren","ListObject","ReadControl","ReadProperty","Self","WriteDacl","WriteOwner","WriteProperty"}, Values{"AccessSystemSecurity","CreateChild","Delete","DeleteChild","DeleteTree","ExtendedRight","GenericAll","GenericExecute","GenericRead","GenericWrite","ListChildren","ListObject","ReadControl","ReadProperty","Self","WriteDacl","WriteOwner","WriteProperty"}] String ActiveDirectoryRights[];
+    [Write, Description("Specifies if, and how, ACE information is applied to an object and its descendents."), ValueMap{"1","4","2","0","3"}, Values{"All","Children","Descendents","None","SelfAndChildren"}] String InheritanceType;
+    [Write, Description("Specifies the schema GUID of the object to which the access rule applies.")] String ObjectType;
+    [Write, Description("Specifies the object type name that identifies the type of child object that can inherit this access rule.")] String InheritedObjectType;
+    [Required, ValueMap{"Present", "Absent"},Values{"Present", "Absent"}] String Ensure;
+};
+
+[ClassVersion("1.0.0.0")]
+class ActiveDirectoryAccessControlList
+{
+    [Write, Description("Indicates the identity of the principal.")] String Principal;
+    [Write] Boolean ForcePrincipal;
+    [Write, Description("Indicates the access control entry in the form of an array of instances of the AccessControlList CIM class."), EmbeddedInstance("ActiveDirectoryAccessRule")] String AccessControlEntry[];
+};

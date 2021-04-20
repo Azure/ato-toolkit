@@ -1,0 +1,77 @@
+.NAME
+    WaitForCertificateServices
+
+.DESCRIPTION
+    The resource is used to wait for a Active Directory Certificate
+    Services Certificate Authority to become available.
+
+.PARAMETER CAServerFQDN
+    Key - String
+    The FQDN of the Active Directory Certificate Service Certificate Authority to wait for.
+
+.PARAMETER CARootName
+    Key - String
+    The name of the Active Directory Certificate Service Certificate Authority to wait for.
+
+.PARAMETER RetryIntervalSeconds
+    Write - UInt32
+    Specifies the number of seconds to wait for the Active Directory Certificate Service Certificate Authority to become available. Defaults to 10 seconds.
+
+.PARAMETER RetryCount
+    Write - UInt32
+    The number of times to loop the retry interval while waiting for the Active Directory Certificate Service Certificate Authority. Defaults to 60 retries.
+
+.EXAMPLE 1
+
+Request and Accept a certificate from an Active Directory Root Certificate Authority.
+The CA may not be initially available (e.g. it may still be being installed) so
+the config will first wait for it to become available.
+
+This example is allowing storage of credentials in plain text by setting
+PSDscAllowPlainTextPassword to $true.
+Storing passwords in plain text is not a good practice and is presented only for
+simplicity and demonstration purposes.
+To learn how to securely store credentials through the use of certificates,
+please refer to the following TechNet topic:
+https://technet.microsoft.com/en-us/library/dn781430.aspx
+
+configuration WaitForCertificateServices_RequestSSLCertWithWait_Config
+{
+    param
+    (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullorEmpty()]
+        [System.Management.Automation.PSCredential]
+        $Credential
+    )
+
+    Import-DscResource -ModuleName CertificateDsc
+
+    Node localhost
+    {
+        WaitForCertificateServices RootCA
+        {
+            CARootName   = 'test-dc01-ca'
+            CAServerFQDN = 'dc01.test.pha'
+        }
+
+        CertReq SSLCert
+        {
+            CARootName          = 'test-dc01-ca'
+            CAServerFQDN        = 'dc01.test.pha'
+            Subject             = 'foodomain.test.net'
+            KeyLength           = '2048'
+            Exportable          = $true
+            ProviderName        = '"Microsoft RSA SChannel Cryptographic Provider"'
+            OID                 = '1.3.6.1.5.5.7.3.1'
+            KeyUsage            = '0xa0'
+            CertificateTemplate = 'WebServer'
+            AutoRenew           = $true
+            FriendlyName        = 'SSL Cert for Web Server'
+            Credential          = $Credential
+            DependsOn           = '[WaitForCertificateServices]RootCA'
+        }
+    }
+}
+
+

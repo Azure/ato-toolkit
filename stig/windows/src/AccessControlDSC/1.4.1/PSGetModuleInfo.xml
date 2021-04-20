@@ -1,0 +1,126 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>Microsoft.PowerShell.Commands.PSRepositoryItemInfo</T>
+      <T>System.Management.Automation.PSCustomObject</T>
+      <T>System.Object</T>
+    </TN>
+    <MS>
+      <S N="Name">AccessControlDSC</S>
+      <S N="Version">1.4.1</S>
+      <S N="Type">Module</S>
+      <S N="Description">Module with DSC resource to manage Registry and NTFS access entries and manage Active Directory SACL</S>
+      <S N="Author">Microsoft Corporation</S>
+      <S N="CompanyName">macoller</S>
+      <S N="Copyright">(c) 2020 Microsoft. All rights reserved.</S>
+      <DT N="PublishedDate">2020-08-03T14:34:11-04:00</DT>
+      <Nil N="InstalledDate" />
+      <Nil N="UpdatedDate" />
+      <URI N="LicenseUri">https://github.com/mcollera/AccessControlDsc/blob/master/LICENSE</URI>
+      <URI N="ProjectUri">https://github.com/mcollera/AccessControlDsc</URI>
+      <Nil N="IconUri" />
+      <Obj N="Tags" RefId="1">
+        <TN RefId="1">
+          <T>System.Object[]</T>
+          <T>System.Array</T>
+          <T>System.Object</T>
+        </TN>
+        <LST>
+          <S>DesiredStateConfiguration</S>
+          <S>DSC</S>
+          <S>DSCResourceKit</S>
+          <S>DSCResource</S>
+          <S>AccessControlDsc</S>
+          <S>DACL</S>
+          <S>SACL</S>
+          <S>Permissions</S>
+          <S>PSModule</S>
+        </LST>
+      </Obj>
+      <Obj N="Includes" RefId="2">
+        <TN RefId="2">
+          <T>System.Collections.Hashtable</T>
+          <T>System.Object</T>
+        </TN>
+        <DCT>
+          <En>
+            <S N="Key">Cmdlet</S>
+            <Obj N="Value" RefId="3">
+              <TNRef RefId="1" />
+              <LST />
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">DscResource</S>
+            <Obj N="Value" RefId="4">
+              <TNRef RefId="1" />
+              <LST>
+                <S>ActiveDirectoryAccessEntry</S>
+                <S>ActiveDirectoryAuditRuleEntry</S>
+                <S>FileSystemAuditRuleEntry</S>
+                <S>NTFSAccessEntry</S>
+                <S>RegistryAccessEntry</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+        </DCT>
+      </Obj>
+      <Nil N="PowerShellGetFormatVersion" />
+      <Nil N="ReleaseNotes" />
+      <Obj N="Dependencies" RefId="5">
+        <TNRef RefId="1" />
+        <LST />
+      </Obj>
+      <S N="RepositorySourceLocation">https://www.powershellgallery.com/api/v2</S>
+      <S N="Repository">PSGallery</S>
+      <S N="PackageManagementProvider">NuGet</S>
+      <Obj N="AdditionalMetadata" RefId="6">
+        <TN RefId="3">
+          <T>System.Management.Automation.PSCustomObject</T>
+          <T>System.Object</T>
+        </TN>
+        <MS>
+          <S N="copyright">(c) 2020 Microsoft. All rights reserved.</S>
+          <S N="description">Module with DSC resource to manage Registry and NTFS access entries and manage Active Directory SACL</S>
+          <S N="requireLicenseAcceptance">False</S>
+          <S N="isLatestVersion">True</S>
+          <S N="isAbsoluteLatestVersion">True</S>
+          <S N="versionDownloadCount">49492</S>
+          <S N="downloadCount">216721</S>
+          <S N="packageSize">36978</S>
+          <S N="published">8/3/2020 2:34:11 PM -04:00</S>
+          <S N="created">8/3/2020 2:34:11 PM -04:00</S>
+          <S N="lastUpdated">4/20/2021 9:07:24 PM -04:00</S>
+          <S N="tags">DesiredStateConfiguration DSC DSCResourceKit DSCResource AccessControlDsc DACL SACL Permissions PSModule PSDscResource_ActiveDirectoryAccessEntry PSDscResource_ActiveDirectoryAuditRuleEntry PSDscResource_FileSystemAuditRuleEntry PSDscResource_NTFSAccessEntry PSDscResource_RegistryAccessEntry PSIncludes_DscResource</S>
+          <S N="developmentDependency">False</S>
+          <S N="updated">2021-04-20T21:07:24Z</S>
+          <S N="NormalizedVersion">1.4.1</S>
+          <S N="Authors">Microsoft Corporation</S>
+          <S N="IsPrerelease">false</S>
+          <S N="ItemType">Module</S>
+          <S N="FileList">AccessControlDsc.nuspec|bin\AccessControlDSC.HelperFunctions.psm1|DSCResources\AccessControlResourceHelper\AccessControlResourceHelper.psd1|DSCResources\AccessControlResourceHelper\AccessControlResourceHelper.psm1|DSCResources\AccessControlResourceHelper\en-US\AccessControlResourceHelper.strings.psd1|DSCResources\ActiveDirectoryAccessEntry\ActiveDirectoryAccessEntry.psm1|DSCResources\ActiveDirectoryAccessEntry\ActiveDirectoryAccessEntry.schema.mof|DSCResources\ActiveDirectoryAuditRuleEntry\ActiveDirectoryAuditRuleEntry.psm1|DSCResources\ActiveDirectoryAuditRuleEntry\ActiveDirectoryAuditRuleEntry.schema.mof|DSCResources\FileSystemAuditRuleEntry\FileSystemAuditRuleEntry.psm1|DSCResources\FileSystemAuditRuleEntry\FileSystemAuditRuleEntry.schema.mof|DSCResources\NTFSAccessEntry\NTFSAccessEntry.psm1|DSCResources\NTFSAccessEntry\NTFSAccessEntry.schema.mof|DSCResources\RegistryAccessEntry\RegistryAccessEntry.psm1|DSCResources\RegistryAccessEntry\RegistryAccessEntry.schema.mof|DSCResources\RegistryAccessEntry\en-US\RegistryAccessEntry.strings.psd1|Examples\ActiveDirectoryAccessEntry_example.ps1|Examples\ActiveDirectoryAuditRuleEntry_example.ps1|Examples\FileSystemAuditRuleEntry_example.ps1|Examples\NtfsAccessEntry_example.ps1|Examples\RegistryAccessEntry_example.ps1|AccessControlDsc.psd1|LICENSE|README.md</S>
+          <S N="GUID">a544c26f-3f96-4c1e-8351-1604867aafc5</S>
+          <S N="PowerShellVersion">4.0</S>
+          <S N="CompanyName">Microsoft Corporation</S>
+        </MS>
+      </Obj>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\AccessControlDSC\1.4.1</S>
+    </MS>
+  </Obj>
+</Objs>
