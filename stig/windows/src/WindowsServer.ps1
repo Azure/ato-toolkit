@@ -84,6 +84,9 @@ configuration WindowsServer
                 Account_lockout_duration            = 15
                 Reset_account_lockout_counter_after = 15
             }
+            Edge MicrosoftEdge
+            {
+            }
             break
         }
 
