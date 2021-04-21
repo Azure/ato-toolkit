@@ -98,5 +98,5 @@ $fileUriGroup = @($requiredModulesFileUrl,$installPSModulesFileUrl,$generateStig
 Set-AzVMCustomScriptExtension -ResourceGroupName $vm.ResourceGroupName -VMName $vm.Name -Name "install-powershell-modules" -FileUri $fileUriGroup -Run "$installPSModulesFile -autoInstallDependencies $true" -Location $vm.Location
 
 # DSC extension Apply configuration
-Set-AzVMDscExtension -ResourceGroupName $vm.ResourceGroupName -VMName $vm.Name -ArchiveBlobName "WindowsServer.ps1.zip" -ArchiveStorageAccountName $storageAccountName -ArchiveContainerName $containerName -ConfigurationName "WindowsServer" -Version "2.77" -Location $vm.Location
+Set-AzVMDscExtension -ResourceGroupName $vm.ResourceGroupName -VMName $vm.Name -ArchiveBlobName "Windows.ps1.zip" -ArchiveStorageAccountName $storageAccountName -ArchiveContainerName $containerName -ConfigurationName "Windows" -Version "2.77" -Location $vm.Location
 ```

@@ -9,7 +9,7 @@ if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 $publicDirectory = "$PSScriptRoot\offline"
 
 # Bundle the Windows STIG DSC files into zip.
-$windowsStigDscConfigFilename = "WindowsServer.ps1"
+$windowsStigDscConfigFilename = "Windows.ps1"
 $windowsStigDscPackageRootPath = "$PSScriptRoot\src\$windowsStigDscConfigFilename"
 
 

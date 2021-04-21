@@ -52,7 +52,7 @@ function New-Artifacts {
     $azureDeployFile = "azuredeploy.json"
     $azureDeployFilePath = "$PSScriptRoot\..\$($azuredeployFile)"
     $createUIDefFile = "createUiDefinition.json"
-    $scriptFile = "WindowsServer.ps1.zip"
+    $scriptFile = "Windows.ps1.zip"
 
     # Create storage account and storage container.
     $context = (Get-AzStorageAccount | Where-Object { $_.StorageAccountName -eq $artifactStorageAccountName }).Context
@@ -66,7 +66,7 @@ function New-Artifacts {
     Set-AzStorageBlobContent -File "$($PSScriptRoot)\offline\$($azureDeployFile)" -Container $containerName -Blob $azureDeployFile -Context $context -Force
     Set-AzStorageBlobContent -File "$($PSScriptRoot)\..\$($createUIDefFile)" -Container $containerName -Blob $createUIDefFile -Context $context -Force
     Set-AzStorageBlobContent -File "$($PSScriptRoot)\..\GenerateStigChecklist.ps1" -Container $containerName -Blob "GenerateStigChecklist.ps1" -Context $context -Force
-    Set-AzStorageBlobContent -File "$($PSScriptRoot)\offline\WindowsServer.ps1.zip" -Container $containerName -Blob $scriptFile -Context $context -Force
+    Set-AzStorageBlobContent -File "$($PSScriptRoot)\offline\Windows.ps1.zip" -Container $containerName -Blob $scriptFile -Context $context -Force
 
     Write-Host "Uploaded file(s) to Container '$($containerName)' in Storage Account '$($artifactStorageAccountName)'."
     

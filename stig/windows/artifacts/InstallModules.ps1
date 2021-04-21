@@ -8,7 +8,7 @@ $osVersion = (Get-WmiObject Win32_OperatingSystem).Caption
 
 if($osVersion -Match "Windows 10")
 {
-    winrm   quickconfig -quiet
+    winrm quickconfig -quiet
 
     # winrm settings require NIC to be not Public
     $networkName = (Get-NetConnectionProfile)[0].Name

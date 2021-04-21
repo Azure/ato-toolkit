@@ -425,9 +425,9 @@
                         "settings": {
                             "wmfVersion": "latest",
                             "configuration": {
-                                "url": "[concat(parameters('_artifactsLocation'), 'WindowsServer.ps1.zip', variables('artifactsLocationSasToken'))]",
-                                "script": "WindowsServer.ps1",
-                                "function": "WindowsServer"
+                                "url": "[concat(parameters('_artifactsLocation'), 'Windows.ps1.zip', variables('artifactsLocationSasToken'))]",
+                                "script": "Windows.ps1",
+                                "function": "Windows"
                             }
                         }
                     }
