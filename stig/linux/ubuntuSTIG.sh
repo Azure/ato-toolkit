@@ -51,7 +51,7 @@ useradd -D -f 35
 
 # file system permissions automation
 echo "Setting permissions to all log files under /far/log to 640..."
-find /var/log -perm /137 -type f -exec chmod -c 640 '{}' \;
+find /var/log -perm 1137 -type f -exec chmod -c 640 '{}' \;
 echo "Setting mode to 0750 for /var/log..."
 chmod -c 0750 /var/log
 echo "Setting group ownership to root for /lib, /usr/lib and /lib64..."
