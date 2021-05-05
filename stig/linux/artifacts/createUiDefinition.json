@@ -79,6 +79,10 @@
                                     "label": "CentOS 7.4"
                                 },
                                 {
+                                    "value": "RHEL79",
+                                    "label": "Red Hat Enterprise Linux 7.9"
+                                },
+                                {
                                     "value": "RHEL78",
                                     "label": "Red Hat Enterprise Linux 7.8"
                                 },
