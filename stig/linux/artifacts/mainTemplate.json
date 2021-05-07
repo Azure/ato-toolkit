@@ -584,7 +584,7 @@
                 "count": "[variables('instanceCount')]"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines/extensions/', concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex())), '/setup-linux-dsc')]"
+                "monitoringAgentLoop"
             ],
             "properties": {
                 "publisher": "Microsoft.Azure.Extensions",
