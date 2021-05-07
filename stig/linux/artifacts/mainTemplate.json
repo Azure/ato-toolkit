@@ -561,7 +561,7 @@
                 "count": "[variables('instanceCount')]"
             },
             "dependsOn": [
-                "cseLoop"
+                "monitoringAgentLoop"
             ],
             "properties": {
                 "publisher": "Microsoft.OSTCExtensions",
@@ -584,7 +584,7 @@
                 "count": "[variables('instanceCount')]"
             },
             "dependsOn": [
-                "monitoringAgentLoop"
+                "dscLoop"
             ],
             "properties": {
                 "publisher": "Microsoft.Azure.Extensions",
@@ -643,7 +643,7 @@
                 "count": "[variables('instanceCount')]"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex())))]"
+                "VirtualMachineDiagnosticLoop"
             ],
             "properties": {
                 "publisher": "Microsoft.EnterpriseCloud.Monitoring",
