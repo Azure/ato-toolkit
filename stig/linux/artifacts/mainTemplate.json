@@ -479,11 +479,11 @@
             "location": "[parameters('location')]",
             "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
             "copy": {
-                "name": "virtualMachineDiagnosticLoop",
+                "name": "nicDiagnosticLoop",
                 "count": "[variables('instanceCount')]"
             },
             "dependsOn": [
-                "virtualMachineDiagnosticLoop"
+                "nicloop"
             ],
             "properties": {
                 "storageAccountId": "[if(equals(parameters('diagnosticStorageResourceId'), ''), json('null'), parameters('diagnosticStorageResourceId'))]",
