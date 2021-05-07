@@ -562,7 +562,7 @@
                 "count": "[variables('instanceCount')]"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex())))]"
+                "cseLoop"
             ],
             "properties": {
                 "publisher": "Microsoft.OSTCExtensions",
