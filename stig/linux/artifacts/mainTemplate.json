@@ -556,6 +556,11 @@
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/setup-linux-dsc')]",
             "location": "[parameters('location')]",
+            "condition": "[not(equals(parameters('_artifactsLocation'), ''))]",
+            "copy": {
+                "name": "dscLoop",
+                "count": "[variables('instanceCount')]"
+            },
             "dependsOn": [
                 "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex())))]"
             ],
