@@ -208,6 +208,13 @@
             "metadata": {
                 "description": "(Optional) Enable Azure Hybrid Benefit to use your on-premises Windows Server licenses and reduce cost. See https://docs.microsoft.com/en-us/azure/virtual-machines/windows/hybrid-use-benefit-licensing for more information."
             }
+        },
+        "enableMultisessionClientLicense": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "windows 10 client multi"
+            }
         }
     },
     "variables": {
