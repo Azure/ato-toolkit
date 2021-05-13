@@ -207,7 +207,15 @@
                         },
                         "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'))]",
                         "toolTip": "If you own Windows licenses with active Software Assurance (SA) or have an active Windows Server subscription, use Azure Hybrid Benefit to save compute cost."
-                    }
+                    },
+                    {
+                        "name": "enableMultisession",
+                        "type": "Microsoft.Common.CheckBox",
+                        "label": "I confirm I have an eligible Windows 10 license with multi-tenant hosting rights.",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": "[equals(steps('instance').osVersion, '19h2-evd')]"                    }
                 ]
             },
             {
@@ -419,6 +427,7 @@
             "adminUsername": "[steps('instance').adminUsername]",
             "adminPassword": "[steps('instance').adminCredentials.password]",
             "enableHybridBenefitServerLicense": "[steps('instance').enableHybridBenefit]",
+            "enableMultisessionClientLicense": "[steps('instance').enableMultisession]",
             "osDiskStorageType": "[steps('disk').osDiskStorageType]",
             "osDiskEncryptionSetResourceId": "[steps('disk').osDiskEncryptionSet.id]",
             "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",
