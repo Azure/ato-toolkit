@@ -264,14 +264,6 @@
                     "sku": "19h2-ent",
                     "version": "latest"
                 }
-            },
-            "19h2-evd": {
-                "reference": {
-                    "publisher": "MicrosoftWindowsDesktop",
-                    "offer": "Windows-10",
-                    "sku": "19h2-evd",
-                    "version": "latest"
-                }
             }
         }
     },

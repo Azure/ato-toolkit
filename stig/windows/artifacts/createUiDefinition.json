@@ -125,11 +125,7 @@
                                 },
                                 {
                                     "value": "19h2-ent",
-                                    "label": "Windows-10-Enterprise"
-                                },
-                                {
-                                    "value": "19h2-ent",
-                                    "label": "Windows-10-Enterprise-Multisession"
+                                    "label": "Windows-10"
                                 }
                             ],
                             "required": true
