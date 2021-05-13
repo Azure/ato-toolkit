@@ -51,22 +51,6 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">RoleCapability</S>
-            <Ref N="Value" RefId="3" />
-          </En>
-          <En>
-            <S N="Key">Command</S>
-            <Ref N="Value" RefId="3" />
-          </En>
-          <En>
-            <S N="Key">Workflow</S>
-            <Ref N="Value" RefId="3" />
-          </En>
-          <En>
-            <S N="Key">Function</S>
-            <Ref N="Value" RefId="3" />
-          </En>
-          <En>
             <S N="Key">DscResource</S>
             <Obj N="Value" RefId="4">
               <TNRef RefId="1" />
@@ -78,6 +62,22 @@
                 <S>RegistryAccessEntry</S>
               </LST>
             </Obj>
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Ref N="Value" RefId="3" />
           </En>
         </DCT>
       </Obj>
@@ -101,15 +101,15 @@
           <S N="requireLicenseAcceptance">False</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">True</S>
-          <S N="versionDownloadCount">38868</S>
-          <S N="downloadCount">205331</S>
+          <S N="versionDownloadCount">49492</S>
+          <S N="downloadCount">216721</S>
           <S N="packageSize">36978</S>
           <S N="published">8/3/2020 2:34:11 PM -04:00</S>
           <S N="created">8/3/2020 2:34:11 PM -04:00</S>
-          <S N="lastUpdated">3/1/2021 9:51:16 PM -05:00</S>
+          <S N="lastUpdated">4/20/2021 9:07:24 PM -04:00</S>
           <S N="tags">DesiredStateConfiguration DSC DSCResourceKit DSCResource AccessControlDsc DACL SACL Permissions PSModule PSDscResource_ActiveDirectoryAccessEntry PSDscResource_ActiveDirectoryAuditRuleEntry PSDscResource_FileSystemAuditRuleEntry PSDscResource_NTFSAccessEntry PSDscResource_RegistryAccessEntry PSIncludes_DscResource</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-03-01T21:51:16Z</S>
+          <S N="updated">2021-04-20T21:07:24Z</S>
           <S N="NormalizedVersion">1.4.1</S>
           <S N="Authors">Microsoft Corporation</S>
           <S N="IsPrerelease">false</S>
@@ -120,7 +120,7 @@
           <S N="CompanyName">Microsoft Corporation</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\chairlift_master\project-chairlift\windows\src\AccessControlDSC\1.4.1</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\AccessControlDSC\1.4.1</S>
     </MS>
   </Obj>
 </Objs>

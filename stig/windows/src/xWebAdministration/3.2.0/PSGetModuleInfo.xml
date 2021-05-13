@@ -54,22 +54,6 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">RoleCapability</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">Command</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">Workflow</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">Function</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
             <S N="Key">DscResource</S>
             <Obj N="Value" RefId="5">
               <TNRef RefId="1" />
@@ -92,6 +76,22 @@
                 <S>xWebVirtualDirectory</S>
               </LST>
             </Obj>
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Ref N="Value" RefId="4" />
           </En>
         </DCT>
       </Obj>
@@ -116,27 +116,28 @@
           <S N="releaseNotes">## [3.2.0] - 2020-08-06_x000A__x000D__x000A_### Added_x000D__x000A__x000D__x000A_- xWebAdminstration_x000D__x000A_  - Integration tests are running on more Microsoft-hosted agents to_x000D__x000A_    test all possible operating systems ([issue #550](https://github.com/PowerShell/xWebAdministration/issues/550))._x000D__x000A_  - Fix a few lingering bugs in CICD ([issue #567](https://github.com/PowerShell/xWebAdministration/issues/567))_x000D__x000A_  - Remove an image from testing that MS will be deprecating soon ([issue #565](https://github.com/PowerShell/xWebAdministration/issues/567))_x000D__x000A__x000D__x000A_### Changed_x000D__x000A__x000D__x000A_- xWebAdminstration_x000D__x000A_  - Module was wrongly bumped to `4.0.0` (there a no merged breaking changes)_x000D__x000A_    so the versions `4.0.0-preview1` to `4.0.0-preview5` have been unlisted_x000D__x000A_    from the Gallery and removed as GitHub releases. The latest release is_x000D__x000A_    `3.2.0`._x000D__x000A_  - Azure Pipelines will no longer trigger on changes to just the CHANGELOG.md_x000D__x000A_    (when merging to master)._x000D__x000A_  - The deploy step is no longer run if the Azure DevOps organization URL_x000D__x000A_    does not contain 'dsccommunity'._x000D__x000A_  - Changed the VS Code project settings to trim trailing whitespace for_x000D__x000A_    markdown files too._x000D__x000A_  - Update pipeline to use NuGetVersionV2 from `GitVersion`._x000D__x000A_  - Pinned PowerShell module Pester to v4.10.1 in the pipeline due to_x000D__x000A_    tests is not yet compatible with Pester 5._x000D__x000A_  - Using latest version of the PowerShell module ModuleBuilder._x000D__x000A_    - Updated build.yaml to use the correct values._x000D__x000A_- xWebSite_x000D__x000A_  - Ensure that Test-TargetResource in xWebSite tests all properties before_x000D__x000A_    returning true or false, and that it uses a consistent style ([issue #221](https://github.com/PowerShell/xWebAdministration/issues/550))._x000D__x000A_- xIisMimeTypeMapping_x000D__x000A_  - Update misleading localization strings_x000D__x000A_- xIisLogging_x000D__x000A_  - Add Ensure to LogCustomFields. ([issue #571](https://github.com/dsccommunity/xWebAdministration/issues/571))_x000D__x000A__x000D__x000A_### Fixed_x000D__x000A__x000D__x000A_- WebApplicationHandler_x000D__x000A_  - Integration test should no longer fail intermittent ([issue #558](https://github.com/PowerShell/xWebAdministration/issues/558)).</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">False</S>
-          <S N="versionDownloadCount">144585</S>
-          <S N="downloadCount">15396954</S>
+          <S N="versionDownloadCount">175430</S>
+          <S N="downloadCount">16833200</S>
           <S N="packageSize">85402</S>
           <S N="published">8/6/2020 5:36:50 PM -04:00</S>
           <S N="created">8/6/2020 5:36:50 PM -04:00</S>
-          <S N="lastUpdated">3/1/2021 9:51:16 PM -05:00</S>
-          <S N="tags">DesiredStateConfiguration DSC DSCResourceKit DSCResource PSModule PSDscResource_WebApplicationHandler PSDscResource_x005F_xIisFeatureDelegation PSDscResource_x005F_xIIsHandler PSDscResource_x005F_xIisLogging PSDscResource_x005F_xIisMimeTypeMapping PSDscResource_x005F_xIisModule PSDscResource_x005F_xSslSettings PSDscResource_x005F_xWebApplication PSDscResource_x005F_xWebAppPool PSDscResource_x005F_xWebAppPoolDefaults PSDscResource_x005F_xWebConfigKeyValue PSDscResource_x005F_xWebConfigProperty PSDscResource_x005F_xWebConfigPropertyCollection PSDscResource_x005F_xWebSite PSDscResource_x005F_xWebSiteDefaults PSDscResource_x005F_xWebVirtualDirectory PSIncludes_DscResource</S>
+          <S N="lastUpdated">4/20/2021 9:47:24 PM -04:00</S>
+          <S N="tags">DesiredStateConfiguration DSC DSCResourceKit DSCResource PSModule</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-03-01T21:51:16Z</S>
+          <S N="updated">2021-04-20T21:47:24Z</S>
           <S N="NormalizedVersion">3.2.0</S>
           <S N="Authors">DSC Community</S>
           <S N="IsPrerelease">false</S>
           <S N="ItemType">Module</S>
           <S N="FileList">xWebAdministration.nuspec|xWebAdministration.psd1|en-US\about_x005F_xWebAdministration.help.txt|Modules\xWebAdministration.Common\xWebAdministration.Common.psd1|Modules\xWebAdministration.Common\xWebAdministration.Common.psm1|DSCResources\MSFT_x005F_xIIsHandler\MSFT_x005F_xIisHandler.psm1|DSCResources\MSFT_x005F_xIIsHandler\MSFT_x005F_xIisHandler.schema.mof|DSCResources\MSFT_x005F_xWebApplication\MSFT_x005F_xWebApplication.schema.mof|DSCResources\MSFT_x005F_xWebApplication\MSFT_x005F_xWebApplication.psm1|DSCResources\MSFT_x005F_xWebConfigProperty\MSFT_x005F_xWebConfigProperty.psm1|DSCResources\MSFT_x005F_xWebConfigProperty\MSFT_x005F_xWebConfigProperty.schema.mof|DSCResources\MSFT_x005F_xIisLogging\MSFT_x005F_xIisLogging.schema.mof|DSCResources\MSFT_x005F_xIisLogging\MSFT_x005F_xIisLogging.psm1|DSCResources\MSFT_x005F_xWebSite\MSFT_x005F_xWebSite.schema.mof|DSCResources\MSFT_x005F_xWebSite\MSFT_x005F_xWebSite.psm1|DSCResources\MSFT_x005F_xWebAppPool\MSFT_x005F_xWebAppPool.psm1|DSCResources\MSFT_x005F_xWebAppPool\MSFT_x005F_xWebAppPool.schema.mof|DSCResources\MSFT_WebApplicationHandler\MSFT_WebApplicationHandler.schema.mof|DSCResources\MSFT_WebApplicationHandler\MSFT_WebApplicationHandler.psm1|DSCResources\MSFT_x005F_xWebVirtualDirectory\MSFT_x005F_xWebVirtualDirectory.schema.mof|DSCResources\MSFT_x005F_xWebVirtualDirectory\MSFT_x005F_xWebVirtualDirectory.psm1|DSCResources\MSFT_x005F_xIisModule\MSFT_x005F_xIisModule.psm1|DSCResources\MSFT_x005F_xIisModule\xIisModuleDesigner.ps1|DSCResources\MSFT_x005F_xIisModule\MSFT_x005F_xIisModule.schema.mof|DSCResources\MSFT_x005F_xWebSiteDefaults\MSFT_x005F_xWebSiteDefaults.schema.mof|DSCResources\MSFT_x005F_xWebSiteDefaults\MSFT_x005F_xWebSiteDefaults.psm1|DSCResources\MSFT_x005F_xIisFeatureDelegation\MSFT_x005F_xIisFeatureDelegation.psm1|DSCResources\MSFT_x005F_xIisFeatureDelegation\MSFT_x005F_xIisFeatureDelegation.schema.mof|DSCResources\MSFT_x005F_xWebConfigPropertyCollection\MSFT_x005F_xWebConfigPropertyCollection.psm1|DSCResources\MSFT_x005F_xWebConfigPropertyCollection\MSFT_x005F_xWebConfigPropertyCollection.schema.mof|DSCResources\MSFT_x005F_xWebConfigKeyValue\MSFT_x005F_xWebConfigKeyValue.schema.mof|DSCResources\MSFT_x005F_xWebConfigKeyValue\MSFT_x005F_xWebConfigKeyValue.psm1|DSCResources\MSFT_x005F_xSslSettings\MSFT_x005F_xSslSettings.psm1|DSCResources\MSFT_x005F_xSslSettings\MSFT_x005F_xSslSettings.schema.mof|DSCResources\MSFT_x005F_xWebAppPoolDefaults\MSFT_x005F_xWebAppPoolDefaults.psm1|DSCResources\MSFT_x005F_xWebAppPoolDefaults\MSFT_x005F_xWebAppPoolDefaults.schema.mof|DSCResources\MSFT_x005F_xIisMimeTypeMapping\MSFT_x005F_xIisMimeTypeMapping.schema.mof|DSCResources\MSFT_x005F_xIisMimeTypeMapping\MSFT_x005F_xIisMimeTypeMapping.psm1|Modules\xWebAdministration.Common\en-US\xWebAdministration.Common.strings.psd1|DSCResources\MSFT_x005F_xIIsHandler\en-US\MSFT_x005F_xIIsHandler.strings.psd1|DSCResources\MSFT_x005F_xWebApplication\en-US\MSFT_x005F_xWebApplication.strings.psd1|DSCResources\MSFT_x005F_xWebConfigProperty\en-US\MSFT_x005F_xWebConfigProperty.strings.psd1|DSCResources\MSFT_x005F_xIisLogging\en-US\MSFT_x005F_xIisLogging.strings.psd1|DSCResources\MSFT_x005F_xWebSite\en-US\MSFT_x005F_xWebSite.strings.psd1|DSCResources\MSFT_x005F_xWebAppPool\en-US\MSFT_x005F_xWebAppPool.strings.psd1|DSCResources\MSFT_WebApplicationHandler\en-US\MSFT_WebApplicationHandler.strings.psd1|DSCResources\MSFT_x005F_xWebVirtualDirectory\en-US\MSFT_x005F_xWebVirtualDirectory.strings.psd1|DSCResources\MSFT_x005F_xIisModule\en-US\MSFT_x005F_xIisModule.strings.psd1|DSCResources\MSFT_x005F_xWebSiteDefaults\en-US\MSFT_x005F_xWebSiteDefaults.strings.psd1|DSCResources\MSFT_x005F_xIisFeatureDelegation\en-US\MSFT_x005F_xIisFeatureDelegation.strings.psd1|DSCResources\MSFT_x005F_xWebConfigPropertyCollection\en-US\MSFT_x005F_xWebConfigPropertyCollection.strings.psd1|DSCResources\MSFT_x005F_xWebConfigKeyValue\en-US\MSFT_x005F_xWebConfigKeyValue.strings.psd1|DSCResources\MSFT_x005F_xSslSettings\en-US\MSFT_x005F_xSslSettings.strings.psd1|DSCResources\MSFT_x005F_xWebAppPoolDefaults\en-US\MSFT_x005F_xWebAppPoolDefaults.strings.psd1|DSCResources\MSFT_x005F_xIisMimeTypeMapping\en-US\MSFT_x005F_xIisMimeTypeMapping.strings.psd1</S>
+          <S N="DscResources">WebApplicationHandler xIisFeatureDelegation xIIsHandler xIisLogging xIisMimeTypeMapping xIisModule xSslSettings xWebApplication xWebAppPool xWebAppPoolDefaults xWebConfigKeyValue xWebConfigProperty xWebConfigPropertyCollection xWebSite xWebSiteDefaults xWebVirtualDirectory</S>
           <S N="GUID">b3239f27-d7d3-4ae6-a5d2-d9a1c97d6ae4</S>
           <S N="PowerShellVersion">4.0</S>
           <S N="CLRVersion">4.0</S>
           <S N="CompanyName">DSC Community</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\chairlift_master\project-chairlift\windows\src\xWebAdministration\3.2.0</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\xWebAdministration\3.2.0</S>
     </MS>
   </Obj>
 </Objs>

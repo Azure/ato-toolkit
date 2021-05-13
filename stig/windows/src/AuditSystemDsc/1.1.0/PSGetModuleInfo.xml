@@ -48,22 +48,6 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">RoleCapability</S>
-            <Ref N="Value" RefId="3" />
-          </En>
-          <En>
-            <S N="Key">Command</S>
-            <Ref N="Value" RefId="3" />
-          </En>
-          <En>
-            <S N="Key">Workflow</S>
-            <Ref N="Value" RefId="3" />
-          </En>
-          <En>
-            <S N="Key">Function</S>
-            <Ref N="Value" RefId="3" />
-          </En>
-          <En>
             <S N="Key">DscResource</S>
             <Obj N="Value" RefId="4">
               <TNRef RefId="1" />
@@ -71,6 +55,22 @@
                 <S>AuditSetting</S>
               </LST>
             </Obj>
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Ref N="Value" RefId="3" />
           </En>
         </DCT>
       </Obj>
@@ -95,15 +95,15 @@
           <S N="releaseNotes">* Added NameSpace parameter to AuditSetting [#8](https://github.com/jcwalker/AuditSystemDsc/issues/8)_x000D__x000A_        * Add example demonstrating how to assert service pack level.</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">True</S>
-          <S N="versionDownloadCount">10784</S>
-          <S N="downloadCount">11653</S>
+          <S N="versionDownloadCount">12146</S>
+          <S N="downloadCount">13020</S>
           <S N="packageSize">21689</S>
           <S N="published">9/4/2019 7:52:01 PM -04:00</S>
           <S N="created">9/4/2019 7:52:01 PM -04:00</S>
-          <S N="lastUpdated">3/1/2021 9:51:16 PM -05:00</S>
+          <S N="lastUpdated">4/20/2021 8:42:24 PM -04:00</S>
           <S N="tags">DesiredStateConfiguration DSC Audit Compliance DSCResource PSModule PSDscResource_AuditSetting PSIncludes_DscResource</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-03-01T21:51:16Z</S>
+          <S N="updated">2021-04-20T20:42:24Z</S>
           <S N="NormalizedVersion">1.1.0</S>
           <S N="Authors">Jason Walker</S>
           <S N="IsPrerelease">false</S>
@@ -114,7 +114,7 @@
           <S N="CLRVersion">4.0</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\chairlift_master\project-chairlift\windows\src\AuditSystemDsc\1.1.0</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\AuditSystemDsc\1.1.0</S>
     </MS>
   </Obj>
 </Objs>

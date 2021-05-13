@@ -54,50 +54,8 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">RoleCapability</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">Command</S>
-            <Obj N="Value" RefId="5">
-              <TNRef RefId="1" />
-              <LST>
-                <S>Get-DomainName</S>
-                <S>Get-Stig</S>
-                <S>New-StigCheckList</S>
-                <S>Get-StigRuleList</S>
-                <S>Get-StigVersionNumber</S>
-                <S>Get-PowerStigFilelist</S>
-                <S>Split-BenchmarkId</S>
-                <S>Get-StigRule</S>
-                <S>Get-StigRuleExceptionString</S>
-              </LST>
-            </Obj>
-          </En>
-          <En>
-            <S N="Key">Workflow</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">Function</S>
-            <Obj N="Value" RefId="6">
-              <TNRef RefId="1" />
-              <LST>
-                <S>Get-DomainName</S>
-                <S>Get-Stig</S>
-                <S>New-StigCheckList</S>
-                <S>Get-StigRuleList</S>
-                <S>Get-StigVersionNumber</S>
-                <S>Get-PowerStigFilelist</S>
-                <S>Split-BenchmarkId</S>
-                <S>Get-StigRule</S>
-                <S>Get-StigRuleExceptionString</S>
-              </LST>
-            </Obj>
-          </En>
-          <En>
             <S N="Key">DscResource</S>
-            <Obj N="Value" RefId="7">
+            <Obj N="Value" RefId="5">
               <TNRef RefId="1" />
               <LST>
                 <S>Adobe</S>
@@ -120,6 +78,48 @@
                 <S>RHEL</S>
                 <S>Ubuntu</S>
                 <S>Edge</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
+            <Obj N="Value" RefId="6">
+              <TNRef RefId="1" />
+              <LST>
+                <S>Get-DomainName</S>
+                <S>Get-Stig</S>
+                <S>New-StigCheckList</S>
+                <S>Get-StigRuleList</S>
+                <S>Get-StigVersionNumber</S>
+                <S>Get-PowerStigFilelist</S>
+                <S>Split-BenchmarkId</S>
+                <S>Get-StigRule</S>
+                <S>Get-StigRuleExceptionString</S>
+              </LST>
+            </Obj>
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Obj N="Value" RefId="7">
+              <TNRef RefId="1" />
+              <LST>
+                <S>Get-DomainName</S>
+                <S>Get-Stig</S>
+                <S>New-StigCheckList</S>
+                <S>Get-StigRuleList</S>
+                <S>Get-StigVersionNumber</S>
+                <S>Get-PowerStigFilelist</S>
+                <S>Split-BenchmarkId</S>
+                <S>Get-StigRule</S>
+                <S>Get-StigRuleExceptionString</S>
               </LST>
             </Obj>
           </En>
@@ -405,15 +405,15 @@
           <S N="releaseNotes">* Update PowerSTIG to remove old rule Ids in Hard Coded Framework: [#790](https://github.com/microsoft/PowerStig/issues/790)_x000D__x000A_            * Update PowerSTIG to Parse/Apply MS Office 365 ProPlus Ver 2, Rel 1: [#811](https://github.com/microsoft/PowerStig/issues/811)_x000D__x000A_            * Update PowerSTIG to parse and apply RHEL 7.x V3R1: [#608](https://github.com/microsoft/PowerStig/issues/608)_x000D__x000A_            * Update PowerSTIG to parse and apply Ubuntu 18.04 LTS STIG - Ver 2, Rel 2: [#821](https://github.com/microsoft/PowerStig/issues/821)_x000D__x000A_            * Update PowerSTIG to Add Checklist Accountability: [#808](https://github.com/microsoft/PowerStig/issues/808)_x000D__x000A_            * Update PowerSTIG to move O365 Pro Plus log entries into Exclusion Rule list: [#815](https://github.com/microsoft/PowerStig/issues/815)_x000D__x000A_            * Update PowerSTIG to parse and apply Mozilla Firefox V5R1 STIG: [#834](https://github.com/microsoft/PowerStig/issues/834)_x000D__x000A_            * Update PowerSTIG to parse and apply Microsoft DotNet V2R1 STIG: [#831](https://github.com/microsoft/PowerStig/issues/831)_x000D__x000A_            * Update PowerSTIG to Parse/Apply Oracle JRE 8 Ver 2, Rel 1: [#833](https://github.com/microsoft/PowerStig/issues/833)_x000D__x000A_            * Update PowerSTIG to use WindowsDefenderDSC 2.1.0: [#822](https://github.com/microsoft/PowerStig/issues/822)_x000D__x000A_            * Update PowerSTIG to Parse/Apply Google Chrome Ver 2, Rel 2: [#841](https://github.com/microsoft/PowerStig/issues/841)_x000D__x000A_            * Update PowerSTIG SkipRule to Accept Parent Rule for Split Rules: [#846](https://github.com/microsoft/PowerStig/issues/846)_x000D__x000A_            * Update PowerSTIG to successfully parse/apply Microsoft SQL Server 2016 Instance Version 2; Release 2: [#838](https://github.com/microsoft/PowerStig/issues/838)_x000D__x000A_            * Update PowerSTIG to successfully parse/apply MS Edge V1R1: [#860](https://github.com/microsoft/PowerStig/issues/860)_x000D__x000A_            * Update PowerSTIG to successfully parse/apply VMware 6.5 ESXI V2R1 STIG: [#851](https://github.com/microsoft/PowerStig/issues/851)_x000D__x000A_            * Fixed: RHEL RuleId V-204406 should be removed: [#847](https://github.com/microsoft/PowerStig/issues/847)</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">True</S>
-          <S N="versionDownloadCount">23</S>
-          <S N="downloadCount">22412</S>
+          <S N="versionDownloadCount">1021</S>
+          <S N="downloadCount">23923</S>
           <S N="packageSize">5002557</S>
           <S N="published">3/1/2021 4:26:22 PM -05:00</S>
           <S N="created">3/1/2021 4:26:22 PM -05:00</S>
-          <S N="lastUpdated">3/1/2021 9:51:16 PM -05:00</S>
+          <S N="lastUpdated">4/20/2021 8:47:24 PM -04:00</S>
           <S N="tags">DSC DesiredStateConfiguration STIG PowerStig PSModule PSFunction_Get-DomainName PSCommand_Get-DomainName PSFunction_Get-Stig PSCommand_Get-Stig PSFunction_New-StigCheckList PSCommand_New-StigCheckList PSFunction_Get-StigRuleList PSCommand_Get-StigRuleList PSFunction_Get-StigVersionNumber PSCommand_Get-StigVersionNumber PSFunction_Get-PowerStigFilelist PSCommand_Get-PowerStigFilelist PSFunction_Split-BenchmarkId PSCommand_Split-BenchmarkId PSFunction_Get-StigRule PSCommand_Get-StigRule PSFunction_Get-StigRuleExceptionString PSCommand_Get-StigRuleExceptionString PSIncludes_Function PSDscResource_Adobe PSDscResource_DotNetFramework PSDscResource_FireFox PSDscResource_IisServer PSDscResource_IisSite PSDscResource_InternetExplorer PSDscResource_Chrome PSDscResource_McAfee PSDscResource_Office PSDscResource_OracleJRE PSDscResource_SqlServer PSDscResource_WindowsClient PSDscResource_WindowsDefender PSDscResource_WindowsDnsServer PSDscResource_WindowsFirewall PSDscResource_WindowsServer PSDscResource_Vsphere PSDscResource_RHEL PSDscResource_Ubuntu PSDscResource_Edge PSIncludes_DscResource</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-03-01T21:51:16Z</S>
+          <S N="updated">2021-04-20T20:47:24Z</S>
           <S N="NormalizedVersion">4.8.0</S>
           <S N="Authors">Microsoft Corporation</S>
           <S N="IsPrerelease">false</S>
@@ -425,7 +425,7 @@
           <S N="CompanyName">Microsoft Corporation</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\chairlift_master\project-chairlift\windows\src\PowerSTIG\4.8.0</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\PowerSTIG\4.8.0</S>
     </MS>
   </Obj>
 </Objs>

@@ -4,6 +4,18 @@ Param(
     $autoInstallDependencies = $false
 )
 
+$osVersion = (Get-WmiObject Win32_OperatingSystem).Caption
+
+if($osVersion -Match "Windows 10")
+{
+    winrm quickconfig -quiet
+
+    # winrm settings require NIC to be not Public
+    $networkName = (Get-NetConnectionProfile)[0].Name
+    Set-NetConnectionProfile -Name $networkName -NetworkCategory Private
+
+}
+
 if ($autoInstallDependencies -eq $true) {
     . "$PSScriptRoot\RequiredModules.ps1"
 

@@ -43,15 +43,11 @@
             </Obj>
           </En>
           <En>
+            <S N="Key">DscResource</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
             <S N="Key">RoleCapability</S>
-            <Ref N="Value" RefId="3" />
-          </En>
-          <En>
-            <S N="Key">Command</S>
-            <Ref N="Value" RefId="3" />
-          </En>
-          <En>
-            <S N="Key">Workflow</S>
             <Ref N="Value" RefId="3" />
           </En>
           <En>
@@ -59,7 +55,11 @@
             <Ref N="Value" RefId="3" />
           </En>
           <En>
-            <S N="Key">DscResource</S>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="3" />
+          </En>
+          <En>
+            <S N="Key">Command</S>
             <Ref N="Value" RefId="3" />
           </En>
         </DCT>
@@ -84,15 +84,15 @@
           <S N="requireLicenseAcceptance">False</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">True</S>
-          <S N="versionDownloadCount">121475</S>
-          <S N="downloadCount">121475</S>
+          <S N="versionDownloadCount">130691</S>
+          <S N="downloadCount">130691</S>
           <S N="packageSize">8045</S>
           <S N="published">9/25/2015 4:20:50 PM -04:00</S>
           <S N="created">9/25/2015 4:20:50 PM -04:00</S>
-          <S N="lastUpdated">3/1/2021 9:51:16 PM -05:00</S>
+          <S N="lastUpdated">4/20/2021 8:52:24 PM -04:00</S>
           <S N="tags">PSModule</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-03-01T21:51:16Z</S>
+          <S N="updated">2021-04-20T20:52:24Z</S>
           <S N="NormalizedVersion">1.0.0</S>
           <S N="Authors">Microsoft Corporation</S>
           <S N="IsPrerelease">false</S>
@@ -100,7 +100,7 @@
           <S N="FileList">nx.nuspec|nx.psd1|Readme.txt|DSCResources\MSFT_nxArchiveResource\MSFT_nxArchiveResource.schema.mof|DSCResources\MSFT_nxEnvironmentResource\MSFT_nxEnvironmentResource.schema.mof|DSCResources\MSFT_nxFileLineResource\MSFT_nxFileLineResource.schema.mof|DSCResources\MSFT_nxFileResource\MSFT_nxFileResource.schema.mof|DSCResources\MSFT_nxGroupResource\MSFT_nxGroupResource.schema.mof|DSCResources\MSFT_nxPackageResource\MSFT_nxPackageResource.schema.mof|DSCResources\MSFT_nxScriptResource\MSFT_nxScriptResource.schema.mof|DSCResources\MSFT_nxServiceResource\MSFT_nxServiceResource.schema.mof|DSCResources\MSFT_nxSshAuthorizedKeysResource\MSFT_nxSshAuthorizedKeysResource.schema.mof|DSCResources\MSFT_nxUserResource\MSFT_nxUserResource.schema.mof</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\chairlift_master\project-chairlift\windows\src\nx\1.0</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\nx\1.0</S>
     </MS>
   </Obj>
 </Objs>

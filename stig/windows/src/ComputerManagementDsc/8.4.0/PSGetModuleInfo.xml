@@ -53,22 +53,6 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">RoleCapability</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">Command</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">Workflow</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
-            <S N="Key">Function</S>
-            <Ref N="Value" RefId="4" />
-          </En>
-          <En>
             <S N="Key">DscResource</S>
             <Obj N="Value" RefId="5">
               <TNRef RefId="1" />
@@ -91,6 +75,22 @@
                 <S>UserAccountControl</S>
               </LST>
             </Obj>
+          </En>
+          <En>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Function</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Workflow</S>
+            <Ref N="Value" RefId="4" />
+          </En>
+          <En>
+            <S N="Key">Command</S>
+            <Ref N="Value" RefId="4" />
           </En>
         </DCT>
       </Obj>
@@ -115,15 +115,15 @@
           <S N="releaseNotes">## [8.4.0] - 2020-08-03_x000A__x000D__x000A_### Changed_x000D__x000A__x000D__x000A_- ComputerManagementDsc_x000D__x000A_  - Automatically publish documentation to GitHub Wiki - Fixes [Issue #342](https://github.com/dsccommunity/ComputerManagementDsc/issues/342).</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">False</S>
-          <S N="versionDownloadCount">113455</S>
-          <S N="downloadCount">29197956</S>
+          <S N="versionDownloadCount">155598</S>
+          <S N="downloadCount">32181688</S>
           <S N="packageSize">106467</S>
           <S N="published">8/3/2020 7:05:04 AM -04:00</S>
           <S N="created">8/3/2020 7:05:04 AM -04:00</S>
-          <S N="lastUpdated">3/1/2021 9:51:16 PM -05:00</S>
+          <S N="lastUpdated">4/20/2021 9:52:24 PM -04:00</S>
           <S N="tags">DesiredStateConfiguration DSC DSCResource PSModule</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2021-03-01T21:51:16Z</S>
+          <S N="updated">2021-04-20T21:52:24Z</S>
           <S N="NormalizedVersion">8.4.0</S>
           <S N="Authors">DSC Community</S>
           <S N="IsPrerelease">false</S>
@@ -136,7 +136,7 @@
           <S N="CompanyName">DSC Community</S>
         </MS>
       </Obj>
-      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\chairlift_master\project-chairlift\windows\src\ComputerManagementDsc\8.4.0</S>
+      <S N="InstalledLocation">C:\Users\Eric\Desktop\GITHUB\erjenkin_ato-toolkit\ato-toolkit\stig\windows\src\ComputerManagementDsc\8.4.0</S>
     </MS>
   </Obj>
 </Objs>

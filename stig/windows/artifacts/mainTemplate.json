@@ -264,6 +264,7 @@
                     "sku": "19h2-ent",
                     "version": "latest"
                 }
+<<<<<<< HEAD
             },
             "19h2-evd": {
                 "reference": {
@@ -272,6 +273,8 @@
                     "sku": "19h2-evd",
                     "version": "latest"
                 }
+=======
+>>>>>>> 8b39ecf2a73060a1880deea21518c15617da1fcf
             }
         }
     },

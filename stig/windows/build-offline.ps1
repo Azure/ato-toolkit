@@ -1,4 +1,4 @@
-. "$PSScriptRoot/RequiredModules.ps1"
+. "$PSScriptRoot\artifacts\RequiredModules.ps1"
 
 if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
             [Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -9,8 +9,8 @@ if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 $publicDirectory = "$PSScriptRoot\offline"
 
 # Bundle the Windows STIG DSC files into zip.
-$windowsStigDscConfigFilename = "WindowsServer.ps1"
-$windowsStigDscPackageRootPath = "$PSScriptRoot\$windowsStigDscConfigFilename"
+$windowsStigDscConfigFilename = "Windows.ps1"
+$windowsStigDscPackageRootPath = "$PSScriptRoot\src\$windowsStigDscConfigFilename"
 
 
 # Bundle the offline STIG DSC zip
@@ -29,4 +29,4 @@ foreach ($requiredModule in $requiredModules) {
 }
 
 # Zip up the DSC package into the format expected by the DSC VM Extension
-Compress-Archive -Path "$buildDirectory\**" -DestinationPath "$publicDirectory\$windowsStigDscConfigFilename.zip" -Force
+Compress-Archive -Path "$buildDirectory\**" -DestinationPath "$PSScriptRoot\artifacts\$windowsStigDscConfigFilename.zip" -Force
