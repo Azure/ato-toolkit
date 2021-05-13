@@ -29,22 +29,83 @@
                         "constraints": {
                             "required": true,
                             "regex": "^[a-z0-9A-Z-]{3,15}$",
-                            "validationMessage": "Virtual machine Name must be between 3 and 15 characters long and contain letters, numbers and hyphens only."
+                            "validationMessage": "Virtual machine name must be between 3 and 15 characters long and contain letters, numbers and hyphens only."
                         }
                     },
                     {
-                        "name": "vmAvailabilitySet",
-                        "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Availability set",
-                        "resourceType": "Microsoft.Compute/availabilitySets",
-                        "toolTip": "Select existing Availability set to be configured for Virtual machine. Availability set must be present in the same resource group.",
-                        "options": {
-                            "filter": {
-                                "subscription": "onBasic",
-                                "location": "onBasic"
-                            }
+                        "name": "availabilityOptions",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "Availability options",
+                        "toolTip": "Azure offers a range of options for managing availability and resiliency for your applications. Architect your solution to use replicated VMs in Availability Sets to protect your apps and data from datacenter outages and maintenance events.",
+                        "defaultValue": "No infrastructure redundancy required",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "value": "default",
+                                    "label": "No infrastructure redundancy required"
+                                },
+                                {
+                                    "value": "availabilitySet",
+                                    "label": "Availability set"
+                                }
+                            ],
+                            "required": true
                         },
-                        "visible": false
+                        "visible": true
+                    },
+                    {
+                        "name": "availabilitySetName",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Availability set name",
+                        "toolTip": "Name of the Availability set.",
+                        "constraints": {
+                            "required": "[equals(steps('instance').availabilityOptions, 'availabilitySet')]",
+                            "regex": "^[a-z0-9A-Z-]{3,15}$",
+                            "validationMessage": "Availability set name must be between 3 and 15 characters long and contain letters, numbers and hyphens only."
+                        },
+                        "visible": "[equals(steps('instance').availabilityOptions, 'availabilitySet')]"
+                    },
+                    {
+                        "name": "instanceCount",
+                        "type": "Microsoft.Common.Slider",
+                        "min": 1,
+                        "max": 5,
+                        "label": "Instance count",
+                        "defaultValue": 2,
+                        "showStepMarkers": false,
+                        "toolTip": "Number of virtual machines in the availability set.",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": "[equals(steps('instance').availabilityOptions, 'availabilitySet')]"
+                    },
+                    {
+                        "name": "faultDomains",
+                        "type": "Microsoft.Common.Slider",
+                        "min": 1,
+                        "max": 3,
+                        "label": "Fault domains",
+                        "defaultValue": 2,
+                        "showStepMarkers": false,
+                        "toolTip": "Virtual machines in the same fault domain share a common power source and physical network switch.",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": "[equals(steps('instance').availabilityOptions, 'availabilitySet')]"
+                    },
+                    {
+                        "name": "updateDomains",
+                        "type": "Microsoft.Common.Slider",
+                        "min": 1,
+                        "max": 5,
+                        "label": "Update domains",
+                        "defaultValue": 3,
+                        "showStepMarkers": true,
+                        "toolTip": "Virtual machines in the same update domain will be restarted together during planned maintenance. Azure never restarts more than one update domain at a time.",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": "[equals(steps('instance').availabilityOptions, 'availabilitySet')]"
                     },
                     {
                         "name": "osVersion",
@@ -61,6 +122,14 @@
                                 {
                                     "value": "2016-Datacenter",
                                     "label": "2016-Datacenter"
+                                },
+                                {
+                                    "value": "19h2-ent",
+                                    "label": "Windows-10-Enterprise"
+                                },
+                                {
+                                    "value": "19h2-ent",
+                                    "label": "Windows-10-Enterprise-Multisession"
                                 }
                             ],
                             "required": true
@@ -124,6 +193,7 @@
                     {
                         "name": "textBlock2",
                         "type": "Microsoft.Common.TextBlock",
+                        "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'))]",
                         "options": {
                             "text": "Licensing"
                         }
@@ -135,6 +205,7 @@
                         "constraints": {
                             "required": false
                         },
+                        "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'))]",
                         "toolTip": "If you own Windows licenses with active Software Assurance (SA) or have an active Windows Server subscription, use Azure Hybrid Benefit to save compute cost."
                     }
                 ]
@@ -208,7 +279,7 @@
                     {
                         "name": "osDiskEncryptionSet",
                         "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Disk Encryption Set",
+                        "label": "Disk encryption set",
                         "resourceType": "Microsoft.Compute/diskEncryptionSets",
                         "toolTip": "A disk encryption set stores the customer key that a disk or snapshot will use for encrypting its data. You must choose an existing disk encryption set during this step. Disk encryption sets require access to key vault and keys.",
                         "options": {
@@ -216,6 +287,9 @@
                                 "subscription": "onBasic",
                                 "location": "onBasic"
                             }
+                        },
+                        "constraints": {
+                            "required": true
                         },
                         "visible": "[not(equals(steps('disk').osDiskEncryptionType, 'default'))]"
                     }
@@ -241,7 +315,7 @@
                         "name": "vmVirtualNetwork",
                         "type": "Microsoft.Network.VirtualNetworkCombo",
                         "label": {
-                            "virtualNetwork": "Virtual Network",
+                            "virtualNetwork": "Virtual network",
                             "subnets": "Subnets"
                         },
                         "toolTip": {
@@ -271,6 +345,17 @@
                                     "requireContiguousAddresses": true
                                 }
                             }
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "vmApplicationSecurityGroup",
+                        "type": "Microsoft.Solutions.ResourceSelector",
+                        "label": "Application security group",
+                        "resourceType": "Microsoft.Network/applicationSecurityGroups",
+                        "toolTip": "Application security groups enable you to configure network security as a natural extension of an application's structure, allowing you to group virtual machines and define network security policies based on those groups.",
+                        "constraints": {
+                            "required": false
                         },
                         "visible": true
                     }
@@ -324,23 +409,27 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
-            "availabilitySetResourceId": "[steps('instance').vmAvailabilitySet.id]",
+            "availabilityOptions": "[steps('instance').availabilityOptions]",
+            "availabilitySetName": "[steps('instance').availabilitySetName]",
+            "instanceCount": "[steps('instance').instanceCount]",
+            "faultDomains": "[steps('instance').faultDomains]",
+            "updateDomains": "[steps('instance').updateDomains]",
             "osVersion": "[steps('instance').osVersion]",
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
             "adminPassword": "[steps('instance').adminCredentials.password]",
             "enableHybridBenefitServerLicense": "[steps('instance').enableHybridBenefit]",
             "osDiskStorageType": "[steps('disk').osDiskStorageType]",
-            "osDiskEncryptionSetResourceId": "[steps('disk').osDiskEncryptionType.id]",
+            "osDiskEncryptionSetResourceId": "[steps('disk').osDiskEncryptionSet.id]",
             "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",
             "virtualNetworkNewOrExisting": "[steps('networking').vmVirtualNetwork.newOrExisting]",
             "virtualNetworkResourceGroupName": "[steps('networking').vmVirtualNetwork.resourceGroup]",
             "addressPrefix": "[steps('networking').vmVirtualNetwork.addressPrefix]",
             "subnetPrefix": "[steps('networking').vmVirtualNetwork.subnets.subnet1.addressPrefix]",
             "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
+            "applicationSecurityGroupResourceId": "[steps('networking').vmApplicationSecurityGroup.id]",
             "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
-            "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]",
-            "logAnalyticsWorkspaceName": "[steps('management').logAnalyticsWorkspace.name]"
+            "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]"
         }
     }
 }
