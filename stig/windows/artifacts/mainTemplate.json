@@ -207,13 +207,6 @@
             "metadata": {
                 "description": "(Optional) Enable Azure Hybrid Benefit to use your on-premises Windows Server licenses and reduce cost. See https://docs.microsoft.com/en-us/azure/virtual-machines/windows/hybrid-use-benefit-licensing for more information."
             }
-        },
-        "enableWin10MultiSessionLicense": {
-            "type": "bool",
-            "defaultValue": false,
-            "metadata": {
-                "description": "(Optional) Enable Windows 10 Multisession License. See http://go.microsoft.com/fwlink/?LinkId=2118246 for more information."
-            }
         }
     },
     "variables": {
@@ -434,7 +427,7 @@
                         "storageUri": "[if(not(equals(parameters('diagnosticStorageResourceId'), '')), reference(parameters('diagnosticStorageResourceId'), variables('storageApiVersion')).primaryEndpoints.blob, json('null'))]"
                     }
                 },
-                "licenseType": "[or(if(equals(parameters('enableHybridBenefitServerLicense'), true()), 'Windows_Server', json('null')),if(equals(parameters('enableWin10MultiSessionLicense'), true()), 'Windows_Client', json('null')))]"
+                "licenseType": "[if(equals(parameters('enableHybridBenefitServerLicense'), true()), 'Windows_Server', json('null'))]"
             },
             "resources": [
             ]
