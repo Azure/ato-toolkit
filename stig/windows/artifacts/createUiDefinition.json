@@ -216,16 +216,6 @@
                             "required": false
                         },
                         "visible": "[(equals(steps('instance').osVersion, '19h2-evd')]"
-                    },
-                    {
-                        "name": "infoBox0",
-                        "type": "Microsoft.Common.InfoBox",
-                        "options": {
-                            "icon": "Info",
-                            "text": "Review multi-tenant hosting rights for Windows 10 compliance",
-                            "uri": "http://go.microsoft.com/fwlink/?LinkId=2118246"
-                        },
-                        "visible": "[(equals(steps('instance').osVersion, '19h2-evd')]"
                     }
                 ]
             },
