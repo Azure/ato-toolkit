@@ -435,7 +435,7 @@
                         "storageUri": "[if(not(equals(parameters('diagnosticStorageResourceId'), '')), reference(parameters('diagnosticStorageResourceId'), variables('storageApiVersion')).primaryEndpoints.blob, json('null'))]"
                     }
                 },
-                "licenseType": "[if(equals(parameters('enableHybridBenefitServerLicense'), true()), 'Windows_Server', json('null'))]"
+                "licenseType": "[if(equals(parameters('enableHybridBenefitServerLicense'), true()), 'Windows_Server', (if(equals(parameters('enableMultisessionClientLicense'), true()), 'Windows_Client', json('null')))]"
             },
             "resources": [
             ]
