@@ -215,7 +215,9 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible": "[equals(steps('instance').osVersion, '19h2-evd')]"                    }
+                        "visible": "[equals(steps('instance').osVersion, '19h2-evd')]" ,
+                        "toolTip": "Review multi-tenant hosting rights for Windows 10 compliance."
+                    }
                 ]
             },
             {
