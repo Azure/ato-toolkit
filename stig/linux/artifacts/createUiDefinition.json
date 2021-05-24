@@ -140,6 +140,22 @@
                                     "label": "CentOS 7.4"
                                 },
                                 {
+                                    "value": "RHEL83",
+                                    "label": "Red Hat Enterprise Linux 8.3"
+                                },
+                                {
+                                    "value": "RHEL82",
+                                    "label": "Red Hat Enterprise Linux 8.2"
+                                },
+                                {
+                                    "value": "RHEL81",
+                                    "label": "Red Hat Enterprise Linux 8.1"
+                                },
+                                {
+                                    "value": "RHEL80",
+                                    "label": "Red Hat Enterprise Linux 8.0"
+                                },
+                                {
                                     "value": "RHEL79",
                                     "label": "Red Hat Enterprise Linux 7.9"
                                 },

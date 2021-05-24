@@ -56,6 +56,10 @@
                 "CentOS76",
                 "CentOS75",
                 "CentOS74",
+                "RHEL83",
+                "RHEL82",
+                "RHEL81",
+                "RHEL80",
                 "RHEL79",
                 "RHEL78",
                 "RHEL77",
@@ -241,6 +245,11 @@
                 "id": "[parameters('applicationSecurityGroupResourceId')]"
             }
         ],
+        "rhel8Versions": "[createArray('RHEL80', 'RHEL81', 'RHEL82', 'RHEL83')]",
+        "defaultFileUri": [
+            "[concat(parameters('_artifactsLocation'), variables('images')[parameters('osVersion')].stigFileName, variables('artifactsLocationSasToken'))]",
+            "[concat(parameters('_artifactsLocation'), 'mof/', parameters('osVersion'), '.mof', variables('artifactsLocationSasToken'))]"
+        ],
         "images": {
             "CentOS79": {
                 "reference": {
@@ -295,6 +304,42 @@
                     "version": "latest"
                 },
                 "stigFileName": "rhel7STIG.sh"
+            },
+            "RHEL83": {
+                "reference": {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "8_3",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel8STIG.sh"
+            },
+            "RHEL82": {
+                "reference": {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "8.2",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel8STIG.sh"
+            },
+            "RHEL81": {
+                "reference": {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "8.1",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel8STIG.sh"
+            },
+            "RHEL80": {
+                "reference": {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "8-LVM",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel8STIG.sh"
             },
             "RHEL79": {
                 "reference": {
@@ -556,6 +601,7 @@
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/setup-linux-dsc')]",
             "location": "[parameters('location')]",
+            "condition": "[not(contains(variables('rhel8Versions'), parameters('osVersion')))]",
             "copy": {
                 "name": "dscLoop",
                 "count": "[variables('instanceCount')]"
@@ -591,17 +637,13 @@
                 "type": "CustomScript",
                 "typeHandlerVersion": "2.0",
                 "autoUpgradeMinorVersion": true,
-                "protectedSettings": {
-                    "fileUris": [
-                        "[concat(parameters('_artifactsLocation'), variables('images')[parameters('osVersion')].stigFileName, variables('artifactsLocationSasToken'))]",
-                        "[concat(parameters('_artifactsLocation'), 'mof/', parameters('osVersion'), '.mof', variables('artifactsLocationSasToken'))]"
-                    ],
-                    "ignoreRelativePathForFileDownloads": true,
-                    "commandToExecute": "[concat('sh ', variables('images')[parameters('osVersion')].stigFileName, ' ', parameters('adminUsername'))]"
-                },
                 "settings": {
                     "skipDos2Unix": false,
                     "timestamp": 123456789
+                },
+                "protectedSettings": {
+                    "fileUris": "[if(contains(variables('rhel8Versions'), parameters('osVersion')), createArray(first(variables('defaultFileUri'))), variables('defaultFileUri'))]",
+                    "commandToExecute": "[concat('sh ', variables('images')[parameters('osVersion')].stigFileName, ' ', parameters('adminUsername'))]"
                 }
             }
         },
