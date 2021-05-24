@@ -216,7 +216,7 @@
                             "required": false
                         },
                         "visible": "[equals(steps('instance').osVersion, '19h2-evd')]" ,
-                        "toolTip": "Review multi-tenant hosting rights for Windows 10 compliance. [link]<http://go.microsoft.com/fwlink/?LinkId=2125807>"
+                        "toolTip": "[Review multi-tenant hosting rights for Windows 10 compliance.](http://go.microsoft.com/fwlink/?LinkId=2125807)"
                     }
                 ]
             },
