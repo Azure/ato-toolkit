@@ -591,16 +591,17 @@
                 "type": "CustomScript",
                 "typeHandlerVersion": "2.0",
                 "autoUpgradeMinorVersion": true,
-                "settings": {
-                    "skipDos2Unix": false,
-                    "timestamp": 123456789
-                },
                 "protectedSettings": {
                     "fileUris": [
                         "[concat(parameters('_artifactsLocation'), variables('images')[parameters('osVersion')].stigFileName, variables('artifactsLocationSasToken'))]",
                         "[concat(parameters('_artifactsLocation'), 'mof/', parameters('osVersion'), '.mof', variables('artifactsLocationSasToken'))]"
                     ],
+                    "ignoreRelativePathForFileDownloads": true,
                     "commandToExecute": "[concat('sh ', variables('images')[parameters('osVersion')].stigFileName, ' ', parameters('adminUsername'))]"
+                },
+                "settings": {
+                    "skipDos2Unix": false,
+                    "timestamp": 123456789
                 }
             }
         },
@@ -655,19 +656,6 @@
                 },
                 "protectedSettings": {
                     "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), listkeys(parameters('logAnalyticsWorkspaceId'),'2015-03-20').primarySharedKey)]"
-                }
-            }
-        },
-        {
-            "apiVersion": "2020-06-01",
-            "name": "pid-212401b4-aef7-457e-815d-3321a6407400",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "Incremental",
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "resources": []
                 }
             }
         }
