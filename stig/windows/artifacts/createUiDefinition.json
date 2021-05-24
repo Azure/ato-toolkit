@@ -213,12 +213,10 @@
                         "type": "Microsoft.Common.CheckBox",
                         "label": "I confirm I have an eligible Windows 10 license with multi-tenant hosting rights.",
                         "constraints": {
-                            "required": false,
-                            "text": "Your image must have code to support consumption of custom data. If your image supports cloud-init, custom-data will be processed by cloud-init.",
-                            "uri": "http://go.microsoft.com/fwlink/?LinkId=2125807"
+                            "required": false
                         },
                         "visible": "[equals(steps('instance').osVersion, '19h2-evd')]" ,
-                        "toolTip": "Review multi-tenant hosting rights for Windows 10 compliance."
+                        "toolTip": "Review multi-tenant hosting rights for Windows 10 compliance. [link]<http://go.microsoft.com/fwlink/?LinkId=2125807>"
                     }
                 ]
             },
