@@ -213,7 +213,9 @@
                         "type": "Microsoft.Common.CheckBox",
                         "label": "I confirm I have an eligible Windows 10 license with multi-tenant hosting rights.",
                         "constraints": {
-                            "required": false
+                            "required": false,
+                            "text": "Your image must have code to support consumption of custom data. If your image supports cloud-init, custom-data will be processed by cloud-init.",
+                            "uri": "http://go.microsoft.com/fwlink/?LinkId=2125807"
                         },
                         "visible": "[equals(steps('instance').osVersion, '19h2-evd')]" ,
                         "toolTip": "Review multi-tenant hosting rights for Windows 10 compliance."
@@ -337,7 +339,7 @@
                             "addressPrefixSize": "/16"
                         },
                         "constraints": {
-                            "minAddressPrefixSize": "/24"
+                            "minAddressPrefixSize": "/16"
                         },
                         "options": {
                             "hideExisting": false
@@ -350,7 +352,7 @@
                                     "addressPrefixSize": "/24"
                                 },
                                 "constraints": {
-                                    "minAddressPrefixSize": "/25",
+                                    "minAddressPrefixSize": "/24",
                                     "minAddressCount": 12,
                                     "requireContiguousAddresses": true
                                 }
