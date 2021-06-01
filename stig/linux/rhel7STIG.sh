@@ -6,11 +6,10 @@ if [ -f ./azAutomationComplete ]; then
     exit 0
 fi
 
-# rhel 7.2/7.3 ssl cert issue remediation
 # https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/redhat/redhat-rhui
-version=$(. /etc/os-release && echo $VERSION_ID)
-if [ ${version} == '7.2' ] || [ ${version} == '7.3' ]; then
-    echo "Executing yum update to disable all repos and enable all microsoft repos (7.2/7.3 fix)..."
+id=$(. /etc/os-release && echo $ID)
+if [ ${id} == 'rhel' ]; then
+    echo "Executing yum update to disable all repos and enable all microsoft repos..."
     yum update -y --disablerepo='*' --enablerepo='*microsoft*' > ./yumupdateresults.log
 fi
 

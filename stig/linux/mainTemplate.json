@@ -4,7 +4,7 @@
     "parameters": {
         "vmName": {
             "type": "string",
-            "defaultValue": "simple-vm",
+            "defaultValue": "stig-vm",
             "metadata": {
                 "description": "Name of the virtual machine."
             }
@@ -155,11 +155,49 @@
                 "description": "(Optional) Application Security Group resource id."
             }
         },
-        "availabilitySetResourceId": {
+        "availabilityOptions": {
             "type": "string",
-            "defaultValue": "",
+            "defaultValue": "default",
+            "allowedValues": [
+                "default",
+                "availabilitySet"
+            ],
             "metadata": {
-                "description": "(Optional) Availability Set resource id."
+                "description": "(Optional) Availability options."
+            }
+        },
+        "availabilitySetName": {
+            "type": "string",
+            "defaultValue": "stig-vm-as",
+            "metadata": {
+                "description": "(Optional) Availability set name."
+            }
+        },
+        "instanceCount": {
+            "type": "int",
+            "defaultValue": 2,
+            "minValue": 1,
+            "maxValue": 5,
+            "metadata": {
+                "description": "(Optional) Instance count."
+            }
+        },
+        "faultDomains": {
+            "type": "int",
+            "defaultValue": 2,
+            "minValue": 1,
+            "maxValue": 3,
+            "metadata": {
+                "description": "(Optional) Fault domains."
+            }
+        },
+        "updateDomains": {
+            "type": "int",
+            "defaultValue": 3,
+            "minValue": 1,
+            "maxValue": 5,
+            "metadata": {
+                "description": "(Optional) Update domains."
             }
         },
         "logsRetentionInDays": {
@@ -187,6 +225,10 @@
         }
     },
     "variables": {
+        "instanceCount": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), parameters('instanceCount'), 1)]",
+        "availabilitySet": {
+            "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySetName'))]"
+        },
         "nicName": "[concat(parameters('vmName'), '-nic')]",
         "vnetId": {
             "new": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vmVirtualNetwork'))]",
@@ -389,10 +431,28 @@
             }
         },
         {
+            "type": "Microsoft.Compute/availabilitySets",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('availabilitySetName')]",
+            "location": "[parameters('location')]",
+            "condition": "[equals(parameters('availabilityOptions'), 'availabilitySet')]",
+            "sku": {
+                "name": "Aligned"
+            },
+            "properties": {
+                "PlatformUpdateDomainCount": "[parameters('updateDomains')]",
+                "PlatformFaultDomainCount": "[parameters('faultDomains')]"
+            }
+        },
+        {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2020-06-01",
-            "name": "[variables('nicName')]",
+            "name": "[concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
             "location": "[parameters('location')]",
+            "copy": {
+                "name": "nicLoop",
+                "count": "[variables('instanceCount')]"
+            },
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('vmVirtualNetwork'))]"
             ],
@@ -415,11 +475,15 @@
         {
             "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
-            "name": "[concat(variables('nicName'), '/Microsoft.Insights/service')]",
+            "name": "[concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights/service')]",
             "location": "[parameters('location')]",
             "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "copy": {
+                "name": "nicDiagnosticLoop",
+                "count": "[variables('instanceCount')]"
+            },
             "dependsOn": [
-                "[variables('nicName')]"
+                "nicloop"
             ],
             "properties": {
                 "storageAccountId": "[if(equals(parameters('diagnosticStorageResourceId'), ''), json('null'), parameters('diagnosticStorageResourceId'))]",
@@ -439,10 +503,14 @@
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2020-06-01",
-            "name": "[parameters('vmName')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
             "location": "[parameters('location')]",
+            "copy": {
+                "name": "virtualMachineLoop",
+                "count": "[variables('instanceCount')]"
+            },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+                "nicLoop"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -461,7 +529,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex())))]"
                         }
                     ]
                 },
@@ -472,7 +540,7 @@
                     "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]",
                     "customData": "[if(equals(parameters('customData'), ''), json('null'), base64(parameters('customData')))]"
                 },
-                "availabilitySet": "[if(equals(parameters('availabilitySetResourceId'), ''), json('null'), parameters('availabilitySetResourceId'))]",
+                "availabilitySet": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), variables('availabilitySet'), json('null'))]",
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
@@ -486,10 +554,14 @@
         {
             "apiVersion": "2020-06-01",
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('vmName'),'/setup-linux-dsc')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/setup-linux-dsc')]",
             "location": "[parameters('location')]",
+            "copy": {
+                "name": "dscLoop",
+                "count": "[variables('instanceCount')]"
+            },
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+                "monitoringAgentLoop"
             ],
             "properties": {
                 "publisher": "Microsoft.OSTCExtensions",
@@ -505,10 +577,14 @@
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "apiVersion": "2019-07-01",
-            "name": "[concat(parameters('vmName'), '/setup-linux-dsc-stig')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/setup-linux-dsc-stig')]",
             "location": "[parameters('location')]",
+            "copy": {
+                "name": "cseLoop",
+                "count": "[variables('instanceCount')]"
+            },
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines/extensions/', parameters('vmName'), 'setup-linux-dsc')]"
+                "dscLoop"
             ],
             "properties": {
                 "publisher": "Microsoft.Azure.Extensions",
@@ -531,11 +607,15 @@
         {
             "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
-            "name": "[concat(parameters('vmName'), '/Microsoft.Insights/service')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights/service')]",
             "location": "[parameters('location')]",
             "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "copy": {
+                "name": "virtualMachineDiagnosticLoop",
+                "count": "[variables('instanceCount')]"
+            },
             "dependsOn": [
-                "[parameters('vmName')]"
+                "virtualMachineLoop"
             ],
             "properties": {
                 "storageAccountId": "[if(equals(parameters('diagnosticStorageResourceId'), ''), json('null'), parameters('diagnosticStorageResourceId'))]",
@@ -554,12 +634,16 @@
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('vmName'), '/Microsoft.EnterpriseCloud.Monitoring')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.EnterpriseCloud.Monitoring')]",
             "apiVersion": "2015-06-15",
             "location": "[parameters('location')]",
             "condition": "[not(equals(parameters('logAnalyticsWorkspaceId'), ''))]",
+            "copy": {
+                "name": "monitoringAgentLoop",
+                "count": "[variables('instanceCount')]"
+            },
             "dependsOn": [
-                "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+                "virtualMachineDiagnosticLoop"
             ],
             "properties": {
                 "publisher": "Microsoft.EnterpriseCloud.Monitoring",

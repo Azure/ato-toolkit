@@ -4,7 +4,7 @@
     "parameters": {
         "vmName": {
             "type": "string",
-            "defaultValue": "simple-vm",
+            "defaultValue": "stig-vm",
             "metadata": {
                 "description": "Name of the virtual machine."
             }
@@ -41,7 +41,8 @@
             "defaultValue": "2019-Datacenter",
             "allowedValues": [
                 "2019-Datacenter",
-                "2016-Datacenter"
+                "2016-Datacenter",
+                "19h2-ent"
             ],
             "metadata": {
                 "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
@@ -132,11 +133,49 @@
                 "description": "(Optional) Application Security Group resource id."
             }
         },
-        "availabilitySetResourceId": {
+        "availabilityOptions": {
             "type": "string",
-            "defaultValue": "",
+            "defaultValue": "default",
+            "allowedValues": [
+                "default",
+                "availabilitySet"
+            ],
             "metadata": {
-                "description": "(Optional) Availability Set resource id."
+                "description": "(Optional) Availability options."
+            }
+        },
+        "availabilitySetName": {
+            "type": "string",
+            "defaultValue": "stig-vm-as",
+            "metadata": {
+                "description": "(Optional) Availability set name."
+            }
+        },
+        "instanceCount": {
+            "type": "int",
+            "defaultValue": 2,
+            "minValue": 1,
+            "maxValue": 5,
+            "metadata": {
+                "description": "(Optional) Instance count."
+            }
+        },
+        "faultDomains": {
+            "type": "int",
+            "defaultValue": 2,
+            "minValue": 1,
+            "maxValue": 3,
+            "metadata": {
+                "description": "(Optional) Fault domains."
+            }
+        },
+        "updateDomains": {
+            "type": "int",
+            "defaultValue": 3,
+            "minValue": 1,
+            "maxValue": 5,
+            "metadata": {
+                "description": "(Optional) Update domains."
             }
         },
         "logsRetentionInDays": {
@@ -171,6 +210,10 @@
         }
     },
     "variables": {
+        "instanceCount": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), parameters('instanceCount'), 1)]",
+        "availabilitySet": {
+            "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySetName'))]"
+        },
         "nicName": "[concat(parameters('vmName'), '-nic')]",
         "vnetId": {
             "new": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vmVirtualNetwork'))]",
@@ -196,7 +239,33 @@
         "wadperfcounters2": "<PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Read Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active read time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Write Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active write time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Transfers/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Reads/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk read operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Writes/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk write operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Read Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk read speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Write Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk write speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\LogicalDisk(_Total)\\% Free Space\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk free space (percentage)\" locale=\"en-us\"/></PerformanceCounterConfiguration></PerformanceCounters>",
         "wadcfgxstart": "[concat(variables('wadlogs'), variables('wadperfcounters1'), variables('wadperfcounters2'), '<Metrics resourceId=\"')]",
         "wadmetricsresourceid": "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
-        "wadcfgxend": "\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>"
+        "wadcfgxend": "\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>",
+        "images": {
+            "2019-Datacenter": {
+                "reference": {
+                    "publisher": "MicrosoftWindowsServer",
+                    "offer": "WindowsServer",
+                    "sku": "2019-Datacenter",
+                    "version": "latest"
+                }
+            },
+            "2016-Datacenter": {
+                "reference": {
+                    "publisher": "MicrosoftWindowsServer",
+                    "offer": "WindowsServer",
+                    "sku": "2016-Datacenter",
+                    "version": "latest"
+                }
+            },
+            "19h2-ent": {
+                "reference": {
+                    "publisher": "MicrosoftWindowsDesktop",
+                    "offer": "Windows-10",
+                    "sku": "19h2-ent",
+                    "version": "latest"
+                }
+            }
+        }
     },
     "resources": [
         {
@@ -236,10 +305,28 @@
             }
         },
         {
+            "type": "Microsoft.Compute/availabilitySets",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('availabilitySetName')]",
+            "location": "[parameters('location')]",
+            "condition": "[equals(parameters('availabilityOptions'), 'availabilitySet')]",
+            "sku": {
+                "name": "Aligned"
+            },
+            "properties": {
+                "PlatformUpdateDomainCount": "[parameters('updateDomains')]",
+                "PlatformFaultDomainCount": "[parameters('faultDomains')]"
+            }
+        },
+        {
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2020-06-01",
-            "name": "[variables('nicName')]",
+            "name": "[concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
             "location": "[parameters('location')]",
+            "copy": {
+                "name": "nicLoop",
+                "count": "[variables('instanceCount')]"
+            },
             "dependsOn": [
                 "[resourceId('Microsoft.Network/virtualNetworks', parameters('vmVirtualNetwork'))]"
             ],
@@ -262,11 +349,15 @@
         {
             "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
-            "name": "[concat(variables('nicName'), '/Microsoft.Insights/service')]",
+            "name": "[concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights/service')]",
             "location": "[parameters('location')]",
             "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "copy": {
+                "name": "nicDiagnosticLoop",
+                "count": "[variables('instanceCount')]"
+            },
             "dependsOn": [
-                "[variables('nicName')]"
+                "nicLoop"
             ],
             "properties": {
                 "storageAccountId": "[if(equals(parameters('diagnosticStorageResourceId'), ''), json('null'), parameters('diagnosticStorageResourceId'))]",
@@ -286,10 +377,14 @@
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2020-06-01",
-            "name": "[parameters('vmName')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
             "location": "[parameters('location')]",
+            "copy": {
+                "name": "virtualMachineLoop",
+                "count": "[variables('instanceCount')]"
+            },
             "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+                "nicLoop"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -301,12 +396,7 @@
                     "adminPassword": "[parameters('adminPassword')]"
                 },
                 "storageProfile": {
-                    "imageReference": {
-                        "publisher": "MicrosoftWindowsServer",
-                        "offer": "WindowsServer",
-                        "sku": "[parameters('osVersion')]",
-                        "version": "latest"
-                    },
+                    "imageReference": "[variables('images')[parameters('osVersion')].reference]",
                     "osDisk": {
                         "createOption": "FromImage",
                         "managedDisk": {
@@ -318,11 +408,11 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex())))]"
                         }
                     ]
                 },
-                "availabilitySet": "[if(equals(parameters('availabilitySetResourceId'), ''), json('null'), parameters('availabilitySetResourceId'))]",
+                "availabilitySet": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), variables('availabilitySet'), json('null'))]",
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
@@ -332,116 +422,20 @@
                 "licenseType": "[if(equals(parameters('enableHybridBenefitServerLicense'), true()), 'Windows_Server', json('null'))]"
             },
             "resources": [
-                {
-                    "name": "[concat(parameters('vmName'), '/Microsoft.Insights.VMDiagnosticsSettings')]",
-                    "type": "Microsoft.Compute/virtualMachines/extensions",
-                    "location": "[parameters('location')]",
-                    "apiVersion": "2020-06-01",
-                    "condition": "[not(equals(parameters('diagnosticStorageResourceId'), ''))]",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-                    ],
-                    "tags": {
-                        "displayName": "AzureDiagnostics"
-                    },
-                    "properties": {
-                        "publisher": "Microsoft.Azure.Diagnostics",
-                        "type": "IaaSDiagnostics",
-                        "typeHandlerVersion": "1.5",
-                        "autoUpgradeMinorVersion": true,
-                        "settings": {
-                            "xmlCfg": "[base64(concat(variables('wadcfgxstart'), variables('wadmetricsresourceid'), variables('wadcfgxend')))]",
-                            "storageAccount": "[variables('storageAccountName')]"
-                        },
-                        "protectedSettings": {
-                            "storageAccountName": "[variables('storageAccountName')]",
-                            "storageAccountKey": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', listkeys(variables('storageAccountResourceid'), '2019-06-01').keys[0].value)]",
-                            "storageAccountEndPoint": "[concat('https://', environment().suffixes.storage)]"
-                        }
-                    }
-                },
-                {
-                    "type": "extensions",
-                    "apiVersion": "2020-12-01",
-                    "name": "install-powershell-modules",
-                    "location": "[parameters('location')]",
-                    "condition": "[not(equals(parameters('_artifactsLocation'), ''))]",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-                    ],
-                    "properties": {
-                        "publisher": "Microsoft.Compute",
-                        "type": "CustomScriptExtension",
-                        "typeHandlerVersion": "1.10",
-                        "autoUpgradeMinorVersion": true,
-                        "settings": {
-                            "fileUris": [
-                                "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), variables('artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), variables('artifactsLocationSasToken'))]",
-                                "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), variables('artifactsLocationSasToken'))]"
-                            ],
-                            "timestamp": 123456788,
-                            "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'), ' -autoInstallDependencies ', parameters('autoInstallDependencies'))]"
-                        }
-                    }
-                },
-                {
-                    "type": "extensions",
-                    "apiVersion": "2020-12-01",
-                    "name": "[concat('setup-win-dsc-stig')]",
-                    "location": "[parameters('location')]",
-                    "condition": "[not(equals(parameters('_artifactsLocation'), ''))]",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
-                        "[resourceId('Microsoft.Compute/virtualMachines/extensions', parameters('vmName'), 'install-powershell-modules')]"
-                    ],
-                    "properties": {
-                        "publisher": "Microsoft.Powershell",
-                        "type": "DSC",
-                        "typeHandlerVersion": "2.77",
-                        "autoUpgradeMinorVersion": true,
-                        "settings": {
-                            "wmfVersion": "latest",
-                            "configuration": {
-                                "url": "[concat(parameters('_artifactsLocation'), 'WindowsServer.ps1.zip', variables('artifactsLocationSasToken'))]",
-                                "script": "WindowsServer.ps1",
-                                "function": "WindowsServer"
-                            }
-                        }
-                    }
-                },
-                {
-                    "type": "extensions",
-                    "name": "Microsoft.EnterpriseCloud.Monitoring",
-                    "apiVersion": "2015-06-15",
-                    "location": "[parameters('location')]",
-                    "condition": "[not(equals(parameters('logAnalyticsWorkspaceId'), ''))]",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
-                    ],
-                    "properties": {
-                        "publisher": "Microsoft.EnterpriseCloud.Monitoring",
-                        "type": "MicrosoftMonitoringAgent",
-                        "typeHandlerVersion": "1.0",
-                        "autoUpgradeMinorVersion": true,
-                        "settings": {
-                            "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'), '2015-03-20').customerId)]"
-                        },
-                        "protectedSettings": {
-                            "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), listkeys(parameters('logAnalyticsWorkspaceId'), '2015-03-20').primarySharedKey)]"
-                        }
-                    }
-                }
             ]
         },
         {
             "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
-            "name": "[concat(parameters('vmName'), '/Microsoft.Insights/service')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights/service')]",
             "location": "[parameters('location')]",
             "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "copy": {
+                "name": "virtualMachineDiagnosticLoop",
+                "count": "[variables('instanceCount')]"
+            },
             "dependsOn": [
-                "[parameters('vmName')]"
+                "virtualMachineLoop"
             ],
             "properties": {
                 "storageAccountId": "[if(equals(parameters('diagnosticStorageResourceId'), ''), json('null'), parameters('diagnosticStorageResourceId'))]",
@@ -456,6 +450,121 @@
                         }
                     }
                 ]
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2015-06-15",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.EnterpriseCloud.Monitoring')]",
+            "location": "[parameters('location')]",
+            "condition": "[not(equals(parameters('logAnalyticsWorkspaceId'), ''))]",
+            "copy": {
+                "name": "monitoringAgentLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "virtualMachineDiagnosticLoop"
+            ],
+            "properties": {
+                "publisher": "Microsoft.EnterpriseCloud.Monitoring",
+                "type": "MicrosoftMonitoringAgent",
+                "typeHandlerVersion": "1.0",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'), '2015-03-20').customerId)]"
+                },
+                "protectedSettings": {
+                    "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), listkeys(parameters('logAnalyticsWorkspaceId'), '2015-03-20').primarySharedKey)]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2020-06-01",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights.VMDiagnosticsSettings')]",
+            "location": "[parameters('location')]",
+            "condition": "[not(equals(parameters('diagnosticStorageResourceId'), ''))]",
+            "copy": {
+                "name": "iaasDiagnosticLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "monitoringAgentLoop"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Azure.Diagnostics",
+                "type": "IaaSDiagnostics",
+                "typeHandlerVersion": "1.5",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "xmlCfg": "[base64(concat(variables('wadcfgxstart'), variables('wadmetricsresourceid'), variables('wadcfgxend')))]",
+                    "storageAccount": "[variables('storageAccountName')]"
+                },
+                "protectedSettings": {
+                    "storageAccountName": "[variables('storageAccountName')]",
+                    "storageAccountKey": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', listkeys(variables('storageAccountResourceid'), '2019-06-01').keys[0].value)]",
+                    "storageAccountEndPoint": "[concat('https://', environment().suffixes.storage)]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2020-12-01",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/install-powershell-modules')]",
+            "location": "[parameters('location')]",
+            "condition": "[not(equals(parameters('_artifactsLocation'), ''))]",
+            "copy": {
+                "name": "cseLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "iaasDiagnosticLoop"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.10",
+                "autoUpgradeMinorVersion": true,
+                "protectedSettings": {
+                    "fileUris": [
+                        "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), variables('artifactsLocationSasToken'))]",
+                        "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), variables('artifactsLocationSasToken'))]",
+                        "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), variables('artifactsLocationSasToken'))]"
+                    ],
+                    "ignoreRelativePathForFileDownloads": true
+                },
+                "settings": {
+                    "timestamp": 123456788,
+                    "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'), ' -autoInstallDependencies ', parameters('autoInstallDependencies'))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2020-12-01",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/setup-win-dsc-stig')]",
+            "location": "[parameters('location')]",
+            "condition": "[not(equals(parameters('_artifactsLocation'), ''))]",
+            "copy": {
+                "name": "dscLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "cseLoop"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.77",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "wmfVersion": "latest",
+                    "configuration": {
+                        "url": "[concat(parameters('_artifactsLocation'), 'Windows.ps1.zip', variables('artifactsLocationSasToken'))]",
+                        "script": "Windows.ps1",
+                        "function": "Windows"
+                    }
+                }
             }
         },
         {

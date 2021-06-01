@@ -29,22 +29,83 @@
                         "constraints": {
                             "required": true,
                             "regex": "^[a-z0-9A-Z-]{3,15}$",
-                            "validationMessage": "Virtual machine Name must be between 3 and 15 characters long and contain letters, numbers and hyphens only."
+                            "validationMessage": "Virtual machine name must be between 3 and 15 characters long and contain letters, numbers and hyphens only."
                         }
                     },
                     {
-                        "name": "vmAvailabilitySet",
-                        "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Availability set",
-                        "resourceType": "Microsoft.Compute/availabilitySets",
-                        "toolTip": "Select existing Availability set to be configured for Virtual machine. Availability set must be present in the same resource group.",
-                        "options": {
-                            "filter": {
-                                "subscription": "onBasic",
-                                "location": "onBasic"
-                            }
+                        "name": "availabilityOptions",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "Availability options",
+                        "toolTip": "Azure offers a range of options for managing availability and resiliency for your applications. Architect your solution to use replicated VMs in Availability Sets to protect your apps and data from datacenter outages and maintenance events.",
+                        "defaultValue": "No infrastructure redundancy required",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "value": "default",
+                                    "label": "No infrastructure redundancy required"
+                                },
+                                {
+                                    "value": "availabilitySet",
+                                    "label": "Availability set"
+                                }
+                            ],
+                            "required": true
                         },
-                        "visible": false
+                        "visible": true
+                    },
+                    {
+                        "name": "availabilitySetName",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Availability set name",
+                        "toolTip": "Name of the Availability set.",
+                        "constraints": {
+                            "required": "[equals(steps('instance').availabilityOptions, 'availabilitySet')]",
+                            "regex": "^[a-z0-9A-Z-]{3,15}$",
+                            "validationMessage": "Availability set name must be between 3 and 15 characters long and contain letters, numbers and hyphens only."
+                        },
+                        "visible": "[equals(steps('instance').availabilityOptions, 'availabilitySet')]"
+                    },
+                    {
+                        "name": "instanceCount",
+                        "type": "Microsoft.Common.Slider",
+                        "min": 1,
+                        "max": 5,
+                        "label": "Instance count",
+                        "defaultValue": 2,
+                        "showStepMarkers": false,
+                        "toolTip": "Number of virtual machines in the availability set.",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": "[equals(steps('instance').availabilityOptions, 'availabilitySet')]"
+                    },
+                    {
+                        "name": "faultDomains",
+                        "type": "Microsoft.Common.Slider",
+                        "min": 1,
+                        "max": 3,
+                        "label": "Fault domains",
+                        "defaultValue": 2,
+                        "showStepMarkers": false,
+                        "toolTip": "Virtual machines in the same fault domain share a common power source and physical network switch.",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": "[equals(steps('instance').availabilityOptions, 'availabilitySet')]"
+                    },
+                    {
+                        "name": "updateDomains",
+                        "type": "Microsoft.Common.Slider",
+                        "min": 1,
+                        "max": 5,
+                        "label": "Update domains",
+                        "defaultValue": 3,
+                        "showStepMarkers": true,
+                        "toolTip": "Virtual machines in the same update domain will be restarted together during planned maintenance. Azure never restarts more than one update domain at a time.",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": "[equals(steps('instance').availabilityOptions, 'availabilitySet')]"
                     },
                     {
                         "name": "osVersion",
@@ -77,6 +138,10 @@
                                 {
                                     "value": "CentOS74",
                                     "label": "CentOS 7.4"
+                                },
+                                {
+                                    "value": "RHEL79",
+                                    "label": "Red Hat Enterprise Linux 7.9"
                                 },
                                 {
                                     "value": "RHEL78",
@@ -427,7 +492,11 @@
         "outputs": {
             "location": "[location()]",
             "vmName": "[steps('instance').vmName]",
-            "availabilitySetResourceId": "[steps('instance').vmAvailabilitySet.id]",
+            "availabilityOptions": "[steps('instance').availabilityOptions]",
+            "availabilitySetName": "[steps('instance').availabilitySetName]",
+            "instanceCount": "[steps('instance').instanceCount]",
+            "faultDomains": "[steps('instance').faultDomains]",
+            "updateDomains": "[steps('instance').updateDomains]",
             "osVersion": "[steps('instance').osVersion]",
             "vmSize": "[steps('instance').vmSize]",
             "adminUsername": "[steps('instance').adminUsername]",
