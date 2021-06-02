@@ -213,12 +213,10 @@
                         "type": "Microsoft.Common.CheckBox",
                         "label": "I confirm I have an eligible Windows 10 license with multi-tenant hosting rights.",
                         "constraints": {
-                            "required": false,
-                            "validationMessage": "http://go.microsoft.com/fwlink/?LinkId=2125807"
+                            "required": false
                         },
                         "visible": "[equals(steps('instance').osVersion, '19h2-evd')]" ,
                         "toolTip": "Review multi-tenant hosting rights for Windows 10 compliance."
-                        
                     }
                 ]
             },
@@ -339,7 +337,7 @@
                             "addressPrefixSize": "/16"
                         },
                         "constraints": {
-                            "minAddressPrefixSize": "/16"
+                            "minAddressPrefixSize": "/29"
                         },
                         "options": {
                             "hideExisting": false
@@ -352,9 +350,9 @@
                                     "addressPrefixSize": "/24"
                                 },
                                 "constraints": {
-                                    "minAddressPrefixSize": "/24",
-                                    "minAddressCount": 12,
-                                    "requireContiguousAddresses": true
+                                    "minAddressPrefixSize": "/29",
+                                    "minAddressCount": 6,
+                                    "requireContiguousAddresses": false
                                 }
                             }
                         },
