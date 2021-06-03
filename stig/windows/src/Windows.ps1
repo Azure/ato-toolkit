@@ -48,15 +48,15 @@ configuration Windows
 
     [scriptblock]$windowsSqlServer2016InstanceStig = {
 
-        if (Test-Path “HKLM:\Software\Microsoft\Microsoft SQL Server\Instance Names\SQL”)
+        if (Test-Path "HKLM:\Software\Microsoft\Microsoft SQL Server\Instance Names\SQL")
         {
             $hostname = [System.Net.Dns]::GetHostName()
 
             File AuditFolderCreate
             {
-                Type = 'Directory'
+                Type            = 'Directory'
                 DestinationPath = 'C:\Audits'
-               Ensure = "Present"
+                Ensure          = "Present"
             }
 
             SqlServer STIG_WindowsSqlServer2016Instance
