@@ -98,6 +98,9 @@
     .PARAMETER EnableHybridBenefitServerLicense
         Enable Azure Hybrid Benefit to use your on-premises Windows Server licenses and reduce cost.
 
+    .PARAMETER EnableMultisessionClientLicense
+        Windows10 Enterprise Multisession
+
     .PARAMETER AutoInstallDependencies
         Boolean value to indicate an online or offline environment.
 
@@ -300,6 +303,10 @@ Param
 
     [Parameter(Mandatory = $false, ParameterSetName = 'Default')]
     [switch]
+    $EnableMultisessionClientLicense,
+
+    [Parameter(Mandatory = $false, ParameterSetName = 'Default')]
+    [switch]
     $AutoInstallDependencies,
 
     [Parameter(Mandatory = $false, ParameterSetName = 'Default')]
@@ -430,6 +437,7 @@ if ($PSCmdlet.ParameterSetName -eq 'Default')
         {
             [void] $newAzResourceGroupDeploymentParams.Remove('AutoInstallDependencies')
             [void] $newAzResourceGroupDeploymentParams.Remove('EnableHybridBenefitServerLicense')
+            [void] $newAzResourceGroupDeploymentParams.Remove('EnableMultisessionClientLicense')
         }
 
         $jobInfo = New-AzResourceGroupDeployment @newAzResourceGroupDeploymentParams

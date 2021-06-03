@@ -367,7 +367,7 @@
                             "addressPrefixSize": "/16"
                         },
                         "constraints": {
-                            "minAddressPrefixSize": "/16"
+                            "minAddressPrefixSize": "/29"
                         },
                         "options": {
                             "hideExisting": false
@@ -380,9 +380,9 @@
                                     "addressPrefixSize": "/24"
                                 },
                                 "constraints": {
-                                    "minAddressPrefixSize": "/24",
-                                    "minAddressCount": 12,
-                                    "requireContiguousAddresses": true
+                                    "minAddressPrefixSize": "/29",
+                                    "minAddressCount": 6,
+                                    "requireContiguousAddresses": false
                                 }
                             }
                         },

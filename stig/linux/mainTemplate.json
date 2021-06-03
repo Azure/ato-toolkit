@@ -648,7 +648,7 @@
             "properties": {
                 "publisher": "Microsoft.EnterpriseCloud.Monitoring",
                 "type": "OmsAgentForLinux",
-                "typeHandlerVersion": "1.13",
+                "typeHandlerVersion": "1.12",
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'),'2015-03-20').customerId)]"

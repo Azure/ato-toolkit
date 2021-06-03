@@ -125,7 +125,11 @@
                                 },
                                 {
                                     "value": "19h2-ent",
-                                    "label": "Windows-10"
+                                    "label": "Windows-10-Enterprise"
+                                },
+                                {
+                                    "value": "19h2-evd",
+                                    "label": "Windows-10-Enterprise-Multisession"
                                 }
                             ],
                             "required": true
@@ -203,6 +207,16 @@
                         },
                         "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'))]",
                         "toolTip": "If you own Windows licenses with active Software Assurance (SA) or have an active Windows Server subscription, use Azure Hybrid Benefit to save compute cost."
+                    },
+                    {
+                        "name": "enableMultisession",
+                        "type": "Microsoft.Common.CheckBox",
+                        "label": "I confirm I have an eligible Windows 10 license with multi-tenant hosting rights.",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": "[equals(steps('instance').osVersion, '19h2-evd')]" ,
+                        "toolTip": "Review multi-tenant hosting rights for Windows 10 compliance."
                     }
                 ]
             },
@@ -323,7 +337,7 @@
                             "addressPrefixSize": "/16"
                         },
                         "constraints": {
-                            "minAddressPrefixSize": "/16"
+                            "minAddressPrefixSize": "/29"
                         },
                         "options": {
                             "hideExisting": false
@@ -336,9 +350,9 @@
                                     "addressPrefixSize": "/24"
                                 },
                                 "constraints": {
-                                    "minAddressPrefixSize": "/24",
-                                    "minAddressCount": 12,
-                                    "requireContiguousAddresses": true
+                                    "minAddressPrefixSize": "/29",
+                                    "minAddressCount": 6,
+                                    "requireContiguousAddresses": false
                                 }
                             }
                         },
@@ -415,6 +429,7 @@
             "adminUsername": "[steps('instance').adminUsername]",
             "adminPassword": "[steps('instance').adminCredentials.password]",
             "enableHybridBenefitServerLicense": "[steps('instance').enableHybridBenefit]",
+            "enableMultisessionClientLicense": "[steps('instance').enableMultisession]",
             "osDiskStorageType": "[steps('disk').osDiskStorageType]",
             "osDiskEncryptionSetResourceId": "[steps('disk').osDiskEncryptionSet.id]",
             "vmVirtualNetwork": "[steps('networking').vmVirtualNetwork.name]",

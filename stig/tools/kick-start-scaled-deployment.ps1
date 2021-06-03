@@ -50,9 +50,9 @@ param
     [string]
     $ContainerName = 'artifacts',
 
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $false)]
     [string]
-    $Environment,
+    $Environment = 'AzureUSGovernment',
 
     [Parameter(Mandatory = $true)]
     [ValidateScript({Test-Path -Path $_})]
