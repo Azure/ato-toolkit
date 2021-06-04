@@ -136,16 +136,8 @@
                                     "label": "SQLServer-2016-SP2-On-Server-2016"
                                 },
                                 {
-                                    "value": "SQL2016SP2-WS2016-BYOL",
-                                    "label": "SQLServer-2016-SP2-On-Server-2016-BYOL"
-                                },
-                                {
                                     "value": "SQL2016SP2-WS2019",
                                     "label": "SQLServer-2016-SP2-On-Server-2019"
-                                },
-                                {
-                                    "value": "SQL2016SP2-WS2019-BYOL",
-                                    "label": "SQLServer-2016-SP2-On-Server-2019-BYOL"
                                 }
 
                             ],
@@ -222,7 +214,7 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'), equals(steps('instance').osVersion, 'SQLServer-2016-SP2-On-Server-2016'), equals(steps('instance').osVersion, 'SQLServer-2016-SP2-On-Server-2016-BYOL'), equals(steps('instance').osVersion, 'SQLServer-2016-SP2-On-Server-2019'), equals(steps('instance').osVersion, 'SQLServer-2016-SP2-On-Server-2019-BYOL'))]",
+                        "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'), equals(steps('instance').osVersion, 'SQLServer-2016-SP2-On-Server-2016'), equals(steps('instance').osVersion, 'SQLServer-2016-SP2-On-Server-2019'))]",
                         "toolTip": "If you own Windows licenses with active Software Assurance (SA) or have an active Windows Server subscription, use Azure Hybrid Benefit to save compute cost."
                     },
                     {
