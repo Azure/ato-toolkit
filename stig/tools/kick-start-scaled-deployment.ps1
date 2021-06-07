@@ -21,6 +21,10 @@
     .PARAMETER DataFilePath
         ATO Scale deployment data file (.psd1)
 
+    .PARAMETER AdminPasswordOrKey
+        Specifies the deployed VM administrator password, should be passed as a secure string. If this parameter is not specified, then the
+        user is prompted for password (Interactive).
+
     .EXAMPLE
 
         $kickStartParams = @{
