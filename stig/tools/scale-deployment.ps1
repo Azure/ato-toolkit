@@ -1,3 +1,4 @@
+#Requires -Module @{ ModuleName = 'Az.Resources'; ModuleVersion = '3.5.0' }
 <#
     .SYNOPSIS
         This script enables scaled STIG VM deployment using ATO Tool Kit artifacts.
@@ -207,6 +208,11 @@ Param
     $AdminUserName,
 
     [Parameter(Mandatory = $false, ParameterSetName = 'Default')]
+    [ValidateSet(
+        "new",
+        "existing",
+        IgnoreCase = $false
+    )]
     [string]
     $VirtualNetworkNewOrExisting,
 
@@ -441,7 +447,8 @@ if ($PSCmdlet.ParameterSetName -eq 'Default')
         }
 
         $jobInfo = New-AzResourceGroupDeployment @newAzResourceGroupDeploymentParams
-        Write-Verbose -Message "JobId: $($jobInfo.Id); Name: $($jobInfo.Name); For more details use: Get-Job -Id $($jobInfo.Id)"
+        $jobVerboseMessage = 'JobId: {0}; Name: {1}; For more details use: Get-Job -Id {0}; SecondsBetweenJobs: {2}' -f $jobInfo.Id, $jobInfo.Name, $TimeInSecondsBetweenJobs
+        Write-Verbose -Message $jobVerboseMessage
         # sleep statement is required to provide sufficient time for pid deployment to succeed.
         Start-Sleep -Seconds $TimeInSecondsBetweenJobs
     }
@@ -449,8 +456,10 @@ if ($PSCmdlet.ParameterSetName -eq 'Default')
 else
 {
     # import PowerShell data file, structure should mimic .psd1 documented here:
+    Write-Verbose -Message "Importing deployment data file: $DataFilePath"
     $dataFileStructureLink = '_placeHolder_for_ato_markdown_link_'
     $deploymentDataFileImport = Import-PowerShellDataFile -Path $DataFilePath
+    Write-Verbose -Message "-- Total deployments to be created: $($($deploymentDataFileImport[$deploymentDataFileImport.Keys]).Count)"
 
     # if the hashtable keys are more than one, fail, since the structure is incorrect.
     if ($deploymentDataFileImport.Keys.Count -gt 1)
