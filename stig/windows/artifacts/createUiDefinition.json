@@ -425,7 +425,7 @@
                 ]
             },
             {
-                "name": "sqlserverSettings",
+                "name": "sqlServerSettings",
                 "label": "SQL Server Settings",
                 "bladeTitle": "SQL Server Settings",
                 "elements": [
@@ -433,34 +433,106 @@
                         "name": "textBlock0",
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
-                            "text": "Diagnostic settings"
+                            "text": "Security & Networking"
                         }
                     },
                     {
-                        "name": "diagnosticStorageAccount",
-                        "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Storage account",
-                        "resourceType": "Microsoft.Storage/storageAccounts",
-                        "toolTip": "Storage Account for Diagnostic Settings.",
+                        "name": "sqlConnectivitySettings",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "SQL connectivity",
+                        "defaultValue": "Private",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "value": "Private",
+                                    "label": "Private (within Virtual Network)"
+                                },
+                                {
+                                    "value": "Public",
+                                    "label": "Public (Internet)"
+                                },
+                                {
+                                    "value": "Local",
+                                    "label": "Local (inside VM only)"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "portNumber",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Port",
+                        "constraints": {
+                            "required": true,
+                            "regex": "^[1024-65535]{4,5}$",
+                            "validationMessage": "Please enter a port number between 1024 and 65535."
+                        },
+                        "visible": "[or(equals(steps('sqlserverSettings').sqlConnectivitySettings, 'Private'), equals(steps('sqlserverSettings').sqlConnectivitySettings, 'Public'))]"
+                    },
+                    {
+                        "name": "textBlock1",
+                        "type": "Microsoft.Common.TextBlock",
                         "options": {
-                            "filter": {
-                                "subscription": "onBasic",
-                                "location": "onBasic"
-                            }
+                            "text": "SQL Authentication"
                         }
                     },
                     {
-                        "name": "logAnalyticsWorkspace",
-                        "type": "Microsoft.Solutions.ResourceSelector",
-                        "label": "Log Analytics workspace",
-                        "resourceType": "Microsoft.OperationalInsights/workspaces",
-                        "toolTip": "Log Analytics workspace for Diagnostic Settings.",
+                        "name": "sqlAuthentication",
+                        "type": "Microsoft.Common.OptionsGroup",
+                        "label": "SQL Authentication",
+                        "defaultValue": "Disable",
+                        "toolTip": "Enable SQL Authentication for connecting to SQL Server.",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "label": "Disable",
+                                    "value": "Disable"
+                                },
+                                {
+                                    "label": "Enable",
+                                    "value": "Enable"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "adminUsername",
+                        "type": "Microsoft.Compute.UserNameTextBox",
+                        "label": "Username",
+                        "defaultValue": "equals(steps('instance').adminUsername)",
+                        "toolTip": "Enter the SQL Authentication login you will use to connect to SQL Server. The sysadmin role will be assigned to this login.",
+                        "constraints": {
+                            "required": true,
+                            "regex": "^[a-z0-9A-Z]{1,30}$",
+                            "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
+                        },
+                        "osPlatform": "Windows",
+                        "visible": "[equals(steps('sqlserverSettings').sqlAuthentication, 'Enable')]"
+                    },
+                    {
+                        "name": "adminCredentials",
+                        "type": "Microsoft.Compute.CredentialsCombo",
+                        "label": {
+                            "password": "Password",
+                            "confirmPassword": "Confirm password"
+                        },
+                        "toolTip": {
+                            "password": "Enter the password associated with the SQL Authentication login. The password for the SQL Authentication login is auto-filled with the admin user password you entered for the virtual machine."
+                        },
+                        "constraints": {
+                            "required": true,
+                            "customPasswordRegex": "^(?=.*[A-Z])(?=.*[.!@#$%^&*()-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
+                            "customValidationMessage": "Password must be at least 12 characters long, and contain upper case, lower case, number and symbol"
+                        },
                         "options": {
-                            "filter": {
-                                "subscription": "onBasic",
-                                "location": "onBasic"
-                            }
-                        }
+                            "hideConfirmation": false
+                        },
+                        "osPlatform": "Windows",
+                        "visible": "[equals(steps('sqlserverSettings').sqlAuthentication, 'Enable')]"
                     }
                 ]
             }
