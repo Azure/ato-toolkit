@@ -565,8 +565,7 @@
                         "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), variables('artifactsLocationSasToken'))]",
                         "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), variables('artifactsLocationSasToken'))]"
                     ],
-                    "ignoreRelativePathForFileDownloads": true,
-                    "random": true
+                    "ignoreRelativePathForFileDownloads": true
                 },
                 "settings": {
                     "timestamp": 123456788,
