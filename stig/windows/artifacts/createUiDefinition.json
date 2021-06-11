@@ -427,7 +427,7 @@
             {
                 "name": "sqlServerSettings",
                 "label": "SQL Server Settings",
-                "bladeTitle": "SQL Server Settings",
+                "bladeTitle": "SQL Server SettingstEST",
                 "elements": [
                     {
                         "name": "textBlock0",
