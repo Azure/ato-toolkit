@@ -423,6 +423,46 @@
                         }
                     }
                 ]
+            },
+            {
+                "name": "sqlserverSettings",
+                "label": "SQL Server Settings",
+                "bladeTitle": "SQL Server Settings",
+                "elements": [
+                    {
+                        "name": "textBlock0",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
+                            "text": "Diagnostic settings"
+                        }
+                    },
+                    {
+                        "name": "diagnosticStorageAccount",
+                        "type": "Microsoft.Solutions.ResourceSelector",
+                        "label": "Storage account",
+                        "resourceType": "Microsoft.Storage/storageAccounts",
+                        "toolTip": "Storage Account for Diagnostic Settings.",
+                        "options": {
+                            "filter": {
+                                "subscription": "onBasic",
+                                "location": "onBasic"
+                            }
+                        }
+                    },
+                    {
+                        "name": "logAnalyticsWorkspace",
+                        "type": "Microsoft.Solutions.ResourceSelector",
+                        "label": "Log Analytics workspace",
+                        "resourceType": "Microsoft.OperationalInsights/workspaces",
+                        "toolTip": "Log Analytics workspace for Diagnostic Settings.",
+                        "options": {
+                            "filter": {
+                                "subscription": "onBasic",
+                                "location": "onBasic"
+                            }
+                        }
+                    }
+                ]
             }
         ],
         "outputs": {
