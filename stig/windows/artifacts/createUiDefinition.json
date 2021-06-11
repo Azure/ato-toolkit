@@ -504,7 +504,7 @@
                         "name": "adminUsername",
                         "type": "Microsoft.Compute.UserNameTextBox",
                         "label": "Username",
-                        "defaultValue": "if(not(equals(steps('instance').adminUsername, " "), equals(steps('instance').adminUsername)",
+                        "defaultValue": "",
                         "toolTip": "Enter the SQL Authentication login you will use to connect to SQL Server. The sysadmin role will be assigned to this login.",
                         "constraints": {
                             "required": true,
