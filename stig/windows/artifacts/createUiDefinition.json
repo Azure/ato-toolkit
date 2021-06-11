@@ -464,12 +464,13 @@
                         "name": "portNumber",
                         "type": "Microsoft.Common.TextBox",
                         "label": "Port",
+                        "defaultValue": "1433",
                         "constraints": {
                             "required": true,
                             "regex": "^[1024-65535]{4,5}$",
                             "validationMessage": "Please enter a port number between 1024 and 65535."
                         },
-                        "visible": "[or(equals(steps('sqlserverSettings').sqlConnectivitySettings, 'Private'), equals(steps('sqlserverSettings').sqlConnectivitySettings, 'Public'))]"
+                        "visible": "[not(equals(steps('sqlServerSettings').sqlConnectivitySettings, 'Local'))]"
                     },
                     {
                         "name": "textBlock1",
@@ -503,7 +504,7 @@
                         "name": "adminUsername",
                         "type": "Microsoft.Compute.UserNameTextBox",
                         "label": "Username",
-                        "defaultValue": "equals(steps('instance').adminUsername)",
+                        "defaultValue": "if(not(equals(steps('instance').adminUsername, " "), equals(steps('instance').adminUsername)",
                         "toolTip": "Enter the SQL Authentication login you will use to connect to SQL Server. The sysadmin role will be assigned to this login.",
                         "constraints": {
                             "required": true,
@@ -511,7 +512,7 @@
                             "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
                         },
                         "osPlatform": "Windows",
-                        "visible": "[equals(steps('sqlserverSettings').sqlAuthentication, 'Enable')]"
+                        "visible": "[equals(steps('sqlServerSettings').sqlAuthentication, 'Enable')]"
                     },
                     {
                         "name": "adminCredentials",
@@ -532,7 +533,7 @@
                             "hideConfirmation": false
                         },
                         "osPlatform": "Windows",
-                        "visible": "[equals(steps('sqlserverSettings').sqlAuthentication, 'Enable')]"
+                        "visible": "[equals(steps('sqlServerSettings').sqlAuthentication, 'Enable')]"
                     }
                 ]
             }
