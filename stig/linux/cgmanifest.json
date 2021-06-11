@@ -1,0 +1,550 @@
+{
+    "Registrations": [
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "auditd",
+                    "Version": "1:2.8.2-1ubuntu1.1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "libauparse0",
+                    "Version": "1:2.8.2-1ubuntu1.1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "audispd-plugins",
+                    "Version": "1:2.8.2-1ubuntu1.1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "fonts-lato",
+                    "Version": "2.0-2",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "javascript-common",
+                    "Version": "11",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "libjs-jquery",
+                    "Version": "3.2.1-1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "libltdl7",
+                    "Version": "2.4.6-2",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "libprelude23",
+                    "Version": "4.1.0-4",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "libruby2.5",
+                    "Version": "2.5.1-1ubuntu1.8",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "prelude-utils",
+                    "Version": "4.1.0-4",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "rake",
+                    "Version": "12.3.1-1ubuntu0.1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "ruby",
+                    "Version": "1:2.5.1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "ruby-did-you-mean",
+                    "Version": "1.2.0-2",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "ruby-minitest",
+                    "Version": "5.10.3-1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "ruby-net-telnet",
+                    "Version": "0.1.1-2",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "ruby-power-assert",
+                    "Version": "0.1.1-2",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "ruby-test-unit",
+                    "Version": "3.2.5-1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "ruby2.5",
+                    "Version": "2.5.1-1ubuntu1.8",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "rubygems-integration",
+                    "Version": "1.11",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "unzip",
+                    "Version": "6.0-21ubuntu1.1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "zip",
+                    "Version": "3.0-11build1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "libpam-pwquality",
+                    "Version": "1.4.0-2",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "cracklib-runtime",
+                    "Version": "2.9.2-5build1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "libcrack2",
+                    "Version": "2.9.2-5build1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "libpwquality-common",
+                    "Version": "1.4.0-2",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "libpwquality1",
+                    "Version": "1.4.0-2",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "wamerican",
+                    "Version": "2017.08.24-1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "vlock",
+                    "Version": "2.2.2-8",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "libpam-pkcs11",
+                    "Version": "0.6.9-2build2",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "libpcsclite1",
+                    "Version": "1.8.23-1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "opensc-pkcs11",
+                    "Version": "0.17.0-3",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "libpam-apparmor",
+                    "Version": "2.12-4ubuntu5.1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "aide",
+                    "Version": "0.16-3",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "aide-common",
+                    "Version": "0.16-3",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "bsd-mailx",
+                    "Version": "8.1.2-0.20160123cvs-4",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "liblockfile-bin",
+                    "Version": "1.14-1.1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "liblockfile1",
+                    "Version": "1.14-1.1",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "postfix",
+                    "Version": "3.3.0-1ubuntu0.3",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        },
+        {
+            "Component": {
+                "Type": "linux",
+                "linux": {
+                    "Name": "ssl-cert",
+                    "Version": "1.0.39",
+                    "Distribution": "Ubuntu",
+                    "Release": "18.04",
+                    "Pool-URL": "http://archive.ubuntu.com/ubuntu",
+                    "Key-URL": "http://archive.ubuntu.com/ubuntu/project/ubuntu-archive-keyring.gpg"
+                }
+            },
+            "DevelopmentDependency": false
+        }
+    ]
+}

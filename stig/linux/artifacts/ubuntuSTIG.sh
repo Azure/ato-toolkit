@@ -1,5 +1,3 @@
-set -e
-
 # only run once during deployment
 if [ -f ./azAutomationComplete ]; then
     echo "STIG Automation completion detected, exiting..."
@@ -9,6 +7,8 @@ fi
 # apt-get update to assist nxPackage dsc automation
 echo "Executing apt-get update..."
 apt-get update -q > ./aptgetupdateresults.log
+
+set -e
 
 # dsc deployment automation
 echo "Move (OS Specific) .mof to configuration store as Pending.mof..."

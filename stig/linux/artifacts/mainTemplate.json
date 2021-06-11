@@ -56,6 +56,7 @@
                 "CentOS76",
                 "CentOS75",
                 "CentOS74",
+                "RHEL84",
                 "RHEL83",
                 "RHEL82",
                 "RHEL81",
@@ -245,10 +246,13 @@
                 "id": "[parameters('applicationSecurityGroupResourceId')]"
             }
         ],
-        "rhel8Versions": "[createArray('RHEL80', 'RHEL81', 'RHEL82', 'RHEL83')]",
-        "defaultFileUri": [
-            "[concat(parameters('_artifactsLocation'), variables('images')[parameters('osVersion')].stigFileName, variables('artifactsLocationSasToken'))]",
-            "[concat(parameters('_artifactsLocation'), 'mof/', parameters('osVersion'), '.mof', variables('artifactsLocationSasToken'))]"
+        "rhel8Versions": "[createArray('RHEL80', 'RHEL81', 'RHEL82', 'RHEL83', 'RHEL84')]",
+        "linuxBashUri": "[concat(parameters('_artifactsLocation'), variables('images')[parameters('osVersion')].stigFileName, variables('artifactsLocationSasToken'))]",
+        "rhel8FileUri": "[concat(parameters('_artifactsLocation'), 'config/', 'rhel8STIG-ansible.zip', variables('artifactsLocationSasToken'))]",
+        "mofDscFileUri": "[concat(parameters('_artifactsLocation'), 'config/', parameters('osVersion'), '.mof', variables('artifactsLocationSasToken'))]",
+        "scriptExtentionUri": [
+            "[variables('linuxBashUri')]",
+            "[if(contains(variables('rhel8Versions'), parameters('osVersion')), variables('rhel8FileUri'), variables('mofDscFileUri'))]"
         ],
         "images": {
             "CentOS79": {
@@ -305,6 +309,15 @@
                 },
                 "stigFileName": "rhel7STIG.sh"
             },
+            "RHEL84": {
+                "reference": {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "8_4",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel8STIG.sh"
+            },
             "RHEL83": {
                 "reference": {
                     "publisher": "RedHat",
@@ -337,7 +350,7 @@
                     "publisher": "RedHat",
                     "offer": "RHEL",
                     "sku": "8-LVM",
-                    "version": "latest"
+                    "version": "8.0.20210422" // the "8" sku is no longer updated (last updated 2019), instead the LVM 8.0 images is used
                 },
                 "stigFileName": "rhel8STIG.sh"
             },
@@ -599,7 +612,7 @@
         {
             "apiVersion": "2020-06-01",
             "type": "Microsoft.Compute/virtualMachines/extensions",
-            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/setup-linux-dsc')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/install-linux-dsc')]",
             "location": "[parameters('location')]",
             "condition": "[not(contains(variables('rhel8Versions'), parameters('osVersion')))]",
             "copy": {
@@ -616,14 +629,14 @@
                 "autoUpgradeMinorVersion": "true",
                 "settings": {
                     "Mode": "Push",
-                    "FileUri": "[concat(parameters('_artifactsLocation'), 'mof/localhost.mof', variables('artifactsLocationSasToken'))]"
+                    "FileUri": "[concat(parameters('_artifactsLocation'), 'config/localhost.mof', variables('artifactsLocationSasToken'))]"
                 }
             }
         },
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "apiVersion": "2019-07-01",
-            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/setup-linux-dsc-stig')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/stig-automation-linux-cse')]",
             "location": "[parameters('location')]",
             "copy": {
                 "name": "cseLoop",
@@ -642,7 +655,7 @@
                     "timestamp": 123456789
                 },
                 "protectedSettings": {
-                    "fileUris": "[if(contains(variables('rhel8Versions'), parameters('osVersion')), createArray(first(variables('defaultFileUri'))), variables('defaultFileUri'))]",
+                    "fileUris": "[variables('scriptExtentionUri')]",
                     "commandToExecute": "[concat('sh ', variables('images')[parameters('osVersion')].stigFileName, ' ', parameters('adminUsername'))]"
                 }
             }
@@ -691,7 +704,7 @@
             "properties": {
                 "publisher": "Microsoft.EnterpriseCloud.Monitoring",
                 "type": "OmsAgentForLinux",
-                "typeHandlerVersion": "1.13",
+                "typeHandlerVersion": "1.12",
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'),'2015-03-20').customerId)]"

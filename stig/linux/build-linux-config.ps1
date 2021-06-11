@@ -128,19 +128,20 @@ configuration LinuxBaseLine
     }
 }
 
+# defining configuration storage path
+$mofStorePath = Join-Path -Path $PSScriptRoot -ChildPath 'artifacts/config'
+
 # configuration parameter splat
 $configurationParams = @{
     ConfigurationData = $configurationData
-    OutputPath        = Join-Path -Path $PSScriptRoot -ChildPath "artifacts/mof"
+    OutputPath        = $mofStorePath
 }
 
 # compile all mofs based on configuration data defined above
-LinuxBaseLine @configurationParams
+$mofs = LinuxBaseLine @configurationParams
 
 # remove personal information from compiled mofs
-$mofStorePath = Join-Path -Path $PSScriptRoot -ChildPath 'artifacts/mof'
-$mofs = Get-ChildItem -Path $mofStorePath | Select-Object -ExpandProperty FullName
-$mofs | ForEach-Object -Process {(Get-Content -Path $_ -Raw) -creplace "$env:USERNAME|$env:COMPUTERNAME", 'Microsoft' | Set-Content -Path $_ -Force}
+$mofs.FullName | ForEach-Object -Process {(Get-Content -Path $_ -Raw) -creplace "$env:USERNAME|$env:COMPUTERNAME", 'Microsoft' | Set-Content -Path $_ -Force}
 foreach ($mof in $mofs)
 {
     try
