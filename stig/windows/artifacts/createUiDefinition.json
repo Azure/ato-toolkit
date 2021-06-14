@@ -882,7 +882,8 @@
                                 "subscription": "onBasic",
                                 "location": "onBasic"
                             }
-                        }
+                        },
+                        "visible": "[equals(steps('sqlServerSettings').automatedBackup, 'Enable')]"
                     },
                     {
                         "name": "encryptionBackup",
