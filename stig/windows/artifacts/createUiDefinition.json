@@ -506,7 +506,7 @@
                         "defaultValue": "",
                         "toolTip": "Enter the SQL Authentication login you will use to connect to SQL Server. The sysadmin role will be assigned to this login.",
                         "constraints": {
-                            "required": true,
+                            "required": false,
                             "regex": "^[a-z0-9A-Z]{1,30}$",
                             "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
                         },
@@ -524,7 +524,7 @@
                             "password": "Enter the password associated with the SQL Authentication login. The password for the SQL Authentication login is auto-filled with the admin user password you entered for the virtual machine."
                         },
                         "constraints": {
-                            "required": true,
+                            "required": false,
                             "customPasswordRegex": "^(?=.*[A-Z])(?=.*[.!@#$%^&*()-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
                             "customValidationMessage": "Password must be at least 12 characters long, and contain upper case, lower case, number and symbol"
                         },
@@ -533,6 +533,79 @@
                         },
                         "osPlatform": "Windows",
                         "visible": "[equals(steps('sqlServerSettings').sqlAuthentication, 'Enable')]"
+                    },
+                    {
+                        "name": "keyVaultIntegration",
+                        "type": "Microsoft.Common.OptionsGroup",
+                        "label": "Azure Key Vault integration",
+                        "defaultValue": "Disable",
+                        "toolTip": "Configure your virtual machine to be able to connect to the Azure Key Vault service.",
+                        "constraints": {
+                            "allowedValues": [
+                                {
+                                    "label": "Disable",
+                                    "value": "Disable"
+                                },
+                                {
+                                    "label": "Enable",
+                                    "value": "Enable"
+                                }
+                            ],
+                            "required": true
+                        },
+                        "visible": true
+                    },
+                    {
+                        "name": "kvUrl",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Key Vault URL",
+                        "toolTip": "Key Vault URL",
+                        "defaultValue": "",
+                        "constraints": {
+                            "required": false,
+                            "regex": "^[1024-65535]{4,5}$",
+                            "validationMessage": "Please enter a port number between 1024 and 65535."
+                        },
+                        "visible": "[not(equals(steps('sqlServerSettings').keyVaultIntegration, 'Enable'))]"
+                    },
+                    {
+                        "name": "kvPrincipalName",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Principal name",
+                        "toolTip": "Enter the client id of the application registered with Microsoft Azure Active Directory that needs access to the Azure Key Vault.",
+                        "defaultValue": "",
+                        "constraints": {
+                            "required": false,
+                            "regex": "^[1024-65535]{4,5}$",
+                            "validationMessage": "Please enter a port number between 1024 and 65535."
+                        },
+                        "visible": "[not(equals(steps('sqlServerSettings').keyVaultIntegration, 'Enable'))]"
+                    },
+                    {
+                        "name": "kvUrl",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Key Vault URL",
+                        "toolTip": "Key Vault URL",
+                        "defaultValue": "",
+                        "constraints": {
+                            "required": false,
+                            "regex": "^[1024-65535]{4,5}$",
+                            "validationMessage": "Please enter a port number between 1024 and 65535."
+                        },
+                        "visible": "[not(equals(steps('sqlServerSettings').keyVaultIntegration, 'Enable'))]"
+                    },
+                    {
+                        "name": "kvUrl",
+                        "type": "Microsoft.Common.TextBox",
+                        "label": "Key Vault URL",
+                        "toolTip": "Key Vault URL",
+                        "defaultValue": "",
+                        "constraints": {
+                            "required": false,
+                            "regex": "^[1024-65535]{4,5}$",
+                            "validationMessage": "Please enter a port number between 1024 and 65535."
+                        },
+                        "visible": "[not(equals(steps('sqlServerSettings').keyVaultIntegration, 'Enable'))]"
                     }
                 ]
             }
