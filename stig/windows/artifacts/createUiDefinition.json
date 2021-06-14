@@ -564,10 +564,9 @@
                         "defaultValue": "",
                         "constraints": {
                             "required": true,
-                            "regex": "",
                             "validationMessage": "The Key Vault URL must start with http or https"
                         },
-                        "visible": "[equals(steps('sqlServerSettings').keyVaultIntegration, 'Enable')]"
+                        "visible": "[not(equals(steps('sqlServerSettings').keyVaultIntegration, 'Disable'))]"
                     },
                     {
                         "name": "kvPrincipalName",
