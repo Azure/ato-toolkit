@@ -402,7 +402,6 @@
                 "Private",
                 "Public",
                 "Local"
-
             ],
             "metadata": {
                 "description": "(Optional) Set a backup hour during which all the SQL backup will start."
