@@ -420,6 +420,18 @@
                 "description": "Sql connectivity port "
             }
         },
+        "sqlAuthenticationLogin": {
+            "type": "string",
+            "metadata": {
+                "description": "Username for the Sql login."
+            }
+        },
+        "sqlAuthenticationPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Password for the Sql login."
+            }
+        },
         "sqlAutobackupStorageAccountName": {
             "type": "string",
             "defaultValue": "",

@@ -501,7 +501,7 @@
                         "visible": true
                     },
                     {
-                        "name": "adminUsername",
+                        "name": "sqlAuthenticationLogin",
                         "type": "Microsoft.Compute.UserNameTextBox",
                         "label": "Username",
                         "defaultValue": "",
@@ -515,7 +515,7 @@
                         "visible": "[equals(steps('sqlServerSettings').sqlAuthentication, 'Enable')]"
                     },
                     {
-                        "name": "adminCredentials",
+                        "name": "sqlAuthenticationPassword",
                         "type": "Microsoft.Compute.CredentialsCombo",
                         "label": {
                             "password": "Password",
@@ -1181,6 +1181,8 @@
             "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]",
             "sqlConnectivitySettings": "[steps('sqlServerSettings').sqlConnectivitySettings]",
             "portNumber": "[steps('sqlServerSettings').portNumber]",
+            "sqlAuthenticationLogin": "[steps('sqlServerSettings').sqlAuthenticationLogin]",
+            "sqlAuthenticationPasswordr": "[steps('sqlServerSettings').sqlAuthenticationPassword.password]",
             "enableHybridBenefitSqlLicense": "[steps('sqlServerSettings').enableHybridBenefitSqlLicense]",
             "automatedPatching": "[steps('sqlServerSettings').automatedPatching]",
             "maintenanceScheduleDay": "[steps('sqlServerSettings').maintenanceScheduleDay]",
