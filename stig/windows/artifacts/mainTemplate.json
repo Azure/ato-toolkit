@@ -804,10 +804,17 @@
             }
         },
         {
-            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/sql-iaas')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
             "type": "Microsoft.SqlVirtualMachine/SqlVirtualMachines",
             "apiVersion": "2017-03-01-preview",
             "location": "[parameters('location')]",
+            "copy": {
+                "name": "dscLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "cseLoop"
+            ],
             "properties": {
                 "virtualMachineResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
                 "sqlManagement": "Full",
@@ -864,14 +871,7 @@
                         "IsRServicesEnabled": "[parameters('rServicesEnabled')]"
                     }
                 }
-            },
-            "copy": {
-                "name": "virtualMachineLoop",
-                "count": "[variables('instanceCount')]"
-            },
-            "dependsOn": [
-                "nicLoop"
-            ]
+            }
         }
     ],
     "outputs": {
