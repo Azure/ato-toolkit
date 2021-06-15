@@ -422,12 +422,14 @@
         },
         "sqlAuthenticationLogin": {
             "type": "string",
+            "defaultValue": "",
             "metadata": {
                 "description": "Username for the Sql login."
             }
         },
         "sqlAuthenticationPassword": {
             "type": "securestring",
+            "defaultValue": "",
             "metadata": {
                 "description": "Password for the Sql login."
             }
