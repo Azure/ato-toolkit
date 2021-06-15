@@ -422,7 +422,7 @@
         },
         "sqlAuthenticationLogin": {
             "type": "string",
-            "defaultValue": "eric",
+            "defaultValue": "",
             "metadata": {
                 "description": "Username for the Sql login."
             }
