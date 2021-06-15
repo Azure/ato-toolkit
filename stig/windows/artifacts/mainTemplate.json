@@ -471,7 +471,7 @@
             }
         },
         "kvAdminSecret":{
-            "type": "securestring",
+            "type": "string",
             "defaultValue": "",
             "metadata": {
                 "description": "(Optional) Key Vault secret"
