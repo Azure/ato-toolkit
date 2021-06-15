@@ -437,7 +437,7 @@
             "metadata": {
                 "description": "(Optional) Storage account for sql resource id."
             }
-        },
+        }
     },
     "variables": {
         "instanceCount": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), parameters('instanceCount'), 1)]",
