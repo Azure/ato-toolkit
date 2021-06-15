@@ -394,6 +394,19 @@
             "metadata": {
                 "description": "(Optional) Log backup frequency (minutes)"
             }
+        },
+        "sqlConnectivityType":{
+            "type": "string",
+            "defaultValue": "Private",
+            "allowedValues": [
+                "Private",
+                "Public",
+                "Local"
+
+            ],
+            "metadata": {
+                "description": "(Optional) Set a backup hour during which all the SQL backup will start."
+            }
         }
     },
     "variables": {
