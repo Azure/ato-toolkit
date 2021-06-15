@@ -826,7 +826,7 @@
                     "MaintenanceWindowDuration": "[parameters('patchingDuration')]"
                 },
                 "AutoBackupSettings": {
-                    "Enable": "[(parameters('automatedBackup')]",
+                    "Enable": "[parameters('automatedBackup')]",
                     "RetentionPeriod": "[parameters('retentionPeriod')]",
                     "EnableEncryption": "[parameters('encryptionBackup')]",
                     "BackupSystemDbs": "[parameters('systemDatabaseBackup')]",
@@ -839,7 +839,7 @@
                     "StorageAccessKey": "[first(listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('sqlAutobackupStorageAccountName')), '2019-04-01').keys).value]"
                 },
                 "KeyVaultCredentialSettings": {
-                    "Enable": "[(parameters('keyVaultIntegration')]",
+                    "Enable": "[parameters('keyVaultIntegration')]",
                     "CredentialName": "[parameters('kvCredentialName')]",
                     "AzureKeyVaultUrl": "[parameters('kvUrl')]",
                     "ServicePrincipalName": "[parameters('kvPrincipalName')]",
