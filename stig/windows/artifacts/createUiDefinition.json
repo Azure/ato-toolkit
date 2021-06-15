@@ -660,7 +660,7 @@
                                     "value": "Enable"
                                 }
                             ],
-                            "required": true
+                            "required": false
                         },
                         "visible": true
                     },
