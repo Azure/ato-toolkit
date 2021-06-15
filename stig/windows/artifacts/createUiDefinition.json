@@ -927,7 +927,7 @@
                         "visible": "[equals(steps('sqlServerSettings').encryptionBackup, 'Enable')]"
                     },
                     {
-                        "name": "sytemDatabaseBackup",
+                        "name": "systemDatabaseBackup",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Backup system databases",
                         "toolTip": "Take full backups of Master, Model, and MSDB",
@@ -1178,7 +1178,27 @@
             "subnetName": "[steps('networking').vmVirtualNetwork.subnets.subnet1.name]",
             "applicationSecurityGroupResourceId": "[steps('networking').vmApplicationSecurityGroup.id]",
             "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
-            "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]"
+            "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]",
+            "enableHybridBenefitSqlLicense": "[steps('sqlServerSettings').enableHybridBenefitSqlLicense]",
+            "automatedPatching": "[steps('sqlServerSettings').automatedPatching]",
+            "maintenanceScheduleDay": "[steps('sqlServerSettings').maintenanceScheduleDay]",
+            "maintenanceScheduleHour": "[steps('sqlServerSettings').maintenanceScheduleHour]",
+            "patchingDuration": "[steps('sqlServerSettings').patchingDuration]",
+            "automatedBackup": "[steps('sqlServerSettings').automatedBackup]",
+            "retentionPeriod": "[steps('sqlServerSettings').retentionPeriod]",
+            "encryptionBackup": "[steps('sqlServerSettings').encryptionBackup]",
+            "systemDatabaseBackup": "[steps('sqlServerSettings').systemDatabaseBackup]",
+            "scheduleBackup": "[steps('sqlServerSettings').scheduleBackup]",
+            "scheduleFrequencyBackup": "[steps('sqlServerSettings').scheduleFrequencyBackup]",
+            "startTimeBackup": "[steps('sqlServerSettings').startTimeBackup]",
+            "backupTimeWindow": "[steps('sqlServerSettings').backupTimeWindow]",
+            "logBackupFrequency": "[steps('sqlServerSettings').logBackupFrequency]",
+            "sqlAkvCredentialName": "[steps('sqlServerSettings').sqlAkvCredentialName]",
+            "sqlAkvUrl": "[steps('sqlServerSettings').sqlAkvUrl]",
+            "sqlAkvPrincipalName": "[steps('sqlServerSettings').sqlAkvPrincipalName",
+            "sqlAkvPrincipalSecret": "[steps('sqlServerSettings').sqlAkvPrincipalSecret]",
+            "sqlStorageDisksConfigurationType": "[steps('sqlServerSettings').sqlStorageDisksConfigurationType]",
+            "rServices":"[steps('sqlServerSettings').rServices]"
         }
     }
 }

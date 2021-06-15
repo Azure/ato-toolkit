@@ -217,7 +217,184 @@
             "metadata": {
                 "description": "Windows10 Enterprise Multisession"
             }
-        }
+        },
+        "enableHybridBenefitSqlLicense": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "(Optional) Enable Azure Hybrid Benefit to use your on-premises Windows SQL Server licenses and reduce cost. See https://docs.microsoft.com/en-us/azure/virtual-machines/windows/hybrid-use-benefit-licensing for more information."
+            }
+        },
+        "automatedPatching": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "(Optional) Set a patching window during which all Windows and SQL patches will be applied."
+            }
+        },
+        "maintenanceScheduleDay": {
+            "type": "string",
+            "defaultValue": "sunday",
+            "allowedValues": [
+                "daily",
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday",
+                "saturday",
+                "sunday"
+            ],
+            "metadata": {
+                "description": "(Optional) Set a patching day during which all Windows and SQL patches will be applied."
+            }
+        },
+        "maintenanceScheduleHour": {
+            "type": "string",
+            "defaultValue": "02:00",
+            "allowedValues": [
+                "00:00",
+                "01:00",
+                "02:00",
+                "03:00",
+                "04:00",
+                "05:00",
+                "06:00",
+                "07:00",
+                "08:00",
+                "09:00",
+                "10:00",
+                "11:00",
+                "12:00",
+                "13:00",
+                "14:00",
+                "15:00",
+                "16:00",
+                "17:00",
+                "18:00",
+                "19:00",
+                "20:00",
+                "21:00",
+                "22:00",
+                "23:00"
+            ],
+            "metadata": {
+                "description": "(Optional) Set a patching hour during which all Windows and SQL patches will be applied."
+            }
+        },
+        "patchingDuration":{
+            "type": "int",
+            "defaultValue": 60,
+            "minValue":30,
+            "maxValue": 180,
+            "metadata": {
+                "description": "(Optional) Set a patching duration which all Windows and SQL patches will be applied."
+            }
+        },
+        "automatedBackup": {
+            "type": "string",
+            "defaultValue": "Disable",
+            "allowedValues": [
+                "Disable",
+                "Enable"
+            ],
+            "metadata": {
+                "description": "(Optional) Enable an automatic backup of SQL."
+            }
+        },
+        "retentionPeriod":{
+            "type": "int",
+            "defaultValue": 30,
+            "minValue":0,
+            "maxValue": 30,
+            "metadata": {
+                "description": "(Optional) Set retention period for SQL backups"
+            }
+        },
+        "encryptionBackup":{
+            "type": "string",
+            "defaultValue": "Disable",
+            "allowedValues": [
+                "Disable",
+                "Enable"
+            ],
+            "metadata": {
+                "description": "(Optional) Enable encyption of the backup of SQL."
+            }
+        },
+        "systemDatabaseBackup":{
+            "type": "string",
+            "defaultValue": "Disable",
+            "allowedValues": [
+                "Disable",
+                "Enable"
+            ],
+            "metadata": {
+                "description": "(Optional) Enable backup of Master, Model, and MSDB SQL Databases."
+            }
+        },
+        "scheduleFrequencyBackup":{
+            "type": "string",
+            "defaultValue": "Automated",
+            "allowedValues": [
+                "Automated",
+                "Manual"
+            ],
+            "metadata": {
+                "description": "(Optional) Frequency SQL backups."
+            }
+        },
+        "startTimeBackup":{
+            "type": "string",
+            "defaultValue": "02:00",
+            "allowedValues": [
+                "00:00",
+                "01:00",
+                "02:00",
+                "03:00",
+                "04:00",
+                "05:00",
+                "06:00",
+                "07:00",
+                "08:00",
+                "09:00",
+                "10:00",
+                "11:00",
+                "12:00",
+                "13:00",
+                "14:00",
+                "15:00",
+                "16:00",
+                "17:00",
+                "18:00",
+                "19:00",
+                "20:00",
+                "21:00",
+                "22:00",
+                "23:00"
+            ],
+            "metadata": {
+                "description": "(Optional) Set a backup hour during which all the SQL backup will start."
+            }
+        },
+        "backupTimeWindow":{
+            "type": "int",
+            "defaultValue": 2,
+            "minValue":1,
+            "maxValue": 23,
+            "metadata": {
+                "description": "(Optional) Backup time window"
+            }
+        },
+        "logBackupFrequency":{
+            "type": "int",
+            "defaultValue": 60,
+            "minValue":5,
+            "maxValue": 60,
+            "metadata": {
+                "description": "(Optional) Log backup frequency (minutes)"
+            }
+        },
     },
     "variables": {
         "instanceCount": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), parameters('instanceCount'), 1)]",
@@ -600,6 +777,72 @@
                     }
                 }
             }
+        },
+        {
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/sql-iaas')]",
+            "type": "Microsoft.SqlVirtualMachine/SqlVirtualMachines",
+            "apiVersion": "2017-03-01-preview",
+            "location": "[parameters('location')]",
+            "properties": {
+                "virtualMachineResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
+                "sqlManagement": "Full",
+                "SqlServerLicenseType": "[if(equals(parameters('enableHybridBenefitSqlLicense'), true()), 'AHUB', 'PAYG']",
+                "AutoPatchingSettings": {
+                    "Enable": "[(parameters('automatedPatching')]",
+                    "DayOfWeek": "[parameters('maintenanceScheduleDay')]",
+                    "MaintenanceWindowStartingHour": "[parameters('maintenanceScheduleHour')]",
+                    "MaintenanceWindowDuration": "[parameters('patchingDuration')]"
+                },
+                "AutoBackupSettings": {
+                    "Enable": "[(parameters('automatedBackup')]",
+                    "RetentionPeriod": "[parameters('retentionPeriod')]",
+                    "EnableEncryption": "[parameters('encryptionBackup')]",
+                    "BackupSystemDbs": "[parameters('systemDatabaseBackup')]",
+                    "BackupScheduleType": "[parameters('scheduleBackup')]",
+                    "FullBackupFrequency": "[parameters('scheduleFrequencyBackup')]",
+                    "FullBackupStartTime": "[parameters('startTimeBackup')]",
+                    "FullBackupWindowHours": "[parameters('backupTimeWindow')]",
+                    "LogBackupFrequency": "[parameters('logBackupFrequency')]",
+                    "StorageAccountUrl": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('sqlAutobackupStorageAccountName')), '2019-04-01').primaryEndpoints['blob']]",
+                    "StorageAccessKey": "[first(listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('sqlAutobackupStorageAccountName')), '2019-04-01').keys).value]"
+                },
+                "KeyVaultCredentialSettings": {
+                    "Enable": "[(parameters('keyVaultIntegration')]",
+                    "CredentialName": "[parameters('kvCredentialName')]",
+                    "AzureKeyVaultUrl": "[parameters('kvUrl')]",
+                    "ServicePrincipalName": "[parameters('kvPrincipalName')]",
+                    "ServicePrincipalSecret": "[parameters('kvAdminSecret')]"
+                },
+                "StorageConfigurationSettings": {
+                    "DiskConfigurationType": "[parameters('sqlStorageDisksConfigurationType')]",
+                    "StorageWorkloadType": "[parameters('sqlStorageWorkloadType')]",
+                    "SQLDataSettings": {
+                        "LUNs": "[parameters('dataDisksLUNs')]",
+                        "DefaultFilePath": "[parameters('dataPath')]"
+                    },
+                    "SQLLogSettings": {
+                        "LUNs": "[parameters('logDisksLUNs')]",
+                        "DefaultFilePath": "[parameters('logPath')]"
+                    },
+                    "SQLTempDbSettings": {
+                        "DefaultFilePath": "[parameters('tempDbPath')]"
+                    }
+                },
+                "ServerConfigurationsManagementSettings": {
+                    "SQLConnectivityUpdateSettings": {
+                        "ConnectivityType": "[parameters('sqlConnectivityType')]",
+                        "Port": "[parameters('sqlPortNumber')]",
+                        "SQLAuthUpdateUserName": "[parameters('sqlAuthenticationLogin')]",
+                        "SQLAuthUpdatePassword": "[parameters('sqlAuthenticationPassword')]"
+                    },
+                    "AdditionalFeaturesServerConfigurations": {
+                        "IsRServicesEnabled": "[parameters('rServicesEnabled')]"
+                    }
+                }
+            },
+            "dependsOn": [
+                "virtualMachineLoop"
+            ]
         }
     ],
     "outputs": {
