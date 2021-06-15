@@ -416,7 +416,7 @@
             "metadata": {
                 "description": "Sql connectivity port "
             }
-        },
+        }
     },
     "variables": {
         "instanceCount": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), parameters('instanceCount'), 1)]",
