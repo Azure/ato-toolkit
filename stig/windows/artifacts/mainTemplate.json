@@ -377,7 +377,7 @@
                 "description": "(Optional) Set a backup hour during which all the SQL backup will start."
             }
         },
-        "backupTimeWindow":{
+        "backupTimeWindow": {
             "type": "int",
             "defaultValue": 2,
             "minValue":1,
@@ -386,7 +386,7 @@
                 "description": "(Optional) Backup time window"
             }
         },
-        "logBackupFrequency":{
+        "logBackupFrequency": {
             "type": "int",
             "defaultValue": 60,
             "minValue":5,
@@ -395,7 +395,7 @@
                 "description": "(Optional) Log backup frequency (minutes)"
             }
         },
-        "sqlConnectivityType":{
+        "sqlConnectivitySettings": {
             "type": "string",
             "defaultValue": "Private",
             "allowedValues": [
@@ -407,7 +407,16 @@
             "metadata": {
                 "description": "(Optional) Set a backup hour during which all the SQL backup will start."
             }
-        }
+        },
+        "portNumber": {
+            "type": "int",
+            "defaultValue": 1443,
+            "minValue":1024,
+            "maxValue": 65535,
+            "metadata": {
+                "description": "Sql connectivity port "
+            }
+        },
     },
     "variables": {
         "instanceCount": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), parameters('instanceCount'), 1)]",
@@ -843,8 +852,8 @@
                 },
                 "ServerConfigurationsManagementSettings": {
                     "SQLConnectivityUpdateSettings": {
-                        "ConnectivityType": "[parameters('sqlConnectivityType')]",
-                        "Port": "[parameters('sqlPortNumber')]",
+                        "ConnectivityType": "[parameters('sqlConnectivitySettings')]",
+                        "Port": "[parameters('portNumber')]",
                         "SQLAuthUpdateUserName": "[parameters('sqlAuthenticationLogin')]",
                         "SQLAuthUpdatePassword": "[parameters('sqlAuthenticationPassword')]"
                     },

@@ -1179,6 +1179,8 @@
             "applicationSecurityGroupResourceId": "[steps('networking').vmApplicationSecurityGroup.id]",
             "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
             "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]",
+            "sqlConnectivitySettings": "[steps('sqlServerSettings').sqlConnectivitySettings]",
+            "portNumber": "[steps('sqlServerSettings').portNumber]",
             "enableHybridBenefitSqlLicense": "[steps('sqlServerSettings').enableHybridBenefitSqlLicense]",
             "automatedPatching": "[steps('sqlServerSettings').automatedPatching]",
             "maintenanceScheduleDay": "[steps('sqlServerSettings').maintenanceScheduleDay]",
