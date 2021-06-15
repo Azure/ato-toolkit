@@ -826,7 +826,7 @@
                     "MaintenanceWindowDuration": "[parameters('patchingDuration')]"
                 },
                 "AutoBackupSettings": {
-                    "Enable": "[parameters('automatedBackup')]",
+                    "Enable":"[parameters('automatedBackup')]",
                     "RetentionPeriod": "[parameters('retentionPeriod')]",
                     "EnableEncryption": "[parameters('encryptionBackup')]",
                     "BackupSystemDbs": "[parameters('systemDatabaseBackup')]",
