@@ -437,6 +437,46 @@
             "metadata": {
                 "description": "(Optional) Storage account for sql resource id."
             }
+        },
+        "keyVaultIntegration":{
+            "type": "string",
+            "defaultValue": "Disable",
+            "allowedValues": [
+                "Disable",
+                "Enable"
+            ],
+            "metadata": {
+                "description": "(Optional) Enable integration with Key Vault."
+            }
+        },
+        "kvCredentialName":{
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Key Vault credential name"
+            }
+        },
+        "kvUrl":{
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Key Vault url"
+            }
+        },
+        "kvPrincipalName":{
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Key Vault principle name"
+            }
+        },
+        "kvAdminSecret":{
+            "type": "string",
+            "type": "securestring",
+            "minLength": 12,
+            "metadata": {
+                "description": "(Optional) Key Vault secret"
+            }
         }
     },
     "variables": {
