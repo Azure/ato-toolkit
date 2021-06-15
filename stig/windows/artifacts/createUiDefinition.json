@@ -1193,10 +1193,10 @@
             "startTimeBackup": "[steps('sqlServerSettings').startTimeBackup]",
             "backupTimeWindow": "[steps('sqlServerSettings').backupTimeWindow]",
             "logBackupFrequency": "[steps('sqlServerSettings').logBackupFrequency]",
-            "sqlAkvCredentialName": "[steps('sqlServerSettings').sqlAkvCredentialName]",
-            "sqlAkvUrl": "[steps('sqlServerSettings').sqlAkvUrl]",
-            "sqlAkvPrincipalName": "[steps('sqlServerSettings').sqlAkvPrincipalName",
-            "sqlAkvPrincipalSecret": "[steps('sqlServerSettings').sqlAkvPrincipalSecret]",
+            "kvCredentialName": "[steps('sqlServerSettings').kvCredentialName]",
+            "kvUrl": "[steps('sqlServerSettings').kvUrl]",
+            "kvPrincipalName": "[steps('sqlServerSettings').kvPrincipalName]",
+            "skvAdminSecret": "[steps('sqlServerSettings').kvAdminSecret]",
             "sqlStorageDisksConfigurationType": "[steps('sqlServerSettings').sqlStorageDisksConfigurationType]",
             "rServices": "[steps('sqlServerSettings').rServices]"
         }
