@@ -903,18 +903,18 @@
                     "ServicePrincipalSecret": "[parameters('kvAdminSecret')]"
                 },
                 "StorageConfigurationSettings": {
-                    "DiskConfigurationType": "[parameters('sqlStorageDisksConfigurationType')]",
-                    "StorageWorkloadType": "[parameters('sqlStorageWorkloadType')]",
+                    "DiskConfigurationType": "NEW",
+                    "StorageWorkloadType": "OLTP",
                     "SQLDataSettings": {
-                        "LUNs": "[parameters('dataDisksLUNs')]",
-                        "DefaultFilePath": "[parameters('dataPath')]"
+                        "LUNs": 0,
+                        "DefaultFilePath": "F:\\data"
                     },
                     "SQLLogSettings": {
-                        "LUNs": "[parameters('logDisksLUNs')]",
-                        "DefaultFilePath": "[parameters('logPath')]"
+                        "LUNs": 1,
+                        "DefaultFilePath": "G:\\log"
                     },
                     "SQLTempDbSettings": {
-                        "DefaultFilePath": "[parameters('tempDbPath')]"
+                        "DefaultFilePath": "D:\\tempDb"
                     }
                 },
                 "ServerConfigurationsManagementSettings": {
