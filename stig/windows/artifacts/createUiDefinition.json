@@ -623,7 +623,7 @@
                         }
                     },
                     {
-                        "name": "enableSqlLicenseBenefit",
+                        "name": "enableHybridBenefitSqlLicense",
                         "type": "Microsoft.Common.CheckBox",
                         "label": "SQL Server License",
                         "constraints": {
@@ -1179,7 +1179,7 @@
             "applicationSecurityGroupResourceId": "[steps('networking').vmApplicationSecurityGroup.id]",
             "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
             "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]",
-            "enableHybridBenefitSqlLicense": "[steps('sqlServerSettings').enableHybridBenefitSqlLicense]",
+            "enableHybridBenefitSqlLicense": "[steps('sqlServerSettings').enableHybridBenefitSqlLicense",
             "automatedPatching": "[steps('sqlServerSettings').automatedPatching]",
             "maintenanceScheduleDay": "[steps('sqlServerSettings').maintenanceScheduleDay]",
             "maintenanceScheduleHour": "[steps('sqlServerSettings').maintenanceScheduleHour]",
