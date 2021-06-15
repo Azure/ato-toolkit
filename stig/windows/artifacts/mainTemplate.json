@@ -842,8 +842,8 @@
                     "FullBackupStartTime": "[parameters('startTimeBackup')]",
                     "FullBackupWindowHours": "[parameters('backupTimeWindow')]",
                     "LogBackupFrequency": "[parameters('logBackupFrequency')]",
-                    "StorageAccountUrl": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), json('null'), reference(resourceId('Microsoft.Storage/storageAccounts', parameters('sqlAutobackupStorageAccountName')), '2019-04-01').primaryEndpoints['blob']))]",
-                    "StorageAccessKey": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), json('null'), reference(resourceId('Microsoft.Storage/storageAccounts', first(listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('sqlAutobackupStorageAccountName')), '2019-04-01').keys).value))]"
+                    "StorageAccountUrl": "",
+                    "StorageAccessKey": ""
                 },
                 "KeyVaultCredentialSettings": {
                     "Enable": "[parameters('keyVaultIntegration')]",
