@@ -226,8 +226,12 @@
             }
         },
         "automatedPatching": {
-            "type": "bool",
-            "defaultValue": false,
+            "type": "string",
+            "defaultValue": "Disable",
+            "allowedValues": [
+                "Disable",
+                "Enable"
+            ],
             "metadata": {
                 "description": "(Optional) Set a patching window during which all Windows and SQL patches will be applied."
             }
