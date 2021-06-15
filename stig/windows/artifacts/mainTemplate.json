@@ -473,7 +473,6 @@
         "kvAdminSecret":{
             "type": "securestring",
             "defaultValue": "",
-            "minLength": 12,
             "metadata": {
                 "description": "(Optional) Key Vault secret"
             }
