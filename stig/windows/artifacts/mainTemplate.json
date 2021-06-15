@@ -471,7 +471,6 @@
             }
         },
         "kvAdminSecret":{
-            "type": "string",
             "type": "securestring",
             "minLength": 12,
             "metadata": {
