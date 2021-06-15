@@ -1198,7 +1198,7 @@
             "sqlAkvPrincipalName": "[steps('sqlServerSettings').sqlAkvPrincipalName",
             "sqlAkvPrincipalSecret": "[steps('sqlServerSettings').sqlAkvPrincipalSecret]",
             "sqlStorageDisksConfigurationType": "[steps('sqlServerSettings').sqlStorageDisksConfigurationType]",
-            "rServices":"[steps('sqlServerSettings').rServices]"
+            "rServices": "[steps('sqlServerSettings').rServices]"
         }
     }
 }
