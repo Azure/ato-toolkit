@@ -590,7 +590,7 @@
                             "password": "Enter the key that was generated for the application after it was registered with Microsoft Azure Active Directory"
                         },
                         "constraints": {
-                            "required": true,
+                            "required": false,
                             "customPasswordRegex": "^(?=.*[A-Z])(?=.*[.!@#$%^&*()-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
                             "customValidationMessage": "Password must be at least 12 characters long, and contain upper case, lower case, number and symbol"
                         },
@@ -1198,7 +1198,7 @@
             "kvCredentialName": "[steps('sqlServerSettings').kvCredentialName]",
             "kvUrl": "[steps('sqlServerSettings').kvUrl]",
             "kvPrincipalName": "[steps('sqlServerSettings').kvPrincipalName]",
-            "kvAdminSecret": "[steps('sqlServerSettings').kvAdminSecret.adminCredentials.password]",
+            "kvAdminSecret": "[steps('sqlServerSettings').kvAdminSecret.password]",
             "rServices": "[steps('sqlServerSettings').rServices]"
         }
     }
