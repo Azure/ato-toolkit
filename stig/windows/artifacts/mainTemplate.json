@@ -490,6 +490,17 @@
             "metadata": {
                 "description": "(Optional) Key Vault secret"
             }
+        },
+        "rServicesEnabled":{
+            "type": "string",
+            "defaultValue": "Disable",
+            "allowedValues": [
+                "Disable",
+                "Enable"
+            ],
+            "metadata": {
+                "description": "(Optional) Enable rServices on SQL."
+            }
         }
     },
     "variables": {
