@@ -201,7 +201,7 @@
                     {
                         "name": "textBlock2",
                         "type": "Microsoft.Common.TextBlock",
-                        "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'))]",
+                        "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'), equals(steps('instance').osVersion, 'SQLServer-2016-SP2-On-Server-2016'), equals(steps('instance').osVersion, 'SQLServer-2016-SP2-On-Server-2019'))]",
                         "options": {
                             "text": "Licensing"
                         }
@@ -1198,7 +1198,7 @@
             "kvCredentialName": "[steps('sqlServerSettings').kvCredentialName]",
             "kvUrl": "[steps('sqlServerSettings').kvUrl]",
             "kvPrincipalName": "[steps('sqlServerSettings').kvPrincipalName]",
-            "skvAdminSecret": "[steps('sqlServerSettings').kvAdminSecret]",
+            "kvAdminSecret": "[steps('sqlServerSettings').kvAdminSecret.adminCredentials.password]",
             "rServices": "[steps('sqlServerSettings').rServices]"
         }
     }
