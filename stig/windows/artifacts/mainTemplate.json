@@ -865,8 +865,12 @@
                     }
                 }
             },
+            "copy": {
+                "name": "virtualMachineLoop",
+                "count": "[variables('instanceCount')]"
+            },
             "dependsOn": [
-                "virtualMachineLoop"
+                "nicLoop"
             ]
         }
     ],
