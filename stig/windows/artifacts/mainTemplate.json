@@ -931,11 +931,15 @@
                     "DiskConfigurationType": "NEW",
                     "StorageWorkloadType": "OLTP",
                     "SQLDataSettings": {
-                        "LUNs": 0,
+                        "LUNs": [
+                            0
+                        ],
                         "DefaultFilePath": "F:\\data"
                     },
                     "SQLLogSettings": {
-                        "LUNs": 1,
+                        "LUNs": [
+                            1
+                        ],
                         "DefaultFilePath": "G:\\log"
                     },
                     "SQLTempDbSettings": {
