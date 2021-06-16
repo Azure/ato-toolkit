@@ -841,17 +841,17 @@
                         "name": "automatedBackup",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Automated backup",
-                        "defaultValue": "Disable",
+                        "defaultValue": "false",
                         "toolTip": "Configure backups for databases in your virtual machine.",
                         "constraints": {
                             "allowedValues": [
                                 {
                                     "label": "Disable",
-                                    "value": "Disable"
+                                    "value": "false"
                                 },
                                 {
                                     "label": "Enable",
-                                    "value": "Enable"
+                                    "value": "true"
                                 }
                             ],
                             "required": true

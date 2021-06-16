@@ -297,10 +297,10 @@
         },
         "automatedBackup": {
             "type": "string",
-            "defaultValue": "Disable",
+            "defaultValue": "false",
             "allowedValues": [
-                "Disable",
-                "Enable"
+                "false",
+                "true"
             ],
             "metadata": {
                 "description": "(Optional) Enable an automatic backup of SQL."
