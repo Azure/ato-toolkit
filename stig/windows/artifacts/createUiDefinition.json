@@ -872,7 +872,7 @@
                         "visible": "[equals(steps('sqlServerSettings').automatedBackup, 'true')]"
                     },
                     {
-                        "name": "backupStorageAccount",
+                        "name": "sqlAutobackupStorageAccountName",
                         "type": "Microsoft.Solutions.ResourceSelector",
                         "label": "Storage account",
                         "resourceType": "Microsoft.Storage/storageAccounts",
@@ -1191,7 +1191,7 @@
             "automatedBackup": "[steps('sqlServerSettings').automatedBackup]",
             "retentionPeriod": "[steps('sqlServerSettings').retentionPeriod]",
             "encryptionBackup": "[steps('sqlServerSettings').encryptionBackup]",
-            "backupStorageAccount": "[steps('sqlServerSettings').backupStorageAccount.id]",
+            "sqlAutobackupStorageAccountName": "[steps('sqlServerSettings').sqlAutobackupStorageAccountName.id]",
             "systemDatabaseBackup": "[steps('sqlServerSettings').systemDatabaseBackup]",
             "backupScheduleType": "[steps('sqlServerSettings').backupScheduleType]",
             "scheduleFrequencyBackup": "[steps('sqlServerSettings').scheduleFrequencyBackup]",
