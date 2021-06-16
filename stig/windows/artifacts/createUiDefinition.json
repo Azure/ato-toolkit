@@ -1191,6 +1191,7 @@
             "automatedBackup": "[steps('sqlServerSettings').automatedBackup]",
             "retentionPeriod": "[steps('sqlServerSettings').retentionPeriod]",
             "encryptionBackup": "[steps('sqlServerSettings').encryptionBackup]",
+            "backupStorageAccount": "[steps('sqlServerSettings').backupStorageAccount.name]",
             "systemDatabaseBackup": "[steps('sqlServerSettings').systemDatabaseBackup]",
             "backupScheduleType": "[steps('sqlServerSettings').backupScheduleType]",
             "scheduleFrequencyBackup": "[steps('sqlServerSettings').scheduleFrequencyBackup]",

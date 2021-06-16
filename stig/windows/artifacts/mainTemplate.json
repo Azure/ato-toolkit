@@ -501,6 +501,13 @@
             "metadata": {
                 "description": "(Optional) Enable rServices on SQL."
             }
+        },
+        "sqlAutobackupStorageAccountName":{
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "SQL storage account."
+            }
         }
     },
     "variables": {
@@ -917,8 +924,8 @@
                     "FullBackupStartTime": "[parameters('startTimeBackup')]",
                     "FullBackupWindowHours": "[parameters('backupTimeWindow')]",
                     "LogBackupFrequency": "[parameters('logBackupFrequency')]",
-                    "StorageAccountUrl": "",
-                    "StorageAccessKey": ""
+                    "StorageAccountUrl": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('sqlAutobackupStorageAccountName')), '2019-04-01').primaryEndpoints['blob']]",,
+                    "StorageAccessKey": "[first(listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('sqlAutobackupStorageAccountName')), '2019-04-01').keys).value]"
                 },
                 "KeyVaultCredentialSettings": {
                     "Enable": "[parameters('keyVaultIntegration')]",
