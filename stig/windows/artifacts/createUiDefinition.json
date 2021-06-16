@@ -952,12 +952,12 @@
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Configure backup schedule",
                         "toolTip": "Take full backups of Master, Model, and MSDB",
-                        "defaultValue": "Automatic",
+                        "defaultValue": "Automated",
                         "constraints": {
                             "allowedValues": [
                                 {
-                                    "label": "Automatic",
-                                    "value": "Automatic"
+                                    "label": "Automated",
+                                    "value": "Automated"
                                 },
                                 {
                                     "label": "Manual",
@@ -1144,7 +1144,7 @@
                                 },
                                 {
                                     "label": "Enable",
-                                    "value": "false"
+                                    "value": "true"
                                 }
                             ],
                             "required": true

@@ -443,9 +443,9 @@
         },
         "backupScheduleType": {
             "type": "string",
-            "defaultValue": "Automatic",
+            "defaultValue": "Automated",
             "allowedValues": [
-                "Automatic",
+                "Automated",
                 "Manual"
             ],
             "metadata": {
@@ -912,7 +912,7 @@
                     "RetentionPeriod": "[parameters('retentionPeriod')]",
                     "EnableEncryption": "[parameters('encryptionBackup')]",
                     "BackupSystemDbs": "[parameters('systemDatabaseBackup')]",
-                    "BackupScheduleType": "Automatic",
+                    "BackupScheduleType": "Automated",
                     "FullBackupFrequency": "[parameters('scheduleFrequencyBackup')]",
                     "FullBackupStartTime": "[parameters('startTimeBackup')]",
                     "FullBackupWindowHours": "[parameters('backupTimeWindow')]",
