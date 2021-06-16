@@ -440,7 +440,7 @@
                         "name": "sqlConnectivitySettings",
                         "type": "Microsoft.Common.DropDown",
                         "label": "SQL connectivity",
-                        "defaultValue": "Private",
+                        "defaultValue": "Private (within Virtual Network)",
                         "constraints": {
                             "allowedValues": [
                                 {
