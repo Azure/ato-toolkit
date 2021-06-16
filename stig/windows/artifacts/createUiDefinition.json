@@ -647,17 +647,17 @@
                         "name": "automatedPatching",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Automated patching",
-                        "defaultValue": "Disable",
+                        "defaultValue": "false",
                         "toolTip": "Set a patching window during which all Windows and SQL patches will be applied.",
                         "constraints": {
                             "allowedValues": [
                                 {
                                     "label": "Disable",
-                                    "value": "Disable"
+                                    "value": "false"
                                 },
                                 {
                                     "label": "Enable",
-                                    "value": "Enable"
+                                    "value": "true"
                                 }
                             ],
                             "required": false
@@ -707,7 +707,7 @@
                             ],
                             "required": true
                         },
-                        "visible": "[equals(steps('sqlServerSettings').automatedPatching, 'Enable')]"
+                        "visible": "[equals(steps('sqlServerSettings').automatedPatching, 'true')]"
                     },
                     {
                         "name": "maintenanceScheduleHour",
@@ -815,7 +815,7 @@
                             ],
                             "required": true
                         },
-                        "visible": "[equals(steps('sqlServerSettings').automatedPatching, 'Enable')]"
+                        "visible": "[equals(steps('sqlServerSettings').automatedPatching, 'true')]"
                     },
                     {
                         "name": "patchingDuration",
@@ -828,7 +828,7 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible": "[equals(steps('sqlServerSettings').automatedPatching, 'Enable')]"
+                        "visible": "[equals(steps('sqlServerSettings').automatedPatching, 'true')]"
                     },
                     {
                         "name": "textBlock4",
