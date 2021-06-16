@@ -441,7 +441,7 @@
                 "description": "(Optional) Storage account for sql resource id."
             }
         },
-        "scheduleBackup": {
+        "backupScheduleType": {
             "type": "string",
             "defaultValue": "Automatic",
             "allowedValues": [
@@ -912,7 +912,7 @@
                     "RetentionPeriod": "[parameters('retentionPeriod')]",
                     "EnableEncryption": "[parameters('encryptionBackup')]",
                     "BackupSystemDbs": "[parameters('systemDatabaseBackup')]",
-                    "BackupScheduleType": "[parameters('scheduleBackup')]",
+                    "BackupScheduleType": "[parameters('backupScheduleType')]",
                     "FullBackupFrequency": "[parameters('scheduleFrequencyBackup')]",
                     "FullBackupStartTime": "[parameters('startTimeBackup')]",
                     "FullBackupWindowHours": "[parameters('backupTimeWindow')]",

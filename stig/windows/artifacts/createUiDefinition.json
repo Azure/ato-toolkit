@@ -647,7 +647,7 @@
                         "name": "automatedPatching",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Automated patching",
-                        "defaultValue": "false",
+                        "defaultValue": "Disable",
                         "toolTip": "Set a patching window during which all Windows and SQL patches will be applied.",
                         "constraints": {
                             "allowedValues": [
@@ -713,7 +713,7 @@
                         "name": "maintenanceScheduleHour",
                         "type": "Microsoft.Common.DropDown",
                         "label": "Maintenance start hour (local time)",
-                        "defaultValue": "2",
+                        "defaultValue": "02:00",
                         "constraints": {
                             "allowedValues": [
                                 {
@@ -841,7 +841,7 @@
                         "name": "automatedBackup",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Automated backup",
-                        "defaultValue": "false",
+                        "defaultValue": "Disable",
                         "toolTip": "Configure backups for databases in your virtual machine.",
                         "constraints": {
                             "allowedValues": [
@@ -889,7 +889,7 @@
                         "name": "encryptionBackup",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Encryption",
-                        "defaultValue": "false",
+                        "defaultValue": "Disable",
                         "constraints": {
                             "allowedValues": [
                                 {
@@ -931,7 +931,7 @@
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Backup system databases",
                         "toolTip": "Take full backups of Master, Model, and MSDB",
-                        "defaultValue": "false",
+                        "defaultValue": "Disable",
                         "constraints": {
                             "allowedValues": [
                                 {
@@ -948,7 +948,7 @@
                         "visible": true
                     },
                     {
-                        "name": "scheduleBackup",
+                        "name": "backupScheduleType",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Configure backup schedule",
                         "toolTip": "Take full backups of Master, Model, and MSDB",
@@ -987,7 +987,7 @@
                             ],
                             "required": true
                         },
-                        "visible": "[equals(steps('sqlServerSettings').scheduleBackup, 'Manual')]"
+                        "visible": "[equals(steps('sqlServerSettings').backupScheduleType, 'Manual')]"
                     },
                     {
                         "name": "startTimeBackup",
@@ -1095,7 +1095,7 @@
                             ],
                             "required": true
                         },
-                        "visible": "[equals(steps('sqlServerSettings').scheduleBackup, 'Manual')]"
+                        "visible": "[equals(steps('sqlServerSettings').backupScheduleType, 'Manual')]"
                     },
                     {
                         "name": "backupTimeWindow",
@@ -1108,7 +1108,7 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible": "[equals(steps('sqlServerSettings').scheduleBackup, 'Manual')]"
+                        "visible": "[equals(steps('sqlServerSettings').backupScheduleType, 'Manual')]"
                     },
                     {
                         "name": "logBackupFrequency",
@@ -1121,7 +1121,7 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible": "[equals(steps('sqlServerSettings').scheduleBackup, 'Manual')]"
+                        "visible": "[equals(steps('sqlServerSettings').backupScheduleType, 'Manual')]"
                     },
                     {
                         "name": "textBlock5",
@@ -1192,7 +1192,7 @@
             "retentionPeriod": "[steps('sqlServerSettings').retentionPeriod]",
             "encryptionBackup": "[steps('sqlServerSettings').encryptionBackup]",
             "systemDatabaseBackup": "[steps('sqlServerSettings').systemDatabaseBackup]",
-            "scheduleBackup": "[steps('sqlServerSettings').scheduleBackup]",
+            "backupScheduleType": "[steps('sqlServerSettings').backupScheduleType]",
             "scheduleFrequencyBackup": "[steps('sqlServerSettings').scheduleFrequencyBackup]",
             "startTimeBackup": "[steps('sqlServerSettings').startTimeBackup]",
             "backupTimeWindow": "[steps('sqlServerSettings').backupTimeWindow]",
