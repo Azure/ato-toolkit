@@ -483,7 +483,7 @@
                         "name": "sqlAuthentication",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "SQL Authentication",
-                        "defaultValue": "false",
+                        "defaultValue": "Disable",
                         "toolTip": "Enable SQL Authentication for connecting to SQL Server.",
                         "constraints": {
                             "allowedValues": [
@@ -539,7 +539,7 @@
                         "name": "keyVaultIntegration",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Azure Key Vault integration",
-                        "defaultValue": "false",
+                        "defaultValue": "Disable",
                         "toolTip": "Configure your virtual machine to be able to connect to the Azure Key Vault service.",
                         "constraints": {
                             "allowedValues": [
@@ -993,7 +993,7 @@
                         "name": "startTimeBackup",
                         "type": "Microsoft.Common.DropDown",
                         "label": "Backup start time (local time)",
-                        "defaultValue": "2",
+                        "defaultValue": "02:00",
                         "constraints": {
                             "allowedValues": [
                                 {
@@ -1135,7 +1135,7 @@
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "SQL Server Machine Learning Services (In-Database)",
                         "toolTip": "Enables SQL Server R Services, allowing you to utilize advanced analytics within your SQL Server. R Services is only supported with SQL Server 2016 (except Express edition).",
-                        "defaultValue": "false",
+                        "defaultValue": "Disable",
                         "constraints": {
                             "allowedValues": [
                                 {
