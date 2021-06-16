@@ -328,10 +328,10 @@
         },
         "systemDatabaseBackup":{
             "type": "string",
-            "defaultValue": "Disable",
+            "defaultValue": "false",
             "allowedValues": [
-                "Disable",
-                "Enable"
+                "false",
+                "true"
             ],
             "metadata": {
                 "description": "(Optional) Enable backup of Master, Model, and MSDB SQL Databases."
@@ -454,10 +454,10 @@
         },
         "keyVaultIntegration":{
             "type": "string",
-            "defaultValue": "Disable",
+            "defaultValue": "false",
             "allowedValues": [
-                "Disable",
-                "Enable"
+                "false",
+                "true"
             ],
             "metadata": {
                 "description": "(Optional) Enable integration with Key Vault."
@@ -493,10 +493,10 @@
         },
         "rServicesEnabled":{
             "type": "string",
-            "defaultValue": "Disable",
+            "defaultValue": "false",
             "allowedValues": [
-                "Disable",
-                "Enable"
+                "false",
+                "true"
             ],
             "metadata": {
                 "description": "(Optional) Enable rServices on SQL."

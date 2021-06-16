@@ -483,17 +483,17 @@
                         "name": "sqlAuthentication",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "SQL Authentication",
-                        "defaultValue": "Disable",
+                        "defaultValue": "false",
                         "toolTip": "Enable SQL Authentication for connecting to SQL Server.",
                         "constraints": {
                             "allowedValues": [
                                 {
                                     "label": "Disable",
-                                    "value": "Disable"
+                                    "value": "false"
                                 },
                                 {
                                     "label": "Enable",
-                                    "value": "Enable"
+                                    "value": "true"
                                 }
                             ],
                             "required": true
@@ -539,17 +539,17 @@
                         "name": "keyVaultIntegration",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Azure Key Vault integration",
-                        "defaultValue": "Disable",
+                        "defaultValue": "false",
                         "toolTip": "Configure your virtual machine to be able to connect to the Azure Key Vault service.",
                         "constraints": {
                             "allowedValues": [
                                 {
                                     "label": "Disable",
-                                    "value": "Disable"
+                                    "value": "false"
                                 },
                                 {
                                     "label": "Enable",
-                                    "value": "Enable"
+                                    "value": "true"
                                 }
                             ],
                             "required": true
@@ -931,16 +931,16 @@
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Backup system databases",
                         "toolTip": "Take full backups of Master, Model, and MSDB",
-                        "defaultValue": "Disable",
+                        "defaultValue": "false",
                         "constraints": {
                             "allowedValues": [
                                 {
                                     "label": "Disable",
-                                    "value": "Disable"
+                                    "value": "false"
                                 },
                                 {
                                     "label": "Enable",
-                                    "value": "Enable"
+                                    "value": "true"
                                 }
                             ],
                             "required": false
@@ -1135,16 +1135,16 @@
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "SQL Server Machine Learning Services (In-Database)",
                         "toolTip": "Enables SQL Server R Services, allowing you to utilize advanced analytics within your SQL Server. R Services is only supported with SQL Server 2016 (except Express edition).",
-                        "defaultValue": "Disable",
+                        "defaultValue": "false",
                         "constraints": {
                             "allowedValues": [
                                 {
                                     "label": "Disable",
-                                    "value": "Disable"
+                                    "value": "false"
                                 },
                                 {
                                     "label": "Enable",
-                                    "value": "Enable"
+                                    "value": "false"
                                 }
                             ],
                             "required": true
