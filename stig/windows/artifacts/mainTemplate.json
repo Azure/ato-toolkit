@@ -339,10 +339,10 @@
         },
         "scheduleFrequencyBackup":{
             "type": "string",
-            "defaultValue": "Automated",
+            "defaultValue": "Weekly",
             "allowedValues": [
-                "Automated",
-                "Manual"
+                "Weekly",
+                "Daily"
             ],
             "metadata": {
                 "description": "(Optional) Frequency SQL backups."
