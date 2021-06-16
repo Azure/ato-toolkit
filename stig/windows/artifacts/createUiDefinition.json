@@ -889,16 +889,16 @@
                         "name": "encryptionBackup",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Encryption",
-                        "defaultValue": "Disable",
+                        "defaultValue": "false",
                         "constraints": {
                             "allowedValues": [
                                 {
                                     "label": "Disable",
-                                    "value": "Disable"
+                                    "value": "false"
                                 },
                                 {
                                     "label": "Enable",
-                                    "value": "Enable"
+                                    "value": "true"
                                 }
                             ],
                             "required": true
@@ -924,7 +924,7 @@
                             "hideConfirmation": false
                         },
                         "osPlatform": "Windows",
-                        "visible": "[equals(steps('sqlServerSettings').encryptionBackup, 'Enable')]"
+                        "visible": "[equals(steps('sqlServerSettings').encryptionBackup, 'true')]"
                     },
                     {
                         "name": "systemDatabaseBackup",

@@ -317,10 +317,10 @@
         },
         "encryptionBackup":{
             "type": "string",
-            "defaultValue": "Disable",
+            "defaultValue": "false",
             "allowedValues": [
-                "Disable",
-                "Enable"
+                "false",
+                "true"
             ],
             "metadata": {
                 "description": "(Optional) Enable encyption of the backup of SQL."
