@@ -449,7 +449,7 @@
                 "Manual"
             ],
             "metadata": {
-                "description": "(Optional) Storage account for sql resource id."
+                "description": "(Optional) SQL backup type."
             }
         },
         "keyVaultIntegration":{
