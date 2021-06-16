@@ -869,7 +869,7 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible": "[equals(steps('sqlServerSettings').automatedBackup, 'Enable')]"
+                        "visible": "[equals(steps('sqlServerSettings').automatedBackup, 'true')]"
                     },
                     {
                         "name": "backupStorageAccount",
@@ -883,7 +883,7 @@
                                 "location": "onBasic"
                             }
                         },
-                        "visible": "[equals(steps('sqlServerSettings').automatedBackup, 'Enable')]"
+                        "visible": "[equals(steps('sqlServerSettings').automatedBackup, 'true')]"
                     },
                     {
                         "name": "encryptionBackup",
