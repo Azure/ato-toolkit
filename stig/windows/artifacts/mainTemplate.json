@@ -923,7 +923,7 @@
                     "RetentionPeriod": "[parameters('retentionPeriod')]",
                     "EnableEncryption": false,
                     "BackupSystemDbs": "[parameters('systemDatabaseBackup')]",
-                    "BackupScheduleType": "[parameters('backupScheduleType')]",
+                    "BackupScheduleType": "Manual",
                     "FullBackupFrequency": "[parameters('scheduleFrequencyBackup')]",
                     "FullBackupStartTime": "[parameters('startTimeBackup')]",
                     "FullBackupWindowHours": "[parameters('backupTimeWindow')]",
