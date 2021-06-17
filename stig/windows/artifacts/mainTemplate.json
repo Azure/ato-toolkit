@@ -436,7 +436,7 @@
         },
         "sqlAutobackupStorageAccountName": {
             "type": "string",
-            "defaultValue": "",
+            "defaultValue": "testsqlstorageaccount",
             "metadata": {
                 "description": "(Optional) Storage account for sql resource id."
             }
@@ -886,7 +886,7 @@
             }
         },
         {
-            "name": "asdfgroupsql",
+            "name": "[parameters('sqlAutobackupStorageAccountName')]",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-04-01",
             "location": "[parameters('location')]",
@@ -928,8 +928,8 @@
                     "FullBackupStartTime": "[parameters('startTimeBackup')]",
                     "FullBackupWindowHours": "[parameters('backupTimeWindow')]",
                     "LogBackupFrequency": "[parameters('logBackupFrequency')]",
-                    "StorageAccountUrl": "[reference(resourceId('Microsoft.Storage/storageAccounts', 'asdfgroupsql'), '2019-04-01').primaryEndpoints['blob']]",
-                    "StorageAccessKey": "[first(listKeys(resourceId('Microsoft.Storage/storageAccounts', 'asdfgroupsql')), '2019-04-01').keys).value]"
+                    "StorageAccountUrl": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('sqlAutobackupStorageAccountName')), '2019-04-01').primaryEndpoints['blob']]",
+                    "StorageAccessKey": "[first(listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('sqlAutobackupStorageAccountName')), '2019-04-01').keys).value]"
                 },
                 "KeyVaultCredentialSettings": {
                     "Enable": "[parameters('keyVaultIntegration')]",
