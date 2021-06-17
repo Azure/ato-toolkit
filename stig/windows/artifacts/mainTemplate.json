@@ -693,17 +693,18 @@
             }
         },
         {
-            "name": "[parameters('dataDiskResources')[copyIndex()].name]",
+            "name": "sql_DataDisk_0",
             "type": "Microsoft.Compute/disks",
             "apiVersion": "2020-09-30",
             "location": "[parameters('location')]",
-            "properties": "[parameters('dataDiskResources')[copyIndex()].properties]",
-            "sku": {
-                "name": "[parameters('dataDiskResources')[copyIndex()].sku]"
+            "properties": {
+                "diskSizeGB": 1024,
+                "creationData": {
+                    "createOption": "empty"
+                }
             },
-            "copy": {
-                "name": "managedDiskResources",
-                "count": "[length(parameters('dataDiskResources'))]"
+            "sku": {
+                "name": "Premium_LRS"
             }
         },
         {
@@ -739,17 +740,17 @@
                     "copy": [
                         {
                             "name": "dataDisks",
-                            "count": "[length(parameters('dataDisks'))]",
+                            "count": "1",
                             "input": {
-                                "lun": "[parameters('dataDisks')[copyIndex('dataDisks')].lun]",
-                                "createOption": "[parameters('dataDisks')[copyIndex('dataDisks')].createOption]",
-                                "caching": "[parameters('dataDisks')[copyIndex('dataDisks')].caching]",
-                                "diskSizeGB": "[parameters('dataDisks')[copyIndex('dataDisks')].diskSizeGB]",
+                                "lun": 0,
+                                "createOption": "attach",
+                                "caching": "ReadOnly",
+                                "diskSizeGB": null,
                                 "managedDisk": {
-                                    "id": "[coalesce(parameters('dataDisks')[copyIndex('dataDisks')].id, if(equals(parameters('dataDisks')[copyIndex('dataDisks')].name, json('null')), json('null'), resourceId('Microsoft.Compute/disks', parameters('dataDisks')[copyIndex('dataDisks')].name)))]",
-                                    "storageAccountType": "[parameters('dataDisks')[copyIndex('dataDisks')].storageAccountType]"
+                                    "id": null,
+                                    "storageAccountType": null
                                 },
-                                "writeAcceleratorEnabled": "[parameters('dataDisks')[copyIndex('dataDisks')].writeAcceleratorEnabled]"
+                                "writeAcceleratorEnabled": "false"
                             }
                         }
                     ]
