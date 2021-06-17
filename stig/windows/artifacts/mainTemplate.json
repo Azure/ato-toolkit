@@ -913,10 +913,10 @@
                 "sqlManagement": "Full",
                 "SqlServerLicenseType": "[if(equals(parameters('enableHybridBenefitSqlLicense'), true()), 'AHUB', 'PAYG')]",
                 "AutoPatchingSettings": {
-                    "Enable": "[parameters('automatedPatching')]",
-                    "DayOfWeek": "[parameters('maintenanceScheduleDay')]",
-                    "MaintenanceWindowStartingHour": "[parameters('maintenanceScheduleHour')]",
-                    "MaintenanceWindowDuration": "[parameters('patchingDuration')]"
+                    "Enable": true,
+                    "DayOfWeek": "Sunday",
+                    "MaintenanceWindowStartingHour": "2",
+                    "MaintenanceWindowDuration": "60"
                 },
                 "KeyVaultCredentialSettings": {
                     "Enable": "[parameters('keyVaultIntegration')]",
