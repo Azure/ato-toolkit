@@ -922,6 +922,7 @@
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-04-01",
             "location": "[parameters('location')]",
+            "condition": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
             "properties": {},
             "sku": {
                 "name": "Standard_GRS"
