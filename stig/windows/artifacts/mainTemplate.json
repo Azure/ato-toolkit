@@ -501,35 +501,6 @@
             "metadata": {
                 "description": "(Optional) Enable rServices on SQL."
             }
-        },
-        "dataDisks": {
-            "value": [
-                {
-                    "lun": 0,
-                    "createOption": "attach",
-                    "caching": "ReadOnly",
-                    "writeAcceleratorEnabled": false,
-                    "id": null,
-                    "name": "sql_DataDisk_0",
-                    "storageAccountType": null,
-                    "diskSizeGB": null,
-                    "diskEncryptionSet": null
-                }
-            ]
-        },
-        "dataDiskResources": {
-            "value": [
-                {
-                    "name": "sql_DataDisk_0",
-                    "sku": "Premium_LRS",
-                    "properties": {
-                        "diskSizeGB": 1024,
-                        "creationData": {
-                            "createOption": "empty"
-                        }
-                    }
-                }
-            ]
         }
     },
     "variables": {
