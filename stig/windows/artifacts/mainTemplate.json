@@ -501,6 +501,35 @@
             "metadata": {
                 "description": "(Optional) Enable rServices on SQL."
             }
+        },
+        "dataDisks": {
+            "value": [
+                {
+                    "lun": 0,
+                    "createOption": "attach",
+                    "caching": "ReadOnly",
+                    "writeAcceleratorEnabled": false,
+                    "id": null,
+                    "name": "sql_DataDisk_0",
+                    "storageAccountType": null,
+                    "diskSizeGB": null,
+                    "diskEncryptionSet": null
+                }
+            ]
+        },
+        "dataDiskResources": {
+            "value": [
+                {
+                    "name": "sql_DataDisk_0",
+                    "sku": "Premium_LRS",
+                    "properties": {
+                        "diskSizeGB": 1024,
+                        "creationData": {
+                            "createOption": "empty"
+                        }
+                    }
+                }
+            ]
         }
     },
     "variables": {
@@ -693,6 +722,20 @@
             }
         },
         {
+            "name": "[parameters('dataDiskResources')[copyIndex()].name]",
+            "type": "Microsoft.Compute/disks",
+            "apiVersion": "2020-09-30",
+            "location": "[parameters('location')]",
+            "properties": "[parameters('dataDiskResources')[copyIndex()].properties]",
+            "sku": {
+                "name": "[parameters('dataDiskResources')[copyIndex()].sku]"
+            },
+            "copy": {
+                "name": "managedDiskResources",
+                "count": "[length(parameters('dataDiskResources'))]"
+            }
+        },
+        {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2020-06-01",
             "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
@@ -721,7 +764,24 @@
                             "storageAccountType": "[parameters('osDiskStorageType')]",
                             "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
                         }
-                    }
+                    },
+                    "copy": [
+                        {
+                            "name": "dataDisks",
+                            "count": "[length(parameters('dataDisks'))]",
+                            "input": {
+                                "lun": "[parameters('dataDisks')[copyIndex('dataDisks')].lun]",
+                                "createOption": "[parameters('dataDisks')[copyIndex('dataDisks')].createOption]",
+                                "caching": "[parameters('dataDisks')[copyIndex('dataDisks')].caching]",
+                                "diskSizeGB": "[parameters('dataDisks')[copyIndex('dataDisks')].diskSizeGB]",
+                                "managedDisk": {
+                                    "id": "[coalesce(parameters('dataDisks')[copyIndex('dataDisks')].id, if(equals(parameters('dataDisks')[copyIndex('dataDisks')].name, json('null')), json('null'), resourceId('Microsoft.Compute/disks', parameters('dataDisks')[copyIndex('dataDisks')].name)))]",
+                                    "storageAccountType": "[parameters('dataDisks')[copyIndex('dataDisks')].storageAccountType]"
+                                },
+                                "writeAcceleratorEnabled": "[parameters('dataDisks')[copyIndex('dataDisks')].writeAcceleratorEnabled]"
+                            }
+                        }
+                    ]
                 },
                 "networkProfile": {
                     "networkInterfaces": [
@@ -936,12 +996,15 @@
                     },
                     "SQLLogSettings": {
                         "LUNs": [
-                            1
+                            0
                         ],
-                        "DefaultFilePath": "G:\\log"
+                        "DefaultFilePath": "F:\\log"
                     },
                     "SQLTempDbSettings": {
-                        "DefaultFilePath": "D:\\tempDb"
+                        "LUNs": [
+                            0
+                        ],
+                        "DefaultFilePath": "F:\\tempDb"
                     }
                 },
                 "ServerConfigurationsManagementSettings": {
