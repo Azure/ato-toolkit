@@ -886,7 +886,7 @@
             }
         },
         {
-            "name": "[parameters('sqlAutobackupStorageAccountName')]",
+            "name": "[parameters('vmName')]",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-04-01",
             "location": "[parameters('location')]",
@@ -919,17 +919,17 @@
                     "MaintenanceWindowDuration": "[parameters('patchingDuration')]"
                 },
                 "AutoBackupSettings": {
-                    "Enable": "[parameters('automatedBackup')]",
+                    "Enable": false,
                     "RetentionPeriod": "[parameters('retentionPeriod')]",
-                    "EnableEncryption": "[parameters('encryptionBackup')]",
+                    "EnableEncryption": false,
                     "BackupSystemDbs": "[parameters('systemDatabaseBackup')]",
                     "BackupScheduleType": "[parameters('backupScheduleType')]",
                     "FullBackupFrequency": "[parameters('scheduleFrequencyBackup')]",
                     "FullBackupStartTime": "[parameters('startTimeBackup')]",
                     "FullBackupWindowHours": "[parameters('backupTimeWindow')]",
                     "LogBackupFrequency": "[parameters('logBackupFrequency')]",
-                    "StorageAccountUrl": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('sqlAutobackupStorageAccountName')), '2019-04-01').primaryEndpoints['blob']]",
-                    "StorageAccessKey": "[first(listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('sqlAutobackupStorageAccountName')), '2019-04-01').keys).value]"
+                    "StorageAccountUrl": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('vmName')), '2019-04-01').primaryEndpoints['blob']]",
+                    "StorageAccessKey": "[first(listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('vmName')), '2019-04-01').keys).value]"
                 },
                 "KeyVaultCredentialSettings": {
                     "Enable": "[parameters('keyVaultIntegration')]",
