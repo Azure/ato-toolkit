@@ -443,7 +443,7 @@
         },
         "backupScheduleType": {
             "type": "string",
-            "defaultValue": "Automated",
+            "defaultValue": "Manual",
             "allowedValues": [
                 "Automated",
                 "Manual"
