@@ -744,7 +744,7 @@
                             "caching": "ReadOnly",
                             "diskSizeGB": null,
                             "managedDisk": {
-                                "id": null,
+                                "id": "[coalesce(resourceId('Microsoft.Compute/disks', sql_DataDisk_0))]",
                                 "storageAccountType": null
                             },
                             "writeAcceleratorEnabled": "false"
