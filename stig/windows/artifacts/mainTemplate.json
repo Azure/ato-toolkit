@@ -737,21 +737,17 @@
                             "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
                         }
                     },
-                    "copy": [
+                    "dataDisks": [
                         {
-                            "name": "dataDisks",
-                            "count": "1",
-                            "input": {
-                                "lun": 0,
-                                "createOption": "attach",
-                                "caching": "ReadOnly",
-                                "diskSizeGB": null,
-                                "managedDisk": {
-                                    "id": null,
-                                    "storageAccountType": null
-                                },
-                                "writeAcceleratorEnabled": "false"
-                            }
+                            "lun": 0,
+                            "createOption": "attach",
+                            "caching": "ReadOnly",
+                            "diskSizeGB": null,
+                            "managedDisk": {
+                                "id": null,
+                                "storageAccountType": null
+                            },
+                            "writeAcceleratorEnabled": "false"
                         }
                     ]
                 },
