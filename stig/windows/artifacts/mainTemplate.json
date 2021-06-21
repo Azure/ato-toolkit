@@ -707,7 +707,7 @@
             }
         },
         {
-            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
+            "name": "[concat(variables('sqlDiskName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
             "type": "Microsoft.Compute/disks",
             "apiVersion": "2020-09-30",
             "location": "[parameters('location')]",
