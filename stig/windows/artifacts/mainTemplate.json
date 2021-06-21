@@ -762,7 +762,7 @@
                             "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
                         }
                     },
-                    "dataDisks": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), variables('sqlDatadisk'), if(equals(parameters('osVersion'), 'SQL2016SP2-WS2019'), variables('sqlDatadisk'), json('null')))]"
+                    "dataDisks": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), '{'lun': 0, 'createOption': 'attach','caching': 'ReadOnly','diskSizeGB': null,'managedDisk': {'id': '[resourceId('Microsoft.Compute/disks', concat(parameters('vmname'), if(equals(variables('instanceCount'), 1), '', copyIndex())))]','storageAccountType': null},'writeAcceleratorEnabled': 'false'}', if(equals(parameters('osVersion'), 'SQL2016SP2-WS2019'), '{'lun': 0, 'createOption': 'attach','caching': 'ReadOnly','diskSizeGB': null,'managedDisk': {'id': '[resourceId('Microsoft.Compute/disks', concat(parameters('vmname'), if(equals(variables('instanceCount'), 1), '', copyIndex())))]','storageAccountType': null},'writeAcceleratorEnabled': 'false'}', json('null')))]"
                 },
                 "networkProfile": {
                     "networkInterfaces": [
