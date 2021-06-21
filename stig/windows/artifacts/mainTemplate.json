@@ -501,10 +501,6 @@
             "metadata": {
                 "description": "(Optional) Enable rServices on SQL."
             }
-        },
-        "sqlDataDisk": {
-            "type": "string",
-            "defaultValue": "sql_DataDisk_0"
         }
     },
     "variables": {
@@ -588,6 +584,7 @@
                 }
             }
         },
+        "sqlDiskName": "[concat(parameters('vmName'), variables('instanceCount'))]",
         "sqlDataDisk": [
             {
                 "lun": 0,
@@ -595,7 +592,7 @@
                 "caching": "ReadOnly",
                 "diskSizeGB": null,
                 "managedDisk": {
-                    "id": "[resourceId('Microsoft.Compute/disks', parameters('vmname'))]",
+                    "id": "[resourceId('Microsoft.Compute/disks', variable('sqlDiskName'))]",
                     "storageAccountType": null
                 },
                 "writeAcceleratorEnabled": "false"
