@@ -501,10 +501,6 @@
             "metadata": {
                 "description": "(Optional) Enable rServices on SQL."
             }
-        },
-        "sqlDataDisk": {
-            "type": "string",
-            "defaultValue": "sql_DataDisk_0"
         }
     },
     "variables": {
@@ -711,7 +707,7 @@
             }
         },
         {
-            "name": "[parameters('sqlDataDiskName')]",
+            "name": "[variables('sqlDataDiskName')]",
             "type": "Microsoft.Compute/disks",
             "apiVersion": "2020-09-30",
             "location": "[parameters('location')]",
