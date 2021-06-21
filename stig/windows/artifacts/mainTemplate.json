@@ -725,7 +725,7 @@
                 "name": "Premium_LRS"
             },
             "copy": {
-                "name": "virtualMachineLoop",
+                "name": "virtualMachineDiskLoop",
                 "count": "[variables('instanceCount')]"
             },
             "dependsOn": [
@@ -742,7 +742,7 @@
                 "count": "[variables('instanceCount')]"
             },
             "dependsOn": [
-                "nicLoop"
+                "virtualMachineDiskLoop"
             ],
             "properties": {
                 "hardwareProfile": {
