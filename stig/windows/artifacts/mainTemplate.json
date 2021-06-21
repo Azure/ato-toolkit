@@ -595,7 +595,7 @@
                 "caching": "ReadOnly",
                 "diskSizeGB": null,
                 "managedDisk": {
-                    "id": "[resourceId('Microsoft.Compute/disks', parameters('vmname'))]",
+                    "id": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
                     "storageAccountType": null
                 },
                 "writeAcceleratorEnabled": "false"
