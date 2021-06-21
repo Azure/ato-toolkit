@@ -711,7 +711,7 @@
             }
         },
         {
-            "name": "[parameters('sqlDataDisk')]",
+            "name": "[parameters('sqlDataDiskName')]",
             "type": "Microsoft.Compute/disks",
             "apiVersion": "2020-09-30",
             "location": "[parameters('location')]",
@@ -756,7 +756,7 @@
                             "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
                         }
                     },
-                    "dataDisks": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), variables('sqlDatadisk'), if(equals(parameters('osVersion'), 'SQL2016SP2-WS2019'), variables('sqlDatadisk'), json('null')))]"
+                    "dataDisks": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), variables('sqlDatadiskName'), if(equals(parameters('osVersion'), 'SQL2016SP2-WS2019'), variables('sqlDatadiskName'), json('null')))]"
                 },
                 "networkProfile": {
                     "networkInterfaces": [
