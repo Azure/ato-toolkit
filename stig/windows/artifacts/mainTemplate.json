@@ -743,6 +743,18 @@
                         }
                     },
                     "dataDisks": [
+                        {
+                            "lun": 0,
+                            "createOption": "attach",
+                            "caching": "ReadOnly",
+                            "diskSizeGB": null,
+                            "managedDisk": {
+                                "id": "[resourceId('Microsoft.Compute/disks', parameters('sqlDataDisk'))]",
+                                "storageAccountType": null
+                            },
+                            "writeAcceleratorEnabled": "false",
+                            "condition": "[or(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), equals(parameters('osVersion'), 'SQL2016SP2-WS2019'))]"
+                        }
                     ]
                 },
                 "networkProfile": {
