@@ -710,7 +710,7 @@
             }
         },
         {
-            "name": "[parameters('sqlDataDisk')]",
+            "name": "[variables('sqlDataDisk')]",
             "type": "Microsoft.Compute/disks",
             "apiVersion": "2020-09-30",
             "location": "[parameters('location')]",
