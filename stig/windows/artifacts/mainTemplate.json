@@ -720,7 +720,7 @@
         {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2020-06-01",
-            "name": "[concat(variables('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
+            "name": "[concat(parameter('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
             "condition": "[or(not(equals(parameters('osVersion'), 'SQL2016SP2-WS2016')), not(equals(parameters('osVersion'), 'SQL2016SP2-WS2019')))]",
             "location": "[parameters('location')]",
             "copy": {
