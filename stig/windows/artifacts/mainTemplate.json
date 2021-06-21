@@ -592,7 +592,7 @@
                 "caching": "ReadOnly",
                 "diskSizeGB": null,
                 "managedDisk": {
-                    "id": "[resourceId('Microsoft.Compute/disks', variable('sqlDiskName'))]",
+                    "id": "[resourceId('Microsoft.Compute/disks', variables('sqlDiskName'))]",
                     "storageAccountType": null
                 },
                 "writeAcceleratorEnabled": "false"
