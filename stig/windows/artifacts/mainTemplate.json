@@ -584,7 +584,7 @@
                 }
             }
         },
-        "vmName": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), concat(parameters('vmname'),'_sql'), if(equals(parameters('osVersion'), 'SQL2016SP2-WS20169'), concat(parameters('vmname'),'_sql'), parameters('vmname')]",
+        "vmName": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), concat(parameters('vmname'),'_sql')), if(equals(parameters('osVersion'), 'SQL2016SP2-WS20169'), concat(parameters('vmname'),'_sql')), parameters('vmname')]",
         "sqlDiskName": "[concat(variables('vmName'), '-disk')]"
     },
     "resources": [
