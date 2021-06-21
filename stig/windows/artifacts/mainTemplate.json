@@ -587,7 +587,20 @@
                     "version": "latest"
                 }
             }
-        }
+        },
+        "sqlDataDisk": [
+            {
+                "lun": 0,
+                "createOption": "attach",
+                "caching": "ReadOnly",
+                "diskSizeGB": null,
+                "managedDisk": {
+                    "id": "[resourceId('Microsoft.Compute/disks', parameters('sqlDataDisk'))]",
+                    "storageAccountType": null
+                },
+                "writeAcceleratorEnabled": "false"
+            }
+        ]
     },
     "resources": [
         {
@@ -742,19 +755,7 @@
                             "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
                         }
                     },
-                    "dataDisks": [
-                        {
-                            "lun": 0,
-                            "createOption": "attach",
-                            "caching": "ReadOnly",
-                            "diskSizeGB": null,
-                            "managedDisk": {
-                                "id": "[resourceId('Microsoft.Compute/disks', parameters('sqlDataDisk'))]",
-                                "storageAccountType": null
-                            },
-                            "writeAcceleratorEnabled": "false"
-                        }
-                    ]
+                    "dataDisks": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016', variable('sqlDatadisk'), if(equals(parameters('osVersion'), 'SQL2016SP2-WS2019', variable('sqlDatadisk'), , json('null')))]"
                 },
                 "networkProfile": {
                     "networkInterfaces": [
