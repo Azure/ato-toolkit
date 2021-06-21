@@ -710,7 +710,7 @@
             }
         },
         {
-            "name": "[variables('sqlDataDisk')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
             "type": "Microsoft.Compute/disks",
             "apiVersion": "2020-09-30",
             "location": "[parameters('location')]",
@@ -723,7 +723,14 @@
             },
             "sku": {
                 "name": "Premium_LRS"
-            }
+            },
+            "copy": {
+                "name": "virtualMachineLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "nicLoop"
+            ]
         },
         {
             "type": "Microsoft.Compute/virtualMachines",
