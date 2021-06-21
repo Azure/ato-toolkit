@@ -584,20 +584,7 @@
                 }
             }
         },
-        "sqlDiskName": "[concat(parameters('vmName'), '-disk')]",
-        "sqlDataDisk": [
-            {
-                "lun": 0,
-                "createOption": "attach",
-                "caching": "ReadOnly",
-                "diskSizeGB": null,
-                "managedDisk": {
-                    "id": "[resourceId('Microsoft.Compute/disks', variables('sqlDiskName'))]",
-                    "storageAccountType": null
-                },
-                "writeAcceleratorEnabled": "false"
-            }
-        ]
+        "sqlDiskName": "[concat(parameters('vmName'), '-disk')]"
     },
     "resources": [
         {
@@ -733,6 +720,7 @@
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2020-06-01",
             "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
+            "condition": "[or(not(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'))), not(equals(parameters('osVersion'), 'SQL2016SP2-WS2019')))]",
             "location": "[parameters('location')]",
             "copy": {
                 "name": "virtualMachineLoop",
@@ -758,8 +746,72 @@
                             "storageAccountType": "[parameters('osDiskStorageType')]",
                             "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
                         }
+                    }
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex())))]"
+                        }
+                    ]
+                },
+                "availabilitySet": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), variables('availabilitySet'), json('null'))]",
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
+                        "storageUri": "[if(not(equals(parameters('diagnosticStorageResourceId'), '')), reference(parameters('diagnosticStorageResourceId'), variables('storageApiVersion')).primaryEndpoints.blob, json('null'))]"
+                    }
+                },
+                "licenseType": "[if(equals(parameters('enableHybridBenefitServerLicense'), true()), 'Windows_Server', if(equals(parameters('enableMultisessionClientLicense'), true()), 'Windows_Client', json('null')))]"
+            },
+            "resources": [
+            ]
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2020-06-01",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
+            "location": "[parameters('location')]",
+            "condition": "[or(equals(parameters('osVersion'), 'SQL2016SP2-WS2016')), (equals(parameters('osVersion'), 'SQL2016SP2-WS2019'))]",
+               
+            "copy": {
+                "name": "virtualMachineLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "virtualMachineDiskLoop"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('vmSize')]"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('vmName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]"
+                },
+                "storageProfile": {
+                    "imageReference": "[variables('images')[parameters('osVersion')].reference]",
+                    "osDisk": {
+                        "createOption": "FromImage",
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('osDiskStorageType')]",
+                            "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
+                        }
                     },
-                    "dataDisks": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), variables('sqlDatadisk'), if(equals(parameters('osVersion'), 'SQL2016SP2-WS2019'), variables('sqlDatadisk'), json('null')))]"
+                    "dataDisks": [
+                        {
+                            "lun": 0,
+                            "createOption": "attach",
+                            "caching": "ReadOnly",
+                            "diskSizeGB": null,
+                            "managedDisk": {
+                                "id": "[resourceId('Microsoft.Compute/disks', concat(variables('sqlDiskName'), if(equals(variables('instanceCount'), 1), '', copyIndex())))]",
+                                "storageAccountType": null
+                            },
+                            "writeAcceleratorEnabled": "false"
+                        }
+                    ]
                 },
                 "networkProfile": {
                     "networkInterfaces": [
