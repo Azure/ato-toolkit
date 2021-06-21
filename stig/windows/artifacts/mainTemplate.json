@@ -755,7 +755,7 @@
                             "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
                         }
                     },
-                    "dataDisks": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016', variable('sqlDatadisk')), if(equals(parameters('osVersion'), 'SQL2016SP2-WS2019', variable('sqlDatadisk'), json('null')))]"
+                    "dataDisks": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), variable('sqlDatadisk'), if(equals(parameters('osVersion'), 'SQL2016SP2-WS2019'), variable('sqlDatadisk'), json('null')))]"
                 },
                 "networkProfile": {
                     "networkInterfaces": [
