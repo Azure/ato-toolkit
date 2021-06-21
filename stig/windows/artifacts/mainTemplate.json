@@ -584,7 +584,7 @@
                 }
             }
         },
-        "sqlDiskName": "[concat(parameters('vmName'), variables('instanceCount'))]",
+        "sqlDiskName": "[parameters('vmName')]",
         "sqlDataDisk": [
             {
                 "lun": 0,
