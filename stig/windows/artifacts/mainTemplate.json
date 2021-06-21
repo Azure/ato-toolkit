@@ -588,6 +588,7 @@
                 }
             }
         },
+        "sqlDataDiskName" : "[concat(parameters('vmName'), '-sql_DataDisk_0')]",
         "sqlDataDisk": [
             {
                 "lun": 0,
@@ -595,7 +596,7 @@
                 "caching": "ReadOnly",
                 "diskSizeGB": null,
                 "managedDisk": {
-                    "id": "[resourceId('Microsoft.Compute/disks', parameters('sqlDataDisk'))]",
+                    "id": "[resourceId('Microsoft.Compute/disks', variables('sqlDataDiskName'))]",
                     "storageAccountType": null
                 },
                 "writeAcceleratorEnabled": "false"
