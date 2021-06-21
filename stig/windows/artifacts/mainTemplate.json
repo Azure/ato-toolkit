@@ -501,6 +501,10 @@
             "metadata": {
                 "description": "(Optional) Enable rServices on SQL."
             }
+        },
+        "sqlDataDisk": {
+            "type": "string",
+            "defaultValue": "sql_DataDisk_0"
         }
     },
     "variables": {
@@ -584,7 +588,6 @@
                 }
             }
         },
-        "sqlDataDiskName" : "[concat(parameters('vmName'), '-sql_DataDisk_0')]",
         "sqlDataDisk": [
             {
                 "lun": 0,
@@ -592,7 +595,7 @@
                 "caching": "ReadOnly",
                 "diskSizeGB": null,
                 "managedDisk": {
-                    "id": "[resourceId('Microsoft.Compute/disks', variables('sqlDataDiskName'))]",
+                    "id": "[resourceId('Microsoft.Compute/disks', parameters('sqlDataDisk'))]",
                     "storageAccountType": null
                 },
                 "writeAcceleratorEnabled": "false"
@@ -707,7 +710,7 @@
             }
         },
         {
-            "name": "[variables('sqlDataDiskName')]",
+            "name": "[parameters('sqlDataDisk')]",
             "type": "Microsoft.Compute/disks",
             "apiVersion": "2020-09-30",
             "location": "[parameters('location')]",
@@ -752,7 +755,7 @@
                             "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
                         }
                     },
-                    "dataDisks": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), variables('sqlDatadiskName'), if(equals(parameters('osVersion'), 'SQL2016SP2-WS2019'), variables('sqlDatadiskName'), json('null')))]"
+                    "dataDisks": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), variables('sqlDatadisk'), if(equals(parameters('osVersion'), 'SQL2016SP2-WS2019'), variables('sqlDatadisk'), json('null')))]"
                 },
                 "networkProfile": {
                     "networkInterfaces": [
