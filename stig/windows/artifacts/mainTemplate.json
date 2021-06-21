@@ -508,13 +508,13 @@
         "availabilitySet": {
             "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySetName'))]"
         },
-        "nicName": "[concat(variables('vmName'), '-nic')]",
+        "nicName": "[concat(parameters('vmName'), '-nic')]",
         "vnetId": {
             "new": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vmVirtualNetwork'))]",
             "existing": "[resourceId(parameters('virtualNetworkResourceGroupName'),'Microsoft.Storage/virtualNetworks',parameters('vmVirtualNetwork'))]"
         },
         "subnetRef": "[concat(variables('vnetId')[parameters('virtualNetworkNewOrExisting')],'/subnets/',parameters('subnetName'))]",
-        "networkSecurityGroupName": "[concat(variables('vmName'), '-nsg')]",
+        "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
         "applicationSecurityGroup": [
             {
                 "id": "[parameters('applicationSecurityGroupResourceId')]"
@@ -532,7 +532,7 @@
         "wadperfcounters1": "<PerformanceCounters scheduledTransferPeriod=\"PT1M\"><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% Processor Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU utilization\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% Privileged Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU privileged time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% User Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU user time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor Information(_Total)\\Processor Frequency\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"CPU frequency\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\System\\Processes\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Processes\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Process(_Total)\\Thread Count\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Threads\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Process(_Total)\\Handle Count\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Handles\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\% Committed Bytes In Use\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Memory usage\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Available Bytes\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory available\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Committed Bytes\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory committed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Commit Limit\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory commit limit\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active time\" locale=\"en-us\"/></PerformanceCounterConfiguration>",
         "wadperfcounters2": "<PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Read Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active read time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Write Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active write time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Transfers/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Reads/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk read operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Writes/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk write operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Read Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk read speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Write Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk write speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\LogicalDisk(_Total)\\% Free Space\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk free space (percentage)\" locale=\"en-us\"/></PerformanceCounterConfiguration></PerformanceCounters>",
         "wadcfgxstart": "[concat(variables('wadlogs'), variables('wadperfcounters1'), variables('wadperfcounters2'), '<Metrics resourceId=\"')]",
-        "wadmetricsresourceid": "[resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))]",
+        "wadmetricsresourceid": "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
         "wadcfgxend": "\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>",
         "images": {
             "2019-Datacenter": {
@@ -584,8 +584,20 @@
                 }
             }
         },
-        "vmName": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), concat(parameters('vmname'),'_sql'), if(equals(parameters('osVersion'), 'SQL2016SP2-WS20169'), concat(parameters('vmname'),'_sql'), parameters('vmname')))]",
-        "sqlDiskName": "[concat(variables('vmName'), '-disk')]"
+        "sqlDiskName": "[concat(parameters('vmName'), '-disk')]",
+        "sqlDataDisk": [
+            {
+                "lun": 0,
+                "createOption": "attach",
+                "caching": "ReadOnly",
+                "diskSizeGB": null,
+                "managedDisk": {
+                    "id": "[resourceId('Microsoft.Compute/disks', variables('sqlDiskName'))]",
+                    "storageAccountType": null
+                },
+                "writeAcceleratorEnabled": "false"
+            }
+        ]
     },
     "resources": [
         {
@@ -721,7 +733,6 @@
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2020-06-01",
             "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
-            "condition": "[or(not(equals(parameters('osVersion'), 'SQL2016SP2-WS2016')), not(equals(parameters('osVersion'), 'SQL2016SP2-WS2019')))]",
             "location": "[parameters('location')]",
             "copy": {
                 "name": "virtualMachineLoop",
@@ -735,58 +746,7 @@
                     "vmSize": "[parameters('vmSize')]"
                 },
                 "osProfile": {
-                    "computerName": "[variables('vmName')]",
-                    "adminUsername": "[parameters('adminUsername')]",
-                    "adminPassword": "[parameters('adminPassword')]"
-                },
-                "storageProfile": {
-                    "imageReference": "[variables('images')[parameters('osVersion')].reference]",
-                    "osDisk": {
-                        "createOption": "FromImage",
-                        "managedDisk": {
-                            "storageAccountType": "[parameters('osDiskStorageType')]",
-                            "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
-                        }
-                    }
-                },
-                "networkProfile": {
-                    "networkInterfaces": [
-                        {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex())))]"
-                        }
-                    ]
-                },
-                "availabilitySet": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), variables('availabilitySet'), json('null'))]",
-                "diagnosticsProfile": {
-                    "bootDiagnostics": {
-                        "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
-                        "storageUri": "[if(not(equals(parameters('diagnosticStorageResourceId'), '')), reference(parameters('diagnosticStorageResourceId'), variables('storageApiVersion')).primaryEndpoints.blob, json('null'))]"
-                    }
-                },
-                "licenseType": "[if(equals(parameters('enableHybridBenefitServerLicense'), true()), 'Windows_Server', if(equals(parameters('enableMultisessionClientLicense'), true()), 'Windows_Client', json('null')))]"
-            },
-            "resources": [
-            ]
-        },
-        {
-            "type": "Microsoft.Compute/virtualMachines",
-            "apiVersion": "2020-06-01",
-            "name": "[concat(variables('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
-            "location": "[parameters('location')]",
-            "condition": "[or(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), equals(parameters('osVersion'), 'SQL2016SP2-WS2019'))]",
-            "copy": {
-                "name": "virtualMachineLoop",
-                "count": "[variables('instanceCount')]"
-            },
-            "dependsOn": [
-                "virtualMachineDiskLoop"
-            ],
-            "properties": {
-                "hardwareProfile": {
-                    "vmSize": "[parameters('vmSize')]"
-                },
-                "osProfile": {
-                    "computerName": "[variables('vmName')]",
+                    "computerName": "[parameters('vmName')]",
                     "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPassword')]"
                 },
@@ -799,19 +759,7 @@
                             "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
                         }
                     },
-                    "dataDisks": [
-                        {
-                            "lun": 0,
-                            "createOption": "attach",
-                            "caching": "ReadOnly",
-                            "diskSizeGB": null,
-                            "managedDisk": {
-                                "id": "[resourceId('Microsoft.Compute/disks', concat(variables('sqlDiskName'), if(equals(variables('instanceCount'), 1), '', copyIndex())))]",
-                                "storageAccountType": null
-                            },
-                            "writeAcceleratorEnabled": "false"
-                        }
-                    ]
+                    "dataDisks": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), variables('sqlDatadisk'), if(equals(parameters('osVersion'), 'SQL2016SP2-WS2019'), variables('sqlDatadisk'), json('null')))]"
                 },
                 "networkProfile": {
                     "networkInterfaces": [
@@ -835,7 +783,7 @@
         {
             "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
             "apiVersion": "2017-05-01-preview",
-            "name": "[concat(variables('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights/service')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights/service')]",
             "location": "[parameters('location')]",
             "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
             "copy": {
@@ -863,7 +811,7 @@
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "apiVersion": "2015-06-15",
-            "name": "[concat(variables('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.EnterpriseCloud.Monitoring')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.EnterpriseCloud.Monitoring')]",
             "location": "[parameters('location')]",
             "condition": "[not(equals(parameters('logAnalyticsWorkspaceId'), ''))]",
             "copy": {
@@ -889,7 +837,7 @@
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "apiVersion": "2020-06-01",
-            "name": "[concat(variables('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights.VMDiagnosticsSettings')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights.VMDiagnosticsSettings')]",
             "location": "[parameters('location')]",
             "condition": "[not(equals(parameters('diagnosticStorageResourceId'), ''))]",
             "copy": {
@@ -918,7 +866,7 @@
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "apiVersion": "2020-12-01",
-            "name": "[concat(variables('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/install-powershell-modules')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/install-powershell-modules')]",
             "location": "[parameters('location')]",
             "condition": "[not(equals(parameters('_artifactsLocation'), ''))]",
             "copy": {
@@ -950,7 +898,7 @@
         {
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "apiVersion": "2020-12-01",
-            "name": "[concat(variables('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/setup-win-dsc-stig')]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/setup-win-dsc-stig')]",
             "location": "[parameters('location')]",
             "condition": "[not(equals(parameters('_artifactsLocation'), ''))]",
             "copy": {
@@ -976,7 +924,7 @@
             }
         },
         {
-            "name": "[variables('vmName')]",
+            "name": "[parameters('vmName')]",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-04-01",
             "location": "[parameters('location')]",
@@ -988,7 +936,7 @@
             "kind": "Storage"
         },
         {
-            "name": "[concat(variables('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
             "type": "Microsoft.SqlVirtualMachine/SqlVirtualMachines",
             "apiVersion": "2017-03-01-preview",
             "location": "[parameters('location')]",
@@ -1001,7 +949,7 @@
                 "cseLoop"
             ],
             "properties": {
-                "virtualMachineResourceId": "[resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))]",
+                "virtualMachineResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
                 "sqlManagement": "Full",
                 "SqlServerLicenseType": "[if(equals(parameters('enableHybridBenefitSqlLicense'), true()), 'AHUB', 'PAYG')]",
                 "AutoPatchingSettings": {
