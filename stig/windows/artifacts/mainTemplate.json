@@ -584,7 +584,7 @@
                 }
             }
         },
-        "sqlDiskName": "[parameters('vmName')]",
+        "sqlDiskName": "[concat(parameters('vmName'), '-disk')]",
         "sqlDataDisk": [
             {
                 "lun": 0,
