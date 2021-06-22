@@ -925,18 +925,6 @@
             }
         },
         {
-            "name": "[variables('sqlStorageAccountName')]",
-            "type": "Microsoft.Storage/storageAccounts",
-            "apiVersion": "2019-04-01",
-            "location": "[parameters('location')]",
-            "condition": "[equals(parameters('automatedBackup'), 'true')]",
-            "properties": {},
-            "sku": {
-                "name": "Standard_GRS"
-            },
-            "kind": "Storage"
-        },
-        {
             "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
             "type": "Microsoft.SqlVirtualMachine/SqlVirtualMachines",
             "apiVersion": "2017-03-01-preview",
