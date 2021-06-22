@@ -485,7 +485,7 @@
             }
         },
         "kvAdminSecret":{
-            "type": "string",
+            "type": "securestring",
             "defaultValue": "",
             "metadata": {
                 "description": "(Optional) Key Vault secret"
@@ -597,7 +597,8 @@
                 },
                 "writeAcceleratorEnabled": "false"
             }
-        ]
+        ],
+        "sqlStorageAccountName": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), 'fakestorageaccountname', split(parameters('sqlAutobackupStorageAccountName'), '/')[8])]",
     },
     "resources": [
         {
@@ -924,7 +925,7 @@
             }
         },
         {
-            "name": "[parameters('vmName')]",
+            "name": "[variables('sqlStorageAccountName')]",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-04-01",
             "location": "[parameters('location')]",
