@@ -995,7 +995,7 @@
                     }
                 },
                 "AutoBackupSettings": {
-                    "Enable": "[parameters('sqlAutomatedBackup)]",
+                    "Enable": "[parameters('sqlAutomatedBackup')]",
                     "RetentionPeriod": "[parameters('sqlAutobackupRetentionPeriod')]",
                     "EnableEncryption": "[parameters('sqlEncryptionBackup')]",
                     "BackupSystemDbs": "[parameters('systemDatabaseBackup')]",
