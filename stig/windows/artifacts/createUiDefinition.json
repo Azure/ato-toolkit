@@ -51,7 +51,7 @@
                             ],
                             "required": true
                         },
-                        "visible": true
+                         "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
                     {
                         "name": "availabilitySetName",
