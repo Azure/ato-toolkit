@@ -51,7 +51,7 @@
                             ],
                             "required": true
                         },
-                        "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'))]"
+                        "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'), equals(steps('instance').osVersion, 'Windows-10-Enterprise'), equals(steps('instance').osVersion, 'Windows-10-Enterprise-Multisession'))]"
                     
                     },
                     {
