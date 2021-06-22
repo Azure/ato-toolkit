@@ -452,6 +452,17 @@
                 "description": "(Optional) SQL backup type."
             }
         },
+        "sqlEncryptionBackup": {
+            "type": "string",
+            "defaultValue": "false",
+            "allowedValues": [
+                "false",
+                "true"
+            ],
+            "metadata": {
+                "description": "(Optional) Enable encyption of SQL backup."
+            }
+        },
         "sqlAutobackupEncryptionPassword": {
             "type": "securestring",
             "defaultValue": "",
