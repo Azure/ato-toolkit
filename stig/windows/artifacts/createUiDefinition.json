@@ -555,7 +555,7 @@
                             ],
                             "required": true
                         },
-                        "visible": true
+                        "visible": false
                     },
                     {
                         "name": "kvUrl",
