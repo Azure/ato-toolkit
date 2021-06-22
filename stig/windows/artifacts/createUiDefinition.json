@@ -839,7 +839,7 @@
                         }
                     },
                     {
-                        "name": "automatedBackup",
+                        "name": "sqlAutomatedBackup",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Automated backup",
                         "defaultValue": "Disable",
@@ -860,7 +860,7 @@
                         "visible": true
                     },
                     {
-                        "name": "retentionPeriod",
+                        "name": "sqlAutobackupRetentionPeriod",
                         "type": "Microsoft.Common.Slider",
                         "min": 0,
                         "max": 30,
@@ -870,7 +870,7 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible": "[equals(steps('sqlServerSettings').automatedBackup, 'true')]"
+                        "visible": "[equals(steps('sqlServerSettings').sqlAutomatedBackup, 'true')]"
                     },
                     {
                         "name": "sqlAutobackupStorageAccountName",
@@ -884,10 +884,10 @@
                                 "location": "onBasic"
                             }
                         },
-                        "visible": "[equals(steps('sqlServerSettings').automatedBackup, 'true')]"
+                        "visible": "[equals(steps('sqlServerSettings').sqlAutomatedBackup, 'true')]"
                     },
                     {
-                        "name": "encryptionBackup",
+                        "name": "sqlEncryptionBackup",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Encryption",
                         "defaultValue": "Disable",
@@ -904,10 +904,10 @@
                             ],
                             "required": true
                         },
-                        "visible": "[equals(steps('sqlServerSettings').automatedBackup, 'true')]"
+                        "visible": "[equals(steps('sqlServerSettings').sqlAutomatedBackup, 'true')]"
                     },
                     {
-                        "name": "encryptionPassword",
+                        "name": "sqlAutobackupEncryptionPassword",
                         "type": "Microsoft.Compute.CredentialsCombo",
                         "label": {
                             "password": "Encryption password",
@@ -925,7 +925,7 @@
                             "hideConfirmation": false
                         },
                         "osPlatform": "Windows",
-                        "visible": "[equals(steps('sqlServerSettings').encryptionBackup, 'true')]"
+                        "visible": "[equals(steps('sqlServerSettings').sqlEncryptionBackup, 'true')]"
                     },
                     {
                         "name": "systemDatabaseBackup",
@@ -946,7 +946,7 @@
                             ],
                             "required": false
                         },
-                        "visible": "[equals(steps('sqlServerSettings').automatedBackup, 'true')]"
+                        "visible": "[equals(steps('sqlServerSettings').sqlAutomatedBackup, 'true')]"
                     },
                     {
                         "name": "backupScheduleType",
@@ -967,7 +967,7 @@
                             ],
                             "required": false
                         },
-                        "visible": "[equals(steps('sqlServerSettings').automatedBackup, 'true')]"
+                        "visible": "[equals(steps('sqlServerSettings').sqlAutomatedBackup, 'true')]"
                     },
                     {
                         "name": "scheduleFrequencyBackup",
@@ -1189,9 +1189,10 @@
             "maintenanceScheduleDay": "[steps('sqlServerSettings').maintenanceScheduleDay]",
             "maintenanceScheduleHour": "[steps('sqlServerSettings').maintenanceScheduleHour]",
             "patchingDuration": "[steps('sqlServerSettings').patchingDuration]",
-            "automatedBackup": "[steps('sqlServerSettings').automatedBackup]",
-            "retentionPeriod": "[steps('sqlServerSettings').retentionPeriod]",
-            "encryptionBackup": "[steps('sqlServerSettings').encryptionBackup]",
+            "sqlAutomatedBackup": "[steps('sqlServerSettings').sqlAutomatedBackup]",
+            "sqlAutobackupRetentionPeriod": "[steps('sqlServerSettings').sqlAutobackupRetentionPeriod]",
+            "sqlEncryptionBackup": "[steps('sqlServerSettings').sqlEncryptionBackup]",
+            "sqlAutobackupEncryptionPassword": "[steps('sqlServerSettings').sqlAutobackupEncryptionPassword.password]",
             "sqlAutobackupStorageAccountName": "[steps('sqlServerSettings').sqlAutobackupStorageAccountName.id]",
             "systemDatabaseBackup": "[steps('sqlServerSettings').systemDatabaseBackup]",
             "backupScheduleType": "[steps('sqlServerSettings').backupScheduleType]",

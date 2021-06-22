@@ -295,7 +295,7 @@
                 "description": "(Optional) Set a patching duration which all Windows and SQL patches will be applied."
             }
         },
-        "automatedBackup": {
+        "sqlAutomatedBackup": {
             "type": "string",
             "defaultValue": "false",
             "allowedValues": [
@@ -306,7 +306,7 @@
                 "description": "(Optional) Enable an automatic backup of SQL."
             }
         },
-        "retentionPeriod":{
+        "sqlAutobackupRetentionPeriod":{
             "type": "int",
             "defaultValue": 30,
             "minValue":0,
@@ -450,6 +450,13 @@
             ],
             "metadata": {
                 "description": "(Optional) SQL backup type."
+            }
+        },
+        "sqlAutobackupEncryptionPassword": {
+            "type": "securestring",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Password to encrypt SQL backup."
             }
         },
         "keyVaultIntegration":{
@@ -986,7 +993,17 @@
                     "AdditionalFeaturesServerConfigurations": {
                         "IsRServicesEnabled": "[parameters('rServicesEnabled')]"
                     }
-                }
+                },
+                "AutoBackupSettings": {
+                    "Enable": "[parameters('sqlAutomatedBackup)]",
+                    "RetentionPeriod": "[parameters('sqlAutobackupRetentionPeriod')]",
+                    "EnableEncryption": "[parameters('sqlEncryptionBackup')]",
+                    "BackupSystemDbs": "[parameters('systemDatabaseBackup')]",
+                    "BackupScheduleType": "[parameters('backupScheduleType')]",
+                    "Password": "[parameters('sqlAutobackupEncryptionPassword')]",
+                    "StorageAccountUrl": "[reference(resourceId('cloud-shell-storage-usgovvirginia', 'Microsoft.Storage/storageAccounts', variables('sqlStorageAccountName')), '2019-04-01').primaryEndpoints['blob']]",
+                    "StorageAccessKey": "[first(listKeys(resourceId('cloud-shell-storage-usgovvirginia', 'Microsoft.Storage/storageAccounts', variables('sqlStorageAccountName')), '2019-04-01').keys).value]"
+                },
             }
         }
     ],
