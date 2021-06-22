@@ -1003,7 +1003,7 @@
                     "Password": "[parameters('sqlAutobackupEncryptionPassword')]",
                     "StorageAccountUrl": "[reference(resourceId('cloud-shell-storage-usgovvirginia', 'Microsoft.Storage/storageAccounts', variables('sqlStorageAccountName')), '2019-04-01').primaryEndpoints['blob']]",
                     "StorageAccessKey": "[first(listKeys(resourceId('cloud-shell-storage-usgovvirginia', 'Microsoft.Storage/storageAccounts', variables('sqlStorageAccountName')), '2019-04-01').keys).value]"
-                },
+                }
             }
         }
     ],
