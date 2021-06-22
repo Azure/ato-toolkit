@@ -1183,7 +1183,7 @@
             "sqlConnectivitySettings": "[steps('sqlServerSettings').sqlConnectivitySettings]",
             "portNumber": "[steps('sqlServerSettings').portNumber]",
             "sqlAuthenticationLogin": "[steps('sqlServerSettings').sqlAuthenticationLogin]",
-            "sqlAuthenticationPasswordr": "[steps('sqlServerSettings').sqlAuthenticationPassword.password]",
+            "sqlAuthenticationPassword": "[steps('sqlServerSettings').sqlAuthenticationPassword.password]",
             "enableHybridBenefitSqlLicense": "[steps('sqlServerSettings').enableHybridBenefitSqlLicense]",
             "automatedPatching": "[steps('sqlServerSettings').automatedPatching]",
             "maintenanceScheduleDay": "[steps('sqlServerSettings').maintenanceScheduleDay]",
