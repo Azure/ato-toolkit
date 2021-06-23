@@ -555,7 +555,7 @@
                             ],
                             "required": true
                         },
-                        "visible": false
+                        "visible": true
                     },
                     {
                         "name": "kvUrl",
@@ -565,7 +565,7 @@
                         "defaultValue": "",
                         "constraints": {
                             "required": true,
-                            "validationMessage": "The Key Vault URL must start with http or https"
+                            "validationMessage": "Key Vault URL should be in the format of 'https://{keyvaultname}.vault.usgovcloudapi.net'"
                         },
                         "visible": "[equals(steps('sqlServerSettings').keyVaultIntegration, 'true')]"
                     },
