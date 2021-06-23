@@ -603,9 +603,9 @@
             }
         },
         "sqlDiskName": "[concat(parameters('vmName'), '-disk')]",
-        "sqlDataDisk": [
+        "copy": [
             {
-                "name": "objectArray",
+                "name": "sqlDataDisk",
                 "count": "[parameters('instanceCount')]",
                 "input": {
                     "lun": 0,
@@ -613,7 +613,7 @@
                     "caching": "ReadOnly",
                     "diskSizeGB": null,
                     "managedDisk": {
-                        "id": "[resourceId('Microsoft.Compute/disks', concat(variables('sqlDiskName'), if(equals(variables('instanceCount'), 1), '', copyIndex('objectArray', 1))))]",
+                        "id": "[resourceId('Microsoft.Compute/disks', concat(variables('sqlDiskName'), if(equals(variables('instanceCount'), 1), '', copyIndex('sqlDataDisk', 1))))]",
                         "storageAccountType": null
                     },
                     "writeAcceleratorEnabled": "false"
