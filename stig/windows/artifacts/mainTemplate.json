@@ -1006,6 +1006,19 @@
                     }
                 },
                 "AutoBackupSettings": {
+                    "Enable": "[if(equals(parameters('sqlAutomatedBackup'), ''), '', parameters('sqlAutomatedBackup'))]",
+                    "RetentionPeriod": "[if(equals(parameters('sqlAutobackupRetentionPeriod'), ''), '', parameters('sqlAutobackupRetentionPeriod'))]",
+                    "EnableEncryption": "[if(equals(parameters('sqlEncryptionBackup'), ''), '', parameters('sqlEncryptionBackup'))]",
+                    "BackupSystemDbs": "[if(equals(parameters('systemDatabaseBackup'), ''), '', parameters('systemDatabaseBackup'))]",
+                    "BackupScheduleType": "[if(equals(parameters('backupScheduleType'), ''), '', parameters('backupScheduleType'))]",
+                    "LogBackupFrequency": "[if(equals(parameters('logBackupFrequency'), ''), '', parameters('logBackupFrequency'))]",
+                    "FullBackupStartTime": "[if(equals(parameters('fullBackupStartTime'), ''), '', parameters('fullBackupStartTime'))]",
+                    "FullBackupWindowHours": "[if(equals(parameters('backupTimeWindow'), ''), '', parameters('backupTimeWindow'))]",
+                    "FullBackupFrequency": "[if(equals(parameters('fullBackupFrequency'), ''), '', parameters('fullBackupFrequency'))]",
+                    "Password": "[if(equals(parameters('sqlAutobackupEncryptionPassword'), ''), '', parameters('sqlAutobackupEncryptionPassword'))]",
+                    "StorageAccountUrl": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', reference(resourceId('cloud-shell-storage-usgovvirginia', 'Microsoft.Storage/storageAccounts', variables('sqlStorageAccountName')), '2019-04-01').primaryEndpoints['blob'])]",
+                    "StorageAccessKey": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', first(listKeys(resourceId('cloud-shell-storage-usgovvirginia', 'Microsoft.Storage/storageAccounts', variables('sqlStorageAccountName')), '2019-04-01').keys).value)]"
+
                 }
             }
         }
