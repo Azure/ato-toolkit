@@ -51,7 +51,7 @@
                             ],
                             "required": true
                         },
-                        "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'), equals(steps('instance').osVersion, '19h2-ent'), equals(steps('instance').osVersion, '19h2-evd'))]"
+                        "visible": true
                     
                     },
                     {
@@ -587,7 +587,7 @@
                             "confirmPassword": "Confirm Principal secret"
                         },
                         "toolTip": {
-                            "password": "Create a password to use with credential name"
+                            "password": "Enter the key that was generated for the application after it was registered with Microsoft Azure Active Directory."
                         },
                         "constraints": {
                             "required": false,
