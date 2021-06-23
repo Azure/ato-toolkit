@@ -603,21 +603,17 @@
             }
         },
         "sqlDiskName": "[concat(parameters('vmName'), '-disk')]",
-        "copy": [
+        "sqlDataDisk": [
             {
-                "name": "sqlDataDisk",
-                "count": "[parameters('instanceCount')]",
-                "input": {
-                    "lun": 0,
-                    "createOption": "attach",
-                    "caching": "ReadOnly",
-                    "diskSizeGB": null,
-                    "managedDisk": {
-                        "id": "[resourceId('Microsoft.Compute/disks', concat(variables('sqlDiskName'), if(equals(variables('instanceCount'), 1), '', copyIndex('sqlDataDisk', 1))))]",
-                        "storageAccountType": null
-                    },
-                    "writeAcceleratorEnabled": "false"
-                }
+                "lun": 0,
+                "createOption": "attach",
+                "caching": "ReadOnly",
+                "diskSizeGB": null,
+                "managedDisk": {
+                    "id": "[resourceId('Microsoft.Compute/disks', variables('sqlDiskName'))]",
+                    "storageAccountType": null
+                },
+                "writeAcceleratorEnabled": "false"
             }
         ],
         "sqlStorageAccountName": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), 'fakestorageaccountname', split(parameters('sqlAutobackupStorageAccountName'), '/')[8])]"
