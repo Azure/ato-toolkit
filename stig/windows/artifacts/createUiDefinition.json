@@ -970,7 +970,7 @@
                         "visible": "[equals(steps('sqlServerSettings').sqlAutomatedBackup, 'true')]"
                     },
                     {
-                        "name": "scheduleFrequencyBackup",
+                        "name": "fullBackupFrequency",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Backup frequency",
                         "toolTip": "Daily - Take full backups every day at the specified start time. Weekly - Take full backups every week beginning at the next specified start time",
@@ -991,7 +991,7 @@
                         "visible": "[equals(steps('sqlServerSettings').backupScheduleType, 'Manual')]"
                     },
                     {
-                        "name": "startTimeBackup",
+                        "name": "fullBackupStartTime",
                         "type": "Microsoft.Common.DropDown",
                         "label": "Backup start time (local time)",
                         "defaultValue": "02:00",
@@ -1196,8 +1196,8 @@
             "sqlAutobackupStorageAccountName": "[steps('sqlServerSettings').sqlAutobackupStorageAccountName.id]",
             "systemDatabaseBackup": "[steps('sqlServerSettings').systemDatabaseBackup]",
             "backupScheduleType": "[steps('sqlServerSettings').backupScheduleType]",
-            "scheduleFrequencyBackup": "[steps('sqlServerSettings').scheduleFrequencyBackup]",
-            "startTimeBackup": "[steps('sqlServerSettings').startTimeBackup]",
+            "fullBackupFrequency": "[steps('sqlServerSettings').fullBackupFrequency]",
+            "fullBackupStartTime": "[steps('sqlServerSettings').fullBackupStartTime]",
             "backupTimeWindow": "[steps('sqlServerSettings').backupTimeWindow]",
             "logBackupFrequency": "[steps('sqlServerSettings').logBackupFrequency]",
             "kvCredentialName": "[steps('sqlServerSettings').kvCredentialName]",

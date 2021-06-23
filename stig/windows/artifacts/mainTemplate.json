@@ -337,7 +337,7 @@
                 "description": "(Optional) Enable backup of Master, Model, and MSDB SQL Databases."
             }
         },
-        "scheduleFrequencyBackup":{
+        "fullBackupFrequency":{
             "type": "string",
             "defaultValue": "Weekly",
             "allowedValues": [
@@ -348,7 +348,7 @@
                 "description": "(Optional) Frequency SQL backups."
             }
         },
-        "startTimeBackup":{
+        "fullBackupStartTime":{
             "type": "string",
             "defaultValue": "2",
             "allowedValues": [
@@ -1012,6 +1012,9 @@
                     "BackupSystemDbs": "[parameters('systemDatabaseBackup')]",
                     "BackupScheduleType": "[parameters('backupScheduleType')]",
                     "Password": "[parameters('sqlAutobackupEncryptionPassword')]",
+                    "FullBackupFrequency": "[parameters('fullBackupFrequency')]",
+                    "FullBackupStartTime": "[parameters('fullBackupStartTime')]",
+                    "FullBackupWindowHours": "[parameters('backupTimeWindow')]",
                     "StorageAccountUrl": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', reference(resourceId('cloud-shell-storage-usgovvirginia', 'Microsoft.Storage/storageAccounts', variables('sqlStorageAccountName')), '2019-04-01').primaryEndpoints['blob'])]",
                     "StorageAccessKey": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', first(listKeys(resourceId('cloud-shell-storage-usgovvirginia', 'Microsoft.Storage/storageAccounts', variables('sqlStorageAccountName')), '2019-04-01').keys).value)]"
                 }
