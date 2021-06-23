@@ -561,11 +561,10 @@
                         "name": "kvUrl",
                         "type": "Microsoft.Common.TextBox",
                         "label": "Key Vault URL",
-                        "toolTip": "Key Vault URL",
+                        "toolTip": "Key Vault URL should be in the format of 'https://{keyvaultname}.vault.usgovcloudapi.net'",
                         "defaultValue": "",
                         "constraints": {
-                            "required": true,
-                            "validationMessage": "Key Vault URL should be in the format of 'https://{keyvaultname}.vault.usgovcloudapi.net'"
+                            "required": true
                         },
                         "visible": "[equals(steps('sqlServerSettings').keyVaultIntegration, 'true')]"
                     },
