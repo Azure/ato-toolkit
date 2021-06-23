@@ -1006,19 +1006,18 @@
                     }
                 },
                 "AutoBackupSettings": {
-                    "Enable": "[if(equals(parameters('sqlAutomatedBackup'), ''), '', parameters('sqlAutomatedBackup'))]",
-                    "RetentionPeriod": "[if(equals(parameters('sqlAutobackupRetentionPeriod'), ''), '', parameters('sqlAutobackupRetentionPeriod'))]",
-                    "EnableEncryption": "[if(equals(parameters('sqlEncryptionBackup'), ''), '', parameters('sqlEncryptionBackup'))]",
-                    "BackupSystemDbs": "[if(equals(parameters('systemDatabaseBackup'), ''), '', parameters('systemDatabaseBackup'))]",
-                    "BackupScheduleType": "[if(equals(parameters('backupScheduleType'), ''), '', parameters('backupScheduleType'))]",
-                    "LogBackupFrequency": "[if(equals(parameters('logBackupFrequency'), ''), '', parameters('logBackupFrequency'))]",
-                    "FullBackupStartTime": "[if(equals(parameters('fullBackupStartTime'), ''), '', parameters('fullBackupStartTime'))]",
-                    "FullBackupWindowHours": "[if(equals(parameters('backupTimeWindow'), ''), '', parameters('backupTimeWindow'))]",
-                    "FullBackupFrequency": "[if(equals(parameters('fullBackupFrequency'), ''), '', parameters('fullBackupFrequency'))]",
-                    "Password": "[if(equals(parameters('sqlAutobackupEncryptionPassword'), ''), '', parameters('sqlAutobackupEncryptionPassword'))]",
-                    "StorageAccountUrl": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', reference(resourceId('cloud-shell-storage-usgovvirginia', 'Microsoft.Storage/storageAccounts', variables('sqlStorageAccountName')), '2019-04-01').primaryEndpoints['blob'])]",
-                    "StorageAccessKey": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', first(listKeys(resourceId('cloud-shell-storage-usgovvirginia', 'Microsoft.Storage/storageAccounts', variables('sqlStorageAccountName')), '2019-04-01').keys).value)]"
-
+                    "Enable": "[parameters('sqlAutomatedBackup')]",
+                    "RetentionPeriod": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlAutobackupRetentionPeriod'))]",
+                    "EnableEncryption": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlEncryptionBackup'))]",
+                    "BackupSystemDbs": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('systemDatabaseBackup'))]",
+                    "BackupScheduleType": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('backupScheduleType'))]",
+                    "LogBackupFrequency": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('logBackupFrequency'))]",
+                    "FullBackupStartTime":"[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('fullBackupStartTime'))]",
+                    "FullBackupWindowHours": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('backupTimeWindow'))]",
+                    "FullBackupFrequency": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('fullBackupFrequency'))]",
+                    "Password": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlAutobackupEncryptionPassword'))]",
+                    "StorageAccountUrl": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', reference(resourceId('cloud-shell-storage-usgovvirginia', 'Microsoft.Storage/storageAccounts', variables('sqlStorageAccountName')), '2019-04-01').primaryEndpoints['blob'])]",
+                    "StorageAccessKey": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', first(listKeys(resourceId('cloud-shell-storage-usgovvirginia', 'Microsoft.Storage/storageAccounts', variables('sqlStorageAccountName')), '2019-04-01').keys).value)]"
                 }
             }
         }
