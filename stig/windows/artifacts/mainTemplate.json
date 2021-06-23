@@ -436,7 +436,7 @@
         },
         "sqlAutobackupStorageAccountName": {
             "type": "string",
-            "defaultValue": "testsqlstorageaccount",
+            "defaultValue": "",
             "metadata": {
                 "description": "(Optional) Storage account for sql resource id."
             }
