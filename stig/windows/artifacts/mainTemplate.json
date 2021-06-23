@@ -503,7 +503,7 @@
             }
         },
         "kvAdminSecret":{
-            "type": "string",
+            "type": "securestring",
             "defaultValue": "",
             "metadata": {
                 "description": "(Optional) Key Vault secret"

@@ -581,13 +581,23 @@
                     },
                     {
                         "name": "kvAdminSecret",
-                        "type": "Microsoft.Common.TextBox",
-                        "label": "Principal secret",
-                        "toolTip": "Enter the key that was generated for the application after it was registered with Microsoft Azure Active Directory",
-                        "defaultValue": "",
-                        "constraints": {
-                            "required": true
+                        "type": "Microsoft.Compute.CredentialsCombo",
+                        "label": {
+                            "password": "Principal secret ",
+                            "confirmPassword": "Confirm Principal secret"
                         },
+                        "toolTip": {
+                            "password": "Create a password to use with credential name"
+                        },
+                        "constraints": {
+                            "required": false,
+                            "customPasswordRegex": "^(?=.*[A-Z])(?=.*[.!@#$%^&*()-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
+                            "customValidationMessage": "Password must be at least 12 characters long, and contain upper case, lower case, number and symbol"
+                        },
+                        "options": {
+                            "hideConfirmation": false
+                        },
+                        "osPlatform": "Windows",
                         "visible": "[equals(steps('sqlServerSettings').keyVaultIntegration, 'true')]"
                     },
                     {
@@ -1192,7 +1202,7 @@
             "kvCredentialName": "[steps('sqlServerSettings').kvCredentialName]",
             "kvUrl": "[steps('sqlServerSettings').kvUrl]",
             "kvPrincipalName": "[steps('sqlServerSettings').kvPrincipalName]",
-            "kvAdminSecret": "[steps('sqlServerSettings').kvAdminSecret]",
+            "kvAdminSecret": "[steps('sqlServerSettings').kvAdminSecret.password]",
             "rServices": "[steps('sqlServerSettings').rServices]"
         }
     }
