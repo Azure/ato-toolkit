@@ -464,7 +464,7 @@
                             "regex": "^[1024-65535]{4,5}$",
                             "validationMessage": "Please enter a port number between 1024 and 65535."
                         },
-                        "visible":  "[or(equals(steps('instance').sqlConnectivitySettings, 'Public (Internet)'), equals(steps('instance').sqlConnectivitySettings, 'Private (within Virtual Network)'))]"
+                        "visible":  "[or(equals(steps('management').sqlConnectivitySettings, 'Public (Internet)'), equals(steps('management').sqlConnectivitySettings, 'Private (within Virtual Network)'))]"
                     },
                     {
                         "name": "textBlock1",
