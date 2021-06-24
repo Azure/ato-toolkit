@@ -608,10 +608,8 @@
                 "lun": 0,
                 "createOption": "attach",
                 "caching": "ReadOnly",
-                "diskSizeGB": "",
                 "managedDisk": {
-                    "id": "[resourceId('Microsoft.Compute/disks', variables('sqlDiskName'))]",
-                    "storageAccountType": ""
+                    "id": "[resourceId('Microsoft.Compute/disks', variables('sqlDiskName'))]"
                 },
                 "writeAcceleratorEnabled": "false"
             }
