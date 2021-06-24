@@ -464,14 +464,15 @@
                             "regex": "^[1024-65535]{4,5}$",
                             "validationMessage": "Please enter a port number between 1024 and 65535."
                         },
-                        "visible": "[not(equals(steps('management').sqlConnectivitySettings, 'Local'))]"
+                        "visible": "[not(equals(steps('management').sqlConnectivitySettings, 'Local (inside VM only)'))]"
                     },
                     {
                         "name": "textBlock1",
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
                             "text": "SQL Authentication"
-                        }
+                        },
+                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
                     {
                         "name": "sqlAuthentication",
@@ -635,7 +636,8 @@
                                 "label": "Learn more",
                                 "uri": "https://azure.microsoft.com/pricing/hybrid-benefit/"
                               }
-                        }
+                        },
+                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
                     {
                         "name": "automatedPatching",
