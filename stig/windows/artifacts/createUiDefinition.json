@@ -423,7 +423,7 @@
                         }
                     },
                     {
-                        "name": "textBlock0",
+                        "name": "textBlock1",
                         "type": "Microsoft.Common.TextBlock",
                         "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
                         "options": {
@@ -467,7 +467,7 @@
                         "visible":  "[or(equals(steps('management').sqlConnectivitySettings, 'Public'), equals(steps('management').sqlConnectivitySettings, 'Private'))]"
                     },
                     {
-                        "name": "textBlock1",
+                        "name": "textBlock4",
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
                             "text": "SQL Authentication"
@@ -558,7 +558,9 @@
                         "toolTip": "Key Vault URL should be in the format of 'https://{keyvaultname}.vault.usgovcloudapi.net'",
                         "defaultValue": "",
                         "constraints": {
-                            "required": true
+                            "required": true,
+                            "regex": "^(http|https):\/\/.*.{7,40}$",
+                            "validationMessage": "Please enter a valid url."
                         },
                         "visible": "[equals(steps('management').keyVaultIntegration, 'true')]"
                     },
@@ -569,7 +571,9 @@
                         "toolTip": "Enter the client id of the application registered with Microsoft Azure Active Directory that needs access to the Azure Key Vault.",
                         "defaultValue": "",
                         "constraints": {
-                            "required": true
+                            "required": true,
+                            "regex": "^[a-z0-9A-Z-]{1,40}$",
+                            "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-40 characters long."
                         },
                         "visible": "[equals(steps('management').keyVaultIntegration, 'true')]"
                     },
@@ -601,7 +605,9 @@
                         "toolTip": "Azure Key Vault Integration creates a credential within SQL Server, allowing the virtual machine to have access to the key vault. Choose a name for this credential.",
                         "defaultValue": "",
                         "constraints": {
-                            "required": true
+                            "required": true,
+                            "regex": "^[a-z0-9A-Z-]{1,30}$",
+                            "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
                         },
                         "visible": "[equals(steps('management').keyVaultIntegration, 'true')]"
                     },
@@ -827,7 +833,7 @@
                         "visible": "[equals(steps('management').automatedPatching, 'true')]"
                     },
                     {
-                        "name": "textBlock4",
+                        "name": "textBlock5",
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
                             "text": "Automated backup"
@@ -1121,7 +1127,7 @@
                         "visible": "[equals(steps('management').backupScheduleType, 'Manual')]"
                     },
                     {
-                        "name": "textBlock5",
+                        "name": "textBlock6",
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
                             "text": "R Services(Advanced Analytics)"
@@ -1129,7 +1135,7 @@
                         "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
                     {
-                        "name": "rServices",
+                        "name": "IsRServicesEnabled",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "SQL Server Machine Learning Services (In-Database)",
                         "toolTip": "Enables SQL Server R Services, allowing you to utilize advanced analytics within your SQL Server. R Services is only supported with SQL Server 2016 (except Express edition).",
@@ -1202,7 +1208,7 @@
             "kvUrl": "[steps('management').kvUrl]",
             "kvPrincipalName": "[steps('management').kvPrincipalName]",
             "kvAdminSecret": "[steps('management').kvAdminSecret.password]",
-            "rServices": "[steps('management').rServices]"
+            "IsRServicesEnabled": "[steps('management').IsRServicesEnabled]"
         }
     }
 }

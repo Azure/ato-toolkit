@@ -509,7 +509,7 @@
                 "description": "(Optional) Key Vault secret"
             }
         },
-        "rServicesEnabled":{
+        "IsRServicesEnabled":{
             "type": "string",
             "defaultValue": "false",
             "allowedValues": [
@@ -608,10 +608,10 @@
                 "lun": 0,
                 "createOption": "attach",
                 "caching": "ReadOnly",
-                "diskSizeGB": null,
+                "diskSizeGB": "",
                 "managedDisk": {
                     "id": "[resourceId('Microsoft.Compute/disks', variables('sqlDiskName'))]",
-                    "storageAccountType": null
+                    "storageAccountType": ""
                 },
                 "writeAcceleratorEnabled": "false"
             }
@@ -1002,7 +1002,7 @@
                         "SQLAuthUpdatePassword": "[parameters('sqlAuthenticationPassword')]"
                     },
                     "AdditionalFeaturesServerConfigurations": {
-                        "IsRServicesEnabled": "[parameters('rServicesEnabled')]"
+                        "IsRServicesEnabled": "[parameters('IsRServicesEnabled')]"
                     }
                 },
                 "AutoBackupSettings": {
