@@ -492,7 +492,7 @@
                             ],
                             "required": true
                         },
-                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
+                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
                     {
                         "name": "sqlAuthenticationLogin",
@@ -548,7 +548,7 @@
                             ],
                             "required": true
                         },
-                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
+                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
                     {
                         "name": "kvUrl",
@@ -622,7 +622,7 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
+                        "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
                         "toolTip": "If you have SQL Server licenses with Software Assurance (SA) or a SQL Server subscription, use Azure Hybrid Benefit to save."
                     },
                     {
@@ -828,7 +828,8 @@
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
                             "text": "Automated backup"
-                        }
+                        },
+                        "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
                     {
                         "name": "sqlAutomatedBackup",
@@ -1121,7 +1122,8 @@
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
                             "text": "R Services(Advanced Analytics)"
-                        }
+                        },
+                        "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
                     {
                         "name": "rServices",
