@@ -421,20 +421,13 @@
                                 "location": "onBasic"
                             }
                         }
-                    }
-                ]
-            },
-            {
-                "name": "sqlServerSettings",
-                "label": "SQL Server Settings",
-                "bladeTitle": "SQL Server Settings",
-                "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
-                "elements": [
+                    },
                     {
                         "name": "textBlock0",
                         "type": "Microsoft.Common.TextBlock",
+                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
                         "options": {
-                            "text": "Security & Networking"
+                            "text": "SQL Security & Networking"
                         }
                     },
                     {
@@ -459,7 +452,7 @@
                             ],
                             "required": true
                         },
-                        "visible": true
+                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
                     {
                         "name": "portNumber",
@@ -471,7 +464,7 @@
                             "regex": "^[1024-65535]{4,5}$",
                             "validationMessage": "Please enter a port number between 1024 and 65535."
                         },
-                        "visible": "[not(equals(steps('sqlServerSettings').sqlConnectivitySettings, 'Local'))]"
+                        "visible": "[not(equals(steps('management').sqlConnectivitySettings, 'Local'))]"
                     },
                     {
                         "name": "textBlock1",
@@ -499,7 +492,7 @@
                             ],
                             "required": true
                         },
-                        "visible": true
+                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
                     },
                     {
                         "name": "sqlAuthenticationLogin",
@@ -513,7 +506,7 @@
                             "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-30 characters long."
                         },
                         "osPlatform": "Windows",
-                        "visible": "[equals(steps('sqlServerSettings').sqlAuthentication, 'true')]"
+                        "visible": "[equals(steps('management').sqlAuthentication, 'true')]"
                     },
                     {
                         "name": "sqlAuthenticationPassword",
@@ -534,7 +527,7 @@
                             "hideConfirmation": false
                         },
                         "osPlatform": "Windows",
-                        "visible": "[equals(steps('sqlServerSettings').sqlAuthentication, 'true')]"
+                        "visible": "[equals(steps('management').sqlAuthentication, 'true')]"
                     },
                     {
                         "name": "keyVaultIntegration",
@@ -555,7 +548,7 @@
                             ],
                             "required": true
                         },
-                        "visible": true
+                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
                     },
                     {
                         "name": "kvUrl",
@@ -566,7 +559,7 @@
                         "constraints": {
                             "required": true
                         },
-                        "visible": "[equals(steps('sqlServerSettings').keyVaultIntegration, 'true')]"
+                        "visible": "[equals(steps('management').keyVaultIntegration, 'true')]"
                     },
                     {
                         "name": "kvPrincipalName",
@@ -577,7 +570,7 @@
                         "constraints": {
                             "required": true
                         },
-                        "visible": "[equals(steps('sqlServerSettings').keyVaultIntegration, 'true')]"
+                        "visible": "[equals(steps('management').keyVaultIntegration, 'true')]"
                     },
                     {
                         "name": "kvAdminSecret",
@@ -598,7 +591,7 @@
                             "hideConfirmation": false
                         },
                         "osPlatform": "Windows",
-                        "visible": "[equals(steps('sqlServerSettings').keyVaultIntegration, 'true')]"
+                        "visible": "[equals(steps('management').keyVaultIntegration, 'true')]"
                     },
                     {
                         "name": "kvCredentialName",
@@ -609,7 +602,7 @@
                         "constraints": {
                             "required": true
                         },
-                        "visible": "[equals(steps('sqlServerSettings').keyVaultIntegration, 'true')]"
+                        "visible": "[equals(steps('management').keyVaultIntegration, 'true')]"
                     },
                     {
                         "name": "textBlock2",
@@ -629,7 +622,7 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible": true,
+                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
                         "toolTip": "If you have SQL Server licenses with Software Assurance (SA) or a SQL Server subscription, use Azure Hybrid Benefit to save."
                     },
                     {
@@ -662,7 +655,7 @@
                             ],
                             "required": false
                         },
-                        "visible": true
+                        "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
                     {
                         "name": "maintenanceScheduleDay",
@@ -707,7 +700,7 @@
                             ],
                             "required": true
                         },
-                        "visible": "[equals(steps('sqlServerSettings').automatedPatching, 'true')]"
+                        "visible": "[equals(steps('management').automatedPatching, 'true')]"
                     },
                     {
                         "name": "maintenanceScheduleHour",
@@ -815,7 +808,7 @@
                             ],
                             "required": true
                         },
-                        "visible": "[equals(steps('sqlServerSettings').automatedPatching, 'true')]"
+                        "visible": "[equals(steps('management').automatedPatching, 'true')]"
                     },
                     {
                         "name": "patchingDuration",
@@ -828,7 +821,7 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible": "[equals(steps('sqlServerSettings').automatedPatching, 'true')]"
+                        "visible": "[equals(steps('management').automatedPatching, 'true')]"
                     },
                     {
                         "name": "textBlock4",
@@ -856,7 +849,7 @@
                             ],
                             "required": true
                         },
-                        "visible": true
+                        "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
                     {
                         "name": "sqlAutobackupRetentionPeriod",
@@ -869,7 +862,7 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible": "[equals(steps('sqlServerSettings').sqlAutomatedBackup, 'true')]"
+                        "visible": "[equals(steps('management').sqlAutomatedBackup, 'true')]"
                     },
                     {
                         "name": "sqlAutobackupStorageAccountName",
@@ -883,7 +876,7 @@
                                 "location": "onBasic"
                             }
                         },
-                        "visible": "[equals(steps('sqlServerSettings').sqlAutomatedBackup, 'true')]"
+                        "visible": "[equals(steps('management').sqlAutomatedBackup, 'true')]"
                     },
                     {
                         "name": "sqlEncryptionBackup",
@@ -903,7 +896,7 @@
                             ],
                             "required": true
                         },
-                        "visible": "[equals(steps('sqlServerSettings').sqlAutomatedBackup, 'true')]"
+                        "visible": "[equals(steps('management').sqlAutomatedBackup, 'true')]"
                     },
                     {
                         "name": "sqlAutobackupEncryptionPassword",
@@ -924,7 +917,7 @@
                             "hideConfirmation": false
                         },
                         "osPlatform": "Windows",
-                        "visible": "[equals(steps('sqlServerSettings').sqlEncryptionBackup, 'true')]"
+                        "visible": "[equals(steps('management').sqlEncryptionBackup, 'true')]"
                     },
                     {
                         "name": "systemDatabaseBackup",
@@ -945,7 +938,7 @@
                             ],
                             "required": false
                         },
-                        "visible": "[equals(steps('sqlServerSettings').sqlAutomatedBackup, 'true')]"
+                        "visible": "[equals(steps('management').sqlAutomatedBackup, 'true')]"
                     },
                     {
                         "name": "backupScheduleType",
@@ -966,7 +959,7 @@
                             ],
                             "required": false
                         },
-                        "visible": "[equals(steps('sqlServerSettings').sqlAutomatedBackup, 'true')]"
+                        "visible": "[equals(steps('management').sqlAutomatedBackup, 'true')]"
                     },
                     {
                         "name": "fullBackupFrequency",
@@ -987,7 +980,7 @@
                             ],
                             "required": true
                         },
-                        "visible": "[equals(steps('sqlServerSettings').backupScheduleType, 'Manual')]"
+                        "visible": "[equals(steps('management').backupScheduleType, 'Manual')]"
                     },
                     {
                         "name": "fullBackupStartTime",
@@ -1095,7 +1088,7 @@
                             ],
                             "required": true
                         },
-                        "visible": "[equals(steps('sqlServerSettings').backupScheduleType, 'Manual')]"
+                        "visible": "[equals(steps('management').backupScheduleType, 'Manual')]"
                     },
                     {
                         "name": "backupTimeWindow",
@@ -1108,7 +1101,7 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible": "[equals(steps('sqlServerSettings').backupScheduleType, 'Manual')]"
+                        "visible": "[equals(steps('management').backupScheduleType, 'Manual')]"
                     },
                     {
                         "name": "logBackupFrequency",
@@ -1121,7 +1114,7 @@
                         "constraints": {
                             "required": false
                         },
-                        "visible": "[equals(steps('sqlServerSettings').backupScheduleType, 'Manual')]"
+                        "visible": "[equals(steps('management').backupScheduleType, 'Manual')]"
                     },
                     {
                         "name": "textBlock5",
@@ -1149,7 +1142,7 @@
                             ],
                             "required": true
                         },
-                        "visible": true
+                        "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     }
                 ]
             }
@@ -1179,32 +1172,32 @@
             "applicationSecurityGroupResourceId": "[steps('networking').vmApplicationSecurityGroup.id]",
             "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
             "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]",
-            "sqlConnectivitySettings": "[steps('sqlServerSettings').sqlConnectivitySettings]",
-            "portNumber": "[steps('sqlServerSettings').portNumber]",
-            "sqlAuthenticationLogin": "[steps('sqlServerSettings').sqlAuthenticationLogin]",
-            "sqlAuthenticationPassword": "[steps('sqlServerSettings').sqlAuthenticationPassword.password]",
-            "enableHybridBenefitSqlLicense": "[steps('sqlServerSettings').enableHybridBenefitSqlLicense]",
-            "automatedPatching": "[steps('sqlServerSettings').automatedPatching]",
-            "maintenanceScheduleDay": "[steps('sqlServerSettings').maintenanceScheduleDay]",
-            "maintenanceScheduleHour": "[steps('sqlServerSettings').maintenanceScheduleHour]",
-            "patchingDuration": "[steps('sqlServerSettings').patchingDuration]",
-            "sqlAutomatedBackup": "[steps('sqlServerSettings').sqlAutomatedBackup]",
-            "sqlAutobackupRetentionPeriod": "[steps('sqlServerSettings').sqlAutobackupRetentionPeriod]",
-            "sqlEncryptionBackup": "[steps('sqlServerSettings').sqlEncryptionBackup]",
-            "sqlAutobackupEncryptionPassword": "[steps('sqlServerSettings').sqlAutobackupEncryptionPassword.password]",
-            "sqlAutobackupStorageAccountName": "[steps('sqlServerSettings').sqlAutobackupStorageAccountName.id]",
-            "systemDatabaseBackup": "[steps('sqlServerSettings').systemDatabaseBackup]",
-            "backupScheduleType": "[steps('sqlServerSettings').backupScheduleType]",
-            "fullBackupFrequency": "[steps('sqlServerSettings').fullBackupFrequency]",
-            "fullBackupStartTime": "[steps('sqlServerSettings').fullBackupStartTime]",
-            "backupTimeWindow": "[steps('sqlServerSettings').backupTimeWindow]",
-            "logBackupFrequency": "[steps('sqlServerSettings').logBackupFrequency]",
-            "kvCredentialName": "[steps('sqlServerSettings').kvCredentialName]",
-            "keyVaultIntegration": "[steps('sqlServerSettings').keyVaultIntegration]",
-            "kvUrl": "[steps('sqlServerSettings').kvUrl]",
-            "kvPrincipalName": "[steps('sqlServerSettings').kvPrincipalName]",
-            "kvAdminSecret": "[steps('sqlServerSettings').kvAdminSecret.password]",
-            "rServices": "[steps('sqlServerSettings').rServices]"
+            "sqlConnectivitySettings": "[steps('management').sqlConnectivitySettings]",
+            "portNumber": "[steps('management').portNumber]",
+            "sqlAuthenticationLogin": "[steps('management').sqlAuthenticationLogin]",
+            "sqlAuthenticationPassword": "[steps('management').sqlAuthenticationPassword.password]",
+            "enableHybridBenefitSqlLicense": "[steps('management').enableHybridBenefitSqlLicense]",
+            "automatedPatching": "[steps('management').automatedPatching]",
+            "maintenanceScheduleDay": "[steps('management').maintenanceScheduleDay]",
+            "maintenanceScheduleHour": "[steps('management').maintenanceScheduleHour]",
+            "patchingDuration": "[steps('management').patchingDuration]",
+            "sqlAutomatedBackup": "[steps('management').sqlAutomatedBackup]",
+            "sqlAutobackupRetentionPeriod": "[steps('management').sqlAutobackupRetentionPeriod]",
+            "sqlEncryptionBackup": "[steps('management').sqlEncryptionBackup]",
+            "sqlAutobackupEncryptionPassword": "[steps('management').sqlAutobackupEncryptionPassword.password]",
+            "sqlAutobackupStorageAccountName": "[steps('management').sqlAutobackupStorageAccountName.id]",
+            "systemDatabaseBackup": "[steps('management').systemDatabaseBackup]",
+            "backupScheduleType": "[steps('management').backupScheduleType]",
+            "fullBackupFrequency": "[steps('management').fullBackupFrequency]",
+            "fullBackupStartTime": "[steps('management').fullBackupStartTime]",
+            "backupTimeWindow": "[steps('management').backupTimeWindow]",
+            "logBackupFrequency": "[steps('management').logBackupFrequency]",
+            "kvCredentialName": "[steps('management').kvCredentialName]",
+            "keyVaultIntegration": "[steps('management').keyVaultIntegration]",
+            "kvUrl": "[steps('management').kvUrl]",
+            "kvPrincipalName": "[steps('management').kvPrincipalName]",
+            "kvAdminSecret": "[steps('management').kvAdminSecret.password]",
+            "rServices": "[steps('management').rServices]"
         }
     }
 }
