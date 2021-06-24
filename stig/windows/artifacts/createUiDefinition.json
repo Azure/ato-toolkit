@@ -607,6 +607,7 @@
                     {
                         "name": "textBlock2",
                         "type": "Microsoft.Common.TextBlock",
+                        "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
                         "options": {
                             "text": "SQL Server License",
                             "link": {
