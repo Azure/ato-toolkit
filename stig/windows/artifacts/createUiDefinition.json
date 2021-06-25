@@ -435,6 +435,7 @@
                         "type": "Microsoft.Common.DropDown",
                         "label": "SQL connectivity",
                         "defaultValue": "Private (within Virtual Network)",
+                        "toolTip": "Connectivity options for SQL",
                         "constraints": {
                             "allowedValues": [
                                 {
@@ -459,6 +460,7 @@
                         "type": "Microsoft.Common.TextBox",
                         "label": "Port",
                         "defaultValue": "1433",
+                        "toolTip": "Port for connection to SQL",
                         "constraints": {
                             "required": true,
                             "regex": "^[1024-65535]{4,5}$",
@@ -687,8 +689,8 @@
                                     "label": "Monday"
                                 },
                                 {
-                                    "value": "Tueday",
-                                    "label": "Tueday"
+                                    "value": "Tuesday",
+                                    "label": "Tuesday"
                                 },
                                 {
                                     "value": "Wednesday",
@@ -715,6 +717,7 @@
                         "name": "maintenanceScheduleHour",
                         "type": "Microsoft.Common.DropDown",
                         "label": "Maintenance start hour (local time)",
+                        "toolTip": "Select the hour during which patching can start",
                         "defaultValue": "02:00",
                         "constraints": {
                             "allowedValues": [
@@ -869,6 +872,7 @@
                         "label": "Retention period (days)",
                         "showStepMarkers": false,
                         "defaultValue": 30,
+                        "toolTip": "Configure retention period in days for SQL backups.",
                         "constraints": {
                             "required": false
                         },
@@ -893,6 +897,7 @@
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Encryption",
                         "defaultValue": "Disable",
+                        "toolTip": "Enable encryption of SQL backups",
                         "constraints": {
                             "allowedValues": [
                                 {
@@ -997,6 +1002,7 @@
                         "type": "Microsoft.Common.DropDown",
                         "label": "Backup start time (local time)",
                         "defaultValue": "02:00",
+                        "toolTip": "Time of day to take full backups",
                         "constraints": {
                             "allowedValues": [
                                 {
@@ -1108,6 +1114,7 @@
                         "label": "Backup time window (hours)",
                         "showStepMarkers": false,
                         "defaultValue": 2,
+                        "toolTip": "How long of a time window to allow SQL backup to run",
                         "constraints": {
                             "required": false
                         },
@@ -1119,6 +1126,7 @@
                         "min": 5,
                         "max": 60,
                         "label": "Log backup frequency (minutes)",
+                        "toolTip": "The frequency of log backups in minutes",
                         "showStepMarkers": false,
                         "defaultValue": 60,
                         "constraints": {
