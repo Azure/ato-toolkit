@@ -226,12 +226,8 @@
             }
         },
         "enableSQLIaaSExtension": {
-            "type": "string",
-            "defaultValue": "false",
-            "allowedValues": [
-                "false",
-                "true"
-            ],
+            "type": "bool",
+            "defaultValue": false,
             "metadata": {
                 "description": "(Optional) Enable SQL IaaS Extension"
             }
