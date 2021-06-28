@@ -692,7 +692,7 @@
                                 "uri": "https://azure.microsoft.com/pricing/hybrid-benefit/"
                               }
                         },
-                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
+                        "visible": "[equals(steps('management').enableSQLIaaSExtension, true)]"
                     },
                     {
                         "name": "automatedPatching",
@@ -888,7 +888,7 @@
                         "options": {
                             "text": "Automated backup"
                         },
-                        "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
+                        "visible": "[equals(steps('management').enableSQLIaaSExtension, true)]"
                     },
                     {
                         "name": "sqlAutomatedBackup",
