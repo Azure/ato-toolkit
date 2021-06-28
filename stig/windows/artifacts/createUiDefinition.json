@@ -442,9 +442,6 @@
                         "name": "enableSQLIaaSExtension",
                         "type": "Microsoft.Common.CheckBox",
                         "label": "I accept the terms in this agreement",
-                        "constraints": {
-                            "required": true
-                        },
                         "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
                         "toolTip": "Enable the SQL Iaas Extension"
                     },
