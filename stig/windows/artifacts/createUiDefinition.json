@@ -426,6 +426,14 @@
                         "name": "textBlockEULA",
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
+                            "text": "Add SQL IaaS Extension to VM"
+                        },
+                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
+                    },
+                    {
+                        "name": "textBlockEULA1",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
                             "text": "EULA"
                         },
                         "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
