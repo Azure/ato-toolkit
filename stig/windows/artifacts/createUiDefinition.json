@@ -475,7 +475,7 @@
                     {
                         "name": "textBlock1",
                         "type": "Microsoft.Common.TextBlock",
-                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
+                        "visible":  "[equals(steps('management').enableSQLIaaSExtension, 'true')]",
                         "options": {
                             "text": "SQL Security & Networking"
                         }
