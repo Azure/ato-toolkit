@@ -225,6 +225,17 @@
                 "description": "(Optional) Enable Azure Hybrid Benefit to use your on-premises Windows SQL Server licenses and reduce cost. See https://docs.microsoft.com/en-us/azure/virtual-machines/windows/hybrid-use-benefit-licensing for more information."
             }
         },
+        "enableSQLIaaSExtension": {
+            "type": "string",
+            "defaultValue": "false",
+            "allowedValues": [
+                "false",
+                "true"
+            ],
+            "metadata": {
+                "description": "(Optional) Enable SQL IaaS Extension"
+            }
+        },
         "automatedPatching": {
             "type": "string",
             "defaultValue": "false",
@@ -934,7 +945,7 @@
             "type": "Microsoft.SqlVirtualMachine/SqlVirtualMachines",
             "apiVersion": "2017-03-01-preview",
             "location": "[parameters('location')]",
-            "condition": "[not(equals(parameters('enableSQLIaaSExtension'), false))]",
+            "condition": "[not(equals(parameters('enableSQLIaaSExtension'), 'false'))]",
             "copy": {
                 "name": "dscLoop",
                 "count": "[variables('instanceCount')]"
