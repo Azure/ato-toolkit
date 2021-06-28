@@ -426,7 +426,7 @@
                         "name": "textBlockEULA",
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
-                            "text": "Add SQL IaaS Extension to VM"
+                            "text": "Enable SQL Server IaaS Extension"
                         },
                         "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
@@ -453,7 +453,10 @@
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
                             "text": "This feature will register the full mode SQL IaaS Agent Extension in the selected SQL server. Learn more about SQL IaaS Agent Extension here.",
-                            "uri": "https://docs.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/sql-server-iaas-agent-extension-automate-management?tabs=azure-powershell"
+                            "link": {
+                                "label": "Learn more",
+                                "uri": "https://docs.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/sql-server-iaas-agent-extension-automate-management?tabs=azure-powershell"
+                            }
                         },
                         "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
@@ -461,8 +464,11 @@
                         "name": "textBlockEULA3",
                         "type": "Microsoft.Common.TextBlock",
                         "options": {
-                            "text": "By clicking 'I accept', I consent to allow Microsoft to access selected SQL Server information on Azure Virtual Machines. To learn more about SQL Server data processing and privacy controls, please see the SQL Server Privacy Supplement. Learn More",
-                            "uri": "https://docs.microsoft.com/en-us/sql/sql-server/sql-server-privacy?view=sql-server-ver15"
+                            "text": "By clicking 'I accept', I consent to allow Microsoft to access selected SQL Server information on Azure Virtual Machines. To learn more about SQL Server data processing and privacy controls, please see the SQL Server Privacy Supplement.",
+                            "link": {
+                                "label": "Learn more",
+                                "uri": "https://docs.microsoft.com/en-us/sql/sql-server/sql-server-privacy?view=sql-server-ver15"
+                            }
                         },
                         "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
                     },
