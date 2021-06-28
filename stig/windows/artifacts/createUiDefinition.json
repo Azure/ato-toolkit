@@ -423,6 +423,32 @@
                         }
                     },
                     {
+                        "name": "textBlockEULA",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
+                            "text": "EULA"
+                        },
+                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
+                    },
+                    {
+                        "name": "enableSQLIaaSExtension",
+                        "type": "Microsoft.Common.CheckBox",
+                        "label": "I accept the terms in this agreement",
+                        "constraints": {
+                            "required": true
+                        },
+                        "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
+                        "toolTip": "Enable the SQL Iaas Extension"
+                    },
+                    {
+                        "name": "textBlockEULA2",
+                        "type": "Microsoft.Common.TextBlock",
+                        "options": {
+                            "text": "This feature will register the full mode SQL IaaS Agent Extension in the selected SQL server. Learn more about SQL IaaS Agent Extension here.'here' is hyperlinked to <https://docs.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/sql-server-iaas-agent-extension-automate-management?tabs=azure-powershell>\n By clicking 'I accept', I consent to allow Microsoft to access selected SQL Server information on Azure Virtual Machines. To learn more about SQL Server data processing and privacy controls, please see the SQL Server Privacy Supplement. Learn More 'Learn more' is hyperlinked to <https://docs.microsoft.com/en-us/sql/sql-server/sql-server-privacy?view=sql-server-ver15>"
+                        },
+                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
+                    },
+                    {
                         "name": "textBlock1",
                         "type": "Microsoft.Common.TextBlock",
                         "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
