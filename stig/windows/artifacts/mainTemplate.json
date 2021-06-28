@@ -941,7 +941,7 @@
             "type": "Microsoft.SqlVirtualMachine/SqlVirtualMachines",
             "apiVersion": "2017-03-01-preview",
             "location": "[parameters('location')]",
-            "condition": "[not(equals(parameters('enableSQLIaaSExtension'), 'false'))]",
+            "condition": "[not(equals(parameters('enableSQLIaaSExtension'), false()))]",
             "copy": {
                 "name": "dscLoop",
                 "count": "[variables('instanceCount')]"
