@@ -1238,6 +1238,7 @@
             "applicationSecurityGroupResourceId": "[steps('networking').vmApplicationSecurityGroup.id]",
             "diagnosticStorageResourceId": "[steps('management').diagnosticStorageAccount.id]",
             "logAnalyticsWorkspaceId": "[steps('management').logAnalyticsWorkspace.id]",
+            "enableSQLIaaSExtension": "[steps('management').enableSQLIaaSExtension]",
             "sqlConnectivitySettings": "[steps('management').sqlConnectivitySettings]",
             "portNumber": "[steps('management').portNumber]",
             "sqlAuthenticationLogin": "[steps('management').sqlAuthenticationLogin]",
