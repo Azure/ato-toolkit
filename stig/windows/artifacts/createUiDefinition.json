@@ -829,7 +829,7 @@
                         "max": 180,
                         "label": "Maintenance window duration (minutes)",
                         "defaultValue": 60,
-                        "toolTip": "Number of virtual machines in the availability set.",
+                        "toolTip": "The total allowed patching run time in minutes",
                         "constraints": {
                             "required": false
                         },

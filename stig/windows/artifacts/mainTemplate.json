@@ -948,16 +948,16 @@
                 "SqlServerLicenseType": "[if(equals(parameters('enableHybridBenefitSqlLicense'), true()), 'AHUB', 'PAYG')]",
                 "AutoPatchingSettings": {
                     "Enable": "[parameters('automatedPatching')]",
-                    "DayOfWeek": "[parameters('maintenanceScheduleDay')]", 
-                    "MaintenanceWindowStartingHour": "[parameters('maintenanceScheduleHour')]", 
-                    "MaintenanceWindowDuration": "[parameters('patchingDuration')]"
+                    "DayOfWeek": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('maintenanceScheduleDay'))]",
+                    "MaintenanceWindowStartingHour": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('maintenanceScheduleHour'))]",
+                    "MaintenanceWindowDuration": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('patchingDuration'))]"
                 },
                 "KeyVaultCredentialSettings": {
                     "Enable": "[parameters('keyVaultIntegration')]",
-                    "CredentialName": "[parameters('kvCredentialName')]",
-                    "AzureKeyVaultUrl": "[parameters('kvUrl')]",
-                    "ServicePrincipalName": "[parameters('kvPrincipalName')]",
-                    "ServicePrincipalSecret": "[parameters('kvAdminSecret')]"
+                    "CredentialName": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvCredentialName'))]",
+                    "AzureKeyVaultUrl": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvUrl'))]",
+                    "ServicePrincipalName": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvPrincipalName'))]",
+                    "ServicePrincipalSecret": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvAdminSecret'))]"
                 },
                 "StorageConfigurationSettings": {
                     "DiskConfigurationType": "NEW",
