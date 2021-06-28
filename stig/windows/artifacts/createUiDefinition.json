@@ -500,7 +500,7 @@
                             ],
                             "required": true
                         },
-                        "visible":  "[equals(steps('management').enableSQLIaaSExtension, true)]"
+                        "visible": "[equals(steps('management').enableSQLIaaSExtension, true)]"
                     },
                     {
                         "name": "portNumber",
@@ -521,7 +521,7 @@
                         "options": {
                             "text": "SQL Authentication"
                         },
-                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
+                        "visible": "[equals(steps('management').enableSQLIaaSExtension, true)]"
                     },
                     {
                         "name": "sqlAuthentication",
@@ -542,7 +542,7 @@
                             ],
                             "required": true
                         },
-                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
+                        "visible": "[equals(steps('management').enableSQLIaaSExtension, true)]"
                     },
                     {
                         "name": "sqlAuthenticationLogin",
@@ -598,7 +598,7 @@
                             ],
                             "required": true
                         },
-                        "visible":  "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
+                        "visible": "[equals(steps('management').enableSQLIaaSExtension, true)]"
                     },
                     {
                         "name": "kvUrl",
@@ -713,7 +713,7 @@
                             ],
                             "required": false
                         },
-                        "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
+                        "visible": "[equals(steps('management').enableSQLIaaSExtension, true)]"
                     },
                     {
                         "name": "maintenanceScheduleDay",
@@ -909,7 +909,7 @@
                             ],
                             "required": true
                         },
-                        "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
+                        "visible": "[equals(steps('management').enableSQLIaaSExtension, true)]"
                     },
                     {
                         "name": "sqlAutobackupRetentionPeriod",
@@ -1187,7 +1187,7 @@
                         "options": {
                             "text": "R Services(Advanced Analytics)"
                         },
-                        "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
+                        "visible": "[equals(steps('management').enableSQLIaaSExtension, true)]"
                     },
                     {
                         "name": "IsRServicesEnabled",
@@ -1208,7 +1208,7 @@
                             ],
                             "required": true
                         },
-                        "visible": "[or(equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]"
+                        "visible": "[equals(steps('management').enableSQLIaaSExtension, true)]"
                     }
                 ]
             }
