@@ -1010,8 +1010,8 @@
                     "FullBackupWindowHours": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('backupTimeWindow'))]",
                     "FullBackupFrequency": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('fullBackupFrequency'))]",
                     "Password": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlAutobackupEncryptionPassword'))]",
-                    "StorageAccountUrl": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', reference(resourceId(parameters('sqlStorageAccountName'), '2021-04-01').primaryEndpoints['blob'])]",
-                    "StorageAccessKey": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', first(listKeys(resourceId(parameters('sqlStorageAccountName'), '2021-04-01').keys).value)]"
+                    "StorageAccountUrl": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', reference(resourceId(parameters('sqlStorageAccountName')), '2021-04-01').primaryEndpoints['blob'])]",
+                    "StorageAccessKey": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', first(listKeys(resourceId(parameters('sqlStorageAccountName')), '2021-04-01').keys).value)]"
                 }
             }
         }
