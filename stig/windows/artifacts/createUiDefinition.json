@@ -1006,7 +1006,7 @@
                         "name": "backupScheduleType",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "Configure backup schedule",
-                        "toolTip": "Take full backups of Master, Model, and MSDB",
+                        "toolTip": "Automated or Manual",
                         "defaultValue": "Automated",
                         "constraints": {
                             "allowedValues": [
