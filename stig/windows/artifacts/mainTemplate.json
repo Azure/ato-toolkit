@@ -522,7 +522,7 @@
             "metadata": {
                 "description": "(Optional) SQL Storage Account Resource ID"
             }
-        },
+        }
     },
     "variables": {
         "instanceCount": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), parameters('instanceCount'), 1)]",
