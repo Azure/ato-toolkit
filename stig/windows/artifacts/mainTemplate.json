@@ -609,8 +609,7 @@
                 },
                 "writeAcceleratorEnabled": "false"
             }
-        ],
-        "sqlStorageAccountName": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), 'fakestorageaccountname', split(parameters('sqlAutobackupStorageAccountName'), '/')[8])]"
+        ]
     },
     "resources": [
         {
