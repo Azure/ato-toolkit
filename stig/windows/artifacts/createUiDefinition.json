@@ -1177,8 +1177,20 @@
                         "showStepMarkers": false,
                         "defaultValue": 60,
                         "constraints": {
-                            "regex": "^[0123456789]?[05]$",
-                            "validationMessage": "Number must be divisible by 5",
+                            "allowedValues":[
+                                5,
+                                10,
+                                15,
+                                20,
+                                25,
+                                30,
+                                35,
+                                40,
+                                45,
+                                50,
+                                55,
+                                60
+                            ],
                             "required": false
                         },
                         "visible": "[equals(steps('management').backupScheduleType, 'Manual')]"
