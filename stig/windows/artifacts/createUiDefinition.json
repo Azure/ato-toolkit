@@ -937,6 +937,9 @@
                                 "location": "onBasic"
                             }
                         },
+                        "constraints": {
+                            "required": true
+                        },
                         "visible": "[equals(steps('management').sqlAutomatedBackup, 'true')]"
                     },
                     {
