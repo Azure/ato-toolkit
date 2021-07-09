@@ -1004,7 +1004,7 @@
                     "RetentionPeriod": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlAutobackupRetentionPeriod'))]",
                     "EnableEncryption": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlEncryptionBackup'))]",
                     "BackupSystemDbs": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('systemDatabaseBackup'))]",
-                    "BackupScheduleType": "[parameters('backupScheduleType')]",
+                    "BackupScheduleType": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('backupScheduleType'))]",
                     "LogBackupFrequency": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('logBackupFrequency'))]",
                     "FullBackupStartTime":"[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('fullBackupStartTime'))]",
                     "FullBackupWindowHours": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('backupTimeWindow'))]",
