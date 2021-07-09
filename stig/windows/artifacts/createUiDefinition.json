@@ -937,9 +937,6 @@
                                 "location": "onBasic"
                             }
                         },
-                        "constraints": {
-                            "required": true
-                        },
                         "visible": "[equals(steps('management').sqlAutomatedBackup, 'true')]"
                     },
                     {
@@ -1240,7 +1237,7 @@
                         "visible": "[equals(steps('management').enableSQLIaaSExtension, true)]"
                     },
                     {
-                        "name": "IsRServicesEnabled",
+                        "name": "isRServicesEnabled",
                         "type": "Microsoft.Common.OptionsGroup",
                         "label": "SQL Server Machine Learning Services (In-Database)",
                         "toolTip": "Enables SQL Server R Services, allowing you to utilize advanced analytics within your SQL Server. R Services is only supported with SQL Server 2016 (except Express edition).",
@@ -1314,7 +1311,7 @@
             "kvUrl": "[steps('management').kvUrl]",
             "kvPrincipalName": "[steps('management').kvPrincipalName]",
             "kvAdminSecret": "[steps('management').kvAdminSecret.password]",
-            "IsRServicesEnabled": "[steps('management').IsRServicesEnabled]"
+            "isRServicesEnabled": "[steps('management').isRServicesEnabled]"
         }
     }
 }

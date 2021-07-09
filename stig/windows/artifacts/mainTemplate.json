@@ -503,7 +503,7 @@
                 "description": "(Optional) Key Vault secret"
             }
         },
-        "IsRServicesEnabled":{
+        "isRServicesEnabled":{
             "type": "string",
             "defaultValue": "false",
             "allowedValues": [
@@ -949,66 +949,66 @@
             "properties": {
                 "virtualMachineResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
                 "sqlManagement": "Full",
-                "SqlServerLicenseType": "[if(equals(parameters('enableHybridBenefitSqlLicense'), true()), 'AHUB', 'PAYG')]",
-                "AutoPatchingSettings": {
-                    "Enable": "[parameters('automatedPatching')]",
-                    "DayOfWeek": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('maintenanceScheduleDay'))]",
-                    "MaintenanceWindowStartingHour": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('maintenanceScheduleHour'))]",
-                    "MaintenanceWindowDuration": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('patchingDuration'))]"
+                "sqlServerLicenseType": "[if(equals(parameters('enableHybridBenefitSqlLicense'), true()), 'AHUB', 'PAYG')]",
+                "autoPatchingSettings": {
+                    "enable": "[parameters('automatedPatching')]",
+                    "dayOfWeek": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('maintenanceScheduleDay'))]",
+                    "maintenanceWindowStartingHour": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('maintenanceScheduleHour'))]",
+                    "maintenanceWindowDuration": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('patchingDuration'))]"
                 },
-                "KeyVaultCredentialSettings": {
-                    "Enable": "[parameters('keyVaultIntegration')]",
-                    "CredentialName": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvCredentialName'))]",
-                    "AzureKeyVaultUrl": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvUrl'))]",
-                    "ServicePrincipalName": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvPrincipalName'))]",
-                    "ServicePrincipalSecret": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvAdminSecret'))]"
+                "keyVaultCredentialSettings": {
+                    "enable": "[parameters('keyVaultIntegration')]",
+                    "credentialName": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvCredentialName'))]",
+                    "azureKeyVaultUrl": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvUrl'))]",
+                    "servicePrincipalName": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvPrincipalName'))]",
+                    "servicePrincipalSecret": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvAdminSecret'))]"
                 },
-                "StorageConfigurationSettings": {
-                    "DiskConfigurationType": "NEW",
-                    "StorageWorkloadType": "OLTP",
-                    "SQLDataSettings": {
-                        "LUNs": [
+                "storageConfigurationSettings": {
+                    "diskConfigurationType": "NEW",
+                    "storageWorkloadType": "OLTP",
+                    "sqlDataSettings": {
+                        "luns": [
                             0
                         ],
-                        "DefaultFilePath": "F:\\data"
+                        "defaultFilePath": "F:\\data"
                     },
-                    "SQLLogSettings": {
-                        "LUNs": [
+                    "sqlLogSettings": {
+                        "luns": [
                             0
                         ],
-                        "DefaultFilePath": "F:\\log"
+                        "defaultFilePath": "F:\\log"
                     },
-                    "SQLTempDbSettings": {
-                        "LUNs": [
+                    "sqlTempDbSettings": {
+                        "luns": [
                             0
                         ],
-                        "DefaultFilePath": "F:\\tempDb"
+                        "defaultFilePath": "F:\\tempDb"
                     }
                 },
-                "ServerConfigurationsManagementSettings": {
-                    "SQLConnectivityUpdateSettings": {
-                        "ConnectivityType": "[parameters('sqlConnectivitySettings')]",
-                        "Port": "[parameters('portNumber')]",
-                        "SQLAuthUpdateUserName": "[parameters('sqlAuthenticationLogin')]",
-                        "SQLAuthUpdatePassword": "[parameters('sqlAuthenticationPassword')]"
+                "serverConfigurationsManagementSettings": {
+                    "sqlConnectivityUpdateSettings": {
+                        "connectivityType": "[parameters('sqlConnectivitySettings')]",
+                        "port": "[parameters('portNumber')]",
+                        "sqlAuthUpdateUserName": "[parameters('sqlAuthenticationLogin')]",
+                        "sqlAuthUpdatePassword": "[parameters('sqlAuthenticationPassword')]"
                     },
-                    "AdditionalFeaturesServerConfigurations": {
-                        "IsRServicesEnabled": "[parameters('IsRServicesEnabled')]"
+                    "additionalFeaturesServerConfigurations": {
+                        "isRServicesEnabled": "[parameters('isRServicesEnabled')]"
                     }
                 },
-                "AutoBackupSettings": {
-                    "Enable": "[parameters('sqlAutomatedBackup')]",
-                    "RetentionPeriod": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlAutobackupRetentionPeriod'))]",
-                    "EnableEncryption": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlEncryptionBackup'))]",
-                    "BackupSystemDbs": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('systemDatabaseBackup'))]",
-                    "BackupScheduleType": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('backupScheduleType'))]",
-                    "LogBackupFrequency": "[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('logBackupFrequency'))]",
-                    "FullBackupStartTime":"[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('fullBackupStartTime'))]",
-                    "FullBackupWindowHours": "[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('backupTimeWindow'))]",
-                    "FullBackupFrequency": "[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('fullBackupFrequency'))]",
-                    "Password": "[if(equals(parameters('sqlEncryptionBackup'), 'false'), '', parameters('sqlAutobackupEncryptionPassword'))]",
-                    "StorageAccountUrl": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', reference(parameters('sqlAutobackupStorageAccountName'), '2021-04-01').primaryEndpoints['blob'])]",
-                    "StorageAccessKey": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', first(listKeys(parameters('sqlAutobackupStorageAccountName'), '2021-04-01').keys).value)]"
+                "autoBackupSettings": {
+                    "enable": "[parameters('sqlAutomatedBackup')]",
+                    "retentionPeriod": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlAutobackupRetentionPeriod'))]",
+                    "enableEncryption": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlEncryptionBackup'))]",
+                    "backupSystemDbs": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('systemDatabaseBackup'))]",
+                    "backupScheduleType": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('backupScheduleType'))]",
+                    "logBackupFrequency": "[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('logBackupFrequency'))]",
+                    "fullBackupStartTime":"[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('fullBackupStartTime'))]",
+                    "fullBackupWindowHours": "[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('backupTimeWindow'))]",
+                    "fullBackupFrequency": "[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('fullBackupFrequency'))]",
+                    "password": "[if(equals(parameters('sqlEncryptionBackup'), 'false'), '', parameters('sqlAutobackupEncryptionPassword'))]",
+                    "storageAccountUrl": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', reference(parameters('sqlAutobackupStorageAccountName'), '2021-04-01').primaryEndpoints['blob'])]",
+                    "storageAccessKey": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', first(listKeys(parameters('sqlAutobackupStorageAccountName'), '2021-04-01').keys).value)]"
                 }
             }
         }
