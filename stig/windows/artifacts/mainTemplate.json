@@ -387,10 +387,8 @@
             }
         },
         "logBackupFrequency": {
-            "type": "int",
-            "defaultValue": 60,
-            "minValue":5,
-            "maxValue": 60,
+            "type": "string",
+            "defaultValue": "60",
             "metadata": {
                 "description": "(Optional) Log backup frequency (minutes)"
             }
