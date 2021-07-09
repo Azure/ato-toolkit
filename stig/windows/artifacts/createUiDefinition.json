@@ -1173,7 +1173,7 @@
                         "min": 5,
                         "max": 60,
                         "label": "Log backup frequency (minutes)",
-                        "toolTip": "The frequency of log backups in minutes",
+                        "toolTip": "The frequency of log backups in 5 minute increments",
                         "showStepMarkers": true,
                         "defaultValue": 60,
                         "constraints": {
