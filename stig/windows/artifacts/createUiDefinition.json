@@ -1174,11 +1174,11 @@
                         "max": 60,
                         "label": "Log backup frequency (minutes)",
                         "toolTip": "The frequency of log backups in 5 minute increments",
-                        "showStepMarkers": true,
+                        "showStepMarkers": false,
                         "defaultValue": 60,
                         "constraints": {
                             "regex": "^[0123456789]?[05]$",
-                            "customValidationMessage": "Number must be divisible by 5",
+                            "validationMessage": "Number must be divisible by 5",
                             "required": false
                         },
                         "visible": "[equals(steps('management').backupScheduleType, 'Manual')]"
