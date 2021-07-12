@@ -315,7 +315,7 @@
         "sqlAutobackupRetentionPeriod":{
             "type": "int",
             "defaultValue": 30,
-            "minValue":0,
+            "minValue":1,
             "maxValue": 30,
             "metadata": {
                 "description": "(Optional) Set retention period for SQL backups"

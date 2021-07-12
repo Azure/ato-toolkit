@@ -910,7 +910,7 @@
                     {
                         "name": "sqlAutobackupRetentionPeriod",
                         "type": "Microsoft.Common.Slider",
-                        "min": 0,
+                        "min": 1,
                         "max": 30,
                         "label": "Retention period (days)",
                         "showStepMarkers": false,
