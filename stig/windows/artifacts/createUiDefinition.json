@@ -724,10 +724,6 @@
                         "constraints": {
                             "allowedValues": [
                                 {
-                                    "value": "Daily",
-                                    "label": "Daily"
-                                },
-                                {
                                     "value": "Sunday",
                                     "label": "Sunday"
                                 },

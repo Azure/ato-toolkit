@@ -247,7 +247,6 @@
             "type": "string",
             "defaultValue": "sunday",
             "allowedValues": [
-                "daily",
                 "monday",
                 "tuesday",
                 "wednesday",
