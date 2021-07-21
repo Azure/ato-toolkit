@@ -19,7 +19,7 @@
         The starting number for the first VM in the deployment.
 
     .PARAMETER Count
-        Number of unque VMs or VM Availability Sets to deploy.
+        Number of unique VMs or VM Availability Sets to deploy.
 
     .PARAMETER OsVersion
         Linux or Windows OS Version.
@@ -100,7 +100,7 @@
         Enable Azure Hybrid Benefit to use your on-premises Windows Server licenses and reduce cost.
 
     .PARAMETER EnableMultisessionClientLicense
-        Windows10 Enterprise Multisession
+        Windows10 Enterprise Multi-session
 
     .PARAMETER AutoInstallDependencies
         Boolean value to indicate an online or offline environment.
@@ -173,6 +173,11 @@ Param
         "CentOS76",
         "CentOS75",
         "CentOS74",
+        "RHEL84",
+        "RHEL83",
+        "RHEL82",
+        "RHEL81",
+        "RHEL80",
         "RHEL79",
         "RHEL78",
         "RHEL77",
@@ -426,7 +431,7 @@ if ($PSCmdlet.ParameterSetName -eq 'Default')
         $newAzResourceGroupDeploymentParams['VmName'] = $vmName
         if ($newAzResourceGroupDeploymentParams.ContainsKey('AvailabilitySetNameSuffix'))
         {
-            # the hashtable "value" of the vmName "key" is the AvailabilitySetName
+            # the hash table "value" of the vmName "key" is the AvailabilitySetName
             $newAzResourceGroupDeploymentParams['AvailabilitySetName'] = $vmNames[$vmName]
             [void] $newAzResourceGroupDeploymentParams.Remove('AvailabilitySetNameSuffix')
         }
@@ -461,7 +466,7 @@ else
     $deploymentDataFileImport = Import-PowerShellDataFile -Path $DataFilePath
     Write-Verbose -Message "-- Total deployments to be created: $($($deploymentDataFileImport[$deploymentDataFileImport.Keys]).Count)"
 
-    # if the hashtable keys are more than one, fail, since the structure is incorrect.
+    # if the hash table keys are more than one, fail, since the structure is incorrect.
     if ($deploymentDataFileImport.Keys.Count -gt 1)
     {
         throw "Deployment Data File structure syntax issue, see the following link for more details: $dataFileStructureLink"
@@ -474,7 +479,7 @@ else
     [void] $PSBoundParameters.Remove('WindowsTemplateUri')
     [void] $PSBoundParameters.Remove('WindowsArtifactsLocation')
 
-    # looping through all deployment hashtables from data file
+    # looping through all deployment hash tables from data file
     $scriptPath = Join-Path -Path $PSScriptRoot -ChildPath 'scale-deployment.ps1'
     foreach ($newAzResourceGroupDeploymentParams in $deploymentDataFileImport[$deploymentDataFileImport.Keys -as [string]])
     {

@@ -1,10 +1,10 @@
 #Requires -Module @{ ModuleName = 'Az.Resources'; ModuleVersion = '3.5.0' }
 <#
     .SYNOPSIS
-        Kick start script that copies artifact data to a storeage account, then deploys Virtual Machines based on the specified data file.
+        Kick start script that copies artifact data to a storage account, then deploys Virtual Machines based on the specified data file.
 
     .DESCRIPTION
-        Kick start script that copies artifact data to a storeage account, then deploys Virtual Machines based on the specified data file.
+        Kick start script that copies artifact data to a storage account, then deploys Virtual Machines based on the specified data file.
 
     .PARAMETER ResourceGroupName
         Specifies the name of the deployment resource group.
@@ -137,6 +137,6 @@ $publishToBlobScript = Join-Path -Path $PSScriptRoot -ChildPath '.\publish-to-bl
 [void] $PSBoundParameters.Remove('AdminPasswordOrKey')
 $artifactLocationParams = & $publishToBlobScript @PSBoundParameters -MetadataPassthru
 
-# call the scale-deployment.ps1 script to deploy all datafile VM resources using the artificats previously copied via the publish-to-blob.ps1 script
+# call the scale-deployment.ps1 script to deploy all data file VM resources using the artifacts previously copied via the publish-to-blob.ps1 script
 $scaleDeployment = Join-Path -Path $PSScriptRoot -ChildPath '.\scale-deployment.ps1'
 & $scaleDeployment @artifactLocationParams -DataFilePath $DataFilePath -AdminPasswordOrKey $AdminPasswordOrKey
