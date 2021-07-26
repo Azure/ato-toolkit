@@ -46,32 +46,6 @@ configuration Windows
         }
     }
 
-    [scriptblock]$windowsSqlServer2016InstanceStig = {
-
-        if (Test-Path "HKLM:\Software\Microsoft\Microsoft SQL Server\Instance Names\SQL")
-        {
-            $hostname = [System.Net.Dns]::GetHostName()
-
-            File AuditFolderCreate
-            {
-                Type            = 'Directory'
-                DestinationPath = 'C:\Audits'
-                Ensure          = "Present"
-            }
-
-            SqlServer STIG_WindowsSqlServer2016Instance
-            {
-                SqlVersion     = '2016'
-                SqlRole        = 'Instance'
-                ServerInstance = $hostname
-            }
-        }
-        else
-        {
-            break
-        }
-    }
-
     [scriptblock]$windowsStig = {
 
         $osVersion = (Get-WmiObject Win32_OperatingSystem).Caption
@@ -220,6 +194,5 @@ configuration Windows
         $dotnetFrameworkStig.invoke()
         $windowsDefenderStig.invoke()
         $windowsFirewallStig.invoke()
-        $windowsSqlServer2016InstanceStig.invoke()
     }
 }

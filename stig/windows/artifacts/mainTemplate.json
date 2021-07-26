@@ -43,9 +43,7 @@
                 "2019-Datacenter",
                 "2016-Datacenter",
                 "19h2-ent",
-                "19h2-evd",
-                "SQL2016SP2-WS2016",
-                "SQL2016SP2-WS2019"
+                "19h2-evd"
             ],
             "metadata": {
                 "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
@@ -217,301 +215,6 @@
             "metadata": {
                 "description": "Windows10 Enterprise Multisession"
             }
-        },
-        "enableHybridBenefitSqlLicense": {
-            "type": "bool",
-            "defaultValue": false,
-            "metadata": {
-                "description": "(Optional) Enable Azure Hybrid Benefit to use your on-premises Windows SQL Server licenses and reduce cost. See https://docs.microsoft.com/en-us/azure/virtual-machines/windows/hybrid-use-benefit-licensing for more information."
-            }
-        },
-        "enableSQLIaaSExtension": {
-            "type": "bool",
-            "defaultValue": false,
-            "metadata": {
-                "description": "(Optional) Enable SQL IaaS Extension"
-            }
-        },
-        "automatedPatching": {
-            "type": "string",
-            "defaultValue": "false",
-            "allowedValues": [
-                "false",
-                "true"
-            ],
-            "metadata": {
-                "description": "(Optional) Set a patching window during which all Windows and SQL patches will be applied."
-            }
-        },
-        "maintenanceScheduleDay": {
-            "type": "string",
-            "defaultValue": "sunday",
-            "allowedValues": [
-                "monday",
-                "tuesday",
-                "wednesday",
-                "thursday",
-                "friday",
-                "saturday",
-                "sunday"
-            ],
-            "metadata": {
-                "description": "(Optional) Set a patching day during which all Windows and SQL patches will be applied."
-            }
-        },
-        "maintenanceScheduleHour": {
-            "type": "string",
-            "defaultValue": "2",
-            "allowedValues": [
-                "0",
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10",
-                "11",
-                "12",
-                "13",
-                "14",
-                "15",
-                "16",
-                "17",
-                "18",
-                "19",
-                "20",
-                "21",
-                "22",
-                "23"
-            ],
-            "metadata": {
-                "description": "(Optional) Set a patching hour during which all Windows and SQL patches will be applied."
-            }
-        },
-        "patchingDuration":{
-            "type": "int",
-            "defaultValue": 60,
-            "minValue":30,
-            "maxValue": 180,
-            "metadata": {
-                "description": "(Optional) Set a patching duration which all Windows and SQL patches will be applied."
-            }
-        },
-        "sqlAutomatedBackup": {
-            "type": "string",
-            "defaultValue": "false",
-            "allowedValues": [
-                "false",
-                "true"
-            ],
-            "metadata": {
-                "description": "(Optional) Enable an automatic backup of SQL."
-            }
-        },
-        "sqlAutobackupRetentionPeriod":{
-            "type": "int",
-            "defaultValue": 30,
-            "minValue":1,
-            "maxValue": 30,
-            "metadata": {
-                "description": "(Optional) Set retention period for SQL backups"
-            }
-        },
-        "systemDatabaseBackup":{
-            "type": "string",
-            "defaultValue": "false",
-            "allowedValues": [
-                "false",
-                "true"
-            ],
-            "metadata": {
-                "description": "(Optional) Enable backup of Master, Model, and MSDB SQL Databases."
-            }
-        },
-        "fullBackupFrequency":{
-            "type": "string",
-            "defaultValue": "Weekly",
-            "allowedValues": [
-                "Weekly",
-                "Daily"
-            ],
-            "metadata": {
-                "description": "(Optional) Frequency SQL backups."
-            }
-        },
-        "fullBackupStartTime":{
-            "type": "string",
-            "defaultValue": "2",
-            "allowedValues": [
-                "0",
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10",
-                "11",
-                "12",
-                "13",
-                "14",
-                "15",
-                "16",
-                "17",
-                "18",
-                "19",
-                "20",
-                "21",
-                "22",
-                "23"
-            ],
-            "metadata": {
-                "description": "(Optional) Set a backup hour during which all the SQL backup will start."
-            }
-        },
-        "backupTimeWindow": {
-            "type": "int",
-            "defaultValue": 2,
-            "minValue":1,
-            "maxValue": 23,
-            "metadata": {
-                "description": "(Optional) Backup time window"
-            }
-        },
-        "logBackupFrequency": {
-            "type": "string",
-            "defaultValue": "60",
-            "metadata": {
-                "description": "(Optional) Log backup frequency (minutes)"
-            }
-        },
-        "sqlConnectivitySettings": {
-            "type": "string",
-            "defaultValue": "Private",
-            "allowedValues": [
-                "Private",
-                "Public",
-                "Local"
-            ],
-            "metadata": {
-                "description": "(Optional) Set a backup hour during which all the SQL backup will start."
-            }
-        },
-        "portNumber": {
-            "type": "int",
-            "defaultValue": 1443,
-            "minValue":1024,
-            "maxValue": 65535,
-            "metadata": {
-                "description": "Sql connectivity port "
-            }
-        },
-        "sqlAuthenticationLogin": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Username for the Sql login."
-            }
-        },
-        "sqlAuthenticationPassword": {
-            "type": "securestring",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Password for the Sql login."
-            }
-        },
-        "sqlAutobackupStorageAccountName": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "(Optional) Storage account for sql resource id."
-            }
-        },
-        "backupScheduleType": {
-            "type": "string",
-            "defaultValue": "Automated",
-            "allowedValues": [
-                "Automated",
-                "Manual"
-            ],
-            "metadata": {
-                "description": "(Optional) SQL backup type."
-            }
-        },
-        "sqlEncryptionBackup": {
-            "type": "string",
-            "defaultValue": "false",
-            "allowedValues": [
-                "false",
-                "true"
-            ],
-            "metadata": {
-                "description": "(Optional) Enable encyption of SQL backup."
-            }
-        },
-        "sqlAutobackupEncryptionPassword": {
-            "type": "securestring",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Password to encrypt SQL backup."
-            }
-        },
-        "keyVaultIntegration":{
-            "type": "string",
-            "defaultValue": "false",
-            "allowedValues": [
-                "false",
-                "true"
-            ],
-            "metadata": {
-                "description": "(Optional) Enable integration with Key Vault."
-            }
-        },
-        "kvCredentialName":{
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "(Optional) Key Vault credential name"
-            }
-        },
-        "kvUrl":{
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "(Optional) Key Vault url"
-            }
-        },
-        "kvPrincipalName":{
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "(Optional) Key Vault principle name"
-            }
-        },
-        "kvAdminSecret":{
-            "type": "securestring",
-            "defaultValue": "",
-            "metadata": {
-                "description": "(Optional) Key Vault secret"
-            }
-        },
-        "isRServicesEnabled":{
-            "type": "string",
-            "defaultValue": "false",
-            "allowedValues": [
-                "false",
-                "true"
-            ],
-            "metadata": {
-                "description": "(Optional) Enable rServices on SQL."
-            }
         }
     },
     "variables": {
@@ -577,36 +280,8 @@
                     "sku": "19h2-evd",
                     "version": "latest"
                 }
-            },
-            "SQL2016SP2-WS2016": {
-                "reference": {
-                    "publisher": "MicrosoftSQLServer",
-                    "offer": "SQL2016SP2-WS2016",
-                    "sku": "Enterprise",
-                    "version": "latest"
-                }
-            },
-            "SQL2016SP2-WS2019": {
-                "reference": {
-                    "publisher": "MicrosoftSQLServer",
-                    "offer": "SQL2016SP2-WS2019",
-                    "sku": "Enterprise",
-                    "version": "latest"
-                }
             }
-        },
-        "sqlDiskName": "[concat(parameters('vmName'), '-disk')]",
-        "sqlDataDisk": [
-            {
-                "lun": 0,
-                "createOption": "attach",
-                "caching": "ReadOnly",
-                "managedDisk": {
-                    "id": "[resourceId('Microsoft.Compute/disks', variables('sqlDiskName'))]"
-                },
-                "writeAcceleratorEnabled": "false"
-            }
-        ]
+        }
     },
     "resources": [
         {
@@ -716,29 +391,6 @@
             }
         },
         {
-            "name": "[concat(variables('sqlDiskName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
-            "type": "Microsoft.Compute/disks",
-            "apiVersion": "2020-09-30",
-            "location": "[parameters('location')]",
-            "condition": "[or(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), equals(parameters('osVersion'), 'SQL2016SP2-WS2019'))]",
-            "properties": {
-                "diskSizeGB": 1024,
-                "creationData": {
-                    "createOption": "empty"
-                }
-            },
-            "sku": {
-                "name": "Premium_LRS"
-            },
-            "copy": {
-                "name": "virtualMachineDiskLoop",
-                "count": "[variables('instanceCount')]"
-            },
-            "dependsOn": [
-                "nicLoop"
-            ]
-        },
-        {
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2020-06-01",
             "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
@@ -748,7 +400,7 @@
                 "count": "[variables('instanceCount')]"
             },
             "dependsOn": [
-                "virtualMachineDiskLoop"
+                "nicLoop"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -767,8 +419,7 @@
                             "storageAccountType": "[parameters('osDiskStorageType')]",
                             "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
                         }
-                    },
-                    "dataDisks": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), variables('sqlDatadisk'), if(equals(parameters('osVersion'), 'SQL2016SP2-WS2019'), variables('sqlDatadisk'), json('null')))]"
+                    }
                 },
                 "networkProfile": {
                     "networkInterfaces": [
@@ -929,85 +580,6 @@
                         "script": "Windows.ps1",
                         "function": "Windows"
                     }
-                }
-            }
-        },
-        {
-            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
-            "type": "Microsoft.SqlVirtualMachine/SqlVirtualMachines",
-            "apiVersion": "2017-03-01-preview",
-            "location": "[parameters('location')]",
-            "condition": "[not(equals(parameters('enableSQLIaaSExtension'), false()))]",
-            "copy": {
-                "name": "dscLoop",
-                "count": "[variables('instanceCount')]"
-            },
-            "dependsOn": [
-                "cseLoop"
-            ],
-            "properties": {
-                "virtualMachineResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
-                "sqlManagement": "Full",
-                "sqlServerLicenseType": "[if(equals(parameters('enableHybridBenefitSqlLicense'), true()), 'AHUB', 'PAYG')]",
-                "autoPatchingSettings": {
-                    "enable": "[parameters('automatedPatching')]",
-                    "dayOfWeek": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('maintenanceScheduleDay'))]",
-                    "maintenanceWindowStartingHour": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('maintenanceScheduleHour'))]",
-                    "maintenanceWindowDuration": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('patchingDuration'))]"
-                },
-                "keyVaultCredentialSettings": {
-                    "enable": "[parameters('keyVaultIntegration')]",
-                    "credentialName": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvCredentialName'))]",
-                    "azureKeyVaultUrl": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvUrl'))]",
-                    "servicePrincipalName": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvPrincipalName'))]",
-                    "servicePrincipalSecret": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvAdminSecret'))]"
-                },
-                "storageConfigurationSettings": {
-                    "diskConfigurationType": "NEW",
-                    "storageWorkloadType": "OLTP",
-                    "sqlDataSettings": {
-                        "luns": [
-                            0
-                        ],
-                        "defaultFilePath": "F:\\data"
-                    },
-                    "sqlLogSettings": {
-                        "luns": [
-                            0
-                        ],
-                        "defaultFilePath": "F:\\log"
-                    },
-                    "sqlTempDbSettings": {
-                        "luns": [
-                            0
-                        ],
-                        "defaultFilePath": "F:\\tempDb"
-                    }
-                },
-                "serverConfigurationsManagementSettings": {
-                    "sqlConnectivityUpdateSettings": {
-                        "connectivityType": "[parameters('sqlConnectivitySettings')]",
-                        "port": "[parameters('portNumber')]",
-                        "sqlAuthUpdateUserName": "[parameters('sqlAuthenticationLogin')]",
-                        "sqlAuthUpdatePassword": "[parameters('sqlAuthenticationPassword')]"
-                    },
-                    "additionalFeaturesServerConfigurations": {
-                        "isRServicesEnabled": "[parameters('isRServicesEnabled')]"
-                    }
-                },
-                "autoBackupSettings": {
-                    "enable": "[parameters('sqlAutomatedBackup')]",
-                    "retentionPeriod": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlAutobackupRetentionPeriod'))]",
-                    "enableEncryption": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlEncryptionBackup'))]",
-                    "backupSystemDbs": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('systemDatabaseBackup'))]",
-                    "backupScheduleType": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('backupScheduleType'))]",
-                    "logBackupFrequency": "[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('logBackupFrequency'))]",
-                    "fullBackupStartTime":"[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('fullBackupStartTime'))]",
-                    "fullBackupWindowHours": "[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('backupTimeWindow'))]",
-                    "fullBackupFrequency": "[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('fullBackupFrequency'))]",
-                    "password": "[if(equals(parameters('sqlEncryptionBackup'), 'false'), '', parameters('sqlAutobackupEncryptionPassword'))]",
-                    "storageAccountUrl": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', reference(parameters('sqlAutobackupStorageAccountName'), '2021-04-01').primaryEndpoints['blob'])]",
-                    "storageAccessKey": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', first(listKeys(parameters('sqlAutobackupStorageAccountName'), '2021-04-01').keys).value)]"
                 }
             }
         }
