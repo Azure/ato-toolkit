@@ -1,0 +1,12 @@
+[ClassVersion("1.0.0.0"), FriendlyName("RegistryPolicyFile")]
+class MSFT_RegistryPolicyFile : OMI_BaseResource
+{
+    [Key, Description("Indicates the path of the registry key for which you want to ensure a specific state.")] String Key;
+    [Key, Description("Indicates the name of the registry value.")] String ValueName;
+    [Required, Description("Indicates the target type. This is needed to determine the .pol file path. Supported values are ComputerConfiguration, UserConfiguration, Administrators, NonAdministrators, and Account."), ValueMap{"ComputerConfiguration","UserConfiguration","Administrators","NonAdministrators","Account"}, Values{"ComputerConfiguration","UserConfiguration","Administrators","NonAdministrators","Account"}] String TargetType;
+    [Write, Description("Specifies the name of the account for an user specific pol file to be managed.")] String AccountName;
+    [Write, Description("The data for the registry value.")] String ValueData[];
+    [Write, Description("Indicates the type of the value."), ValueMap{"Binary","Dword","ExpandString","MultiString","Qword","String","None"}, Values{"Binary","Dword","ExpandString","MultiString","Qword","String","None"}] String ValueType;
+    [Write, Description("Specifies the desired state of the registry policy. When set to 'Present', the registry policy will be created. When set to 'Absent', the registry policy will be removed. Default value is 'Present'."), ValueMap{"Present","Absent"}, Values{"Present","Absent"}] String Ensure;
+    [Read, Description("Returns the path to the pol file being managed.")] String Path;
+};

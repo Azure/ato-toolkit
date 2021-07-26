@@ -1,0 +1,10 @@
+[ClassVersion("1.0.0.0"), FriendlyName("AuditSetting")]
+class AuditSetting : OMI_BaseResource
+{
+    [Key, Description("A WQL query used to retrieve the setting to be audited.")] String Query;
+    [Key, Description("The property name to be audited.")] String Property;
+    [Key, Description("Specifies the desired value of the property being audited.")] String DesiredValue;
+    [Required, Description("The comparison operator to be used to craft the condition that defines compliance.")] String Operator;
+    [Write, Description("Specifies the namespace of the CIM class.")] String NameSpace;
+    [Read, Description("An array of strings listing all the properties and values of the WMI class being queried.")] String ResultString[];
+};

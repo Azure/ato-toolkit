@@ -1,0 +1,981 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+            "type": "string",
+            "defaultValue": "stig-vm",
+            "metadata": {
+                "description": "Name of the virtual machine."
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        },
+        "vmSize": {
+            "type": "string",
+            "defaultValue": "Standard_D2s_v3",
+            "metadata": {
+                "description": "Size of the virtual machine."
+            }
+        },
+        "adminUsername": {
+            "type": "string",
+            "metadata": {
+                "description": "Username for the Virtual Machine."
+            }
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "minLength": 12,
+            "metadata": {
+                "description": "Password for the Virtual Machine."
+            }
+        },
+        "osVersion": {
+            "type": "string",
+            "defaultValue": "2019-Datacenter",
+            "allowedValues": [
+                "SQL2016SP2-WS2016",
+                "SQL2016SP2-WS2019"
+            ],
+            "metadata": {
+                "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
+            }
+        },
+        "osDiskStorageType": {
+            "type": "string",
+            "defaultValue": "Premium_LRS",
+            "allowedValues": [ "Premium_LRS", "Standard_LRS", "StandardSSD_LRS" ],
+            "metadata": {
+                "description": "You can choose between Azure managed disks types to support your workload or scenario."
+            }
+        },
+        "osDiskEncryptionSetResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "OS Disk Encryption Set resource id."
+            }
+        },
+        "_artifactsLocation": {
+            "type": "string",
+            "defaultValue": "[split(deployment().properties.templateLink.uri, 'mainTemplate.json')[0]]",
+            "metadata": {
+                "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+            }
+        },
+        "_artifactsLocationSasToken": {
+            "type": "secureString",
+            "defaultValue": "",
+            "metadata": {
+                "description": "SAS Token to access the storage location containing artifacts."
+            }
+        },
+        "autoInstallDependencies": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Boolean value to indicate an online or offline environment."
+            }
+        },
+        "vmVirtualNetwork": {
+            "type": "string",
+            "defaultValue": "stig-vm-vnet",
+            "metadata": {
+                "description": "Virtual Network for the VM Image."
+            }
+        },
+        "virtualNetworkResourceGroupName": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().name]",
+            "metadata": {
+                "description": "Name of the resource group for the existing virtual network"
+            }
+        },
+        "virtualNetworkNewOrExisting": {
+            "type": "string",
+            "defaultValue": "new",
+            "metadata": {
+                "description": "Is the Virtual Network new or existing for the VM Image."
+            }
+        },
+        "addressPrefix": {
+            "type": "string",
+            "defaultValue": "10.0.0.0/16",
+            "metadata": {
+                "description": "Address prefix of the virtual network"
+            }
+        },
+        "subnetName": {
+            "type": "string",
+            "defaultValue": "default",
+            "metadata": {
+                "description": "Subnet name for the VM Image."
+            }
+        },
+        "subnetPrefix": {
+            "type": "string",
+            "defaultValue": "10.0.0.0/24",
+            "metadata": {
+                "description": "Subnet prefix of the virtual network"
+            }
+        },
+        "applicationSecurityGroupResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Application Security Group resource id."
+            }
+        },
+        "availabilityOptions": {
+            "type": "string",
+            "defaultValue": "default",
+            "allowedValues": [
+                "default",
+                "availabilitySet"
+            ],
+            "metadata": {
+                "description": "(Optional) Availability options."
+            }
+        },
+        "availabilitySetName": {
+            "type": "string",
+            "defaultValue": "stig-vm-as",
+            "metadata": {
+                "description": "(Optional) Availability set name."
+            }
+        },
+        "instanceCount": {
+            "type": "int",
+            "defaultValue": 2,
+            "minValue": 1,
+            "maxValue": 5,
+            "metadata": {
+                "description": "(Optional) Instance count."
+            }
+        },
+        "faultDomains": {
+            "type": "int",
+            "defaultValue": 2,
+            "minValue": 1,
+            "maxValue": 3,
+            "metadata": {
+                "description": "(Optional) Fault domains."
+            }
+        },
+        "updateDomains": {
+            "type": "int",
+            "defaultValue": 3,
+            "minValue": 1,
+            "maxValue": 5,
+            "metadata": {
+                "description": "(Optional) Update domains."
+            }
+        },
+        "logsRetentionInDays": {
+            "type": "int",
+            "defaultValue": 365,
+            "minValue": 0,
+            "maxValue": 365,
+            "metadata": {
+                "description": "Log retention in days."
+            }
+        },
+        "diagnosticStorageResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Diagnostic Storage account resource id."
+            }
+        },
+        "logAnalyticsWorkspaceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Log Analytics workspace resource id."
+            }
+        },
+        "enableHybridBenefitServerLicense": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "(Optional) Enable Azure Hybrid Benefit to use your on-premises Windows Server licenses and reduce cost. See https://docs.microsoft.com/en-us/azure/virtual-machines/windows/hybrid-use-benefit-licensing for more information."
+            }
+        },
+        "enableMultisessionClientLicense": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Windows10 Enterprise Multisession"
+            }
+        },
+        "enableHybridBenefitSqlLicense": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "(Optional) Enable Azure Hybrid Benefit to use your on-premises Windows SQL Server licenses and reduce cost. See https://docs.microsoft.com/en-us/azure/virtual-machines/windows/hybrid-use-benefit-licensing for more information."
+            }
+        },
+        "enableSQLIaaSExtension": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "(Optional) Enable SQL IaaS Extension"
+            }
+        },
+        "automatedPatching": {
+            "type": "string",
+            "defaultValue": "false",
+            "allowedValues": [
+                "false",
+                "true"
+            ],
+            "metadata": {
+                "description": "(Optional) Set a patching window during which all Windows and SQL patches will be applied."
+            }
+        },
+        "maintenanceScheduleDay": {
+            "type": "string",
+            "defaultValue": "sunday",
+            "allowedValues": [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday",
+                "saturday",
+                "sunday"
+            ],
+            "metadata": {
+                "description": "(Optional) Set a patching day during which all Windows and SQL patches will be applied."
+            }
+        },
+        "maintenanceScheduleHour": {
+            "type": "string",
+            "defaultValue": "2",
+            "allowedValues": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19",
+                "20",
+                "21",
+                "22",
+                "23"
+            ],
+            "metadata": {
+                "description": "(Optional) Set a patching hour during which all Windows and SQL patches will be applied."
+            }
+        },
+        "patchingDuration":{
+            "type": "int",
+            "defaultValue": 60,
+            "minValue":30,
+            "maxValue": 180,
+            "metadata": {
+                "description": "(Optional) Set a patching duration which all Windows and SQL patches will be applied."
+            }
+        },
+        "sqlAutomatedBackup": {
+            "type": "string",
+            "defaultValue": "false",
+            "allowedValues": [
+                "false",
+                "true"
+            ],
+            "metadata": {
+                "description": "(Optional) Enable an automatic backup of SQL."
+            }
+        },
+        "sqlAutobackupRetentionPeriod":{
+            "type": "int",
+            "defaultValue": 30,
+            "minValue":1,
+            "maxValue": 30,
+            "metadata": {
+                "description": "(Optional) Set retention period for SQL backups"
+            }
+        },
+        "systemDatabaseBackup":{
+            "type": "string",
+            "defaultValue": "false",
+            "allowedValues": [
+                "false",
+                "true"
+            ],
+            "metadata": {
+                "description": "(Optional) Enable backup of Master, Model, and MSDB SQL Databases."
+            }
+        },
+        "fullBackupFrequency":{
+            "type": "string",
+            "defaultValue": "Weekly",
+            "allowedValues": [
+                "Weekly",
+                "Daily"
+            ],
+            "metadata": {
+                "description": "(Optional) Frequency SQL backups."
+            }
+        },
+        "fullBackupStartTime":{
+            "type": "string",
+            "defaultValue": "2",
+            "allowedValues": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19",
+                "20",
+                "21",
+                "22",
+                "23"
+            ],
+            "metadata": {
+                "description": "(Optional) Set a backup hour during which all the SQL backup will start."
+            }
+        },
+        "backupTimeWindow": {
+            "type": "int",
+            "defaultValue": 2,
+            "minValue":1,
+            "maxValue": 23,
+            "metadata": {
+                "description": "(Optional) Backup time window"
+            }
+        },
+        "logBackupFrequency": {
+            "type": "string",
+            "defaultValue": "60",
+            "metadata": {
+                "description": "(Optional) Log backup frequency (minutes)"
+            }
+        },
+        "sqlConnectivitySettings": {
+            "type": "string",
+            "defaultValue": "Private",
+            "allowedValues": [
+                "Private",
+                "Public",
+                "Local"
+            ],
+            "metadata": {
+                "description": "(Optional) Set a backup hour during which all the SQL backup will start."
+            }
+        },
+        "portNumber": {
+            "type": "int",
+            "defaultValue": 1443,
+            "minValue":1024,
+            "maxValue": 65535,
+            "metadata": {
+                "description": "Sql connectivity port "
+            }
+        },
+        "sqlAuthenticationLogin": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Username for the Sql login."
+            }
+        },
+        "sqlAuthenticationPassword": {
+            "type": "securestring",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Password for the Sql login."
+            }
+        },
+        "sqlAutobackupStorageAccountName": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Storage account for sql resource id."
+            }
+        },
+        "backupScheduleType": {
+            "type": "string",
+            "defaultValue": "Automated",
+            "allowedValues": [
+                "Automated",
+                "Manual"
+            ],
+            "metadata": {
+                "description": "(Optional) SQL backup type."
+            }
+        },
+        "sqlEncryptionBackup": {
+            "type": "string",
+            "defaultValue": "false",
+            "allowedValues": [
+                "false",
+                "true"
+            ],
+            "metadata": {
+                "description": "(Optional) Enable encyption of SQL backup."
+            }
+        },
+        "sqlAutobackupEncryptionPassword": {
+            "type": "securestring",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Password to encrypt SQL backup."
+            }
+        },
+        "keyVaultIntegration":{
+            "type": "string",
+            "defaultValue": "false",
+            "allowedValues": [
+                "false",
+                "true"
+            ],
+            "metadata": {
+                "description": "(Optional) Enable integration with Key Vault."
+            }
+        },
+        "kvCredentialName":{
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Key Vault credential name"
+            }
+        },
+        "kvUrl":{
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Key Vault url"
+            }
+        },
+        "kvPrincipalName":{
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Key Vault principle name"
+            }
+        },
+        "kvAdminSecret":{
+            "type": "securestring",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Key Vault secret"
+            }
+        },
+        "isRServicesEnabled":{
+            "type": "string",
+            "defaultValue": "false",
+            "allowedValues": [
+                "false",
+                "true"
+            ],
+            "metadata": {
+                "description": "(Optional) Enable rServices on SQL."
+            }
+        }
+    },
+    "variables": {
+        "instanceCount": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), parameters('instanceCount'), 1)]",
+        "availabilitySet": {
+            "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySetName'))]"
+        },
+        "nicName": "[concat(parameters('vmName'), '-nic')]",
+        "vnetId": {
+            "new": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vmVirtualNetwork'))]",
+            "existing": "[resourceId(parameters('virtualNetworkResourceGroupName'),'Microsoft.Storage/virtualNetworks',parameters('vmVirtualNetwork'))]"
+        },
+        "subnetRef": "[concat(variables('vnetId')[parameters('virtualNetworkNewOrExisting')],'/subnets/',parameters('subnetName'))]",
+        "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
+        "applicationSecurityGroup": [
+            {
+                "id": "[parameters('applicationSecurityGroupResourceId')]"
+            }
+        ],
+        "requiredModulesFile": "RequiredModules.ps1",
+        "installPSModulesFile": "InstallModules.ps1",
+        "generateStigChecklist": "GenerateStigChecklist.ps1",
+        "storageApiVersion": "2019-06-01",
+        "diskEncryptionSet": { "id": "[parameters('osDiskEncryptionSetResourceId')]" },
+        "artifactsLocationSasToken": "[if(equals(parameters('_artifactsLocationSasToken'), ''), if(contains(deployment().properties.templateLink.uri, '?'), split(deployment().properties.templateLink.uri, 'mainTemplate.json')[1], ''), parameters('_artifactsLocationSasToken'))]",
+        "storageAccountResourceid": "[if(equals(parameters('diagnosticStorageResourceId'), ''), 'fakestorageaccountresourceid', parameters('diagnosticStorageResourceId'))]",
+        "storageAccountName": "[if(equals(parameters('diagnosticStorageResourceId'), ''), 'fakestorageaccountname', split(parameters('diagnosticStorageResourceId'), '/')[8])]",
+        "wadlogs": "<WadCfg> <DiagnosticMonitorConfiguration overallQuotaInMB=\"4096\" xmlns=\"http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration\"> <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter=\"Error\"/> <WindowsEventLog scheduledTransferPeriod=\"PT1M\" > <DataSource name=\"Application!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"Security!*[System[(band(Keywords,13510798882111488))]]\" /> <DataSource name=\"System!*[System[(Level = 1 or Level = 2)]]\" /></WindowsEventLog>",
+        "wadperfcounters1": "<PerformanceCounters scheduledTransferPeriod=\"PT1M\"><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% Processor Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU utilization\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% Privileged Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU privileged time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% User Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU user time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor Information(_Total)\\Processor Frequency\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"CPU frequency\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\System\\Processes\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Processes\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Process(_Total)\\Thread Count\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Threads\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Process(_Total)\\Handle Count\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Handles\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\% Committed Bytes In Use\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Memory usage\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Available Bytes\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory available\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Committed Bytes\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory committed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Commit Limit\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory commit limit\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active time\" locale=\"en-us\"/></PerformanceCounterConfiguration>",
+        "wadperfcounters2": "<PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Read Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active read time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Write Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active write time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Transfers/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Reads/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk read operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Writes/sec\" sampleRate=\"PT15S\" unit=\"CountPerSecond\"><annotation displayName=\"Disk write operations\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Read Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk read speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\Disk Write Bytes/sec\" sampleRate=\"PT15S\" unit=\"BytesPerSecond\"><annotation displayName=\"Disk write speed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\LogicalDisk(_Total)\\% Free Space\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk free space (percentage)\" locale=\"en-us\"/></PerformanceCounterConfiguration></PerformanceCounters>",
+        "wadcfgxstart": "[concat(variables('wadlogs'), variables('wadperfcounters1'), variables('wadperfcounters2'), '<Metrics resourceId=\"')]",
+        "wadmetricsresourceid": "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
+        "wadcfgxend": "\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>",
+        "images": {
+            "SQL2016SP2-WS2016": {
+                "reference": {
+                    "publisher": "MicrosoftSQLServer",
+                    "offer": "SQL2016SP2-WS2016",
+                    "sku": "Enterprise",
+                    "version": "latest"
+                }
+            },
+            "SQL2016SP2-WS2019": {
+                "reference": {
+                    "publisher": "MicrosoftSQLServer",
+                    "offer": "SQL2016SP2-WS2019",
+                    "sku": "Enterprise",
+                    "version": "latest"
+                }
+            }
+        },
+        "sqlDiskName": "[concat(parameters('vmName'), '-disk')]",
+        "sqlDataDisk": [
+            {
+                "lun": 0,
+                "createOption": "attach",
+                "caching": "ReadOnly",
+                "managedDisk": {
+                    "id": "[resourceId('Microsoft.Compute/disks', variables('sqlDiskName'))]"
+                },
+                "writeAcceleratorEnabled": "false"
+            }
+        ]
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2020-06-01",
+            "name": "[variables('networkSecurityGroupName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('vmVirtualNetwork')]",
+            "location": "[parameters('location')]",
+            "condition": "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+            ],
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('addressPrefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnetName')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnetPrefix')]",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Compute/availabilitySets",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('availabilitySetName')]",
+            "location": "[parameters('location')]",
+            "condition": "[equals(parameters('availabilityOptions'), 'availabilitySet')]",
+            "sku": {
+                "name": "Aligned"
+            },
+            "properties": {
+                "PlatformUpdateDomainCount": "[parameters('updateDomains')]",
+                "PlatformFaultDomainCount": "[parameters('faultDomains')]"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-06-01",
+            "name": "[concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
+            "location": "[parameters('location')]",
+            "copy": {
+                "name": "nicLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vmVirtualNetwork'))]"
+            ],
+            "properties": {
+                "networkSecurityGroup": { "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]" },
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            },
+                            "applicationSecurityGroups": "[if(equals(parameters('applicationSecurityGroupResourceId'), ''), json('null'), variables('applicationSecurityGroup'))]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights/service')]",
+            "location": "[parameters('location')]",
+            "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "copy": {
+                "name": "nicDiagnosticLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "nicLoop"
+            ],
+            "properties": {
+                "storageAccountId": "[if(equals(parameters('diagnosticStorageResourceId'), ''), json('null'), parameters('diagnosticStorageResourceId'))]",
+                "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), parameters('logAnalyticsWorkspaceId'))]",
+                "metrics": [
+                    {
+                        "category": "AllMetrics",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('logsRetentionInDays')]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "[concat(variables('sqlDiskName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
+            "type": "Microsoft.Compute/disks",
+            "apiVersion": "2020-09-30",
+            "location": "[parameters('location')]",
+            "condition": "[or(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), equals(parameters('osVersion'), 'SQL2016SP2-WS2019'))]",
+            "properties": {
+                "diskSizeGB": 1024,
+                "creationData": {
+                    "createOption": "empty"
+                }
+            },
+            "sku": {
+                "name": "Premium_LRS"
+            },
+            "copy": {
+                "name": "virtualMachineDiskLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "nicLoop"
+            ]
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2020-06-01",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
+            "location": "[parameters('location')]",
+            "copy": {
+                "name": "virtualMachineLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "virtualMachineDiskLoop"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('vmSize')]"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('vmName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]"
+                },
+                "storageProfile": {
+                    "imageReference": "[variables('images')[parameters('osVersion')].reference]",
+                    "osDisk": {
+                        "createOption": "FromImage",
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('osDiskStorageType')]",
+                            "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
+                        }
+                    },
+                    "dataDisks": "[if(equals(parameters('osVersion'), 'SQL2016SP2-WS2016'), variables('sqlDatadisk'), if(equals(parameters('osVersion'), 'SQL2016SP2-WS2019'), variables('sqlDatadisk'), json('null')))]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex())))]"
+                        }
+                    ]
+                },
+                "availabilitySet": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), variables('availabilitySet'), json('null'))]",
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
+                        "storageUri": "[if(not(equals(parameters('diagnosticStorageResourceId'), '')), reference(parameters('diagnosticStorageResourceId'), variables('storageApiVersion')).primaryEndpoints.blob, json('null'))]"
+                    }
+                },
+                "licenseType": "[if(equals(parameters('enableHybridBenefitServerLicense'), true()), 'Windows_Server', if(equals(parameters('enableMultisessionClientLicense'), true()), 'Windows_Client', json('null')))]"
+            },
+            "resources": [
+            ]
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights/service')]",
+            "location": "[parameters('location')]",
+            "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "copy": {
+                "name": "virtualMachineDiagnosticLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "virtualMachineLoop"
+            ],
+            "properties": {
+                "storageAccountId": "[if(equals(parameters('diagnosticStorageResourceId'), ''), json('null'), parameters('diagnosticStorageResourceId'))]",
+                "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), parameters('logAnalyticsWorkspaceId'))]",
+                "metrics": [
+                    {
+                        "category": "AllMetrics",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('logsRetentionInDays')]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2015-06-15",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.EnterpriseCloud.Monitoring')]",
+            "location": "[parameters('location')]",
+            "condition": "[not(equals(parameters('logAnalyticsWorkspaceId'), ''))]",
+            "copy": {
+                "name": "monitoringAgentLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "virtualMachineDiagnosticLoop"
+            ],
+            "properties": {
+                "publisher": "Microsoft.EnterpriseCloud.Monitoring",
+                "type": "MicrosoftMonitoringAgent",
+                "typeHandlerVersion": "1.0",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'), '2015-03-20').customerId)]"
+                },
+                "protectedSettings": {
+                    "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), listkeys(parameters('logAnalyticsWorkspaceId'), '2015-03-20').primarySharedKey)]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2020-06-01",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights.VMDiagnosticsSettings')]",
+            "location": "[parameters('location')]",
+            "condition": "[not(equals(parameters('diagnosticStorageResourceId'), ''))]",
+            "copy": {
+                "name": "iaasDiagnosticLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "monitoringAgentLoop"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Azure.Diagnostics",
+                "type": "IaaSDiagnostics",
+                "typeHandlerVersion": "1.5",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "xmlCfg": "[base64(concat(variables('wadcfgxstart'), variables('wadmetricsresourceid'), variables('wadcfgxend')))]",
+                    "storageAccount": "[variables('storageAccountName')]"
+                },
+                "protectedSettings": {
+                    "storageAccountName": "[variables('storageAccountName')]",
+                    "storageAccountKey": "[if(equals(parameters('diagnosticStorageResourceId'), ''), '', listkeys(variables('storageAccountResourceid'), '2019-06-01').keys[0].value)]",
+                    "storageAccountEndPoint": "[concat('https://', environment().suffixes.storage)]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2020-12-01",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/install-powershell-modules')]",
+            "location": "[parameters('location')]",
+            "condition": "[not(equals(parameters('_artifactsLocation'), ''))]",
+            "copy": {
+                "name": "cseLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "iaasDiagnosticLoop"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.10",
+                "autoUpgradeMinorVersion": true,
+                "protectedSettings": {
+                    "fileUris": [
+                        "[concat(parameters('_artifactsLocation'), variables('requiredModulesFile'), variables('artifactsLocationSasToken'))]",
+                        "[concat(parameters('_artifactsLocation'), variables('installPSModulesFile'), variables('artifactsLocationSasToken'))]",
+                        "[concat(parameters('_artifactsLocation'), variables('generateStigChecklist'), variables('artifactsLocationSasToken'))]"
+                    ],
+                    "ignoreRelativePathForFileDownloads": true
+                },
+                "settings": {
+                    "timestamp": 123456788,
+                    "commandToExecute": "[concat('PowerShell -ExecutionPolicy Unrestricted -File ', variables('installPSModulesFile'), ' -autoInstallDependencies ', parameters('autoInstallDependencies'))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2020-12-01",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/setup-win-dsc-stig')]",
+            "location": "[parameters('location')]",
+            "condition": "[not(equals(parameters('_artifactsLocation'), ''))]",
+            "copy": {
+                "name": "dscLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "cseLoop"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.77",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "wmfVersion": "latest",
+                    "configuration": {
+                        "url": "[concat(parameters('_artifactsLocation'), 'Windows.ps1.zip', variables('artifactsLocationSasToken'))]",
+                        "script": "Windows.ps1",
+                        "function": "Windows"
+                    }
+                }
+            }
+        },
+        {
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
+            "type": "Microsoft.SqlVirtualMachine/SqlVirtualMachines",
+            "apiVersion": "2017-03-01-preview",
+            "location": "[parameters('location')]",
+            "condition": "[not(equals(parameters('enableSQLIaaSExtension'), false()))]",
+            "copy": {
+                "name": "dscLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "cseLoop"
+            ],
+            "properties": {
+                "virtualMachineResourceId": "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
+                "sqlManagement": "Full",
+                "sqlServerLicenseType": "[if(equals(parameters('enableHybridBenefitSqlLicense'), true()), 'AHUB', 'PAYG')]",
+                "autoPatchingSettings": {
+                    "enable": "[parameters('automatedPatching')]",
+                    "dayOfWeek": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('maintenanceScheduleDay'))]",
+                    "maintenanceWindowStartingHour": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('maintenanceScheduleHour'))]",
+                    "maintenanceWindowDuration": "[if(equals(parameters('automatedPatching'), 'false'), '', parameters('patchingDuration'))]"
+                },
+                "keyVaultCredentialSettings": {
+                    "enable": "[parameters('keyVaultIntegration')]",
+                    "credentialName": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvCredentialName'))]",
+                    "azureKeyVaultUrl": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvUrl'))]",
+                    "servicePrincipalName": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvPrincipalName'))]",
+                    "servicePrincipalSecret": "[if(equals(parameters('keyVaultIntegration'), 'false'), '', parameters('kvAdminSecret'))]"
+                },
+                "storageConfigurationSettings": {
+                    "diskConfigurationType": "NEW",
+                    "storageWorkloadType": "OLTP",
+                    "sqlDataSettings": {
+                        "luns": [
+                            0
+                        ],
+                        "defaultFilePath": "F:\\data"
+                    },
+                    "sqlLogSettings": {
+                        "luns": [
+                            0
+                        ],
+                        "defaultFilePath": "F:\\log"
+                    },
+                    "sqlTempDbSettings": {
+                        "luns": [
+                            0
+                        ],
+                        "defaultFilePath": "F:\\tempDb"
+                    }
+                },
+                "serverConfigurationsManagementSettings": {
+                    "sqlConnectivityUpdateSettings": {
+                        "connectivityType": "[parameters('sqlConnectivitySettings')]",
+                        "port": "[parameters('portNumber')]",
+                        "sqlAuthUpdateUserName": "[parameters('sqlAuthenticationLogin')]",
+                        "sqlAuthUpdatePassword": "[parameters('sqlAuthenticationPassword')]"
+                    },
+                    "additionalFeaturesServerConfigurations": {
+                        "isRServicesEnabled": "[parameters('isRServicesEnabled')]"
+                    }
+                },
+                "autoBackupSettings": {
+                    "enable": "[parameters('sqlAutomatedBackup')]",
+                    "retentionPeriod": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlAutobackupRetentionPeriod'))]",
+                    "enableEncryption": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('sqlEncryptionBackup'))]",
+                    "backupSystemDbs": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('systemDatabaseBackup'))]",
+                    "backupScheduleType": "[if(equals(parameters('sqlAutomatedBackup'), 'false'), '', parameters('backupScheduleType'))]",
+                    "logBackupFrequency": "[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('logBackupFrequency'))]",
+                    "fullBackupStartTime":"[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('fullBackupStartTime'))]",
+                    "fullBackupWindowHours": "[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('backupTimeWindow'))]",
+                    "fullBackupFrequency": "[if(equals(parameters('backupScheduleType'), 'Automated'), '', parameters('fullBackupFrequency'))]",
+                    "password": "[if(equals(parameters('sqlEncryptionBackup'), 'false'), '', parameters('sqlAutobackupEncryptionPassword'))]",
+                    "storageAccountUrl": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', reference(parameters('sqlAutobackupStorageAccountName'), '2021-04-01').primaryEndpoints['blob'])]",
+                    "storageAccessKey": "[if(equals(parameters('sqlAutobackupStorageAccountName'), ''), '', first(listKeys(parameters('sqlAutobackupStorageAccountName'), '2021-04-01').keys).value)]"
+                }
+            }
+        }
+    ],
+    "outputs": {
+    }
+}

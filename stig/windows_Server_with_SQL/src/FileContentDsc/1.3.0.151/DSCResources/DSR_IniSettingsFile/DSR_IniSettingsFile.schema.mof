@@ -1,0 +1,10 @@
+[ClassVersion("1.0.0.0"), FriendlyName("IniSettingsFile")]
+class DSR_IniSettingsFile : OMI_BaseResource
+{
+  [Key, Description("The path to the INI settings file to set the entry in.")] String Path;
+  [Key, Description("The section to add or set the entry in.")] String Section;
+  [Key, Description("The name of the key to add or set in the section.")] String Key;
+  [Write, Description("Specifies the value type that contains the value to set the entry to. Defaults to 'Text'."),ValueMap{"Text", "Secret"},Values{"Text", "Secret"}] String Type;
+  [Write, Description("The text to set the entry value to. Only used when Type is set to 'Text'.")] String Text;
+  [write, Description("The secret text to set the entry value to. Only used when Type is set to 'Secret'."),EmbeddedInstance("MSFT_Credential")] String Secret;
+};

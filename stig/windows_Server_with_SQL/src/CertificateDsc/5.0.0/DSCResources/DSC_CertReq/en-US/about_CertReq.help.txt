@@ -1,0 +1,177 @@
+.NAME
+    CertReq
+
+.DESCRIPTION
+    The resource is used to request a new certificate from an certificate
+    authority.
+
+.PARAMETER Subject
+    Key - String
+    Provide the text string to use as the subject of the certificate.
+
+.PARAMETER CAType
+    Write - String
+    The type of CA in use, Standalone/Enterprise.
+
+.PARAMETER CAServerFQDN
+    Write - String
+    The FQDN of the Active Directory Certificate Authority on the local area network. Leave empty to automatically locate.
+
+.PARAMETER CARootName
+    Write - String
+    The name of the certificate authority, by default this will be in format domain-servername-ca. Leave empty to automatically locate.
+
+.PARAMETER KeyLength
+    Write - String
+    Allowed values: 192, 224, 256, 384, 521, 1024, 2048, 4096, 8192
+    The bit length of the encryption key to be used. Defaults to 2048.
+
+.PARAMETER Exportable
+    Write - Boolean
+    The option to allow the certificate to be exportable, by default it will be true.
+
+.PARAMETER ProviderName
+    Write - String
+    The selection of provider for the type of encryption to be used.
+
+.PARAMETER OID
+    Write - String
+    The Object Identifier that is used to name the object.
+
+.PARAMETER KeyUsage
+    Write - String
+    The Keyusage is a restriction method that determines what a certificate can be used for.
+
+.PARAMETER CertificateTemplate
+    Write - String
+    The template used for the definition of the certificate.
+
+.PARAMETER SubjectAltName
+    Write - String
+    The subject alternative name used to create the certificate.
+
+.PARAMETER Credential
+    Write - Instance
+    The `PSCredential` object containing the credentials that will be used to access the template in the Certificate Authority.
+
+.PARAMETER AutoRenew
+    Write - Boolean
+    Determines if the resource will also renew a certificate within 7 days of expiration.
+
+.PARAMETER CepURL
+    Write - String
+    The URL to the Certification Enrollment Policy Service.
+
+.PARAMETER CesURL
+    Write - String
+    The URL to the Certification Enrollment Service.
+
+.PARAMETER UseMachineContext
+    Write - Boolean
+    Indicates whether or not the flag -adminforcemachine will be used when requesting certificates. Necessary for certain templates like e.g. DomainControllerAuthentication
+
+.PARAMETER FriendlyName
+    Write - String
+    Specifies a friendly name for the certificate.
+
+.PARAMETER KeyType
+    Write - String
+    Allowed values: RSA, ECDH
+    Specifies if the key type should be RSA or ECDH, defaults to RSA.
+
+.PARAMETER RequestType
+    Write - String
+    Allowed values: CMC, PKCS10
+    Specifies if the request type should be CMC or PKCS10, deafults to CMC.
+
+.EXAMPLE 1
+
+Request and Accept a certificate from an Active Directory Root Certificate Authority. This certificate
+is issued using an subject alternate name with multiple DNS addresses.
+
+This example is allowing storage of credentials in plain text by setting PSDscAllowPlainTextPassword to $true.
+Storing passwords in plain text is not a good practice and is presented only for simplicity and demonstration purposes.
+To learn how to securely store credentials through the use of certificates,
+please refer to the following TechNet topic: https://technet.microsoft.com/en-us/library/dn781430.aspx
+
+configuration CertReq_RequestAltSSLCert_Config
+{
+    [CmdletBinding()]
+    param
+    (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullorEmpty()]
+        [System.Management.Automation.PSCredential]
+        $Credential
+    )
+
+    Import-DscResource -ModuleName CertificateDsc
+
+    Node localhost
+    {
+        CertReq SSLCert
+        {
+            CARootName          = 'test-dc01-ca'
+            CAServerFQDN        = 'dc01.test.pha'
+            Subject             = 'contoso.com'
+            KeyLength           = '2048'
+            Exportable          = $true
+            ProviderName        = 'Microsoft RSA SChannel Cryptographic Provider'
+            OID                 = '1.3.6.1.5.5.7.3.1'
+            KeyUsage            = '0xa0'
+            CertificateTemplate = 'WebServer'
+            SubjectAltName      = 'dns=fabrikam.com&dns=contoso.com'
+            AutoRenew           = $true
+            FriendlyName        = 'SSL Cert for Web Server'
+            Credential          = $Credential
+            KeyType             = 'RSA'
+            RequestType         = 'CMC'
+        }
+    }
+}
+
+.EXAMPLE 2
+
+Request and Accept a certificate from an Active Directory Root Certificate Authority.
+
+This example is allowing storage of credentials in plain text by setting PSDscAllowPlainTextPassword to $true.
+Storing passwords in plain text is not a good practice and is presented only for simplicity and demonstration purposes.
+To learn how to securely store credentials through the use of certificates,
+please refer to the following TechNet topic: https://technet.microsoft.com/en-us/library/dn781430.aspx
+
+configuration CertReq_RequestSSLCert_Config
+{
+    [CmdletBinding()]
+    param
+    (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullorEmpty()]
+        [System.Management.Automation.PSCredential]
+        $Credential
+    )
+
+    Import-DscResource -ModuleName CertificateDsc
+
+    Node localhost
+    {
+        CertReq SSLCert
+        {
+            CARootName          = 'test-dc01-ca'
+            CAServerFQDN        = 'dc01.test.pha'
+            Subject             = 'foodomain.test.net'
+            KeyLength           = '2048'
+            Exportable          = $true
+            ProviderName        = 'Microsoft RSA SChannel Cryptographic Provider'
+            OID                 = '1.3.6.1.5.5.7.3.1'
+            KeyUsage            = '0xa0'
+            CertificateTemplate = 'WebServer'
+            AutoRenew           = $true
+            FriendlyName        = 'SSL Cert for Web Server'
+            Credential          = $Credential
+            KeyType             = 'RSA'
+            RequestType         = 'CMC'
+        }
+    }
+}
+
+
