@@ -200,6 +200,16 @@
                         },
                         "visible": "[or(equals(steps('instance').osVersion, '2019-Datacenter'), equals(steps('instance').osVersion, '2016-Datacenter'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2016'), equals(steps('instance').osVersion, 'SQL2016SP2-WS2019'))]",
                         "toolTip": "If you own Windows licenses with active Software Assurance (SA) or have an active Windows Server subscription, use Azure Hybrid Benefit to save compute cost."
+                    },
+                    {
+                        "name": "enableMultisession",
+                        "type": "Microsoft.Common.CheckBox",
+                        "label": "I confirm I have an eligible Windows 10 license with multi-tenant hosting rights.",
+                        "constraints": {
+                            "required": false
+                        },
+                        "visible": "[equals(steps('instance').osVersion, '19h2-evd')]" ,
+                        "toolTip": "Review multi-tenant hosting rights for Windows 10 compliance."
                     }
                 ]
             },
