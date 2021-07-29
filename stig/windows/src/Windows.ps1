@@ -10,6 +10,14 @@ configuration Windows
             RebootNodeIfNeeded = $true
         }
     }
+    
+    [scriptblock]$microsoftEdgeStig = {
+
+        Edge STIG_MicrosoftEdge
+        {
+
+        }
+    }
 
     [scriptblock]$ie11Stig = {
 
@@ -87,8 +95,10 @@ configuration Windows
             break
         }
 
-        switch -Wildcard ($osVersion) {
-            "*2016*" {
+        switch -Wildcard ($osVersion) 
+        {
+            "*2016*" 
+            {
                 $osVersion = '2016'
                 $skipRules = @('V-224866', 'V-224867', 'V-224868')
                 $exceptions = @{
@@ -137,12 +147,10 @@ configuration Windows
                     Account_lockout_duration            = 15
                     Reset_account_lockout_counter_after = 15
                 }
-                Edge MicrosoftEdge
-                {
-                }
                 break
             }
-            "*2019*" {
+            "*2019*" 
+            {
                 $osVersion = '2019'
                 $exceptions = @{
                     'V-205733' = @{Identity = 'Guests'}
@@ -194,5 +202,6 @@ configuration Windows
         $dotnetFrameworkStig.invoke()
         $windowsDefenderStig.invoke()
         $windowsFirewallStig.invoke()
+        $microsoftEdgeStig.invoke()
     }
 }
