@@ -22,6 +22,7 @@ echo "Execute PerformRequiredConfigurationChecks.py to apply the Pending.mof con
 /opt/microsoft/dsc/Scripts/PerformRequiredConfigurationChecks.py >> ./dscresults.log
 if grep -q "MI_RESULT_FAILED" ./dscresults.log; then
     echo "Failed to apply Desired State Configuration successfully, check dscresults.log for more details..."
+    exit 1
 else
     echo "Applied Desired State Configuration successfully..."
 fi
