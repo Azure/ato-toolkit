@@ -72,7 +72,7 @@
             }
         },
         "_artifactsLocationSasToken": {
-            "type": "secureString",
+            "type": "securestring",
             "defaultValue": "",
             "metadata": {
                 "description": "SAS Token to access the storage location containing artifacts."
@@ -289,6 +289,9 @@
             "apiVersion": "2020-06-01",
             "name": "[variables('networkSecurityGroupName')]",
             "location": "[parameters('location')]",
+            "tags": {
+                "DeploymentType": "AzureSTIG-Windows"
+            },
             "properties": {
             }
         },
@@ -298,6 +301,9 @@
             "name": "[parameters('vmVirtualNetwork')]",
             "location": "[parameters('location')]",
             "condition": "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]",
+            "tags": {
+                "DeploymentType": "AzureSTIG-Windows"
+            },
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
             ],
@@ -326,6 +332,9 @@
             "name": "[parameters('availabilitySetName')]",
             "location": "[parameters('location')]",
             "condition": "[equals(parameters('availabilityOptions'), 'availabilitySet')]",
+            "tags": {
+                "DeploymentType": "AzureSTIG-Windows"
+            },
             "sku": {
                 "name": "Aligned"
             },
@@ -339,6 +348,9 @@
             "apiVersion": "2020-06-01",
             "name": "[concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
             "location": "[parameters('location')]",
+            "tags": {
+                "DeploymentType": "AzureSTIG-Windows"
+            },
             "copy": {
                 "name": "nicLoop",
                 "count": "[variables('instanceCount')]"
@@ -368,6 +380,9 @@
             "name": "[concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights/service')]",
             "location": "[parameters('location')]",
             "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "tags": {
+                "DeploymentType": "AzureSTIG-Windows"
+            },
             "copy": {
                 "name": "nicDiagnosticLoop",
                 "count": "[variables('instanceCount')]"
@@ -394,6 +409,9 @@
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2020-06-01",
             "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
+            "tags": {
+                "DeploymentType": "AzureSTIG-Windows"
+            },
             "location": "[parameters('location')]",
             "copy": {
                 "name": "virtualMachineLoop",

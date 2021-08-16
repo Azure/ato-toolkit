@@ -4,7 +4,7 @@
     @(
         @{
             # Windows Deployment Example w/AvailabilitySet
-            ResourceGroupName             = 'atoTesting' # Resource Group name
+            ResourceGroupName             = 'atotoolkit' # Resource Group name
             adminUsername                 = 'testuser' # Admin user account name for VM
             virtualNetworkNewOrExisting   = 'new' # vNet 'new' or 'existing'
             vmVirtualNetwork              = 'ato-vm-vnet' # vNet name, creates new if not does exist
@@ -27,7 +27,7 @@
         },
         @{
             # Windows Deployment Example w/o AvailabilitySet
-            ResourceGroupName             = 'atoTesting' # Resource Group name
+            ResourceGroupName             = 'atotoolkit' # Resource Group name
             adminUsername                 = 'testuser' # Admin user account name for VM
             virtualNetworkNewOrExisting   = 'existing' # vNet 'new' or 'existing'
             vmVirtualNetwork              = 'ato-vm-vnet' # vNet name, creates new if not does exist
@@ -44,7 +44,7 @@
         },
         @{
             # Linux Deployment Example w/AvailabilitySet
-            ResourceGroupName             = 'atoTesting' # Resource Group name
+            ResourceGroupName             = 'atotoolkit' # Resource Group name
             adminUsername                 = 'testuser' # Admin user account name for VM
             virtualNetworkNewOrExisting   = 'existing' # vNet 'new' or 'existing'
             vmVirtualNetwork              = 'ato-vm-vnet' # vNet name, creates new if not does exist
@@ -67,7 +67,7 @@
         },
         @{
             # Linux Deployment Example w/o AvailabilitySet
-            ResourceGroupName             = 'atoTesting' # Resource Group name
+            ResourceGroupName             = 'atotoolkit' # Resource Group name
             adminUsername                 = 'testuser' # Admin user account name for VM
             virtualNetworkNewOrExisting   = 'existing' # vNet 'new' or 'existing'
             vmVirtualNetwork              = 'ato-vm-vnet' # vNet name, creates new if not does exist
