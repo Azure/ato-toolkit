@@ -1,9 +1,20 @@
+> **ATTENTION**: For latest and up to date documentation [please click here to be re-directed to Azure Government Documentation page.](https://docs.microsoft.com/en-us/azure/azure-government/documentation-government-stig-linux-vm)
+
 # Deploy Azure Virtual Machine (Linux) and apply STIG
 
+<<<<<<< HEAD
 [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ferjenkin%2Fato-toolkit%2Fmaster%2Fstig%2Flinux%2Fartifacts%2FmainTemplate.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Ferjenkin%2Fato-toolkit%2Fmaster%2Fstig%2Flinux%2Fartifacts%2FcreateUiDefinition.json)
 [![Deploy To Azure Gov](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazuregov.svg?sanitize=true)](https://portal.azure.us/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ferjenkin%2Fato-toolkit%2Fmaster%2Fstig%2Flinux%2Fartifacts%2FmainTemplate.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Ferjenkin%2Fato-toolkit%2Fmaster%2Fstig%2Flinux%2Fartifacts%2FcreateUiDefinition.json)
+=======
+[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fato-toolkit%2Fmaster%2Fstig%2Flinux%2FmainTemplate.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fato-toolkit%2Fmaster%2Fstig%2Flinux%2FcreateUiDefinition.json)
+[![Deploy To Azure Gov](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazuregov.svg?sanitize=true)](https://portal.azure.us/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fato-toolkit%2Fmaster%2Fstig%2Flinux%2FmainTemplate.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fato-toolkit%2Fmaster%2Fstig%2Flinux%2FcreateUiDefinition.json)
+>>>>>>> a38d688b5695c432c676b05533a2ef69a2122ad6
 
 Use this template to deploy Azure Virtual Machine with select Red Hat Enterprise Linux 7 and CentOS 7 Operating Systems. Template executes automation developed by [ComplianceAsCode](https://github.com/ComplianceAsCode/content) via [Azure Custom Scripts Extension](https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-linux) to apply [STIG](https://public.cyber.mil/stigs/).
+
+For add-ons to the STIG templates, see:
+- [Publish to Shared Gallery](https://github.com/Azure/ato-toolkit/blob/master/stig/publish-to-shared-gallery.md)
+- [Publish to Existing VM](https://github.com/Azure/ato-toolkit/blob/master/stig/publish-to-existing-vm.md)
 
 If you're new to Azure virtual machines, see:
 

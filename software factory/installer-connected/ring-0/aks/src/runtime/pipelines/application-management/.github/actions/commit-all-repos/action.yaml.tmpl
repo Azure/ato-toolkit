@@ -1,0 +1,10 @@
+# action.yml
+name: 'Clone all repositories'
+description: 'Clones all application repositories required'
+author: Project C12
+runs:
+  using: 'docker'
+  image: 'docker://$docker_login_server/c12/ci-tooling'
+  entrypoint: '/bin/bash'
+  args:
+    - '/github/workspace/.c12/scripts/commit-all-repos.sh'    

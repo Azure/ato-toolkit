@@ -1,0 +1,49 @@
+#curl -v --user elastic:cfs1234 http://vmESNM001:9200/_cluster/stats?pretty
+# - name: Waiting For Cluster to Form
+#   uri:
+#     url: http://{{ ES_INITIAL_MASTER_HOSTNAME }}:{{ ES_DEFAULT_PORT_1 }}/_cluster/stats
+#     user: elastic
+#     password: cfs1234
+#     method: GET
+#     return_content: yes
+#     headers:
+#       Content-Type: "application/json"
+#     register: result
+#     until: result.json.nodes.count.total == "{{ ansible_play_hosts | length }}"
+#     delay: 30
+#     retries: 50
+#   with_items:
+#   - "{{ lookup('password', '{{ USER_LOCATION }}/elastic') }}"
+
+# - pause:
+#     prompt: "Did it cluster yet?"
+
+- name: Set Elastic User Password
+  uri:
+    url: http://{{ ES_INITIAL_MASTER_IP }}:{{ ES_DEFAULT_PORT_1 }}/_security/user/elastic/_password
+    user: elastic
+    password: cfs1234
+    method: POST
+    body: '{ "password":"{{ item }}" }'
+    body_format: json
+    headers:
+      Content-Type: "application/json"
+  with_items:
+  - "{{ lookup('password', '{{ USER_LOCATION }}/elastic') }}"
+
+- name: Set Other Default User Account Passwords
+  uri:
+    url: http://{{ ES_INITIAL_MASTER_IP }}:{{ ES_DEFAULT_PORT_1 }}/_security/user/{{ item.user }}/_password
+    user: elastic
+    password: "{{ lookup('password', '{{ USER_LOCATION }}/elastic') }}"
+    method: POST
+    body: '{ "password":"{{ item.password }}" }'
+    body_format: json
+    headers:
+      Content-Type: "application/json"
+  with_items:
+    - { user: apm_system, password: "{{ lookup('password', '{{ USER_LOCATION }}/apm_system') }}" }
+    - { user: kibana, password: "{{ lookup('password', '{{ USER_LOCATION }}/kibana') }}" }
+    - { user: logstash_system, password: "{{ lookup('password', '{{ USER_LOCATION }}/logstash_system') }}" }
+    - { user: beats_system, password: "{{ lookup('password', '{{ USER_LOCATION }}/beats_system') }}" }
+    - { user: remote_monitoring_user, password: "{{ lookup('password', '{{ USER_LOCATION }}/remote_monitoring_user') }}" }

@@ -1,0 +1,40 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: "$namespace-flux"
+  namespace: "$namespace"
+spec:
+  releaseName: "$namespace-flux"
+  targetNamespace: "$namespace"
+  timeout: 300
+  resetValues: false
+  wait: true
+  forceUpgrade: false
+  chart:
+    repository: "$repo_url"
+    name: "$chart_name"
+    version: "$chart_version"
+  values:
+    image:
+      repository: "$flux_image"
+    git:
+      url: "$git_repo_url"
+      path: "$git_repo_folder"
+      pollInterval: 30s
+      readonly: true
+    nodeSelector:
+      beta.kubernetes.io/os: linux
+    memcached:
+      enabled: false
+    helmOperator:
+      create: false
+    clusterRole:
+      create: true
+    registry:
+      disableScanning: true
+      acr:
+        enabled: true
+    resources:
+      limits:
+        memory: 1Gi
+        cpu: "1"

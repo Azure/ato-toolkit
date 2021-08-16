@@ -1,0 +1,21 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: {{ kind }}
+metadata:
+  name: "{{ name | replace("_", "") | replace("-", "") }}"
+spec:
+  match:
+    kinds:
+      - apiGroups: {% if not match["apiGroups"] -%} [""] {%- endif %}
+        {% for api in match["apiGroups"] -%}
+        - "{{ api }}"
+        {%- endfor %}
+        kinds:{% if not match["kinds"] %} ["Pod"] {% endif %}
+        {% for kind in match["kinds"] -%}
+        - "{{ kind }}"
+        {% endfor -%}
+{% if properties %}
+  parameters:
+    {%- for property in properties %}
+    {{ property["name"]}}: {{ property["default"]}}
+    {%- endfor %}
+{% endif %}

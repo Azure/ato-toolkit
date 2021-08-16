@@ -1,0 +1,47 @@
+/*
+@TargetNode='localhost'
+@GeneratedBy=Microsoft
+@GenerationDate=06/03/2021 13:17:08
+@GenerationHost=Microsoft
+*/
+
+instance of MSFT_nxScriptResource as $MSFT_nxScriptResource1ref
+{
+ResourceID = "[nxScript]EmptyDsc";
+ GetScript = "#!/bin/bash\necho emptyGet";
+ TestScript = "#!/bin/bash\nexit 0";
+ SourceInfo = "C:\\dev\\linux\\build-linux-config.ps1::105::9::nxScript";
+ SetScript = "#!/bin/bash\necho emptySet";
+ ModuleName = "nx";
+ ModuleVersion = "1.0";
+
+ ConfigurationName = "LinuxBaseLine";
+
+};
+instance of OMI_ConfigurationDocument
+
+
+                    {
+ Version="2.0.0";
+
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+
+                        Author="Microsoft";
+
+
+                        GenerationDate="06/03/2021 13:17:08";
+
+
+                        GenerationHost="Microsoft";
+
+
+                        Name="LinuxBaseLine";
+
+
+                    };
+

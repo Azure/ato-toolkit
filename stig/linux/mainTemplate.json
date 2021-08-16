@@ -1,0 +1,677 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+            "type": "string",
+            "defaultValue": "stig-vm",
+            "metadata": {
+                "description": "Name of the virtual machine."
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        },
+        "vmSize": {
+            "type": "string",
+            "defaultValue": "Standard_D2s_v3",
+            "metadata": {
+                "description": "Size of the virtual machine."
+            }
+        },
+        "adminUsername": {
+            "type": "string",
+            "metadata": {
+                "description": "Username for the Virtual Machine."
+            }
+        },
+        "authenticationType": {
+            "type": "string",
+            "defaultValue": "password",
+            "allowedValues": [
+                "sshPublicKey",
+                "password"
+            ],
+            "metadata": {
+                "description": "Type of authentication to use on the Virtual Machine. SSH key is recommended."
+            }
+        },
+        "adminPasswordOrKey": {
+            "type": "securestring",
+            "metadata": {
+                "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
+            }
+        },
+        "osVersion": {
+            "type": "string",
+            "defaultValue": "CentOS77",
+            "allowedValues": [
+                "CentOS79",
+                "CentOS78",
+                "CentOS77",
+                "CentOS76",
+                "CentOS75",
+                "CentOS74",
+                "RHEL79",
+                "RHEL78",
+                "RHEL77",
+                "RHEL75",
+                "RHEL74",
+                "RHEL73",
+                "RHEL72",
+                "Ubuntu1804",
+                "Ubuntu1804-DataScience"
+            ],
+            "metadata": {
+                "description": "The Linux version for the VM. This will pick a fully patched image of this given Linux version."
+            }
+        },
+        "osDiskStorageType": {
+            "type": "string",
+            "defaultValue": "Premium_LRS",
+            "allowedValues": [ "Premium_LRS", "Standard_LRS", "StandardSSD_LRS" ],
+            "metadata": {
+                "description": "You can choose between Azure managed disks types to support your workload or scenario."
+            }
+        },
+        "osDiskEncryptionSetResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "OS Disk Encryption Set resource id."
+            }
+        },
+        "customData": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Pass a script, configuration file, or other data into the virtual machine while it is being provisioned. The data will be saved on the VM in a known location."
+            }
+        },
+        "_artifactsLocation": {
+            "type": "string",
+            "defaultValue": "[split(deployment().properties.templateLink.uri, 'mainTemplate.json')[0]]",
+            "metadata": {
+                "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+            }
+        },
+        "_artifactsLocationSasToken": {
+            "type": "secureString",
+            "defaultValue": "",
+            "metadata": {
+                "description": "SAS Token to access the storage location containing artifacts."
+            }
+        },
+        "vmVirtualNetwork": {
+            "type": "string",
+            "defaultValue": "stig-vm-vnet",
+            "metadata": {
+                "description": "Virtual Network for the VM Image."
+            }
+        },
+        "virtualNetworkResourceGroupName": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().name]",
+            "metadata": {
+                "description": "Name of the resource group for the existing virtual network"
+            }
+        },
+        "virtualNetworkNewOrExisting": {
+            "type": "string",
+            "defaultValue": "new",
+            "metadata": {
+                "description": "Is the Virtual Network new or existing for the VM Image."
+            }
+        },
+        "addressPrefix": {
+            "type": "string",
+            "defaultValue": "10.0.0.0/16",
+            "metadata": {
+                "description": "Address prefix of the virtual network"
+            }
+        },
+        "subnetName": {
+            "type": "string",
+            "defaultValue": "default",
+            "metadata": {
+                "description": "Subnet name for the VM Image."
+            }
+        },
+        "subnetPrefix": {
+            "type": "string",
+            "defaultValue": "10.0.0.0/24",
+            "metadata": {
+                "description": "Subnet prefix of the virtual network"
+            }
+        },
+        "applicationSecurityGroupResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Application Security Group resource id."
+            }
+        },
+        "availabilityOptions": {
+            "type": "string",
+            "defaultValue": "default",
+            "allowedValues": [
+                "default",
+                "availabilitySet"
+            ],
+            "metadata": {
+                "description": "(Optional) Availability options."
+            }
+        },
+        "availabilitySetName": {
+            "type": "string",
+            "defaultValue": "stig-vm-as",
+            "metadata": {
+                "description": "(Optional) Availability set name."
+            }
+        },
+        "instanceCount": {
+            "type": "int",
+            "defaultValue": 2,
+            "minValue": 1,
+            "maxValue": 5,
+            "metadata": {
+                "description": "(Optional) Instance count."
+            }
+        },
+        "faultDomains": {
+            "type": "int",
+            "defaultValue": 2,
+            "minValue": 1,
+            "maxValue": 3,
+            "metadata": {
+                "description": "(Optional) Fault domains."
+            }
+        },
+        "updateDomains": {
+            "type": "int",
+            "defaultValue": 3,
+            "minValue": 1,
+            "maxValue": 5,
+            "metadata": {
+                "description": "(Optional) Update domains."
+            }
+        },
+        "logsRetentionInDays": {
+            "type": "int",
+            "defaultValue": 365,
+            "minValue": 0,
+            "maxValue": 365,
+            "metadata": {
+                "description": "Log retention in days."
+            }
+        },
+        "diagnosticStorageResourceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Diagnostic Storage account resource id."
+            }
+        },
+        "logAnalyticsWorkspaceId": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "(Optional) Log Analytics workspace resource id."
+            }
+        }
+    },
+    "variables": {
+        "instanceCount": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), parameters('instanceCount'), 1)]",
+        "availabilitySet": {
+            "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('availabilitySetName'))]"
+        },
+        "nicName": "[concat(parameters('vmName'), '-nic')]",
+        "vnetId": {
+            "new": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vmVirtualNetwork'))]",
+            "existing": "[resourceId(parameters('virtualNetworkResourceGroupName'),'Microsoft.Storage/virtualNetworks',parameters('vmVirtualNetwork'))]"
+        },
+        "subnetRef": "[concat(variables('vnetId')[parameters('virtualNetworkNewOrExisting')],'/subnets/',parameters('subnetName'))]",
+        "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
+        "applicationSecurityGroup": [
+            {
+                "id": "[parameters('applicationSecurityGroupResourceId')]"
+            }
+        ],
+        "images": {
+            "CentOS79": {
+                "reference": {
+                    "publisher": "OpenLogic",
+                    "offer": "CentOS",
+                    "sku": "7_9",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel7STIG.sh"
+            },
+            "CentOS78": {
+                "reference": {
+                    "publisher": "OpenLogic",
+                    "offer": "CentOS",
+                    "sku": "7_8",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel7STIG.sh"
+            },
+            "CentOS77": {
+                "reference": {
+                    "publisher": "OpenLogic",
+                    "offer": "CentOS",
+                    "sku": "7.7",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel7STIG.sh"
+            },
+            "CentOS76": {
+                "reference": {
+                    "publisher": "OpenLogic",
+                    "offer": "CentOS",
+                    "sku": "7.6",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel7STIG.sh"
+            },
+            "CentOS75": {
+                "reference": {
+                    "publisher": "OpenLogic",
+                    "offer": "CentOS",
+                    "sku": "7.5",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel7STIG.sh"
+            },
+            "CentOS74": {
+                "reference": {
+                    "publisher": "OpenLogic",
+                    "offer": "CentOS",
+                    "sku": "7.4",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel7STIG.sh"
+            },
+            "RHEL79": {
+                "reference": {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "7_9",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel7STIG.sh"
+            },
+            "RHEL78": {
+                "reference": {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "7.8",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel7STIG.sh"
+            },
+            "RHEL77": {
+                "reference": {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "7.7",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel7STIG.sh"
+            },
+            "RHEL75": {
+                "reference": {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "7.5",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel7STIG.sh"
+            },
+            "RHEL74": {
+                "reference": {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "7.4",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel7STIG.sh"
+            },
+            "RHEL73": {
+                "reference": {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "7.3",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel7STIG.sh"
+            },
+            "RHEL72": {
+                "reference": {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "7.2",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel7STIG.sh"
+            },
+            "Ubuntu1804": {
+                "reference": {
+                    "publisher": "Canonical",
+                    "offer": "UbuntuServer",
+                    "sku": "18.04-LTS",
+                    "version": "latest"
+                },
+                "stigFileName": "ubuntuSTIG.sh"
+            },
+            "Ubuntu1804-DataScience": {
+                "reference": {
+                    "publisher": "microsoft-dsvm",
+                    "offer": "ubuntu-1804",
+                    "sku": "1804",
+                    "version": "latest"
+                },
+                "stigFileName": "ubuntuDsVmSTIG.sh"
+            }
+        },
+        "linuxConfiguration": {
+            "disablePasswordAuthentication": true,
+            "ssh": {
+                "publicKeys": [
+                    {
+                        "path": "[concat('/home/', parameters('adminUsername'), '/.ssh/authorized_keys')]",
+                        "keyData": "[parameters('adminPasswordOrKey')]"
+                    }
+                ]
+            }
+        },
+        "storageApiVersion": "2019-06-01",
+        "diskEncryptionSet": { "id": "[parameters('osDiskEncryptionSetResourceId')]" },
+        "artifactsLocationSasToken": "[if(equals(parameters('_artifactsLocationSasToken'), ''), if(contains(deployment().properties.templateLink.uri, '?'), split(deployment().properties.templateLink.uri, 'mainTemplate.json')[1], ''), parameters('_artifactsLocationSasToken'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2020-06-01",
+            "name": "[variables('networkSecurityGroupName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('vmVirtualNetwork')]",
+            "location": "[parameters('location')]",
+            "condition": "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+            ],
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('addressPrefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnetName')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnetPrefix')]",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Compute/availabilitySets",
+            "apiVersion": "2020-06-01",
+            "name": "[parameters('availabilitySetName')]",
+            "location": "[parameters('location')]",
+            "condition": "[equals(parameters('availabilityOptions'), 'availabilitySet')]",
+            "sku": {
+                "name": "Aligned"
+            },
+            "properties": {
+                "PlatformUpdateDomainCount": "[parameters('updateDomains')]",
+                "PlatformFaultDomainCount": "[parameters('faultDomains')]"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-06-01",
+            "name": "[concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
+            "location": "[parameters('location')]",
+            "copy": {
+                "name": "nicLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vmVirtualNetwork'))]"
+            ],
+            "properties": {
+                "networkSecurityGroup": { "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]" },
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            },
+                            "applicationSecurityGroups": "[if(equals(parameters('applicationSecurityGroupResourceId'), ''), json('null'), variables('applicationSecurityGroup'))]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces/providers/diagnosticSettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights/service')]",
+            "location": "[parameters('location')]",
+            "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "copy": {
+                "name": "nicDiagnosticLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "nicloop"
+            ],
+            "properties": {
+                "storageAccountId": "[if(equals(parameters('diagnosticStorageResourceId'), ''), json('null'), parameters('diagnosticStorageResourceId'))]",
+                "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), parameters('logAnalyticsWorkspaceId'))]",
+                "metrics": [
+                    {
+                        "category": "AllMetrics",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('logsRetentionInDays')]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2020-06-01",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
+            "location": "[parameters('location')]",
+            "copy": {
+                "name": "virtualMachineLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "nicLoop"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('vmSize')]"
+                },
+                "storageProfile": {
+                    "osDisk": {
+                        "createOption": "FromImage",
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('osDiskStorageType')]",
+                            "diskEncryptionSet": "[if(equals(parameters('osDiskEncryptionSetResourceId'), ''), json('null'), variables('diskEncryptionSet'))]"
+                        }
+                    },
+                    "imageReference": "[variables('images')[parameters('osVersion')].reference]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex())))]"
+                        }
+                    ]
+                },
+                "osProfile": {
+                    "computerName": "[parameters('vmName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPasswordOrKey')]",
+                    "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]",
+                    "customData": "[if(equals(parameters('customData'), ''), json('null'), base64(parameters('customData')))]"
+                },
+                "availabilitySet": "[if(equals(parameters('availabilityOptions'), 'availabilitySet'), variables('availabilitySet'), json('null'))]",
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": "[if(equals(parameters('diagnosticStorageResourceId'), ''), false(), true())]",
+                        "storageUri": "[if(not(equals(parameters('diagnosticStorageResourceId'), '')), reference(parameters('diagnosticStorageResourceId'), variables('storageApiVersion')).primaryEndpoints.blob, json('null'))]"
+                    }
+                }
+            },
+            "resources": [
+            ]
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/setup-linux-dsc')]",
+            "location": "[parameters('location')]",
+            "copy": {
+                "name": "dscLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "monitoringAgentLoop"
+            ],
+            "properties": {
+                "publisher": "Microsoft.OSTCExtensions",
+                "type": "DSCForLinux",
+                "typeHandlerVersion": "2.71",
+                "autoUpgradeMinorVersion": "true",
+                "settings": {
+                    "Mode": "Push",
+                    "FileUri": "[concat(parameters('_artifactsLocation'), 'mof/localhost.mof', variables('artifactsLocationSasToken'))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "apiVersion": "2019-07-01",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/setup-linux-dsc-stig')]",
+            "location": "[parameters('location')]",
+            "copy": {
+                "name": "cseLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "dscLoop"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Azure.Extensions",
+                "type": "CustomScript",
+                "typeHandlerVersion": "2.0",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "skipDos2Unix": false,
+                    "timestamp": 123456789
+                },
+                "protectedSettings": {
+                    "fileUris": [
+                        "[concat(parameters('_artifactsLocation'), variables('images')[parameters('osVersion')].stigFileName, variables('artifactsLocationSasToken'))]",
+                        "[concat(parameters('_artifactsLocation'), 'mof/', parameters('osVersion'), '.mof', variables('artifactsLocationSasToken'))]"
+                    ],
+                    "commandToExecute": "[concat('sh ', variables('images')[parameters('osVersion')].stigFileName, ' ', parameters('adminUsername'))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/providers/diagnosticSettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.Insights/service')]",
+            "location": "[parameters('location')]",
+            "condition": "[or(not(equals(parameters('diagnosticStorageResourceId'), '')), not(equals(parameters('logAnalyticsWorkspaceId'), '')))]",
+            "copy": {
+                "name": "virtualMachineDiagnosticLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "virtualMachineLoop"
+            ],
+            "properties": {
+                "storageAccountId": "[if(equals(parameters('diagnosticStorageResourceId'), ''), json('null'), parameters('diagnosticStorageResourceId'))]",
+                "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), parameters('logAnalyticsWorkspaceId'))]",
+                "metrics": [
+                    {
+                        "category": "AllMetrics",
+                        "enabled": true,
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('logsRetentionInDays')]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.EnterpriseCloud.Monitoring')]",
+            "apiVersion": "2015-06-15",
+            "location": "[parameters('location')]",
+            "condition": "[not(equals(parameters('logAnalyticsWorkspaceId'), ''))]",
+            "copy": {
+                "name": "monitoringAgentLoop",
+                "count": "[variables('instanceCount')]"
+            },
+            "dependsOn": [
+                "virtualMachineDiagnosticLoop"
+            ],
+            "properties": {
+                "publisher": "Microsoft.EnterpriseCloud.Monitoring",
+                "type": "OmsAgentForLinux",
+                "typeHandlerVersion": "1.12",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'),'2015-03-20').customerId)]"
+                },
+                "protectedSettings": {
+                    "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), listkeys(parameters('logAnalyticsWorkspaceId'),'2015-03-20').primarySharedKey)]"
+                }
+            }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "name": "pid-8c0294d0-fbe8-4cb7-aedc-6aaa2afa66d0",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": []
+                }
+            }
+        }
+    ],
+    "outputs": {
+    }
+}

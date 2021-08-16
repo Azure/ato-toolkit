@@ -1,0 +1,10 @@
+apiVersion: v1
+repositories:
+- caFile: ""
+  cache: ${name}-index.yaml
+  certFile: ""
+  keyFile: ""
+  name: "${name}"
+  url: "${repo_url}"
+  username: "${username}"
+  password: "${password}"

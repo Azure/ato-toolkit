@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "helloazuregov.fullname" . }}-test-connection"
+  labels:
+    {{- include "helloazuregov.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "helloazuregov.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never

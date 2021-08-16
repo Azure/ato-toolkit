@@ -1,0 +1,24 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: nonrootpods
+spec:
+  crd:
+    spec:
+      names:
+        kind: "NonRootPods"
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package com.microsoft.c12.podsnonroot
+
+        violation[{"msg": msg, "details": {}}] {
+        	not input.review.object.spec.securityContext.runAsNonRoot = true
+        	msg := sprintf("pod %s is running as root", [input.review.name])
+        }
+
+        violation[{"msg": msg, "details": {}}] {
+        	input.review.object.spec.securityContext.runAsUser == 0
+        	msg := sprintf("pod %s has a UID of 0", [input.review.name])
+        }
+

@@ -1,0 +1,243 @@
+{
+    "args": {
+        "tempPath": "./temp.usr",
+        "policyTemplate": "./run.policy.template.json",
+        "artifactsPath": "./src",
+        "defaultParams": "./blueprint/blueprint.json",
+        "policyAssignmentPrefix": "",
+        "onlyGenerateTemplates": false
+    },
+    "policies": [
+        {
+            "name": "Allowed virtual machine SKUs",
+            "artifact": "05088c37-2381-4674-aa64-d3022d3839e9.json",
+            "enabled": false
+        },
+        {
+            "name": "Enforce automatic OS upgrade with app health checks on VMSS",
+            "artifact": "05af2b76-44e5-40c7-a400-2bf814c90331.json",
+            "enabled": false
+        },
+        {
+            "name": "[Preview]: Deploy Log Analytics Agent for Linux VMs",
+            "artifact": "0d369266-ba61-408f-9224-b59407dd9219.json",
+            "enabled": false
+        },
+        {
+            "name": "[Preview]: Deploy Log Analytics Agent for Windows VM Scale Sets (VMSS)",
+            "artifact": "15b2256e-6e50-497e-8c7b-12908ea3bcec.json",
+            "enabled": false
+        },
+        {
+            "name": "Allowed storage account SKUs",
+            "artifact": "17932dfa-ef41-4773-bb3f-6d47ec231862.json",
+            "enabled": false
+        },
+        {
+            "name": "Require blob encryption for storage accounts",
+            "artifact": "2fa4484f-856a-412f-8f6b-4dbe43ece14e.json",
+            "enabled": false
+        },
+        {
+            "name": "Deploy Diagnostic Settings for Network Security Groups",
+            "artifact": "325a87d6-1147-4a81-a9b7-be40306f672a.json",
+            "enabled": false
+        },
+        {
+            "name": "Deploy SQL DB transparent data encryption",
+            "artifact": "3bcbd39e-142f-438c-8d60-bf1e7a7a646d.json",
+            "enabled": false
+        },
+        {
+            "name": "DoD Impact Level 4",
+            "artifact": "4e8db8db-05a3-4595-aaae-efc24c749ad6.json",
+            "enabled": false
+        },
+        {
+            "name": "[Preview]: Deploy Log Analytics Agent for Windows VMs",
+            "artifact": "758c7b68-2444-44ef-8b96-88697b685ac0.json",
+            "enabled": false
+        },
+        {
+            "name": "Deploy Threat Detection on SQL servers",
+            "artifact": "86379ec5-5137-4be8-924a-fdac61206823.json",
+            "enabled": false
+        },
+        {
+            "name": "Deploy default Microsoft IaaSAntimalware extension for Windows Server",
+            "artifact": "9f359831-fbfd-456d-ac61-7a949d067a55.json",
+            "enabled": false
+        },
+        {
+            "name": "Deploy network watcher when virtual networks are created",
+            "artifact": "a0601552-2ed7-439f-a2f2-104130d3a20f.json",
+            "enabled": false
+        },
+        {
+            "name": "Deploy Advanced Data Security on SQL servers",
+            "artifact": "a76b04dc-bab8-4e73-9968-be509cfa88b6.json",
+            "enabled": false
+        },
+        {
+            "name": "Allowed locations for resource groups",
+            "artifact": "ad448639-d7d1-4f19-a459-02a6883d3a50.json",
+            "enabled": false
+        },
+        {
+            "name": "[Preview]: Deploy Log Analytics Agent for Linux VM Scale Sets (VMSS)",
+            "artifact": "bcd7c4f1-5fed-4934-8e08-f76d0779ff27.json",
+            "enabled": false
+        },
+        {
+            "name": "Deploy Auditing on SQL servers",
+            "artifact": "bfb71af3-5e93-4fef-8d82-1268fbb70867.json",
+            "enabled": false
+        },
+        {
+            "name": "Allowed locations",
+            "artifact": "e2e95399-ff59-48b9-9985-504a5eedd7af.json",
+            "enabled": false
+        }
+    ],
+    "resources": [
+        {
+            "name": "Hub->Shared->Security->Log",
+            "artifact": "hub-shared-security-log.json",
+            "enabled": true
+        },
+        {
+            "name": "Hub->Security",
+            "artifact": "hub-security-center.json",
+            "enabled": false
+        },
+        {
+            "name": "Hub->Shared->Network->Nsg",
+            "artifact": "hub-shared-network-nsg.json",
+            "enabled": true
+        },
+        {
+            "name": "Hub->Shared->Network->Vnet",
+            "artifact": "hub-shared-network-vnet.json",
+            "enabled": true
+        },
+        {
+            "name": "Hub->Shared->Network->Firewall",
+            "artifact": "hub-shared-network-firewall.json",
+            "enabled": true
+        },
+        {
+            "name": "Hub->Shared->Security->KeyVault",
+            "artifact": "hub-shared-security-kv.json",
+            "enabled": true
+        },
+        {
+            "name": "Hub->Shared->Security->KeyVault",
+            "artifact": "hub-shared-security-kv.ps1",
+            "enabled": true
+        },
+        {
+            "name": "Hub->Shared->JumpBox",
+            "artifact": "hub-shared-jump-box.json",
+            "enabled": true
+        },
+        {
+            "name": "Spoke->Workload->Network->Vnet",
+            "artifact": "spoke-workload-network-vnet.json",
+            "enabled": true
+        },
+        {
+            "name": "Spoke->Workload->Windows->VM",
+            "artifact": "spoke-workload-windows-vm.json",
+            "enabled": true
+        },
+        {
+            "name": "Spoke->Workload->Linux->VM",
+            "artifact": "spoke-workload-linux-vm.json",
+            "enabled": false
+        }
+    ],
+    "parameters": {
+        "listOfAllowedLocationsForResourcesAndResourceGroups": {
+            "value": [
+                "usgovvirginia",
+                "usgovarizona",
+                "usgovtexas"
+            ]
+        },
+        "membersToIncludeInAdministratorsLocalGroup": {
+            "value": "jb-admin-user"
+        },
+        "membersToExcludeInAdministratorsLocalGroup": {
+            "value": "skip"
+        },
+        "namePrefix": {
+            "value": ""
+        },
+        "location": {
+            "value": "usgovarizona"
+        },
+        "workspaceLocation": {
+            "value": "usgovarizona"
+        },
+        "deployHub": {
+            "value": true
+        },
+        "hubName": {
+            "value": "hub-shared"
+        },
+        "deploySpoke": {
+            "value": true
+        },
+        "spokeName": {
+            "value": "spoke-workload"
+        },
+        "spokeVnetAddressPrefix": {
+            "value": "10.1.0.0/16"
+        },
+        "spokeSubnetAddressPrefix": {
+            "value": "10.1.0.0/24"
+        },
+        "destinationAddresses": {
+            "value": "0.0.0.0"
+        },
+        "enableDdosProtection": {
+            "value": false
+        },
+        "enableNsgFlowLogs": {
+            "value": false
+        },
+        "deployment-user-object-id": {
+            "value": ""
+        },
+        "jumpbox-os": {
+            "value": "Windows"
+        },
+        "spokeOptionalSubnetNames": {
+            "value": []
+        },
+        "spokeOptionalSubnetPrefixes": {
+            "value": []
+        },
+        "vm-names": {
+            "value": [
+                "vm1",
+                "vm2"
+            ]
+        },
+        "vm-subnets": {
+            "value": [
+                "workload-subnet",
+                "workload-subnet"
+            ]
+        },
+        "disk-encryption-type": {
+            "value": "ADE"
+        },
+        "artifact-storage-account-uri": {
+            "value": "https://STORAGE-ACCOUNT-NAME.blob.core.usgovcloudapi.net/artifacts"
+        },
+        "isOffline": {
+            "value": true
+        }
+    }
+}
