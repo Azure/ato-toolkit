@@ -4,11 +4,7 @@
     @(
         @{
             # Windows Deployment Example w/AvailabilitySet
-<<<<<<< HEAD
-            ResourceGroupName             = 'atotoolkit' # Resource Group name
-=======
             ResourceGroupName             = 'atoTesting' # Resource Group name
->>>>>>> a38d688b5695c432c676b05533a2ef69a2122ad6
             adminUsername                 = 'testuser' # Admin user account name for VM
             virtualNetworkNewOrExisting   = 'new' # vNet 'new' or 'existing'
             vmVirtualNetwork              = 'ato-vm-vnet' # vNet name, creates new if not does exist
