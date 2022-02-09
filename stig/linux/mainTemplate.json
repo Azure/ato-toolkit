@@ -304,7 +304,7 @@
                 "reference": {
                     "publisher": "OpenLogic",
                     "offer": "CentOS",
-                    "sku": "7.4",
+                    "sku": "7_4",
                     "version": "latest"
                 },
                 "stigFileName": "rhel7STIG.sh"
@@ -457,6 +457,9 @@
             "apiVersion": "2020-06-01",
             "name": "[variables('networkSecurityGroupName')]",
             "location": "[parameters('location')]",
+            "tags": {
+                "DeploymentType": "AzureSTIG-Linux"
+            },
             "properties": {
             }
         },
@@ -466,6 +469,9 @@
             "name": "[parameters('vmVirtualNetwork')]",
             "location": "[parameters('location')]",
             "condition": "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]",
+            "tags": {
+                "DeploymentType": "AzureSTIG-Linux"
+            },
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
             ],
@@ -494,6 +500,9 @@
             "name": "[parameters('availabilitySetName')]",
             "location": "[parameters('location')]",
             "condition": "[equals(parameters('availabilityOptions'), 'availabilitySet')]",
+            "tags": {
+                "DeploymentType": "AzureSTIG-Linux"
+            },
             "sku": {
                 "name": "Aligned"
             },
@@ -507,6 +516,9 @@
             "apiVersion": "2020-06-01",
             "name": "[concat(variables('nicName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
             "location": "[parameters('location')]",
+            "tags": {
+                "DeploymentType": "AzureSTIG-Linux"
+            },
             "copy": {
                 "name": "nicLoop",
                 "count": "[variables('instanceCount')]"
@@ -563,6 +575,9 @@
             "apiVersion": "2020-06-01",
             "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()))]",
             "location": "[parameters('location')]",
+            "tags": {
+                "DeploymentType": "AzureSTIG-Linux"
+            },
             "copy": {
                 "name": "virtualMachineLoop",
                 "count": "[variables('instanceCount')]"

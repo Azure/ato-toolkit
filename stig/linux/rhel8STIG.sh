@@ -44,6 +44,12 @@ grep -r -l -i nopasswd /etc/sudoers.d/* /etc/sudoers | xargs sed -i 's/\s*NOPASS
 # END V-230271
 
 ###############################################################################
+echo "Automating Rule Id V-230287"
+###############################################################################
+chmod 0600 /etc/ssh/ssh_host*key
+# END V-230287
+
+###############################################################################
 echo "Automating Rule Id V-230301"
 ###############################################################################
 sed -i "s/\(.*[[:space:]]\/[[:alpha:]].*defaults\)/\1,nodev/g" /etc/fstab
@@ -147,10 +153,14 @@ fi
 # END V-230345
 
 ###############################################################################
-echo "Automating Rule Id V-230350"
+echo "Automating Rule Id V-230349"
 ###############################################################################
-sed -i 's/.*tmux.*//g' /etc/shells
-# END V-230350
+echo 'if [ "$PS1" ]; then' >> /etc/profile.d/230348-customshell.sh
+echo 'parent=$(ps -o ppid= -p $$)' >> /etc/profile.d/230348-customshell.sh
+echo 'name=$(ps -o comm= -p $parent)' >> /etc/profile.d/230348-customshell.sh
+echo 'case "$name" in (sshd|login) exec tmux ;; esac' >> /etc/profile.d/230348-customshell.sh
+echo 'fi' >> /etc/profile.d/230348-customshell.sh
+# END V-230349
 
 ###############################################################################
 echo "Automating Rule Id V-230367"
@@ -182,6 +192,13 @@ sed -i "s/.*PermitEmptyPasswords.*/PermitEmptyPasswords no/g" /etc/ssh/sshd_conf
 # END V-230380
 
 ###############################################################################
+echo "Automating Rule Id V-230439"
+###############################################################################
+echo '-a always,exit -F arch=b32 -S rename,unlink,rmdir,renameat,unlinkat -F auid>=1000 -F auid!=unset -k delete' >> /etc/audit/rules.d/audit.rules
+echo '-a always,exit -F arch=b64 -S rename,unlink,rmdir,renameat,unlinkat -F auid>=1000 -F auid!=unset -k delete' >> /etc/audit/rules.d/audit.rules
+# END V-230439
+
+###############################################################################
 echo "Automating Rule Id V-230485"
 ###############################################################################
 if ! grep -q -w 'port' /etc/chrony.conf; then
@@ -204,29 +221,29 @@ fi
 ###############################################################################
 echo "Automating Rule Id V-230494"
 ###############################################################################
-echo 'install ATM /bin/true' > /etc/modprobe.d/ATM.conf
-echo 'blacklist ATM' >> /etc/modprobe.d/blacklist.conf
+echo 'install atm /bin/true' > /etc/modprobe.d/atm.conf
+echo 'blacklist atm' >> /etc/modprobe.d/blacklist.conf
 # END V-230494
 
 ###############################################################################
 echo "Automating Rule Id V-230495"
 ###############################################################################
-echo 'install CAN /bin/true' > /etc/modprobe.d/CAN.conf
-echo 'blacklist CAN' >> /etc/modprobe.d/blacklist.conf
+echo 'install can /bin/true' > /etc/modprobe.d/can.conf
+echo 'blacklist can' >> /etc/modprobe.d/blacklist.conf
 # END V-230495
 
 ###############################################################################
 echo "Automating Rule Id V-230496"
 ###############################################################################
-echo 'install SCTP /bin/true' > /etc/modprobe.d/SCTP.conf
-echo 'blacklist SCTP' >> /etc/modprobe.d/blacklist.conf
+echo 'install sctp /bin/true' > /etc/modprobe.d/sctp.conf
+echo 'blacklist sctp' >> /etc/modprobe.d/blacklist.conf
 # END V-230496
 
 ###############################################################################
 echo "Automating Rule Id V-230497"
 ###############################################################################
-echo 'install TIPC /bin/true' > /etc/modprobe.d/TIPC.conf
-echo 'blacklist TIPC' >> /etc/modprobe.d/blacklist.conf
+echo 'install tipc /bin/true' > /etc/modprobe.d/tipc.conf
+echo 'blacklist tipc' >> /etc/modprobe.d/blacklist.conf
 # END V-230497
 
 ###############################################################################
@@ -277,6 +294,14 @@ echo "kernel.yama.ptrace_scope = 1" > /etc/sysctl.d/90-azurestig-v230546.conf
 # END V-230546
 
 ###############################################################################
+echo "Automating Rule Id V-237642"
+###############################################################################
+echo 'Defaults !targetpw' >> /etc/sudoers.d/237642
+echo 'Defaults !rootpw' >> /etc/sudoers.d/237642
+echo 'Defaults !runaspw' >> /etc/sudoers.d/237642
+# END V-237642
+
+###############################################################################
 echo "Installing Ansible for STIG automation..."
 ###############################################################################
 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
@@ -301,6 +326,21 @@ if [ ${version} == '8.0' ]; then
     sed -i 's/25%/2048/g' /etc/audit/auditd.conf
 fi
 # END V-230483
+
+###############################################################################
+echo "Automating Rule Id V-230350"
+###############################################################################
+sed -i 's/.*tmux.*//g' /etc/shells
+echo '---------- /etc/shells content begin ----------'
+cat /etc/shells
+echo '---------- /etc/shells content end ----------'
+# END V-230350
+
+###############################################################################
+echo "Automating Rule Id V-230223"
+###############################################################################
+fips-mode-setup --enable
+# END V-230223
 
 ###############################################################################
 echo "Restarting system to apply STIG settings..."

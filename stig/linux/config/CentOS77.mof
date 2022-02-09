@@ -1,7 +1,7 @@
 /*
 @TargetNode='CentOS77'
 @GeneratedBy=Microsoft
-@GenerationDate=06/09/2021 11:32:25
+@GenerationDate=01/31/2022 17:13:26
 @GenerationHost=Microsoft
 */
 
@@ -9,7 +9,7 @@ instance of MSFT_nxPackageResource as $MSFT_nxPackageResource1ref
 {
 ResourceID = "[nxPackage][V-204442][high][SRG-OS-000095-GPOS-00049]::[RHEL]Baseline";
  Ensure = "Absent";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
  Name = "rsh-server";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -19,7 +19,7 @@ instance of MSFT_nxPackageResource as $MSFT_nxPackageResource2ref
 {
 ResourceID = "[nxPackage][V-204443][high][SRG-OS-000095-GPOS-00049]::[RHEL]Baseline";
  Ensure = "Absent";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
  Name = "ypserv";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -29,7 +29,7 @@ instance of MSFT_nxPackageResource as $MSFT_nxPackageResource3ref
 {
 ResourceID = "[nxPackage][V-204497][high][SRG-OS-000033-GPOS-00014]::[RHEL]Baseline";
  Ensure = "Present";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
  Name = "dracut-fips";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -39,7 +39,7 @@ instance of MSFT_nxPackageResource as $MSFT_nxPackageResource4ref
 {
 ResourceID = "[nxPackage][V-204498][low][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  Ensure = "Present";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
  Name = "aide";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -49,7 +49,7 @@ instance of MSFT_nxPackageResource as $MSFT_nxPackageResource5ref
 {
 ResourceID = "[nxPackage][V-204502][high][SRG-OS-000095-GPOS-00049]::[RHEL]Baseline";
  Ensure = "Absent";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
  Name = "telnet-server";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -59,7 +59,7 @@ instance of MSFT_nxPackageResource as $MSFT_nxPackageResource6ref
 {
 ResourceID = "[nxPackage][V-204585][medium][SRG-OS-000423-GPOS-00187]::[RHEL]Baseline";
  Ensure = "Present";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
  Name = "openssh-server";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -69,7 +69,7 @@ instance of MSFT_nxPackageResource as $MSFT_nxPackageResource7ref
 {
 ResourceID = "[nxPackage][V-204604.a][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  Ensure = "Present";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
  Name = "firewalld";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -79,7 +79,7 @@ instance of MSFT_nxPackageResource as $MSFT_nxPackageResource8ref
 {
 ResourceID = "[nxPackage][V-204620][high][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  Ensure = "Absent";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
  Name = "vsftpd";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -89,7 +89,7 @@ instance of MSFT_nxPackageResource as $MSFT_nxPackageResource9ref
 {
 ResourceID = "[nxPackage][V-204621][high][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  Ensure = "Absent";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
  Name = "tftp-server";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -99,7 +99,7 @@ instance of MSFT_nxPackageResource as $MSFT_nxPackageResource10ref
 {
 ResourceID = "[nxPackage][V-204631][medium][SRG-OS-000375-GPOS-00160]::[RHEL]Baseline";
  Ensure = "Present";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxPackage.ps1::8::5::nxPackage";
  Name = "pam_pkcs11";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -108,220 +108,230 @@ ResourceID = "[nxPackage][V-204631][medium][SRG-OS-000375-GPOS-00160]::[RHEL]Bas
 instance of MSFT_nxFileResource as $MSFT_nxFileResource1ref
 {
 ResourceID = "[nxFile][V-204395][medium][SRG-OS-000023-GPOS-00006]::[RHEL]Baseline";
- Contents = "You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.\n\nBy using this IS (which includes any device attached to this IS), you consent to the following conditions:\n\n-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.\n\n-At any time, the USG may inspect and seize data stored on this IS.\n\n-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.\n\n-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.\n\n-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.\n";
+ Contents = "You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.\n\nBy using this IS (which includes any device attached to this IS), you consent to the following conditions:\n\n-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.\n\n-At any time, the USG may inspect and seize data stored on this IS.\n\n-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.\n\n-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.\n\n-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.";
  DestinationPath = "/etc/issue";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource2ref
 {
 ResourceID = "[nxFile][V-204449.a][medium][SRG-OS-000114-GPOS-00059]::[RHEL]Baseline";
- Contents = "# Generated via PowerSTIG\n";
+ Contents = "";
  DestinationPath = "/etc/modprobe.d/usb-storage.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource3ref
 {
 ResourceID = "[nxFile][V-204449.b][medium][SRG-OS-000114-GPOS-00059]::[RHEL]Baseline";
- Contents = "# Generated via PowerSTIG\n";
+ Contents = "";
  DestinationPath = "/etc/modprobe.d/blacklist.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource4ref
 {
 ResourceID = "[nxFile][V-204450.a][medium][SRG-OS-000378-GPOS-00163]::[RHEL]Baseline";
- Contents = "# Generated via PowerSTIG\n";
+ Contents = "";
  DestinationPath = "/etc/modprobe.d/dccp.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource5ref
 {
 ResourceID = "[nxFile][V-204576][low][SRG-OS-000027-GPOS-00008]::[RHEL]Baseline";
- Contents = "* hard maxlogins 10\n";
+ Contents = "* hard maxlogins 10";
  DestinationPath = "/etc/security/limits.d/204576-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource6ref
 {
 ResourceID = "[nxFile][V-204579.a][medium][SRG-OS-000163-GPOS-00072]::[RHEL]Baseline";
- Contents = "# Generated via PowerSTIG\n";
+ Contents = "";
  DestinationPath = "/etc/profile.d/tmout.sh";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource7ref
 {
 ResourceID = "[nxFile][V-204584][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "kernel.randomize_va_space = 2\n";
+ Contents = "kernel.randomize_va_space = 2";
  DestinationPath = "/etc/sysctl.d/204584-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource8ref
 {
 ResourceID = "[nxFile][V-204609][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "net.ipv4.conf.all.accept_source_route = 0\n";
+ Contents = "net.ipv4.conf.all.accept_source_route = 0";
  DestinationPath = "/etc/sysctl.d/204609-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource9ref
 {
 ResourceID = "[nxFile][V-204610][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "net.ipv4.conf.all.rp_filter = 1\n";
+ Contents = "net.ipv4.conf.all.rp_filter = 1";
  DestinationPath = "/etc/sysctl.d/204610-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource10ref
 {
 ResourceID = "[nxFile][V-204611][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "net.ipv4.conf.default.rp_filter = 1\n";
+ Contents = "net.ipv4.conf.default.rp_filter = 1";
  DestinationPath = "/etc/sysctl.d/204611-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource11ref
 {
 ResourceID = "[nxFile][V-204612][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "net.ipv4.conf.default.accept_source_route = 0\n";
+ Contents = "net.ipv4.conf.default.accept_source_route = 0";
  DestinationPath = "/etc/sysctl.d/204612-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource12ref
 {
 ResourceID = "[nxFile][V-204613][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "net.ipv4.icmp_echo_ignore_broadcasts = 1\n";
+ Contents = "net.ipv4.icmp_echo_ignore_broadcasts = 1";
  DestinationPath = "/etc/sysctl.d/204613-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource13ref
 {
 ResourceID = "[nxFile][V-204614][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "net.ipv4.conf.default.accept_redirects = 0\n";
+ Contents = "net.ipv4.conf.default.accept_redirects = 0";
  DestinationPath = "/etc/sysctl.d/204614-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource14ref
 {
 ResourceID = "[nxFile][V-204615][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "net.ipv4.conf.all.accept_redirects = 0\n";
+ Contents = "net.ipv4.conf.all.accept_redirects = 0";
  DestinationPath = "/etc/sysctl.d/204615-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource15ref
 {
 ResourceID = "[nxFile][V-204616][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "net.ipv4.conf.default.send_redirects = 0\n";
+ Contents = "net.ipv4.conf.default.send_redirects = 0";
  DestinationPath = "/etc/sysctl.d/204616-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource16ref
 {
 ResourceID = "[nxFile][V-204617][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "net.ipv4.conf.all.send_redirects = 0\n";
+ Contents = "net.ipv4.conf.all.send_redirects = 0";
  DestinationPath = "/etc/sysctl.d/204617-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource17ref
 {
 ResourceID = "[nxFile][V-204625][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "net.ipv4.ip_forward = 0\n";
+ Contents = "net.ipv4.ip_forward = 0";
  DestinationPath = "/etc/sysctl.d/204625-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource18ref
 {
 ResourceID = "[nxFile][V-204630][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "net.ipv6.conf.all.accept_source_route = 0\n";
+ Contents = "net.ipv6.conf.all.accept_source_route = 0";
  DestinationPath = "/etc/sysctl.d/204630-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource19ref
 {
 ResourceID = "[nxFile][V-237634.a][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "Defaults !targetpw\n";
+ Contents = "Defaults !targetpw";
  DestinationPath = "/etc/sudoers.d/237634a-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource20ref
 {
 ResourceID = "[nxFile][V-237634.b][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "Defaults !rootpw\n";
+ Contents = "Defaults !rootpw";
  DestinationPath = "/etc/sudoers.d/237634b-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource21ref
 {
 ResourceID = "[nxFile][V-237634.c][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
- Contents = "Defaults !runaspw\n";
+ Contents = "Defaults !runaspw";
  DestinationPath = "/etc/sudoers.d/237634c-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileResource as $MSFT_nxFileResource22ref
 {
 ResourceID = "[nxFile][V-237635][medium][SRG-OS-000373-GPOS-00156]::[RHEL]Baseline";
- Contents = "Defaults timestamp_timeout=0\n";
+ Contents = "Defaults timestamp_timeout=0";
  DestinationPath = "/etc/sudoers.d/237635-powerstig.conf";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
+ ModuleVersion = "1.0";
+ ConfigurationName = "LinuxBaseLine";
+};
+instance of MSFT_nxFileResource as $MSFT_nxFileResource23ref
+{
+ResourceID = "[nxFile][V-250314][medium][SRG-OS-000324-GPOS-00125]::[RHEL]Baseline";
+ Contents = "%wheel ALL=(ALL) TYPE=sysadm_t ROLE=sysadm_r ALL";
+ DestinationPath = "/etc/sudoers.d/250314-powerstig.conf";
+ ModuleName = "nx";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFile.ps1::8::5::nxFile";
  ModuleVersion = "1.0";
  ConfigurationName = "LinuxBaseLine";
 };
@@ -329,7 +339,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource1ref
 {
 ResourceID = "[nxFileLine][V-204405][medium][SRG-OS-000069-GPOS-00037]::[RHEL]Baseline";
  ContainsLine = "password substack system-auth";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/pam.d/passwd";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -340,7 +350,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource2ref
 {
 ResourceID = "[nxFileLine][V-204407][medium][SRG-OS-000069-GPOS-00037]::[RHEL]Baseline";
  ContainsLine = "ucredit = -1";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/security/pwquality.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -351,7 +361,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource3ref
 {
 ResourceID = "[nxFileLine][V-204408][medium][SRG-OS-000070-GPOS-00038]::[RHEL]Baseline";
  ContainsLine = "lcredit = -1";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/security/pwquality.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -362,7 +372,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource4ref
 {
 ResourceID = "[nxFileLine][V-204409][medium][SRG-OS-000071-GPOS-00039]::[RHEL]Baseline";
  ContainsLine = "dcredit = -1";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/security/pwquality.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -373,7 +383,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource5ref
 {
 ResourceID = "[nxFileLine][V-204410][medium][SRG-OS-000266-GPOS-00101]::[RHEL]Baseline";
  ContainsLine = "ocredit=-1";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/security/pwquality.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -384,7 +394,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource6ref
 {
 ResourceID = "[nxFileLine][V-204411][medium][SRG-OS-000072-GPOS-00040]::[RHEL]Baseline";
  ContainsLine = "difok = 8";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/security/pwquality.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -395,7 +405,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource7ref
 {
 ResourceID = "[nxFileLine][V-204412][medium][SRG-OS-000072-GPOS-00040]::[RHEL]Baseline";
  ContainsLine = "minclass = 4";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/security/pwquality.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -406,7 +416,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource8ref
 {
 ResourceID = "[nxFileLine][V-204413][medium][SRG-OS-000072-GPOS-00040]::[RHEL]Baseline";
  ContainsLine = "maxrepeat = 3";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/security/pwquality.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -417,7 +427,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource9ref
 {
 ResourceID = "[nxFileLine][V-204414][medium][SRG-OS-000072-GPOS-00040]::[RHEL]Baseline";
  ContainsLine = "maxclassrepeat = 4";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/security/pwquality.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -428,7 +438,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource10ref
 {
 ResourceID = "[nxFileLine][V-204416][medium][SRG-OS-000073-GPOS-00041]::[RHEL]Baseline";
  ContainsLine = "ENCRYPT_METHOD SHA512";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/login.defs";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -439,7 +449,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource11ref
 {
 ResourceID = "[nxFileLine][V-204418][medium][SRG-OS-000075-GPOS-00043]::[RHEL]Baseline";
  ContainsLine = "PASS_MIN_DAYS 1";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/login.defs";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -450,7 +460,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource12ref
 {
 ResourceID = "[nxFileLine][V-204420][medium][SRG-OS-000076-GPOS-00044]::[RHEL]Baseline";
  ContainsLine = "PASS_MAX_DAYS 60";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/login.defs";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -461,7 +471,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource13ref
 {
 ResourceID = "[nxFileLine][V-204423][medium][SRG-OS-000078-GPOS-00046]::[RHEL]Baseline";
  ContainsLine = "minlen = 15";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/security/pwquality.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -472,7 +482,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource14ref
 {
 ResourceID = "[nxFileLine][V-204425][high][SRG-OS-000106-GPOS-00053]::[RHEL]Baseline";
  ContainsLine = "PermitEmptyPasswords no";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -483,7 +493,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource15ref
 {
 ResourceID = "[nxFileLine][V-204426][medium][SRG-OS-000118-GPOS-00060]::[RHEL]Baseline";
  ContainsLine = "INACTIVE=0";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/default/useradd";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -494,7 +504,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource16ref
 {
 ResourceID = "[nxFileLine][V-204431][medium][SRG-OS-000480-GPOS-00226]::[RHEL]Baseline";
  ContainsLine = "FAIL_DELAY 4";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/login.defs";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -505,7 +515,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource17ref
 {
 ResourceID = "[nxFileLine][V-204434][medium][SRG-OS-000480-GPOS-00229]::[RHEL]Baseline";
  ContainsLine = "PermitUserEnvironment no";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -516,7 +526,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource18ref
 {
 ResourceID = "[nxFileLine][V-204435][medium][SRG-OS-000480-GPOS-00229]::[RHEL]Baseline";
  ContainsLine = "HostbasedAuthentication no";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -527,7 +537,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource19ref
 {
 ResourceID = "[nxFileLine][V-204447][high][SRG-OS-000366-GPOS-00153]::[RHEL]Baseline";
  ContainsLine = "gpgcheck=1";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/yum.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -538,7 +548,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource20ref
 {
 ResourceID = "[nxFileLine][V-204448][high][SRG-OS-000366-GPOS-00153]::[RHEL]Baseline";
  ContainsLine = "localpkg_gpgcheck=1";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/yum.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -549,7 +559,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource21ref
 {
 ResourceID = "[nxFileLine][V-204449.c][medium][SRG-OS-000114-GPOS-00059]::[RHEL]Baseline";
  ContainsLine = "install usb-storage /bin/true";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/modprobe.d/usb-storage.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -560,7 +570,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource22ref
 {
 ResourceID = "[nxFileLine][V-204449.d][medium][SRG-OS-000114-GPOS-00059]::[RHEL]Baseline";
  ContainsLine = "blacklist usb-storage";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/modprobe.d/blacklist.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -571,7 +581,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource23ref
 {
 ResourceID = "[nxFileLine][V-204450.b][medium][SRG-OS-000378-GPOS-00163]::[RHEL]Baseline";
  ContainsLine = "install dccp /bin/true";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/modprobe.d/dccp.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -582,7 +592,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource24ref
 {
 ResourceID = "[nxFileLine][V-204450.c][medium][SRG-OS-000378-GPOS-00163]::[RHEL]Baseline";
  ContainsLine = "blacklist dccp";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/modprobe.d/blacklist.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -593,7 +603,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource25ref
 {
 ResourceID = "[nxFileLine][V-204452][low][SRG-OS-000437-GPOS-00194]::[RHEL]Baseline";
  ContainsLine = "clean_requirements_on_remove=1";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/yum.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -604,7 +614,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource26ref
 {
 ResourceID = "[nxFileLine][V-204453][medium][SRG-OS-000445-GPOS-00199]::[RHEL]Baseline";
  ContainsLine = "SELINUX=enforcing";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/selinux/config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -615,7 +625,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource27ref
 {
 ResourceID = "[nxFileLine][V-204454][medium][SRG-OS-000445-GPOS-00199]::[RHEL]Baseline";
  ContainsLine = "SELINUXTYPE=targeted";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/selinux/config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -626,7 +636,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource28ref
 {
 ResourceID = "[nxFileLine][V-204457][medium][SRG-OS-000480-GPOS-00228]::[RHEL]Baseline";
  ContainsLine = "UMASK 077";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/login.defs";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -637,7 +647,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource29ref
 {
 ResourceID = "[nxFileLine][V-204466][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  ContainsLine = "CREATE_HOME yes";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/login.defs";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -648,28 +658,27 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource30ref
 {
 ResourceID = "[nxFileLine][V-204504][medium][SRG-OS-000046-GPOS-00022]::[RHEL]Baseline";
  ContainsLine = "-f 2";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*-f\\s+2|^\\s*-f\\s*1";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileResource as $MSFT_nxFileResource23ref
+instance of MSFT_nxFileResource as $MSFT_nxFileResource24ref
 {
-ResourceID = "[nxFile][V-204506.a][medium][SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
- Contents = "# Generated via PowerSTIG\n";
- DestinationPath = "/etc/audisp/plugins.d/au-remote.conf";
+SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::29::9::nxFile";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::30::9::nxFile";
- ModuleVersion = "1.0";
+ ModuleVersion = "1.0";
+ ResourceID = "[nxFile][V-204506.a][medium][SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
+ DestinationPath = "/etc/audisp/plugins.d/au-remote.conf";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource31ref
 {
 ResourceID = "[nxFileLine][V-204506.a][medium][SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
  ContainsLine = "active = yes";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audisp/plugins.d/au-remote.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -680,7 +689,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource32ref
 {
 ResourceID = "[nxFileLine][V-204506.b][medium][SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
  ContainsLine = "direction = out";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audisp/plugins.d/au-remote.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -691,7 +700,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource33ref
 {
 ResourceID = "[nxFileLine][V-204506.c][medium][SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
  ContainsLine = "path = /sbin/audisp-remote";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audisp/plugins.d/au-remote.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -702,7 +711,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource34ref
 {
 ResourceID = "[nxFileLine][V-204506.d][medium][SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
  ContainsLine = "type = always";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audisp/plugins.d/au-remote.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -713,7 +722,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource35ref
 {
 ResourceID = "[nxFileLine][V-204507][medium][SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
  ContainsLine = "overflow_action = syslog";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audisp/audispd.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -724,28 +733,27 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource36ref
 {
 ResourceID = "[nxFileLine][V-204508][medium][SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
  ContainsLine = "name_format = hostname";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audisp/audispd.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*name_format.*$|^name_format\\s*=\\s*(?!hostname$)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileResource as $MSFT_nxFileResource24ref
+instance of MSFT_nxFileResource as $MSFT_nxFileResource25ref
 {
-ResourceID = "[nxFile][V-204510][medium][SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
- Contents = "# Generated via PowerSTIG\n";
- DestinationPath = "/etc/audisp/audisp-remote.conf";
+SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::19::9::nxFile";
  ModuleName = "nx";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::19::9::nxFile";
- ModuleVersion = "1.0";
+ ModuleVersion = "1.0";
+ ResourceID = "[nxFile][V-204510][medium][SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
+ DestinationPath = "/etc/audisp/audisp-remote.conf";
  ConfigurationName = "LinuxBaseLine";
 };
 instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource37ref
 {
 ResourceID = "[nxFileLine][V-204510][medium][SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
  ContainsLine = "enable_krb5 = yes";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audisp/audisp-remote.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -756,7 +764,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource38ref
 {
 ResourceID = "[nxFileLine][V-204511][medium][SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
  ContainsLine = "disk_full_action = single";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audisp/audisp-remote.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -767,7 +775,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource39ref
 {
 ResourceID = "[nxFileLine][V-204512][medium][SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
  ContainsLine = "network_failure_action = syslog";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audisp/audisp-remote.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -778,7 +786,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource40ref
 {
 ResourceID = "[nxFileLine][V-204514][medium][SRG-OS-000343-GPOS-00134]::[RHEL]Baseline";
  ContainsLine = "space_left_action = email";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/auditd.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -789,7 +797,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource41ref
 {
 ResourceID = "[nxFileLine][V-204515][medium][SRG-OS-000343-GPOS-00134]::[RHEL]Baseline";
  ContainsLine = "action_mail_acct = root";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/auditd.conf";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -800,7 +808,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource42ref
 {
 ResourceID = "[nxFileLine][V-204516.a][medium][SRG-OS-000327-GPOS-00127]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -811,7 +819,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource43ref
 {
 ResourceID = "[nxFileLine][V-204516.b][medium][SRG-OS-000327-GPOS-00127]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -822,7 +830,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource44ref
 {
 ResourceID = "[nxFileLine][V-204516.c][medium][SRG-OS-000327-GPOS-00127]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -833,7 +841,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource45ref
 {
 ResourceID = "[nxFileLine][V-204516.d][medium][SRG-OS-000327-GPOS-00127]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -844,7 +852,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource46ref
 {
 ResourceID = "[nxFileLine][V-204517.a][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S chown -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -855,7 +863,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource47ref
 {
 ResourceID = "[nxFileLine][V-204517.b][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S chown -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -866,7 +874,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource48ref
 {
 ResourceID = "[nxFileLine][V-204518.a][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fchown -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -877,7 +885,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource49ref
 {
 ResourceID = "[nxFileLine][V-204518.b][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fchown -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -888,7 +896,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource50ref
 {
 ResourceID = "[nxFileLine][V-204519.a][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S lchown -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -899,7 +907,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource51ref
 {
 ResourceID = "[nxFileLine][V-204519.b][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S lchown -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -910,7 +918,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource52ref
 {
 ResourceID = "[nxFileLine][V-204520.a][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fchownat -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -921,7 +929,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource53ref
 {
 ResourceID = "[nxFileLine][V-204520.b][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fchownat -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -932,7 +940,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource54ref
 {
 ResourceID = "[nxFileLine][V-204521.a][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S chmod -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -943,7 +951,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource55ref
 {
 ResourceID = "[nxFileLine][V-204521.b][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S chmod -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -954,7 +962,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource56ref
 {
 ResourceID = "[nxFileLine][V-204522.a][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fchmod -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -965,7 +973,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource57ref
 {
 ResourceID = "[nxFileLine][V-204522.b][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fchmod -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -976,7 +984,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource58ref
 {
 ResourceID = "[nxFileLine][V-204523.a][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fchmodat -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -987,7 +995,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource59ref
 {
 ResourceID = "[nxFileLine][V-204523.b][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fchmodat -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -998,7 +1006,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource60ref
 {
 ResourceID = "[nxFileLine][V-204524.a][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S setxattr -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1009,7 +1017,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource61ref
 {
 ResourceID = "[nxFileLine][V-204524.b][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S setxattr -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1020,7 +1028,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource62ref
 {
 ResourceID = "[nxFileLine][V-204525.a][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fsetxattr -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1031,7 +1039,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource63ref
 {
 ResourceID = "[nxFileLine][V-204525.b][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fsetxattr -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1042,7 +1050,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource64ref
 {
 ResourceID = "[nxFileLine][V-204526.a][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S lsetxattr -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1053,7 +1061,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource65ref
 {
 ResourceID = "[nxFileLine][V-204526.b][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S lsetxattr -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1064,7 +1072,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource66ref
 {
 ResourceID = "[nxFileLine][V-204527.a][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S removexattr -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1075,7 +1083,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource67ref
 {
 ResourceID = "[nxFileLine][V-204527.b][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S removexattr -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1086,7 +1094,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource68ref
 {
 ResourceID = "[nxFileLine][V-204528.a][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S fremovexattr -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1097,7 +1105,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource69ref
 {
 ResourceID = "[nxFileLine][V-204528.b][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S fremovexattr -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1108,7 +1116,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource70ref
 {
 ResourceID = "[nxFileLine][V-204529.a][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S lremovexattr -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1119,7 +1127,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource71ref
 {
 ResourceID = "[nxFileLine][V-204529.b][medium][SRG-OS-000458-GPOS-00203]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S lremovexattr -F auid>=1000 -F auid!=unset -k perm_mod";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1130,7 +1138,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource72ref
 {
 ResourceID = "[nxFileLine][V-204530.a][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S creat F exit=-EPERM -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1141,7 +1149,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource73ref
 {
 ResourceID = "[nxFileLine][V-204530.b][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S creat -F exit=-EACCES -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1152,7 +1160,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource74ref
 {
 ResourceID = "[nxFileLine][V-204530.c][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S creat -F exit=-EPERM -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1163,7 +1171,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource75ref
 {
 ResourceID = "[nxFileLine][V-204530.d][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S creat -F exit=-EACCES -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1174,7 +1182,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource76ref
 {
 ResourceID = "[nxFileLine][V-204531.a][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S open -F exit=-EPERM -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1185,7 +1193,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource77ref
 {
 ResourceID = "[nxFileLine][V-204531.b][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S open -F exit=-EACCES -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1196,7 +1204,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource78ref
 {
 ResourceID = "[nxFileLine][V-204531.c][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S open -F exit=-EPERM -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1207,7 +1215,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource79ref
 {
 ResourceID = "[nxFileLine][V-204531.d][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S open -F exit=-EACCES -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1218,7 +1226,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource80ref
 {
 ResourceID = "[nxFileLine][V-204532.a][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S openat -F exit=-EPERM -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1229,7 +1237,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource81ref
 {
 ResourceID = "[nxFileLine][V-204532.b][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S openat -F exit=-EACCES -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1240,7 +1248,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource82ref
 {
 ResourceID = "[nxFileLine][V-204532.c][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S openat -F exit=-EPERM -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1251,7 +1259,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource83ref
 {
 ResourceID = "[nxFileLine][V-204532.d][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S openat -F exit=-EACCES -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1262,7 +1270,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource84ref
 {
 ResourceID = "[nxFileLine][V-204533.a][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1273,7 +1281,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource85ref
 {
 ResourceID = "[nxFileLine][V-204533.b][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1284,7 +1292,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource86ref
 {
 ResourceID = "[nxFileLine][V-204533.c][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1295,7 +1303,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource87ref
 {
 ResourceID = "[nxFileLine][V-204533.d][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1306,7 +1314,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource88ref
 {
 ResourceID = "[nxFileLine][V-204534.a][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S truncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1317,7 +1325,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource89ref
 {
 ResourceID = "[nxFileLine][V-204534.b][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S truncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1328,7 +1336,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource90ref
 {
 ResourceID = "[nxFileLine][V-204534.c][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S truncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1339,7 +1347,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource91ref
 {
 ResourceID = "[nxFileLine][V-204534.d][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S truncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1350,7 +1358,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource92ref
 {
 ResourceID = "[nxFileLine][V-204535.a][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1361,7 +1369,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource93ref
 {
 ResourceID = "[nxFileLine][V-204535.b][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1372,7 +1380,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource94ref
 {
 ResourceID = "[nxFileLine][V-204535.c][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1383,7 +1391,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource95ref
 {
 ResourceID = "[nxFileLine][V-204535.d][medium][SRG-OS-000064-GPOS-00033]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -k access";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1394,7 +1402,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource96ref
 {
 ResourceID = "[nxFileLine][V-204536][medium][SRG-OS-000392-GPOS-00172]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/sbin/semanage -F auid>=1000 -F auid!=unset -k privileged-priv_change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1405,7 +1413,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource97ref
 {
 ResourceID = "[nxFileLine][V-204537][medium][SRG-OS-000392-GPOS-00172]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/sbin/setsebool -F auid>=1000 -F auid!=unset -k privileged-priv_change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1416,7 +1424,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource98ref
 {
 ResourceID = "[nxFileLine][V-204538][medium][SRG-OS-000392-GPOS-00172]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/chcon -F auid>=1000 -F auid!=unset -k privileged-priv_change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1427,7 +1435,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource99ref
 {
 ResourceID = "[nxFileLine][V-204539][medium][SRG-OS-000392-GPOS-00172]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/sbin/setfiles -F auid>=1000 -F auid!=unset -k privileged-priv_change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1438,7 +1446,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource100ref
 {
 ResourceID = "[nxFileLine][V-204540][medium][SRG-OS-000392-GPOS-00172]::[RHEL]Baseline";
  ContainsLine = "-w /var/run/faillock -p wa -k logins";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1449,7 +1457,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource101ref
 {
 ResourceID = "[nxFileLine][V-204541][medium][SRG-OS-000392-GPOS-00172]::[RHEL]Baseline";
  ContainsLine = "-w /var/log/lastlog -p wa -k logins";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1460,7 +1468,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource102ref
 {
 ResourceID = "[nxFileLine][V-204542][medium][SRG-OS-000042-GPOS-00020]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/passwd -F auid>=1000 -F auid!=unset -k privileged-passwd";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1471,7 +1479,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource103ref
 {
 ResourceID = "[nxFileLine][V-204543][medium][SRG-OS-000042-GPOS-00020]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/sbin/unix_chkpwd -F auid>=1000 -F auid!=unset -k privileged-passwd";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1482,7 +1490,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource104ref
 {
 ResourceID = "[nxFileLine][V-204544][medium][SRG-OS-000042-GPOS-00020]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/gpasswd -F auid>=1000 -F auid!=unset -k privileged-passwd";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1493,7 +1501,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource105ref
 {
 ResourceID = "[nxFileLine][V-204545][medium][SRG-OS-000042-GPOS-00020]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/chage -F auid>=1000 -F auid!=unset -k privileged-passwd";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1504,7 +1512,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource106ref
 {
 ResourceID = "[nxFileLine][V-204546][medium][SRG-OS-000042-GPOS-00020]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/sbin/userhelper -F auid>=1000 -F auid!=unset -k privileged-passwd";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1515,7 +1523,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource107ref
 {
 ResourceID = "[nxFileLine][V-204547][medium][SRG-OS-000037-GPOS-00015]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/su -F auid>=1000 -F auid!=unset -k privileged-priv_change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1526,7 +1534,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource108ref
 {
 ResourceID = "[nxFileLine][V-204548][medium][SRG-OS-000037-GPOS-00015]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/sudo -F auid>=1000 -F auid!=unset -k privileged-priv_change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1537,7 +1545,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource109ref
 {
 ResourceID = "[nxFileLine][V-204549.a][medium][SRG-OS-000037-GPOS-00015]::[RHEL]Baseline";
  ContainsLine = "-w /etc/sudoers -p wa -k privileged-actions";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1548,7 +1556,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource110ref
 {
 ResourceID = "[nxFileLine][V-204549.b][medium][SRG-OS-000037-GPOS-00015]::[RHEL]Baseline";
  ContainsLine = "-w /etc/sudoers.d/ -p wa -k privileged-actions";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1559,7 +1567,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource111ref
 {
 ResourceID = "[nxFileLine][V-204550][medium][SRG-OS-000037-GPOS-00015]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/newgrp -F auid>=1000 -F auid!=unset -k privileged-priv_change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1570,7 +1578,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource112ref
 {
 ResourceID = "[nxFileLine][V-204551][medium][SRG-OS-000037-GPOS-00015]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/chsh -F auid>=1000 -F auid!=unset -k privileged-priv_change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1581,7 +1589,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource113ref
 {
 ResourceID = "[nxFileLine][V-204552.a][medium][SRG-OS-000042-GPOS-00020]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=unset -k privileged-mount";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1592,7 +1600,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource114ref
 {
 ResourceID = "[nxFileLine][V-204552.b][medium][SRG-OS-000042-GPOS-00020]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=unset -k privileged-mount";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1603,7 +1611,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource115ref
 {
 ResourceID = "[nxFileLine][V-204552.c][medium][SRG-OS-000042-GPOS-00020]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/mount -F auid>=1000 -F auid!=unset -k privileged-mount";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1614,7 +1622,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource116ref
 {
 ResourceID = "[nxFileLine][V-204553][medium][SRG-OS-000042-GPOS-00020]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/umount -F auid>=1000 -F auid!=unset -k privileged-mount";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1625,7 +1633,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource117ref
 {
 ResourceID = "[nxFileLine][V-204554][medium][SRG-OS-000042-GPOS-00020]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/sbin/postdrop -F auid>=1000 -F auid!=unset -k privileged-postfix";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1636,7 +1644,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource118ref
 {
 ResourceID = "[nxFileLine][V-204555][medium][SRG-OS-000042-GPOS-00020]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/sbin/postqueue -F auid>=1000 -F auid!=unset -k privileged-postfix";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1647,7 +1655,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource119ref
 {
 ResourceID = "[nxFileLine][V-204556][medium][SRG-OS-000042-GPOS-00020]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/libexec/openssh/ssh-keysign -F auid>=1000 -F auid!=unset -k privileged-ssh";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1658,7 +1666,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource120ref
 {
 ResourceID = "[nxFileLine][V-204557][medium][SRG-OS-000042-GPOS-00020]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/bin/crontab -F auid>=1000 -F auid!=unset -k privileged-cron";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1669,7 +1677,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource121ref
 {
 ResourceID = "[nxFileLine][V-204558][medium][SRG-OS-000471-GPOS-00215]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F path=/usr/sbin/pam_timestamp_check -F auid>=1000 -F auid!=unset -k privileged-pam";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1680,7 +1688,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource122ref
 {
 ResourceID = "[nxFileLine][V-204559.a][medium][SRG-OS-000471-GPOS-00216]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S create_module -k module-change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1691,7 +1699,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource123ref
 {
 ResourceID = "[nxFileLine][V-204559.b][medium][SRG-OS-000471-GPOS-00216]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S create_module -k module-change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1702,7 +1710,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource124ref
 {
 ResourceID = "[nxFileLine][V-204560.a][medium][SRG-OS-000471-GPOS-00216]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S init_module -k module-change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1713,7 +1721,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource125ref
 {
 ResourceID = "[nxFileLine][V-204560.b][medium][SRG-OS-000471-GPOS-00216]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S init_module -k module-change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1724,7 +1732,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource126ref
 {
 ResourceID = "[nxFileLine][V-204561.a][medium][SRG-OS-000471-GPOS-00216]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S finit_module -k module-change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1735,7 +1743,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource127ref
 {
 ResourceID = "[nxFileLine][V-204561.b][medium][SRG-OS-000471-GPOS-00216]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S finit_module -k module-change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1746,7 +1754,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource128ref
 {
 ResourceID = "[nxFileLine][V-204562.a][medium][SRG-OS-000471-GPOS-00216]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S delete_module -k module-change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1757,7 +1765,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource129ref
 {
 ResourceID = "[nxFileLine][V-204562.b][medium][SRG-OS-000471-GPOS-00216]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S delete_module -k module-change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1768,7 +1776,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource130ref
 {
 ResourceID = "[nxFileLine][V-204563][medium][SRG-OS-000471-GPOS-00216]::[RHEL]Baseline";
  ContainsLine = "-w /usr/bin/kmod -p x -F auid!=unset -k module-change";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1779,7 +1787,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource131ref
 {
 ResourceID = "[nxFileLine][V-204564][medium][SRG-OS-000004-GPOS-00004]::[RHEL]Baseline";
  ContainsLine = "-w /etc/passwd -p wa -k identity";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1790,7 +1798,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource132ref
 {
 ResourceID = "[nxFileLine][V-204565][medium][SRG-OS-000004-GPOS-00004]::[RHEL]Baseline";
  ContainsLine = "-w /etc/group -p wa -k identity";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1801,7 +1809,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource133ref
 {
 ResourceID = "[nxFileLine][V-204566][medium][SRG-OS-000004-GPOS-00004]::[RHEL]Baseline";
  ContainsLine = "-w /etc/gshadow -p wa -k identity";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1812,7 +1820,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource134ref
 {
 ResourceID = "[nxFileLine][V-204567][medium][SRG-OS-000004-GPOS-00004]::[RHEL]Baseline";
  ContainsLine = "-w /etc/shadow -p wa -k identity";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1823,7 +1831,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource135ref
 {
 ResourceID = "[nxFileLine][V-204568][medium][SRG-OS-000004-GPOS-00004]::[RHEL]Baseline";
  ContainsLine = "-w /etc/security/opasswd -p wa -k identity";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1834,7 +1842,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource136ref
 {
 ResourceID = "[nxFileLine][V-204569.a][medium][SRG-OS-000466-GPOS-00210]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S rename -F auid>=1000 -F auid!=unset -k delete";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1845,7 +1853,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource137ref
 {
 ResourceID = "[nxFileLine][V-204569.b][medium][SRG-OS-000466-GPOS-00210]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S rename -F auid>=1000 -F auid!=unset -k delete";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1856,7 +1864,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource138ref
 {
 ResourceID = "[nxFileLine][V-204570.a][medium][SRG-OS-000466-GPOS-00210]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S renameat -F auid>=1000 -F auid!=unset -k delete";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1867,7 +1875,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource139ref
 {
 ResourceID = "[nxFileLine][V-204570.b][medium][SRG-OS-000466-GPOS-00210]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S renameat -F auid>=1000 -F auid!=unset -k delete";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1878,7 +1886,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource140ref
 {
 ResourceID = "[nxFileLine][V-204571.a][medium][SRG-OS-000466-GPOS-00210]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S rmdir -F auid>=1000 -F auid!=unset -k delete";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1889,7 +1897,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource141ref
 {
 ResourceID = "[nxFileLine][V-204571.b][medium][SRG-OS-000466-GPOS-00210]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S rmdir -F auid>=1000 -F auid!=unset -k delete";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1900,7 +1908,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource142ref
 {
 ResourceID = "[nxFileLine][V-204572.a][medium][SRG-OS-000466-GPOS-00210]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S unlink -F auid>=1000 -F auid!=unset -k delete";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1911,7 +1919,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource143ref
 {
 ResourceID = "[nxFileLine][V-204572.b][medium][SRG-OS-000466-GPOS-00210]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S unlink -F auid>=1000 -F auid!=unset -k delete";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1922,7 +1930,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource144ref
 {
 ResourceID = "[nxFileLine][V-204573.a][medium][SRG-OS-000466-GPOS-00210]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b32 -S unlinkat -F auid>=1000 -F auid!=unset -k delete";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1933,7 +1941,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource145ref
 {
 ResourceID = "[nxFileLine][V-204573.b][medium][SRG-OS-000466-GPOS-00210]::[RHEL]Baseline";
  ContainsLine = "-a always,exit -F arch=b64 -S unlinkat -F auid>=1000 -F auid!=unset -k delete";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/audit/rules.d/audit.rules";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1944,7 +1952,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource146ref
 {
 ResourceID = "[nxFileLine][V-204578][medium][SRG-OS-000033-GPOS-00014]::[RHEL]Baseline";
  ContainsLine = "Ciphers aes256-ctr,aes192-ctr,aes128-ctr";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1955,7 +1963,7 @@ instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource147ref
 {
 ResourceID = "[nxFileLine][V-204579.b][medium][SRG-OS-000163-GPOS-00072]::[RHEL]Baseline";
  ContainsLine = "declare -xr TMOUT=900";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/profile.d/tmout.sh";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -1964,207 +1972,185 @@ ResourceID = "[nxFileLine][V-204579.b][medium][SRG-OS-000163-GPOS-00072]::[RHEL]
 };
 instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource148ref
 {
-ResourceID = "[nxFileLine][V-204579.c][medium][SRG-OS-000163-GPOS-00072]::[RHEL]Baseline";
- ContainsLine = "readonly TMOUT";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
- FilePath = "/etc/profile.d/tmout.sh";
- ModuleName = "nx";
- ModuleVersion = "1.0";
- DoesNotContainPattern = "^\\s*readonly\\s+(?!TMOUT\\b).*$|^\\s*#\\s*readonly.*$";
- ConfigurationName = "LinuxBaseLine";
-};
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource149ref
-{
-ResourceID = "[nxFileLine][V-204579.d][medium][SRG-OS-000163-GPOS-00072]::[RHEL]Baseline";
- ContainsLine = "export TMOUT";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
- FilePath = "/etc/profile.d/tmout.sh";
- ModuleName = "nx";
- ModuleVersion = "1.0";
- DoesNotContainPattern = "^\\s*export\\s+(?!TMOUT\\b).*$|^\\s*#\\s*export.*$";
- ConfigurationName = "LinuxBaseLine";
-};
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource150ref
-{
 ResourceID = "[nxFileLine][V-204580][medium][SRG-OS-000023-GPOS-00006]::[RHEL]Baseline";
  ContainsLine = "banner /etc/issue";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "#\\s*banner\\s*/etc/issue";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource151ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource149ref
 {
 ResourceID = "[nxFileLine][V-204587][medium][SRG-OS-000163-GPOS-00072]::[RHEL]Baseline";
  ContainsLine = "ClientAliveInterval 600";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^\\s*ClientAliveInterval\\s*[0-5]?[0-9]?[0-9]?\\s*$|^#\\s*ClientAliveInterval.*|^\\s*ClientAliveInterval\\s*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource152ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource150ref
 {
 ResourceID = "[nxFileLine][V-204588][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  ContainsLine = "RhostsRSAAuthentication no";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*RhostsRSAAuthentication.*$|^RhostsRSAAuthentication\\s*(?!no\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource153ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource151ref
 {
 ResourceID = "[nxFileLine][V-204589][medium][SRG-OS-000163-GPOS-00072]::[RHEL]Baseline";
  ContainsLine = "ClientAliveCountMax 0";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*ClientAliveCountMax.*$|^ClientAliveCountMax\\s*(?!0\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource154ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource152ref
 {
 ResourceID = "[nxFileLine][V-204590][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  ContainsLine = "IgnoreRhosts yes";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*IgnoreRhosts.*$|^IgnoreRhosts\\s*(?!yes\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource155ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource153ref
 {
 ResourceID = "[nxFileLine][V-204591][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  ContainsLine = "PrintLastLog yes";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*PrintLastLog.*$|^PrintLastLog\\s*(?!yes\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource156ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource154ref
 {
 ResourceID = "[nxFileLine][V-204592][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  ContainsLine = "PermitRootLogin no";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*PermitRootLogin.*$|^PermitRootLogin\\s*(?!no\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource157ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource155ref
 {
 ResourceID = "[nxFileLine][V-204593][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  ContainsLine = "IgnoreUserKnownHosts yes";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*IgnoreUserKnownHosts.*$|^IgnoreUserKnownHosts\\s*(?!yes\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource158ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource156ref
 {
 ResourceID = "[nxFileLine][V-204594][high][SRG-OS-000074-GPOS-00042]::[RHEL]Baseline";
  ContainsLine = "Protocol 2";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*Protocol.*$|^Protocol\\s*(?!2\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource159ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource157ref
 {
 ResourceID = "[nxFileLine][V-204595][medium][SRG-OS-000250-GPOS-00093]::[RHEL]Baseline";
  ContainsLine = "MACs hmac-sha2-512,hmac-sha2-256";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "#\\s*MACs.*|\\s*MACs\\s*hmac-(?!sha2-512).*";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource160ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource158ref
 {
 ResourceID = "[nxFileLine][V-204598][medium][SRG-OS-000364-GPOS-00151]::[RHEL]Baseline";
  ContainsLine = "GSSAPIAuthentication no";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*GSSAPIAuthentication.*$|^GSSAPIAuthentication\\s*(?!no\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource161ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource159ref
 {
 ResourceID = "[nxFileLine][V-204599][medium][SRG-OS-000364-GPOS-00151]::[RHEL]Baseline";
  ContainsLine = "KerberosAuthentication no";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*KerberosAuthentication.*$|^KerberosAuthentication\\s*(?!no\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource162ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource160ref
 {
 ResourceID = "[nxFileLine][V-204600][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  ContainsLine = "StrictModes yes";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*StrictModes.*$|^StrictModes\\s*(?!yes\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource163ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource161ref
 {
 ResourceID = "[nxFileLine][V-204601][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  ContainsLine = "UsePrivilegeSeparation sandbox";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*UsePrivilegeSeparation.*$|^UsePrivilegeSeparation\\s*(?!sandbox\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource164ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource162ref
 {
 ResourceID = "[nxFileLine][V-204602][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  ContainsLine = "Compression delayed";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*Compression.*$|^Compression\\s*(?!delayed\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource165ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource163ref
 {
 ResourceID = "[nxFileLine][V-204622][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  ContainsLine = "X11Forwarding no";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
  DoesNotContainPattern = "^#\\s*X11Forwarding.*$|^X11Forwarding\\s*(?!no\\b)\\w*$";
  ConfigurationName = "LinuxBaseLine";
 };
-instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource166ref
+instance of MSFT_nxFileLineResource as $MSFT_nxFileLineResource164ref
 {
 ResourceID = "[nxFileLine][V-233307][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  ContainsLine = "X11UseLocalhost yes";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxFileLine.ps1::41::9::nxFileLine";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxFileLine.ps1::39::9::nxFileLine";
  FilePath = "/etc/ssh/sshd_config";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -2176,7 +2162,7 @@ instance of MSFT_nxServiceResource as $MSFT_nxServiceResource1ref
 ResourceID = "[nxService][V-204451][medium][SRG-OS-000114-GPOS-00059]::[RHEL]Baseline";
  Controller = "systemd";
  Enabled = False;
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxService.ps1::13::9::nxService";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxService.ps1::13::9::nxService";
  Name = "autofs";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -2187,7 +2173,7 @@ instance of MSFT_nxServiceResource as $MSFT_nxServiceResource2ref
 ResourceID = "[nxService][V-204492][medium][SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  Controller = "systemd";
  Enabled = False;
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxService.ps1::13::9::nxService";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxService.ps1::13::9::nxService";
  Name = "kdump";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -2199,7 +2185,7 @@ ResourceID = "[nxService][V-204503][medium][SRG-OS-000038-GPOS-00016]::[RHEL]Bas
  Controller = "systemd";
  State = "Running";
  Enabled = True;
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxService.ps1::22::9::nxService";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxService.ps1::22::9::nxService";
  Name = "auditd";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -2211,7 +2197,7 @@ ResourceID = "[nxService][V-204586][medium][SRG-OS-000423-GPOS-00187]::[RHEL]Bas
  Controller = "systemd";
  State = "Running";
  Enabled = True;
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxService.ps1::22::9::nxService";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxService.ps1::22::9::nxService";
  Name = "sshd";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -2223,7 +2209,7 @@ ResourceID = "[nxService][V-204604.b][medium][SRG-OS-000480-GPOS-00227]::[RHEL]B
  Controller = "systemd";
  State = "Running";
  Enabled = True;
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxService.ps1::22::9::nxService";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxService.ps1::22::9::nxService";
  Name = "firewalld";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -2234,7 +2220,7 @@ instance of MSFT_nxScriptResource as $MSFT_nxScriptResource1ref
 ResourceID = "[nxScript][V-204399.b][medium][[Skip] SRG-OS-000029-GPOS-00010]::[RHEL]Baseline";
  GetScript = "#!/bin/bash\necho [V-204399.b][medium][[Skip] SRG-OS-000029-GPOS-00010]";
  TestScript = "#!/bin/bash\nexit 0";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
  SetScript = "#!/bin/bash";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -2245,7 +2231,7 @@ instance of MSFT_nxScriptResource as $MSFT_nxScriptResource2ref
 ResourceID = "[nxScript][V-204400][medium][[Skip] SRG-OS-000029-GPOS-00010]::[RHEL]Baseline";
  GetScript = "#!/bin/bash\necho [V-204400][medium][[Skip] SRG-OS-000029-GPOS-00010]";
  TestScript = "#!/bin/bash\nexit 0";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
  SetScript = "#!/bin/bash";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -2256,7 +2242,7 @@ instance of MSFT_nxScriptResource as $MSFT_nxScriptResource3ref
 ResourceID = "[nxScript][V-204403][medium][[Skip] SRG-OS-000029-GPOS-00010]::[RHEL]Baseline";
  GetScript = "#!/bin/bash\necho [V-204403][medium][[Skip] SRG-OS-000029-GPOS-00010]";
  TestScript = "#!/bin/bash\nexit 0";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
  SetScript = "#!/bin/bash";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -2267,7 +2253,7 @@ instance of MSFT_nxScriptResource as $MSFT_nxScriptResource4ref
 ResourceID = "[nxScript][V-204509][medium][[Skip] SRG-OS-000342-GPOS-00133]::[RHEL]Baseline";
  GetScript = "#!/bin/bash\necho [V-204509][medium][[Skip] SRG-OS-000342-GPOS-00133]";
  TestScript = "#!/bin/bash\nexit 0";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
  SetScript = "#!/bin/bash";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -2278,7 +2264,7 @@ instance of MSFT_nxScriptResource as $MSFT_nxScriptResource5ref
 ResourceID = "[nxScript][V-204513][medium][[Skip] SRG-OS-000343-GPOS-00134]::[RHEL]Baseline";
  GetScript = "#!/bin/bash\necho [V-204513][medium][[Skip] SRG-OS-000343-GPOS-00134]";
  TestScript = "#!/bin/bash\nexit 0";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
  SetScript = "#!/bin/bash";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -2289,7 +2275,7 @@ instance of MSFT_nxScriptResource as $MSFT_nxScriptResource6ref
 ResourceID = "[nxScript][V-204623][medium][[Skip] SRG-OS-000480-GPOS-00227]::[RHEL]Baseline";
  GetScript = "#!/bin/bash\necho [V-204623][medium][[Skip] SRG-OS-000480-GPOS-00227]";
  TestScript = "#!/bin/bash\nexit 0";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
  SetScript = "#!/bin/bash";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -2297,10 +2283,32 @@ ResourceID = "[nxScript][V-204623][medium][[Skip] SRG-OS-000480-GPOS-00227]::[RH
 };
 instance of MSFT_nxScriptResource as $MSFT_nxScriptResource7ref
 {
+ResourceID = "[nxScript][V-244557][medium][[Skip] SRG-OS-000080-GPOS-00048]::[RHEL]Baseline";
+ GetScript = "#!/bin/bash\necho [V-244557][medium][[Skip] SRG-OS-000080-GPOS-00048]";
+ TestScript = "#!/bin/bash\nexit 0";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
+ SetScript = "#!/bin/bash";
+ ModuleName = "nx";
+ ModuleVersion = "1.0";
+ ConfigurationName = "LinuxBaseLine";
+};
+instance of MSFT_nxScriptResource as $MSFT_nxScriptResource8ref
+{
+ResourceID = "[nxScript][V-244558][medium][[Skip] SRG-OS-000080-GPOS-00048]::[RHEL]Baseline";
+ GetScript = "#!/bin/bash\necho [V-244558][medium][[Skip] SRG-OS-000080-GPOS-00048]";
+ TestScript = "#!/bin/bash\nexit 0";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
+ SetScript = "#!/bin/bash";
+ ModuleName = "nx";
+ ModuleVersion = "1.0";
+ ConfigurationName = "LinuxBaseLine";
+};
+instance of MSFT_nxScriptResource as $MSFT_nxScriptResource9ref
+{
 ResourceID = "[nxScript][V-204399.a][medium][[Skip] SRG-OS-000029-GPOS-00010]::[RHEL]Baseline";
  GetScript = "#!/bin/bash\necho [V-204399.a][medium][[Skip] SRG-OS-000029-GPOS-00010]";
  TestScript = "#!/bin/bash\nexit 0";
- SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.9.1\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
+ SourceInfo = "C:\\Program Files\\WindowsPowerShell\\Modules\\PowerSTIG\\4.11.0\\DSCResources\\Resources\\linux.nxScript.skip.ps1::10::5::nxScript";
  SetScript = "#!/bin/bash";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -2317,7 +2325,7 @@ instance of OMI_ConfigurationDocument
  
                         Author="Microsoft";
  
-                        GenerationDate="06/09/2021 11:32:25";
+                        GenerationDate="01/31/2022 17:13:26";
  
                         GenerationHost="Microsoft";
  

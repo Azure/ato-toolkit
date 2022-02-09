@@ -21,6 +21,9 @@
     .PARAMETER Count
         Number of unique VMs or VM Availability Sets to deploy.
 
+    .PARAMETER VmSize
+        Specifies the size for the virtual machine.
+
     .PARAMETER OsVersion
         Linux or Windows OS Version.
 
@@ -164,6 +167,10 @@ Param
     [Parameter(Mandatory = $false, ParameterSetName = 'Default')]
     [int]
     $Count,
+
+    [Parameter(Mandatory = $false, ParameterSetName = 'Default')]
+    [string]
+    $VmSize,
 
     [Parameter(Mandatory = $true, ParameterSetName = 'Default')]
     [ValidateSet(
@@ -462,7 +469,7 @@ else
 {
     # import PowerShell data file, structure should mimic .psd1 documented here:
     Write-Verbose -Message "Importing deployment data file: $DataFilePath"
-    $dataFileStructureLink = '_placeHolder_for_ato_markdown_link_'
+    $dataFileStructureLink = 'https://github.com/Azure/ato-toolkit/tree/master/stig/tools'
     $deploymentDataFileImport = Import-PowerShellDataFile -Path $DataFilePath
     Write-Verbose -Message "-- Total deployments to be created: $($($deploymentDataFileImport[$deploymentDataFileImport.Keys]).Count)"
 
