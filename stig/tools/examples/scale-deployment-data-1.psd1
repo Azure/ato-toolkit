@@ -12,6 +12,7 @@
             diagnosticStorageResourceId   = '' # Diagnostic Storage Resource Id (Get-AzStorageAccount -ResourceGroupName <ResourceGroupName> -Name <diagStorageAcctName>).Id
             logAnalyticsWorkspaceId       = '' # Log Analytic Workspace Id (Get-AzOperationalInsightsWorkspace -ResourceGroupName <ResourceGroupName> -Name <WorkspaceName>).ResourceId
             osDiskEncryptionSetResourceId = '' # Disk Encryption Set Resource Id (Get-AzDiskEncryptionSet -ResourceGroupName <ResourceGroupName> -Name <DiskEncryptionSetName>).Id
+            VmSize                        = 'Standard_D2s_v3' # Specify the VmSize to deploy, ensure the size is available in the region being deployed to # Specify the VmSize to deploy, ensure the size is available in the region being deployed to
             OsVersion                     = '2019-Datacenter' # OS Version, i.e.: '2019-Datacenter', '2016-Datacenter', '19h2-ent'
             VmName                        = 'win2019' # Virtual Machine Name, this will be the base name used in conjunction with VmNamePrefix, VmNameSuffixDelimiter and VmNameSuffixStartingNumber
             VmNamePrefix                  = 'ato-' # VM Name prefix, i.e.: 'ato-'
@@ -35,6 +36,7 @@
             diagnosticStorageResourceId   = '' # Diagnostic Storage Resource Id (Get-AzStorageAccount -ResourceGroupName <ResourceGroupName> -Name <diagStorageAcctName>).Id
             logAnalyticsWorkspaceId       = '' # Log Analytic Workspace Id (Get-AzOperationalInsightsWorkspace -ResourceGroupName <ResourceGroupName> -Name <WorkspaceName>).ResourceId
             osDiskEncryptionSetResourceId = '' # Disk Encryption Set Resource Id (Get-AzDiskEncryptionSet -ResourceGroupName <ResourceGroupName> -Name <DiskEncryptionSetName>).Id
+            VmSize                        = 'Standard_D2s_v3' # Specify the VmSize to deploy, ensure the size is available in the region being deployed to
             OsVersion                     = '2016-Datacenter' # OS Version, i.e.: '2019-Datacenter', '2016-Datacenter', '19h2-ent'
             VmName                        = 'win2016' # Virtual Machine Name, this will be the base name used in conjunction with VmNamePrefix, VmNameSuffixDelimiter and VmNameSuffixStartingNumber
             VmNamePrefix                  = 'ato-' # VM Name prefix, i.e.: 'ato-'
@@ -53,6 +55,7 @@
             diagnosticStorageResourceId   = '' # Diagnostic Storage Resource Id (Get-AzStorageAccount -ResourceGroupName <ResourceGroupName> -Name <diagStorageAcctName>).Id
             logAnalyticsWorkspaceId       = '' # Log Analytic Workspace Id (Get-AzOperationalInsightsWorkspace -ResourceGroupName <ResourceGroupName> -Name <WorkspaceName>).ResourceId
             osDiskEncryptionSetResourceId = '' # Disk Encryption Set Resource Id (Get-AzDiskEncryptionSet -ResourceGroupName <ResourceGroupName> -Name <DiskEncryptionSetName>).Id
+            VmSize                        = 'Standard_D2s_v3' # Specify the VmSize to deploy, ensure the size is available in the region being deployed to
             OsVersion                     = 'RHEL79' # OS Version, i.e.: 'CentOS79', 'RHEL79', 'Ubuntu1804'
             VmName                        = 'redhat' # Virtual Machine Name, this will be the base name used in conjunction with VmNamePrefix, VmNameSuffixDelimiter and VmNameSuffixStartingNumber
             VmNamePrefix                  = 'ato-' # VM Name prefix, i.e.: 'ato-'
@@ -76,6 +79,7 @@
             diagnosticStorageResourceId   = '' # Diagnostic Storage Resource Id (Get-AzStorageAccount -ResourceGroupName <ResourceGroupName> -Name <diagStorageAcctName>).Id
             logAnalyticsWorkspaceId       = '' # Log Analytic Workspace Id (Get-AzOperationalInsightsWorkspace -ResourceGroupName <ResourceGroupName> -Name <WorkspaceName>).ResourceId
             osDiskEncryptionSetResourceId = '' # Disk Encryption Set Resource Id (Get-AzDiskEncryptionSet -ResourceGroupName <ResourceGroupName> -Name <DiskEncryptionSetName>).Id
+            VmSize                        = 'Standard_D2s_v3' # Specify the VmSize to deploy, ensure the size is available in the region being deployed to
             OsVersion                     = 'CentOS79' # OS Version, i.e.: 'CentOS79', 'RHEL79', 'Ubuntu1804'
             VmName                        = 'centos' # Virtual Machine Name, this will be the base name used in conjunction with VmNamePrefix, VmNameSuffixDelimiter and VmNameSuffixStartingNumber
             VmNamePrefix                  = 'ato-' # VM Name prefix, i.e.: 'ato-'
