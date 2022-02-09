@@ -28,6 +28,10 @@
 
         This example will copy deployment artifacts to the specified storage account / container, then output via Write-Host Uri details.
         This example also stores the artifact location details as a hash table in the deploymentUri variable.
+
+    .NOTES
+        The README.md file from Linux and Windows folders will be added to the specified storage container regardless of which platform is specified.
+        This method is used to ensure that a Linux and Windows folder is created in order to maintain backward compatibility.
 #>
 
 Param(
@@ -52,6 +56,11 @@ Param(
     $MetadataPassthru,
 
     [Parameter(Mandatory = $false)]
+    [ValidateSet('Linux', 'Windows')]
+    [string[]]
+    $Platform = @('Linux', 'Windows'),
+
+    [Parameter(Mandatory = $false)]
     [switch]
     $SkipPublish
 )
@@ -60,23 +69,39 @@ Param(
 $context = (Get-AzStorageAccount -ResourceGroupName $ResourceGroupName -Name $StorageAccountName).Context
 
 # detect specified container name, create it if it does not exist
-if (-not(Get-AzStorageContainer -Context $context -Prefix $ContainerName))
+if (-not(Get-AzStorageContainer -Context $context -Name $ContainerName -ErrorAction SilentlyContinue))
 {
     Write-Verbose -Message "Specified container does not exist, creating $ContainerName"
     New-AzStorageContainer -Context $context -Name $ContainerName -Permission Off | Out-Null
 }
 
-# detect artifact folders and copy both to the specified blob storage container
-$projectRootFolder = Join-Path -Path $PSScriptRoot -ChildPath '..\'
-$winArtifactFolder = Join-Path -Path $projectRootFolder -ChildPath '.\windows'
-$linArtifactFolder = Join-Path -Path $projectRootFolder -ChildPath '.\linux*'
-$artifactFolders   = Get-ChildItem -Path $winArtifactFolder, $linArtifactFolder
-$artifactFiles     = Get-ChildItem -Path $artifactFolders.FullName -File -Recurse
-
-switch ($SkipPublish)
+# detect artifact folders and copy to the specified blob storage container
+if ($SkipPublish)
 {
-    $false {$blobContent = $artifactFiles | Set-AzStorageBlobContent -Context $context -Container $ContainerName -Force ; break}
-    $true  {$blobContent = Get-AzStorageBlob -Context $context -Container $ContainerName}
+    $blobContent = Get-AzStorageBlob -Context $context -Container $ContainerName
+}
+else
+{
+    $projectRootPath = Join-Path -Path $PSScriptRoot -ChildPath '..\'
+    $linArtifactPath = Join-Path -Path $projectRootPath -ChildPath '.\linux'
+    $winArtifactPath = Join-Path -Path $projectRootPath -ChildPath '.\windows'
+    $artifactFolders = [System.Collections.ArrayList]::new()
+    switch ($Platform)
+    {
+        'Linux'
+        {
+            $winReadMePath = Join-Path -Path $winArtifactPath -ChildPath 'README.md'
+            [void] $artifactFolders.Add((Get-ChildItem -Path $linArtifactPath, $winReadMePath))
+        }
+        'Windows'
+        {
+            $linReadMePath = Join-Path -Path $linArtifactPath -ChildPath 'README.md'
+            [void] $artifactFolders.Add((Get-ChildItem -Path $winArtifactPath, $linReadMePath))
+        }
+    }
+
+    $artifactFiles = Get-ChildItem -Path $artifactFolders.FullName -File -Recurse
+    $blobContent = $artifactFiles | Set-AzStorageBlobContent -Context $context -Container $ContainerName -Force
 }
 
 # create container SAS token

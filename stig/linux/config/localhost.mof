@@ -1,7 +1,7 @@
 /*
 @TargetNode='localhost'
 @GeneratedBy=Microsoft
-@GenerationDate=06/09/2021 11:32:25
+@GenerationDate=01/31/2022 17:13:26
 @GenerationHost=Microsoft
 */
 
@@ -10,7 +10,7 @@ instance of MSFT_nxScriptResource as $MSFT_nxScriptResource1ref
 ResourceID = "[nxScript]EmptyDsc";
  GetScript = "#!/bin/bash\necho emptyGet";
  TestScript = "#!/bin/bash\nexit 0";
- SourceInfo = "C:\\dev\\project-chairlift\\linux\\build-linux-config.ps1::105::9::nxScript";
+ SourceInfo = "D:\\dev\\project-chairlift\\linux\\build-linux-config.ps1::105::9::nxScript";
  SetScript = "#!/bin/bash\necho emptySet";
  ModuleName = "nx";
  ModuleVersion = "1.0";
@@ -27,7 +27,7 @@ instance of OMI_ConfigurationDocument
  
                         Author="Microsoft";
  
-                        GenerationDate="06/09/2021 11:32:25";
+                        GenerationDate="01/31/2022 17:13:26";
  
                         GenerationHost="Microsoft";
  
