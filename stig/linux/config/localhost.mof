@@ -1,7 +1,7 @@
 /*
 @TargetNode='localhost'
 @GeneratedBy=Microsoft
-@GenerationDate=05/04/2022 09:09:33
+@GenerationDate=06/30/2022 11:38:45
 @GenerationHost=Microsoft
 */
 
@@ -13,25 +13,34 @@ ResourceID = "[nxScript]EmptyDsc";
  SourceInfo = "D:\\dev\\project-chairlift\\linux\\build-linux-config.ps1::105::9::nxScript";
  SetScript = "#!/bin/bash\necho emptySet";
  ModuleName = "nx";
- ModuleVersion = "1.0";
- ConfigurationName = "LinuxBaseLine";
+ ModuleVersion = "1.0";
+
+ ConfigurationName = "LinuxBaseLine";
+
 };
 instance of OMI_ConfigurationDocument
-
+
+
                     {
  Version="2.0.0";
- 
-                        MinimumCompatibleVersion = "1.0.0";
- 
-                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
- 
-                        Author="Microsoft";
- 
-                        GenerationDate="05/04/2022 09:09:33";
- 
-                        GenerationHost="Microsoft";
- 
-                        Name="LinuxBaseLine";
-
-                    };
 
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+
+                        Author="Microsoft";
+
+
+                        GenerationDate="06/30/2022 11:38:45";
+
+
+                        GenerationHost="Microsoft";
+
+
+                        Name="LinuxBaseLine";
+
+
+                    };
