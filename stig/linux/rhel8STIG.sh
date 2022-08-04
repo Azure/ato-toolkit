@@ -302,21 +302,20 @@ echo 'Defaults !runaspw' >> /etc/sudoers.d/237642
 # END V-237642
 
 ###############################################################################
-echo "Installing Ansible for STIG automation..."
+echo "Installing Ansible for STIG automation (pip3 install)..."
 ###############################################################################
-yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-# replacing releasever in epel repo files; issue in 8.1/8.2 where the $releasever returns "8.1" / "8.2" instead of "8"
-sed -i 's/$releasever/8/g' /etc/yum.repos.d/epel*.repo
-yum -y install ansible
+pip3 install ansible --user
 
 ###############################################################################
 echo "Unzipping rhel8STIG-ansible.zip to ./rhel8STIG"
 ###############################################################################
 unzip rhel8STIG-ansible.zip -d ./rhel8STIG
-chmod +x ./rhel8STIG/enforce.sh
-# due to enforce.sh content pathing, changing to expanded directory for script execution
-cd ./rhel8STIG
-sh ./enforce.sh
+
+###############################################################################
+echo "Invoking ansible-playbook to automate STIG rules"
+###############################################################################
+/root/.local/bin/ansible-playbook -v -b -i /dev/null ./rhel8STIG/site.yml
+
 
 ###############################################################################
 # "Automating Rule Id V-230483" 8.0 auditd.conf does not recogn. percent sign
@@ -345,5 +344,5 @@ fips-mode-setup --enable
 ###############################################################################
 echo "Restarting system to apply STIG settings..."
 ###############################################################################
-touch ./../azAutomationComplete
+touch ./azAutomationComplete
 shutdown -r +1 2>&1
