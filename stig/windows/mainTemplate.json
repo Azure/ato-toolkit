@@ -43,7 +43,9 @@
                 "2019-Datacenter",
                 "2016-Datacenter",
                 "19h2-ent",
-                "19h2-evd"
+                "19h2-evd",
+                "21h2-ent",
+                "21h2-avd"
             ],
             "metadata": {
                 "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
@@ -278,6 +280,22 @@
                     "publisher": "MicrosoftWindowsDesktop",
                     "offer": "Windows-10",
                     "sku": "19h2-evd",
+                    "version": "latest"
+                }
+            },
+            "21h2-ent": {
+                "reference": {
+                    "publisher": "MicrosoftWindowsDesktop",
+                    "offer": "Windows-10",
+                    "sku": "win10-21h2-ent",
+                    "version": "latest"
+                }
+            },
+            "21h2-avd": {
+                "reference": {
+                    "publisher": "MicrosoftWindowsDesktop",
+                    "offer": "Windows-10",
+                    "sku": "win10-21h2-avd",
                     "version": "latest"
                 }
             }
