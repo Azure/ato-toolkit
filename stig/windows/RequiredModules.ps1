@@ -14,6 +14,6 @@ function Get-RequiredModules {
         @{ModuleName = 'WindowsDefenderDsc'; ModuleVersion = '2.1.0' },
         @{ModuleName = 'xDnsServer'; ModuleVersion = '1.16.0.0' },
         @{ModuleName = 'xWebAdministration'; ModuleVersion = '3.2.0' },
-        @{ModuleName = 'PowerSTIG'; ModuleVersion = '4.11.0' }
+        @{ModuleName = 'PowerSTIG'; ModuleVersion = '4.12.1' }
     )
 }
