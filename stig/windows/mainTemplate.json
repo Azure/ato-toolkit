@@ -38,12 +38,12 @@
         },
         "osVersion": {
             "type": "string",
-            "defaultValue": "2019-Datacenter",
+            "defaultValue": "2019-Datacenter-GenSecond",
             "allowedValues": [
-                "2019-Datacenter",
-                "2016-Datacenter",
-                "19h2-ent",
-                "19h2-evd"
+                "2019-Datacenter-GenSecond",
+                "2016-Datacenter-GenSecond",
+                "win10-22h2-ent-g2",
+                "win10-22h2-avd-g2"
             ],
             "metadata": {
                 "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
@@ -249,35 +249,35 @@
         "wadmetricsresourceid": "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]",
         "wadcfgxend": "\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>",
         "images": {
-            "2019-Datacenter": {
+            "2019-Datacenter-GenSecond": {
                 "reference": {
                     "publisher": "MicrosoftWindowsServer",
                     "offer": "WindowsServer",
-                    "sku": "2019-Datacenter",
+                    "sku": "2019-Datacenter-GenSecond",
                     "version": "latest"
                 }
             },
-            "2016-Datacenter": {
+            "2016-Datacenter-GenSecond": {
                 "reference": {
                     "publisher": "MicrosoftWindowsServer",
                     "offer": "WindowsServer",
-                    "sku": "2016-Datacenter",
+                    "sku": "2016-Datacenter-GenSecond",
                     "version": "latest"
                 }
             },
-            "19h2-ent": {
+            "win10-22h2-ent-g2": {
                 "reference": {
                     "publisher": "MicrosoftWindowsDesktop",
                     "offer": "Windows-10",
-                    "sku": "19h2-ent",
+                    "sku": "win10-22h2-ent-g2",
                     "version": "latest"
                 }
             },
-            "19h2-evd": {
+            "win10-22h2-avd-g2": {
                 "reference": {
                     "publisher": "MicrosoftWindowsDesktop",
                     "offer": "Windows-10",
-                    "sku": "19h2-evd",
+                    "sku": "win10-22h2-avd-g2",
                     "version": "latest"
                 }
             }
