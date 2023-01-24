@@ -406,7 +406,7 @@ if ($PSCmdlet.ParameterSetName -eq 'Default')
 
     # creating VM names based on user input
     $vmNames = [System.Collections.Specialized.OrderedDictionary]::new()
-    for ($i = $VmNameSuffixStartingNumber; $i -le $Count; $i++)
+    for ($i = $VmNameSuffixStartingNumber; $i -le ($VmNameSuffixStartingNumber + $Count); $i++)
     {
         $assembledVmName = '{0}{1}{2}{3}' -f $VmNamePrefix, $VmName, $VmNameSuffixDelimiter, $i
         if ($AvailabilityOptions -eq 'availabilitySet')
