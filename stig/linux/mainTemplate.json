@@ -66,8 +66,6 @@
                 "RHEL77",
                 "RHEL75",
                 "RHEL74",
-                "RHEL73",
-                "RHEL72",
                 "Ubuntu1804",
                 "Ubuntu1804-DataScience"
             ],
@@ -254,6 +252,7 @@
             "[variables('linuxBashUri')]",
             "[if(contains(variables('rhel8Versions'), parameters('osVersion')), variables('rhel8FileUri'), variables('mofDscFileUri'))]"
         ],
+        "omsAutoUpgrade": "[if(contains(variables('rhel8Versions'), parameters('osVersion')), 'true', 'false')]",
         "images": {
             "CentOS79": {
                 "reference": {
@@ -395,24 +394,6 @@
                     "publisher": "RedHat",
                     "offer": "RHEL",
                     "sku": "7.4",
-                    "version": "latest"
-                },
-                "stigFileName": "rhel7STIG.sh"
-            },
-            "RHEL73": {
-                "reference": {
-                    "publisher": "RedHat",
-                    "offer": "RHEL",
-                    "sku": "7.3",
-                    "version": "latest"
-                },
-                "stigFileName": "rhel7STIG.sh"
-            },
-            "RHEL72": {
-                "reference": {
-                    "publisher": "RedHat",
-                    "offer": "RHEL",
-                    "sku": "7.2",
                     "version": "latest"
                 },
                 "stigFileName": "rhel7STIG.sh"
@@ -708,7 +689,7 @@
             "name": "[concat(parameters('vmName'), if(equals(variables('instanceCount'), 1), '', copyIndex()), '/Microsoft.EnterpriseCloud.Monitoring')]",
             "apiVersion": "2015-06-15",
             "location": "[parameters('location')]",
-            "condition": "[not(equals(parameters('logAnalyticsWorkspaceId'), ''))]",
+            "condition": "[and(not(equals(parameters('logAnalyticsWorkspaceId'), '')), not(equals(parameters('osVersion'), 'Ubuntu1804-DataScience')))]",
             "copy": {
                 "name": "monitoringAgentLoop",
                 "count": "[variables('instanceCount')]"
@@ -720,7 +701,7 @@
                 "publisher": "Microsoft.EnterpriseCloud.Monitoring",
                 "type": "OmsAgentForLinux",
                 "typeHandlerVersion": "1.12",
-                "autoUpgradeMinorVersion": true,
+                "autoUpgradeMinorVersion": "[variables('omsAutoUpgrade')]",
                 "settings": {
                     "workspaceId": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), reference(parameters('logAnalyticsWorkspaceId'),'2015-03-20').customerId)]"
                 },
