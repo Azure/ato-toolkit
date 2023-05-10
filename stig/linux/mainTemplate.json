@@ -709,6 +709,19 @@
                     "workspaceKey": "[if(equals(parameters('logAnalyticsWorkspaceId'), ''), json('null'), listkeys(parameters('logAnalyticsWorkspaceId'),'2015-03-20').primarySharedKey)]"
                 }
             }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "name": "pid-8c0294d0-fbe8-4cb7-aedc-6aaa2afa66d0",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": []
+                }
+            }
         }
     ],
     "outputs": {
