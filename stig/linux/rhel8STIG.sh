@@ -10,6 +10,11 @@ echo "Setting script variables"
 version=$(. /etc/os-release && echo $VERSION_ID)
 
 ###############################################################################
+echo "Enabling Microsoft Repos"
+###############################################################################
+yum update -y --disablerepo='*' --enablerepo='*microsoft*'
+
+###############################################################################
 echo "Automating Rule Id V-230233"
 ###############################################################################
 sed -i "s/\(password\s*sufficient.*\)/\1 rounds=5000/g" /etc/pam.d/password-auth /etc/pam.d/system-auth

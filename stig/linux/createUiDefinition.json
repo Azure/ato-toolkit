@@ -180,14 +180,6 @@
                                     "label": "Red Hat Enterprise Linux 7.4"
                                 },
                                 {
-                                    "value": "RHEL73",
-                                    "label": "Red Hat Enterprise Linux 7.3"
-                                },
-                                {
-                                    "value": "RHEL72",
-                                    "label": "Red Hat Enterprise Linux 7.2"
-                                },
-                                {
                                     "value": "Ubuntu1804",
                                     "label": "Canonical Ubuntu 18.04 LTS"
                                 },
@@ -461,7 +453,8 @@
                                 "subscription": "onBasic",
                                 "location": "onBasic"
                             }
-                        }
+                        },
+                        "visible": "[not(equals(steps('instance').osVersion, 'Ubuntu1804-DataScience'))]"
                     },
                     {
                         "name": "textBlock1",
@@ -505,6 +498,16 @@
                             "uri": "http://go.microsoft.com/fwlink/?LinkId=2125807"
                         },
                         "visible": "[or(equals(steps('instance').osVersion, 'RHEL77'), equals(steps('instance').osVersion, 'RHEL78'), equals(steps('instance').osVersion, 'Ubuntu1804'), equals(steps('instance').osVersion, 'Ubuntu1804-DataScience'), equals(steps('instance').osVersion, 'CentOS77'), equals(steps('instance').osVersion, 'CentOS78'), equals(steps('instance').osVersion, 'CentOS79'))]"
+                    },
+                    {
+                        "name": "infoBox1",
+                        "type": "Microsoft.Common.InfoBox",
+                        "options": {
+                            "icon": "Info",
+                            "text": "Ubuntu Data Science STIG Solution Template does not currently support Log Analytics workspace configuration at deployment time. However, this can be performed after deployment by uninstalling the DSCForLinux extension, then deploying the Log Analytics agent.",
+                            "uri": "https://learn.microsoft.com/en-us/azure/azure-government/documentation-government-stig-linux-vm"
+                        },
+                        "visible": "[equals(steps('instance').osVersion, 'Ubuntu1804-DataScience')]"
                     }
                 ]
             }
