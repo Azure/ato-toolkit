@@ -59,6 +59,7 @@
                 "RHEL84",
                 "RHEL83",
                 "RHEL82",
+                "RHEL81GEN2",
                 "RHEL81",
                 "RHEL80",
                 "RHEL79",
@@ -244,7 +245,7 @@
                 "id": "[parameters('applicationSecurityGroupResourceId')]"
             }
         ],
-        "rhel8Versions": "[createArray('RHEL80', 'RHEL81', 'RHEL82', 'RHEL83', 'RHEL84')]",
+        "rhel8Versions": "[createArray('RHEL80', 'RHEL81', 'RHEL81GEN2', 'RHEL82', 'RHEL83', 'RHEL84')]",
         "linuxBashUri": "[concat(parameters('_artifactsLocation'), variables('images')[parameters('osVersion')].stigFileName, variables('artifactsLocationSasToken'))]",
         "rhel8FileUri": "[concat(parameters('_artifactsLocation'), 'config/', 'rhel8STIG-ansible.zip', variables('artifactsLocationSasToken'))]",
         "mofDscFileUri": "[concat(parameters('_artifactsLocation'), 'config/', parameters('osVersion'), '.mof', variables('artifactsLocationSasToken'))]",
@@ -331,6 +332,15 @@
                     "publisher": "RedHat",
                     "offer": "RHEL",
                     "sku": "8.2",
+                    "version": "latest"
+                },
+                "stigFileName": "rhel8STIG.sh"
+            },
+            "RHEL81GEN2": {
+                "reference": {
+                    "publisher": "RedHat",
+                    "offer": "RHEL",
+                    "sku": "81gen2",
                     "version": "latest"
                 },
                 "stigFileName": "rhel8STIG.sh"

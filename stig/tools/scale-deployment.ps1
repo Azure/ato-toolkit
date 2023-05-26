@@ -183,6 +183,7 @@ Param
         "RHEL84",
         "RHEL83",
         "RHEL82",
+        "RHEL81GEN2",
         "RHEL81",
         "RHEL80",
         "RHEL79",
