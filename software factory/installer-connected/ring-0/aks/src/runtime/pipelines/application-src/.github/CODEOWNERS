@@ -1,6 +1,0 @@
-# add to `.github/` dir in GitHub repo to only allow these groups to edit pipelines
-
-.github/*   @%ORG%/%PREFIX%-application-management-owner
-.github/*   @%ORG%/%PREFIX%-%REPO%-owner
-.c12/*   @%ORG%/%PREFIX%-application-management-owner
-.c12/*   @%ORG%/%PREFIX%-%REPO%-owner

@@ -1,3 +1,0 @@
-variable "clustername" {
-  default = ""
-}

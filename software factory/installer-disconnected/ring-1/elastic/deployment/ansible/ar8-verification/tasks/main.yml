@@ -1,8 +1,0 @@
----
-- name: Verify {{ ES_INITIAL_MASTER_IP }}:{{ ES_DEFAULT_PORT_1 }} Listening
-  uri:
-    url: https://{{ ES_INITIAL_MASTER_IP }}:{{ ES_DEFAULT_PORT_1 }}/_cluster/stats/?pretty
-    user: elastic
-    password: "{{ lookup('password', '{{ USER_LOCATION }}/elastic') }}"
-    method: GET
-    validate_certs: no
